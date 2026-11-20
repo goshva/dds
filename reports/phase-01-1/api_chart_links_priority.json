@@ -1,0 +1,1183 @@
+{
+  "generated_at": "2026-11-20T10:35:03.373Z",
+  "api_request_format": "GET /api/v1/chart/?q={\"page_size\":N,\"filters\":[{\"col\":\"datasource_id\",\"opr\":\"eq\",\"value\":ID}]}",
+  "by_dataset": {
+    "4732": {
+      "count": 13,
+      "charts": [
+        {
+          "id": 21680,
+          "name": "Аптеки_сводная_в разрезе Партнеров",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "Показатели проекта Аптеки",
+              "id": 717
+            }
+          ]
+        },
+        {
+          "id": 15932,
+          "name": "Аптеки динамика просрочек сборки",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "Показатели проекта Аптеки",
+              "id": 717
+            }
+          ]
+        },
+        {
+          "id": 21681,
+          "name": "Аптеки_сводная таблица ТТ-Партнер",
+          "viz_type": "pivot_table_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Показатели проекта Аптеки",
+              "id": 717
+            }
+          ]
+        },
+        {
+          "id": 21679,
+          "name": "Аптеки_сводная_в разрезе Партнера и ТТ",
+          "viz_type": "pivot_table_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Показатели проекта Аптеки",
+              "id": 717
+            }
+          ]
+        },
+        {
+          "id": 27294,
+          "name": "test",
+          "viz_type": "pivot_table_v2",
+          "dashboards": []
+        },
+        {
+          "id": 21698,
+          "name": "Цветы_сводная_в разрезе Партнеров",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "Показатели проекта Цветы_архив с 08.10.2026",
+              "id": 1054
+            }
+          ]
+        },
+        {
+          "id": 21701,
+          "name": "Цветы_сводная таблица ТТ-Партнер",
+          "viz_type": "pivot_table_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Показатели проекта Цветы_архив с 08.10.2026",
+              "id": 1054
+            }
+          ]
+        },
+        {
+          "id": 21745,
+          "name": "Цветы динамика просрочек сборки",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "Показатели проекта Цветы_архив с 08.10.2026",
+              "id": 1054
+            }
+          ]
+        },
+        {
+          "id": 21697,
+          "name": "Цветы_сводная_в разрезе Партнера и ТТ",
+          "viz_type": "pivot_table_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Показатели проекта Цветы_архив с 08.10.2026",
+              "id": 1054
+            }
+          ]
+        },
+        {
+          "id": 21653,
+          "name": "Рестораны_сводная_в разрезе Партнера и ТТ_click",
+          "viz_type": "pivot_table_v2",
+          "dashboards": []
+        },
+        {
+          "id": 21654,
+          "name": "Рестораны_сводная_в разрезе Партнеров_click",
+          "viz_type": "table",
+          "dashboards": []
+        },
+        {
+          "id": 21659,
+          "name": "Рестораны_сводная таблица ТТ-Партнер",
+          "viz_type": "pivot_table_v2",
+          "dashboards": []
+        },
+        {
+          "id": 21663,
+          "name": "Рестораны динамика просрочек сборки",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "Показатели проекта Рестораны",
+              "id": 983
+            }
+          ]
+        }
+      ]
+    },
+    "5247": {
+      "count": 1,
+      "charts": [
+        {
+          "id": 22839,
+          "name": "Кол-во событий по курьерам (дни). Отчет по логам МП курьера",
+          "viz_type": "pivot_table_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Отчет по логам МП курьера_архив",
+              "id": 1079
+            }
+          ]
+        }
+      ]
+    },
+    "5399": {
+      "count": 1,
+      "charts": [
+        {
+          "id": 22664,
+          "name": "Кол-во событий по курьерам (недели). Отчет по логам МП курьера",
+          "viz_type": "pivot_table_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Отчет по логам МП курьера_архив",
+              "id": 1079
+            }
+          ]
+        }
+      ]
+    },
+    "5797": {
+      "count": 54,
+      "charts": [
+        {
+          "id": 26022,
+          "name": "HR доставка - численность на дату по типу 2",
+          "viz_type": "pie",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24276,
+          "name": "HR доставка - численность на дату по стажу",
+          "viz_type": "pie",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24091,
+          "name": "HR доставка - детализация численности на дату",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29738,
+          "name": "HR доставка - детализация численности на дату (переход в красную зону)",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29737,
+          "name": "HR доставка - детализация численности на дату (переход в оранжевую зону)",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29736,
+          "name": "HR доставка - детализация численности на дату (переход в желтую зону)",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24084,
+          "name": "HR доставка - уходы в неактивность",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29739,
+          "name": "HR доставка - детализация численности на дату (trial)",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24087,
+          "name": "HR доставка - текучесть как ССЧ и увольнения",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            },
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 24086,
+          "name": "HR доставка - численность",
+          "viz_type": "echarts_timeseries_line",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            },
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 30075,
+          "name": "HR доставка - численность активных по неделям",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24281,
+          "name": "HR доставка - вернувшиеся в разбивке по перерыву - доли",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            },
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29879,
+          "name": "HR доставка - адаптация новичков (не только первые выходы)",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29800,
+          "name": "HR доставка - новички и закрепившиеся (актуальный)",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29776,
+          "name": "hr delivery перетоки тишина",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29752,
+          "name": "hr delivery перетоки в зеленую зону линии",
+          "viz_type": "echarts_timeseries_line",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29756,
+          "name": "hr delivery перетоки в зеленую зону тест2",
+          "viz_type": "supersetTA-custom-nivo-area-bump",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24083,
+          "name": "HR доставка - выходы (первые и повторные)",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24082,
+          "name": "HR доставка - приемы - самый первый заказ",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29760,
+          "name": "hr delivery перетоки в жёлтую зону тест",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29774,
+          "name": "hr delivery перетоки оранжевая зона",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29777,
+          "name": "hr delivery перетоки lost",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29775,
+          "name": "hr delivery перетоки красная зона",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29761,
+          "name": "hr delivery перетоки в зеленую зону тест диаграмма с областями",
+          "viz_type": "echarts_timeseries_line",
+          "dashboards": []
+        },
+        {
+          "id": 29757,
+          "name": "hr delivery перетоки между зонами кол-во",
+          "viz_type": "echarts_area",
+          "dashboards": []
+        },
+        {
+          "id": 29755,
+          "name": "hr delivery перетоки в зеленую зону тест",
+          "viz_type": "heatmap_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29753,
+          "name": "hr delivery перетоки между зонами тест",
+          "viz_type": "pivot_table_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29746,
+          "name": "hr delivery перетоки между зонами линии",
+          "viz_type": "echarts_timeseries_line",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 29745,
+          "name": "hr delivery перетоки между зонами спарклайны",
+          "viz_type": "time_table",
+          "dashboards": []
+        },
+        {
+          "id": 29744,
+          "name": "hr delivery перетоки между зонами тест",
+          "viz_type": "pivot_table_v2",
+          "dashboards": []
+        },
+        {
+          "id": 29731,
+          "name": "hr delivery перетоки между зонами",
+          "viz_type": "echarts_area",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24088,
+          "name": "HR доставка - адаптация новичков",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 29702,
+          "name": "тест hr_delivery удержание курьеров",
+          "viz_type": "table",
+          "dashboards": []
+        },
+        {
+          "id": 24279,
+          "name": "HR доставка - средний стаж по группам - доли",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            },
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24278,
+          "name": "HR доставка - средний стаж по группам",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            },
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 24132,
+          "name": "HR доставка - Динамика прироста численности",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 25939,
+          "name": "HR доставка - текучесть по годам для верхнеуровневого",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 26023,
+          "name": "HR доставка - возвращаемость по годам",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 24090,
+          "name": "HR доставка - возвращаемость",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            },
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 24085,
+          "name": "HR доставка - текучесть график %",
+          "viz_type": "echarts_timeseries_line",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            },
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 25972,
+          "name": "HR доставка - средний стаж по группам по годам",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 26027,
+          "name": "HR доставка - вернувшиеся в разбивке по перерыву по годам",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 26026,
+          "name": "HR доставка - вернувшиеся в разбивке по перерыву - доли по годам",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 25966,
+          "name": "HR доставка - адаптация новичков по годам",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 25965,
+          "name": "HR доставка - текучесть график % год к году",
+          "viz_type": "echarts_timeseries_line",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 24277,
+          "name": "HR доставка - численность на дату по типу",
+          "viz_type": "pie",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 25938,
+          "name": "HR доставка - численность на дату для верхнеуровневого",
+          "viz_type": "handlebars",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 25967,
+          "name": "HR доставка - стаж при увольнении по годам",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 25971,
+          "name": "HR доставка - средний стаж по группам - доли по годам",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 24120,
+          "name": "HR доставка - стаж при увольнении",
+          "viz_type": "mixed_timeseries",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            },
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 24280,
+          "name": "HR доставка - вернувшиеся в разбивке по перерыву",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            },
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 24115,
+          "name": "HR доставка - численность общая",
+          "viz_type": "echarts_timeseries_line",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            },
+            {
+              "dashboard_title": "HR верхнеуровневый",
+              "id": 1124
+            }
+          ]
+        },
+        {
+          "id": 25940,
+          "name": "HR доставка - текучесть график % для верхнеуровневного",
+          "viz_type": "echarts_timeseries_line",
+          "dashboards": []
+        },
+        {
+          "id": 24089,
+          "name": "HR доставка - численность на дату",
+          "viz_type": "big_number_total",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        }
+      ]
+    },
+    "7006": {
+      "count": 17,
+      "charts": [
+        {
+          "id": 28156,
+          "name": ". ",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28155,
+          "name": ". ",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28115,
+          "name": "Распределение размеров пулов",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28134,
+          "name": "Распределение запланированных опозданий по минутам",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28158,
+          "name": ".",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28157,
+          "name": ".",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28170,
+          "name": "Плановое прибытие относительно дедлайна",
+          "viz_type": "histogram_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28169,
+          "name": "Фактическое прибытие относительно дедлайна",
+          "viz_type": "histogram_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28168,
+          "name": "Время от выхода заказа в доставку до первого назначения (неслотовые заказы)",
+          "viz_type": "histogram_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28167,
+          "name": "Распределение времени ожидания следующего заказа при наборе",
+          "viz_type": "histogram_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28166,
+          "name": "Длительность ожидания назначения заказов в зависимости от ПОРЯДКА ИХ НАЗНАЧЕНИЯ",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28113,
+          "name": ".",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28154,
+          "name": ".",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": []
+        },
+        {
+          "id": 28133,
+          "name": ".",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28135,
+          "name": ".",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": []
+        },
+        {
+          "id": 28114,
+          "name": "Распределение опозданий по бакетам",
+          "viz_type": "pie",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28116,
+          "name": "Распределение размеров пулов по бакетам",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        }
+      ]
+    },
+    "7024": {
+      "count": 5,
+      "charts": [
+        {
+          "id": 28143,
+          "name": "Распределение доли в %: разница факт-план от плана (ВЕЛО курьеры)",
+          "viz_type": "histogram_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28151,
+          "name": "Распределение доли в %: разница факт-план от плана (АВТО курьеры)",
+          "viz_type": "histogram_v2",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28152,
+          "name": " .",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28153,
+          "name": ". ",
+          "viz_type": "supersetTA-custom-kpi-card",
+          "dashboards": [
+            {
+              "dashboard_title": "Метрики маршрутизатора",
+              "id": 1472
+            }
+          ]
+        },
+        {
+          "id": 28141,
+          "name": "Средняя план. и факт. время на маршрут (по размеру пула)",
+          "viz_type": "echarts_timeseries_bar",
+          "dashboards": []
+        }
+      ]
+    },
+    "7027": {
+      "count": 0,
+      "charts": []
+    },
+    "7119": {
+      "count": 0,
+      "charts": []
+    },
+    "7293": {
+      "count": 1,
+      "charts": [
+        {
+          "id": 29758,
+          "name": "тест перетоки",
+          "viz_type": "handlebars",
+          "dashboards": []
+        }
+      ]
+    },
+    "7465": {
+      "count": 0,
+      "charts": []
+    },
+    "7473": {
+      "count": 15,
+      "charts": [
+        {
+          "id": 30379,
+          "name": "HR доставка - заказов в день",
+          "viz_type": "big_number",
+          "dashboards": []
+        },
+        {
+          "id": 30460,
+          "name": "HR доставка - оплата в день",
+          "viz_type": "big_number",
+          "dashboards": []
+        },
+        {
+          "id": 30396,
+          "name": "HR доставка - 5 смен hb взяли 3 порога - зрелые",
+          "viz_type": "handlebars",
+          "dashboards": []
+        },
+        {
+          "id": 30395,
+          "name": "HR доставка - 5 смен hb набрали 5 смен - зрелые",
+          "viz_type": "handlebars",
+          "dashboards": []
+        },
+        {
+          "id": 30394,
+          "name": "HR доставка - 5 смен hb взяли 4 порога по оплатам - зрелые",
+          "viz_type": "handlebars",
+          "dashboards": []
+        },
+        {
+          "id": 30276,
+          "name": "HR доставка - выходы на первые 5 смен 2",
+          "viz_type": "table",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 30380,
+          "name": "HR доставка - 5 смен hb взяли 4 порога по оплатам",
+          "viz_type": "handlebars",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 30274,
+          "name": "HR доставка - 5 смен hb взяли 3 порога",
+          "viz_type": "handlebars",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 30367,
+          "name": "HR доставка - 5 смен hb медиана d1 оплата",
+          "viz_type": "handlebars",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 30378,
+          "name": "HR доставка - оплата в час",
+          "viz_type": "big_number",
+          "dashboards": []
+        },
+        {
+          "id": 30377,
+          "name": "HR доставка - заказов в час",
+          "viz_type": "big_number",
+          "dashboards": []
+        },
+        {
+          "id": 30272,
+          "name": "HR доставка - 5 смен hb кол-во",
+          "viz_type": "handlebars",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 30273,
+          "name": "HR доставка - 5 смен hb медиана d1",
+          "viz_type": "handlebars",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        },
+        {
+          "id": 30360,
+          "name": "HR доставка - выходы на первые 5 смен с оплатами",
+          "viz_type": "table",
+          "dashboards": []
+        },
+        {
+          "id": 30279,
+          "name": "HR доставка - выходы на первые 5 смен hb набрали 5 смен",
+          "viz_type": "handlebars",
+          "dashboards": [
+            {
+              "dashboard_title": "HR Dashboard Доставка",
+              "id": 1228
+            }
+          ]
+        }
+      ]
+    },
+    "7775": {
+      "count": 1,
+      "charts": [
+        {
+          "id": 31906,
+          "name": "Список курьеров (полный)",
+          "viz_type": "table",
+          "dashboards": []
+        }
+      ]
+    }
+  },
+  "summary": {
+    "priority_datasets": 12,
+    "total_charts_api": 108,
+    "charts_present_in_local_catalog": 0,
+    "charts_with_local_detail": 0,
+    "charts_absent_from_catalog": 108
+  }
+}

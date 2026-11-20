@@ -1,0 +1,178 @@
+{
+  "generated_at": "2026-11-20T10:28:06.972Z",
+  "auth": "success",
+  "counts": {
+    "dashboard": {
+      "api_count": 330,
+      "page_rows": 1,
+      "default_page_size_used": 1
+    },
+    "chart": {
+      "api_count": 19920,
+      "page_rows": 1,
+      "default_page_size_used": 1
+    },
+    "dataset": {
+      "api_count": 3771,
+      "page_rows": 1,
+      "default_page_size_used": 1
+    }
+  },
+  "endpoint_shape_probe": {
+    "/api/v1/dataset/4732": {
+      "ok": true,
+      "status": 200,
+      "result_keys": 42,
+      "has_sql": true,
+      "sql_length": 4897,
+      "columns_count": 127,
+      "changed_on": "2026-09-02T09:04:43.401054"
+    },
+    "/api/v1/dataset/4732/": {
+      "ok": false,
+      "status": 404,
+      "result_keys": null,
+      "has_sql": null,
+      "sql_length": null,
+      "columns_count": null,
+      "changed_on": null
+    }
+  },
+  "priority_dataset_details": {
+    "4732": {
+      "ok": true,
+      "table_name": "darkstore_ts_partners_new",
+      "kind": "virtual",
+      "changed_on": "2026-09-02T09:04:43.401054",
+      "sql_length": 4897,
+      "columns_count": 127,
+      "database_name": "ch_10.0.15.240/default",
+      "schema": "default"
+    },
+    "5247": {
+      "ok": true,
+      "table_name": "courier_logs_agg_couriers_daily",
+      "kind": "virtual",
+      "changed_on": "2025-08-20T08:04:04.770504",
+      "sql_length": 2378,
+      "columns_count": 15,
+      "database_name": "gp_10.0.112.100/dwh",
+      "schema": "agile_mart_techaudit"
+    },
+    "5399": {
+      "ok": true,
+      "table_name": "courier_logs_agg_couriers_week",
+      "kind": "virtual",
+      "changed_on": "2025-08-20T08:06:23.534580",
+      "sql_length": 2889,
+      "columns_count": 15,
+      "database_name": "gp_10.0.112.100/dwh",
+      "schema": "agile_mart_techaudit"
+    },
+    "5797": {
+      "ok": true,
+      "table_name": "hr_couriers",
+      "kind": "virtual",
+      "changed_on": "2026-10-14T14:15:27.162178",
+      "sql_length": 2246,
+      "columns_count": 65,
+      "database_name": "ch_10.0.15.240/default",
+      "schema": "agile_mart_techaudit"
+    },
+    "7006": {
+      "ok": true,
+      "table_name": "cargo_main2",
+      "kind": "virtual",
+      "changed_on": "2026-05-19T10:59:39.954920",
+      "sql_length": 8891,
+      "columns_count": 44,
+      "database_name": "gp_10.0.112.100/dwh",
+      "schema": "logs_mart"
+    },
+    "7024": {
+      "ok": true,
+      "table_name": "cargo_main3",
+      "kind": "virtual",
+      "changed_on": "2026-05-19T10:50:27.003578",
+      "sql_length": 5819,
+      "columns_count": 11,
+      "database_name": "gp_10.0.112.100/dwh",
+      "schema": "logs_mart"
+    },
+    "7027": {
+      "ok": true,
+      "table_name": "cargo_main4",
+      "kind": "virtual",
+      "changed_on": "2026-05-18T07:48:50.811733",
+      "sql_length": 11820,
+      "columns_count": 50,
+      "database_name": "gp_10.0.112.100/dwh",
+      "schema": "logs_mart"
+    },
+    "7119": {
+      "ok": true,
+      "table_name": "cargo_flags",
+      "kind": "virtual",
+      "changed_on": "2026-06-10T12:48:13.714862",
+      "sql_length": 15282,
+      "columns_count": 55,
+      "database_name": "ch_10.0.112.21",
+      "schema": null
+    },
+    "7293": {
+      "ok": true,
+      "table_name": "hr_couriers_zone_balance",
+      "kind": "virtual",
+      "changed_on": "2026-07-24T07:51:44.294783",
+      "sql_length": 1515,
+      "columns_count": 8,
+      "database_name": "ch_10.0.15.240/default",
+      "schema": null
+    },
+    "7465": {
+      "ok": true,
+      "table_name": "hr_couriers_5shifts",
+      "kind": "virtual",
+      "changed_on": "2026-09-11T13:15:35.586920",
+      "sql_length": 2331,
+      "columns_count": 59,
+      "database_name": "ch_10.0.15.240/default",
+      "schema": "agile_mart_techaudit"
+    },
+    "7473": {
+      "ok": true,
+      "table_name": "hr_couriers_five_shifts",
+      "kind": "virtual",
+      "changed_on": "2026-09-18T12:46:06.313300",
+      "sql_length": 2772,
+      "columns_count": 54,
+      "database_name": "ch_10.0.15.240/default",
+      "schema": "agile_mart_techaudit"
+    },
+    "7775": {
+      "ok": true,
+      "table_name": "all_couriers_list",
+      "kind": "virtual",
+      "changed_on": "2026-10-28T10:47:38.077331",
+      "sql_length": 600,
+      "columns_count": 11,
+      "database_name": "ch_10.0.15.240/default",
+      "schema": null
+    }
+  },
+  "chart_list_order_probe": {
+    "total": 19920,
+    "first_two_ids": [
+      28360,
+      32355
+    ],
+    "last_two_ids": [
+      1286,
+      1183
+    ],
+    "order_by_hint": "check results"
+  },
+  "notes": [
+    "GET /api/v1/{resource}/{id}/ возвращает 404 в этой сборке Superset 6.2.4; корректная форма — без завершающего слэша."
+  ]
+}
