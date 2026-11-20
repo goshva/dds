@@ -1,0 +1,122 @@
+
+# ==========================================
+# Dependencies
+# ==========================================
+node_modules/
+.pnp/
+.pnp.js
+
+# ==========================================
+# Environment and secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+!.env.template
+
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials/
+config.local.*
+
+# ==========================================
+# SQLite databases and backups
+# ==========================================
+*.sqlite
+*.sqlite3
+*.db
+
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+
+*.db-wal
+*.db-shm
+*.db-journal
+
+backups/
+*.bak
+*.backup
+
+# ==========================================
+# Local data
+# ==========================================
+data/*
+!data/README.md
+
+# ==========================================
+# Superset raw exports
+# ==========================================
+output/*
+!output/README.md
+
+# ==========================================
+# Temporary and audit dumps
+# ==========================================
+*.log
+*.tmp
+*.temp
+*.dump
+
+audit.txt
+audit_*.txt
+ls.txt
+
+# ==========================================
+# Generated temporary reports
+# Keep curated reports in Git
+# ==========================================
+reports/**/*.tmp
+reports/**/*.log
+
+# ==========================================
+# Runtime and cache
+# ==========================================
+.cache/
+.tmp/
+temp/
+tmp/
+.cache-*/
+*.pid
+
+# ==========================================
+# Bun / TypeScript build artifacts
+# ==========================================
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# ==========================================
+# Python
+# ==========================================
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# ==========================================
+# IDE
+# ==========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ==========================================
+# OS
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# Debug
+# ==========================================
+npm-debug.log*
+yarn-debug.log*
+bun-debug.log*

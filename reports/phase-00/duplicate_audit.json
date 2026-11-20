@@ -1,0 +1,7 @@
+{
+  "generated_at": "2026-11-20T09:19:29.430Z",
+  "method": "GROUP BY object_type, object_id HAVING COUNT(*)>1 (plus PRIMARY KEY guarantee)",
+  "pk_definition": "objects PRIMARY KEY(object_type, object_id); relations PRIMARY KEY(parent_type,parent_id,child_type,child_id,relation_type)",
+  "duplicate_groups": 0,
+  "duplicates": []
+}

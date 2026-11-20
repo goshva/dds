@@ -1,0 +1,135 @@
+{
+  "generated_at": "2026-11-20T09:50:17.070Z",
+  "phase": "phase-01",
+  "auth": {
+    "status": "unknown",
+    "error": "TypeError: ECONNREFUSED: Unable to connect. Is the computer able to access the url?",
+    "method": "failed"
+  },
+  "pagination": {
+    "local": [
+      {
+        "object_type": "chart",
+        "records": 5000,
+        "unique_ids": 5000
+      },
+      {
+        "object_type": "dashboard",
+        "records": 330,
+        "unique_ids": 330
+      },
+      {
+        "object_type": "dataset",
+        "records": 3767,
+        "unique_ids": 3767
+      }
+    ],
+    "api": {
+      "dashboard": {
+        "status": "skipped",
+        "reason": "auth_failed"
+      },
+      "chart": {
+        "status": "skipped",
+        "reason": "auth_failed"
+      },
+      "dataset": {
+        "status": "skipped",
+        "reason": "auth_failed"
+      }
+    }
+  },
+  "detail": {
+    "missing": {
+      "dashboard": 0,
+      "chart": 1234,
+      "dataset": 3767
+    },
+    "matched": {
+      "dashboard": 330,
+      "chart": 3766,
+      "dataset": 0
+    },
+    "errors_by_status": {
+      "401": 5660,
+      "no_status": 1
+    },
+    "errors_by_resource": {
+      "chart_detail": 1234,
+      "dataset_detail": 3767,
+      "dashboard_charts": 330,
+      "dashboard_datasets": 330
+    }
+  },
+  "api_access": [
+    {
+      "endpoint": "/api/v1/security/csrf_token/",
+      "status": "skipped",
+      "ok": false
+    },
+    {
+      "endpoint": "/api/v1/dashboard/",
+      "status": "skipped",
+      "ok": false
+    },
+    {
+      "endpoint": "/api/v1/chart/",
+      "status": "skipped",
+      "ok": false
+    },
+    {
+      "endpoint": "/api/v1/dataset/",
+      "status": "skipped",
+      "ok": false
+    },
+    {
+      "endpoint": "/api/v1/dashboard/1/",
+      "status": "skipped",
+      "ok": false
+    },
+    {
+      "endpoint": "/api/v1/chart/1/",
+      "status": "skipped",
+      "ok": false
+    },
+    {
+      "endpoint": "/api/v1/dataset/4732/",
+      "status": "skipped",
+      "ok": false
+    },
+    {
+      "endpoint": "/api/v1/dashboard/1/charts",
+      "status": "skipped",
+      "ok": false
+    },
+    {
+      "endpoint": "/api/v1/dashboard/1/datasets",
+      "status": "skipped",
+      "ok": false
+    }
+  ],
+  "local_consistency": {
+    "duplicate_count": 0,
+    "invalid_json_types": [],
+    "dataset_sql_in_list": 3514,
+    "lineage_potential": {
+      "dashboard_detail_with_position_json": {
+        "c": 329
+      },
+      "chart_detail_with_datasource_id": {
+        "c": 3755
+      },
+      "relations_table_empty": true
+    }
+  },
+  "conclusions": [
+    "AUTH: авторизация НЕ удалась — TypeError: ECONNREFUSED: Unable to connect. Is the computer able to access the url?",
+    "DASHBOARD: list=330(local)/N/A(API), matched_detail=330, missing_detail=0",
+    "CHART: list=5000(local)/N/A(API), matched_detail=3766, missing_detail=1234",
+    "DATASET: list=3767(local)/N/A(API), matched_detail=0, missing_detail=3767",
+    "SQL доступен в list-payload для 3514 из 3 767 dataset.",
+    "Lineage (Dashboard→Chart→Dataset) может быть частично восстановлен локально: 329/330 dashboards имеют position_json, 3755/3 766 charts имеют datasource_id.",
+    "REPEAT SCAN: повторный запуск не изменяет SQLite (readonly).",
+    "NO FULL RELOAD: полная выгрузка не выполнялась."
+  ]
+}

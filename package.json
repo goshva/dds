@@ -1,0 +1,16 @@
+{
+  "name": "vkusvill-courier-discovery",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "audit": "bun run src/cli.ts audit",
+    "summary": "bun run src/cli.ts summary",
+    "search": "bun run src/cli.ts search",
+    "object": "bun run src/cli.ts object",
+    "help": "bun run src/cli.ts help"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

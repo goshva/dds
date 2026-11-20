@@ -1,0 +1,106 @@
+{
+  "auth_status": "unknown",
+  "auth_error": "TypeError: ECONNREFUSED: Unable to connect. Is the computer able to access the url?",
+  "endpoints": [
+    {
+      "path": "/api/v1/security/csrf_token/",
+      "method": "GET",
+      "expect": 200,
+      "status": "skipped",
+      "ok": false,
+      "has_count": false,
+      "has_result": false,
+      "result_length": 0,
+      "error": "auth_failed — запрос не выполнялся"
+    },
+    {
+      "path": "/api/v1/dashboard/",
+      "method": "GET",
+      "expect": 200,
+      "status": "skipped",
+      "ok": false,
+      "has_count": false,
+      "has_result": false,
+      "result_length": 0,
+      "error": "auth_failed — запрос не выполнялся"
+    },
+    {
+      "path": "/api/v1/chart/",
+      "method": "GET",
+      "expect": 200,
+      "status": "skipped",
+      "ok": false,
+      "has_count": false,
+      "has_result": false,
+      "result_length": 0,
+      "error": "auth_failed — запрос не выполнялся"
+    },
+    {
+      "path": "/api/v1/dataset/",
+      "method": "GET",
+      "expect": 200,
+      "status": "skipped",
+      "ok": false,
+      "has_count": false,
+      "has_result": false,
+      "result_length": 0,
+      "error": "auth_failed — запрос не выполнялся"
+    },
+    {
+      "path": "/api/v1/dashboard/1/",
+      "method": "GET",
+      "expect": 200,
+      "status": "skipped",
+      "ok": false,
+      "has_count": false,
+      "has_result": false,
+      "result_length": 0,
+      "error": "auth_failed — запрос не выполнялся"
+    },
+    {
+      "path": "/api/v1/chart/1/",
+      "method": "GET",
+      "expect": 200,
+      "status": "skipped",
+      "ok": false,
+      "has_count": false,
+      "has_result": false,
+      "result_length": 0,
+      "error": "auth_failed — запрос не выполнялся"
+    },
+    {
+      "path": "/api/v1/dataset/4732/",
+      "method": "GET",
+      "expect": 200,
+      "status": "skipped",
+      "ok": false,
+      "has_count": false,
+      "has_result": false,
+      "result_length": 0,
+      "error": "auth_failed — запрос не выполнялся"
+    },
+    {
+      "path": "/api/v1/dashboard/1/charts",
+      "method": "GET",
+      "expect": 200,
+      "status": "skipped",
+      "ok": false,
+      "has_count": false,
+      "has_result": false,
+      "result_length": 0,
+      "error": "auth_failed — запрос не выполнялся"
+    },
+    {
+      "path": "/api/v1/dashboard/1/datasets",
+      "method": "GET",
+      "expect": 200,
+      "status": "skipped",
+      "ok": false,
+      "has_count": false,
+      "has_result": false,
+      "result_length": 0,
+      "error": "auth_failed — запрос не выполнялся"
+    }
+  ],
+  "error_samples": []
+}
