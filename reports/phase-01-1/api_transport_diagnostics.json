@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-11-20T10:25:20.752Z",
+  "target": "https://superset.svc.vkusvill.ru:443",
+  "environment": {
+    "SUPERSET_URL_configured": true,
+    "SUPERSET_USERNAME_configured": true,
+    "SUPERSET_PASSWORD_configured": true,
+    "SUPERSET_ACCESS_TOKEN_configured": false,
+    "proxy_env_present": [],
+    "no_proxy_present": []
+  },
+  "layers": [
+    {
+      "layer": "dns.A",
+      "ok": true,
+      "duration_ms": 36,
+      "details": {
+        "addresses": [
+          "10.210.254.19"
+        ]
+      }
+    },
+    {
+      "layer": "dns.AAAA",
+      "ok": false,
+      "duration_ms": 17,
+      "error_code": "UNKNOWN",
+      "error_message": "undefined"
+    },
+    {
+      "layer": "tcp.443",
+      "ok": true,
+      "duration_ms": 56
+    },
+    {
+      "layer": "tls",
+      "ok": true,
+      "duration_ms": 62,
+      "details": {
+        "valid_to": "May 20 23:06:40 2027 GMT",
+        "issuer": {
+          "C": "BE",
+          "O": "GlobalSign nv-sa",
+          "CN": "GlobalSign GCC R46 OV TLS CA 2025"
+        }
+      }
+    },
+    {
+      "layer": "http.GET_/health",
+      "ok": true,
+      "duration_ms": 33,
+      "details": {
+        "status": 200,
+        "body_preview": "OK"
+      }
+    }
+  ],
+  "auth": {
+    "performed": true,
+    "login": "success"
+  },
+  "verdict": "TRANSPORT_AND_AUTH_OK",
+  "interpretation": {
+    "ECONNREFUSED_note": "ECONNREFUSED в bun:fetch на Windows может маскировать отсутствие маршрута/VPN к internal-хосту; точная классификация — по слоям выше.",
+    "auth_vs_transport": "Ошибки транспорта (DNS/TCP/TLS) НЕ являются ошибками авторизации и не должны записываться как auth_failed."
+  }
+}
