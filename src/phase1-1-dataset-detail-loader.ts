@@ -8,11 +8,12 @@
  *  - checkpoint: completed_ids, failed_ids (с классификацией), attempts, results, file_path, validation;
  *  - completed = HTTP ok + структура result проверена + файл сохранён + файл перечитан и валиден;
  *  - при восстановлении: completed без валидного файла → повтор загрузки;
+ *  - если файл валиден, но results[id] отсутствует — summary восстанавливается из файла;
  *  - сетевые/преходящие ошибки НЕ попадают в перманентный failed_ids;
  *  - 401 — re-auth (один повтор запроса) через SupersetClient; 429/5xx/network — backoff; 403/404 — финальная ошибка;
  *  - последовательно, 1 запрос/сек (RATE_LIMIT_MS).
  */
-import { writeFileSync, readFileSync, renameSync, mkdirSync, existsSync } from "fs";
+import { writeFileSync, readFileSync, renameSync, mkdirSync, existsSync, unlinkSync } from "fs";
 import { join } from "path";
 import { loadConfig } from "./config";
 import { SupersetClient } from "./superset";
@@ -25,7 +26,12 @@ const SUMMARY_FILE = "output/dataset_detail_summary.json";
 // Приоритетные ID без изменений (ТЗ раздел 3)
 const PRIORITY_IDS = [4732, 7119, 7006, 7024, 7027, 7775, 5797, 7465, 7473, 5247, 5399, 7293];
 
-type ValidationResult = "valid" | "invalid_structure" | "file_missing" | "file_corrupt";
+type ValidationResult =
+  | "valid"
+  | "invalid_structure"
+  | "file_missing"
+  | "file_corrupt"
+  | "save_failed";
 
 type IdResult = {
   dataset_id: number;
@@ -41,6 +47,7 @@ type IdResult = {
   file_path?: string;
   validation?: ValidationResult;
   fetched_at?: string;
+  save_error?: boolean;
 };
 
 type Checkpoint = {
@@ -49,7 +56,8 @@ type Checkpoint = {
   transient_failures: number[];  // сеть/5xx — будут повторены на следующем запуске
   attempts: Record<string, number>;
   results: Record<string, IdResult>;
-  total_fetched: number;
+  successful_fetch_attempts: number;
+  total_fetched?: number;        // legacy-поле старых checkpoint
   last_ts: string;
 };
 
@@ -62,11 +70,19 @@ function loadCheckpoint(): Checkpoint {
       transient_failures: cp.transient_failures ?? [],
       attempts: cp.attempts ?? {},
       results: cp.results ?? {},
-      total_fetched: cp.total_fetched ?? 0,
+      successful_fetch_attempts: cp.successful_fetch_attempts ?? cp.total_fetched ?? 0,
       last_ts: cp.last_ts ?? "",
     };
   } catch {
-    return { completed_ids: [], failed_ids: [], transient_failures: [], attempts: {}, results: {}, total_fetched: 0, last_ts: "" };
+    return {
+      completed_ids: [],
+      failed_ids: [],
+      transient_failures: [],
+      attempts: {},
+      results: {},
+      successful_fetch_attempts: 0,
+      last_ts: "",
+    };
   }
 }
 
@@ -74,15 +90,33 @@ function saveCheckpoint(cp: Checkpoint) {
   atomicWrite(CHECKPOINT_FILE, JSON.stringify(cp, null, 2));
 }
 
-/** Атомарная запись: temp-файл + rename. */
+/** Атомарная запись: temp-файл + rename; temp удаляется при ошибке. */
 function atomicWrite(path: string, content: string) {
   const tmp = `${path}.tmp`;
-  writeFileSync(tmp, content, { mode: 0o600 });
-  renameSync(tmp, path);
+  try {
+    writeFileSync(tmp, content, { mode: 0o600 });
+    renameSync(tmp, path);
+  } catch (error) {
+    try {
+      if (existsSync(tmp)) unlinkSync(tmp);
+    } catch {
+      // ignore cleanup failure
+    }
+    throw error;
+  }
 }
 
 function sleep(ms: number) {
   return new Promise((r) => setTimeout(r, ms));
+}
+
+function addUnique(list: number[], id: number) {
+  if (!list.includes(id)) list.push(id);
+}
+
+function removeId(list: number[], id: number) {
+  const i = list.indexOf(id);
+  if (i >= 0) list.splice(i, 1);
 }
 
 /** Валидация структуры detail-ответа Superset. */
@@ -96,17 +130,26 @@ function validateStructure(data: any): { ok: boolean; reason?: string } {
   return { ok: true };
 }
 
-/** Проверка сохранённого файла: перечитать, распарсить, сверить id. */
-function verifySavedFile(path: string, datasetId: number): ValidationResult {
-  if (!existsSync(path)) return "file_missing";
+type SavedFile = { validation: ValidationResult; parsed?: any; reason?: string };
+
+/** Перечитать сохранённый файл и проверить id + структуру. */
+function readSavedFile(path: string, datasetId: number): SavedFile {
+  if (!existsSync(path)) return { validation: "file_missing" };
   try {
     const parsed = JSON.parse(readFileSync(path, "utf8"));
-    if (parsed?.result?.id !== datasetId) return "invalid_structure";
+    if (String(parsed?.result?.id) !== String(datasetId)) {
+      return { validation: "invalid_structure", reason: "saved id mismatch" };
+    }
     const v = validateStructure(parsed);
-    return v.ok ? "valid" : "invalid_structure";
+    if (!v.ok) return { validation: "invalid_structure", reason: v.reason };
+    return { validation: "valid", parsed };
   } catch {
-    return "file_corrupt";
+    return { validation: "file_corrupt" };
   }
+}
+
+function verifySavedFile(path: string, datasetId: number): ValidationResult {
+  return readSavedFile(path, datasetId).validation;
 }
 
 /** Единая функция получения detail (preview и batch). Использует retry/re-auth клиента. */
@@ -118,9 +161,14 @@ async function fetchDetail(client: SupersetClient, datasetId: number): Promise<I
     const status = e?.status ?? null;
     let errorClass: "permanent" | "transient" = "transient";
     if (status === 403 || status === 404) errorClass = "permanent";
-    // nonRetryable тоже ставится клиентом для 403/404
     if (e?.nonRetryable) errorClass = "permanent";
-    return { dataset_id: datasetId, ok: false, http_status: status, error: String(e.message ?? e).slice(0, 400), error_class: errorClass };
+    return {
+      dataset_id: datasetId,
+      ok: false,
+      http_status: status,
+      error: String(e?.message ?? e).slice(0, 400),
+      error_class: errorClass,
+    };
   }
 }
 
@@ -135,10 +183,36 @@ function summarizeResult(raw: any): Omit<IdResult, "dataset_id" | "ok" | "http_s
   };
 }
 
+/** Восстановить summary из валидного файла (checkpoint без results[id]). */
+function restoreResultFromFile(datasetId: number, path: string): IdResult | null {
+  const saved = readSavedFile(path, datasetId);
+  if (saved.validation !== "valid" || !saved.parsed) return null;
+  return {
+    dataset_id: datasetId,
+    ok: true,
+    http_status: 200,
+    ...summarizeResult(saved.parsed),
+    file_path: path,
+    validation: "valid",
+    fetched_at: saved.parsed?._fetched_at ?? new Date().toISOString(),
+  };
+}
+
 /** Сохранение полного ответа + проверка файла. Возвращает итоговый статус. */
 function persistDetail(datasetId: number, raw: any): IdResult {
   const filePath = join(DETAILS_DIR, `${datasetId}.json`);
-  atomicWrite(filePath, JSON.stringify({ ...raw, _fetched_at: new Date().toISOString(), _source: `${config.baseUrl}/api/v1/dataset/${datasetId}` }, null, 2));
+  atomicWrite(
+    filePath,
+    JSON.stringify(
+      {
+        ...raw,
+        _fetched_at: new Date().toISOString(),
+        _source: `${config.baseUrl}/api/v1/dataset/${datasetId}`,
+      },
+      null,
+      2,
+    ),
+  );
   const validation = verifySavedFile(filePath, datasetId);
   return {
     dataset_id: datasetId,
@@ -148,8 +222,16 @@ function persistDetail(datasetId: number, raw: any): IdResult {
     file_path: filePath,
     validation,
     fetched_at: new Date().toISOString(),
-    ...(validation !== "valid" ? { error: `save validation failed: ${validation}`, error_class: "transient" } : {}),
+    ...(validation !== "valid"
+      ? { error: `save validation failed: ${validation}`, error_class: "transient" as const }
+      : {}),
   };
+}
+
+/** Ошибки записи, которые означают повреждение общей инфраструктуры. */
+function isFatalSaveError(error: any): boolean {
+  const code = String(error?.code ?? "");
+  return ["ENOSPC", "EROFS", "EACCES", "EPERM", "EMFILE", "ENFILE"].includes(code);
 }
 
 async function main() {
@@ -157,7 +239,9 @@ async function main() {
   mkdirSync("data", { recursive: true });
 
   console.log("=== Dataset Detail Loader (v2, ТЗ §3) ===");
-  console.log(`API: ${config.baseUrl} | rate limit: ${config.rateLimitMs}ms/request | priority set: ${PRIORITY_IDS.length}`);
+  console.log(
+    `API: ${config.baseUrl} | rate limit: ${config.rateLimitMs}ms/request | priority set: ${PRIORITY_IDS.length}`,
+  );
 
   const client = new SupersetClient(config);
   await client.login();
@@ -165,27 +249,43 @@ async function main() {
 
   const cp = loadCheckpoint();
 
-  // --- Шаг A: восстановить статус completed-checkpoint файлов (ТЗ п.13) ---
+  // --- Шаг A: восстановить статус completed-checkpoint файлов ---
   const staleCompleted: number[] = [];
   for (const id of [...cp.completed_ids]) {
     const stored = cp.results[String(id)];
     const path = stored?.file_path ?? join(DETAILS_DIR, `${id}.json`);
-    const validation = verifySavedFile(path, id);
-    if (validation !== "valid") {
+    const saved = readSavedFile(path, id);
+    if (saved.validation !== "valid") {
       staleCompleted.push(id);
       cp.completed_ids = cp.completed_ids.filter((x) => x !== id);
       delete cp.results[String(id)];
-      console.log(`[recover] #${id}: marked completed but file invalid (${validation}) → will refetch`);
+      console.log(`[recover] #${id}: marked completed but file invalid (${saved.validation}) → will refetch`);
+      continue;
+    }
+
+    // Файл валиден, но summary в checkpoint отсутствует/неполный → восстановить из JSON.
+    const needsRestore =
+      !stored ||
+      stored.validation !== "valid" ||
+      !stored.table_name ||
+      !stored.file_path;
+    if (needsRestore) {
+      const restored = restoreResultFromFile(id, path);
+      if (restored) {
+        cp.results[String(id)] = restored;
+        console.log(`[recover] #${id}: summary restored from ${path} (${restored.table_name})`);
+      }
     }
   }
-  if (staleCompleted.length) saveCheckpoint(cp);
+  if (staleCompleted.length || cp.completed_ids.length) saveCheckpoint(cp);
 
   // --- Шаг B: определить очередь ---
-  // Preview и batch — один и тот же набор: приоритетные ID минус уже completed/failed(permanent).
   const queue = PRIORITY_IDS.filter(
-    (id) => !cp.completed_ids.includes(id) && !cp.failed_ids.includes(id)
+    (id) => !cp.completed_ids.includes(id) && !cp.failed_ids.includes(id),
   );
-  console.log(`[plan] completed=${cp.completed_ids.length}, permanent_failed=${cp.failed_ids.length}, to_fetch=${queue.length}\n`);
+  console.log(
+    `[plan] completed=${cp.completed_ids.length}, permanent_failed=${cp.failed_ids.length}, to_fetch=${queue.length}\n`,
+  );
 
   const reusedFromDisk: IdResult[] = [];
   for (const id of cp.completed_ids) {
@@ -193,7 +293,7 @@ async function main() {
     if (r) reusedFromDisk.push(r);
   }
   if (reusedFromDisk.length) {
-    console.log(`[reuse] ${reusedFromDisk.length} results already in checkpoint (from previous runs, incl. preview)`);
+    console.log(`[reuse] ${reusedFromDisk.length} results already in checkpoint (incl. restored from disk)`);
   }
 
   const runResults: IdResult[] = [];
@@ -208,34 +308,64 @@ async function main() {
     if (outcome.ok) {
       const v = validateStructure(outcome.raw);
       if (v.ok) {
-        final = persistDetail(id, outcome.raw);
+        try {
+          final = persistDetail(id, outcome.raw);
+        } catch (error: any) {
+          if (isFatalSaveError(error)) throw error;
+          final = {
+            dataset_id: id,
+            ok: false,
+            http_status: 200,
+            error: `save failed: ${String(error?.message ?? error)}`.slice(0, 400),
+            error_class: "transient",
+            validation: "save_failed",
+            save_error: true,
+          };
+          addUnique(cp.transient_failures, id);
+          removeId(cp.failed_ids, id);
+        }
       } else {
         final = {
-          dataset_id: id, ok: false, http_status: 200,
-          error: `structure invalid: ${v.reason}`, error_class: "permanent",
+          dataset_id: id,
+          ok: false,
+          http_status: 200,
+          error: `structure invalid: ${v.reason}`,
+          error_class: "permanent",
           validation: "invalid_structure",
         };
-        cp.failed_ids.push(id);
+        addUnique(cp.failed_ids, id);
+        removeId(cp.transient_failures, id);
       }
     } else {
       final = { ...outcome };
       delete (final as any).raw;
-      if (outcome.error_class === "permanent") cp.failed_ids.push(id);
-      else if (!cp.transient_failures.includes(id)) cp.transient_failures.push(id);
+      if (outcome.error_class === "permanent") {
+        addUnique(cp.failed_ids, id);
+        removeId(cp.transient_failures, id);
+      } else {
+        addUnique(cp.transient_failures, id);
+        removeId(cp.failed_ids, id);
+      }
     }
 
     cp.results[String(id)] = final;
     if (final.ok && !cp.completed_ids.includes(id)) cp.completed_ids.push(id);
+    if (final.ok) {
+      removeId(cp.failed_ids, id);
+      removeId(cp.transient_failures, id);
+    }
     cp.transient_failures = cp.transient_failures.filter((x) => x !== id || !final.ok);
-    if (final.ok) cp.total_fetched++;
+    if (final.ok) cp.successful_fetch_attempts++;
     cp.last_ts = new Date().toISOString();
-    saveCheckpoint(cp); // порядок: счётчики/ts ДО сохранения (ТЗ п.9)
+    saveCheckpoint(cp);
 
     runResults.push(final);
 
     const mark = final.ok ? "✓" : "✗";
     console.log(
-      `  ${mark} ${id} ${final.table_name ?? ""} status=${final.http_status ?? "-"} sql=${final.sql_length ?? "-"} cols=${final.columns_count ?? "-"} metrics=${final.metrics_count ?? "-"}${final.error ? " err=" + final.error.slice(0, 80) : ""}`
+      `  ${mark} ${id} ${final.table_name ?? ""} status=${final.http_status ?? "-"} ` +
+      `sql=${final.sql_length ?? "-"} cols=${final.columns_count ?? "-"} metrics=${final.metrics_count ?? "-"}` +
+      `${final.error ? " err=" + final.error.slice(0, 80) : ""}`,
     );
 
     if (i < queue.length - 1) await sleep(config.rateLimitMs);
@@ -243,15 +373,19 @@ async function main() {
 
   // --- Шаг C: сводный отчёт 12/12 ---
   const all = [...reusedFromDisk, ...runResults].filter((r) => PRIORITY_IDS.includes(r.dataset_id));
-  // дедуп по id, свежие поверх старых
   const byId = new Map<number, IdResult>();
   for (const r of all) byId.set(r.dataset_id, r);
 
   const rows = PRIORITY_IDS.map((id) => {
-    const r = byId.get(id);
+    let r = byId.get(id);
+    if (!r) {
+      const path = join(DETAILS_DIR, `${id}.json`);
+      r = restoreResultFromFile(id, path) ?? undefined;
+    }
+    const inCheckpoint = cp.completed_ids.includes(id);
     return {
       dataset_id: id,
-      in_checkpoint: cp.completed_ids.includes(id),
+      in_checkpoint: inCheckpoint,
       http_status: r?.http_status ?? null,
       table_name: r?.table_name ?? null,
       sql_length: r?.sql_length ?? null,
@@ -259,12 +393,24 @@ async function main() {
       metrics_count: r?.metrics_count ?? null,
       changed_on: r?.changed_on ?? null,
       file_path: r?.file_path ?? null,
-      validation: r?.validation ?? (cp.completed_ids.includes(id) ? "valid" : "not_fetched"),
+      validation: r?.validation ?? (inCheckpoint ? "valid" : "not_fetched"),
       error: r?.error ?? null,
+      error_class: r?.error_class ?? null,
+      save_error: r?.save_error ?? false,
     };
   });
 
   const okCount = rows.filter((r) => r.validation === "valid").length;
+  const permanentFailed = cp.failed_ids.filter((id) => PRIORITY_IDS.includes(id)).length;
+  const transientFailed = cp.transient_failures.filter((id) => PRIORITY_IDS.includes(id)).length;
+  const uniqueSaved = cp.completed_ids.filter((id) => PRIORITY_IDS.includes(id)).length;
+
+  const verification = PRIORITY_IDS.map((id) => {
+    const path = join(DETAILS_DIR, `${id}.json`);
+    return { dataset_id: id, file_path: path, validation: verifySavedFile(path, id) };
+  });
+  const invalidFiles = verification.filter((v) => v.validation !== "valid");
+
   const summary = {
     generated_at: new Date().toISOString(),
     api_base: config.baseUrl,
@@ -273,8 +419,16 @@ async function main() {
     totals: {
       priority: PRIORITY_IDS.length,
       valid_details: okCount,
-      permanent_failed: cp.failed_ids.length,
-      missing: PRIORITY_IDS.length - okCount - cp.failed_ids.length,
+      unique_saved_datasets: uniqueSaved,
+      successful_fetch_attempts: cp.successful_fetch_attempts,
+      permanent_failed: permanentFailed,
+      transient_failed: transientFailed,
+      missing: Math.max(0, PRIORITY_IDS.length - okCount - permanentFailed - transientFailed),
+    },
+    verification: {
+      checked: verification.length,
+      all_valid: invalidFiles.length === 0,
+      invalid: invalidFiles,
     },
     datasets: rows,
     checkpoint_file: CHECKPOINT_FILE,
@@ -283,9 +437,27 @@ async function main() {
 
   console.log("\n=== Summary ===");
   for (const r of rows) {
-    console.log(`${r.validation === "valid" ? "✓" : r.validation === "not_fetched" ? "·" : "✗"} ${r.dataset_id} ${r.table_name ?? ""} sql=${r.sql_length} cols=${r.columns_count} metrics=${r.metrics_count} file=${r.file_path ?? "-"} [${r.validation}]`);
+    console.log(
+      `${r.validation === "valid" ? "✓" : r.validation === "not_fetched" ? "·" : "✗"} ` +
+      `${r.dataset_id} ${r.table_name ?? ""} sql=${r.sql_length ?? "-"} cols=${r.columns_count ?? "-"} ` +
+      `metrics=${r.metrics_count ?? "-"} file=${r.file_path ?? "-"} [${r.validation}]`,
+    );
   }
-  console.log(`\nvalid: ${okCount}/${PRIORITY_IDS.length} | summary: ${SUMMARY_FILE}`);
+  console.log(
+    `\nvalid: ${okCount}/${PRIORITY_IDS.length} | unique_saved=${uniqueSaved} | ` +
+    `successful_fetch_attempts=${cp.successful_fetch_attempts} | ` +
+    `permanent_failed=${permanentFailed} | transient_failed=${transientFailed} | summary: ${SUMMARY_FILE}`,
+  );
+
+  if (invalidFiles.length > 0 || okCount < PRIORITY_IDS.length) {
+    process.exitCode = 1;
+    console.error(
+      `\n[FAIL] detail files invalid or missing: ${invalidFiles.length} file(s); valid=${okCount}/${PRIORITY_IDS.length}`,
+    );
+  }
 }
 
-main().catch((e) => { console.error("Fatal:", e); process.exit(1); });
+main().catch((e) => {
+  console.error("Fatal:", e);
+  process.exit(1);
+});

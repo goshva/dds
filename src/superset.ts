@@ -5,7 +5,9 @@ export class PaginationError extends Error {
     message: string,
     public readonly apiCount: number,
     public readonly downloadedCount: number,
-    public readonly pagesCount: number
+    public readonly pagesCount: number,
+    public readonly uniqueIdsCount: number = 0,
+    public readonly duplicateRows: number = 0,
   ) {
     super(message);
     this.name = "PaginationError";
@@ -16,16 +18,88 @@ export type ListResult = {
   rows: any[];
   api_count: number;
   downloaded_count: number;
+  unique_ids_count: number;
+  duplicate_rows: number;
   pages_count: number;
   complete: boolean;
 };
 
+export type NetworkErrorCategory =
+  | "dns"
+  | "tcp_refused"
+  | "tcp_reset"
+  | "timeout"
+  | "tls"
+  | "proxy"
+  | "network_error";
+
 type RequestOutcome =
   | { kind: "ok"; data: any }
-  | { kind: "http_error"; status: number; body: any }
-  | { kind: "network_error"; error: unknown };
+  | { kind: "http_error"; status: number; body: any; retryAfterMs: number | null }
+  | {
+      kind: "network_error";
+      error: unknown;
+      category: NetworkErrorCategory;
+      code: string | null;
+      cause: string;
+    };
 
 const RETRYABLE_STATUS = new Set([429, 500, 502, 503, 504]);
+
+/** Проверенный Rison-формат list-запроса Superset 6.2.4: (page:N,page_size:N). */
+export function buildPaginationQuery(page: number, pageSize: number): string {
+  return encodeURIComponent(`(page:${page},page_size:${pageSize})`);
+}
+
+/** Retry-After: число секунд ИЛИ HTTP-date. Возвращает миллисекунды. */
+export function parseRetryAfter(value: string | null): number | null {
+  if (!value) return null;
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  const seconds = Number(trimmed);
+  if (Number.isFinite(seconds) && seconds >= 0) {
+    return Math.round(seconds * 1000);
+  }
+
+  const timestamp = Date.parse(trimmed);
+  if (Number.isFinite(timestamp)) {
+    return Math.max(0, timestamp - Date.now());
+  }
+
+  return null;
+}
+
+/** Классификация сетевой ошибки для api_transport_diagnostics.json. */
+export function classifyNetworkError(error: unknown): {
+  category: NetworkErrorCategory;
+  code: string | null;
+  cause: string;
+} {
+  const e = error as any;
+  const nested = e?.cause as any;
+  const code = e?.code != null ? String(e.code) : nested?.code != null ? String(nested.code) : null;
+  const name = String(e?.name ?? nested?.name ?? "");
+  const message = String(e?.message ?? nested?.message ?? error);
+  const text = `${code ?? ""} ${name} ${message}`;
+
+  let category: NetworkErrorCategory = "network_error";
+  if (/ENOTFOUND|EAI_AGAIN|getaddrinfo|DNS/i.test(text)) {
+    category = "dns";
+  } else if (/ECONNREFUSED/i.test(text)) {
+    category = "tcp_refused";
+  } else if (/ECONNRESET|EPIPE|socket hang up/i.test(text)) {
+    category = "tcp_reset";
+  } else if (/CERT_|certificate|handshake|TLS|SSL/i.test(text)) {
+    category = "tls";
+  } else if (/proxy|ECONNPROXY|tunnel/i.test(text)) {
+    category = "proxy";
+  } else if (/ETIMEDOUT|ESOCKETTIMEDOUT|AbortError|timed? ?out|timeout|aborted/i.test(text)) {
+    category = "timeout";
+  }
+
+  return { category, code, cause: message };
+}
 
 function sleep(ms: number): Promise<void> {
   return new Promise((r) => setTimeout(r, ms));
@@ -64,7 +138,7 @@ export class SupersetClient {
     return headers;
   }
 
-  private async rawRequest(path: string, init: RequestInit = {}): Promise<RequestOutcome & { retryAfterMs?: number | null }> {
+  private async rawRequest(path: string, init: RequestInit = {}): Promise<RequestOutcome> {
     await this.throttle();
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), this.cfg.timeoutMs);
@@ -76,29 +150,34 @@ export class SupersetClient {
       });
       const body = await response.text();
       let parsed: any;
-      try { parsed = body ? JSON.parse(body) : null; }
-      catch { parsed = { raw_text: body.slice(0, 4000) }; }
+      try {
+        parsed = body ? JSON.parse(body) : null;
+      } catch {
+        parsed = { raw_text: body.slice(0, 4000) };
+      }
       if (!response.ok) {
-        const raHeader = response.headers.get("Retry-After");
-        const ra = raHeader ? Number(raHeader) : NaN;
         return {
           kind: "http_error",
           status: response.status,
           body: parsed,
-          retryAfterMs: Number.isFinite(ra) && ra >= 0 ? ra * 1000 : null,
+          retryAfterMs: parseRetryAfter(response.headers.get("Retry-After")),
         };
       }
       return { kind: "ok", data: parsed };
     } catch (error) {
-      return { kind: "network_error", error };
+      const classified = classifyNetworkError(error);
+      return { kind: "network_error", error, ...classified };
     } finally {
       clearTimeout(timer);
     }
   }
 
   /**
-   * GET с повторами: 401 → переавторизация + ровно один повтор исходного запроса;
-   * 429/5xx/network → exponential backoff до maxRetries.
+   * GET с повторами:
+   *  - 401 → переавторизация и повтор исходного запроса через тот же retry-loop (без повторной re-auth);
+   *  - 429/5xx/network → exponential backoff до maxRetries;
+   *  - после исчерпания повторов 429/5xx помечаются transient=true;
+   *  - сетевая ошибка сохраняет cause/code/error_type.
    */
   private async requestWithRetry(path: string, init: RequestInit = {}, allowReauth = true): Promise<any> {
     let attempt = 0;
@@ -114,13 +193,10 @@ export class SupersetClient {
             "(SUPERSET_ACCESS_TOKEN provided without SUPERSET_USERNAME/SUPERSET_PASSWORD)"
           );
         }
-        // Повторная авторизация и ПОВТОР ИСХОДНОГО ЗАПРОСА ровно один раз.
+        // Переавторизация ровно один раз; исходный запрос повторяется через общий retry-loop.
         await this.login(true);
-        const retry = await this.rawRequest(path, init);
-        if (retry.kind === "ok") return retry.data;
-        const err = new Error(`HTTP ${retry.kind === "http_error" ? retry.status : 401} after re-auth: ${JSON.stringify(retry.kind === "http_error" ? retry.body : String(retry.error)).slice(0, 500)}`);
-        (err as any).status = retry.kind === "http_error" ? retry.status : 401;
-        throw err;
+        allowReauth = false;
+        continue;
       }
 
       const retriableStatus = outcome.kind === "http_error" && RETRYABLE_STATUS.has(outcome.status);
@@ -129,12 +205,18 @@ export class SupersetClient {
         attempt++;
         let delay = this.cfg.retryBaseDelayMs * 2 ** (attempt - 1);
         if (outcome.kind === "http_error" && outcome.status === 429) {
-          // Уважаем Retry-After или удлинённый базовый шаг.
+          // Уважаем Retry-After (секунды или HTTP-date) или удлинённый базовый шаг.
           const ra = outcome.retryAfterMs;
-          delay = ra ? Math.max(delay, ra) : Math.max(delay, this.cfg.retryBaseDelayMs * 2);
+          delay = ra !== null ? Math.max(delay, ra) : Math.max(delay, this.cfg.retryBaseDelayMs * 2);
         }
         delay = Math.min(delay, 60_000);
-        console.warn(`[RETRY ${attempt}/${this.cfg.maxRetries}] ${path}: ${outcome.kind === "network_error" ? "network error" : `HTTP ${outcome.status}`} — waiting ${delay}ms`);
+        console.warn(
+          `[RETRY ${attempt}/${this.cfg.maxRetries}] ${path}: ` +
+          (outcome.kind === "network_error"
+            ? `network error (${outcome.category}${outcome.code ? `/${outcome.code}` : ""})`
+            : `HTTP ${outcome.status}`) +
+          ` — waiting ${delay}ms`
+        );
         await sleep(delay);
         continue;
       }
@@ -142,11 +224,19 @@ export class SupersetClient {
       if (outcome.kind === "http_error") {
         const err = new Error(`HTTP ${outcome.status}: ${JSON.stringify(outcome.body).slice(0, 1500)}`);
         (err as any).status = outcome.status;
-        (err as any).nonRetryable = outcome.status === 403 || outcome.status === 404;
+        (err as any).transient = RETRYABLE_STATUS.has(outcome.status);
+        (err as any).nonRetryable =
+          outcome.status === 401 || outcome.status === 403 || outcome.status === 404;
+        (err as any).retry_after_ms = outcome.retryAfterMs;
         throw err;
       }
-      const err = new Error(`Network error after ${attempt} retries: ${String(outcome.error)}`);
+
+      const err = new Error(`Network error after ${attempt} retries: ${outcome.cause}`);
       (err as any).transient = true;
+      (err as any).cause = outcome.error;
+      (err as any).code = outcome.code;
+      (err as any).error_type = outcome.category;
+      (err as any).network_category = outcome.category;
       throw err;
     }
   }
@@ -157,16 +247,20 @@ export class SupersetClient {
       if (this.token) return; // используем предоставленный токен
       throw new Error("Set SUPERSET_ACCESS_TOKEN or SUPERSET_USERNAME + SUPERSET_PASSWORD");
     }
-    const result = await this.requestWithRetry("/api/v1/security/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username: this.cfg.username,
-        password: this.cfg.password,
-        provider: this.cfg.provider,
-        refresh: true,
-      }),
-    }, false);
+    const result = await this.requestWithRetry(
+      "/api/v1/security/login",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username: this.cfg.username,
+          password: this.cfg.password,
+          provider: this.cfg.provider,
+          refresh: true,
+        }),
+      },
+      false,
+    );
     if (!result?.access_token) throw new Error("Login response did not contain access_token");
     this.token = result.access_token;
   }
@@ -187,50 +281,81 @@ export class SupersetClient {
 
   /**
    * Полная пагинация list-эндпоинта:
-   *  1) первый запрос читаем .count как ground truth;
+   *  1) первый запрос читает .count как ground truth;
    *  2) качаем страницы до count;
-   *  3) защитный предел MAX_PAGES → явная ошибка PaginationError, если count больше предела.
-   * Формат q совместим с Superset 6.2.4.
+   *  3) проверяем структуру каждой страницы и уникальность ID;
+   *  4) при дублях/неполноте — PaginationError.
+   * Формат q: Rison (page:N,page_size:N), совместим с Superset 6.2.4.
    */
   async listFull(resource: "dashboard" | "chart" | "dataset"): Promise<ListResult> {
-    const firstQ = encodeURIComponent(JSON.stringify({ page: 0, page_size: this.cfg.pageSize }));
-    const first = await this.get(`/api/v1/${resource}/?q=${firstQ}`);
+    const first = await this.get(`/api/v1/${resource}/?q=${buildPaginationQuery(0, this.cfg.pageSize)}`);
     const apiCount = Number(first?.count ?? NaN);
     if (!Number.isFinite(apiCount) || apiCount < 0) {
       throw new Error(`list(${resource}): API did not report count`);
     }
-    const firstRows = Array.isArray(first?.result) ? first.result : [];
-    const collected: any[] = [...firstRows];
-    let pages = 1;
-
-    const maxByGuard = Math.ceil(apiCount / this.cfg.pageSize);
-    const pageLimit = Math.min(Math.max(this.cfg.maxPages, 1), maxByGuard > this.cfg.maxPages ? this.cfg.maxPages : maxByGuard);
-
-    if (maxByGuard > this.cfg.maxPages) {
+    if (!Array.isArray(first?.result)) {
       throw new PaginationError(
-        `list(${resource}): API count=${apiCount} requires ${maxByGuard} pages, MAX_PAGES=${this.cfg.maxPages}. Increase MAX_PAGES.`,
-        apiCount, collected.length, pages
+        `list(${resource}): first page has no result array`,
+        apiCount, 0, 1,
       );
     }
 
-    while (collected.length < apiCount && pages < pageLimit) {
-      const q = encodeURIComponent(JSON.stringify({ page: pages, page_size: this.cfg.pageSize }));
-      const result = await this.get(`/api/v1/${resource}/?q=${q}`);
-      const rows = Array.isArray(result?.result) ? result.result : [];
+    const collected: any[] = [...first.result];
+    let pages = 1;
+
+    const maxByGuard = Math.ceil(apiCount / this.cfg.pageSize);
+    if (maxByGuard > this.cfg.maxPages) {
+      throw new PaginationError(
+        `list(${resource}): API count=${apiCount} requires ${maxByGuard} pages, MAX_PAGES=${this.cfg.maxPages}. Increase MAX_PAGES.`,
+        apiCount, collected.length, pages,
+      );
+    }
+
+    while (collected.length < apiCount && pages < Math.max(1, maxByGuard)) {
+      const result = await this.get(`/api/v1/${resource}/?q=${buildPaginationQuery(pages, this.cfg.pageSize)}`);
+      if (!Array.isArray(result?.result)) {
+        throw new PaginationError(
+          `list(${resource}): page ${pages} has no result array`,
+          apiCount, collected.length, pages,
+        );
+      }
+      const rows = result.result;
       if (rows.length === 0) break; // источник закрыл выдачу раньше count
       collected.push(...rows);
       pages++;
     }
 
-    const complete = collected.length >= apiCount;
+    const ids = collected.map((row) => String(row?.id ?? row?.uuid ?? row?.slug ?? ""));
+    const missingIds = ids.filter((id) => !id).length;
+    const uniqueIds = new Set(ids.filter(Boolean));
+    const duplicateRows = ids.length - uniqueIds.size;
+    const complete =
+      collected.length === apiCount &&
+      uniqueIds.size === apiCount &&
+      duplicateRows === 0 &&
+      missingIds === 0;
+
     if (!complete) {
+      const reasons: string[] = [];
+      if (collected.length !== apiCount) reasons.push(`rows ${collected.length} != count ${apiCount}`);
+      if (uniqueIds.size !== apiCount) reasons.push(`unique ids ${uniqueIds.size} != count ${apiCount}`);
+      if (duplicateRows > 0) reasons.push(`duplicate rows ${duplicateRows}`);
+      if (missingIds > 0) reasons.push(`rows without id ${missingIds}`);
       throw new PaginationError(
-        `list(${resource}): incomplete — downloaded ${collected.length} of API count ${apiCount}`,
-        apiCount, collected.length, pages
+        `list(${resource}): incomplete — ${reasons.join("; ")}`,
+        apiCount, collected.length, pages, uniqueIds.size, duplicateRows,
       );
     }
 
-    return { rows: collected, api_count: apiCount, downloaded_count: collected.length, pages_count: pages, complete: true };
+    return {
+      rows: collected,
+      api_count: apiCount,
+      downloaded_count: collected.length,
+      unique_ids_count: uniqueIds.size,
+      duplicate_rows: duplicateRows,
+      pages_count: pages,
+      complete: true,
+    };
   }
 
   /** Совместимость: старый интерфейс возвращает только строки. */
@@ -243,11 +368,34 @@ export class SupersetClient {
     return this.get(`/api/v1/${resource}/${encodeURIComponent(String(id))}`);
   }
 
-  async tryGet(path: string): Promise<{ ok: true; data: any } | { ok: false; error: string; status?: number; transient?: boolean }> {
+  async tryGet(path: string): Promise<
+    | { ok: true; data: any }
+    | {
+        ok: false;
+        error: string;
+        status?: number;
+        transient?: boolean;
+        code?: string;
+        error_type?: string;
+        cause?: string;
+        non_retryable?: boolean;
+        retry_after_ms?: number | null;
+      }
+  > {
     try {
       return { ok: true, data: await this.get(path) };
     } catch (e: any) {
-      return { ok: false, error: String(e), status: e?.status, transient: Boolean(e?.transient) };
+      return {
+        ok: false,
+        error: String(e?.message ?? e),
+        status: e?.status,
+        transient: Boolean(e?.transient),
+        code: e?.code,
+        error_type: e?.error_type,
+        cause: e?.cause ? String(e.cause) : undefined,
+        non_retryable: Boolean(e?.nonRetryable),
+        retry_after_ms: e?.retry_after_ms ?? null,
+      };
     }
   }
 }
