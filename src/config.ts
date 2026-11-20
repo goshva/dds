@@ -7,6 +7,9 @@ export interface Config {
   timeoutMs: number;
   pageSize: number;
   maxPages: number;
+  maxRetries: number;
+  retryBaseDelayMs: number;
+  rateLimitMs: number;
   outputDir: string;
   sqlitePath: string;
   courierKeywords: string[];
@@ -43,7 +46,10 @@ export function loadConfig(): Config {
     accessToken: Bun.env.SUPERSET_ACCESS_TOKEN ?? "",
     timeoutMs: intEnv("HTTP_TIMEOUT_SECONDS", 30) * 1000,
     pageSize: intEnv("PAGE_SIZE", 100),
-    maxPages: intEnv("MAX_PAGES", 50),
+    maxPages: intEnv("MAX_PAGES", 200),
+    maxRetries: intEnv("MAX_RETRIES", 5),
+    retryBaseDelayMs: intEnv("RETRY_BASE_DELAY_MS", 1000),
+    rateLimitMs: intEnv("RATE_LIMIT_MS", 1000),
     outputDir: Bun.env.OUTPUT_DIR ?? "./output",
     sqlitePath: Bun.env.SQLITE_PATH ?? "./data/catalog.sqlite",
     courierKeywords: words("COURIER_KEYWORDS", "courier,курьер,доставка,delivery,доставк,курьерск,shipment,rider,driver,логист"),
