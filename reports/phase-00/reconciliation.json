@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-11-20T09:19:29.436Z",
+  "checks": [
+    {
+      "object_type": "chart",
+      "expected": 5000,
+      "actual": 5000,
+      "match": true
+    },
+    {
+      "object_type": "chart_detail",
+      "expected": 3766,
+      "actual": 3766,
+      "match": true
+    },
+    {
+      "object_type": "dashboard",
+      "expected": 330,
+      "actual": 330,
+      "match": true
+    },
+    {
+      "object_type": "dashboard_detail",
+      "expected": 330,
+      "actual": 330,
+      "match": true
+    },
+    {
+      "object_type": "dataset",
+      "expected": 3767,
+      "actual": 3767,
+      "match": true
+    },
+    {
+      "object_type": "TOTAL objects",
+      "expected": 13193,
+      "actual": 13193,
+      "match": true
+    },
+    {
+      "object_type": "relations",
+      "expected": 0,
+      "actual": 0,
+      "match": true
+    }
+  ],
+  "all_match": true
+}

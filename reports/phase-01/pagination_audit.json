@@ -1,0 +1,35 @@
+{
+  "local_stats": [
+    {
+      "object_type": "chart",
+      "records": 5000,
+      "unique_ids": 5000
+    },
+    {
+      "object_type": "dashboard",
+      "records": 330,
+      "unique_ids": 330
+    },
+    {
+      "object_type": "dataset",
+      "records": 3767,
+      "unique_ids": 3767
+    }
+  ],
+  "auth_status": "unknown",
+  "auth_error": "TypeError: ECONNREFUSED: Unable to connect. Is the computer able to access the url?",
+  "api_stats": {
+    "dashboard": {
+      "status": "skipped",
+      "reason": "auth_failed"
+    },
+    "chart": {
+      "status": "skipped",
+      "reason": "auth_failed"
+    },
+    "dataset": {
+      "status": "skipped",
+      "reason": "auth_failed"
+    }
+  }
+}

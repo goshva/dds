@@ -1,0 +1,17 @@
+{
+  "duplicate_count": 0,
+  "unique_ids": [],
+  "invalid_json": [],
+  "dataset_sql_available": {
+    "c": 3514
+  },
+  "lineage_potential": {
+    "dashboard_detail_with_position_json": {
+      "c": 329
+    },
+    "chart_detail_with_datasource_id": {
+      "c": 3755
+    },
+    "relations_table_empty": true
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-11-20T09:19:29.424Z",
+  "totals": {
+    "objects": 13193,
+    "relations": 0
+  },
+  "by_type": [
+    {
+      "object_type": "chart",
+      "records": 5000,
+      "unique_ids": 5000,
+      "payload_mb": 50.18,
+      "first_collected": "2026-11-19T21:03:55.265Z",
+      "last_collected": "2026-11-19T21:04:02.312Z"
+    },
+    {
+      "object_type": "chart_detail",
+      "records": 3766,
+      "unique_ids": 3766,
+      "payload_mb": 1654.26,
+      "first_collected": "2026-11-19T21:09:22.544Z",
+      "last_collected": "2026-11-19T21:17:18.628Z"
+    },
+    {
+      "object_type": "dashboard",
+      "records": 330,
+      "unique_ids": 330,
+      "payload_mb": 0.43,
+      "first_collected": "2026-11-19T21:02:33.888Z",
+      "last_collected": "2026-11-19T21:02:34.240Z"
+    },
+    {
+      "object_type": "dashboard_detail",
+      "records": 330,
+      "unique_ids": 330,
+      "payload_mb": 20.9,
+      "first_collected": "2026-11-19T21:04:17.983Z",
+      "last_collected": "2026-11-19T21:09:22.452Z"
+    },
+    {
+      "object_type": "dataset",
+      "records": 3767,
+      "unique_ids": 3767,
+      "payload_mb": 12.19,
+      "first_collected": "2026-11-19T21:04:08.175Z",
+      "last_collected": "2026-11-19T21:04:12.529Z"
+    }
+  ],
+  "detail_coverage_facts": {
+    "dataset_detail_records": 0,
+    "dataset_list_rows_with_nonnull_sql": 3514,
+    "dataset_kinds": { "virtual": 3213, "physical": 554 },
+    "dashboard_detail_with_position_json": 329,
+    "chart_detail_with_datasource_id": 3755
+  },
+  "priority_dataset_ids_presence": {
+    "checked": ["4732","7119","7006","7024","7027","7775","5797","7465","7473","5247","5399","7293","6603","3896","5420","5421","5424","6693","7742"],
+    "found_in_catalog": 19,
+    "missing": [],
+    "titles_verified": true
+  }
+}

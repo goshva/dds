@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-11-20T09:19:14.939Z",
+  "database": "data/catalog.sqlite",
+  "journal_mode": {
+    "journal_mode": "wal"
+  },
+  "quick_check": [
+    {
+      "quick_check": "ok"
+    }
+  ],
+  "integrity_check": [
+    {
+      "integrity_check": "ok"
+    }
+  ],
+  "tables": [
+    {
+      "name": "objects",
+      "sql": "CREATE TABLE objects (\n        object_type TEXT NOT NULL,\n        object_id TEXT NOT NULL,\n        title TEXT,\n        payload_json TEXT NOT NULL,\n        collected_at TEXT NOT NULL,\n        PRIMARY KEY(object_type, object_id)\n      )"
+    },
+    {
+      "name": "relations",
+      "sql": "CREATE TABLE relations (\n        parent_type TEXT NOT NULL,\n        parent_id TEXT NOT NULL,\n        child_type TEXT NOT NULL,\n        child_id TEXT NOT NULL,\n        relation_type TEXT NOT NULL,\n        collected_at TEXT NOT NULL,\n        PRIMARY KEY(parent_type,parent_id,child_type,child_id,relation_type)\n      )"
+    }
+  ],
+  "total_objects": {
+    "c": 13193
+  },
+  "total_relations": {
+    "c": 0
+  },
+  "empty_payloads": [],
+  "invalid_json_payloads": [],
+  "null_titles": []
+}
