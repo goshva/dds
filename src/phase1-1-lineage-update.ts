@@ -105,7 +105,7 @@ const linkedCharts = new Set<string>();
 const linkedDatasets = new Set<string>();
 for (const [dsId, cnt] of dsChartCount.entries()) {
   if (cnt > 0) linkedDatasets.add(String(dsId));
-  linkedCharts.add(dsId);
+  linkedCharts.add(String(dsId));
 }
 
 // Диапазон chart ID

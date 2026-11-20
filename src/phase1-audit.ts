@@ -316,10 +316,10 @@ async function main() {
       errors_by_status: step2.errors_by_status,
       errors_by_resource: step2.errors_by_resource
     },
-    api_access: step3.endpoints.map(e => ({ endpoint: e.path, status: e.status, ok: e.ok })),
+    api_access: step3.endpoints.map((e: any) => ({ endpoint: e.path, status: e.status, ok: e.ok })),
     local_consistency: {
       duplicate_count: step4.duplicate_count,
-      invalid_json_types: step4.invalid_json.map(i => i.object_type),
+      invalid_json_types: step4.invalid_json.map((i: any) => i.object_type),
       dataset_sql_in_list: step4.dataset_sql_available.c,
       lineage_potential: step4.lineage_potential
     },
@@ -338,7 +338,7 @@ async function main() {
     const mt = step2.matched[t] ?? 0;
     const api = step1.api_stats[t];
     const apiCount = api?.api_count ?? "N/A";
-    const localCount = step1.local_stats.find(s => s.object_type === t)?.records ?? "N/A";
+    const localCount = step1.local_stats.find((s: any) => s.object_type === t)?.records ?? "N/A";
     summary.conclusions.push(
       `${t.toUpperCase()}: list=${localCount}(local)/${apiCount}(API), matched_detail=${mt}, missing_detail=${m}`
     );
@@ -378,9 +378,9 @@ ${JSON.stringify(step1.api_stats, null, 2)}
 
 | Тип | List | Detail | Missing | Matched |
 |---|---:|---:|---:|---:|
-| Dashboard | ${step1.local_stats.find(s=>s.object_type==='dashboard')?.records??0} | ${step1.local_stats.find(s=>s.object_type==='dashboard_detail')?.records??0} | ${step2.missing.dashboard??0} | ${step2.matched.dashboard??0} |
-| Chart | ${step1.local_stats.find(s=>s.object_type==='chart')?.records??0} | ${step1.local_stats.find(s=>s.object_type==='chart_detail')?.records??0} | ${step2.missing.chart??0} | ${step2.matched.chart??0} |
-| Dataset | ${step1.local_stats.find(s=>s.object_type==='dataset')?.records??0} | ${step1.local_stats.find(s=>s.object_type==='dataset_detail')?.records??0} | ${step2.missing.dataset??0} | ${step2.matched.dataset??0} |
+| Dashboard | ${step1.local_stats.find((s: any)=>s.object_type==='dashboard')?.records??0} | ${step1.local_stats.find((s: any)=>s.object_type==='dashboard_detail')?.records??0} | ${step2.missing.dashboard??0} | ${step2.matched.dashboard??0} |
+| Chart | ${step1.local_stats.find((s: any)=>s.object_type==='chart')?.records??0} | ${step1.local_stats.find((s: any)=>s.object_type==='chart_detail')?.records??0} | ${step2.missing.chart??0} | ${step2.matched.chart??0} |
+| Dataset | ${step1.local_stats.find((s: any)=>s.object_type==='dataset')?.records??0} | ${step1.local_stats.find((s: any)=>s.object_type==='dataset_detail')?.records??0} | ${step2.missing.dataset??0} | ${step2.matched.dataset??0} |
 
 ### Ошибки предыдущей выгрузки
 - Всего: ${step2.endpoint_errors_total}
@@ -391,7 +391,7 @@ ${JSON.stringify(step1.api_stats, null, 2)}
 
 | Endpoint | Status | OK |
 |---|---:|---:|
-${step3.endpoints.map(e => `| ${e.path} | ${e.status} | ${e.ok ? "✅" : "❌"} |`).join("\n")}
+${step3.endpoints.map((e: any) => `| ${e.path} | ${e.status} | ${e.ok ? "✅" : "❌"} |`).join("\n")}
 
 ## 4. Локальная согласованность
 
