@@ -1,286 +1,291 @@
 /**
- * Этап 1.1 — дозагрузка dataset_detail из Superset API.
- * - 1 запрос/сек (rate limiting)
- * - checkpoint в JSON после каждого успешного запроса → восстановление после обрыва
- * - приоритетные датасеты P0 → P1 загружаются первыми, остальные — по порядку
- * - только чтение, не модифицирует SQLite
- * - проверяет первые 5 датасетов перед массовой загрузкой
+ * Этап 1.1 — дозагрузка dataset_detail из Superset API (переписан по ТЗ раздела 3).
+ *
+ * Поведение:
+ *  - единая fetchDetail() для preview и batch; результаты preview переиспользуются;
+ *  - полный ответ API сохраняется атомарно в output/dataset_details/<id>.json;
+ *  - summary — только сводка/статусы (output/dataset_detail_summary.json);
+ *  - checkpoint: completed_ids, failed_ids (с классификацией), attempts, results, file_path, validation;
+ *  - completed = HTTP ok + структура result проверена + файл сохранён + файл перечитан и валиден;
+ *  - при восстановлении: completed без валидного файла → повтор загрузки;
+ *  - сетевые/преходящие ошибки НЕ попадают в перманентный failed_ids;
+ *  - 401 — re-auth (один повтор запроса) через SupersetClient; 429/5xx/network — backoff; 403/404 — финальная ошибка;
+ *  - последовательно, 1 запрос/сек (RATE_LIMIT_MS).
  */
-import { writeFileSync, readFileSync } from "fs";
+import { writeFileSync, readFileSync, renameSync, mkdirSync, existsSync } from "fs";
+import { join } from "path";
 import { loadConfig } from "./config";
+import { SupersetClient } from "./superset";
 
 const config = loadConfig();
-const API = config.baseUrl;
+const DETAILS_DIR = "output/dataset_details";
 const CHECKPOINT_FILE = "data/checkpoint_dataset_detail.json";
-const OUTPUT_FILE = "output/dataset_detail_batch.json";
+const SUMMARY_FILE = "output/dataset_detail_summary.json";
 
-// Приоритетные датасеты (P0 → P1)
+// Приоритетные ID без изменений (ТЗ раздел 3)
 const PRIORITY_IDS = [4732, 7119, 7006, 7024, 7027, 7775, 5797, 7465, 7473, 5247, 5399, 7293];
 
-type Checkpoint = {
-  completed_ids: number[];
-  failed_ids: number[];
-  total_fetched: number;
-  last_ts: string;
-};
+type ValidationResult = "valid" | "invalid_structure" | "file_missing" | "file_corrupt";
 
-type DetailResult = {
+type IdResult = {
   dataset_id: number;
   ok: boolean;
-  status: number;
+  http_status: number | null;
   error?: string;
+  error_class?: "permanent" | "transient"; // permanent: 403/404; transient: сеть/таймаут/5xx после ретраев
   table_name?: string;
-  kind?: string;
-  database_name?: string;
-  schema?: string;
   sql_length?: number;
   columns_count?: number;
   metrics_count?: number;
   changed_on?: string;
-  sample_columns?: { name: string; type: string; }[];
-  sample_metrics?: { name: string; expression: string; }[];
+  file_path?: string;
+  validation?: ValidationResult;
+  fetched_at?: string;
 };
 
-async function sleep(ms: number) {
-  return new Promise((r) => setTimeout(r, ms));
-}
-
-async function login(): Promise<string> {
-  const resp = await fetch(`${API}/api/v1/security/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username: config.username,
-      password: config.password,
-      provider: config.provider,
-      refresh: true,
-    }),
-  });
-  if (!resp.ok) throw new Error(`Login failed: ${resp.status} ${resp.statusText}`);
-  const data = await resp.json();
-  return data.access_token;
-}
-
-async function fetchDatasetDetail(token: string, datasetId: number): Promise<DetailResult> {
-  // Без завершающего слэша!
-  const url = `${API}/api/v1/dataset/${datasetId}`;
-  const resp = await fetch(url, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-  const result: DetailResult = {
-    dataset_id: datasetId,
-    ok: resp.ok,
-    status: resp.status,
-  };
-
-  if (!resp.ok) {
-    result.error = `HTTP ${resp.status}`;
-    return result;
-  }
-
-  const data = await resp.json();
-  const res = data.result;
-
-  result.table_name = res.table_name;
-  result.kind = res.kind;
-  result.database_name = res.database?.database_name;
-  result.schema = res.schema;
-  result.changed_on = res.changed_on;
-
-  // SQL
-  if (res.sql) {
-    result.sql_length = res.sql.length;
-  }
-
-  // Columns
-  if (res.columns) {
-    result.columns_count = res.columns.length;
-    result.sample_columns = res.columns.slice(0, 5).map((c: any) => ({
-      name: c.column_name,
-      type: c.type || "",
-    }));
-  }
-
-  // Metrics
-  if (res.metrics) {
-    result.metrics_count = res.metrics.length;
-    result.sample_metrics = Object.entries(res.metrics).slice(0, 5).map(([k, v]: [string, any]) => ({
-      name: k,
-      expression: v?.expression || v?.verbose_name || "",
-    }));
-  }
-
-  return result;
-}
+type Checkpoint = {
+  completed_ids: number[];
+  failed_ids: number[];          // только PERMANENT failures (403/404/структура)
+  transient_failures: number[];  // сеть/5xx — будут повторены на следующем запуске
+  attempts: Record<string, number>;
+  results: Record<string, IdResult>;
+  total_fetched: number;
+  last_ts: string;
+};
 
 function loadCheckpoint(): Checkpoint {
   try {
-    return JSON.parse(readFileSync(CHECKPOINT_FILE, "utf8")) as Checkpoint;
+    const cp = JSON.parse(readFileSync(CHECKPOINT_FILE, "utf8")) as Checkpoint;
+    return {
+      completed_ids: cp.completed_ids ?? [],
+      failed_ids: cp.failed_ids ?? [],
+      transient_failures: cp.transient_failures ?? [],
+      attempts: cp.attempts ?? {},
+      results: cp.results ?? {},
+      total_fetched: cp.total_fetched ?? 0,
+      last_ts: cp.last_ts ?? "",
+    };
   } catch {
-    return { completed_ids: [], failed_ids: [], total_fetched: 0, last_ts: "" };
+    return { completed_ids: [], failed_ids: [], transient_failures: [], attempts: {}, results: {}, total_fetched: 0, last_ts: "" };
   }
 }
 
 function saveCheckpoint(cp: Checkpoint) {
-  writeFileSync(CHECKPOINT_FILE, JSON.stringify(cp, null, 2), { mode: 0o600 });
+  atomicWrite(CHECKPOINT_FILE, JSON.stringify(cp, null, 2));
+}
+
+/** Атомарная запись: temp-файл + rename. */
+function atomicWrite(path: string, content: string) {
+  const tmp = `${path}.tmp`;
+  writeFileSync(tmp, content, { mode: 0o600 });
+  renameSync(tmp, path);
+}
+
+function sleep(ms: number) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+/** Валидация структуры detail-ответа Superset. */
+function validateStructure(data: any): { ok: boolean; reason?: string } {
+  const res = data?.result;
+  if (!res || typeof res !== "object") return { ok: false, reason: "missing .result object" };
+  if (res.id == null) return { ok: false, reason: "missing result.id" };
+  if (typeof res.table_name !== "string") return { ok: false, reason: "missing result.table_name" };
+  if (!Array.isArray(res.columns)) return { ok: false, reason: "result.columns is not an array" };
+  if (!Array.isArray(res.metrics)) return { ok: false, reason: "result.metrics is not an array" };
+  return { ok: true };
+}
+
+/** Проверка сохранённого файла: перечитать, распарсить, сверить id. */
+function verifySavedFile(path: string, datasetId: number): ValidationResult {
+  if (!existsSync(path)) return "file_missing";
+  try {
+    const parsed = JSON.parse(readFileSync(path, "utf8"));
+    if (parsed?.result?.id !== datasetId) return "invalid_structure";
+    const v = validateStructure(parsed);
+    return v.ok ? "valid" : "invalid_structure";
+  } catch {
+    return "file_corrupt";
+  }
+}
+
+/** Единая функция получения detail (preview и batch). Использует retry/re-auth клиента. */
+async function fetchDetail(client: SupersetClient, datasetId: number): Promise<IdResult & { raw?: any }> {
+  try {
+    const data = await client.detail("dataset", datasetId);
+    return { dataset_id: datasetId, ok: true, http_status: 200, raw: data };
+  } catch (e: any) {
+    const status = e?.status ?? null;
+    let errorClass: "permanent" | "transient" = "transient";
+    if (status === 403 || status === 404) errorClass = "permanent";
+    // nonRetryable тоже ставится клиентом для 403/404
+    if (e?.nonRetryable) errorClass = "permanent";
+    return { dataset_id: datasetId, ok: false, http_status: status, error: String(e.message ?? e).slice(0, 400), error_class: errorClass };
+  }
+}
+
+function summarizeResult(raw: any): Omit<IdResult, "dataset_id" | "ok" | "http_status"> {
+  const res = raw?.result ?? {};
+  return {
+    table_name: res.table_name,
+    sql_length: typeof res.sql === "string" ? res.sql.length : 0,
+    columns_count: Array.isArray(res.columns) ? res.columns.length : 0,
+    metrics_count: Array.isArray(res.metrics) ? res.metrics.length : 0,
+    changed_on: res.changed_on,
+  };
+}
+
+/** Сохранение полного ответа + проверка файла. Возвращает итоговый статус. */
+function persistDetail(datasetId: number, raw: any): IdResult {
+  const filePath = join(DETAILS_DIR, `${datasetId}.json`);
+  atomicWrite(filePath, JSON.stringify({ ...raw, _fetched_at: new Date().toISOString(), _source: `${config.baseUrl}/api/v1/dataset/${datasetId}` }, null, 2));
+  const validation = verifySavedFile(filePath, datasetId);
+  return {
+    dataset_id: datasetId,
+    ok: validation === "valid",
+    http_status: 200,
+    ...summarizeResult(raw),
+    file_path: filePath,
+    validation,
+    fetched_at: new Date().toISOString(),
+    ...(validation !== "valid" ? { error: `save validation failed: ${validation}`, error_class: "transient" } : {}),
+  };
 }
 
 async function main() {
-  console.log("=== Dataset Detail Dataloader ===");
-  console.log("Target:", API);
-  console.log("Rate limit: 1 req/sec");
-  console.log();
+  mkdirSync(DETAILS_DIR, { recursive: true });
+  mkdirSync("data", { recursive: true });
 
-  // --- Phase 0: Login + check first 5 priority datasets ---
-  console.log("[Phase 0] Login...");
-  let token: string;
-  try {
-    token = await login();
-    console.log("✓ Login successful");
-  } catch (e: any) {
-    console.error("✗ Login failed:", e.message);
-    process.exit(1);
-  }
+  console.log("=== Dataset Detail Loader (v2, ТЗ §3) ===");
+  console.log(`API: ${config.baseUrl} | rate limit: ${config.rateLimitMs}ms/request | priority set: ${PRIORITY_IDS.length}`);
 
-  // Проверяем первые 5 датасетов
-  const checkIds = PRIORITY_IDS.slice(0, 5);
-  console.log(`\n[Phase 0] Checking ${checkIds.length} priority datasets (preview)...`);
-  const previewResults: DetailResult[] = [];
+  const client = new SupersetClient(config);
+  await client.login();
+  console.log("[auth] login ok\n");
 
-  for (const id of checkIds) {
-    console.log(`  Fetching dataset ${id}...`);
-    const result = await fetchDatasetDetail(token, id);
-    previewResults.push(result);
-
-    if (result.ok) {
-      console.log(`  ✓ ${id} ${result.table_name} | sql=${result.sql_length} cols=${result.columns_count} metrics=${result.metrics_count}`);
-    } else {
-      console.log(`  ✗ ${id} status=${result.status} ${result.error}`);
-    }
-
-    if (id !== checkIds[checkIds.length - 1]) {
-      await sleep(1000); // 1 req/sec
-    }
-  }
-
-  // Показываем sample данных
-  const okResults = previewResults.filter((r) => r.ok);
-  if (okResults.length > 0) {
-    console.log("\n[Phase 0] Sample data from first OK result:");
-    const first = okResults[0];
-    console.log(`  table: ${first.table_name}`);
-    console.log(`  database: ${first.database_name}`);
-    console.log(`  sql_length: ${first.sql_length}`);
-    console.log(`  columns_count: ${first.columns_count}`);
-    if (first.sample_columns?.length) {
-      console.log(`  sample columns:`);
-      for (const c of first.sample_columns) {
-        console.log(`    - ${c.name} (${c.type})`);
-      }
-    }
-    if (first.sample_metrics?.length) {
-      console.log(`  sample metrics:`);
-      for (const m of first.sample_metrics) {
-        console.log(`    - ${m.name}: ${m.expression.slice(0, 80)}`);
-      }
-    }
-  }
-
-  console.log(`\n[Phase 0] Preview complete: ${okResults.length}/${checkIds.length} ok`);
-  if (okResults.length === 0) {
-    console.error("✗ No datasets fetched — aborting batch load");
-    return;
-  }
-
-  // --- Phase 1: Batch load with checkpoint ---
-  console.log("\n[Phase 1] Batch load with checkpoint...");
   const cp = loadCheckpoint();
-  console.log(`  Resumed from checkpoint: ${cp.completed_ids.length} completed, ${cp.failed_ids.length} failed`);
 
-  // Загружаем все приоритетные, пропуская уже выполненные
-  const allIds = [...PRIORITY_IDS];
-  const toFetch = allIds.filter((id) => !cp.completed_ids.includes(id) && !cp.failed_ids.includes(id));
-  console.log(`  To fetch: ${toFetch.length} datasets (${allIds.length - toFetch.length} already processed)`);
+  // --- Шаг A: восстановить статус completed-checkpoint файлов (ТЗ п.13) ---
+  const staleCompleted: number[] = [];
+  for (const id of [...cp.completed_ids]) {
+    const stored = cp.results[String(id)];
+    const path = stored?.file_path ?? join(DETAILS_DIR, `${id}.json`);
+    const validation = verifySavedFile(path, id);
+    if (validation !== "valid") {
+      staleCompleted.push(id);
+      cp.completed_ids = cp.completed_ids.filter((x) => x !== id);
+      delete cp.results[String(id)];
+      console.log(`[recover] #${id}: marked completed but file invalid (${validation}) → will refetch`);
+    }
+  }
+  if (staleCompleted.length) saveCheckpoint(cp);
 
-  const batchResults: DetailResult[] = [];
-  let consecutiveErrors = 0;
-  const MAX_CONSECUTIVE_ERRORS = 10;
+  // --- Шаг B: определить очередь ---
+  // Preview и batch — один и тот же набор: приоритетные ID минус уже completed/failed(permanent).
+  const queue = PRIORITY_IDS.filter(
+    (id) => !cp.completed_ids.includes(id) && !cp.failed_ids.includes(id)
+  );
+  console.log(`[plan] completed=${cp.completed_ids.length}, permanent_failed=${cp.failed_ids.length}, to_fetch=${queue.length}\n`);
 
-  for (let i = 0; i < toFetch.length; i++) {
-    const id = toFetch[i];
-    const percent = Math.round(((cp.completed_ids.length + i) / toFetch.length) * 100);
-    console.log(`  [${i + 1}/${toFetch.length}] (${percent}%) Fetching dataset ${id}...`);
+  const reusedFromDisk: IdResult[] = [];
+  for (const id of cp.completed_ids) {
+    const r = cp.results[String(id)];
+    if (r) reusedFromDisk.push(r);
+  }
+  if (reusedFromDisk.length) {
+    console.log(`[reuse] ${reusedFromDisk.length} results already in checkpoint (from previous runs, incl. preview)`);
+  }
 
-    try {
-      const result = await fetchDatasetDetail(token, id);
-      batchResults.push(result);
+  const runResults: IdResult[] = [];
+  for (let i = 0; i < queue.length; i++) {
+    const id = queue[i];
+    cp.attempts[String(id)] = (cp.attempts[String(id)] ?? 0) + 1;
+    console.log(`[${i + 1}/${queue.length}] fetching dataset ${id} (attempt ${cp.attempts[String(id)]})...`);
 
-      if (result.ok) {
-        cp.completed_ids.push(id);
-        consecutiveErrors = 0;
-        console.log(`    ✓ ${result.table_name} | sql=${result.sql_length} cols=${result.columns_count}`);
+    const outcome = await fetchDetail(client, id);
+
+    let final: IdResult;
+    if (outcome.ok) {
+      const v = validateStructure(outcome.raw);
+      if (v.ok) {
+        final = persistDetail(id, outcome.raw);
       } else {
+        final = {
+          dataset_id: id, ok: false, http_status: 200,
+          error: `structure invalid: ${v.reason}`, error_class: "permanent",
+          validation: "invalid_structure",
+        };
         cp.failed_ids.push(id);
-        console.log(`    ✗ status=${result.status} ${result.error}`);
       }
-
-      saveCheckpoint(cp);
-      cp.total_fetched++;
-      cp.last_ts = new Date().toISOString();
-
-    } catch (e: any) {
-      console.error(`    ✗ Network error: ${e.message}`);
-      cp.failed_ids.push(id);
-      consecutiveErrors++;
-      saveCheckpoint(cp);
-
-      if (consecutiveErrors >= MAX_CONSECUTIVE_ERRORS) {
-        console.error(`\n✗ ${MAX_CONSECUTIVE_ERRORS} consecutive errors — stopping to avoid spam`);
-        break;
-      }
-
-      // Retry с exponential backoff
-      const retryDelay = Math.min(1000 * Math.pow(2, consecutiveErrors), 30000);
-      console.log(`    Retrying in ${retryDelay}ms...`);
-      await sleep(retryDelay);
+    } else {
+      final = { ...outcome };
+      delete (final as any).raw;
+      if (outcome.error_class === "permanent") cp.failed_ids.push(id);
+      else if (!cp.transient_failures.includes(id)) cp.transient_failures.push(id);
     }
 
-    // Rate limiting: 1 req/sec
-    if (i < toFetch.length - 1) {
-      await sleep(1000);
-    }
+    cp.results[String(id)] = final;
+    if (final.ok && !cp.completed_ids.includes(id)) cp.completed_ids.push(id);
+    cp.transient_failures = cp.transient_failures.filter((x) => x !== id || !final.ok);
+    if (final.ok) cp.total_fetched++;
+    cp.last_ts = new Date().toISOString();
+    saveCheckpoint(cp); // порядок: счётчики/ts ДО сохранения (ТЗ п.9)
+
+    runResults.push(final);
+
+    const mark = final.ok ? "✓" : "✗";
+    console.log(
+      `  ${mark} ${id} ${final.table_name ?? ""} status=${final.http_status ?? "-"} sql=${final.sql_length ?? "-"} cols=${final.columns_count ?? "-"} metrics=${final.metrics_count ?? "-"}${final.error ? " err=" + final.error.slice(0, 80) : ""}`
+    );
+
+    if (i < queue.length - 1) await sleep(config.rateLimitMs);
   }
 
-  // Итоговый отчёт
-  const okCount = batchResults.filter((r) => r.ok).length;
-  const failCount = batchResults.filter((r) => !r.ok).length;
+  // --- Шаг C: сводный отчёт 12/12 ---
+  const all = [...reusedFromDisk, ...runResults].filter((r) => PRIORITY_IDS.includes(r.dataset_id));
+  // дедуп по id, свежие поверх старых
+  const byId = new Map<number, IdResult>();
+  for (const r of all) byId.set(r.dataset_id, r);
 
-  console.log("\n=== Batch Load Complete ===");
-  console.log(`Fetched: ${batchResults.length} datasets (${okCount} ok, ${failCount} failed)`);
-  console.log(`Checkpoint: ${cp.completed_ids.length} completed, ${cp.failed_ids.length} failed, total=${cp.total_fetched}`);
+  const rows = PRIORITY_IDS.map((id) => {
+    const r = byId.get(id);
+    return {
+      dataset_id: id,
+      in_checkpoint: cp.completed_ids.includes(id),
+      http_status: r?.http_status ?? null,
+      table_name: r?.table_name ?? null,
+      sql_length: r?.sql_length ?? null,
+      columns_count: r?.columns_count ?? null,
+      metrics_count: r?.metrics_count ?? null,
+      changed_on: r?.changed_on ?? null,
+      file_path: r?.file_path ?? null,
+      validation: r?.validation ?? (cp.completed_ids.includes(id) ? "valid" : "not_fetched"),
+      error: r?.error ?? null,
+    };
+  });
 
-  // Сохраняем batch-результаты
-  writeFileSync(OUTPUT_FILE, JSON.stringify({
+  const okCount = rows.filter((r) => r.validation === "valid").length;
+  const summary = {
     generated_at: new Date().toISOString(),
-    batch: batchResults,
-    checkpoint: cp,
-  }, null, 2), { mode: 0o600 });
+    api_base: config.baseUrl,
+    method: "SupersetClient.detail() — единая функция для preview/batch; полный ответ сохраняется атомарно",
+    rate_limit_ms: config.rateLimitMs,
+    totals: {
+      priority: PRIORITY_IDS.length,
+      valid_details: okCount,
+      permanent_failed: cp.failed_ids.length,
+      missing: PRIORITY_IDS.length - okCount - cp.failed_ids.length,
+    },
+    datasets: rows,
+    checkpoint_file: CHECKPOINT_FILE,
+  };
+  atomicWrite(SUMMARY_FILE, JSON.stringify(summary, null, 2));
 
-  console.log(`Saved to ${OUTPUT_FILE}`);
-
-  // ***REMOVED***им полную сводку по всем датасетам (checkpoint + batch)
-  console.log("\n=== Full Summary ===");
-  for (const id of PRIORITY_IDS) {
-    const wasInCheckpoint = cp.completed_ids.includes(id);
-    const wasFailed = cp.failed_ids.includes(id);
-    const inBatch = batchResults.find((r) => r.dataset_id === id);
-    const ok = wasInCheckpoint || (inBatch && inBatch.ok);
-    console.log(`${ok ? "✓" : "✗"} ${id} ${wasInCheckpoint ? "(checkpoint)" : inBatch ? "(new)" : "(pending)"}`);
+  console.log("\n=== Summary ===");
+  for (const r of rows) {
+    console.log(`${r.validation === "valid" ? "✓" : r.validation === "not_fetched" ? "·" : "✗"} ${r.dataset_id} ${r.table_name ?? ""} sql=${r.sql_length} cols=${r.columns_count} metrics=${r.metrics_count} file=${r.file_path ?? "-"} [${r.validation}]`);
   }
+  console.log(`\nvalid: ${okCount}/${PRIORITY_IDS.length} | summary: ${SUMMARY_FILE}`);
 }
 
-main().catch((e) => {
-  console.error("Fatal:", e);
-  process.exit(1);
-});
+main().catch((e) => { console.error("Fatal:", e); process.exit(1); });
