@@ -1,124 +1,217 @@
 {
-  "generated_at": "2026-11-20T20:24:22.783Z",
+  "generated_at": "2026-11-21T06:01:32.221Z",
   "mode": "read-only",
-  "checks": {
-    "sqlite": {
-      "quick_check": "ok",
-      "counts": {
-        "chart": 5000,
-        "chart_detail": 3766,
-        "dashboard": 330,
-        "dashboard_detail": 330,
-        "dataset": 3767
-      },
-      "relations": 0
-    },
-    "lists": {
+  "summary": {
+    "started_at": "2026-11-20T21:33:38.331Z",
+    "finished_at": "2026-11-20T21:39:40.179Z",
+    "status": "ok",
+    "mode": "read-only",
+    "resources": {
       "dashboard": {
-        "file": "output\\dashboards.json",
-        "present": true,
-        "rows": 330,
-        "local_catalog_count": 330
+        "api_count": 331,
+        "downloaded_count": 331,
+        "unique_ids_count": 331,
+        "duplicate_rows": 0,
+        "pages_count": 4,
+        "status": "complete"
       },
       "chart": {
-        "file": "output\\charts.json",
-        "present": true,
-        "rows": 5000,
-        "local_catalog_count": 5000
+        "api_count": 19924,
+        "downloaded_count": 19924,
+        "unique_ids_count": 19924,
+        "duplicate_rows": 0,
+        "pages_count": 200,
+        "status": "complete"
       },
       "dataset": {
-        "file": "output\\datasets.json",
-        "present": true,
-        "rows": 3767,
-        "local_catalog_count": 3767
+        "api_count": 3776,
+        "downloaded_count": 3776,
+        "unique_ids_count": 3776,
+        "duplicate_rows": 0,
+        "pages_count": 38,
+        "status": "complete"
       }
     },
-    "dataset_details": {
-      "4732": {
-        "dataset_id": 4732,
-        "ok": true,
-        "table_name": "darkstore_ts_partners_new",
-        "reason": null
+    "detail_summary": {
+      "total_attempted": 4,
+      "success": 4,
+      "failed": 0,
+      "http401": 0,
+      "by_class": {
+        "http_401": 0,
+        "http_403": 0,
+        "http_429": 0,
+        "http_5xx": 0,
+        "http_4xx": 0,
+        "network": 0,
+        "other": 0
       },
-      "5247": {
-        "dataset_id": 5247,
-        "ok": true,
-        "table_name": "courier_logs_agg_couriers_daily",
-        "reason": null
-      },
-      "5399": {
-        "dataset_id": 5399,
-        "ok": true,
-        "table_name": "courier_logs_agg_couriers_week",
-        "reason": null
-      },
-      "5797": {
-        "dataset_id": 5797,
-        "ok": true,
-        "table_name": "hr_couriers",
-        "reason": null
-      },
-      "7006": {
-        "dataset_id": 7006,
-        "ok": true,
-        "table_name": "cargo_main2",
-        "reason": null
-      },
-      "7024": {
-        "dataset_id": 7024,
-        "ok": true,
-        "table_name": "cargo_main3",
-        "reason": null
-      },
-      "7027": {
-        "dataset_id": 7027,
-        "ok": true,
-        "table_name": "cargo_main4",
-        "reason": null
-      },
-      "7119": {
-        "dataset_id": 7119,
-        "ok": true,
-        "table_name": "cargo_flags",
-        "reason": null
-      },
-      "7293": {
-        "dataset_id": 7293,
-        "ok": true,
-        "table_name": "hr_couriers_zone_balance",
-        "reason": null
-      },
-      "7465": {
-        "dataset_id": 7465,
-        "ok": true,
-        "table_name": "hr_couriers_5shifts",
-        "reason": null
-      },
-      "7473": {
-        "dataset_id": 7473,
-        "ok": true,
-        "table_name": "hr_couriers_five_shifts",
-        "reason": null
-      },
-      "7775": {
-        "dataset_id": 7775,
-        "ok": true,
-        "table_name": "all_couriers_list",
-        "reason": null
-      }
+      "note": "Точечные dashboard/chart detail; dataset detail — отдельный загрузчик."
     },
-    "dataset_detail_summary": {
+    "detail_spot_checks": {
+      "attempted": 4,
+      "ok": 4,
+      "failed": 0,
+      "by_class": {
+        "http_401": 0,
+        "http_403": 0,
+        "http_429": 0,
+        "http_5xx": 0,
+        "http_4xx": 0,
+        "network": 0,
+        "other": 0
+      },
+      "errors": [],
+      "note": "Только точечная выборка; полные dataset detail загружает phase1-1-dataset-detail-loader.ts."
+    },
+    "endpoint_errors": 0,
+    "courier_candidates": 7245
+  },
+  "lists": {
+    "dashboard": {
+      "file": "output/dashboards.json",
       "present": true,
-      "priority": 12,
-      "valid_details": 12,
-      "all_valid": true
+      "rows": 331,
+      "unique_ids": 331,
+      "duplicate_ids": 0,
+      "rows_without_id": 0,
+      "summary_downloaded_count": 331,
+      "summary_api_count": 331,
+      "summary_unique_ids_count": 331,
+      "summary_duplicate_rows": 0,
+      "summary_status": "complete",
+      "file_api_count_field": 331
+    },
+    "chart": {
+      "file": "output/charts.json",
+      "present": true,
+      "rows": 19924,
+      "unique_ids": 19924,
+      "duplicate_ids": 0,
+      "rows_without_id": 0,
+      "summary_downloaded_count": 19924,
+      "summary_api_count": 19924,
+      "summary_unique_ids_count": 19924,
+      "summary_duplicate_rows": 0,
+      "summary_status": "complete",
+      "file_api_count_field": 19924
+    },
+    "dataset": {
+      "file": "output/datasets.json",
+      "present": true,
+      "rows": 3776,
+      "unique_ids": 3776,
+      "duplicate_ids": 0,
+      "rows_without_id": 0,
+      "summary_downloaded_count": 3776,
+      "summary_api_count": 3776,
+      "summary_unique_ids_count": 3776,
+      "summary_duplicate_rows": 0,
+      "summary_status": "complete",
+      "file_api_count_field": 3776
     }
   },
-  "errors": [],
+  "sqlite": {
+    "quick_check": "ok",
+    "counts": {
+      "chart": 5000,
+      "chart_detail": 3766,
+      "dashboard": 330,
+      "dashboard_detail": 330,
+      "dataset": 3767
+    },
+    "relations": 0,
+    "note": "SQLite list усечён (историческая выгрузка); полный каталог — в output/*.json"
+  },
+  "dataset_details": {
+    "4732": {
+      "dataset_id": 4732,
+      "ok": true,
+      "table_name": "darkstore_ts_partners_new",
+      "reason": null
+    },
+    "5247": {
+      "dataset_id": 5247,
+      "ok": true,
+      "table_name": "courier_logs_agg_couriers_daily",
+      "reason": null
+    },
+    "5399": {
+      "dataset_id": 5399,
+      "ok": true,
+      "table_name": "courier_logs_agg_couriers_week",
+      "reason": null
+    },
+    "5797": {
+      "dataset_id": 5797,
+      "ok": true,
+      "table_name": "hr_couriers",
+      "reason": null
+    },
+    "7006": {
+      "dataset_id": 7006,
+      "ok": true,
+      "table_name": "cargo_main2",
+      "reason": null
+    },
+    "7024": {
+      "dataset_id": 7024,
+      "ok": true,
+      "table_name": "cargo_main3",
+      "reason": null
+    },
+    "7027": {
+      "dataset_id": 7027,
+      "ok": true,
+      "table_name": "cargo_main4",
+      "reason": null
+    },
+    "7119": {
+      "dataset_id": 7119,
+      "ok": true,
+      "table_name": "cargo_flags",
+      "reason": null
+    },
+    "7293": {
+      "dataset_id": 7293,
+      "ok": true,
+      "table_name": "hr_couriers_zone_balance",
+      "reason": null
+    },
+    "7465": {
+      "dataset_id": 7465,
+      "ok": true,
+      "table_name": "hr_couriers_5shifts",
+      "reason": null
+    },
+    "7473": {
+      "dataset_id": 7473,
+      "ok": true,
+      "table_name": "hr_couriers_five_shifts",
+      "reason": null
+    },
+    "7775": {
+      "dataset_id": 7775,
+      "ok": true,
+      "table_name": "all_couriers_list",
+      "reason": null
+    }
+  },
   "api": {
-    "attempted": false,
-    "skipped_reason": "no credentials (SUPERSET_USERNAME/SUPERSET_PASSWORD/SUPERSET_ACCESS_TOKEN)"
+    "attempted": true,
+    "auth": "failed",
+    "error": "Network error after 5 retries: ECONNREFUSED: Unable to connect. Is the computer able to access the url?",
+    "skipped_reason": "login failed"
+  },
+  "checks": {},
+  "errors": [],
+  "dataset_detail_summary": {
+    "present": true,
+    "priority": 12,
+    "valid_details": 12,
+    "unique_saved_datasets": 12,
+    "all_valid": true
   },
   "status": "ok",
-  "finished_at": "2026-11-20T20:24:28.968Z"
+  "finished_at": "2026-11-21T06:04:21.925Z"
 }

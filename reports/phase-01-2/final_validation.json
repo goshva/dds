@@ -1,0 +1,170 @@
+{
+  "phase": "1.2",
+  "status": "PASS",
+  "generated_at": "2026-11-21T11:55:39.442Z",
+  "datasets_expected": 12,
+  "datasets_audited": 12,
+  "datasets_with_sql": 12,
+  "datasets_without_sql": 0,
+  "marts_registered": 11,
+  "metrics_registered": 48,
+  "metrics_verified": 14,
+  "metrics_partial": 18,
+  "metrics_needs_event": 13,
+  "metrics_not_available": 3,
+  "missing_events": 17,
+  "missing_references": 13,
+  "validation_errors": 0,
+  "catalog_sqlite_modified": false,
+  "source_databases_accessed": false,
+  "full_discovery_rerun": false,
+  "status_breakdown": {
+    "DERIVABLE": 12,
+    "VERIFIED": 2,
+    "PARTIAL": 12,
+    "NEEDS_REFERENCE": 4,
+    "NEEDS_EVENT": 13,
+    "NOT_AVAILABLE": 3,
+    "NEEDS_BUSINESS_RULE": 2
+  },
+  "summary": {
+    "total_checks": 10,
+    "pass": 10,
+    "fail": 0,
+    "warn": 0
+  },
+  "checks": [
+    {
+      "id": "datasets_12_sql",
+      "status": "PASS",
+      "details": "approved=12, present=12, with_sql=12, without_sql=0, missing=[]",
+      "metrics": {
+        "missing": [],
+        "with_sql": [
+          4732,
+          5247,
+          5399,
+          5797,
+          7006,
+          7024,
+          7027,
+          7119,
+          7293,
+          7465,
+          7473,
+          7775
+        ],
+        "without_sql": []
+      }
+    },
+    {
+      "id": "fields_metrics_processed",
+      "status": "PASS",
+      "details": "fields=514, metrics=149; counts совпадают с detail JSON",
+      "metrics": {
+        "fields": 514,
+        "metrics": 149,
+        "field_mismatches": [],
+        "metric_mismatches": []
+      }
+    },
+    {
+      "id": "join_map",
+      "status": "PASS",
+      "details": "edges=127, confidence=VERIFIED/PROBABLE/UNKNOWN/PARTIAL",
+      "metrics": {
+        "edges": 127,
+        "confidence": [
+          "VERIFIED",
+          "PROBABLE",
+          "UNKNOWN",
+          "PARTIAL"
+        ]
+      }
+    },
+    {
+      "id": "mart_registry",
+      "status": "PASS",
+      "details": "marts=11, unique=11, problems=[]",
+      "metrics": {
+        "marts": 11,
+        "unique": 11,
+        "problems": []
+      }
+    },
+    {
+      "id": "kpi_matrix",
+      "status": "PASS",
+      "details": "kpis=48, statuses={\"DERIVABLE\":12,\"VERIFIED\":2,\"PARTIAL\":12,\"NEEDS_REFERENCE\":4,\"NEEDS_EVENT\":13,\"NOT_AVAILABLE\":3,\"NEEDS_BUSINESS_RULE\":2}, problems=[]",
+      "metrics": {
+        "kpis": 48,
+        "status_counts": {
+          "DERIVABLE": 12,
+          "VERIFIED": 2,
+          "PARTIAL": 12,
+          "NEEDS_REFERENCE": 4,
+          "NEEDS_EVENT": 13,
+          "NOT_AVAILABLE": 3,
+          "NEEDS_BUSINESS_RULE": 2
+        },
+        "problems": []
+      }
+    },
+    {
+      "id": "evidence",
+      "status": "PASS",
+      "details": "все ссылки на поля/метрики разрешены",
+      "metrics": {
+        "evidence_issues": []
+      }
+    },
+    {
+      "id": "missing_events_references",
+      "status": "PASS",
+      "details": "events=17, references=13, missing required events=[]",
+      "metrics": {
+        "events": 17,
+        "references": 13,
+        "missing_events": []
+      }
+    },
+    {
+      "id": "parser_local_tests",
+      "status": "PASS",
+      "details": "локальные тесты анализатора пройдены",
+      "metrics": {
+        "failures": []
+      }
+    },
+    {
+      "id": "typescript_compile",
+      "status": "PASS",
+      "details": "bunx tsc --noEmit: exit 0"
+    },
+    {
+      "id": "catalog_sqlite_unchanged",
+      "status": "PASS",
+      "details": "quick_check=ok, relations=0, unchanged_vs_backup=true"
+    }
+  ],
+  "approved_ids": [
+    4732,
+    5247,
+    5399,
+    5797,
+    7006,
+    7024,
+    7027,
+    7119,
+    7293,
+    7465,
+    7473,
+    7775
+  ],
+  "notes": {
+    "metrics_verified": "VERIFIED + DERIVABLE",
+    "metrics_partial": "PARTIAL + NEEDS_REFERENCE + NEEDS_BUSINESS_RULE",
+    "metrics_needs_event": "NEEDS_EVENT",
+    "metrics_not_available": "NOT_AVAILABLE"
+  }
+}

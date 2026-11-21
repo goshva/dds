@@ -1,15 +1,14 @@
 /**
  * Этап 1.1 — итоговая валидация.
  *
- * Проверяет:
- *  1. SQLite readonly + quick_check + отсутствие изменений относительно backup.
- *  2. 12 валидных dataset detail.
- *  3. Полноту Discovery (list count vs API count).
- *  4. Уникальность/согласованность Lineage.
- *  5. CSV ↔ JSON.
- *  6. Наличие всех 18 KPI и верификацию их полей.
- *  7. Отсутствие PII и секретов в отчётах.
- *  8. Наличие итоговых отчётов.
+ * Разделяет статусы:
+ *  - LOCAL_VALIDATION     (TypeScript, SQLite readonly/quick_check, 12 detail, отчёты, PII)
+ *  - API_TRANSPORT        (api_transport_diagnostics.json)
+ *  - API_AUTH             (discovery_summary.json / diagnostics)
+ *  - DISCOVERY_COMPLETENESS (summary ↔ фактические list-файлы)
+ *  - LINEAGE_QUALITY      (lineage_preview.json ↔ CSV)
+ *  - KPI_EVIDENCE         (18 KPI, evidence_verified, full catalog cross-check)
+ *  - OVERALL_STATUS
  *
  * Пишет reports/phase-01-1/final_validation.json.
  * При критических ошибках завершает процесс с кодом 1.
@@ -22,6 +21,7 @@ const DB = "data/catalog.sqlite";
 const BACKUP = "backups/catalog-before-discovery.sqlite";
 const OUT_DIR = "reports/phase-01-1";
 const OUT = join(OUT_DIR, "final_validation.json");
+const OUTPUT_DIR = "output";
 
 const PRIORITY_IDS = [4732, 7119, 7006, 7024, 7027, 7775, 5797, 7465, 7473, 5247, 5399, 7293];
 const OPERATIONAL_KPI_IDS = [
@@ -45,8 +45,13 @@ const OPERATIONAL_KPI_IDS = [
   "retention",
 ];
 const KPI_STATUSES = ["FOUND", "PARTIAL", "NOT_FOUND", "NOT_VERIFIED"];
+const LIST_FILE: Record<string, string> = {
+  dashboard: "dashboards.json",
+  chart: "charts.json",
+  dataset: "datasets.json",
+};
 
-type CheckStatus = "PASS" | "FAIL" | "WARN";
+type CheckStatus = "PASS" | "FAIL" | "WARN" | "BLOCKED" | "NOT_TESTED";
 type Check = {
   id: string;
   name: string;
@@ -56,7 +61,6 @@ type Check = {
 };
 
 const checks: Check[] = [];
-
 function add(check: Check) {
   checks.push(check);
 }
@@ -119,6 +123,28 @@ function tableCounts(db: Database): Record<string, number> {
   return out;
 }
 
+// ---------------- LOCAL: TypeScript ----------------
+function checkTypeScript() {
+  try {
+    const proc = Bun.spawnSync(["bunx", "tsc", "--noEmit"], { stdout: "ignore", stderr: "ignore" });
+    const ok = proc.exitCode === 0;
+    add({
+      id: "typescript_compile",
+      name: "TypeScript compilation",
+      status: ok ? "PASS" : "FAIL",
+      details: ok ? "bunx tsc --noEmit: exit 0" : `bunx tsc --noEmit: exit ${proc.exitCode}`,
+    });
+  } catch (error: any) {
+    add({
+      id: "typescript_compile",
+      name: "TypeScript compilation",
+      status: "WARN",
+      details: `не удалось запустить tsc: ${String(error?.message ?? error)}`,
+    });
+  }
+}
+
+// ---------------- LOCAL: SQLite ----------------
 function checkSqlite() {
   try {
     const db = new Database(DB, { readonly: true });
@@ -181,11 +207,12 @@ function checkSqlite() {
   }
 }
 
+// ---------------- LOCAL: 12 dataset details ----------------
 function checkDatasetDetails() {
   const rows: any[] = [];
   const problems: string[] = [];
   for (const id of PRIORITY_IDS) {
-    const path = join("output", "dataset_details", `${id}.json`);
+    const path = join(OUTPUT_DIR, "dataset_details", `${id}.json`);
     if (!existsSync(path)) {
       problems.push(`${id}: file_missing`);
       rows.push({ dataset_id: id, ok: false, reason: "file_missing" });
@@ -221,7 +248,7 @@ function checkDatasetDetails() {
     }
   }
 
-  const summary = readJson("output/dataset_detail_summary.json");
+  const summary = readJson(join(OUTPUT_DIR, "dataset_detail_summary.json"));
   const summaryChecks = {
     exists: Boolean(summary),
     priority: summary?.totals?.priority === PRIORITY_IDS.length,
@@ -245,53 +272,161 @@ function checkDatasetDetails() {
   });
 }
 
+// ---------------- DISCOVERY_COMPLETENESS ----------------
 function checkDiscovery() {
-  const summary = readJson("output/discovery_summary.json");
-  const spot = readJson(join(OUT_DIR, "api_spot_checks.json"));
-  const apiCounts: Record<string, number | null> = {
-    dashboard: spot?.counts?.dashboard?.api_count ?? null,
-    chart: spot?.counts?.chart?.api_count ?? null,
-    dataset: spot?.counts?.dataset?.api_count ?? null,
-  };
-  const resources = summary?.resources ?? {};
+  const summary = readJson(join(OUTPUT_DIR, "discovery_summary.json"));
   const problems: string[] = [];
   const details: Record<string, any> = {};
+  if (!summary) {
+    add({
+      id: "discovery_complete",
+      name: "Полнота Discovery (summary ↔ фактические файлы)",
+      status: "FAIL",
+      details: "output/discovery_summary.json не найден",
+    });
+    return;
+  }
 
   for (const resource of ["dashboard", "chart", "dataset"] as const) {
-    const r = resources[resource];
-    if (!r) {
-      problems.push(`${resource}: resource missing in summary`);
-      details[resource] = { present: false };
-      continue;
+    const path = join(OUTPUT_DIR, LIST_FILE[resource]);
+    const data = readJson(path);
+    const rows = Array.isArray(data?.result) ? data.result : [];
+    const ids = rows.map((r: any) => String(r?.id ?? r?.uuid ?? ""));
+    const unique = new Set(ids.filter(Boolean));
+    const duplicates = ids.length - unique.size;
+    const r = summary?.resources?.[resource] ?? null;
+    const downloaded = r?.downloaded_count ?? r?.count ?? null;
+    const api = r?.api_count ?? null;
+    const status = r?.status ?? null;
+    const entry = {
+      file: path,
+      actual_rows: rows.length,
+      actual_unique_ids: unique.size,
+      actual_duplicates: duplicates,
+      summary_downloaded_count: downloaded,
+      summary_api_count: api,
+      summary_unique_ids_count: r?.unique_ids_count ?? null,
+      summary_duplicate_rows: r?.duplicate_rows ?? null,
+      summary_status: status,
+    };
+    details[resource] = entry;
+    if (!data) problems.push(`${resource}: файл ${path} отсутствует`);
+    if (duplicates > 0) problems.push(`${resource}: дубликаты ID = ${duplicates}`);
+    if (downloaded !== null && downloaded !== rows.length) {
+      problems.push(`${resource}: summary downloaded=${downloaded} != факт ${rows.length}`);
     }
-    const downloaded = r.downloaded_count ?? r.count ?? null;
-    const api = r.api_count ?? apiCounts[resource];
-    const status = r.status ?? null;
-    const complete = status === "complete" || (api !== null && downloaded === api);
-    details[resource] = { downloaded, api, status, complete };
-    if (!complete) problems.push(`${resource}: downloaded=${downloaded} api=${api} status=${status}`);
+    if (api !== null && api !== rows.length) {
+      problems.push(`${resource}: summary api_count=${api} != факт ${rows.length}`);
+    }
+    if (entry.summary_unique_ids_count !== null && entry.summary_unique_ids_count !== unique.size) {
+      problems.push(`${resource}: summary unique_ids=${entry.summary_unique_ids_count} != факт ${unique.size}`);
+    }
   }
 
   add({
     id: "discovery_complete",
-    name: "Полнота Discovery",
+    name: "Полнота Discovery (summary ↔ фактические файлы)",
     status: problems.length === 0 ? "PASS" : "FAIL",
     details:
       problems.length === 0
-        ? "все list-ресурсы полны (downloaded = api_count)"
+        ? "фактические list-файлы совпадают с summary; дубликатов нет"
         : problems.join("; "),
-    metrics: { resources: details, api_counts: apiCounts, summary_generated_at: summary?.generated_at ?? null },
+    metrics: {
+      resources: details,
+      started_at: summary?.started_at ?? null,
+      finished_at: summary?.finished_at ?? null,
+      summary_status: summary?.status ?? null,
+      mode: summary?.mode ?? null,
+      endpoint_errors: Array.isArray(summary?.endpoint_errors) ? summary.endpoint_errors.length : null,
+      detail_spot_checks: summary?.detail_spot_checks ?? null,
+    },
   });
 }
 
-function checkLineage() {
+// ---------------- API_TRANSPORT ----------------
+function checkApiTransportCurrent() {
+  const diag = readJson(join(OUT_DIR, "api_transport_diagnostics.json"));
+  const verdict = diag?.verdict ?? null;
+  const layers = Array.isArray(diag?.layers)
+    ? diag.layers.map((l: any) => ({ layer: l.layer, ok: l.ok, code: l.error_code ?? null }))
+    : [];
+  const blocked = verdict !== null && verdict !== "TRANSPORT_AND_AUTH_OK" && verdict !== "TRANSPORT_OK_AUTH_FAILED";
+  add({
+    id: "api_transport_current",
+    name: "API transport current (DNS/TCP/TLS/HTTP)",
+    status: verdict === null ? "WARN" : blocked ? "BLOCKED" : "PASS",
+    details:
+      verdict === null
+        ? "api_transport_diagnostics.json не найден"
+        : `${verdict}; generated_at=${diag?.generated_at ?? "—"}`,
+    metrics: { verdict, layers, generated_at: diag?.generated_at ?? null },
+  });
+}
+
+// ---------------- API_AUTH_LAST_SUCCESS ----------------
+function checkApiAuthLastSuccess() {
+  const summary = readJson(join(OUTPUT_DIR, "discovery_summary.json"));
+  const spotOk = summary?.detail_spot_checks?.ok ?? null;
+  const spotAttempted = summary?.detail_spot_checks?.attempted ?? null;
+  const summaryOk = summary?.status === "ok";
+  const ok = summaryOk && spotAttempted !== null && spotAttempted > 0 && spotOk === spotAttempted;
+  add({
+    id: "api_auth_last_success",
+    name: "API auth — последняя успешная авторизация (Discovery)",
+    status: ok ? "PASS" : "FAIL",
+    details: ok
+      ? `Подтверждена во время Discovery: status=${summary?.status}, detail spot checks ${spotOk}/${spotAttempted}, ${summary?.started_at ?? "—"} — ${summary?.finished_at ?? "—"}`
+      : `Не подтверждена: discovery status=${summary?.status ?? "—"}, spot checks ${spotOk ?? "—"}/${spotAttempted ?? "—"}`,
+    metrics: {
+      auth_mode: summary?.auth_mode ?? null,
+      spot_ok: spotOk,
+      spot_attempted: spotAttempted,
+      discovery_started_at: summary?.started_at ?? null,
+      discovery_finished_at: summary?.finished_at ?? null,
+    },
+  });
+}
+
+// ---------------- API_AUTH_CURRENT ----------------
+function checkApiAuthCurrent() {
+  const diag = readJson(join(OUT_DIR, "api_transport_diagnostics.json"));
+  const verdict = diag?.verdict ?? null;
+  const login = diag?.auth?.login ?? null;
+  const transportBlocked =
+    verdict !== null && verdict !== "TRANSPORT_AND_AUTH_OK" && verdict !== "TRANSPORT_OK_AUTH_FAILED";
+  let status: CheckStatus;
+  let details: string;
+  if (login === "success") {
+    status = "PASS";
+    details = "текущий login выполнен успешно";
+  } else if (transportBlocked) {
+    status = "NOT_TESTED";
+    details = `текущий login не выполнялся: transport=${verdict}`;
+  } else if (login === "failed") {
+    status = "FAIL";
+    details = "текущий login завершился ошибкой";
+  } else {
+    status = "NOT_TESTED";
+    details = "текущий login не тестировался";
+  }
+  add({
+    id: "api_auth_current",
+    name: "API auth current",
+    status,
+    details,
+    metrics: { verdict, auth: diag?.auth ?? null },
+  });
+}
+
+// ---------------- LINEAGE_INTERNAL_CONSISTENCY ----------------
+function checkLineageInternalConsistency() {
   const preview = readJson(join(OUT_DIR, "lineage_preview.json"));
   const evidencePath = join(OUT_DIR, "lineage_evidence.csv");
   const relationsPath = join(OUT_DIR, "lineage_relations.csv");
   if (!preview || !existsSync(evidencePath) || !existsSync(relationsPath)) {
     add({
-      id: "lineage_consistency",
-      name: "Lineage: уникальность и согласованность",
+      id: "lineage_internal_consistency",
+      name: "Lineage: внутренняя согласованность (CSV ↔ JSON)",
       status: "FAIL",
       details: "lineage_preview.json или CSV не найдены",
     });
@@ -318,9 +453,12 @@ function checkLineage() {
 
   const byType = preview?.by_relation_type ?? {};
   const byTypeSum = Number(byType.DASHBOARD_HAS_CHART ?? 0) + Number(byType.CHART_USES_DATASET ?? 0);
+  const catalog = preview?.catalog ?? {};
+  const listCounts = catalog.list_counts ?? {};
+  const summaryCounts = catalog.summary_counts ?? {};
 
   const checksMap = {
-    preview_checks_ok: preview?.checks_ok === true,
+    preview_internal_checks_ok: preview?.internal_consistency?.checks_ok === true || preview?.checks_ok === true,
     evidence_rows_match: preview?.counts?.evidence_rows === evidenceData.length,
     relations_rows_match: preview?.counts?.unique_relations === relationData.length,
     no_duplicate_relation_keys: duplicateKeys === 0,
@@ -329,18 +467,22 @@ function checkLineage() {
     relation_header_has_evidence_count: evidenceIdx >= 0,
     evidence_header_columns: evidenceHeader.length >= 8,
     relation_header_columns: relationHeader.length >= 10,
+    list_counts_match_summary:
+      summaryCounts.dashboard === listCounts.dashboard &&
+      summaryCounts.chart === listCounts.chart &&
+      summaryCounts.dataset === listCounts.dataset,
   };
   const failed = Object.entries(checksMap)
     .filter(([, v]) => !v)
     .map(([k]) => k);
 
   add({
-    id: "lineage_consistency",
-    name: "Lineage: уникальность и согласованность",
+    id: "lineage_internal_consistency",
+    name: "Lineage: внутренняя согласованность (CSV ↔ JSON)",
     status: failed.length === 0 ? "PASS" : "FAIL",
     details:
       failed.length === 0
-        ? "CSV и JSON согласованы, дублей ключей нет"
+        ? "CSV и JSON согласованы, evidence_count сходится, дублей ключей нет"
         : `failed checks: ${failed.join(", ")}`,
     metrics: {
       checks: checksMap,
@@ -349,10 +491,57 @@ function checkLineage() {
       duplicate_keys: duplicateKeys,
       evidence_count_sum: evidenceCountSum,
       by_type_sum: byTypeSum,
+      list_counts: listCounts,
+      summary_counts: summaryCounts,
     },
   });
 }
 
+// ---------------- LINEAGE_REFERENCE_QUALITY ----------------
+function checkLineageReferenceQuality() {
+  const preview = readJson(join(OUT_DIR, "lineage_preview.json"));
+  const rq = preview?.reference_quality ?? null;
+  if (!rq) {
+    add({
+      id: "lineage_reference_quality",
+      name: "Lineage: качество ссылок и противоречия источников",
+      status: "WARN",
+      details: "lineage_preview.reference_quality не найден",
+    });
+    return;
+  }
+  const findings = {
+    unresolved_dashboard_refs: Number(rq.unresolved_dashboard_refs ?? 0),
+    unresolved_dataset_refs: Number(rq.unresolved_dataset_refs ?? 0),
+    unresolved_chart_refs: Number(rq.unresolved_chart_refs ?? 0),
+    charts_with_conflicting_dashboard_sets: Number(rq.charts_with_conflicting_dashboard_sets ?? 0),
+    chart_dataset_source_conflicts: Number(rq.chart_dataset_source_conflicts ?? 0),
+    charts_without_dataset_local: Number(rq.charts_without_dataset_local ?? 0),
+    charts_without_dashboard: Number(rq.charts_without_dashboard ?? 0),
+    datasets_unused_by_charts_local: Number(rq.datasets_unused_by_charts_local ?? 0),
+  };
+  const totalFindings =
+    findings.unresolved_dashboard_refs +
+    findings.unresolved_dataset_refs +
+    findings.unresolved_chart_refs +
+    findings.charts_with_conflicting_dashboard_sets +
+    findings.chart_dataset_source_conflicts;
+  add({
+    id: "lineage_reference_quality",
+    name: "Lineage: качество ссылок и противоречия источников",
+    status: totalFindings > 0 ? "WARN" : "PASS",
+    details:
+      `unresolved dashboard refs=${findings.unresolved_dashboard_refs}; ` +
+      `unresolved dataset refs=${findings.unresolved_dataset_refs}; ` +
+      `unresolved chart refs=${findings.unresolved_chart_refs}; ` +
+      `chart с расхождением dashboard sets=${findings.charts_with_conflicting_dashboard_sets}; ` +
+      `chart→dataset конфликты=${findings.chart_dataset_source_conflicts}; ` +
+      "детали: lineage_reference_quality.md",
+    metrics: { findings, reference_quality: rq, report: "lineage_reference_quality.md" },
+  });
+}
+
+// ---------------- KPI_EVIDENCE ----------------
 function checkKpi() {
   const kpi = readJson(join(OUT_DIR, "kpi_source_matrix.json"));
   const inventory = readJson(join(OUT_DIR, "kpi_field_inventory.json"));
@@ -374,6 +563,7 @@ function checkKpi() {
   const notVerified = kpis.filter((k: any) => !k.evidence_verified).map((k: any) => k.id);
   const inventoryMissing = inventory?.missing_ids ?? [];
   const inventoryDatasets = inventory?.datasets?.length ?? 0;
+  const fullCatalog = kpi?.full_catalog ?? {};
 
   const checksMap = {
     count_18: kpi?.kpi_model?.count === 18,
@@ -384,6 +574,8 @@ function checkKpi() {
     evidence_verified: notVerified.length === 0,
     inventory_12: inventoryDatasets === 12,
     inventory_missing_empty: Array.isArray(inventoryMissing) && inventoryMissing.length === 0,
+    full_catalog_present: Array.isArray(fullCatalog.priority_missing) && fullCatalog.priority_missing.length === 0,
+    full_catalog_priority_12: fullCatalog.priority_present === 12,
   };
   const failed = Object.entries(checksMap)
     .filter(([, v]) => !v)
@@ -395,7 +587,7 @@ function checkKpi() {
     status: failed.length === 0 ? "PASS" : "FAIL",
     details:
       failed.length === 0
-        ? "18 KPI, статусы валидны, поля верифицированы"
+        ? "18 KPI, статусы валидны, поля верифицированы, приоритетные датасеты найдены в полном каталоге"
         : `failed checks: ${failed.join(", ")}; missing operational=${missingOperational.join(",") || "none"}; not verified=${notVerified.join(",") || "none"}`,
     metrics: {
       checks: checksMap,
@@ -403,10 +595,18 @@ function checkKpi() {
       kpi_count: kpis.length,
       inventory_datasets: inventoryDatasets,
       inventory_missing: inventoryMissing,
+      full_catalog: {
+        datasets_total: fullCatalog.datasets_total ?? null,
+        datasets_with_sql: fullCatalog.datasets_with_sql ?? null,
+        priority_present: fullCatalog.priority_present ?? null,
+        priority_missing: fullCatalog.priority_missing ?? null,
+        sql_length_mismatches: fullCatalog.sql_length_mismatches ?? null,
+      },
     },
   });
 }
 
+// ---------------- LOCAL: PII / secrets ----------------
 function checkPiiAndSecrets() {
   const files: string[] = [];
   for (const name of readdirSync(OUT_DIR)) {
@@ -450,9 +650,11 @@ function checkPiiAndSecrets() {
   });
 }
 
+// ---------------- LOCAL: reports ----------------
 function checkReports() {
   const required = [
     "discovery_corrected.md",
+    "discovery_completion.md",
     "lineage_quality.md",
     "phase_01_1_summary.md",
     "kpi_source_matrix.json",
@@ -461,6 +663,9 @@ function checkReports() {
     "lineage_preview.json",
     "lineage_evidence.csv",
     "lineage_relations.csv",
+    "lineage_reference_quality.md",
+    "discovery_test.json",
+    "api_transport_diagnostics.json",
   ];
   const missing = required.filter((f) => !existsSync(join(OUT_DIR, f)));
   add({
@@ -473,10 +678,15 @@ function checkReports() {
 }
 
 function main() {
+  checkTypeScript();
   checkSqlite();
   checkDatasetDetails();
   checkDiscovery();
-  checkLineage();
+  checkApiTransportCurrent();
+  checkApiAuthLastSuccess();
+  checkApiAuthCurrent();
+  checkLineageInternalConsistency();
+  checkLineageReferenceQuality();
   checkKpi();
   checkPiiAndSecrets();
   checkReports();
@@ -484,25 +694,97 @@ function main() {
   const pass = checks.filter((c) => c.status === "PASS").length;
   const fail = checks.filter((c) => c.status === "FAIL").length;
   const warn = checks.filter((c) => c.status === "WARN").length;
-  const blockers = checks.filter((c) => c.status === "FAIL").map((c) => `${c.id}: ${c.details}`);
+  const blocked = checks.filter((c) => c.status === "BLOCKED").length;
+  const notTested = checks.filter((c) => c.status === "NOT_TESTED").length;
+  const byId = (id: string) => checks.find((c) => c.id === id);
+
+  const localIds = [
+    "typescript_compile",
+    "sqlite_readonly_quick_check",
+    "sqlite_unchanged_vs_backup",
+    "sqlite_relations_unchanged",
+    "dataset_details_12",
+    "pii_and_secrets",
+    "reports_present",
+  ];
+  const localFail = localIds.filter((id) => byId(id)?.status === "FAIL").length;
+
+  const discoveryStatus: CheckStatus = byId("discovery_complete")?.status ?? "FAIL";
+  const internalStatus: CheckStatus = byId("lineage_internal_consistency")?.status ?? "FAIL";
+  const refStatus: CheckStatus = byId("lineage_reference_quality")?.status ?? "WARN";
+  const kpiStatus: CheckStatus = byId("kpi_matrix_18")?.status ?? "FAIL";
+  const transportStatus: CheckStatus = byId("api_transport_current")?.status ?? "WARN";
+  const lastAuthStatus: CheckStatus = byId("api_auth_last_success")?.status ?? "FAIL";
+  const currentAuthStatus: CheckStatus = byId("api_auth_current")?.status ?? "NOT_TESTED";
+  const transportVerdict = byId("api_transport_current")?.metrics?.verdict ?? transportStatus;
+
+  const criticalFail =
+    localFail > 0 ||
+    discoveryStatus === "FAIL" ||
+    internalStatus === "FAIL" ||
+    kpiStatus === "FAIL";
+  const apiBlocked =
+    transportStatus === "BLOCKED" ||
+    currentAuthStatus === "NOT_TESTED" ||
+    currentAuthStatus === "BLOCKED";
+
+  const overall = criticalFail ? "FAIL" : apiBlocked ? "PASS_WITH_BLOCKER" : "PASS";
+
+  const statuses = {
+    LOCAL_VALIDATION: localFail === 0 ? "PASS" : "FAIL",
+    API_TRANSPORT_CURRENT: transportVerdict,
+    API_AUTH_LAST_SUCCESS: lastAuthStatus,
+    API_AUTH_CURRENT: currentAuthStatus,
+    DISCOVERY_COMPLETENESS: discoveryStatus,
+    LINEAGE_INTERNAL_CONSISTENCY: internalStatus,
+    LINEAGE_REFERENCE_QUALITY: refStatus,
+    KPI_EVIDENCE: kpiStatus,
+    OVERALL_STATUS: overall,
+  };
+
+  const blockers = checks
+    .filter((c) => c.status === "FAIL" || c.status === "BLOCKED" || c.status === "NOT_TESTED")
+    .map((c) => `${c.id}: ${c.details}`);
+
+  const rq = byId("lineage_reference_quality")?.metrics?.findings as Record<string, number> | undefined;
+  const findings: string[] = [];
+  if (rq) {
+    findings.push(`unresolved_dashboard_refs=${rq.unresolved_dashboard_refs}`);
+    findings.push(`unresolved_dataset_refs=${rq.unresolved_dataset_refs}`);
+    findings.push(`unresolved_chart_refs=${rq.unresolved_chart_refs}`);
+    findings.push(`charts_with_conflicting_dashboard_sets=${rq.charts_with_conflicting_dashboard_sets}`);
+    findings.push(`chart_dataset_source_conflicts=${rq.chart_dataset_source_conflicts}`);
+    findings.push(`charts_without_dataset_local=${rq.charts_without_dataset_local}`);
+    findings.push(`charts_without_dashboard=${rq.charts_without_dashboard}`);
+    findings.push(`datasets_unused_by_charts_local=${rq.datasets_unused_by_charts_local}`);
+  }
 
   const out = {
     generated_at: new Date().toISOString(),
-    verdict: fail === 0 ? "PASS" : "FAIL",
-    summary: { total: checks.length, pass, fail, warn },
+    verdict: overall,
+    statuses,
+    summary: { total: checks.length, pass, fail, warn, blocked, not_tested: notTested },
     checks,
     blockers,
+    findings,
+    notes: [
+      "API_AUTH_LAST_SUCCESS подтверждён Discovery (status=ok, detail spot checks 4/4).",
+      "API_AUTH_CURRENT = NOT_TESTED: повторный login не выполнялся из-за BLOCKED_TCP.",
+      "LINEAGE_REFERENCE_QUALITY фиксирует unresolved refs и конфликты как findings, не FAIL.",
+      "Ссылки не обозначаются архивными/удалёнными без подтверждения источником.",
+    ],
   };
 
   writeFileSync(OUT, JSON.stringify(out, null, 2), { mode: 0o600 });
 
-  console.log(`=== Final validation: ${out.verdict} (${pass} pass, ${fail} fail, ${warn} warn) ===`);
+  console.log(`=== Final validation: ${overall} (${pass} pass, ${fail} fail, ${warn} warn, ${blocked} blocked, ${notTested} not_tested) ===`);
+  console.log(`statuses: ${JSON.stringify(statuses, null, 2)}`);
   for (const c of checks) {
     console.log(`[${c.status}] ${c.name} — ${c.details}`);
   }
   console.log(`report: ${OUT}`);
 
-  if (fail > 0) process.exitCode = 1;
+  if (fail > 0 || criticalFail) process.exitCode = 1;
 }
 
 main();

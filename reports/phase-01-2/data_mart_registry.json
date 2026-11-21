@@ -1,0 +1,2910 @@
+{
+  "generated_at": "2026-11-21T11:54:53.800Z",
+  "stage": "1.2",
+  "source": "аудит SQL 12 утверждённых датасетов + Lineage + KPI Source Matrix; витрины НЕ создаются",
+  "status_vocabulary": [
+    "VERIFIED",
+    "PARTIAL",
+    "DERIVABLE",
+    "NEEDS_EVENT",
+    "NEEDS_REFERENCE",
+    "NEEDS_BUSINESS_RULE",
+    "NOT_AVAILABLE",
+    "NOT_CHECKED"
+  ],
+  "totals": {
+    "marts": 11,
+    "kpis": 48,
+    "missing_events": 17,
+    "missing_references": 13,
+    "evidence_issues": 0,
+    "status_counts": {
+      "DERIVABLE": 12,
+      "VERIFIED": 2,
+      "PARTIAL": 12,
+      "NEEDS_REFERENCE": 4,
+      "NEEDS_EVENT": 13,
+      "NOT_AVAILABLE": 3,
+      "NEEDS_BUSINESS_RULE": 2
+    }
+  },
+  "evidence_issues": [],
+  "marts": [
+    {
+      "mart_id": "dm_courier_orders",
+      "mart_name": "***REMOVED***ы курьерской доставки",
+      "business_purpose": "Единая основа по заказам: объём, статусы, временные этапы, SLA, суммы заказа, ТТ, курьер, пул.",
+      "grain": "1 строка = заказ (COALESCE(id_general, id_order)); подзаказы id_order сводятся к id_general.",
+      "primary_key": "order_key = COALESCE(id_general, id_order)",
+      "source_datasets": [
+        4732,
+        7006,
+        7027,
+        7119,
+        7775
+      ],
+      "source_tables": [
+        "default.darkstore_time_sheet",
+        "mart_mixed.darkstore_time",
+        "agile_mart_hot_team.order_delivery_base",
+        "default.v_couriers"
+      ],
+      "join_keys": [
+        "order_key",
+        "id_courier",
+        "shopno/id_tt"
+      ],
+      "filters": [
+        "4732: shopno NOT IN (99888), id_tt IS NOT NULL",
+        "7006/7027: status_name='Успешно завершен', delivery_type_group='Курьеры', окно 3 месяца",
+        "7119: id_status=18, is_route=true, окно 14 дней"
+      ],
+      "aggregation_period": "день/неделя/месяц",
+      "metrics": [
+        "orders_total",
+        "orders_success",
+        "orders_cancelled",
+        "orders_returned",
+        "orders_by_shop",
+        "orders_by_zone",
+        "orders_by_courier",
+        "time_create_to_assembly",
+        "assembly_duration",
+        "wait_duration",
+        "delivery_duration",
+        "sla_on_time_rate"
+      ],
+      "dimensions": [
+        "date",
+        "shopno/id_tt",
+        "direction",
+        "courier_type",
+        "id_pool",
+        "zone/cluster"
+      ],
+      "calculation_rules": [
+        "orders_total = COUNT(DISTINCT order_key)",
+        "orders_success = COUNT(DISTINCT order_key) WHERE order_status='Успешно завершен'",
+        "delivery_duration = date_delivered - date_delivery_start (4732) или duration_fact (7006/7027)",
+        "sla_on_time_rate = 1 - AVG(is_late) (7006/7027) или доля date_status_10/date_delivered <= date_supply_untill (4732)"
+      ],
+      "data_availability": "PARTIAL: заказы и временные этапы доступны; order_ready и зона доставки не подтверждены.",
+      "confidence": "PROBABLE",
+      "quality_checks": [
+        "order_key NOT NULL",
+        "нет дублей order_key",
+        "date_delivered >= date_order",
+        "нет отрицательных длительностей",
+        "order_status в допустимом наборе",
+        "согласованность COUNT между 4732 и 7006/7027"
+      ],
+      "missing_events": [
+        "order_ready",
+        "order_picked_up"
+      ],
+      "missing_references": [
+        "zone_reference (адрес→зона доставки)",
+        "status_dictionary"
+      ],
+      "business_questions": [
+        "Сколько заказов и какова доля успешных?",
+        "Где нарушается SLA?",
+        "Каково время сборки/ожидания/доставки?"
+      ],
+      "implementation_priority": "P0",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_general"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "order_status"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_supply"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_supply_untill"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_status_10"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_delivery_start"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_collect_start"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_collected"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "collection_time_all"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "delivery_time_all"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "sum_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "sum_paid"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "shopno"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_tt"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_pool"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "is_late"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "minutes_late"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "date_supply_until"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "is_late"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "fact_minutes_late"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "is_late"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "date_supply_until"
+        },
+        {
+          "dataset_id": 7775,
+          "field": "ID"
+        },
+        {
+          "dataset_id": 7775,
+          "field": "job_type"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_courier_ready_queue",
+      "mart_name": "***REMOVED*** готовых заказов",
+      "business_purpose": "***REMOVED*** заказов, готовых к выдаче курьеру, и время ожидания курьера.",
+      "grain": "1 строка = заказ в очереди готовности (событие order_ready).",
+      "primary_key": "order_key + ready_at",
+      "source_datasets": [
+        4732,
+        7006,
+        7027,
+        7119
+      ],
+      "source_tables": [
+        "default.darkstore_time_sheet",
+        "mart_mixed.darkstore_time",
+        "agile_mart_hot_team.order_delivery_base"
+      ],
+      "join_keys": [
+        "order_key",
+        "shopno/id_tt",
+        "id_courier"
+      ],
+      "filters": [
+        "успешные заказы",
+        "окно 3/14 дней по источнику"
+      ],
+      "aggregation_period": "час/день",
+      "metrics": [
+        "queue_size",
+        "wait_duration",
+        "ready_to_pickup_duration",
+        "orders_waiting_over_threshold"
+      ],
+      "dimensions": [
+        "date",
+        "shopno/id_tt",
+        "direction",
+        "courier_type"
+      ],
+      "calculation_rules": [
+        "Пока НЕ подтверждено: order_ready. Кандидаты: date_status_10 (4732, PROBABLE), date_collected (4732/7006/7027, PROBABLE).",
+        "wait_duration = date_pickuped - ready_at (после появления order_ready)"
+      ],
+      "data_availability": "NEEDS_EVENT: подтверждённого события «заказ готов к выдаче» нет; date_status_10 и date_collected — только гипотезы.",
+      "confidence": "UNKNOWN",
+      "quality_checks": [
+        "ready_at NOT NULL",
+        "ready_at <= pickup_at",
+        "нет отрицательного wait_duration",
+        "нет дублей order_key+ready_at"
+      ],
+      "missing_events": [
+        "order_ready",
+        "order_picked_up"
+      ],
+      "missing_references": [
+        "status_dictionary"
+      ],
+      "business_questions": [
+        "Сколько заказов ждут курьера?",
+        "Сколько времени заказ проводит в очереди?"
+      ],
+      "implementation_priority": "P0",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_status_10",
+          "note": "гипотеза order_ready"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_collected",
+          "note": "гипотеза order_ready"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "shopno"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_tt"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "date_pickuped"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "date_collected"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "date_pickuped"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "date_collected"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "date_collected"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "date_pickuped"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_delivery_zones",
+      "mart_name": "Постоянные зоны доставки",
+      "business_purpose": "Справочник зон доставки, привязка ТТ/адресов к зонам и правила закрепления.",
+      "grain": "1 строка = зона (zone_id) на дату действия.",
+      "primary_key": "zone_id + valid_from",
+      "source_datasets": [
+        4732,
+        5797,
+        7293,
+        7465,
+        7473
+      ],
+      "source_tables": [
+        "mart.org_unit_actual (zone_cluster)",
+        "agile_mart_techaudit.hr_delivery (inactivity_zone)",
+        "agile_mart_techaudit.hr_delivery (zone transitions)"
+      ],
+      "join_keys": [
+        "shopno/id_tt",
+        "id_courier",
+        "zone"
+      ],
+      "filters": [
+        "7293: zone_changed=1, prev/current zone NOT NULL",
+        "5797/7465/7473: date < today()"
+      ],
+      "aggregation_period": "день",
+      "metrics": [
+        "zones_total",
+        "orders_by_zone",
+        "couriers_by_zone",
+        "zone_active_flag"
+      ],
+      "dimensions": [
+        "zone",
+        "zone_order",
+        "shopno/id_tt",
+        "direction"
+      ],
+      "calculation_rules": [
+        "4732: zone_cluster из mart.org_unit_actual как «Куст» (кластер орг-единицы, не зона доставки).",
+        "5797/7465/7473: inactivity_zone — зона бездействия курьера, не зона доставки.",
+        "7293: zone_from — зона миграции курьеров (Green/Yellow/Orange/Red/Тишина/Lost).",
+        "Адрес доставки → зона: подтверждённой связи нет."
+      ],
+      "data_availability": "NEEDS_REFERENCE: границы зон, привязка адреса доставки и история изменения границ отсутствуют. area_tt — территория ТТ, не зона.",
+      "confidence": "UNKNOWN",
+      "quality_checks": [
+        "zone_id NOT NULL",
+        "нет пересечения зон по адресу",
+        "история границ без разрывов"
+      ],
+      "missing_events": [
+        "courier_zone_assigned",
+        "courier_zone_changed"
+      ],
+      "missing_references": [
+        "zone_reference (zone_id, name, boundaries)",
+        "address_to_zone_mapping",
+        "tt_to_zone_mapping"
+      ],
+      "business_questions": [
+        "Какие постоянные зоны существуют?",
+        "Какие ТТ/адреса входят в зону?"
+      ],
+      "implementation_priority": "P0",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "shopno"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_tt"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "area_tt",
+          "note": "не зона"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "inactivity_zone"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "prev_inactivity_zone"
+        },
+        {
+          "dataset_id": 7293,
+          "field": "zone"
+        },
+        {
+          "dataset_id": 7293,
+          "field": "zone_order"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "inactivity_zone"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "inactivity_zone_ordered"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_delivery_batches",
+      "mart_name": "Пакеты заказов (ходки/пулы)",
+      "business_purpose": "Пакеты заказов, собираемые по постоянным зонам, с составом и временем выдачи/завершения.",
+      "grain": "1 строка = пакет (batch_key = id_pool_calc или id_pool) на дату.",
+      "primary_key": "batch_key",
+      "source_datasets": [
+        7006,
+        7024,
+        7027,
+        7119
+      ],
+      "source_tables": [
+        "mart_mixed.darkstore_time",
+        "ods.v_delivery_job_lines",
+        "agile_mart_hot_team.order_delivery_base"
+      ],
+      "join_keys": [
+        "id_pool",
+        "id_pool_calc",
+        "id_order",
+        "id_courier"
+      ],
+      "filters": [
+        "7006/7027: успешные курьерские доставки, окно 3 месяца",
+        "7024: courier_type in ('вело','авто')",
+        "7119: id_status=18, is_route=true"
+      ],
+      "aggregation_period": "день",
+      "metrics": [
+        "batches_total",
+        "orders_per_batch",
+        "batch_created_at",
+        "batch_assigned_at",
+        "batch_pickup_at",
+        "batch_completed_at",
+        "batch_success_rate",
+        "batch_zone"
+      ],
+      "dimensions": [
+        "date",
+        "id_pool/id_pool_calc",
+        "shopno",
+        "courier_type",
+        "cluster_id"
+      ],
+      "calculation_rules": [
+        "id_pool_calc = DENSE_RANK() по (id_courier, pool_seq), где pool_seq — разрывы date_pickuped (7006/7027).",
+        "pool_size = COUNT(DISTINCT id_order) по id_pool_calc (7006/7024/7027) или uniqExact(id_order) по id_pool (7119).",
+        "<ФИО>ное правило «5 заказов в пакете» — ГИПОТЕЗА, в источниках не подтверждено."
+      ],
+      "data_availability": "PARTIAL: состав и размер пула доступны; batch_created/assigned и привязка к зоне не подтверждены.",
+      "confidence": "PARTIAL",
+      "quality_checks": [
+        "batch_key NOT NULL",
+        "нет пересечения заказов между пакетами",
+        "orders_per_batch > 0",
+        "batch_pickup_at >= batch_created_at",
+        "один заказ в одном пакете"
+      ],
+      "missing_events": [
+        "batch_created",
+        "batch_assigned",
+        "order_added_to_batch"
+      ],
+      "missing_references": [
+        "zone_reference",
+        "batch_rule_reference (правило формирования пакета)"
+      ],
+      "business_questions": [
+        "Сколько заказов в пакете?",
+        "Как быстро пакет выдаётся и завершается?"
+      ],
+      "implementation_priority": "P0",
+      "source_fields": [
+        {
+          "dataset_id": 7006,
+          "field": "id_pool"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "id_pool_calc"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "pool_size"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "fact_seq"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "plan_seq"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "date_pickuped"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 7024,
+          "field": "id_pool"
+        },
+        {
+          "dataset_id": 7024,
+          "field": "pool_size"
+        },
+        {
+          "dataset_id": 7024,
+          "field": "plan_duration_min"
+        },
+        {
+          "dataset_id": 7024,
+          "field": "fact_duration_min"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "id_pool"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "pool_size"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "total_pool_distance"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "id_pool"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "pool_size"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_courier_assignments",
+      "mart_name": "Назначения курьеров",
+      "business_purpose": "История назначений заказов/пакетов на курьеров и их принятия/завершения.",
+      "grain": "1 строка = назначение (order_key или batch_key × courier × assigned_at).",
+      "primary_key": "assignment_id (order_key + courier + assigned_at)",
+      "source_datasets": [
+        4732,
+        7006,
+        7024,
+        7027,
+        7119,
+        7775
+      ],
+      "source_tables": [
+        "default.darkstore_time_sheet",
+        "mart_mixed.darkstore_time",
+        "agile_mart_hot_team.order_delivery_base",
+        "ods.v_delivery_job_lines"
+      ],
+      "join_keys": [
+        "order_key",
+        "id_courier",
+        "id_pool/id_pool_calc"
+      ],
+      "filters": [
+        "успешные курьерские доставки",
+        "id_courier NOT NULL"
+      ],
+      "aggregation_period": "день",
+      "metrics": [
+        "assignments_total",
+        "accepted_total",
+        "pickup_total",
+        "completed_total",
+        "cancelled_total",
+        "reassigned_total",
+        "time_to_accept",
+        "time_to_pickup"
+      ],
+      "dimensions": [
+        "date",
+        "courier",
+        "shopno",
+        "batch",
+        "courier_type"
+      ],
+      "calculation_rules": [
+        "Факт получения курьером: date_pickuped (7006/7027/7119, PROBABLE).",
+        "Факт вручения: date_delivered (VERIFIED).",
+        "Назначение/принятие/отмена/повторное назначение как события отсутствуют."
+      ],
+      "data_availability": "PARTIAL: связь заказ↔курьер и факт pickup доступны; события назначения/принятия/отмены отсутствуют.",
+      "confidence": "PROBABLE",
+      "quality_checks": [
+        "assignment_id уникален",
+        "courier NOT NULL",
+        "pickup_at >= assigned_at",
+        "нет назначения завершённого заказа",
+        "нет дублей order+courier+time"
+      ],
+      "missing_events": [
+        "batch_assigned",
+        "courier_accepted_assignment",
+        "order_picked_up",
+        "order_cancelled"
+      ],
+      "missing_references": [
+        "cancel_reason_dictionary"
+      ],
+      "business_questions": [
+        "Кто и когда получил назначение?",
+        "Сколько назначений отменено/переназначено?"
+      ],
+      "implementation_priority": "P0",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_pool"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "date_pickuped"
+        },
+        {
+          "dataset_id": 7024,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 7024,
+          "field": "id_pool"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "date_pickuped"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "date_pickuped"
+        },
+        {
+          "dataset_id": 7775,
+          "field": "ID"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_courier_performance",
+      "mart_name": "Производительность курьеров",
+      "business_purpose": "Производительность курьера: заказы, успешные доставки, рабочие дни, время доставки, SLA, динамика, зоны, новички.",
+      "grain": "1 строка = courier × day (агрегация из заказов); сменная гранулярность — только первые смены новичков.",
+      "primary_key": "courier_id + date",
+      "source_datasets": [
+        4732,
+        7006,
+        7027,
+        5797,
+        7465,
+        7473,
+        5247,
+        5399
+      ],
+      "source_tables": [
+        "default.darkstore_time_sheet",
+        "mart_mixed.darkstore_time",
+        "agile_mart_techaudit.hr_delivery",
+        "agile_mart_techaudit.courier_events_logs_aggr"
+      ],
+      "join_keys": [
+        "id_courier",
+        "date",
+        "shopno"
+      ],
+      "filters": [
+        "успешные доставки",
+        "HR: date < today()",
+        "5247/5399: окно 7 дней / неделя"
+      ],
+      "aggregation_period": "день/неделя/месяц",
+      "metrics": [
+        "orders_per_courier",
+        "deliveries_success",
+        "working_days",
+        "avg_delivery_duration",
+        "sla_rate",
+        "cancellations",
+        "productivity_dynamics",
+        "productivity_by_zone",
+        "newcomer_productivity"
+      ],
+      "dimensions": [
+        "courier",
+        "date",
+        "shopno",
+        "zone",
+        "courier_type",
+        "newcomer_flag"
+      ],
+      "calculation_rules": [
+        "orders_per_courier = COUNT(DISTINCT order_key) GROUP BY id_courier, date",
+        "deliveries_success = COUNT(DISTINCT order_key) WHERE order_status='Успешно завершен'",
+        "working_days: 5797 days_with_orders (PROBABLE); 7465/7473 — только первые 5 смен/14 дней",
+        "sla_rate = 1 - AVG(is_late) (7006/7027)"
+      ],
+      "data_availability": "PARTIAL: заказы по курьеру и HR-агрегаты доступны; полноценных смен нет — только первые 5 смен/14 дней.",
+      "confidence": "PROBABLE",
+      "quality_checks": [
+        "courier_id NOT NULL",
+        "orders_per_courier >= 0",
+        "нет дублей courier+date",
+        "sum(orders) по курьерам = orders_total",
+        "нет пересечения смен"
+      ],
+      "missing_events": [
+        "courier_shift_started",
+        "courier_shift_ended"
+      ],
+      "missing_references": [
+        "shift_plan_reference"
+      ],
+      "business_questions": [
+        "Кто самый производительный?",
+        "Как меняется производительность новичков?",
+        "Где SLA хуже?"
+      ],
+      "implementation_priority": "P1",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "duration_fact"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "is_late"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "is_late"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "cnt_orders"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "days_with_orders"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "enough_shifts_flg"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "first_order_date"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "cnt_orders"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "enough_shifts_flg"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_1"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shifts_in_14_days"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "fifth_shift_status"
+        },
+        {
+          "dataset_id": 5247,
+          "field": "events_qty",
+          "note": "не смены"
+        },
+        {
+          "dataset_id": 5399,
+          "field": "events_qty",
+          "note": "не смены"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_courier_income",
+      "mart_name": "Доход курьеров",
+      "business_purpose": "Начисления курьеру за доставку заказов (правило: оплата за заказ).",
+      "grain": "1 строка = начисление за заказ (accrual_id = order_key + courier + accrual_date).",
+      "primary_key": "accrual_id",
+      "source_datasets": [
+        7473,
+        4732
+      ],
+      "source_tables": [
+        "agile_mart_techaudit.hr_delivery_five_shifts",
+        "default.darkstore_time_sheet"
+      ],
+      "join_keys": [
+        "id_courier",
+        "order_key",
+        "event_date/date"
+      ],
+      "filters": [
+        "7473: первые 5 смен новичка, event_date >= today()-30 DAY"
+      ],
+      "aggregation_period": "день/неделя/месяц",
+      "metrics": [
+        "income_per_order",
+        "income_per_hour",
+        "income_per_shift",
+        "adjustments",
+        "payout_status"
+      ],
+      "dimensions": [
+        "courier",
+        "date",
+        "zone",
+        "delivery_type"
+      ],
+      "calculation_rules": [
+        "Подтверждён только shift_N_profit / shift_N_work_minutes (7473) для первых 5 смен новичка.",
+        "income_per_hour = shift_N_profit / (shift_N_work_minutes / 60) — DERIVABLE только для 7473.",
+        "sum_order/sum_paid (4732) — суммы ЗАКАЗА, НЕ доход курьера; формула заработка не выводится.",
+        "Тарифы за заказ, период действия тарифа, корректировки и статус выплаты отсутствуют."
+      ],
+      "data_availability": "NEEDS_REFERENCE + NEEDS_BUSINESS_RULE: нет тарифа за заказ и правила начисления; есть только доход по первым 5 сменам (7473).",
+      "confidence": "UNKNOWN",
+      "quality_checks": [
+        "нет двойного начисления на заказ",
+        "accrual_amount >= 0",
+        "период тарифа покрывает дату заказа",
+        "courier_id NOT NULL"
+      ],
+      "missing_events": [
+        "courier_income_accrued",
+        "courier_income_adjusted"
+      ],
+      "missing_references": [
+        "tariff_reference (ставка за заказ, период, зона/тип)",
+        "payout_status_dictionary"
+      ],
+      "business_questions": [
+        "Сколько курьер заработал за период?",
+        "Каков доход в час?",
+        "Как учитываются отмены и возвраты?"
+      ],
+      "implementation_priority": "P1",
+      "source_fields": [
+        {
+          "dataset_id": 7473,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_1_profit"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_1_work_minutes"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_2_profit"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_2_work_minutes"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_5_profit"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_5_work_minutes"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "thresholds_taken_payments"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "sum_order",
+          "note": "не доход"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "sum_paid",
+          "note": "не доход"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_courier_mentorship",
+      "mart_name": "Наставничество и адаптация новичков",
+      "business_purpose": "Связь наставника и новичка, первые смены, результаты адаптации и удержание.",
+      "grain": "1 строка = пара (новичок × event_date) с атрибутами наставника/куратора.",
+      "primary_key": "courier_id + event_date + mentor_id",
+      "source_datasets": [
+        5797,
+        7465,
+        7473
+      ],
+      "source_tables": [
+        "agile_mart_techaudit.hr_delivery",
+        "agile_mart_techaudit.hr_delivery_five_shifts"
+      ],
+      "join_keys": [
+        "id_courier",
+        "event_date",
+        "shopno"
+      ],
+      "filters": [
+        "5797: date < today()",
+        "7465/7473: event_date >= today()-30 DAY"
+      ],
+      "aggregation_period": "день/месяц",
+      "metrics": [
+        "newcomers_total",
+        "first_shifts_count",
+        "newcomer_orders",
+        "adaptation_days",
+        "mentor_assignment",
+        "newcomer_retention"
+      ],
+      "dimensions": [
+        "courier",
+        "event_date",
+        "name_curator/leader",
+        "shopno",
+        "region_name"
+      ],
+      "calculation_rules": [
+        "newcomers = COUNT(DISTINCT id_courier) WHERE first_order_date = date (5797/7465).",
+        "curator/leader доступны как name_curator/leader (PROBABLE), но роль «наставник» не подтверждена.",
+        "Адаптация: shifts_in_first_14d, enough_shifts_flg, days_with_orders, fifth_shift_status."
+      ],
+      "data_availability": "PARTIAL: куратор/лидер и первые смены доступны; назначение наставника и результат обучения не подтверждены.",
+      "confidence": "PARTIAL",
+      "quality_checks": [
+        "mentor_id != newcomer_id",
+        "один наставник на пару",
+        "event_date в периоде обучения",
+        "нет дублей пары"
+      ],
+      "missing_events": [
+        "courier_mentor_assigned",
+        "courier_training_completed"
+      ],
+      "missing_references": [
+        "mentor_role_reference",
+        "training_program_reference"
+      ],
+      "business_questions": [
+        "Кто обучал новичка?",
+        "Сколько новичков закрепилось?"
+      ],
+      "implementation_priority": "P2",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "first_order_date"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "event_date"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "name_curator"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "leader"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "shifts_in_first_14d"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "enough_shifts_flg"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "cnt_orders"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "first_order_date"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "name_curator"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "shifts_in_first_14d"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "fifth_shift_status"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "thresholds_taken"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shifts_in_14_days"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_courier_curator_performance",
+      "mart_name": "Производительность кураторов",
+      "business_purpose": "Показатели работы куратора: закреплённые новички, их удержание и продуктивность.",
+      "grain": "1 строка = куратор × период (день/месяц).",
+      "primary_key": "curator_id + period",
+      "source_datasets": [
+        5797,
+        7465,
+        7473
+      ],
+      "source_tables": [
+        "agile_mart_techaudit.hr_delivery",
+        "agile_mart_techaudit.hr_delivery_five_shifts"
+      ],
+      "join_keys": [
+        "name_curator",
+        "id_courier",
+        "event_date"
+      ],
+      "filters": [
+        "5797: date < today()",
+        "7465/7473: event_date >= today()-30 DAY"
+      ],
+      "aggregation_period": "месяц",
+      "metrics": [
+        "curator_newcomers",
+        "curator_retention_14d",
+        "curator_newcomer_orders",
+        "curator_avg_adaptation"
+      ],
+      "dimensions": [
+        "name_curator",
+        "region_name",
+        "shopno",
+        "period"
+      ],
+      "calculation_rules": [
+        "curator_newcomers = COUNT(DISTINCT id_courier) GROUP BY name_curator",
+        "curator_retention_14d = AVG(enough_shifts_flg) (PROBABLE, только первые 14 дней)"
+      ],
+      "data_availability": "PARTIAL: name_curator и метрики первых смен есть; единая корпоративная формула удержания и роль куратора не подтверждены.",
+      "confidence": "PARTIAL",
+      "quality_checks": [
+        "curator_id NOT NULL",
+        "новичок привязан к одному куратору в периоде",
+        "нет дублей curator+period"
+      ],
+      "missing_events": [
+        "courier_mentor_assigned"
+      ],
+      "missing_references": [
+        "curator_role_reference",
+        "curator_org_structure"
+      ],
+      "business_questions": [
+        "Какой куратор лучше удерживает новичков?"
+      ],
+      "implementation_priority": "P2",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "name_curator"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "enough_shifts_flg"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "cnt_orders"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "event_date"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "name_curator"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "enough_shifts_flg"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "name_curator"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "fifth_shift_status"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_courier_attendance",
+      "mart_name": "Явка и доступность курьеров",
+      "business_purpose": "Плановая и фактическая смена, опоздания, невыходы, доступность для назначения.",
+      "grain": "1 строка = courier × planned_shift (после появления плана смен).",
+      "primary_key": "courier_id + planned_shift_start",
+      "source_datasets": [
+        5797,
+        7465,
+        7473,
+        5247,
+        5399
+      ],
+      "source_tables": [
+        "agile_mart_techaudit.hr_delivery",
+        "agile_mart_techaudit.hr_delivery_five_shifts",
+        "agile_mart_techaudit.courier_events_logs_aggr"
+      ],
+      "join_keys": [
+        "id_courier",
+        "date/event_date"
+      ],
+      "filters": [
+        "5797: date < today()",
+        "5247/5399: окно 7 дней / полная неделя"
+      ],
+      "aggregation_period": "день/неделя/месяц",
+      "metrics": [
+        "planned_shifts",
+        "actual_shifts",
+        "attendance_rate",
+        "late_start",
+        "no_show",
+        "shift_duration",
+        "availability_flag"
+      ],
+      "dimensions": [
+        "courier",
+        "date",
+        "shopno",
+        "zone"
+      ],
+      "calculation_rules": [
+        "events_qty (5247/5399) — количество событий, НЕ явка; event_name не расшифрован.",
+        "Подтверждённых событий courier_shift_started/ended нет.",
+        "Косвенно: shifts_in_first_14d / enough_shifts_flg (5797/7465) — только первые 14 дней, только новички."
+      ],
+      "data_availability": "NOT_AVAILABLE для плановой/фактической явки; NEEDS_EVENT + NEEDS_REFERENCE.",
+      "confidence": "UNKNOWN",
+      "quality_checks": [
+        "planned_shift_start NOT NULL",
+        "actual >= planned",
+        "нет пересечения смен курьера",
+        "no_show без shift_started"
+      ],
+      "missing_events": [
+        "courier_shift_started",
+        "courier_shift_ended"
+      ],
+      "missing_references": [
+        "shift_plan_reference (план смен)",
+        "absence_reason_dictionary"
+      ],
+      "business_questions": [
+        "Кто не вышел на смену?",
+        "Какова явка по зонам?"
+      ],
+      "implementation_priority": "P1",
+      "source_fields": [
+        {
+          "dataset_id": 5247,
+          "field": "event_name",
+          "note": "не явка"
+        },
+        {
+          "dataset_id": 5247,
+          "field": "events_qty",
+          "note": "не явка"
+        },
+        {
+          "dataset_id": 5247,
+          "field": "courier_id"
+        },
+        {
+          "dataset_id": 5247,
+          "field": "d"
+        },
+        {
+          "dataset_id": 5399,
+          "field": "event_name"
+        },
+        {
+          "dataset_id": 5399,
+          "field": "events_qty"
+        },
+        {
+          "dataset_id": 5399,
+          "field": "week_no"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "shifts_in_first_14d"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "enough_shifts_flg"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "no_orders_days_streak",
+          "note": "не невыход"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "pause_days"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "shifts_in_first_14d"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shifts_in_14_days"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_1_work_minutes"
+        }
+      ]
+    },
+    {
+      "mart_id": "dm_courier_demand_forecast",
+      "mart_name": "Прогноз нагрузки и дефицита курьеров",
+      "business_purpose": "Прогноз количества заказов, доступных курьеров, дефицита и времени ожидания по зонам.",
+      "grain": "1 строка = zone × date × hour.",
+      "primary_key": "zone_id + forecast_date + hour",
+      "source_datasets": [
+        4732,
+        7006,
+        7027,
+        5797,
+        7465,
+        5247,
+        5399
+      ],
+      "source_tables": [
+        "default.darkstore_time_sheet",
+        "mart_mixed.darkstore_time",
+        "agile_mart_techaudit.hr_delivery",
+        "agile_mart_techaudit.courier_events_logs_aggr"
+      ],
+      "join_keys": [
+        "zone",
+        "date",
+        "shopno"
+      ],
+      "filters": [
+        "исторические окна 3 месяца / 7 дней / 30 дней"
+      ],
+      "aggregation_period": "час/день",
+      "metrics": [
+        "orders_forecast",
+        "orders_actual",
+        "couriers_available",
+        "courier_deficit",
+        "zone_load",
+        "expected_wait_time"
+      ],
+      "dimensions": [
+        "zone",
+        "date",
+        "hour",
+        "shopno"
+      ],
+      "calculation_rules": [
+        "orders_actual = COUNT(order_key) GROUP BY zone, date, hour (DERIVABLE после появления zone_reference).",
+        "couriers_available = COUNT(DISTINCT id_courier) по сменам (PARTIAL: смены не подтверждены).",
+        "orders_forecast, courier_deficit, expected_wait_time — NEEDS_BUSINESS_RULE/модель."
+      ],
+      "data_availability": "PARTIAL/NEEDS_BUSINESS_RULE: фактические заказы доступны, прогноз, дефицит и ожидание требуют модели и справочника зон.",
+      "confidence": "UNKNOWN",
+      "quality_checks": [
+        "forecast_date >= today",
+        "couriers_available >= 0",
+        "zone_id NOT NULL",
+        "нет дублей zone+date+hour"
+      ],
+      "missing_events": [],
+      "missing_references": [
+        "zone_reference",
+        "forecast_model_spec",
+        "shift_plan_reference"
+      ],
+      "business_questions": [
+        "Сколько курьеров нужно в зоне завтра?",
+        "Где будет дефицит?"
+      ],
+      "implementation_priority": "P2",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "shopno"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_tt"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "date"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 5247,
+          "field": "courier_id",
+          "note": "не смены"
+        },
+        {
+          "dataset_id": 5247,
+          "field": "d"
+        },
+        {
+          "dataset_id": 5399,
+          "field": "courier_id"
+        },
+        {
+          "dataset_id": 5399,
+          "field": "week_no"
+        }
+      ]
+    }
+  ],
+  "kpis": [
+    {
+      "kpi_id": "orders_total",
+      "name": "Количество заказов",
+      "target_mart": "dm_courier_orders",
+      "formula": "COUNT(DISTINCT COALESCE(id_general, id_order))",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_general"
+        }
+      ],
+      "join_keys": [],
+      "aggregation_period": "день/неделя/месяц",
+      "status": "DERIVABLE",
+      "confidence": "HIGH",
+      "limitations": [
+        "4732: id_order — подзаказ, id_general — объединённый заказ"
+      ],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "orders_success",
+      "name": "Успешные доставки",
+      "target_mart": "dm_courier_orders",
+      "formula": "COUNT(DISTINCT order_key) WHERE order_status='Успешно завершен'",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "order_status"
+        }
+      ],
+      "join_keys": [],
+      "aggregation_period": "день",
+      "status": "VERIFIED",
+      "confidence": "HIGH",
+      "limitations": [],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "orders_cancelled",
+      "name": "Отменённые заказы",
+      "target_mart": "dm_courier_orders",
+      "formula": "COUNT(DISTINCT order_key) WHERE order_status IN ('Отменен','Не выполнен','Вернулся на полки')",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "order_status"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        }
+      ],
+      "join_keys": [],
+      "aggregation_period": "день",
+      "status": "VERIFIED",
+      "confidence": "HIGH",
+      "limitations": [
+        "набор статусов зашит в метрике 4732"
+      ],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "orders_returned",
+      "name": "Возвращённые заказы",
+      "target_mart": "dm_courier_orders",
+      "formula": "COUNT(DISTINCT order_key) WHERE is_returned_store = true",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "is_returned_store"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        }
+      ],
+      "join_keys": [],
+      "aggregation_period": "день",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "is_returned_store не проверен на полноту"
+      ],
+      "needed_events": [
+        "order_returned"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "orders_by_shop",
+      "name": "***REMOVED***ы по торговым точкам",
+      "target_mart": "dm_courier_orders",
+      "formula": "COUNT(DISTINCT order_key) GROUP BY shopno",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "shopno"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        }
+      ],
+      "join_keys": [
+        "shopno"
+      ],
+      "aggregation_period": "день",
+      "status": "DERIVABLE",
+      "confidence": "HIGH",
+      "limitations": [],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "orders_by_zone",
+      "name": "***REMOVED***ы по зонам",
+      "target_mart": "dm_courier_orders",
+      "formula": "COUNT(DISTINCT order_key) GROUP BY zone_id",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        }
+      ],
+      "join_keys": [
+        "zone"
+      ],
+      "aggregation_period": "день",
+      "status": "NEEDS_REFERENCE",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "zone_id отсутствует; area_tt — территория ТТ"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "zone_reference"
+      ]
+    },
+    {
+      "kpi_id": "orders_by_courier",
+      "name": "***REMOVED***ы по курьерам",
+      "target_mart": "dm_courier_orders",
+      "formula": "COUNT(DISTINCT order_key) GROUP BY id_courier",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        }
+      ],
+      "join_keys": [
+        "id_courier"
+      ],
+      "aggregation_period": "день",
+      "status": "DERIVABLE",
+      "confidence": "HIGH",
+      "limitations": [],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "time_create_to_assembly",
+      "name": "Время от создания до сборки",
+      "target_mart": "dm_courier_orders",
+      "formula": "date_collect_start - date_order",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "date_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_collect_start"
+        }
+      ],
+      "join_keys": [],
+      "aggregation_period": "день",
+      "status": "DERIVABLE",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "date_collect_start PROBABLE"
+      ],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "assembly_duration",
+      "name": "Время сборки",
+      "target_mart": "dm_courier_orders",
+      "formula": "date_collected - date_collect_start; collection_time_all",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "date_collected"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_collect_start"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "collection_time_all"
+        }
+      ],
+      "join_keys": [],
+      "aggregation_period": "день",
+      "status": "DERIVABLE",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "единицы collection_time_all не подтверждены"
+      ],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "wait_duration",
+      "name": "Время ожидания",
+      "target_mart": "dm_courier_orders",
+      "formula": "date_pickuped - ready_at",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "wait_time"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "wait_time2"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_collected"
+        }
+      ],
+      "join_keys": [],
+      "aggregation_period": "день",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "ready_at не подтверждён; wait_time единицы неизвестны"
+      ],
+      "needed_events": [
+        "order_ready"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "delivery_duration",
+      "name": "Время доставки",
+      "target_mart": "dm_courier_orders",
+      "formula": "date_delivered - date_delivery_start (4732); duration_fact (7006)",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_delivery_start"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "duration_fact"
+        }
+      ],
+      "join_keys": [],
+      "aggregation_period": "день",
+      "status": "DERIVABLE",
+      "confidence": "HIGH",
+      "limitations": [],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "sla_on_time_rate",
+      "name": "Соблюдение SLA",
+      "target_mart": "dm_courier_orders",
+      "formula": "1 - AVG(is_late); для 4732 — доля date_delivered <= date_supply_untill",
+      "source_fields": [
+        {
+          "dataset_id": 7006,
+          "field": "is_late"
+        },
+        {
+          "dataset_id": 7027,
+          "field": "is_late"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_delivered"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_supply_untill"
+        }
+      ],
+      "join_keys": [],
+      "aggregation_period": "день",
+      "status": "DERIVABLE",
+      "confidence": "HIGH",
+      "limitations": [
+        "SLA-нормативы 4732 приходят из services_sla"
+      ],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "order_ready_ts",
+      "name": "Момент готовности заказа",
+      "target_mart": "dm_courier_ready_queue",
+      "formula": "order_ready event timestamp",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "date_status_10",
+          "note": "гипотеза"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_collected",
+          "note": "гипотеза"
+        }
+      ],
+      "join_keys": [
+        "order_key"
+      ],
+      "aggregation_period": "—",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "date_status_10/date_collected не доказывают готовность к выдаче"
+      ],
+      "needed_events": [
+        "order_ready"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "queue_size",
+      "name": "Размер очереди готовых заказов",
+      "target_mart": "dm_courier_ready_queue",
+      "formula": "COUNT(order_key) WHERE ready_at IS NOT NULL AND pickup_at IS NULL",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        }
+      ],
+      "join_keys": [
+        "order_key"
+      ],
+      "aggregation_period": "час",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [],
+      "needed_events": [
+        "order_ready",
+        "order_picked_up"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "ready_to_pickup_duration",
+      "name": "Время от готовности до получения",
+      "target_mart": "dm_courier_ready_queue",
+      "formula": "order_picked_up.at - order_ready.at",
+      "source_fields": [
+        {
+          "dataset_id": 7006,
+          "field": "date_pickuped"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_collected"
+        }
+      ],
+      "join_keys": [
+        "order_key"
+      ],
+      "aggregation_period": "день",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "pickup доступен (PROBABLE), ready — нет"
+      ],
+      "needed_events": [
+        "order_ready",
+        "order_picked_up"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "zones_total",
+      "name": "Количество зон",
+      "target_mart": "dm_delivery_zones",
+      "formula": "COUNT(DISTINCT zone_id)",
+      "source_fields": [
+        {
+          "dataset_id": 7293,
+          "field": "zone"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "inactivity_zone"
+        }
+      ],
+      "join_keys": [
+        "zone"
+      ],
+      "aggregation_period": "—",
+      "status": "NEEDS_REFERENCE",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "нет справочника зон доставки; inactivity_zone — зона бездействия"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "zone_reference"
+      ]
+    },
+    {
+      "kpi_id": "couriers_by_zone",
+      "name": "Курьеры по зонам",
+      "target_mart": "dm_delivery_zones",
+      "formula": "COUNT(DISTINCT id_courier) GROUP BY zone",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "inactivity_zone"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "zone"
+      ],
+      "aggregation_period": "день",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "зона бездействия ≠ зона доставки"
+      ],
+      "needed_events": [
+        "courier_zone_assigned"
+      ],
+      "needed_references": [
+        "zone_reference"
+      ]
+    },
+    {
+      "kpi_id": "batches_total",
+      "name": "Количество пакетов",
+      "target_mart": "dm_delivery_batches",
+      "formula": "COUNT(DISTINCT id_pool_calc) или COUNT(DISTINCT id_pool)",
+      "source_fields": [
+        {
+          "dataset_id": 7006,
+          "field": "id_pool_calc"
+        },
+        {
+          "dataset_id": 7024,
+          "field": "id_pool"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "id_pool"
+        }
+      ],
+      "join_keys": [
+        "id_pool",
+        "id_pool_calc"
+      ],
+      "aggregation_period": "день",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "id_pool_calc — вычисляемый; id_pool различается по источникам"
+      ],
+      "needed_events": [
+        "batch_created"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "orders_per_batch",
+      "name": "***REMOVED***ов в пакете",
+      "target_mart": "dm_delivery_batches",
+      "formula": "COUNT(DISTINCT id_order) по пакету",
+      "source_fields": [
+        {
+          "dataset_id": 7006,
+          "field": "pool_size"
+        },
+        {
+          "dataset_id": 7024,
+          "field": "pool_size"
+        },
+        {
+          "dataset_id": 7119,
+          "field": "pool_size"
+        }
+      ],
+      "join_keys": [
+        "id_pool",
+        "id_pool_calc"
+      ],
+      "aggregation_period": "день",
+      "status": "DERIVABLE",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "проектное правило 5 заказов не подтверждено"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "batch_rule_reference"
+      ]
+    },
+    {
+      "kpi_id": "batch_created_at",
+      "name": "Время формирования пакета",
+      "target_mart": "dm_delivery_batches",
+      "formula": "batch_created event",
+      "source_fields": [],
+      "join_keys": [
+        "id_pool"
+      ],
+      "aggregation_period": "—",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [],
+      "needed_events": [
+        "batch_created"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "batch_assigned_at",
+      "name": "Время назначения пакета",
+      "target_mart": "dm_delivery_batches",
+      "formula": "batch_assigned event",
+      "source_fields": [],
+      "join_keys": [
+        "id_pool",
+        "id_courier"
+      ],
+      "aggregation_period": "—",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [],
+      "needed_events": [
+        "batch_assigned"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "batch_success_rate",
+      "name": "Доля успешных заказов в пакете",
+      "target_mart": "dm_delivery_batches",
+      "formula": "AVG(order_status='Успешно завершен') по пакету",
+      "source_fields": [
+        {
+          "dataset_id": 7006,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 7006,
+          "field": "id_pool_calc"
+        }
+      ],
+      "join_keys": [
+        "id_pool_calc",
+        "order_key"
+      ],
+      "aggregation_period": "день",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "требуется связь пакета с order_status 4732"
+      ],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "assignments_total",
+      "name": "Количество назначений",
+      "target_mart": "dm_courier_assignments",
+      "formula": "COUNT(DISTINCT order_key + courier)",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_courier"
+        }
+      ],
+      "join_keys": [
+        "order_key",
+        "id_courier"
+      ],
+      "aggregation_period": "день",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "нет события назначения; только факт связи заказ↔курьер"
+      ],
+      "needed_events": [
+        "batch_assigned",
+        "courier_accepted_assignment"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "time_to_pickup",
+      "name": "Время до получения заказа курьером",
+      "target_mart": "dm_courier_assignments",
+      "formula": "date_pickuped - assigned_at",
+      "source_fields": [
+        {
+          "dataset_id": 7006,
+          "field": "date_pickuped"
+        }
+      ],
+      "join_keys": [
+        "order_key",
+        "id_courier"
+      ],
+      "aggregation_period": "день",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "assigned_at отсутствует"
+      ],
+      "needed_events": [
+        "batch_assigned",
+        "order_picked_up"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "reassignments_total",
+      "name": "Повторные назначения",
+      "target_mart": "dm_courier_assignments",
+      "formula": "COUNT(*) WHERE reassigned = true",
+      "source_fields": [],
+      "join_keys": [
+        "order_key"
+      ],
+      "aggregation_period": "день",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [],
+      "needed_events": [
+        "batch_assigned"
+      ],
+      "needed_references": [
+        "cancel_reason_dictionary"
+      ]
+    },
+    {
+      "kpi_id": "orders_per_courier",
+      "name": "***REMOVED***ы на курьера",
+      "target_mart": "dm_courier_performance",
+      "formula": "COUNT(DISTINCT order_key) GROUP BY id_courier, date",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "date"
+      ],
+      "aggregation_period": "день",
+      "status": "DERIVABLE",
+      "confidence": "HIGH",
+      "limitations": [],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "working_days",
+      "name": "Количество рабочих дней",
+      "target_mart": "dm_courier_performance",
+      "formula": "COUNT(DISTINCT date) WHERE cnt_orders > 0",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "days_with_orders"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "date"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "cnt_orders"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "date"
+      ],
+      "aggregation_period": "месяц",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "days_with_orders — оконная метрика 5797; полных смен нет"
+      ],
+      "needed_events": [
+        "courier_shift_started",
+        "courier_shift_ended"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "newcomer_productivity",
+      "name": "Производительность новичков",
+      "target_mart": "dm_courier_performance",
+      "formula": "SUM(cnt_orders) / COUNT(DISTINCT id_courier) WHERE first_order_date IS NOT NULL",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "cnt_orders"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "first_order_date"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "cnt_orders"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_1"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "event_date"
+      ],
+      "aggregation_period": "14 дней",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "только первые 5 смен / 14 дней"
+      ],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "income_per_order",
+      "name": "Доход за заказ",
+      "target_mart": "dm_courier_income",
+      "formula": "tariff(order, zone, type, date)",
+      "source_fields": [],
+      "join_keys": [
+        "order_key",
+        "id_courier"
+      ],
+      "aggregation_period": "день",
+      "status": "NEEDS_REFERENCE",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "тариф за заказ отсутствует"
+      ],
+      "needed_events": [
+        "courier_income_accrued"
+      ],
+      "needed_references": [
+        "tariff_reference"
+      ]
+    },
+    {
+      "kpi_id": "income_per_hour",
+      "name": "Доход в час",
+      "target_mart": "dm_courier_income",
+      "formula": "shift_N_profit / (shift_N_work_minutes / 60)",
+      "source_fields": [
+        {
+          "dataset_id": 7473,
+          "field": "shift_1_profit"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_1_work_minutes"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_5_profit"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_5_work_minutes"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "event_date"
+      ],
+      "aggregation_period": "смена",
+      "status": "DERIVABLE",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "только первые 5 смен новичка (7473)"
+      ],
+      "needed_events": [
+        "courier_income_accrued"
+      ],
+      "needed_references": [
+        "tariff_reference"
+      ]
+    },
+    {
+      "kpi_id": "payout_status",
+      "name": "Статус выплаты",
+      "target_mart": "dm_courier_income",
+      "formula": "payout status per accrual",
+      "source_fields": [],
+      "join_keys": [
+        "accrual_id"
+      ],
+      "aggregation_period": "месяц",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [],
+      "needed_events": [
+        "courier_income_accrued",
+        "courier_income_adjusted"
+      ],
+      "needed_references": [
+        "payout_status_dictionary"
+      ]
+    },
+    {
+      "kpi_id": "newcomers_total",
+      "name": "Количество новичков",
+      "target_mart": "dm_courier_mentorship",
+      "formula": "COUNT(DISTINCT id_courier) WHERE first_order_date = date",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "first_order_date"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "date"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "event_date"
+      ],
+      "aggregation_period": "месяц",
+      "status": "DERIVABLE",
+      "confidence": "MEDIUM",
+      "limitations": [],
+      "needed_events": [],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "newcomer_retention",
+      "name": "Удержание новичков",
+      "target_mart": "dm_courier_mentorship",
+      "formula": "AVG(enough_shifts_flg); ret_14_d",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "enough_shifts_flg"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "ret_14_d",
+          "note": "метрика"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "enough_shifts_flg"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "event_date"
+      ],
+      "aggregation_period": "14 дней",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "определение только первые 14 дней"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "retention_rule_reference"
+      ]
+    },
+    {
+      "kpi_id": "mentor_assignment",
+      "name": "Назначение наставника",
+      "target_mart": "dm_courier_mentorship",
+      "formula": "mentor_id per newcomer",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "name_curator"
+        },
+        {
+          "dataset_id": 7465,
+          "field": "name_curator"
+        }
+      ],
+      "join_keys": [
+        "id_courier"
+      ],
+      "aggregation_period": "—",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "name_curator — куратор, не обязательно наставник"
+      ],
+      "needed_events": [
+        "courier_mentor_assigned"
+      ],
+      "needed_references": [
+        "mentor_role_reference"
+      ]
+    },
+    {
+      "kpi_id": "training_completed",
+      "name": "Обучение завершено",
+      "target_mart": "dm_courier_mentorship",
+      "formula": "training_completed event",
+      "source_fields": [
+        {
+          "dataset_id": 7473,
+          "field": "fifth_shift_status"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "thresholds_taken"
+        }
+      ],
+      "join_keys": [
+        "id_courier"
+      ],
+      "aggregation_period": "—",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [],
+      "needed_events": [
+        "courier_training_completed"
+      ],
+      "needed_references": [
+        "training_program_reference"
+      ]
+    },
+    {
+      "kpi_id": "curator_newcomers",
+      "name": "Новички куратора",
+      "target_mart": "dm_courier_curator_performance",
+      "formula": "COUNT(DISTINCT id_courier) GROUP BY name_curator",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "name_curator"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "id_courier"
+        }
+      ],
+      "join_keys": [
+        "name_curator",
+        "id_courier"
+      ],
+      "aggregation_period": "месяц",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "куратор доступен как имя, id отсутствует"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "curator_role_reference"
+      ]
+    },
+    {
+      "kpi_id": "curator_retention",
+      "name": "Удержание новичков куратора",
+      "target_mart": "dm_courier_curator_performance",
+      "formula": "AVG(enough_shifts_flg) GROUP BY name_curator",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "name_curator"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "enough_shifts_flg"
+        }
+      ],
+      "join_keys": [
+        "name_curator",
+        "id_courier"
+      ],
+      "aggregation_period": "14 дней",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "определение удержания не подтверждено"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "retention_rule_reference"
+      ]
+    },
+    {
+      "kpi_id": "planned_shifts",
+      "name": "Плановые смены",
+      "target_mart": "dm_courier_attendance",
+      "formula": "COUNT(planned_shift)",
+      "source_fields": [],
+      "join_keys": [
+        "id_courier",
+        "date"
+      ],
+      "aggregation_period": "день",
+      "status": "NOT_AVAILABLE",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "плана смен нет в 12 источниках"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "shift_plan_reference"
+      ]
+    },
+    {
+      "kpi_id": "actual_shifts",
+      "name": "Фактические смены",
+      "target_mart": "dm_courier_attendance",
+      "formula": "COUNT(courier_shift_started)",
+      "source_fields": [
+        {
+          "dataset_id": 7473,
+          "field": "shifts_in_14_days"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "shifts_in_first_14d"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "date"
+      ],
+      "aggregation_period": "день",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "подтверждены только первые 5 смен/14 дней новичков"
+      ],
+      "needed_events": [
+        "courier_shift_started",
+        "courier_shift_ended"
+      ],
+      "needed_references": [
+        "shift_plan_reference"
+      ]
+    },
+    {
+      "kpi_id": "attendance_rate",
+      "name": "Явка",
+      "target_mart": "dm_courier_attendance",
+      "formula": "actual_shifts / planned_shifts",
+      "source_fields": [],
+      "join_keys": [
+        "id_courier",
+        "date"
+      ],
+      "aggregation_period": "день",
+      "status": "NOT_AVAILABLE",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "events_qty — не явка"
+      ],
+      "needed_events": [
+        "courier_shift_started"
+      ],
+      "needed_references": [
+        "shift_plan_reference"
+      ]
+    },
+    {
+      "kpi_id": "no_show",
+      "name": "Невыходы",
+      "target_mart": "dm_courier_attendance",
+      "formula": "planned_shifts - actual_shifts",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "no_orders_days_streak",
+          "note": "не невыход"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "pause_days"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "date"
+      ],
+      "aggregation_period": "день",
+      "status": "NOT_AVAILABLE",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "подтверждённого поля невыхода нет"
+      ],
+      "needed_events": [
+        "courier_shift_started"
+      ],
+      "needed_references": [
+        "shift_plan_reference",
+        "absence_reason_dictionary"
+      ]
+    },
+    {
+      "kpi_id": "shift_duration",
+      "name": "Продолжительность смены",
+      "target_mart": "dm_courier_attendance",
+      "formula": "shift_end - shift_start; shift_N_work_minutes",
+      "source_fields": [
+        {
+          "dataset_id": 7473,
+          "field": "shift_1_work_minutes"
+        },
+        {
+          "dataset_id": 7473,
+          "field": "shift_5_work_minutes"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "event_date"
+      ],
+      "aggregation_period": "смена",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "только первые 5 смен новичка"
+      ],
+      "needed_events": [
+        "courier_shift_started",
+        "courier_shift_ended"
+      ],
+      "needed_references": []
+    },
+    {
+      "kpi_id": "orders_actual_forecast",
+      "name": "Фактическое количество заказов (для прогноза)",
+      "target_mart": "dm_courier_demand_forecast",
+      "formula": "COUNT(DISTINCT order_key) GROUP BY zone, date, hour",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "id_order"
+        },
+        {
+          "dataset_id": 4732,
+          "field": "date_order"
+        }
+      ],
+      "join_keys": [
+        "zone",
+        "date"
+      ],
+      "aggregation_period": "час",
+      "status": "NEEDS_REFERENCE",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "нет zone_reference для группировки по зонам"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "zone_reference"
+      ]
+    },
+    {
+      "kpi_id": "couriers_available",
+      "name": "Доступные курьеры",
+      "target_mart": "dm_courier_demand_forecast",
+      "formula": "COUNT(DISTINCT id_courier) WHERE shift_started",
+      "source_fields": [
+        {
+          "dataset_id": 5797,
+          "field": "id_courier"
+        },
+        {
+          "dataset_id": 5797,
+          "field": "date"
+        }
+      ],
+      "join_keys": [
+        "id_courier",
+        "date"
+      ],
+      "aggregation_period": "час",
+      "status": "NEEDS_EVENT",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "смены не подтверждены"
+      ],
+      "needed_events": [
+        "courier_shift_started",
+        "courier_shift_ended"
+      ],
+      "needed_references": [
+        "shift_plan_reference"
+      ]
+    },
+    {
+      "kpi_id": "courier_deficit",
+      "name": "Дефицит курьеров",
+      "target_mart": "dm_courier_demand_forecast",
+      "formula": "required_couriers - couriers_available",
+      "source_fields": [],
+      "join_keys": [
+        "zone",
+        "date"
+      ],
+      "aggregation_period": "час",
+      "status": "NEEDS_BUSINESS_RULE",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "требует модели нормирования"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "forecast_model_spec",
+        "shift_plan_reference"
+      ]
+    },
+    {
+      "kpi_id": "expected_wait_time",
+      "name": "Прогнозируемое время ожидания",
+      "target_mart": "dm_courier_demand_forecast",
+      "formula": "model(queue_load, couriers_available)",
+      "source_fields": [
+        {
+          "dataset_id": 4732,
+          "field": "wait_time",
+          "note": "не подтверждено"
+        }
+      ],
+      "join_keys": [
+        "zone",
+        "date"
+      ],
+      "aggregation_period": "час",
+      "status": "NEEDS_BUSINESS_RULE",
+      "confidence": "UNKNOWN",
+      "limitations": [
+        "wait_time единицы/семантика не подтверждены"
+      ],
+      "needed_events": [
+        "order_ready"
+      ],
+      "needed_references": [
+        "forecast_model_spec",
+        "zone_reference"
+      ]
+    },
+    {
+      "kpi_id": "events_courier_activity",
+      "name": "Событийная активность курьера",
+      "target_mart": "dm_courier_performance",
+      "formula": "SUM(events_qty)",
+      "source_fields": [
+        {
+          "dataset_id": 5247,
+          "field": "events_qty"
+        },
+        {
+          "dataset_id": 5399,
+          "field": "events_qty"
+        }
+      ],
+      "join_keys": [
+        "courier_id",
+        "d"
+      ],
+      "aggregation_period": "день/неделя",
+      "status": "PARTIAL",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "events_qty — события, не явка и не смены; event_name не расшифрован"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "event_dictionary"
+      ]
+    },
+    {
+      "kpi_id": "zone_migration_balance",
+      "name": "Баланс миграции курьеров между зонами",
+      "target_mart": "dm_delivery_zones",
+      "formula": "positive_flow - negative_flow",
+      "source_fields": [
+        {
+          "dataset_id": 7293,
+          "field": "positive_flow"
+        },
+        {
+          "dataset_id": 7293,
+          "field": "negative_flow"
+        },
+        {
+          "dataset_id": 7293,
+          "field": "balance"
+        },
+        {
+          "dataset_id": 7293,
+          "field": "zone"
+        }
+      ],
+      "join_keys": [
+        "zone",
+        "date"
+      ],
+      "aggregation_period": "день",
+      "status": "DERIVABLE",
+      "confidence": "MEDIUM",
+      "limitations": [
+        "зона бездействия, не зона доставки"
+      ],
+      "needed_events": [],
+      "needed_references": [
+        "zone_reference"
+      ]
+    }
+  ]
+}

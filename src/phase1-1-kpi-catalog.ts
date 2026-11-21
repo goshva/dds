@@ -11,7 +11,7 @@
  *  - sum_order не считается доходом курьера, events_qty не считается явкой без семантики;
  *  - PII-поля перечисляются как имена, но их значения не выгружаются.
  */
-import { readFileSync, writeFileSync, readdirSync, mkdirSync } from "fs";
+import { readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync } from "fs";
 import { join } from "path";
 
 const DETAILS_DIR = "output/dataset_details";
@@ -89,6 +89,43 @@ function loadDatasets(): Map<number, DatasetInfo> {
     });
   }
   return map;
+}
+
+type FullCatalogEntry = {
+  id: number;
+  table_name: string;
+  kind: string;
+  sql: string;
+  sql_length: number;
+};
+
+/** Полный list-каталог датасетов (output/datasets.json), read-only. */
+function loadFullCatalog(): FullCatalogEntry[] {
+  const path = join("output", "datasets.json");
+  if (!existsSync(path)) return [];
+  try {
+    const data = JSON.parse(readFileSync(path, "utf8"));
+    const rows = Array.isArray(data?.result) ? data.result : [];
+    return rows.map((d: any) => ({
+      id: Number(d?.id),
+      table_name: String(d?.table_name ?? ""),
+      kind: String(d?.kind ?? ""),
+      sql: String(d?.sql ?? ""),
+      sql_length: typeof d?.sql === "string" ? d.sql.length : 0,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+function escapeRe(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/** Широкий поиск токена в SQL полного каталога (только контекст, не evidence). */
+function tokenInSql(sqlLower: string, tokenLower: string): boolean {
+  const re = new RegExp(`(^|[^a-z0-9_])${escapeRe(tokenLower)}([^a-z0-9_]|$)`);
+  return re.test(sqlLower);
 }
 
 type KpiStatus = "FOUND" | "PARTIAL" | "NOT_FOUND" | "NOT_VERIFIED";
@@ -698,6 +735,45 @@ function main() {
       pii_columns: ds.pii_columns,
     }));
 
+  const fullCatalog = loadFullCatalog();
+  const fullCatalogById = new Map(fullCatalog.map((d) => [d.id, d]));
+  const priorityMissingInCatalog = PRIORITY_IDS.filter((id) => !fullCatalogById.has(id));
+  const sqlLengthMismatches: any[] = [];
+  for (const id of PRIORITY_IDS) {
+    const detail = datasets.get(id);
+    const list = fullCatalogById.get(id);
+    if (!detail || !list) continue;
+    if (detail.sql_length !== list.sql_length) {
+      sqlLengthMismatches.push({
+        dataset_id: id,
+        detail_sql_length: detail.sql_length,
+        list_sql_length: list.sql_length,
+      });
+    }
+  }
+
+  // Широкий контекстный скан по SQL полного каталога. НЕ используется для повышения статуса KPI.
+  const fullCatalogLower = fullCatalog
+    .filter((d) => d.sql_length > 0)
+    .map((d) => ({ id: d.id, table_name: d.table_name, low: d.sql.toLowerCase() }));
+  const fullCatalogScan: Record<string, any> = {};
+  for (const kpi of KPIS) {
+    const tokens = new Set<string>();
+    for (const ev of kpi.evidence) {
+      for (const f of ev.fields) tokens.add(f.toLowerCase());
+      for (const m of ev.metrics ?? []) tokens.add(m.toLowerCase());
+    }
+    const tokenList = [...tokens];
+    const candidates: any[] = [];
+    for (const ds of fullCatalogLower) {
+      const matched = tokenList.filter((t) => tokenInSql(ds.low, t));
+      if (matched.length) {
+        candidates.push({ dataset_id: ds.id, table_name: ds.table_name, matched_fields: matched.slice(0, 10) });
+      }
+    }
+    fullCatalogScan[kpi.id] = { candidate_datasets: candidates.length, sample: candidates.slice(0, 10) };
+  }
+
   const out = {
     generated_at: new Date().toISOString(),
     source: "output/dataset_details/*.json — полные detail 12 приоритетных датасетов (SQL, columns, metrics, calculated_columns)",
@@ -708,9 +784,18 @@ function main() {
       status_counts: statusCounts,
     },
     datasets: datasetRows,
+    full_catalog: {
+      datasets_total: fullCatalog.length,
+      datasets_with_sql: fullCatalogLower.length,
+      priority_present: PRIORITY_IDS.length - priorityMissingInCatalog.length,
+      priority_missing: priorityMissingInCatalog,
+      sql_length_mismatches: sqlLengthMismatches,
+      scan_by_kpi: fullCatalogScan,
+      note: "Скан по SQL полного каталога — только контекст; статусы KPI не повышаются из-за новых датасетов.",
+    },
     kpis,
     limitations: [
-      "Матрица отражает только 12 приоритетных датасетов; остальные 3 759 датасетов не проверялись.",
+      "Evidence и статусы KPI основаны на 12 приоритетных dataset details; полный каталог (3 776) используется только для контекстного скана SQL.",
       "Статус FOUND означает наличие подтверждённых полей/метрик, а не согласованную бизнес-формулу.",
       "sum_order/sum_paid — суммы заказа, а не доход курьера.",
       "events_qty — события, а не явка; семантика event_name не подтверждена.",
@@ -762,6 +847,22 @@ function main() {
   md.push("## PII");
   md.push("");
   md.push(out.pii_note);
+  md.push("");
+  md.push("## Полный каталог (контекст)");
+  md.push("");
+  md.push(`- datasets_total: ${out.full_catalog.datasets_total}`);
+  md.push(`- datasets_with_sql: ${out.full_catalog.datasets_with_sql}`);
+  md.push(`- priority_present: ${out.full_catalog.priority_present}/12`);
+  md.push(`- priority_missing: ${out.full_catalog.priority_missing.length ? out.full_catalog.priority_missing.join(", ") : "нет"}`);
+  md.push(`- sql_length_mismatches: ${out.full_catalog.sql_length_mismatches.length ? JSON.stringify(out.full_catalog.sql_length_mismatches) : "нет"}`);
+  md.push("");
+  md.push("Кандидаты по SQL полного каталога (контекст; статусы не повышаются):");
+  md.push("");
+  md.push("| KPI | candidate_datasets |");
+  md.push("|---|---:|");
+  for (const k of kpis) {
+    md.push(`| ${k.name} | ${out.full_catalog.scan_by_kpi[k.id]?.candidate_datasets ?? 0} |`);
+  }
   md.push("");
   md.push("## Проблемы верификации полей");
   md.push("");

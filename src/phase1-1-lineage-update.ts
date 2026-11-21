@@ -15,7 +15,6 @@ const db = new Database(DB, { readonly: true });
 const catalogIds = (t: string) =>
   new Set((db.query(`SELECT object_id FROM objects WHERE object_type=?`).all(t) as any[]).map((r) => r.object_id));
 
-const dashIds = catalogIds("dashboard_detail");
 const chartIds = catalogIds("chart");
 const datasetIds = catalogIds("dataset");
 const chartDetailIds = catalogIds("chart_detail");
@@ -92,7 +91,7 @@ for (const [key, pairs] of Object.entries(csvRows)) {
 // --- API-дополнение: CHART_USES_DATASET|API_FILTER_BY_DATASOURCE_ID ---
 const apiChartLinks = JSON.parse(readFileSync(`${OUT_DIR}/api_chart_links_priority.json`, "utf8")) as any;
 let apiRelations = 0;
-for (const [dsId, info] of Object.entries(apiChartLinks.by_dataset)) {
+for (const info of Object.values(apiChartLinks.by_dataset)) {
   apiRelations += (info as any).charts.length;
 }
 

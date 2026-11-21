@@ -1,13 +1,32 @@
 {
-  "generated_at": "2026-11-20T20:27:00.158Z",
-  "verdict": "FAIL",
+  "generated_at": "2026-11-21T06:52:15.866Z",
+  "verdict": "PASS_WITH_BLOCKER",
+  "statuses": {
+    "LOCAL_VALIDATION": "PASS",
+    "API_TRANSPORT_CURRENT": "BLOCKED_TCP",
+    "API_AUTH_LAST_SUCCESS": "PASS",
+    "API_AUTH_CURRENT": "NOT_TESTED",
+    "DISCOVERY_COMPLETENESS": "PASS",
+    "LINEAGE_INTERNAL_CONSISTENCY": "PASS",
+    "LINEAGE_REFERENCE_QUALITY": "WARN",
+    "KPI_EVIDENCE": "PASS",
+    "OVERALL_STATUS": "PASS_WITH_BLOCKER"
+  },
   "summary": {
-    "total": 9,
-    "pass": 8,
-    "fail": 1,
-    "warn": 0
+    "total": 14,
+    "pass": 11,
+    "fail": 0,
+    "warn": 1,
+    "blocked": 1,
+    "not_tested": 1
   },
   "checks": [
+    {
+      "id": "typescript_compile",
+      "name": "TypeScript compilation",
+      "status": "PASS",
+      "details": "bunx tsc --noEmit: exit 0"
+    },
     {
       "id": "sqlite_readonly_quick_check",
       "name": "SQLite readonly и quick_check",
@@ -178,46 +197,139 @@
     },
     {
       "id": "discovery_complete",
-      "name": "Полнота Discovery",
-      "status": "FAIL",
-      "details": "chart: downloaded=5000 api=19920 status=ok; dataset: downloaded=3767 api=3771 status=ok",
+      "name": "Полнота Discovery (summary ↔ фактические файлы)",
+      "status": "PASS",
+      "details": "фактические list-файлы совпадают с summary; дубликатов нет",
       "metrics": {
         "resources": {
           "dashboard": {
-            "downloaded": 330,
-            "api": 330,
-            "status": "ok",
-            "complete": true
+            "file": "output\\dashboards.json",
+            "actual_rows": 331,
+            "actual_unique_ids": 331,
+            "actual_duplicates": 0,
+            "summary_downloaded_count": 331,
+            "summary_api_count": 331,
+            "summary_unique_ids_count": 331,
+            "summary_duplicate_rows": 0,
+            "summary_status": "complete"
           },
           "chart": {
-            "downloaded": 5000,
-            "api": 19920,
-            "status": "ok",
-            "complete": false
+            "file": "output\\charts.json",
+            "actual_rows": 19924,
+            "actual_unique_ids": 19924,
+            "actual_duplicates": 0,
+            "summary_downloaded_count": 19924,
+            "summary_api_count": 19924,
+            "summary_unique_ids_count": 19924,
+            "summary_duplicate_rows": 0,
+            "summary_status": "complete"
           },
           "dataset": {
-            "downloaded": 3767,
-            "api": 3771,
-            "status": "ok",
-            "complete": false
+            "file": "output\\datasets.json",
+            "actual_rows": 3776,
+            "actual_unique_ids": 3776,
+            "actual_duplicates": 0,
+            "summary_downloaded_count": 3776,
+            "summary_api_count": 3776,
+            "summary_unique_ids_count": 3776,
+            "summary_duplicate_rows": 0,
+            "summary_status": "complete"
           }
         },
-        "api_counts": {
-          "dashboard": 330,
-          "chart": 19920,
-          "dataset": 3771
-        },
-        "summary_generated_at": null
+        "started_at": "2026-11-20T21:33:38.331Z",
+        "finished_at": "2026-11-20T21:39:40.179Z",
+        "summary_status": "ok",
+        "mode": "read-only",
+        "endpoint_errors": 0,
+        "detail_spot_checks": {
+          "attempted": 4,
+          "ok": 4,
+          "failed": 0,
+          "by_class": {
+            "http_401": 0,
+            "http_403": 0,
+            "http_429": 0,
+            "http_5xx": 0,
+            "http_4xx": 0,
+            "network": 0,
+            "other": 0
+          },
+          "errors": [],
+          "note": "Только точечная выборка; полные dataset detail загружает phase1-1-dataset-detail-loader.ts."
+        }
       }
     },
     {
-      "id": "lineage_consistency",
-      "name": "Lineage: уникальность и согласованность",
+      "id": "api_transport_current",
+      "name": "API transport current (DNS/TCP/TLS/HTTP)",
+      "status": "BLOCKED",
+      "details": "BLOCKED_TCP; generated_at=2026-11-21T06:04:46.887Z",
+      "metrics": {
+        "verdict": "BLOCKED_TCP",
+        "layers": [
+          {
+            "layer": "dns.A",
+            "ok": true,
+            "code": null
+          },
+          {
+            "layer": "dns.AAAA",
+            "ok": false,
+            "code": "UNKNOWN"
+          },
+          {
+            "layer": "tcp.443",
+            "ok": false,
+            "code": "TCP_TIMEOUT"
+          },
+          {
+            "layer": "tls",
+            "ok": false,
+            "code": "SKIPPED_TCP_FAILED"
+          },
+          {
+            "layer": "http.GET_/health",
+            "ok": false,
+            "code": "SKIPPED_TLS_FAILED"
+          }
+        ],
+        "generated_at": "2026-11-21T06:04:46.887Z"
+      }
+    },
+    {
+      "id": "api_auth_last_success",
+      "name": "API auth — последняя успешная авторизация (Discovery)",
       "status": "PASS",
-      "details": "CSV и JSON согласованы, дублей ключей нет",
+      "details": "Подтверждена во время Discovery: status=ok, detail spot checks 4/4, 2026-11-20T21:33:38.331Z — 2026-11-20T21:39:40.179Z",
+      "metrics": {
+        "auth_mode": "username-password",
+        "spot_ok": 4,
+        "spot_attempted": 4,
+        "discovery_started_at": "2026-11-20T21:33:38.331Z",
+        "discovery_finished_at": "2026-11-20T21:39:40.179Z"
+      }
+    },
+    {
+      "id": "api_auth_current",
+      "name": "API auth current",
+      "status": "NOT_TESTED",
+      "details": "текущий login не выполнялся: transport=BLOCKED_TCP",
+      "metrics": {
+        "verdict": "BLOCKED_TCP",
+        "auth": {
+          "performed": false,
+          "reason": "transport_unavailable"
+        }
+      }
+    },
+    {
+      "id": "lineage_internal_consistency",
+      "name": "Lineage: внутренняя согласованность (CSV ↔ JSON)",
+      "status": "PASS",
+      "details": "CSV и JSON согласованы, evidence_count сходится, дублей ключей нет",
       "metrics": {
         "checks": {
-          "preview_checks_ok": true,
+          "preview_internal_checks_ok": true,
           "evidence_rows_match": true,
           "relations_rows_match": true,
           "no_duplicate_relation_keys": true,
@@ -225,20 +337,198 @@
           "by_relation_type_sum": true,
           "relation_header_has_evidence_count": true,
           "evidence_header_columns": true,
-          "relation_header_columns": true
+          "relation_header_columns": true,
+          "list_counts_match_summary": true
         },
-        "evidence_rows": 14426,
-        "relation_rows": 13037,
+        "evidence_rows": 48010,
+        "relation_rows": 33592,
         "duplicate_keys": 0,
-        "evidence_count_sum": 14426,
-        "by_type_sum": 13037
+        "evidence_count_sum": 48010,
+        "by_type_sum": 33592,
+        "list_counts": {
+          "dashboard": 331,
+          "chart": 19924,
+          "dataset": 3776
+        },
+        "summary_counts": {
+          "dashboard": 331,
+          "chart": 19924,
+          "dataset": 3776
+        }
+      }
+    },
+    {
+      "id": "lineage_reference_quality",
+      "name": "Lineage: качество ссылок и противоречия источников",
+      "status": "WARN",
+      "details": "unresolved dashboard refs=318; unresolved dataset refs=45; unresolved chart refs=6; chart с расхождением dashboard sets=2; chart→dataset конфликты=0; детали: lineage_reference_quality.md",
+      "metrics": {
+        "findings": {
+          "unresolved_dashboard_refs": 318,
+          "unresolved_dataset_refs": 45,
+          "unresolved_chart_refs": 6,
+          "charts_with_conflicting_dashboard_sets": 2,
+          "chart_dataset_source_conflicts": 0,
+          "charts_without_dataset_local": 164,
+          "charts_without_dashboard": 9268,
+          "datasets_unused_by_charts_local": 1109
+        },
+        "reference_quality": {
+          "unresolved_dashboard_refs": 318,
+          "unresolved_dashboard_refs_sample": [
+            "870",
+            "1380",
+            "697",
+            "1519",
+            "1520",
+            "1537",
+            "755",
+            "765",
+            "785",
+            "988",
+            "921",
+            "963",
+            "1031",
+            "1134",
+            "1224",
+            "1263",
+            "1404",
+            "1406",
+            "1422",
+            "1480",
+            "1491",
+            "1494",
+            "1538",
+            "1539",
+            "1544",
+            "1549",
+            "1560",
+            "1602",
+            "1606",
+            "1629",
+            "1679",
+            "1645",
+            "1126",
+            "1299",
+            "1054",
+            "1344",
+            "1256",
+            "1625",
+            "1548",
+            "1377",
+            "1220",
+            "1490",
+            "1620",
+            "1541",
+            "1201",
+            "1211",
+            "1195",
+            "1388",
+            "1178",
+            "1182"
+          ],
+          "unresolved_dataset_refs": 45,
+          "unresolved_dataset_refs_local": 45,
+          "unresolved_dataset_refs_sample": [
+            "3202",
+            "3201",
+            "3054",
+            "2983",
+            "2982",
+            "2743",
+            "2278",
+            "2251",
+            "2247",
+            "1202",
+            "1402",
+            "1088",
+            "2149",
+            "1619",
+            "1604",
+            "1449",
+            "1610",
+            "1550",
+            "1430",
+            "1323",
+            "1494",
+            "1635",
+            "1121",
+            "1533",
+            "1638",
+            "1600",
+            "1531",
+            "1126",
+            "1127",
+            "1532",
+            "1122",
+            "1299",
+            "1326",
+            "1105",
+            "1103",
+            "1096",
+            "1100",
+            "1091",
+            "1011",
+            "1459",
+            "1470",
+            "11457",
+            "1313",
+            "1456",
+            "1"
+          ],
+          "unresolved_chart_refs": 6,
+          "unresolved_chart_refs_all": [
+            "27734",
+            "27735",
+            "27737",
+            "27733",
+            "27736",
+            "27732"
+          ],
+          "charts_with_conflicting_dashboard_sets": 2,
+          "conflicts_sample": [
+            {
+              "chart_id": "20940",
+              "detail": [
+                "1431",
+                "1664",
+                "736"
+              ],
+              "list": [
+                "1431",
+                "736"
+              ]
+            },
+            {
+              "chart_id": "20941",
+              "detail": [
+                "1431",
+                "1664",
+                "736"
+              ],
+              "list": [
+                "1431",
+                "736"
+              ]
+            }
+          ],
+          "chart_dataset_source_conflicts": 0,
+          "chart_dataset_source_conflicts_sample": [],
+          "datasets_unused_by_charts_local": 1109,
+          "datasets_used_in_catalog": 2667,
+          "charts_without_dataset_local": 164,
+          "charts_without_dashboard": 9268,
+          "status": "FINDINGS",
+          "note": "Unresolved/contradiction findings. Ссылки НЕ обозначаются архивными или удалёнными без отдельного подтверждения источником."
+        },
+        "report": "lineage_reference_quality.md"
       }
     },
     {
       "id": "kpi_matrix_18",
       "name": "KPI Matrix: 18 показателей",
       "status": "PASS",
-      "details": "18 KPI, статусы валидны, поля верифицированы",
+      "details": "18 KPI, статусы валидны, поля верифицированы, приоритетные датасеты найдены в полном каталоге",
       "metrics": {
         "checks": {
           "count_18": true,
@@ -248,7 +538,9 @@
           "operational_kpis_present": true,
           "evidence_verified": true,
           "inventory_12": true,
-          "inventory_missing_empty": true
+          "inventory_missing_empty": true,
+          "full_catalog_present": true,
+          "full_catalog_priority_12": true
         },
         "status_counts": {
           "FOUND": 9,
@@ -258,7 +550,14 @@
         },
         "kpi_count": 18,
         "inventory_datasets": 12,
-        "inventory_missing": []
+        "inventory_missing": [],
+        "full_catalog": {
+          "datasets_total": 3776,
+          "datasets_with_sql": 3220,
+          "priority_present": 12,
+          "priority_missing": [],
+          "sql_length_mismatches": []
+        }
       }
     },
     {
@@ -267,7 +566,7 @@
       "status": "PASS",
       "details": "секреты и PII-значения не найдены",
       "metrics": {
-        "scanned_files": 15,
+        "scanned_files": 17,
         "hits": []
       }
     },
@@ -279,6 +578,7 @@
       "metrics": {
         "required": [
           "discovery_corrected.md",
+          "discovery_completion.md",
           "lineage_quality.md",
           "phase_01_1_summary.md",
           "kpi_source_matrix.json",
@@ -286,13 +586,33 @@
           "kpi_field_inventory.json",
           "lineage_preview.json",
           "lineage_evidence.csv",
-          "lineage_relations.csv"
+          "lineage_relations.csv",
+          "lineage_reference_quality.md",
+          "discovery_test.json",
+          "api_transport_diagnostics.json"
         ],
         "missing": []
       }
     }
   ],
   "blockers": [
-    "discovery_complete: chart: downloaded=5000 api=19920 status=ok; dataset: downloaded=3767 api=3771 status=ok"
+    "api_transport_current: BLOCKED_TCP; generated_at=2026-11-21T06:04:46.887Z",
+    "api_auth_current: текущий login не выполнялся: transport=BLOCKED_TCP"
+  ],
+  "findings": [
+    "unresolved_dashboard_refs=318",
+    "unresolved_dataset_refs=45",
+    "unresolved_chart_refs=6",
+    "charts_with_conflicting_dashboard_sets=2",
+    "chart_dataset_source_conflicts=0",
+    "charts_without_dataset_local=164",
+    "charts_without_dashboard=9268",
+    "datasets_unused_by_charts_local=1109"
+  ],
+  "notes": [
+    "API_AUTH_LAST_SUCCESS подтверждён Discovery (status=ok, detail spot checks 4/4).",
+    "API_AUTH_CURRENT = NOT_TESTED: повторный login не выполнялся из-за BLOCKED_TCP.",
+    "LINEAGE_REFERENCE_QUALITY фиксирует unresolved refs и конфликты как findings, не FAIL.",
+    "Ссылки не обозначаются архивными/удалёнными без подтверждения источником."
   ]
 }

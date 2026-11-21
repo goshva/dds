@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-20T20:26:45.683Z",
+  "generated_at": "2026-11-21T06:04:46.887Z",
   "target": "https://superset.svc.vkusvill.ru:443",
   "environment": {
     "SUPERSET_URL_configured": true,
     "SUPERSET_USERNAME_configured": true,
-    "SUPERSET_PASSWORD_configured": false,
+    "SUPERSET_PASSWORD_configured": true,
     "SUPERSET_ACCESS_TOKEN_configured": false,
     "proxy_env_present": [],
     "no_proxy_present": []
@@ -13,7 +13,7 @@
     {
       "layer": "dns.A",
       "ok": true,
-      "duration_ms": 87,
+      "duration_ms": 44,
       "details": {
         "addresses": [
           "10.210.254.19"
@@ -23,14 +23,14 @@
     {
       "layer": "dns.AAAA",
       "ok": false,
-      "duration_ms": 18,
+      "duration_ms": 9,
       "error_code": "UNKNOWN",
       "error_message": "undefined"
     },
     {
       "layer": "tcp.443",
       "ok": false,
-      "duration_ms": 10097,
+      "duration_ms": 10021,
       "error_code": "TCP_TIMEOUT",
       "error_message": "socket timeout"
     },

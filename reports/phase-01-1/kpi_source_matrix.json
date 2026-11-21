@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T20:23:07.823Z",
+  "generated_at": "2026-11-21T06:01:32.153Z",
   "source": "output/dataset_details/*.json — полные detail 12 приоритетных датасетов (SQL, columns, metrics, calculated_columns)",
   "kpi_model": {
     "name": "<ФИО> модель — 18 показателей",
@@ -191,6 +191,1419 @@
       "pii_columns": []
     }
   ],
+  "full_catalog": {
+    "datasets_total": 3776,
+    "datasets_with_sql": 3220,
+    "priority_present": 12,
+    "priority_missing": [],
+    "sql_length_mismatches": [],
+    "scan_by_kpi": {
+      "orders_volume": {
+        "candidate_datasets": 502,
+        "sample": [
+          {
+            "dataset_id": 2662,
+            "table_name": "not_collected_details_chefDash",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 2616,
+            "table_name": "apt_sales with sku",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 2688,
+            "table_name": "bake_nesobr_new",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 7021,
+            "table_name": "ds_collectors_prod",
+            "matched_fields": [
+              "id_order",
+              "order_status"
+            ]
+          },
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "id_order",
+              "id_general",
+              "gettype",
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "id_order",
+              "id_general",
+              "order_status",
+              "gettype",
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 3376,
+            "table_name": "garbage_details",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 4565,
+            "table_name": "logs_frov_sbor",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 4628,
+            "table_name": "rest_customers",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 5088,
+            "table_name": "orders_modificators_ds",
+            "matched_fields": [
+              "id_order",
+              "id_general"
+            ]
+          }
+        ]
+      },
+      "sla_late": {
+        "candidate_datasets": 152,
+        "sample": [
+          {
+            "dataset_id": 7021,
+            "table_name": "ds_collectors_prod",
+            "matched_fields": [
+              "sla_order_time",
+              "sla_collection_time_all",
+              "sla_delivery_time_all",
+              "date_supply_untill",
+              "date_status_10"
+            ]
+          },
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "sla_order_time",
+              "is_late",
+              "plan_late_minute",
+              "planned_late",
+              "date_supply_until",
+              "fact_minutes_late",
+              "flag_is_near_deadline"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "sla_order_time",
+              "sla_collection_time_all",
+              "sla_delivery_time_all",
+              "date_supply_untill",
+              "date_status_10"
+            ]
+          },
+          {
+            "dataset_id": 5088,
+            "table_name": "orders_modificators_ds",
+            "matched_fields": [
+              "date_status_10"
+            ]
+          },
+          {
+            "dataset_id": 5453,
+            "table_name": "rest_sales with PSE_dynamics",
+            "matched_fields": [
+              "date_status_10",
+              "date_supply_until"
+            ]
+          },
+          {
+            "dataset_id": 7124,
+            "table_name": "cargo6",
+            "matched_fields": [
+              "is_late"
+            ]
+          },
+          {
+            "dataset_id": 2648,
+            "table_name": "sborka_dk",
+            "matched_fields": [
+              "date_supply_untill"
+            ]
+          },
+          {
+            "dataset_id": 7024,
+            "table_name": "cargo_main3",
+            "matched_fields": [
+              "sla_order_time",
+              "date_supply_until"
+            ]
+          },
+          {
+            "dataset_id": 2545,
+            "table_name": "dk_orders_yesterday",
+            "matched_fields": [
+              "date_supply_untill"
+            ]
+          },
+          {
+            "dataset_id": 3798,
+            "table_name": "Запрос без имени 11 29.03.2024 11:57:45",
+            "matched_fields": [
+              "date_supply_until"
+            ]
+          }
+        ]
+      },
+      "delivery_duration": {
+        "candidate_datasets": 192,
+        "sample": [
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "date_delivered",
+              "date_pickuped",
+              "fact_duration_min",
+              "plan_duration_min"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "date_delivery_start",
+              "date_delivered",
+              "delivery_time",
+              "delivery_time_all"
+            ]
+          },
+          {
+            "dataset_id": 2858,
+            "table_name": "compaints_roznica",
+            "matched_fields": [
+              "delivery_time"
+            ]
+          },
+          {
+            "dataset_id": 5453,
+            "table_name": "rest_sales with PSE_dynamics",
+            "matched_fields": [
+              "date_delivered"
+            ]
+          },
+          {
+            "dataset_id": 7124,
+            "table_name": "cargo6",
+            "matched_fields": [
+              "date_delivered"
+            ]
+          },
+          {
+            "dataset_id": 1578,
+            "table_name": "Отчет по курьерам без кластеров 06/30/2021 16:42:43",
+            "matched_fields": [
+              "date_delivery_start",
+              "date_delivered"
+            ]
+          },
+          {
+            "dataset_id": 7024,
+            "table_name": "cargo_main3",
+            "matched_fields": [
+              "date_delivered",
+              "date_pickuped",
+              "fact_duration_min",
+              "plan_duration_min"
+            ]
+          },
+          {
+            "dataset_id": 2724,
+            "table_name": "***REMOVED***ы_Вкусвильчик",
+            "matched_fields": [
+              "date_delivery_start",
+              "date_delivered",
+              "delivery_time_all"
+            ]
+          },
+          {
+            "dataset_id": 3798,
+            "table_name": "Запрос без имени 11 29.03.2024 11:57:45",
+            "matched_fields": [
+              "date_delivered"
+            ]
+          },
+          {
+            "dataset_id": 4369,
+            "table_name": "darkstore_time_sheet_TEST_j_join",
+            "matched_fields": [
+              "date_delivery_start",
+              "date_delivered",
+              "delivery_time",
+              "delivery_time_all"
+            ]
+          }
+        ]
+      },
+      "assembly_duration": {
+        "candidate_datasets": 230,
+        "sample": [
+          {
+            "dataset_id": 7021,
+            "table_name": "ds_collectors_prod",
+            "matched_fields": [
+              "date_collected",
+              "collection_time_all"
+            ]
+          },
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "date_collected"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "date_collect_start",
+              "date_collected",
+              "date_printed",
+              "collection_time",
+              "collection_time_all",
+              "date_collect_start_plan",
+              "date_collected_plan"
+            ]
+          },
+          {
+            "dataset_id": 2858,
+            "table_name": "compaints_roznica",
+            "matched_fields": [
+              "collection_time"
+            ]
+          },
+          {
+            "dataset_id": 4565,
+            "table_name": "logs_frov_sbor",
+            "matched_fields": [
+              "collection_time"
+            ]
+          },
+          {
+            "dataset_id": 5088,
+            "table_name": "orders_modificators_ds",
+            "matched_fields": [
+              "date_collect_start",
+              "date_collected",
+              "collection_time",
+              "collection_time_all"
+            ]
+          },
+          {
+            "dataset_id": 5453,
+            "table_name": "rest_sales with PSE_dynamics",
+            "matched_fields": [
+              "collection_time_all"
+            ]
+          },
+          {
+            "dataset_id": 2648,
+            "table_name": "sborka_dk",
+            "matched_fields": [
+              "date_collected"
+            ]
+          },
+          {
+            "dataset_id": 7024,
+            "table_name": "cargo_main3",
+            "matched_fields": [
+              "date_collected"
+            ]
+          },
+          {
+            "dataset_id": 2724,
+            "table_name": "***REMOVED***ы_Вкусвильчик",
+            "matched_fields": [
+              "date_collect_start",
+              "date_collected",
+              "collection_time_all"
+            ]
+          }
+        ]
+      },
+      "gmv": {
+        "candidate_datasets": 77,
+        "sample": [
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "sum_order",
+              "sum_paid",
+              "sum_paid_disc"
+            ]
+          },
+          {
+            "dataset_id": 5453,
+            "table_name": "rest_sales with PSE_dynamics",
+            "matched_fields": [
+              "sum_paid"
+            ]
+          },
+          {
+            "dataset_id": 7321,
+            "table_name": "radvogin_test",
+            "matched_fields": [
+              "sum_paid"
+            ]
+          },
+          {
+            "dataset_id": 4369,
+            "table_name": "darkstore_time_sheet_TEST_j_join",
+            "matched_fields": [
+              "sum_order",
+              "sum_paid",
+              "sum_paid_disc"
+            ]
+          },
+          {
+            "dataset_id": 6757,
+            "table_name": "darkstore_time_sheet_for_1000002697",
+            "matched_fields": [
+              "sum_order",
+              "sum_paid",
+              "sum_paid_disc"
+            ]
+          },
+          {
+            "dataset_id": 7701,
+            "table_name": "dt_test",
+            "matched_fields": [
+              "sum_paid",
+              "sum_paid_disc"
+            ]
+          },
+          {
+            "dataset_id": 6849,
+            "table_name": "partners_projects_economics_ch240_v2",
+            "matched_fields": [
+              "sum_without_bonuses"
+            ]
+          },
+          {
+            "dataset_id": 4328,
+            "table_name": "Ресторанные заказы",
+            "matched_fields": [
+              "sum_paid"
+            ]
+          },
+          {
+            "dataset_id": 6831,
+            "table_name": "darkstore_time_sheet_with_hor",
+            "matched_fields": [
+              "sum_order",
+              "sum_paid",
+              "sum_paid_disc"
+            ]
+          },
+          {
+            "dataset_id": 3036,
+            "table_name": "test_darkstorke_click",
+            "matched_fields": [
+              "sum_paid",
+              "sum_paid_disc"
+            ]
+          }
+        ]
+      },
+      "routing": {
+        "candidate_datasets": 56,
+        "sample": [
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "arrival_time",
+              "cluster_id",
+              "id_pool",
+              "plan_seq",
+              "fact_seq",
+              "fact_duration_min",
+              "plan_duration_min",
+              "total_pool_distance"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 7024,
+            "table_name": "cargo_main3",
+            "matched_fields": [
+              "arrival_time",
+              "cluster_id",
+              "id_pool",
+              "plan_seq",
+              "fact_seq",
+              "distance",
+              "delta_pct",
+              "fact_duration_min",
+              "plan_duration_min"
+            ]
+          },
+          {
+            "dataset_id": 4369,
+            "table_name": "darkstore_time_sheet_TEST_j_join",
+            "matched_fields": [
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 6757,
+            "table_name": "darkstore_time_sheet_for_1000002697",
+            "matched_fields": [
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 7090,
+            "table_name": "cargo2",
+            "matched_fields": [
+              "arrival_time",
+              "cluster_id",
+              "id_pool",
+              "delta_pct",
+              "fact_duration_min",
+              "plan_duration_min"
+            ]
+          },
+          {
+            "dataset_id": 7131,
+            "table_name": "cargo7",
+            "matched_fields": [
+              "arrival_time",
+              "cluster_id",
+              "id_pool",
+              "plan_seq",
+              "fact_seq"
+            ]
+          },
+          {
+            "dataset_id": 7218,
+            "table_name": "cargo_veer6",
+            "matched_fields": [
+              "arrival_time",
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 6831,
+            "table_name": "darkstore_time_sheet_with_hor",
+            "matched_fields": [
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 7006,
+            "table_name": "cargo_main2",
+            "matched_fields": [
+              "duration_fact",
+              "duration_plan",
+              "pickup_minute",
+              "pickup_to_courier_minute",
+              "arrival_time",
+              "plan_arrival_deadline",
+              "cluster_id",
+              "id_pool",
+              "plan_seq",
+              "fact_seq"
+            ]
+          }
+        ]
+      },
+      "headcount": {
+        "candidate_datasets": 701,
+        "sample": [
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "id_courier"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "id_courier"
+            ]
+          },
+          {
+            "dataset_id": 2910,
+            "table_name": "reports_list",
+            "matched_fields": [
+              "id",
+              "active"
+            ]
+          },
+          {
+            "dataset_id": 3897,
+            "table_name": "TMZ_per_cur_no_TT",
+            "matched_fields": [
+              "id",
+              "id_courier_type",
+              "job_type",
+              "id_courier",
+              "active",
+              "job_type_name"
+            ]
+          },
+          {
+            "dataset_id": 4565,
+            "table_name": "logs_frov_sbor",
+            "matched_fields": [
+              "id"
+            ]
+          },
+          {
+            "dataset_id": 5088,
+            "table_name": "orders_modificators_ds",
+            "matched_fields": [
+              "id"
+            ]
+          },
+          {
+            "dataset_id": 5200,
+            "table_name": "orders_modif_complaints",
+            "matched_fields": [
+              "id"
+            ]
+          },
+          {
+            "dataset_id": 5529,
+            "table_name": "indilavka_delivery",
+            "matched_fields": [
+              "id"
+            ]
+          },
+          {
+            "dataset_id": 5777,
+            "table_name": "checks_modificators_ds",
+            "matched_fields": [
+              "id"
+            ]
+          },
+          {
+            "dataset_id": 7075,
+            "table_name": "couriers_leads_by_amo",
+            "matched_fields": [
+              "id",
+              "id_courier"
+            ]
+          }
+        ]
+      },
+      "productivity": {
+        "candidate_datasets": 44,
+        "sample": [
+          {
+            "dataset_id": 4628,
+            "table_name": "rest_customers",
+            "matched_fields": [
+              "cnt_orders"
+            ]
+          },
+          {
+            "dataset_id": 7787,
+            "table_name": "alternative_recruitment",
+            "matched_fields": [
+              "first_order_date"
+            ]
+          },
+          {
+            "dataset_id": 4327,
+            "table_name": "Запрос без имени 1 20.08.2024 09:16:25",
+            "matched_fields": [
+              "cnt_orders"
+            ]
+          },
+          {
+            "dataset_id": 7424,
+            "table_name": "courier_amo_employment_periods",
+            "matched_fields": [
+              "cnt_orders",
+              "days_with_orders",
+              "last_order_date"
+            ]
+          },
+          {
+            "dataset_id": 4518,
+            "table_name": "geo_tt_and_service",
+            "matched_fields": [
+              "cnt_orders"
+            ]
+          },
+          {
+            "dataset_id": 7425,
+            "table_name": "couriers_beginners_daily",
+            "matched_fields": [
+              "first_order_date",
+              "last_order_date"
+            ]
+          },
+          {
+            "dataset_id": 7427,
+            "table_name": "courier_amo_emp",
+            "matched_fields": [
+              "cnt_orders",
+              "days_with_orders",
+              "last_order_date"
+            ]
+          },
+          {
+            "dataset_id": 7707,
+            "table_name": "Nesb_tov_ves_weekly_copy",
+            "matched_fields": [
+              "cnt_orders"
+            ]
+          },
+          {
+            "dataset_id": 7814,
+            "table_name": "courier_support_dau_detail",
+            "matched_fields": [
+              "first_order_date"
+            ]
+          },
+          {
+            "dataset_id": 4982,
+            "table_name": "apt_rest_flowers_customers_aggreport",
+            "matched_fields": [
+              "cnt_orders"
+            ]
+          }
+        ]
+      },
+      "shifts": {
+        "candidate_datasets": 9,
+        "sample": [
+          {
+            "dataset_id": 7780,
+            "table_name": "newsletter_effect",
+            "matched_fields": [
+              "is_5_shifts_in_14d"
+            ]
+          },
+          {
+            "dataset_id": 7465,
+            "table_name": "hr_couriers_5shifts",
+            "matched_fields": [
+              "shifts_in_first_14d",
+              "is_5_shifts_in_14d",
+              "enough_shifts_flg"
+            ]
+          },
+          {
+            "dataset_id": 7294,
+            "table_name": "hr_delivery_cohorts",
+            "matched_fields": [
+              "is_5_shifts_in_14d"
+            ]
+          },
+          {
+            "dataset_id": 7394,
+            "table_name": "couriers_newsletters_status",
+            "matched_fields": [
+              "shifts_in_first_14d",
+              "is_5_shifts_in_14d",
+              "enough_shifts_flg"
+            ]
+          },
+          {
+            "dataset_id": 7413,
+            "table_name": "couriers_newsletters",
+            "matched_fields": [
+              "shifts_in_first_14d",
+              "is_5_shifts_in_14d",
+              "enough_shifts_flg"
+            ]
+          },
+          {
+            "dataset_id": 7473,
+            "table_name": "hr_couriers_five_shifts",
+            "matched_fields": [
+              "shift_1",
+              "shift_2",
+              "shift_3",
+              "shift_4",
+              "shift_5",
+              "shifts_in_14_days",
+              "fifth_shift_date",
+              "fifth_shift_status",
+              "days_to_fifth_shift"
+            ]
+          },
+          {
+            "dataset_id": 5797,
+            "table_name": "hr_couriers",
+            "matched_fields": [
+              "shifts_in_first_14d",
+              "is_5_shifts_in_14d",
+              "enough_shifts_flg"
+            ]
+          },
+          {
+            "dataset_id": 7687,
+            "table_name": " hr_couriers_copy",
+            "matched_fields": [
+              "shifts_in_first_14d",
+              "is_5_shifts_in_14d",
+              "enough_shifts_flg"
+            ]
+          },
+          {
+            "dataset_id": 7915,
+            "table_name": "couriers_newsletters_test",
+            "matched_fields": [
+              "shifts_in_first_14d",
+              "is_5_shifts_in_14d",
+              "enough_shifts_flg"
+            ]
+          }
+        ]
+      },
+      "attendance": {
+        "candidate_datasets": 431,
+        "sample": [
+          {
+            "dataset_id": 6559,
+            "table_name": "radvogin_dc3_gp100_week",
+            "matched_fields": [
+              "week_no"
+            ]
+          },
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "courier_id",
+              "d"
+            ]
+          },
+          {
+            "dataset_id": 2910,
+            "table_name": "reports_list",
+            "matched_fields": [
+              "d"
+            ]
+          },
+          {
+            "dataset_id": 7149,
+            "table_name": "Запрос ods.dttk 11.06.2026 12:02:25",
+            "matched_fields": [
+              "d"
+            ]
+          },
+          {
+            "dataset_id": 7417,
+            "table_name": "vv_week_serv",
+            "matched_fields": [
+              "d",
+              "week_no"
+            ]
+          },
+          {
+            "dataset_id": 7611,
+            "table_name": "autobanner_active_v3",
+            "matched_fields": [
+              "d"
+            ]
+          },
+          {
+            "dataset_id": 7790,
+            "table_name": "Категория · Промо недели: выручка к пред. периоду (как в отчёте категорий)",
+            "matched_fields": [
+              "d"
+            ]
+          },
+          {
+            "dataset_id": 2577,
+            "table_name": "delivery_news",
+            "matched_fields": [
+              "courier_id"
+            ]
+          },
+          {
+            "dataset_id": 6543,
+            "table_name": "milay_roznica_week_osn",
+            "matched_fields": [
+              "d"
+            ]
+          },
+          {
+            "dataset_id": 7024,
+            "table_name": "cargo_main3",
+            "matched_fields": [
+              "courier_id"
+            ]
+          }
+        ]
+      },
+      "no_shows": {
+        "candidate_datasets": 23,
+        "sample": [
+          {
+            "dataset_id": 7421,
+            "table_name": "hr_daily_pers_click",
+            "matched_fields": [
+              "pause_days"
+            ]
+          },
+          {
+            "dataset_id": 7794,
+            "table_name": "hr_daily_pers_rc_click",
+            "matched_fields": [
+              "pause_days"
+            ]
+          },
+          {
+            "dataset_id": 5939,
+            "table_name": "hr_daily_pers_mentors",
+            "matched_fields": [
+              "pause_days"
+            ]
+          },
+          {
+            "dataset_id": 6054,
+            "table_name": "hr_daily_pers_turnover_dynamic",
+            "matched_fields": [
+              "pause_days"
+            ]
+          },
+          {
+            "dataset_id": 4038,
+            "table_name": "hr_daily_pers",
+            "matched_fields": [
+              "pause_days"
+            ]
+          },
+          {
+            "dataset_id": 6386,
+            "table_name": "hr_daily_pers_outsource",
+            "matched_fields": [
+              "pause_days"
+            ]
+          },
+          {
+            "dataset_id": 4040,
+            "table_name": "hr_daily_pers_freelance",
+            "matched_fields": [
+              "pause_days"
+            ]
+          },
+          {
+            "dataset_id": 5205,
+            "table_name": "hr_daily_pers_rc",
+            "matched_fields": [
+              "pause_days"
+            ]
+          },
+          {
+            "dataset_id": 3664,
+            "table_name": "hr_daily_pers_office",
+            "matched_fields": [
+              "pause_days"
+            ]
+          },
+          {
+            "dataset_id": 7283,
+            "table_name": "hr_daily_pers_office_click",
+            "matched_fields": [
+              "pause_days"
+            ]
+          }
+        ]
+      },
+      "shifts_12h": {
+        "candidate_datasets": 1,
+        "sample": [
+          {
+            "dataset_id": 7473,
+            "table_name": "hr_couriers_five_shifts",
+            "matched_fields": [
+              "shift_1_work_minutes",
+              "shift_2_work_minutes",
+              "shift_3_work_minutes",
+              "shift_4_work_minutes",
+              "shift_5_work_minutes"
+            ]
+          }
+        ]
+      },
+      "trips": {
+        "candidate_datasets": 222,
+        "sample": [
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "id_pool",
+              "id_courier",
+              "fact_seq",
+              "plan_seq"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "id_pool",
+              "id_courier"
+            ]
+          },
+          {
+            "dataset_id": 3897,
+            "table_name": "TMZ_per_cur_no_TT",
+            "matched_fields": [
+              "id_courier"
+            ]
+          },
+          {
+            "dataset_id": 7075,
+            "table_name": "couriers_leads_by_amo",
+            "matched_fields": [
+              "id_courier"
+            ]
+          },
+          {
+            "dataset_id": 1578,
+            "table_name": "Отчет по курьерам без кластеров 06/30/2021 16:42:43",
+            "matched_fields": [
+              "id_courier"
+            ]
+          },
+          {
+            "dataset_id": 2577,
+            "table_name": "delivery_news",
+            "matched_fields": [
+              "id_courier"
+            ]
+          },
+          {
+            "dataset_id": 7024,
+            "table_name": "cargo_main3",
+            "matched_fields": [
+              "id_pool",
+              "id_courier",
+              "fact_seq",
+              "plan_seq"
+            ]
+          },
+          {
+            "dataset_id": 2724,
+            "table_name": "***REMOVED***ы_Вкусвильчик",
+            "matched_fields": [
+              "id_courier"
+            ]
+          },
+          {
+            "dataset_id": 4369,
+            "table_name": "darkstore_time_sheet_TEST_j_join",
+            "matched_fields": [
+              "id_pool",
+              "id_courier"
+            ]
+          },
+          {
+            "dataset_id": 6757,
+            "table_name": "darkstore_time_sheet_for_1000002697",
+            "matched_fields": [
+              "id_pool",
+              "id_courier"
+            ]
+          }
+        ]
+      },
+      "orders_per_trip": {
+        "candidate_datasets": 449,
+        "sample": [
+          {
+            "dataset_id": 2662,
+            "table_name": "not_collected_details_chefDash",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 2616,
+            "table_name": "apt_sales with sku",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 2688,
+            "table_name": "bake_nesobr_new",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 7021,
+            "table_name": "ds_collectors_prod",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "id_order",
+              "id_pool",
+              "pool_size",
+              "fact_seq"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "id_order",
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 3376,
+            "table_name": "garbage_details",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 4565,
+            "table_name": "logs_frov_sbor",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 4628,
+            "table_name": "rest_customers",
+            "matched_fields": [
+              "id_order"
+            ]
+          },
+          {
+            "dataset_id": 5088,
+            "table_name": "orders_modificators_ds",
+            "matched_fields": [
+              "id_order"
+            ]
+          }
+        ]
+      },
+      "available_pool": {
+        "candidate_datasets": 49,
+        "sample": [
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "pool_size",
+              "id_pool",
+              "late_orders_cnt_in_pool",
+              "max_fact_late_in_pool",
+              "sum_fact_late_minutes_in_pool",
+              "flag_courier_shortage"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 7024,
+            "table_name": "cargo_main3",
+            "matched_fields": [
+              "pool_size",
+              "pool_size_text",
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 4369,
+            "table_name": "darkstore_time_sheet_TEST_j_join",
+            "matched_fields": [
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 6757,
+            "table_name": "darkstore_time_sheet_for_1000002697",
+            "matched_fields": [
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 7090,
+            "table_name": "cargo2",
+            "matched_fields": [
+              "pool_size",
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 7131,
+            "table_name": "cargo7",
+            "matched_fields": [
+              "pool_size",
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 7218,
+            "table_name": "cargo_veer6",
+            "matched_fields": [
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 6831,
+            "table_name": "darkstore_time_sheet_with_hor",
+            "matched_fields": [
+              "id_pool"
+            ]
+          },
+          {
+            "dataset_id": 7006,
+            "table_name": "cargo_main2",
+            "matched_fields": [
+              "pool_size",
+              "pool_size_text",
+              "id_pool"
+            ]
+          }
+        ]
+      },
+      "idle_time": {
+        "candidate_datasets": 79,
+        "sample": [
+          {
+            "dataset_id": 7027,
+            "table_name": "cargo_main4",
+            "matched_fields": [
+              "flag_wait_orders_with_planlate"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "wait_time",
+              "wait_time2",
+              "waiting_area_time",
+              "collection_time",
+              "delivery_time"
+            ]
+          },
+          {
+            "dataset_id": 2858,
+            "table_name": "compaints_roznica",
+            "matched_fields": [
+              "collection_time",
+              "delivery_time"
+            ]
+          },
+          {
+            "dataset_id": 4565,
+            "table_name": "logs_frov_sbor",
+            "matched_fields": [
+              "collection_time"
+            ]
+          },
+          {
+            "dataset_id": 5088,
+            "table_name": "orders_modificators_ds",
+            "matched_fields": [
+              "collection_time"
+            ]
+          },
+          {
+            "dataset_id": 4369,
+            "table_name": "darkstore_time_sheet_TEST_j_join",
+            "matched_fields": [
+              "wait_time",
+              "wait_time2",
+              "waiting_area_time",
+              "collection_time",
+              "delivery_time"
+            ]
+          },
+          {
+            "dataset_id": 6757,
+            "table_name": "darkstore_time_sheet_for_1000002697",
+            "matched_fields": [
+              "wait_time",
+              "wait_time2",
+              "waiting_area_time",
+              "collection_time",
+              "delivery_time"
+            ]
+          },
+          {
+            "dataset_id": 7701,
+            "table_name": "dt_test",
+            "matched_fields": [
+              "wait_time",
+              "wait_time2",
+              "collection_time",
+              "delivery_time"
+            ]
+          },
+          {
+            "dataset_id": 1665,
+            "table_name": "Работа_сборщиков_sql",
+            "matched_fields": [
+              "wait_time",
+              "collection_time"
+            ]
+          },
+          {
+            "dataset_id": 7335,
+            "table_name": "cargo_collect5",
+            "matched_fields": [
+              "wait_time"
+            ]
+          }
+        ]
+      },
+      "courier_income_per_hour": {
+        "candidate_datasets": 1,
+        "sample": [
+          {
+            "dataset_id": 7473,
+            "table_name": "hr_couriers_five_shifts",
+            "matched_fields": [
+              "shift_1_profit",
+              "shift_2_profit",
+              "shift_3_profit",
+              "shift_4_profit",
+              "shift_5_profit",
+              "shift_1_work_minutes",
+              "shift_2_work_minutes",
+              "shift_3_work_minutes",
+              "shift_4_work_minutes",
+              "shift_5_work_minutes"
+            ]
+          }
+        ]
+      },
+      "retention": {
+        "candidate_datasets": 1252,
+        "sample": [
+          {
+            "dataset_id": 5940,
+            "table_name": "radvogin_dc3_gp100",
+            "matched_fields": [
+              "date"
+            ]
+          },
+          {
+            "dataset_id": 2662,
+            "table_name": "not_collected_details_chefDash",
+            "matched_fields": [
+              "date"
+            ]
+          },
+          {
+            "dataset_id": 1639,
+            "table_name": "sarima_pallet",
+            "matched_fields": [
+              "date"
+            ]
+          },
+          {
+            "dataset_id": 2688,
+            "table_name": "bake_nesobr_new",
+            "matched_fields": [
+              "date"
+            ]
+          },
+          {
+            "dataset_id": 6559,
+            "table_name": "radvogin_dc3_gp100_week",
+            "matched_fields": [
+              "date"
+            ]
+          },
+          {
+            "dataset_id": 6836,
+            "table_name": "darkstore_time_sheet_21CH",
+            "matched_fields": [
+              "date"
+            ]
+          },
+          {
+            "dataset_id": 2784,
+            "table_name": "Roll_test",
+            "matched_fields": [
+              "date"
+            ]
+          },
+          {
+            "dataset_id": 2910,
+            "table_name": "reports_list",
+            "matched_fields": [
+              "active",
+              "date"
+            ]
+          },
+          {
+            "dataset_id": 3754,
+            "table_name": "complaints_weekly_ds_roznica_mile",
+            "matched_fields": [
+              "date"
+            ]
+          },
+          {
+            "dataset_id": 3897,
+            "table_name": "TMZ_per_cur_no_TT",
+            "matched_fields": [
+              "active",
+              "date"
+            ]
+          }
+        ]
+      }
+    },
+    "note": "Скан по SQL полного каталога — только контекст; статусы KPI не повышаются из-за новых датасетов."
+  },
   "kpis": [
     {
       "id": "orders_volume",
@@ -1255,7 +2668,7 @@
     }
   ],
   "limitations": [
-    "Матрица отражает только 12 приоритетных датасетов; остальные 3 759 датасетов не проверялись.",
+    "Evidence и статусы KPI основаны на 12 приоритетных dataset details; полный каталог (3 776) используется только для контекстного скана SQL.",
     "Статус FOUND означает наличие подтверждённых полей/метрик, а не согласованную бизнес-формулу.",
     "sum_order/sum_paid — суммы заказа, а не доход курьера.",
     "events_qty — события, а не явка; семантика event_name не подтверждена.",

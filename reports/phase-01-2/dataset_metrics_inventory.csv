@@ -1,0 +1,961 @@
+"dataset_id","table_name","metric_name","metric_type","expression","verbose_name","description","has_aggregate","has_window","referenced_identifiers","missing_column_references"
+"4732","darkstore_ts_partners_new","apt_collected>20m_qty","","COUNT( DISTINCT IF( order_status = 'Успешно завершен' AND partner_type='Аптека' AND age('minute', date_order, date_status_10) >= 20, COALESCE(id_general, id_order), NULL))","Кол-во УЗ ген.заказов Аптеки, собранных > чем за 20 мин.","","true","false","order_status;partner_type;date_order;date_status_10;id_general;id_order",""
+"4732","darkstore_ts_partners_new","apt_collected_>20m_share","","1.0*COUNT( DISTINCT IF(order_status = 'Успешно завершен' AND partner_type='Аптека' AND age('minute', date_order, date_status_10) >= 20, COALESCE(id_general, id_order), NULL)) 
+/ NULLIF( COUNT(DISTINCT IF(order_status = 'Успешно завершен' AND partner_type='Аптека', COALESCE(id_general, id_order), NULL)),0)","Доля УЗ ген.заказов Аптеки, собранных >чем за 20 мин.","","true","false","order_status;partner_type;date_order;date_status_10;id_general;id_order",""
+"4732","darkstore_ts_partners_new","apt_collected>30m_qty","","COUNT( DISTINCT IF( order_status = 'Успешно завершен' AND partner_type='Аптека' AND age('minute', date_order, date_status_10) >= 30, COALESCE(id_general, id_order), NULL))","Кол-во УЗ ген.заказов Аптеки, собранных > чем за 30 мин.","","true","false","order_status;partner_type;date_order;date_status_10;id_general;id_order",""
+"4732","darkstore_ts_partners_new","apt_collected>30m_qty2","","COUNT( DISTINCT IF( order_status = 'Успешно завершен' AND partner_type='Аптека' AND collection_time >= 30, COALESCE(id_general, id_order), NULL))","","","true","false","order_status;partner_type;collection_time;id_general;id_order",""
+"4732","darkstore_ts_partners_new","apt_collected_>30m_share","","1.0*COUNT( DISTINCT IF(order_status = 'Успешно завершен' AND partner_type='Аптека' AND age('minute', date_order, date_status_10) >= 30, COALESCE(id_general, id_order), NULL)) 
+/ NULLIF( COUNT(DISTINCT IF(order_status = 'Успешно завершен' AND partner_type='Аптека', COALESCE(id_general, id_order), NULL)),0)","Доля УЗ ген.заказов Аптеки, собранных > чем за 30 мин.","","true","false","order_status;partner_type;date_order;date_status_10;id_general;id_order",""
+"4732","darkstore_ts_partners_new","avg_sum","","AVG(IF(order_status = 'Успешно завершен', sum_paid, NULL))","Средний чек (УЗ)","","true","false","order_status;sum_paid",""
+"4732","darkstore_ts_partners_new","flowers_collected>20m_qty","","COUNT(DISTINCT IF(
+order_status = 'Успешно завершен'
+AND partner_type IN ('Цветы')
+AND age('minute', date_order, date_status_10) >= 20, COALESCE(id_general, id_order), NULL))","Кол-во УЗ ген.заказов Цветы, собранных > чем за 20 мин.","","true","false","order_status;partner_type;date_order;date_status_10;id_general;id_order",""
+"4732","darkstore_ts_partners_new","flowers_collected_>20m_share","","1.0*COUNT(DISTINCT
+IF(order_status = 'Успешно завершен'
+AND partner_type IN ('Цветы')
+AND age('minute', date_order, date_status_10) >= 20,
+COALESCE(id_general, id_order), NULL))
+/
+NULLIF(
+COUNT(DISTINCT
+IF(order_status = 'Успешно завершен'
+AND partner_type IN ('Цветы'),
+COALESCE(id_general, id_order), NULL)),0)","Доля УЗ ген.заказов Цветы, собранных >чем за 20 мин.","","true","false","order_status;partner_type;date_order;date_status_10;id_general;id_order",""
+"4732","darkstore_ts_partners_new","qty_apt_suborders","","COUNT (DISTINCT IF (order_status = 'Успешно завершен' AND 
+partner_type='Аптека', id_order, NULL))","Кол-во УЗ (под)заказов Аптеки","","true","false","order_status;partner_type;id_order",""
+"4732","darkstore_ts_partners_new","qty_flowers_suborders","","COUNT (DISTINCT IF
+(order_status = 'Успешно завершен' 
+AND partner_type IN ('Цветы'), 
+id_order, 
+NULL))","Кол-во УЗ (под)заказов Цветы","","true","false","order_status;partner_type;id_order",""
+"4732","darkstore_ts_partners_new","qty_not_in_slot_above_all","","COUNT(DISTINCT IF(order_status = 'Успешно завершен'
+AND
+IF(gettype IN (0, 6), date_status_10, date_delivered) > date_supply_untill, 
+COALESCE(id_general, id_order), NULL))","Кол-во заказов, просроч. по времени (УЗ)","","true","false","order_status;date_status_10;date_delivered;date_supply_untill;id_general;id_order",""
+"4732","darkstore_ts_partners_new","qty_orders_all","count","COUNT(DISTINCT COALESCE(id_general, id_order))","Общее кол-во ген.заказов","","true","false","id_general;id_order",""
+"4732","darkstore_ts_partners_new","qty_orders_declined","","COUNT(DISTINCT IF(order_status IN ('Отменен', 'Не выполнен', 'Вернулся на полки'), COALESCE(id_general, id_order), NULL))","В статусах Отменен / Не выполнен / Вернулся на полки","","true","false","order_status;id_general;id_order",""
+"4732","darkstore_ts_partners_new","qty_orders_delivered","","COUNT(DISTINCT IF(order_status = 'Успешно завершен', id_general, NULL))","Ген.заказы в статусе Успешно завершен","","true","false","order_status;id_general",""
+"4732","darkstore_ts_partners_new","qty_restaurant_suborders","","COUNT
+(DISTINCT IF
+(order_status = 'Успешно завершен' 
+AND id_partner_type = 5 AND id_partner NOT IN (24808, 49598, 22253, 60430, 54360), 
+id_order, 
+NULL))","Кол-во УЗ (под)заказов Рестораны","","true","false","order_status;id_partner_type;id_partner;id_order",""
+"4732","darkstore_ts_partners_new","rest_collected>20m_qty","","COUNT(
+DISTINCT
+IF(
+order_status = 'Успешно завершен'
+AND id_partner_type=5 AND id_partner NOT IN (24808, 49598, 22253, 60430, 54360)
+AND age('minute', date_order, date_status_10) >= 20, COALESCE(id_general, id_order), NULL))","Кол-во УЗ ген.заказов, собранных > чем за 20 мин.","","true","false","order_status;id_partner_type;id_partner;date_order;date_status_10;id_general;id_order",""
+"4732","darkstore_ts_partners_new","rest_collected_>20m_share","","1.0*COUNT(
+DISTINCT
+IF(order_status = 'Успешно завершен'
+AND id_partner_type=5 AND id_partner NOT IN (24808, 49598, 22253, 60430, 54360)
+AND age('minute', date_order, date_status_10) >= 20,
+COALESCE(id_general, id_order), NULL))
+/
+NULLIF(
+COUNT(DISTINCT
+IF(order_status = 'Успешно завершен'
+AND id_partner_type=5 AND id_partner NOT IN (24808, 49598, 22253, 60430, 54360),
+COALESCE(id_general, id_order), NULL)),0)","Доля УЗ ген.заказов, собранных > чем за 20 мин.","","true","false","order_status;id_partner_type;id_partner;date_order;date_status_10;id_general;id_order",""
+"4732","darkstore_ts_partners_new","share_collection_delay_all","","1.0*COUNT(DISTINCT IF(
+  order_status = 'Успешно завершен'
+  AND
+ (
+  (        
+   (          
+    slots != 1           
+    OR slots = 1 AND date_order > DATEADD(MINUTE, -60, date_supply)           
+    OR sla_order_time = 60
+   )                 
+   AND collection_time_all > sla_collection_time_all
+   AND dt.id_service != 3       
+  )            
+  OR (slots = 1 AND date_order <= DATEADD(MINUTE, -60, date_supply) AND date_status_10 > DATEADD(MINUTE, -30, date_supply) AND sla_order_time != 60 AND dt.id_service != 3)   
+  OR (date_status_10 > date_supply AND dt.id_service = 3)      
+ )  , id_order, NULL))   
+/
+NULLIF(COUNT(DISTINCT IF(order_status = 'Успешно завершен', id_order, NULL)), 0)","Доля УЗ ген.заказов, просроченных по сборке","","true","false","id_service;order_status;slots;date_order;date_supply;sla_order_time;collection_time_all;sla_collection_time_all;date_status_10;id_order",""
+"4732","darkstore_ts_partners_new","share_qty_declined","","1.0*COUNT(DISTINCT IF(order_status IN ('Отменен', 'Не выполнен', 'Вернулся на полки'), COALESCE(id_general, id_order), NULL)) / 
+COUNT(DISTINCT COALESCE(id_general, id_order))","Доля отмененных ген. заказов","","true","false","order_status;id_general;id_order",""
+"4732","darkstore_ts_partners_new","sum_without_bonuses","","SUM(IF(order_status = 'Успешно завершен', COALESCE(sum_paid, 0), NULL))","Сумма (ДС + баллы) (УЗ)","","true","false","order_status;sum_paid",""
+"4732","darkstore_ts_partners_new","test","","COUNT(DISTINCT IF(  
+	(order_status = 'Успешно завершен'      
+	AND   
+	(   
+		(    
+			(     
+				slots != 1      
+				OR slots = 1 AND date_order > DATEADD(MINUTE, -60, date_supply)      
+				OR sla_order_time = 60     
+			)             
+			AND collection_time_all > sla_collection_time_all
+			AND id_service != 3  
+		)         
+		OR (slots = 1 AND date_order <= DATEADD(MINUTE, -60, date_supply) AND date_status_10 > DATEADD(MINUTE, -30, date_supply) AND sla_order_time != 60 AND id_service != 3)   
+		OR (date_status_10 > date_supply AND id_service = 3)    
+	)  and 		(
+			id_source != 80
+			or order_type != 14
+		))
+	or 
+	(order_status = 'Успешно завершен'
+		and date_status_10 > date_supply_untill
+		and order_type = 14 
+		and id_source = 80
+		and id_service = 3)
+	, id_order, NULL))","","","true","false","order_status;slots;date_order;date_supply;sla_order_time;collection_time_all;sla_collection_time_all;id_service;date_status_10;id_source;order_type;date_supply_untill;id_order",""
+"4732","darkstore_ts_partners_new","tt_qty","","COUNT(DISTINCT name_tt)","Кол-во точек","","true","false","name_tt",""
+"5247","courier_logs_agg_couriers_daily","events_daily_otkl_rate","","(
+sum(max_day_event_qty) - (max(sum_events_qty_all_days) / max(count_distinct_day_no) )
+)
+/
+NULLIF(
+(max(sum_events_qty_all_days) / max(count_distinct_day_no) ),0)","Отклонение, %","","true","false","max_day_event_qty;sum_events_qty_all_days;count_distinct_day_no",""
+"5247","courier_logs_agg_couriers_daily","events_qty","","SUM(COALESCE(events_qty,0))","Кол-во событий","","true","false","events_qty",""
+"5399","courier_logs_agg_couriers_week","events_daily_otkl_rate","","(
+sum(max_day_event_qty) - (max(sum_events_qty_all_days) / max(count_distinct_day_no) )
+)
+/
+NULLIF(
+(max(sum_events_qty_all_days) / max(count_distinct_day_no) ),0)","Отклонение, %","","true","false","max_day_event_qty;sum_events_qty_all_days;count_distinct_day_no","max_day_event_qty;sum_events_qty_all_days;count_distinct_day_no"
+"5399","courier_logs_agg_couriers_week","events_daily_otkl_rate_abs","","ABS((
+sum(max_day_event_qty) - (max(sum_events_qty_all_days) / max(count_distinct_day_no) )
+)
+/
+NULLIF(
+(max(sum_events_qty_all_days) / max(count_distinct_day_no) ),0))","","","true","false","max_day_event_qty;sum_events_qty_all_days;count_distinct_day_no","max_day_event_qty;sum_events_qty_all_days;count_distinct_day_no"
+"5399","courier_logs_agg_couriers_week","events_qty","","SUM(COALESCE(events_qty,0))","Кол-во событий","","true","false","events_qty",""
+"5399","courier_logs_agg_couriers_week","events_weekly_otkl_rate","","1.0*(
+sum(max_week_event_qty) - (max(sum_events_qty_all_weeks) / max(count_distinct_week_no) )
+)
+/
+NULLIF(
+(max(sum_events_qty_all_weeks) / max(count_distinct_week_no) ),0)","Отклонение, %","","true","false","max_week_event_qty;sum_events_qty_all_weeks;count_distinct_week_no",""
+"5399","courier_logs_agg_couriers_week","events_weekly_otkl_rate_abs","","ABS((
+1.0*sum(max_week_event_qty) - (max(sum_events_qty_all_weeks) / max(count_distinct_week_no) )
+)
+/
+NULLIF(
+(max(sum_events_qty_all_weeks) / max(count_distinct_week_no) ),0))","","","true","false","max_week_event_qty;sum_events_qty_all_weeks;count_distinct_week_no",""
+"5797","hr_couriers","turnover","","{% if time_grain == 'P1M' %} 
+coalesce (1.0*sum(case when uvol=1
+then uvol else 0 end)
+/(NULLIF(1.0*count(id_courier)/max(days_in_month), 0)),0)
+
+{% else %} 
+coalesce (1.0*sum(case when uvol=1
+then uvol else 0 end)
+/(NULLIF(1.0*count(id_courier)/count (distinct date), 0)),0)
+
+{% endif %}","Коэф. текучести кадров","С формулой, зависящей от выбранной грануляции периода (актуально для верхнеуровневого дашборда)","true","false","uvol;id_courier;days_in_month;date",""
+"5797","hr_couriers","count","count","COUNT(*)","COUNT(*)","","true","false","",""
+"5797","hr_couriers","returns","","sum (case 
+when event_date=date
+    and second_hire=1
+    then 1
+    ELSE 0
+    END)","Кол-во вернувшихся","","true","false","event_date;date;second_hire",""
+"5797","hr_couriers","hirings_qty","","SUM(CASE 
+    when event_date=date
+    then 1
+    ELSE 0
+    END) ","Кол-во выходов","","true","false","event_date;date",""
+"5797","hr_couriers","hirings_qty_all","","SUM(CASE 
+    when event_date=date
+    then 1
+    ELSE 0
+    END) ","Кол-во выходов","Доп. метрика для корректной раскраски на верхнеуровневом дашборде","true","false","event_date;date",""
+"5797","hr_couriers","average_exp","","avg(exp_days/30.5)","Средний стаж (месяцы)","","true","false","exp_days",""
+"5797","hr_couriers","return_pers","","1.0*sum (case 
+when event_date=date
+    and second_hire=1
+    then 1
+    ELSE 0
+    END)
+/
+nullif(SUM(CASE 
+    when event_date=date
+    then 1
+    ELSE 0
+    END),0)  ","% вернувшихся","","true","false","event_date;date;second_hire",""
+"5797","hr_couriers","avg_qty","","1.0*count(id_courier)/max(days_in_month)","ССЧ","","true","false","id_courier;days_in_month",""
+"5797","hr_couriers","from_orange_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Orange'
+    AND inactivity_zone = 'Green'
+)","Orange → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","from_orange_not_to_green","","/* Orange → не Green */
+-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Orange'
+    AND inactivity_zone != 'Green'
+)","Orange → Red","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","from_yellow_not_to_green","","/* Yellow → не Green */
+-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone != 'Green'
+)","Yellow → Orange","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","balance_yellow","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Yellow'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Yellow","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","balance_orange","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Orange'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Orange'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Orange","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","to_red","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Red'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Red","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","to_silent","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Тишина'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Тишину","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","from_silent_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Тишина'
+    AND inactivity_zone = 'Green'
+)","Тишина → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","to_lost","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Lost'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Lost","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","from_lost_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Lost'
+    AND inactivity_zone = 'Green'
+)","Lost → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","ret_14_d","","uniqExactIf(
+    tuple(id_courier, event_date),
+    toDate(date) = toDate(event_date)
+    AND enough_shifts_flg = 1
+)
+/
+nullIf(
+    uniqExactIf(
+        tuple(id_courier, event_date),
+        toDate(date) = toDate(event_date)
+    ),
+    0
+)","Закрепились (5 смен за 14 дней), %","","true","false","id_courier;event_date;date;enough_shifts_flg",""
+"5797","hr_couriers","cnt_new_couriers","","uniqExactIf(
+    tuple(id_courier, event_date),
+    toDate(date) = toDate(event_date)
+)","Кол-во курьеров-новичков","","true","false","id_courier;event_date;date",""
+"5797","hr_couriers","newcomers","","SUM(CASE 
+    when first_order_date=date
+    then 1
+    ELSE 0
+    END)  ","Вышло новичков","","true","false","first_order_date;date",""
+"5797","hr_couriers","qty","","count(distinct id_courier)","Кол-во курьеров","","true","false","id_courier",""
+"5797","hr_couriers","attrition","","1.0*sum(case when uvol=1 then uvol else 0 end)/(NULLIF(1.0*count(id_courier)/max(days_in_month), 0))","Коэффициент текучести","","true","false","uvol;id_courier;days_in_month",""
+"5797","hr_couriers","dismissal_qty","","sum(case when uvol=1 then uvol else 0 end)","Кол-во ушедших в неактивность","","true","false","uvol",""
+"5797","hr_couriers","from_silent_to_lost","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Тишина'
+    AND inactivity_zone IS NOT NULL
+    AND inactivity_zone != 'Green'
+)","Тишина → Lost","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","to_yellow","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Yellow'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Yellow","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","from_yellow","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone IS NOT NULL
+)","Вышли из Yellow","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","turnover_by_year","","1.0*sum(case when uvol=1 then uvol else 0 end) 
+/ 
+(1.0*count(id_courier) / count (distinct date))","Текучесть за год","","true","false","uvol;id_courier;date",""
+"5797","hr_couriers","median_exp","","round(median (exp_days)/30.5,1)","Медианный стаж (месяцы)","","false","false","exp_days",""
+"5797","hr_couriers","from_yellow_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone = 'Green'
+)","Yellow → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","from_red_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Red'
+    AND inactivity_zone = 'Green'
+)","Red → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","balance_red","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Red'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Red'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Red","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","to_orange","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Orange'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Orange","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","attrition_newcomers_new","","coalesce(
+    1.0 * sum(
+        CASE
+            WHEN date = event_date
+                AND date_dismissed IS NOT NULL
+                AND toDate(date_dismissed) <= today()
+                AND dateDiff(
+                    'day',
+                    toDate(coalesce(event_date, today())),
+                    toDate(coalesce(date_dismissed, today()))
+                ) <= 60
+            THEN 1
+            ELSE 0
+        END
+    )
+    / nullIf(
+        sum(
+            CASE
+                WHEN date = event_date
+                THEN 1
+                ELSE 0
+            END
+        ),
+        0
+    ),
+    0
+)","% оттока ","","true","false","date;event_date;date_dismissed",""
+"5797","hr_couriers","balance_lost","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Lost'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Lost'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Lost","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","balance_silent","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Тишина'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Тишина'
+    AND inactivity_zone IS NOT NULL
+)","<ФИО>","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"5797","hr_couriers","from_red_not_to_green","","/* Red → не Green */
+-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Red'
+    AND inactivity_zone != 'Green'
+)","Red → Тишина","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"5797","hr_couriers","attrition_newcomers","","coalesce (1.0 *sum (case when 
+date = first_order_date
+and date_dismissed is not null 
+and date_dismissed::date<=today()
+and dateDiff(
+    'day',
+    toDate(coalesce(first_order_date, today())),
+    toDate(coalesce(date_dismissed, today())))<=60
+then 1 else 0 end)
+/ nullif (SUM(CASE 
+    when date = first_order_date
+    then 1
+    ELSE 0
+    END) ,0),0)","% оттока новичков","","true","false","date;first_order_date;date_dismissed",""
+"7006","cargo_main2","count","count","COUNT(*)","COUNT(*)","","true","false","",""
+"7024","cargo_main3","count","count","COUNT(*)","COUNT(*)","","true","false","",""
+"7027","cargo_main4","count","count","COUNT(*)","COUNT(*)","","true","false","",""
+"7119","cargo_flags","count","count","COUNT(*)","COUNT(*)","","true","false","",""
+"7293","hr_couriers_zone_balance","count","count","COUNT(*)","COUNT(*)","","true","false","",""
+"7465","hr_couriers_5shifts","qty","","count(distinct id_courier)","Кол-во курьеров","","true","false","id_courier",""
+"7465","hr_couriers_5shifts","turnover_by_year","","1.0*sum(case when uvol=1 then uvol else 0 end) 
+/ 
+(1.0*count(id_courier) / count (distinct date))","Текучесть за год","","true","false","uvol;id_courier;date",""
+"7465","hr_couriers_5shifts","count","count","COUNT(*)","COUNT(*)","","true","false","",""
+"7465","hr_couriers_5shifts","dismissal_qty","","sum(case when uvol=1 then uvol else 0 end)","Кол-во ушедших в неактивность","","true","false","uvol",""
+"7465","hr_couriers_5shifts","cnt_new_couriers","","uniqExactIf(
+    tuple(id_courier, event_date),
+    toDate(date) = toDate(event_date)
+)","Кол-во курьеров-новичков","","true","false","id_courier;event_date;date",""
+"7465","hr_couriers_5shifts","to_lost","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Lost'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Lost","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","ret_14_d","","uniqExactIf(
+    tuple(id_courier, event_date),
+    toDate(date) = toDate(event_date)
+    AND enough_shifts_flg = 1
+)
+/
+nullIf(
+    uniqExactIf(
+        tuple(id_courier, event_date),
+        toDate(date) = toDate(event_date)
+    ),
+    0
+)","Закрепились (5 смен за 14 дней), %","","true","false","id_courier;event_date;date;enough_shifts_flg",""
+"7465","hr_couriers_5shifts","hirings_qty","","SUM(CASE 
+    when event_date=date
+    then 1
+    ELSE 0
+    END) ","Кол-во выходов","","true","false","event_date;date",""
+"7465","hr_couriers_5shifts","median_exp","","round(median (exp_days)/30.5,1)","Медианный стаж (месяцы)","","false","false","exp_days",""
+"7465","hr_couriers_5shifts","from_red_not_to_green","","/* Red → не Green */
+-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Red'
+    AND inactivity_zone != 'Green'
+)","Red → Тишина","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7465","hr_couriers_5shifts","balance_lost","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Lost'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Lost'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Lost","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","from_silent_to_lost","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Тишина'
+    AND inactivity_zone IS NOT NULL
+    AND inactivity_zone != 'Green'
+)","Тишина → Lost","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7465","hr_couriers_5shifts","balance_yellow","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Yellow'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Yellow","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","avg_qty","","1.0*count(id_courier)/max(days_in_month)","ССЧ","","true","false","id_courier;days_in_month",""
+"7465","hr_couriers_5shifts","average_exp","","avg(exp_days/30.5)","Средний стаж (месяцы)","","true","false","exp_days",""
+"7465","hr_couriers_5shifts","balance_red","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Red'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Red'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Red","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","turnover","","{% if time_grain == 'P1M' %} 
+coalesce (1.0*sum(case when uvol=1
+then uvol else 0 end)
+/(NULLIF(1.0*count(id_courier)/max(days_in_month), 0)),0)
+
+{% else %} 
+coalesce (1.0*sum(case when uvol=1
+then uvol else 0 end)
+/(NULLIF(1.0*count(id_courier)/count (distinct date), 0)),0)
+
+{% endif %}","Коэф. текучести кадров","С формулой, зависящей от выбранной грануляции периода (актуально для верхнеуровневого дашборда)","true","false","uvol;id_courier;days_in_month;date",""
+"7465","hr_couriers_5shifts","from_red_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Red'
+    AND inactivity_zone = 'Green'
+)","Red → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7465","hr_couriers_5shifts","to_silent","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Тишина'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Тишину","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","from_lost_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Lost'
+    AND inactivity_zone = 'Green'
+)","Lost → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7465","hr_couriers_5shifts","to_red","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Red'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Red","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","balance_orange","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Orange'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Orange'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Orange","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","return_pers","","1.0*sum (case 
+when event_date=date
+    and second_hire=1
+    then 1
+    ELSE 0
+    END)
+/
+nullif(SUM(CASE 
+    when event_date=date
+    then 1
+    ELSE 0
+    END),0)  ","% вернувшихся","","true","false","event_date;date;second_hire",""
+"7465","hr_couriers_5shifts","hirings_qty_all","","SUM(CASE 
+    when event_date=date
+    then 1
+    ELSE 0
+    END) ","Кол-во выходов","Доп. метрика для корректной раскраски на верхнеуровневом дашборде","true","false","event_date;date",""
+"7465","hr_couriers_5shifts","attrition","","1.0*sum(case when uvol=1 then uvol else 0 end)/(NULLIF(1.0*count(id_courier)/max(days_in_month), 0))","Коэффициент текучести","","true","false","uvol;id_courier;days_in_month",""
+"7465","hr_couriers_5shifts","from_orange_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Orange'
+    AND inactivity_zone = 'Green'
+)","Orange → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7465","hr_couriers_5shifts","attrition_newcomers","","coalesce (1.0 *sum (case when 
+date = first_order_date
+and date_dismissed is not null 
+and date_dismissed::date<=today()
+and dateDiff(
+    'day',
+    toDate(coalesce(first_order_date, today())),
+    toDate(coalesce(date_dismissed, today())))<=60
+then 1 else 0 end)
+/ nullif (SUM(CASE 
+    when date = first_order_date
+    then 1
+    ELSE 0
+    END) ,0),0)","% оттока новичков","","true","false","date;first_order_date;date_dismissed",""
+"7465","hr_couriers_5shifts","attrition_newcomers_new","","coalesce(
+    1.0 * sum(
+        CASE
+            WHEN date = event_date
+                AND date_dismissed IS NOT NULL
+                AND toDate(date_dismissed) <= today()
+                AND dateDiff(
+                    'day',
+                    toDate(coalesce(event_date, today())),
+                    toDate(coalesce(date_dismissed, today()))
+                ) <= 60
+            THEN 1
+            ELSE 0
+        END
+    )
+    / nullIf(
+        sum(
+            CASE
+                WHEN date = event_date
+                THEN 1
+                ELSE 0
+            END
+        ),
+        0
+    ),
+    0
+)","% оттока ","","true","false","date;event_date;date_dismissed",""
+"7465","hr_couriers_5shifts","from_silent_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Тишина'
+    AND inactivity_zone = 'Green'
+)","Тишина → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7465","hr_couriers_5shifts","to_yellow","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Yellow'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Yellow","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","to_orange","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Orange'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Orange","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","returns","","sum (case 
+when event_date=date
+    and second_hire=1
+    then 1
+    ELSE 0
+    END)","Кол-во вернувшихся","","true","false","event_date;date;second_hire",""
+"7465","hr_couriers_5shifts","balance_silent","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Тишина'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Тишина'
+    AND inactivity_zone IS NOT NULL
+)","<ФИО>","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone",""
+"7465","hr_couriers_5shifts","from_yellow_not_to_green","","/* Yellow → не Green */
+-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone != 'Green'
+)","Yellow → Orange","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7465","hr_couriers_5shifts","from_yellow","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone IS NOT NULL
+)","Вышли из Yellow","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7465","hr_couriers_5shifts","from_yellow_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone = 'Green'
+)","Yellow → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7465","hr_couriers_5shifts","newcomers","","SUM(CASE 
+    when first_order_date=date
+    then 1
+    ELSE 0
+    END)  ","Вышло новичков","","true","false","first_order_date;date",""
+"7465","hr_couriers_5shifts","from_orange_not_to_green","","/* Orange → не Green */
+-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Orange'
+    AND inactivity_zone != 'Green'
+)","Orange → Red","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone",""
+"7473","hr_couriers_five_shifts","to_orange","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Orange'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Orange","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","from_orange_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Orange'
+    AND inactivity_zone = 'Green'
+)","Orange → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","from_red_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Red'
+    AND inactivity_zone = 'Green'
+)","Red → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","from_yellow_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone = 'Green'
+)","Yellow → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","from_yellow","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone IS NOT NULL
+)","Вышли из Yellow","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","from_orange_not_to_green","","/* Orange → не Green */
+-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Orange'
+    AND inactivity_zone != 'Green'
+)","Orange → Red","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","newcomers","","SUM(CASE 
+    when first_order_date=date
+    then 1
+    ELSE 0
+    END)  ","Вышло новичков","","true","false","first_order_date;date","first_order_date;date"
+"7473","hr_couriers_five_shifts","from_yellow_not_to_green","","/* Yellow → не Green */
+-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone != 'Green'
+)","Yellow → Orange","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","balance_silent","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Тишина'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Тишина'
+    AND inactivity_zone IS NOT NULL
+)","<ФИО>","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","to_yellow","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Yellow'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Yellow","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","returns","","sum (case 
+when event_date=date
+    and second_hire=1
+    then 1
+    ELSE 0
+    END)","Кол-во вернувшихся","","true","false","event_date;date;second_hire","date;second_hire"
+"7473","hr_couriers_five_shifts","from_silent_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Тишина'
+    AND inactivity_zone = 'Green'
+)","Тишина → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","attrition_newcomers_new","","coalesce(
+    1.0 * sum(
+        CASE
+            WHEN date = event_date
+                AND date_dismissed IS NOT NULL
+                AND toDate(date_dismissed) <= today()
+                AND dateDiff(
+                    'day',
+                    toDate(coalesce(event_date, today())),
+                    toDate(coalesce(date_dismissed, today()))
+                ) <= 60
+            THEN 1
+            ELSE 0
+        END
+    )
+    / nullIf(
+        sum(
+            CASE
+                WHEN date = event_date
+                THEN 1
+                ELSE 0
+            END
+        ),
+        0
+    ),
+    0
+)","% оттока ","","true","false","date;event_date;date_dismissed","date;date_dismissed"
+"7473","hr_couriers_five_shifts","attrition_newcomers","","coalesce (1.0 *sum (case when 
+date = first_order_date
+and date_dismissed is not null 
+and date_dismissed::date<=today()
+and dateDiff(
+    'day',
+    toDate(coalesce(first_order_date, today())),
+    toDate(coalesce(date_dismissed, today())))<=60
+then 1 else 0 end)
+/ nullif (SUM(CASE 
+    when date = first_order_date
+    then 1
+    ELSE 0
+    END) ,0),0)","% оттока новичков","","true","false","date;first_order_date;date_dismissed","date;first_order_date;date_dismissed"
+"7473","hr_couriers_five_shifts","attrition","","1.0*sum(case when uvol=1 then uvol else 0 end)/(NULLIF(1.0*count(id_courier)/max(days_in_month), 0))","Коэффициент текучести","","true","false","uvol;id_courier;days_in_month","uvol;days_in_month"
+"7473","hr_couriers_five_shifts","return_pers","","1.0*sum (case 
+when event_date=date
+    and second_hire=1
+    then 1
+    ELSE 0
+    END)
+/
+nullif(SUM(CASE 
+    when event_date=date
+    then 1
+    ELSE 0
+    END),0)  ","% вернувшихся","","true","false","event_date;date;second_hire","date;second_hire"
+"7473","hr_couriers_five_shifts","balance_orange","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Orange'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Orange'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Orange","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","to_red","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Red'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Red","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","to_silent","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Тишина'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Тишину","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","from_lost_to_green","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Lost'
+    AND inactivity_zone = 'Green'
+)","Lost → Green","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","balance_red","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Red'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Red'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Red","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","hirings_qty_all","","SUM(CASE 
+    when event_date=date
+    then 1
+    ELSE 0
+    END) ","Кол-во выходов","Доп. метрика для корректной раскраски на верхнеуровневом дашборде","true","false","event_date;date","date"
+"7473","hr_couriers_five_shifts","average_exp","","avg(exp_days/30.5)","Средний стаж (месяцы)","","true","false","exp_days","exp_days"
+"7473","hr_couriers_five_shifts","avg_qty","","1.0*count(id_courier)/max(days_in_month)","ССЧ","","true","false","id_courier;days_in_month","days_in_month"
+"7473","hr_couriers_five_shifts","count","count","COUNT(*)","COUNT(*)","","true","false","",""
+"7473","hr_couriers_five_shifts","dismissal_qty","","sum(case when uvol=1 then uvol else 0 end)","Кол-во ушедших в неактивность","","true","false","uvol","uvol"
+"7473","hr_couriers_five_shifts","turnover_by_year","","1.0*sum(case when uvol=1 then uvol else 0 end) 
+/ 
+(1.0*count(id_courier) / count (distinct date))","Текучесть за год","","true","false","uvol;id_courier;date","uvol;date"
+"7473","hr_couriers_five_shifts","turnover","","{% if time_grain == 'P1M' %} 
+coalesce (1.0*sum(case when uvol=1
+then uvol else 0 end)
+/(NULLIF(1.0*count(id_courier)/max(days_in_month), 0)),0)
+
+{% else %} 
+coalesce (1.0*sum(case when uvol=1
+then uvol else 0 end)
+/(NULLIF(1.0*count(id_courier)/count (distinct date), 0)),0)
+
+{% endif %}","Коэф. текучести кадров","С формулой, зависящей от выбранной грануляции периода (актуально для верхнеуровневого дашборда)","true","false","uvol;id_courier;days_in_month;date","uvol;days_in_month;date"
+"7473","hr_couriers_five_shifts","balance_yellow","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Yellow'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Yellow'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Yellow","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","from_silent_to_lost","","-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Тишина'
+    AND inactivity_zone IS NOT NULL
+    AND inactivity_zone != 'Green'
+)","Тишина → Lost","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","balance_lost","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Lost'
+    AND prev_inactivity_zone IS NOT NULL
+)
+-
+uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Lost'
+    AND inactivity_zone IS NOT NULL
+)","Баланс Lost","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","from_red_not_to_green","","/* Red → не Green */
+-uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND prev_inactivity_zone = 'Red'
+    AND inactivity_zone != 'Green'
+)","Red → Тишина","","true","false","id_courier;zone_changed;prev_inactivity_zone;inactivity_zone","zone_changed;prev_inactivity_zone;inactivity_zone"
+"7473","hr_couriers_five_shifts","median_exp","","round(median (exp_days)/30.5,1)","Медианный стаж (месяцы)","","false","false","exp_days","exp_days"
+"7473","hr_couriers_five_shifts","hirings_qty","","SUM(CASE 
+    when event_date=date
+    then 1
+    ELSE 0
+    END) ","Кол-во выходов","","true","false","event_date;date","date"
+"7473","hr_couriers_five_shifts","ret_14_d","","uniqExactIf(
+    tuple(id_courier, event_date),
+    toDate(date) = toDate(event_date)
+    AND enough_shifts_flg = 1
+)
+/
+nullIf(
+    uniqExactIf(
+        tuple(id_courier, event_date),
+        toDate(date) = toDate(event_date)
+    ),
+    0
+)","Закрепились (5 смен за 14 дней), %","","true","false","id_courier;event_date;date;enough_shifts_flg","date;enough_shifts_flg"
+"7473","hr_couriers_five_shifts","cnt_new_couriers","","uniqExactIf(
+    tuple(id_courier, event_date),
+    toDate(date) = toDate(event_date)
+)","Кол-во курьеров-новичков","","true","false","id_courier;event_date;date","date"
+"7473","hr_couriers_five_shifts","to_lost","","uniqExactIf(
+    id_courier,
+    zone_changed = 1
+    AND inactivity_zone = 'Lost'
+    AND prev_inactivity_zone IS NOT NULL
+)","Попали в Lost","","true","false","id_courier;zone_changed;inactivity_zone;prev_inactivity_zone","zone_changed;inactivity_zone;prev_inactivity_zone"
+"7473","hr_couriers_five_shifts","qty","","count(distinct id_courier)","Кол-во курьеров","","true","false","id_courier",""
+"7775","all_couriers_list","count","count","COUNT(*)","COUNT(*)","","true","false","",""
