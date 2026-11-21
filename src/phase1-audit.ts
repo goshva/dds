@@ -24,9 +24,6 @@ const DB = "data/catalog.sqlite";
 function idOf(x: any): string {
   return String(x?.id ?? x?.uuid ?? x?.slug ?? x?.table_name ?? "unknown");
 }
-function titleOf(x: any): string {
-  return String(x?.dashboard_title ?? x?.slice_name ?? x?.table_name ?? x?.name ?? x?.title ?? "");
-}
 
 async function step1_paginationAudit(): Promise<any> {
   // 1A — локальная проверка (что мы имеем)

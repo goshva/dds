@@ -1,111 +1,162 @@
 {
-  "generated_at": "2026-11-20T20:24:11.492Z",
-  "source": "единый snapshot: catalog.sqlite (readonly) + api_chart_links_priority.json; один запуск → evidence+relations+JSON",
-  "sqlite_snapshot": {
-    "note": "Линия построена на текущем снимке каталога. Локальный chart list = 5000; полная API-выгрузка chart = 19920 (count из api_spot_checks.json). Таблица relations БД не изменялась.",
-    "api_counts": {
-      "dashboard": 330,
-      "chart": 19920,
-      "dataset": 3771
+  "generated_at": "2026-11-21T06:51:20.367Z",
+  "source": "полный каталог: output/{dashboards,charts,datasets}.json + SQLite detail + spot_details + api_chart_links_priority.json",
+  "catalog": {
+    "list_counts": {
+      "dashboard": 331,
+      "chart": 19924,
+      "dataset": 3776
     },
-    "chart_list": 5000,
-    "chart_detail": 3766,
-    "dashboard_list": 330,
-    "dashboard_detail": 330,
-    "dataset_list": 3767
+    "detail_counts": {
+      "dashboard_detail": 331,
+      "chart_detail": 3767,
+      "chart_detail_valid": 3767,
+      "sqlite_dashboard_detail": 330,
+      "sqlite_chart_detail": 3766,
+      "spot_dashboard_detail": 2,
+      "spot_chart_detail": 2
+    },
+    "sqlite_list_counts": {
+      "dashboard": 330,
+      "chart": 5000,
+      "dataset": 3767
+    },
+    "summary_counts": {
+      "dashboard": 331,
+      "chart": 19924,
+      "dataset": 3776
+    },
+    "summary_started_at": "2026-11-20T21:33:38.331Z",
+    "summary_finished_at": "2026-11-20T21:39:40.179Z",
+    "summary_status": "ok",
+    "note": "Lineage построен на полном list-каталоге output/*.json. SQLite содержит усечённый list (5 000 charts) и detail-записи; таблица relations не изменялась."
   },
   "counts": {
-    "evidence_rows": 14426,
-    "unique_relations": 13037,
-    "duplicate_evidence_collapsed": 1389,
-    "evidence_count_sum": 14426,
-    "csv_evidence_rows": 14426,
-    "csv_relations_rows": 13037,
-    "rows_match_check": "CSV evidence=14426, CSV relations=13037"
+    "evidence_rows": 48010,
+    "unique_relations": 33592,
+    "duplicate_evidence_collapsed": 14418,
+    "evidence_count_sum": 48010,
+    "csv_evidence_rows": 48010,
+    "csv_relations_rows": 33592,
+    "list_chart_dash_pair_rows": 13821
   },
   "by_relation_type": {
-    "DASHBOARD_HAS_CHART": 9174,
-    "CHART_USES_DATASET": 3863
+    "DASHBOARD_HAS_CHART": 13832,
+    "CHART_USES_DATASET": 19760
   },
   "by_method": {
     "evidence_rows": {
-      "DASHBOARD_POSITION_JSON": 7918,
-      "CHART_DASHBOARDS_ARRAY": 2645,
-      "CHART_DATASOURCE_ID": 3755,
+      "DASHBOARD_POSITION_JSON": 7919,
+      "CHART_DATASOURCE_ID": 3756,
+      "CHART_DASHBOARDS_ARRAY": 2646,
+      "CHART_LIST_DASHBOARDS_ARRAY": 13821,
+      "CHART_LIST_DATASOURCE_ID": 19760,
       "API_FILTER_BY_DATASOURCE_ID": 108
     },
     "unique_pairs": {
-      "DASHBOARD_POSITION_JSON": 7900,
-      "CHART_DASHBOARDS_ARRAY": 2645,
-      "CHART_DATASOURCE_ID": 3755,
+      "DASHBOARD_POSITION_JSON": 7901,
+      "CHART_DASHBOARDS_ARRAY": 2646,
+      "CHART_LIST_DASHBOARDS_ARRAY": 13821,
+      "CHART_DATASOURCE_ID": 3756,
+      "CHART_LIST_DATASOURCE_ID": 19760,
       "API_FILTER_BY_DATASOURCE_ID": 108
     }
   },
-  "discrepancy_1757_vs_2645_explanation": {
-    "previous_report_value": 1757,
-    "old_definition": "Точная формула предыдущей реализации в текущем репозитории недоступна; ниже пересчитаны все кандидаты из единого snapshot без предположений.",
-    "recomputed_unique_array_pairs": 2645,
-    "raw_array_evidence_rows": 2645,
-    "charts_with_nonempty_dashboards_array": 1757,
-    "raw_dashboards_array_elements": 2645,
-    "relations_with_chart_dashboards_array_method": 2645,
-    "matches": {
-      "unique_array_pairs": false,
-      "raw_array_evidence_rows": false,
-      "charts_with_nonempty_dashboards_array": true,
-      "relations_with_chart_dashboards_array_method": false
-    },
-    "reason": "Пересчёт из одного snapshot: уникальных пар dashboard|chart по методу CHART_DASHBOARDS_ARRAY = 2645; сырых свидетельств = 2645; chart_detail с непустым dashboards[] = 1757; элементов массивов dashboards[] = 2645; отношений с этим методом = 2645. Значение 1757 совпадает с: charts_with_nonempty_dashboards_array."
-  },
-  "corroborated_dashboard_pairs": 1371,
-  "local_vs_api": {
-    "local_only_relations": 12929,
-    "api_only_relations": 108,
-    "both": 0,
-    "api_chart_rows": 108,
-    "api_unique_charts": 108,
-    "api_unique_datasets": 12,
-    "api_charts_not_in_local_catalog": 108,
-    "note": "API-связи НЕ увеличивают счётчики локальных объектов (п.10)."
-  },
   "chart_categories": {
-    "chart_list_total": 5000,
-    "chart_detail_total": 3766,
-    "chart_detail_valid": 3766,
-    "chart_detail_with_datasource_id": 3755,
+    "chart_list_total": 19924,
+    "chart_list_with_datasource_id": 19760,
+    "chart_list_without_datasource_id": 164,
+    "chart_detail_total": 3767,
+    "chart_detail_valid": 3767,
+    "chart_detail_with_datasource_id": 3756,
     "chart_detail_without_datasource_id": 11,
     "chart_detail_invalid": 0,
-    "chart_in_list_without_detail": 1234,
-    "categories_sum": 3766,
+    "chart_in_list_without_detail": 16157,
+    "chart_detail_not_in_list": 0,
+    "categories_sum": 3767,
     "categories_sum_matches_total": true
   },
+  "chart_dataset_sources": {
+    "detail_charts_with_dataset": 3756,
+    "list_charts_with_dataset": 19760,
+    "both_agree": 3756,
+    "conflicts": 0,
+    "conflicts_sample": [],
+    "only_in_detail": 0,
+    "only_in_list": 16004,
+    "note": "CHART_DATASOURCE_ID (detail) и CHART_LIST_DATASOURCE_ID (list) не смешиваются."
+  },
+  "chart_dashboard_sources": {
+    "position_json_pairs": 7901,
+    "detail_dashboards_pairs": 2646,
+    "list_dashboards_pairs": 13821,
+    "position_and_list": 7892,
+    "position_and_detail": 1371,
+    "detail_and_list": 2644,
+    "only_position_json": 9,
+    "only_list": 4656,
+    "charts_with_both_sources": 1758,
+    "charts_with_conflicting_dashboard_sets": 2,
+    "conflicts_sample": [
+      {
+        "chart_id": "20940",
+        "detail": [
+          "1431",
+          "1664",
+          "736"
+        ],
+        "list": [
+          "1431",
+          "736"
+        ]
+      },
+      {
+        "chart_id": "20941",
+        "detail": [
+          "1431",
+          "1664",
+          "736"
+        ],
+        "list": [
+          "1431",
+          "736"
+        ]
+      }
+    ]
+  },
   "coverage": {
-    "dashboards_total": 330,
-    "dashboards_with_charts_position_json": 329,
-    "dashboards_with_charts_any_method": 361,
-    "dashboards_without_confirmed_charts": 1,
-    "dashboards_without_confirmed_charts_ids": [
-      "1558"
-    ],
+    "dashboards_total": 331,
+    "dashboards_with_charts_any_method": 331,
+    "dashboards_without_confirmed_charts": 0,
+    "dashboards_without_confirmed_charts_ids": [],
+    "referenced_dashboards_not_in_catalog": 318,
     "position_json_null": 1,
     "position_json_parse_fail": 0,
-    "charts_linked_to_datasets_local": 3755,
-    "charts_linked_via_api_only": 108,
-    "datasets_used_by_charts_local": 161,
-    "datasets_used_in_catalog": 161,
-    "datasets_unused_by_charts_local": 3606,
-    "datasets_unresolved_refs_local": 0,
-    "correction_161": "161 — это уникальные ДАТАСЕТЫ, использовавшиеся локальными charts; charts с dataset-связью считается отдельно: charts_linked_to_datasets_local."
+    "charts_total": 19924,
+    "charts_with_dataset_link_local": 19760,
+    "charts_without_dataset_local": 164,
+    "charts_with_dashboard_link": 10656,
+    "charts_without_dashboard": 9268,
+    "datasets_total": 3776,
+    "datasets_used_by_charts_local": 2712,
+    "datasets_used_in_catalog": 2667,
+    "datasets_unused_by_charts_local": 1109,
+    "datasets_unresolved_refs_local": 45
   },
   "integrity_issues": {
     "self_links": 0,
     "multi_dataset_charts": 0,
     "multi_dataset_charts_sample": [],
-    "unresolved_chart_refs": 4569,
-    "unresolved_dataset_refs": 0,
-    "unresolved_dataset_refs_local": 0,
-    "unresolved_dashboard_refs": 32,
-    "explanation_unresolved_charts": "Неразрешённые chart-ссылки — следствие усечения локального list; полная API-выгрузка не перезаписывала каталог."
+    "unresolved_chart_refs": 6,
+    "unresolved_dataset_refs": 45,
+    "unresolved_dataset_refs_local": 45,
+    "unresolved_dashboard_refs": 318
+  },
+  "api_links": {
+    "api_chart_rows": 108,
+    "api_unique_charts": 108,
+    "api_unique_datasets": 12,
+    "api_charts_not_in_local_catalog": 0
   },
   "checks": {
     "evidence_rows_match": true,
@@ -114,11 +165,186 @@
     "relation_type_sum_matches": true,
     "chart_detail_categories_sum_matches": true,
     "datasets_unused_non_negative": true,
-    "api_charts_unique_not_exceed_api_rows": true
+    "api_charts_unique_not_exceed_api_rows": true,
+    "list_dashboard_count_matches_summary": true,
+    "list_chart_count_matches_summary": true,
+    "list_dataset_count_matches_summary": true,
+    "detail_within_list": true
   },
   "checks_ok": true,
+  "internal_consistency": {
+    "checks": {
+      "evidence_rows_match": true,
+      "relations_rows_match": true,
+      "evidence_count_sum_matches": true,
+      "relation_type_sum_matches": true,
+      "chart_detail_categories_sum_matches": true,
+      "datasets_unused_non_negative": true,
+      "api_charts_unique_not_exceed_api_rows": true,
+      "list_dashboard_count_matches_summary": true,
+      "list_chart_count_matches_summary": true,
+      "list_dataset_count_matches_summary": true,
+      "detail_within_list": true
+    },
+    "checks_ok": true,
+    "csv_evidence_rows": 48010,
+    "csv_relations_rows": 33592,
+    "evidence_rows": 48010,
+    "unique_relations": 33592,
+    "evidence_count_sum": 48010,
+    "duplicate_relation_keys": 0,
+    "note": "Проверка структуры и согласованности CSV ↔ JSON; не зависит от сети."
+  },
+  "reference_quality": {
+    "unresolved_dashboard_refs": 318,
+    "unresolved_dashboard_refs_sample": [
+      "870",
+      "1380",
+      "697",
+      "1519",
+      "1520",
+      "1537",
+      "755",
+      "765",
+      "785",
+      "988",
+      "921",
+      "963",
+      "1031",
+      "1134",
+      "1224",
+      "1263",
+      "1404",
+      "1406",
+      "1422",
+      "1480",
+      "1491",
+      "1494",
+      "1538",
+      "1539",
+      "1544",
+      "1549",
+      "1560",
+      "1602",
+      "1606",
+      "1629",
+      "1679",
+      "1645",
+      "1126",
+      "1299",
+      "1054",
+      "1344",
+      "1256",
+      "1625",
+      "1548",
+      "1377",
+      "1220",
+      "1490",
+      "1620",
+      "1541",
+      "1201",
+      "1211",
+      "1195",
+      "1388",
+      "1178",
+      "1182"
+    ],
+    "unresolved_dataset_refs": 45,
+    "unresolved_dataset_refs_local": 45,
+    "unresolved_dataset_refs_sample": [
+      "3202",
+      "3201",
+      "3054",
+      "2983",
+      "2982",
+      "2743",
+      "2278",
+      "2251",
+      "2247",
+      "1202",
+      "1402",
+      "1088",
+      "2149",
+      "1619",
+      "1604",
+      "1449",
+      "1610",
+      "1550",
+      "1430",
+      "1323",
+      "1494",
+      "1635",
+      "1121",
+      "1533",
+      "1638",
+      "1600",
+      "1531",
+      "1126",
+      "1127",
+      "1532",
+      "1122",
+      "1299",
+      "1326",
+      "1105",
+      "1103",
+      "1096",
+      "1100",
+      "1091",
+      "1011",
+      "1459",
+      "1470",
+      "11457",
+      "1313",
+      "1456",
+      "1"
+    ],
+    "unresolved_chart_refs": 6,
+    "unresolved_chart_refs_all": [
+      "27734",
+      "27735",
+      "27737",
+      "27733",
+      "27736",
+      "27732"
+    ],
+    "charts_with_conflicting_dashboard_sets": 2,
+    "conflicts_sample": [
+      {
+        "chart_id": "20940",
+        "detail": [
+          "1431",
+          "1664",
+          "736"
+        ],
+        "list": [
+          "1431",
+          "736"
+        ]
+      },
+      {
+        "chart_id": "20941",
+        "detail": [
+          "1431",
+          "1664",
+          "736"
+        ],
+        "list": [
+          "1431",
+          "736"
+        ]
+      }
+    ],
+    "chart_dataset_source_conflicts": 0,
+    "chart_dataset_source_conflicts_sample": [],
+    "datasets_unused_by_charts_local": 1109,
+    "datasets_used_in_catalog": 2667,
+    "charts_without_dataset_local": 164,
+    "charts_without_dashboard": 9268,
+    "status": "FINDINGS",
+    "note": "Unresolved/contradiction findings. Ссылки НЕ обозначаются архивными или удалёнными без отдельного подтверждения источником."
+  },
   "confidence_levels": {
-    "VERIFIED": "прямой результат API или прямое поле сохранённого detail, подтверждённое источником",
+    "VERIFIED": "прямой результат API или прямое поле сохранённого detail/list",
     "HIGH": "прямые сохранённые metadata Superset (position_json layout, reverse arrays)",
     "MEDIUM": "косвенное предположение",
     "LOW": "слабое предположение"

@@ -1,0 +1,140 @@
+graph LR
+  D4732["4732 darkstore_ts_partners_new"]
+  D5247["5247 courier_logs_agg_couriers_daily"]
+  D5399["5399 courier_logs_agg_couriers_week"]
+  D5797["5797 hr_couriers"]
+  D7006["7006 cargo_main2"]
+  D7024["7024 cargo_main3"]
+  D7027["7027 cargo_main4"]
+  D7119["7119 cargo_flags"]
+  D7293["7293 hr_couriers_zone_balance"]
+  D7465["7465 hr_couriers_5shifts"]
+  D7473["7473 hr_couriers_five_shifts"]
+  D7775["7775 all_couriers_list"]
+  D4732 -- "order / VERIFIED" --> D7006
+  D4732 -- "order / VERIFIED" --> D7024
+  D4732 -- "order / VERIFIED" --> D7027
+  D4732 -- "order / VERIFIED" --> D7119
+  D7006 -- "order / VERIFIED" --> D7024
+  D7006 -- "order / VERIFIED" --> D7027
+  D7006 -- "order / VERIFIED" --> D7119
+  D7024 -- "order / VERIFIED" --> D7027
+  D7024 -- "order / VERIFIED" --> D7119
+  D7027 -- "order / VERIFIED" --> D7119
+  D4732 -- "order_group / PROBABLE" --> D7119
+  D4732 -- "courier / UNKNOWN" --> D5247
+  D4732 -- "courier / UNKNOWN" --> D5399
+  D4732 -- "courier / UNKNOWN" --> D5797
+  D4732 -- "courier / UNKNOWN" --> D7006
+  D4732 -- "courier / UNKNOWN" --> D7024
+  D4732 -- "courier / UNKNOWN" --> D7027
+  D4732 -- "courier / UNKNOWN" --> D7119
+  D4732 -- "courier / UNKNOWN" --> D7293
+  D4732 -- "courier / UNKNOWN" --> D7465
+  D4732 -- "courier / UNKNOWN" --> D7473
+  D4732 -- "courier / UNKNOWN" --> D7775
+  D5247 -- "courier / PROBABLE" --> D5399
+  D5247 -- "courier / UNKNOWN" --> D5797
+  D5247 -- "courier / UNKNOWN" --> D7006
+  D5247 -- "courier / UNKNOWN" --> D7024
+  D5247 -- "courier / UNKNOWN" --> D7027
+  D5247 -- "courier / UNKNOWN" --> D7119
+  D5247 -- "courier / UNKNOWN" --> D7293
+  D5247 -- "courier / UNKNOWN" --> D7465
+  D5247 -- "courier / UNKNOWN" --> D7473
+  D5247 -- "courier / UNKNOWN" --> D7775
+  D5399 -- "courier / UNKNOWN" --> D5797
+  D5399 -- "courier / UNKNOWN" --> D7006
+  D5399 -- "courier / UNKNOWN" --> D7024
+  D5399 -- "courier / UNKNOWN" --> D7027
+  D5399 -- "courier / UNKNOWN" --> D7119
+  D5399 -- "courier / UNKNOWN" --> D7293
+  D5399 -- "courier / UNKNOWN" --> D7465
+  D5399 -- "courier / UNKNOWN" --> D7473
+  D5399 -- "courier / UNKNOWN" --> D7775
+  D5797 -- "courier / VERIFIED" --> D7006
+  D5797 -- "courier / VERIFIED" --> D7024
+  D5797 -- "courier / VERIFIED" --> D7027
+  D5797 -- "courier / PARTIAL" --> D7119
+  D5797 -- "courier / PROBABLE" --> D7293
+  D5797 -- "courier / PROBABLE" --> D7465
+  D5797 -- "courier / VERIFIED" --> D7473
+  D5797 -- "courier / UNKNOWN" --> D7775
+  D7006 -- "courier / VERIFIED" --> D7024
+  D7006 -- "courier / VERIFIED" --> D7027
+  D7006 -- "courier / PARTIAL" --> D7119
+  D7006 -- "courier / VERIFIED" --> D7293
+  D7006 -- "courier / VERIFIED" --> D7465
+  D7006 -- "courier / VERIFIED" --> D7473
+  D7006 -- "courier / UNKNOWN" --> D7775
+  D7024 -- "courier / VERIFIED" --> D7027
+  D7024 -- "courier / PARTIAL" --> D7119
+  D7024 -- "courier / VERIFIED" --> D7293
+  D7024 -- "courier / VERIFIED" --> D7465
+  D7024 -- "courier / VERIFIED" --> D7473
+  D7024 -- "courier / UNKNOWN" --> D7775
+  D7027 -- "courier / PARTIAL" --> D7119
+  D7027 -- "courier / VERIFIED" --> D7293
+  D7027 -- "courier / VERIFIED" --> D7465
+  D7027 -- "courier / VERIFIED" --> D7473
+  D7027 -- "courier / UNKNOWN" --> D7775
+  D7119 -- "courier / PARTIAL" --> D7293
+  D7119 -- "courier / PARTIAL" --> D7465
+  D7119 -- "courier / PARTIAL" --> D7473
+  D7119 -- "courier / UNKNOWN" --> D7775
+  D7293 -- "courier / PROBABLE" --> D7465
+  D7293 -- "courier / VERIFIED" --> D7473
+  D7293 -- "courier / UNKNOWN" --> D7775
+  D7465 -- "courier / VERIFIED" --> D7473
+  D7465 -- "courier / UNKNOWN" --> D7775
+  D7473 -- "courier / UNKNOWN" --> D7775
+  D4732 -- "shop / PROBABLE" --> D5247
+  D4732 -- "shop / UNKNOWN" --> D5399
+  D4732 -- "shop / UNKNOWN" --> D5797
+  D4732 -- "shop / UNKNOWN" --> D7006
+  D4732 -- "shop / UNKNOWN" --> D7119
+  D4732 -- "shop / UNKNOWN" --> D7465
+  D4732 -- "shop / UNKNOWN" --> D7473
+  D5247 -- "shop / UNKNOWN" --> D5399
+  D5247 -- "shop / UNKNOWN" --> D5797
+  D5247 -- "shop / UNKNOWN" --> D7006
+  D5247 -- "shop / UNKNOWN" --> D7119
+  D5247 -- "shop / UNKNOWN" --> D7465
+  D5247 -- "shop / UNKNOWN" --> D7473
+  D5399 -- "shop / PROBABLE" --> D5797
+  D5399 -- "shop / PROBABLE" --> D7006
+  D5399 -- "shop / PROBABLE" --> D7119
+  D5399 -- "shop / PROBABLE" --> D7465
+  D5399 -- "shop / PROBABLE" --> D7473
+  D5797 -- "shop / PROBABLE" --> D7006
+  D5797 -- "shop / PROBABLE" --> D7119
+  D5797 -- "shop / PROBABLE" --> D7465
+  D5797 -- "shop / PROBABLE" --> D7473
+  D7006 -- "shop / PROBABLE" --> D7119
+  D7006 -- "shop / PROBABLE" --> D7465
+  D7006 -- "shop / PROBABLE" --> D7473
+  D7119 -- "shop / PROBABLE" --> D7465
+  D7119 -- "shop / PROBABLE" --> D7473
+  D7465 -- "shop / PROBABLE" --> D7473
+  D4732 -- "pool / PROBABLE" --> D7006
+  D4732 -- "pool / PROBABLE" --> D7024
+  D4732 -- "pool / VERIFIED" --> D7027
+  D4732 -- "pool / VERIFIED" --> D7119
+  D7006 -- "pool / PROBABLE" --> D7024
+  D7006 -- "pool / VERIFIED" --> D7027
+  D7006 -- "pool / VERIFIED" --> D7119
+  D7024 -- "pool / VERIFIED" --> D7027
+  D7024 -- "pool / VERIFIED" --> D7119
+  D7027 -- "pool / VERIFIED" --> D7119
+  D4732 -- "cluster / UNKNOWN" --> D7006
+  D4732 -- "cluster / UNKNOWN" --> D7024
+  D4732 -- "cluster / UNKNOWN" --> D7027
+  D7006 -- "cluster / PROBABLE" --> D7024
+  D7006 -- "cluster / PROBABLE" --> D7027
+  D7024 -- "cluster / PROBABLE" --> D7027
+  D5797 -- "hr_event / PROBABLE" --> D7465
+  D5797 -- "hr_event / VERIFIED" --> D7473
+  D7465 -- "hr_event / VERIFIED" --> D7473
+  D7006 -- "pool_computed / VERIFIED" --> D7024
+  D7006 -- "pool_computed / VERIFIED" --> D7027
+  D7024 -- "pool_computed / VERIFIED" --> D7027

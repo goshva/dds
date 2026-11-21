@@ -122,7 +122,6 @@ async function main() {
 
   // ---- Layer 4: HTTP (без авторизации — проверяем, отвечает ли API-транспорт) ----
   let httpOk = false;
-  let httpStatus: number | undefined;
   if (tlsOk) {
     const { r, e, ms } = await timed(async () => {
       const ctrl = new AbortController();
@@ -134,7 +133,7 @@ async function main() {
       } finally { clearTimeout(t); }
     });
     if (r) {
-      httpOk = true; httpStatus = r.status;
+      httpOk = true;
       layers.push({ layer: "http.GET_/health", ok: true, duration_ms: ms, details: { status: r.status, body_preview: r.body } });
     } else {
       layers.push({ layer: "http.GET_/health", ok: false, duration_ms: ms, error_code: classifyNodeError(e), error_message: String(e?.message ?? e) });
