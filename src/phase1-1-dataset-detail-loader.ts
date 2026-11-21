@@ -244,8 +244,13 @@ async function main() {
   );
 
   const client = new SupersetClient(config);
-  await client.login();
-  console.log("[auth] login ok\n");
+  let loggedIn = false;
+  const ensureLogin = async () => {
+    if (loggedIn) return;
+    await client.login();
+    loggedIn = true;
+    console.log("[auth] login ok\n");
+  };
 
   const cp = loadCheckpoint();
 
@@ -297,6 +302,7 @@ async function main() {
   }
 
   const runResults: IdResult[] = [];
+  if (queue.length > 0) await ensureLogin();
   for (let i = 0; i < queue.length; i++) {
     const id = queue[i];
     cp.attempts[String(id)] = (cp.attempts[String(id)] ?? 0) + 1;

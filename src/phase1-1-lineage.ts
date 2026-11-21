@@ -329,6 +329,7 @@ const corroboratedPairs = relations.filter(
 ).length;
 
 const evidenceCountSum = relations.reduce((s, r) => s + r.evidence_count, 0);
+const relationsWithArrMethod = relations.filter((r) => r.methods.has("CHART_DASHBOARDS_ARRAY")).length;
 
 // ---------------- Запись CSV (один запуск, один набор данных) ----------------
 const evidenceCsvRows = evidences.map((e) =>
@@ -449,18 +450,32 @@ const out = {
   discrepancy_1757_vs_2645_explanation: {
     previous_report_value: 1757,
     old_definition:
-      "В предыдущей реализации methods.CHART_DASHBOARDS_ARRAY считался как d2c.filter(r => r.discovery_method === 'CHART_DASHBOARDS_ARRAY').length — то есть числом отношений, а не числом chart-объектов с непустым dashboards[].",
+      "Точная формула предыдущей реализации в текущем репозитории недоступна; ниже пересчитаны все кандидаты из единого snapshot без предположений.",
     recomputed_unique_array_pairs: arrPairsUnique,
     raw_array_evidence_rows: arrEvidenceRows,
     charts_with_nonempty_dashboards_array: chartsWithDashArray.size,
     raw_dashboards_array_elements: chartDetailDashArrayRawRows,
-    matches_previous_value: arrPairsUnique === 1757,
+    relations_with_chart_dashboards_array_method: relationsWithArrMethod,
+    matches: {
+      unique_array_pairs: arrPairsUnique === 1757,
+      raw_array_evidence_rows: arrEvidenceRows === 1757,
+      charts_with_nonempty_dashboards_array: chartsWithDashArray.size === 1757,
+      relations_with_chart_dashboards_array_method: relationsWithArrMethod === 1757,
+    },
     reason:
-      "Старое значение 1757 было числом отношений с методом CHART_DASHBOARDS_ARRAY, а не числом chart-объектов. " +
-      `В текущем едином snapshot: уникальных пар dashboard|chart по методу = ${arrPairsUnique}; ` +
+      `Пересчёт из одного snapshot: уникальных пар dashboard|chart по методу CHART_DASHBOARDS_ARRAY = ${arrPairsUnique}; ` +
       `сырых свидетельств = ${arrEvidenceRows}; chart_detail с непустым dashboards[] = ${chartsWithDashArray.size}; ` +
-      `элементов массивов dashboards[] = ${chartDetailDashArrayRawRows}. ` +
-      `Совпадение с 1757: ${arrPairsUnique === 1757 ? "да" : "нет"}.`,
+      `элементов массивов dashboards[] = ${chartDetailDashArrayRawRows}; отношений с этим методом = ${relationsWithArrMethod}. ` +
+      `Значение 1757 совпадает с: ${
+        [
+          arrPairsUnique === 1757 ? "unique_array_pairs" : null,
+          arrEvidenceRows === 1757 ? "raw_array_evidence_rows" : null,
+          chartsWithDashArray.size === 1757 ? "charts_with_nonempty_dashboards_array" : null,
+          relationsWithArrMethod === 1757 ? "relations_with_chart_dashboards_array_method" : null,
+        ]
+          .filter(Boolean)
+          .join(", ") || "ни одним из пересчитанных кандидатов"
+      }.`,
   },
   corroborated_dashboard_pairs: corroboratedPairs,
   local_vs_api: {

@@ -1,100 +1,126 @@
 {
-  "generated_at": "2026-11-20T10:46:57.185Z",
-  "source": "локальный catalog.sqlite (readonly) + API-дополнение (12 приоритетных datasets)",
-  "methods": {
-    "DASHBOARD_POSITION_JSON": {
-      "pairs": 7900,
-      "confidence": "HIGH"
+  "generated_at": "2026-11-20T20:24:11.492Z",
+  "source": "единый snapshot: catalog.sqlite (readonly) + api_chart_links_priority.json; один запуск → evidence+relations+JSON",
+  "sqlite_snapshot": {
+    "note": "Линия построена на текущем снимке каталога. Локальный chart list = 5000; полная API-выгрузка chart = 19920 (count из api_spot_checks.json). Таблица relations БД не изменялась.",
+    "api_counts": {
+      "dashboard": 330,
+      "chart": 19920,
+      "dataset": 3771
     },
-    "CHART_DASHBOARDS_ARRAY": {
-      "pairs": 1757,
-      "confidence": "HIGH"
+    "chart_list": 5000,
+    "chart_detail": 3766,
+    "dashboard_list": 330,
+    "dashboard_detail": 330,
+    "dataset_list": 3767
+  },
+  "counts": {
+    "evidence_rows": 14426,
+    "unique_relations": 13037,
+    "duplicate_evidence_collapsed": 1389,
+    "evidence_count_sum": 14426,
+    "csv_evidence_rows": 14426,
+    "csv_relations_rows": 13037,
+    "rows_match_check": "CSV evidence=14426, CSV relations=13037"
+  },
+  "by_relation_type": {
+    "DASHBOARD_HAS_CHART": 9174,
+    "CHART_USES_DATASET": 3863
+  },
+  "by_method": {
+    "evidence_rows": {
+      "DASHBOARD_POSITION_JSON": 7918,
+      "CHART_DASHBOARDS_ARRAY": 2645,
+      "CHART_DATASOURCE_ID": 3755,
+      "API_FILTER_BY_DATASOURCE_ID": 108
     },
-    "CHART_DATASOURCE_ID": {
-      "pairs": 3755,
-      "confidence": "VERIFIED"
-    },
-    "API_FILTER_BY_DATASOURCE_ID": {
-      "pairs": 108,
-      "confidence": "VERIFIED"
+    "unique_pairs": {
+      "DASHBOARD_POSITION_JSON": 7900,
+      "CHART_DASHBOARDS_ARRAY": 2645,
+      "CHART_DATASOURCE_ID": 3755,
+      "API_FILTER_BY_DATASOURCE_ID": 108
     }
   },
-  "totals": {
-    "relations": 13628,
-    "DASHBOARD_HAS_CHART": 9657,
-    "CHART_USES_DATASET": 3863,
-    "DASHBOARD_POSITION_JSON": 7900,
-    "CHART_DASHBOARDS_ARRAY": 1757,
-    "CHART_DATASOURCE_ID": 3755,
-    "API_FILTER_BY_DATASOURCE_ID": 108,
-    "duplicate_pairs_suppressed": 0,
-    "corroborated_by_both_methods": 1371,
-    "self_links": 0
+  "discrepancy_1757_vs_2645_explanation": {
+    "previous_report_value": 1757,
+    "old_definition": "Точная формула предыдущей реализации в текущем репозитории недоступна; ниже пересчитаны все кандидаты из единого snapshot без предположений.",
+    "recomputed_unique_array_pairs": 2645,
+    "raw_array_evidence_rows": 2645,
+    "charts_with_nonempty_dashboards_array": 1757,
+    "raw_dashboards_array_elements": 2645,
+    "relations_with_chart_dashboards_array_method": 2645,
+    "matches": {
+      "unique_array_pairs": false,
+      "raw_array_evidence_rows": false,
+      "charts_with_nonempty_dashboards_array": true,
+      "relations_with_chart_dashboards_array_method": false
+    },
+    "reason": "Пересчёт из одного snapshot: уникальных пар dashboard|chart по методу CHART_DASHBOARDS_ARRAY = 2645; сырых свидетельств = 2645; chart_detail с непустым dashboards[] = 1757; элементов массивов dashboards[] = 2645; отношений с этим методом = 2645. Значение 1757 совпадает с: charts_with_nonempty_dashboards_array."
+  },
+  "corroborated_dashboard_pairs": 1371,
+  "local_vs_api": {
+    "local_only_relations": 12929,
+    "api_only_relations": 108,
+    "both": 0,
+    "api_chart_rows": 108,
+    "api_unique_charts": 108,
+    "api_unique_datasets": 12,
+    "api_charts_not_in_local_catalog": 108,
+    "note": "API-связи НЕ увеличивают счётчики локальных объектов (п.10)."
+  },
+  "chart_categories": {
+    "chart_list_total": 5000,
+    "chart_detail_total": 3766,
+    "chart_detail_valid": 3766,
+    "chart_detail_with_datasource_id": 3755,
+    "chart_detail_without_datasource_id": 11,
+    "chart_detail_invalid": 0,
+    "chart_in_list_without_detail": 1234,
+    "categories_sum": 3766,
+    "categories_sum_matches_total": true
   },
   "coverage": {
     "dashboards_total": 330,
-    "dashboards_with_at_least_one_chart": 330,
-    "dashboards_without_charts": 0,
-    "dashboards_position_json_null": 1,
-    "dashboards_position_json_parse_fail": 0,
-    "raw_position_json_refs": 7918,
-    "charts_total": 5000,
-    "charts_referenced_by_any_dashboard": 7019,
-    "referenced_charts_present_in_catalog": 2450,
-    "referenced_charts_absent_from_catalog": 4569,
-    "charts_with_dataset_link": 161,
-    "charts_without_dataset_link": 4839,
-    "chart_details_present": 3766,
-    "charts_no_datasource_id": 11,
-    "datasets_total": 3767,
-    "datasets_used_by_charts": 161,
-    "datasets_unused_by_charts": 3606
-  },
-  "chart_id_range_in_catalog": {
-    "min": 11335,
-    "max": 32565
-  },
-  "unresolved_chart_refs_explanation": {
-    "total_unique_chart_refs": 7019,
-    "missing_from_catalog": 4569,
-    "below_catalog_range": 30,
-    "in_range_missing_usually_due_to_pagination": 4539,
-    "note": "5 000 chart усечены MAX_PAGES=50 из 19 920 реальных; ссылки на chart >32565 и >5000 отсутствуют в каталоге. <ФИО> НЕ ошибка lineage."
-  },
-  "methods_intersection": {
-    "both_methods": 1371,
-    "only_position": 6529,
-    "only_array": 1274,
-    "corroborated_pairs": 1371
-  },
-  "methods_data_sources": {
-    "position_json_nonempty": 329,
+    "dashboards_with_charts_position_json": 329,
+    "dashboards_with_charts_any_method": 361,
+    "dashboards_without_confirmed_charts": 1,
+    "dashboards_without_confirmed_charts_ids": [
+      "1558"
+    ],
     "position_json_null": 1,
     "position_json_parse_fail": 0,
-    "chart_nodes_found": 7918,
-    "dashboards_per_chart_array": 2645
+    "charts_linked_to_datasets_local": 3755,
+    "charts_linked_via_api_only": 108,
+    "datasets_used_by_charts_local": 161,
+    "datasets_used_in_catalog": 161,
+    "datasets_unused_by_charts_local": 3606,
+    "datasets_unresolved_refs_local": 0,
+    "correction_161": "161 — это уникальные ДАТАСЕТЫ, использовавшиеся локальными charts; charts с dataset-связью считается отдельно: charts_linked_to_datasets_local."
   },
-  "priority_check_4732_used_by_charts": 0,
   "integrity_issues": {
-    "unresolved_reference_count": 0,
-    "multi_dataset_charts": [],
-    "multi_dataset_chart_count": 0
+    "self_links": 0,
+    "multi_dataset_charts": 0,
+    "multi_dataset_charts_sample": [],
+    "unresolved_chart_refs": 4569,
+    "unresolved_dataset_refs": 0,
+    "unresolved_dataset_refs_local": 0,
+    "unresolved_dashboard_refs": 32,
+    "explanation_unresolved_charts": "Неразрешённые chart-ссылки — следствие усечения локального list; полная API-выгрузка не перезаписывала каталог."
   },
-  "csv_summary": {
-    "path": "reports/phase-01-1/lineage_relations.csv",
-    "total_rows": 13520,
-    "by_method": {
-      "DASHBOARD_HAS_CHART|DASHBOARD_POSITION_JSON": 7900,
-      "CHART_USES_DATASET|CHART_DATASOURCE_ID": 3755,
-      "DASHBOARD_HAS_CHART|CHART_DASHBOARDS_ARRAY": 1757,
-      "CHART_USES_DATASET|API_FILTER_BY_DATASOURCE_ID": 108
-    }
+  "checks": {
+    "evidence_rows_match": true,
+    "relations_rows_match": true,
+    "evidence_count_sum_matches": true,
+    "relation_type_sum_matches": true,
+    "chart_detail_categories_sum_matches": true,
+    "datasets_unused_non_negative": true,
+    "api_charts_unique_not_exceed_api_rows": true
   },
-  "limitations": [
-    "Для 1 234 charts без detail связь chart→dataset восстановить локально невозможно (требуется API).",
-    "Для dashboard 1558 («Чек») position_json = NULL — связи неизвестны.",
-    "11 chart_detail без datasource_id — не связаны ни с одним dataset локально.",
-    "API-дополнение покрывает только 12 приоритетных datasets (108 charts). Остальные 14 920 charts не проверены.",
-    "Связи выведены из metadata Superset — HIGH/VERIFIED confidence, но layout может быть устаревшим."
-  ]
+  "checks_ok": true,
+  "confidence_levels": {
+    "VERIFIED": "прямой результат API или прямое поле сохранённого detail, подтверждённое источником",
+    "HIGH": "прямые сохранённые metadata Superset (position_json layout, reverse arrays)",
+    "MEDIUM": "косвенное предположение",
+    "LOW": "слабое предположение"
+  }
 }

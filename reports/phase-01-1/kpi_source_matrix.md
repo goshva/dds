@@ -1,79 +1,55 @@
-# KPI-каталог: операционные KPI ↔ источники данных
+# KPI Source Matrix — 18 показателей операционной модели
 
-**Этап 1.1, задача 4.** Дата: 20 ноября 2026 г.  
-**Метод:** SQL и поля извлечены из фактического содержимого датасетов (`dataset.sql` в `data/catalog.sqlite`, readonly) + привязки charts/dashboards из API (`api_chart_links_priority.json`) + детали из `api_spot_checks.json`.  
-*****REMOVED***:** ни одно поле не выдумано — в `fields` только подстроки, реально найденные в SQL датасета. Confidence: **HIGH** = выражение/поле прямо в SELECT; **MEDIUM** = косвенные признаки.
+Сгенерировано: 2026-11-20T20:23:07.823Z
 
----
+Источник: полные detail JSON 12 приоритетных датасетов (`output/dataset_details/*.json`).
 
-## Сводная матрица KPI → датасеты
+## Статусы
 
-| # | KPI (операционный) | Основные датасеты | Доп. датасеты | Confidence |
-|---|--------------------|-------------------|---------------|------------|
-| 1 | Объём заказов | 4732, 7006, 7024, 7027, 7119 | — | HIGH |
-| 2 | Просрочка / SLA | 4732, 7006, 7024, 7027, 7119 | — | HIGH |
-| 3 | Время доставки (duration) | 4732, 7006, 7024, 7027, 7119 | — | HIGH |
-| 4 | Время сборки заказа | 4732, 7119 | 7006, 7024, 7027 (MEDIUM) | HIGH/MEDIUM |
-| 5 | Суммы заказов (GMV/paid) | 4732 | — | HIGH |
-| 6 | Маршрутизация: расстояние/время между точками | 7006, 7024, 7027, 7119 | — | HIGH |
-| 7 | Флаги качества/аномалий | 7119 | — | MEDIUM |
-| 8 | Численность / активность курьеров (HR) | 5797, 7465, 7473, 7775 | — | HIGH |
-| 9 | Продуктивность курьера (заказы/смены) | 5797, 7465 | — | HIGH |
-| 10 | Онлайн/событийная активность (день/неделя) | 5247, 5399 | — | HIGH |
-| 11 | Баланс миграции курьеров между зонами | 7293 | — | HIGH |
+| Статус | Кол-во |
+|---|---:|
+| FOUND | 9 |
+| PARTIAL | 4 |
+| NOT_FOUND | 1 |
+| NOT_VERIFIED | 4 |
 
----
+## Матрица
 
-## Детализация по датасетам
+| # | KPI | Статус | Подтверждённые датасеты | Поля/метрики | Формула/примечание |
+|---:|---|---|---|---|---|
+| 1 | Объём заказов | FOUND | 4732 darkstore_ts_partners_new; 7006 cargo_main2; 7024 cargo_main3; 7027 cargo_main4 | id_order, id_general, order_status, gettype, qty_orders_all, qty_orders_delivered, qty_orders_declined, id_order, id_pool, gettype, id_pool, gettype, id_order, id_pool, gettype | COUNT(id_order) / COUNT(DISTINCT id_order); группировка по order_status, gettype. |
+| 2 | Просрочка заказов (SLA) | FOUND | 4732 darkstore_ts_partners_new; 7006 cargo_main2; 7027 cargo_main4; 7119 cargo_flags | sla_order_time, sla_collection_time_all, sla_delivery_time_all, date_supply_untill, date_status_10, is_late, minutes_late, plan_late_minute, planned_late, sla_order_time, date_supply_until, is_late, fact_minutes_late, plan_late_minute, planned_late, sla_order_time, date_supply_until, is_late | AVG(is_late); AVG(minutes_late); сравнение date_delivered/date_supply_until. |
+| 3 | Время доставки | FOUND | 4732 darkstore_ts_partners_new; 7006 cargo_main2; 7024 cargo_main3; 7027 cargo_main4 | date_delivery_start, date_delivered, delivery_time, delivery_time_all, duration_fact, duration_plan, date_pickuped, date_delivered, fact_duration_min, plan_duration_min, date_delivered, fact_duration_min, plan_duration_min, date_pickuped, date_delivered | date_delivered - date_delivery_start; duration_fact; delivery_time. |
+| 4 | Время сборки заказа | FOUND | 4732 darkstore_ts_partners_new; 7006 cargo_main2; 7027 cargo_main4 | date_collect_start, date_collected, date_printed, collection_time, collection_time_all, date_collect_start_plan, date_collected_plan, date_collected, date_collected | date_collected - date_collect_start; collection_time. |
+| 5 | Суммы заказов (GMV/paid) | FOUND | 4732 darkstore_ts_partners_new | sum_order, sum_paid, sum_paid_disc, sum_paid_sheet, sum_without_bonuses, avg_sum | SUM(sum_order); SUM(sum_paid); SUM(sum_paid_disc). |
+| 6 | Маршрутизация: расстояние/время между точками | FOUND | 7006 cargo_main2; 7024 cargo_main3; 7027 cargo_main4 | duration_fact, duration_plan, pickup_minute, pickup_to_courier_minute, arrival_time, plan_arrival_deadline, cluster_id, id_pool, plan_seq, fact_seq, distance, delta_pct, fact_duration_min, plan_duration_min, cluster_id, id_pool, total_pool_distance, fact_duration_min | SUM(distance); SUM(duration_fact); сравнение plan_seq/fact_seq. |
+| 7 | Численность / активная база курьеров | FOUND | 7775 all_couriers_list; 5797 hr_couriers; 7465 hr_couriers_5shifts; 7473 hr_couriers_five_shifts | ID, id_courier_type, job_type, Активный, Бан, Тип занятости, Тип курьера, id_courier, active, is_banned, is_blocked, job_type_name, region_name, id_courier, active, is_banned, is_blocked, job_type_name | COUNT(DISTINCT id_courier); фильтры active, is_banned, job_type. |
+| 8 | Продуктивность курьера (заказы/дни со сменами) | FOUND | 5797 hr_couriers; 7465 hr_couriers_5shifts; 7473 hr_couriers_five_shifts | cnt_orders, orders_after_hire, days_with_orders, enough_shifts_flg, first_order_date, last_order_date, cnt_orders, enough_shifts_flg, first_order_date, last_order_date, last_order_date, fifth_shift_date, shifts_in_14_days | SUM(cnt_orders); AVG(days_with_orders); доля enough_shifts_flg. |
+| 9 | Смены (фактические выходы) | PARTIAL | 7473 hr_couriers_five_shifts; 5797 hr_couriers; 7465 hr_couriers_5shifts | shift_1, shift_2, shift_3, shift_4, shift_5, shifts_in_14_days, fifth_shift_date, fifth_shift_status, days_to_fifth_shift, had_enough_time, shifts_in_first_14d, 5_shifts_in_14d, is_5_shifts_in_14d, has_5_shifts_in_first_14d, enough_shifts_flg, shifts_in_first_14d, 5_shifts_in_14d, is_5_shifts_in_14d | COUNT(shift_*); SUM(shift_*_work_minutes); shifts_in_14_days. |
+| 10 | Явка на смену | NOT_VERIFIED | 5247 courier_logs_agg_couriers_daily; 5399 courier_logs_agg_couriers_week | event_name, events_qty, courier_id, d, dey, week_no, event_name, events_qty, courier_id, d, dey, week_no | Не подтверждена; events_qty не является явкой без семантики событий. |
+| 11 | Невыходы | NOT_FOUND | 5797 hr_couriers | no_orders_days_streak, pause_days | Не найдено подтверждённого поля невыхода. |
+| 12 | 12-часовые смены | PARTIAL | 7473 hr_couriers_five_shifts | shift_1_work_minutes, shift_2_work_minutes, shift_3_work_minutes, shift_4_work_minutes, shift_5_work_minutes | shift_*_work_minutes >= 720; группировка по сменам. |
+| 13 | Ходки | NOT_VERIFIED | 7006 cargo_main2; 7027 cargo_main4 | id_pool, id_courier, fact_seq, plan_seq, id_pool, id_courier, fact_seq, plan_seq | Кандидат: COUNT(DISTINCT id_pool) по курьеру; семантика ходки не подтверждена. |
+| 14 | ***REMOVED***ы в ходке | NOT_VERIFIED | 7006 cargo_main2; 7027 cargo_main4 | id_order, id_pool, pool_size, fact_seq, id_order, id_pool, pool_size, fact_seq | COUNT(id_order) / COUNT(DISTINCT id_pool); семантика ходки не подтверждена. |
+| 15 | Доступный пул заказов | NOT_VERIFIED | 7006 cargo_main2; 7024 cargo_main3; 7027 cargo_main4; 7119 cargo_flags | pool_size, pool_size_text, id_pool, pool_size, id_pool, pool_size, late_orders_cnt_in_pool, max_fact_late_in_pool, sum_fact_late_minutes_in_pool, flag_courier_shortage, id_pool, pool_size, late_orders_cnt_in_pool, max_fact_late_in_pool, sum_fact_late_minutes_in_pool, flag_courier_shortage, id_pool | pool_size; late_orders_cnt_in_pool; flag_courier_shortage. |
+| 16 | Простои | PARTIAL | 4732 darkstore_ts_partners_new; 7006 cargo_main2; 7027 cargo_main4 | wait_time, wait_time2, waiting_area_time, collection_time, delivery_time, pickup_minute, pickup_to_courier_minute, duration_plan, duration_fact, minutes_late, flag_wait_orders_with_planlate | wait_time; pickup_minute; pickup_to_courier_minute; flag_wait_orders_with_planlate. |
+| 17 | Доход курьера в час | PARTIAL | 7473 hr_couriers_five_shifts | shift_1_profit, shift_2_profit, shift_3_profit, shift_4_profit, shift_5_profit, shift_1_work_minutes, shift_2_work_minutes, shift_3_work_minutes, shift_4_work_minutes, shift_5_work_minutes, thresholds_taken_payments | shift_*_profit / (shift_*_work_minutes / 60). |
+| 18 | Удержание курьеров | FOUND | 5797 hr_couriers; 7465 hr_couriers_5shifts; 7473 hr_couriers_five_shifts; 7293 hr_couriers_zone_balance | uvol, date_dismissed, event_hiring, second_hire, repeated_hire, active, enough_shifts_flg, first_order_date, last_order_date, pause_days, no_orders_days_streak, inactivity_zone, zone_changed, zone_transition_type, turnover, attrition, ret_14_d, returns | turnover; attrition; ret_14_d; returns; second_hire; balance_*. |
 
-### 4732 · darkstore_ts_partners_new (virtual, ClickHouse ch_10.0.15.240/default, 127 колонок)
-Charts: 13 · Dashboards: 717 «Показатели проекта Аптеки», 983 «Показатели проекта Рестораны», 1054 «Показатели проекта Цветы_архив»
-- **Объём заказов** [HIGH]: `id_order`, `order_status`
-- **Просрочка/SLA** [HIGH]: `sla_order_time`, `date_supply_until`
-- **Время доставки** [HIGH]: `date_delivery_start`, `date_delivered`, `date_supply`
-- **Время сборки** [HIGH]: `date_collect_start`, `date_collected`, `date_printed`
-- **Суммы (GMV/paid)** [HIGH]: `sum_order`, `sum_paid`, `sum_paid_disc`
+## Ограничения
 
-### 7006 / 7024 / 7027 · cargo_main2/3/4 (virtual, Greenplum gp_10.0.112.100/dwh, logs_mart)
-Charts: 17 / 5 / 0 · Dashboard: 1472 «Метрики маршрутизатора»
-- **Объём заказов** [HIGH]: `id_order`, `status_name`
-- **Просрочка/SLA** [HIGH]: `is_late` (7006, 7027), `sla_order_time`, `date_supply_until`
-- **Время доставки** [HIGH]: `date_delivery_start`, `date_delivered`, `date_supply`
-- **Маршрутизация** [HIGH]: `parcel_id`, `cluster_id`, `duration_from_previous` (7006, 7024), `distance_from_previous` (7024, 7027), `arrival_time`; источник `ab_logs_mart_routing_results_v1`
-- **Время сборки** [MEDIUM]: только `date_collected`
+- Матрица отражает только 12 приоритетных датасетов; остальные 3 759 датасетов не проверялись.
+- Статус FOUND означает наличие подтверждённых полей/метрик, а не согласованную бизнес-формулу.
+- sum_order/sum_paid — суммы заказа, а не доход курьера.
+- events_qty — события, а не явка; семантика event_name не подтверждена.
+- <ФИО> смен ограничена первыми 5 сменами новичка и 14-дневным окном.
+- Ходки и доступный пул заказов не подтверждены как бизнес-сущности.
+- PII-поля перечислены как имена; их значения не выгружаются.
 
-### 7119 · cargo_flags (virtual, ClickHouse ch_10.0.112.21, 55 колонок)
-Charts: 0 (прямых потребителей через datasource_id нет; используется как витрина флагов)
-- **Флаги качества/аномалий** [MEDIUM→фактические поля]: `plan_arrival_before_deadline`, `fact_minutes_late`, `fact_arrival_before_deadline`, `planned_late`, `flag_is_near_deadline`, `plan_late_minute`, `fact_seq`, `plan_seq`, `release_to_first_assignment`, `pool_size`, `late_orders_cnt_in_pool`
-- Плюс полный набор заказных метрик как у 4732 (объём, SLA, доставка, сборка) [HIGH]
+## PII
 
-### 5797 · hr_couriers (virtual, ClickHouse ch_10.0.15.240/agile_mart_techaudit, 65 колонок)
-Charts: 54 · Dashboards: 1228 «HR Dashboard Доставки», 1124 «HR верхнеуровневый»
-- **Численность/активность HR** [HIGH]: `id_courier`, `active`, `event_hiring`, `event_date`, `date_dismissed`, `uvol`, `pause_days`, `second_hire`, `repeated_hire`, `exp_days`, `exp_months`, `job_type_name`, `region_name`
-- **Продуктивность** [HIGH]: `cnt_orders`, `orders_after_hire`, `days_with_orders`, `enough_shifts_flg`
+PII-поля присутствуют в 4732, 5797, 7465, 7473, 7775; в отчётах используются только имена полей.
 
-### 7465 · hr_couriers_5shifts / 7473 · hr_couriers_five_shifts (ClickHouse, agile_mart_techaudit)
-Charts: 0 / 15 · Dashboard: 1228 «HR Dashboard Доставки»
-- Те же HR-KPI [HIGH]; у 7473 дополнительно `last_order_date`, `day_number`, `leader`, `feature_tt`, `name_tt` (5-сменный график)
+## Проблемы верификации полей
 
-### 7775 · all_couriers_list (virtual, ClickHouse, 11 колонок)
-Charts: 1 · Источник: `default.v_couriers`
-- **Справочник активной базы** [HIGH]: `"Активный"` (`case active=1`), `"Бан"` (`case is_blocked`), `"Тип занятости"`, `"Тип курьера"`, `date_add`
-- ⚠️ Содержит персональные поля (`phone`, `INN`) — **не выгружать значения в отчёты** (PII)
-
-### 5247 / 5399 · courier_logs_agg_couriers_daily / _week (Greenplum dwh, agile_mart_techaudit)
-Charts: 1 / 1 · Dashboard: 1079 «Отчет по логам МП курьера_архив»
-- **Событийная активность** [HIGH]: `events_qty`, `max_day`/`max_week`, `days_count`/`week_count`, `max_day_event_qty`, `count_distinct_day_no`, `sum_events_qty_all_days` (аналогично week)
-
-### 7293 · hr_couriers_zone_balance (virtual, ClickHouse, 8 колонок)
-Charts: 1 · Источник: `agile_mart_techaudit.hr_delivery` (`zone_changed=1`)
-- **Баланс миграции зон активности** [HIGH]: `positive_flow` (в Green), `negative_flow`, `balance = pos − neg`, `positive_pct/negative_pct` от дневного максимума; шкала зон: Green/Yellow/Orange/Red/Тишина/Lost
-
----
-
-## Пробелы и ограничения
-
-1. **Три датасета без прямых charts** (7027, 7119, 7465): либо используются через other-datasource charts (не подтверждено локально), либо являются вспомогательными витринами. Требуется разбор chart query_context после полной дозагрузки charts.
-2. **Metric-слой Superset не исследован:** каталог `dataset.metrics[]` в list-payload пуст; нормативные определения KPI (metric_name/expression) станут доступны только после загрузки `dataset_detail` (см. discovery_corrected.md).
-3. **7 019 уникальных chart-ссылок дашбордов, из них 4 569 вне усечённого каталога** — полная декомпозиция KPI→chart доступна лишь для приоритетных 12 датасетов (108 charts из API).
-4. Confidence «HIGH» означает наличие поля в SQL, но **не** согласованность бизнес-определения KPI — определение должно быть верифицировано с владельцами дашбордов.
+Все заявленные поля найдены в detail JSON.

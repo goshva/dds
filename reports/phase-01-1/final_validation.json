@@ -1,0 +1,298 @@
+{
+  "generated_at": "2026-11-20T20:27:00.158Z",
+  "verdict": "FAIL",
+  "summary": {
+    "total": 9,
+    "pass": 8,
+    "fail": 1,
+    "warn": 0
+  },
+  "checks": [
+    {
+      "id": "sqlite_readonly_quick_check",
+      "name": "SQLite readonly и quick_check",
+      "status": "PASS",
+      "details": "quick_check = ok",
+      "metrics": {
+        "quick_check": "ok"
+      }
+    },
+    {
+      "id": "sqlite_unchanged_vs_backup",
+      "name": "SQLite не изменена относительно backup",
+      "status": "PASS",
+      "details": "counts по object_type совпадают с backup",
+      "metrics": {
+        "current": {
+          "chart": 5000,
+          "chart_detail": 3766,
+          "dashboard": 330,
+          "dashboard_detail": 330,
+          "dataset": 3767
+        },
+        "backup": {
+          "chart": 5000,
+          "chart_detail": 3766,
+          "dashboard": 330,
+          "dashboard_detail": 330,
+          "dataset": 3767
+        },
+        "relations": 0,
+        "backup_relations": 0
+      }
+    },
+    {
+      "id": "sqlite_relations_unchanged",
+      "name": "Таблица relations не изменена",
+      "status": "PASS",
+      "details": "relations=0 (как в backup)",
+      "metrics": {
+        "relations": 0,
+        "backup_relations": 0
+      }
+    },
+    {
+      "id": "dataset_details_12",
+      "name": "12 валидных dataset detail",
+      "status": "PASS",
+      "details": "все 12 файлов валидны, summary согласован",
+      "metrics": {
+        "files": [
+          {
+            "dataset_id": 4732,
+            "ok": true,
+            "id_match": true,
+            "table_name": "darkstore_ts_partners_new",
+            "columns": 127,
+            "metrics": 22,
+            "sql_length": 4897
+          },
+          {
+            "dataset_id": 7119,
+            "ok": true,
+            "id_match": true,
+            "table_name": "cargo_flags",
+            "columns": 55,
+            "metrics": 1,
+            "sql_length": 15282
+          },
+          {
+            "dataset_id": 7006,
+            "ok": true,
+            "id_match": true,
+            "table_name": "cargo_main2",
+            "columns": 44,
+            "metrics": 1,
+            "sql_length": 8891
+          },
+          {
+            "dataset_id": 7024,
+            "ok": true,
+            "id_match": true,
+            "table_name": "cargo_main3",
+            "columns": 11,
+            "metrics": 1,
+            "sql_length": 5819
+          },
+          {
+            "dataset_id": 7027,
+            "ok": true,
+            "id_match": true,
+            "table_name": "cargo_main4",
+            "columns": 50,
+            "metrics": 1,
+            "sql_length": 11820
+          },
+          {
+            "dataset_id": 7775,
+            "ok": true,
+            "id_match": true,
+            "table_name": "all_couriers_list",
+            "columns": 11,
+            "metrics": 1,
+            "sql_length": 600
+          },
+          {
+            "dataset_id": 5797,
+            "ok": true,
+            "id_match": true,
+            "table_name": "hr_couriers",
+            "columns": 65,
+            "metrics": 38,
+            "sql_length": 2246
+          },
+          {
+            "dataset_id": 7465,
+            "ok": true,
+            "id_match": true,
+            "table_name": "hr_couriers_5shifts",
+            "columns": 59,
+            "metrics": 38,
+            "sql_length": 2331
+          },
+          {
+            "dataset_id": 7473,
+            "ok": true,
+            "id_match": true,
+            "table_name": "hr_couriers_five_shifts",
+            "columns": 54,
+            "metrics": 38,
+            "sql_length": 2772
+          },
+          {
+            "dataset_id": 5247,
+            "ok": true,
+            "id_match": true,
+            "table_name": "courier_logs_agg_couriers_daily",
+            "columns": 15,
+            "metrics": 2,
+            "sql_length": 2378
+          },
+          {
+            "dataset_id": 5399,
+            "ok": true,
+            "id_match": true,
+            "table_name": "courier_logs_agg_couriers_week",
+            "columns": 15,
+            "metrics": 5,
+            "sql_length": 2889
+          },
+          {
+            "dataset_id": 7293,
+            "ok": true,
+            "id_match": true,
+            "table_name": "hr_couriers_zone_balance",
+            "columns": 8,
+            "metrics": 1,
+            "sql_length": 1515
+          }
+        ],
+        "summary_checks": {
+          "exists": true,
+          "priority": true,
+          "valid": true,
+          "all_valid": true,
+          "datasets": true
+        }
+      }
+    },
+    {
+      "id": "discovery_complete",
+      "name": "Полнота Discovery",
+      "status": "FAIL",
+      "details": "chart: downloaded=5000 api=19920 status=ok; dataset: downloaded=3767 api=3771 status=ok",
+      "metrics": {
+        "resources": {
+          "dashboard": {
+            "downloaded": 330,
+            "api": 330,
+            "status": "ok",
+            "complete": true
+          },
+          "chart": {
+            "downloaded": 5000,
+            "api": 19920,
+            "status": "ok",
+            "complete": false
+          },
+          "dataset": {
+            "downloaded": 3767,
+            "api": 3771,
+            "status": "ok",
+            "complete": false
+          }
+        },
+        "api_counts": {
+          "dashboard": 330,
+          "chart": 19920,
+          "dataset": 3771
+        },
+        "summary_generated_at": null
+      }
+    },
+    {
+      "id": "lineage_consistency",
+      "name": "Lineage: уникальность и согласованность",
+      "status": "PASS",
+      "details": "CSV и JSON согласованы, дублей ключей нет",
+      "metrics": {
+        "checks": {
+          "preview_checks_ok": true,
+          "evidence_rows_match": true,
+          "relations_rows_match": true,
+          "no_duplicate_relation_keys": true,
+          "evidence_count_sum_match": true,
+          "by_relation_type_sum": true,
+          "relation_header_has_evidence_count": true,
+          "evidence_header_columns": true,
+          "relation_header_columns": true
+        },
+        "evidence_rows": 14426,
+        "relation_rows": 13037,
+        "duplicate_keys": 0,
+        "evidence_count_sum": 14426,
+        "by_type_sum": 13037
+      }
+    },
+    {
+      "id": "kpi_matrix_18",
+      "name": "KPI Matrix: 18 показателей",
+      "status": "PASS",
+      "details": "18 KPI, статусы валидны, поля верифицированы",
+      "metrics": {
+        "checks": {
+          "count_18": true,
+          "kpis_18": true,
+          "ids_unique": true,
+          "statuses_valid": true,
+          "operational_kpis_present": true,
+          "evidence_verified": true,
+          "inventory_12": true,
+          "inventory_missing_empty": true
+        },
+        "status_counts": {
+          "FOUND": 9,
+          "PARTIAL": 4,
+          "NOT_FOUND": 1,
+          "NOT_VERIFIED": 4
+        },
+        "kpi_count": 18,
+        "inventory_datasets": 12,
+        "inventory_missing": []
+      }
+    },
+    {
+      "id": "pii_and_secrets",
+      "name": "Отсутствие PII и секретов в отчётах",
+      "status": "PASS",
+      "details": "секреты и PII-значения не найдены",
+      "metrics": {
+        "scanned_files": 15,
+        "hits": []
+      }
+    },
+    {
+      "id": "reports_present",
+      "name": "Наличие итоговых отчётов",
+      "status": "PASS",
+      "details": "все обязательные отчёты на месте",
+      "metrics": {
+        "required": [
+          "discovery_corrected.md",
+          "lineage_quality.md",
+          "phase_01_1_summary.md",
+          "kpi_source_matrix.json",
+          "kpi_source_matrix.md",
+          "kpi_field_inventory.json",
+          "lineage_preview.json",
+          "lineage_evidence.csv",
+          "lineage_relations.csv"
+        ],
+        "missing": []
+      }
+    }
+  ],
+  "blockers": [
+    "discovery_complete: chart: downloaded=5000 api=19920 status=ok; dataset: downloaded=3767 api=3771 status=ok"
+  ]
+}

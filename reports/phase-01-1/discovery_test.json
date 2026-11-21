@@ -1,0 +1,124 @@
+{
+  "generated_at": "2026-11-20T20:24:22.783Z",
+  "mode": "read-only",
+  "checks": {
+    "sqlite": {
+      "quick_check": "ok",
+      "counts": {
+        "chart": 5000,
+        "chart_detail": 3766,
+        "dashboard": 330,
+        "dashboard_detail": 330,
+        "dataset": 3767
+      },
+      "relations": 0
+    },
+    "lists": {
+      "dashboard": {
+        "file": "output\\dashboards.json",
+        "present": true,
+        "rows": 330,
+        "local_catalog_count": 330
+      },
+      "chart": {
+        "file": "output\\charts.json",
+        "present": true,
+        "rows": 5000,
+        "local_catalog_count": 5000
+      },
+      "dataset": {
+        "file": "output\\datasets.json",
+        "present": true,
+        "rows": 3767,
+        "local_catalog_count": 3767
+      }
+    },
+    "dataset_details": {
+      "4732": {
+        "dataset_id": 4732,
+        "ok": true,
+        "table_name": "darkstore_ts_partners_new",
+        "reason": null
+      },
+      "5247": {
+        "dataset_id": 5247,
+        "ok": true,
+        "table_name": "courier_logs_agg_couriers_daily",
+        "reason": null
+      },
+      "5399": {
+        "dataset_id": 5399,
+        "ok": true,
+        "table_name": "courier_logs_agg_couriers_week",
+        "reason": null
+      },
+      "5797": {
+        "dataset_id": 5797,
+        "ok": true,
+        "table_name": "hr_couriers",
+        "reason": null
+      },
+      "7006": {
+        "dataset_id": 7006,
+        "ok": true,
+        "table_name": "cargo_main2",
+        "reason": null
+      },
+      "7024": {
+        "dataset_id": 7024,
+        "ok": true,
+        "table_name": "cargo_main3",
+        "reason": null
+      },
+      "7027": {
+        "dataset_id": 7027,
+        "ok": true,
+        "table_name": "cargo_main4",
+        "reason": null
+      },
+      "7119": {
+        "dataset_id": 7119,
+        "ok": true,
+        "table_name": "cargo_flags",
+        "reason": null
+      },
+      "7293": {
+        "dataset_id": 7293,
+        "ok": true,
+        "table_name": "hr_couriers_zone_balance",
+        "reason": null
+      },
+      "7465": {
+        "dataset_id": 7465,
+        "ok": true,
+        "table_name": "hr_couriers_5shifts",
+        "reason": null
+      },
+      "7473": {
+        "dataset_id": 7473,
+        "ok": true,
+        "table_name": "hr_couriers_five_shifts",
+        "reason": null
+      },
+      "7775": {
+        "dataset_id": 7775,
+        "ok": true,
+        "table_name": "all_couriers_list",
+        "reason": null
+      }
+    },
+    "dataset_detail_summary": {
+      "present": true,
+      "priority": 12,
+      "valid_details": 12,
+      "all_valid": true
+    }
+  },
+  "errors": [],
+  "api": {
+    "attempted": false,
+    "skipped_reason": "no credentials (SUPERSET_USERNAME/SUPERSET_PASSWORD/SUPERSET_ACCESS_TOKEN)"
+  },
+  "status": "ok",
+  "finished_at": "2026-11-20T20:24:28.968Z"
+}
