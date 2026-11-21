@@ -1,0 +1,501 @@
+{
+  "generated_by": "phase1-5/generate.ts",
+  "count": 24,
+  "decisions": [
+    {
+      "id": "BD-001",
+      "question": "Кто назначает новичка куратору?",
+      "why": "Назначение и права",
+      "owner": "TBD",
+      "impact": "mentorship_assignments.assigned_by",
+      "required_decision": "Утвердить роль",
+      "options": [
+        "Куратор",
+        "Операционный менеджер",
+        "HR",
+        "Автоматически по ТТ"
+      ],
+      "consequences": [
+        "Меняются права и аудит",
+        "Автоназначение требует правил подбора"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "mentorship_assignments"
+      ]
+    },
+    {
+      "id": "BD-002",
+      "question": "Что делать, если заказ готов, но подходящего курьера нет?",
+      "why": "***REMOVED*** и исключения",
+      "owner": "TBD",
+      "impact": "order_readiness/queues",
+      "required_decision": "Утвердить процедуру исключения",
+      "options": [
+        "Ожидание без лимита",
+        "Эскалация менеджеру",
+        "Отмена заказа"
+      ],
+      "consequences": [
+        "Влияет на SLA и очередь",
+        "Может требовать нового события"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "orders",
+        "courier_queue_entries"
+      ]
+    },
+    {
+      "id": "BD-003",
+      "question": "Что считать подходящим курьером при отсутствии в своей зоне?",
+      "why": "Допуск к назначению",
+      "owner": "TBD",
+      "impact": "trip_assignments",
+      "required_decision": "Утвердить правило допуска",
+      "options": [
+        "Только своя зона",
+        "Соседняя зона",
+        "Любая зона ТТ"
+      ],
+      "consequences": [
+        "Влияет на правило одной зоны в ходке"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "trips",
+        "trip_assignments"
+      ]
+    },
+    {
+      "id": "BD-004",
+      "question": "Возврат курьера: новый FIFO или сохранение приоритета?",
+      "why": "***REMOVED***",
+      "owner": "TBD",
+      "impact": "courier_queue_entries.queue_sequence",
+      "required_decision": "Утвердить правило",
+      "options": [
+        "Новый FIFO",
+        "Сохранить приоритет",
+        "Гибрид"
+      ],
+      "consequences": [
+        "Влияет на справедливость и нагрузку"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "courier_queue_entries"
+      ]
+    },
+    {
+      "id": "BD-005",
+      "question": "Что делать, если курьер не вернулся/не закрыл ходку?",
+      "why": "Контроль незавершённых поездок",
+      "owner": "TBD",
+      "impact": "trips.trip_status",
+      "required_decision": "Утвердить процедуру",
+      "options": [
+        "Автозакрытие по таймауту",
+        "Эскалация куратору",
+        "Ручное закрытие"
+      ],
+      "consequences": [
+        "Влияет на начисления и аудит"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "trips",
+        "courier_shifts"
+      ]
+    },
+    {
+      "id": "BD-006",
+      "question": "Как поступать с отменой после выезда?",
+      "why": "История ходки и оплата",
+      "owner": "TBD",
+      "impact": "trip_orders/trip_order_membership_history",
+      "required_decision": "Утвердить процедуру",
+      "options": [
+        "Запрет",
+        "Административная корректировка с аудитом"
+      ],
+      "consequences": [
+        "Требует отдельного права и причины"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "trip_orders",
+        "trip_order_membership_history"
+      ]
+    },
+    {
+      "id": "BD-007",
+      "question": "Как учитывать возврат после успешной доставки?",
+      "why": "Корректировка начисления",
+      "owner": "TBD",
+      "impact": "accrual_adjustments",
+      "required_decision": "Утвердить правило",
+      "options": [
+        "Сторно начисления",
+        "Корректировка",
+        "Не менять"
+      ],
+      "consequences": [
+        "Влияет на финансовую историю"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "courier_accruals",
+        "accrual_adjustments"
+      ]
+    },
+    {
+      "id": "BD-008",
+      "question": "Точная формула тарифа по зоне и расстоянию?",
+      "why": "Расчёт оплаты",
+      "owner": "TBD",
+      "impact": "tariff_versions",
+      "required_decision": "Утвердить формулу и ставки",
+      "options": [
+        "Фикс за заказ",
+        "Зона+расстояние",
+        "Комбинированная"
+      ],
+      "consequences": [
+        "Без формулы начисления не создаются"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "tariff_versions",
+        "courier_accruals"
+      ]
+    },
+    {
+      "id": "BD-009",
+      "question": "Как измеряется загруженность и влияет ли она на тариф?",
+      "why": "Переменная часть оплаты",
+      "owner": "TBD",
+      "impact": "tariff_versions",
+      "required_decision": "Утвердить метрику",
+      "options": [
+        "По числу активных курьеров",
+        "По очереди",
+        "Не учитывать"
+      ],
+      "consequences": [
+        "Может менять тариф динамически"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "tariff_versions"
+      ]
+    },
+    {
+      "id": "BD-010",
+      "question": "Когда начисление окончательно и кто подтверждает?",
+      "why": "Финансовый статус",
+      "owner": "TBD",
+      "impact": "courier_accruals.accrual_status",
+      "required_decision": "Утвердить процесс",
+      "options": [
+        "Автоподтверждение",
+        "Финансы",
+        "Руководитель"
+      ],
+      "consequences": [
+        "Влияет на статусы и выплаты"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "courier_accruals"
+      ]
+    },
+    {
+      "id": "BD-011",
+      "question": "Какие роли, кроме куратора, могут отменить/переназначить ходку?",
+      "why": "Доступы и аудит",
+      "owner": "TBD",
+      "impact": "roles/audit",
+      "required_decision": "Утвердить роли",
+      "options": [
+        "Только куратор",
+        "Куратор+менеджер",
+        "Диспетчер (если утверждён)"
+      ],
+      "consequences": [
+        "Влияет на модель прав"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "trips",
+        "trip_assignments"
+      ]
+    },
+    {
+      "id": "BD-012",
+      "question": "Как фиксировать невозможность принять ходку, если отказ запрещён?",
+      "why": "Исключительные ситуации",
+      "owner": "TBD",
+      "impact": "trip_assignments",
+      "required_decision": "Утвердить процедуру",
+      "options": [
+        "Пауза очереди",
+        "Пропуск",
+        "Аварийная отмена"
+      ],
+      "consequences": [
+        "Может требовать новых статусов"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "trip_assignments",
+        "courier_queue_entries"
+      ]
+    },
+    {
+      "id": "BD-013",
+      "question": "Кто и когда отмечает готовность заказа?",
+      "why": "Событие ORDER_READY",
+      "owner": "TBD",
+      "impact": "order_readiness.ready_at",
+      "required_decision": "Утвердить источник и ответственного",
+      "options": [
+        "3466.time_ready",
+        "date_status_10",
+        "date_collected",
+        "Новое событие"
+      ],
+      "consequences": [
+        "ready_at остаётся TBD до решения"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "orders",
+        "order_readiness"
+      ]
+    },
+    {
+      "id": "BD-014",
+      "question": "Какие точные статусы и переходы заказа действуют?",
+      "why": "Жизненный цикл",
+      "owner": "TBD",
+      "impact": "orders.order_status",
+      "required_decision": "Утвердить перечень",
+      "options": [
+        "<ФИО>ный перечень",
+        "Статусы источника",
+        "Гибрид"
+      ],
+      "consequences": [
+        "Влияет на историю и отчёты"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "orders",
+        "order_status_history"
+      ]
+    },
+    {
+      "id": "BD-015",
+      "question": "Как учитывать отменённые и возвращённые заказы в SLA?",
+      "why": "Отчётность",
+      "owner": "TBD",
+      "impact": "orders/sla",
+      "required_decision": "Утвердить правило",
+      "options": [
+        "Включать",
+        "Отдельная группа",
+        "Исключать с оговоркой"
+      ],
+      "consequences": [
+        "Ответ «не исключать автоматически» уже получен"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "orders"
+      ]
+    },
+    {
+      "id": "BD-016",
+      "question": "Какой источник — мастер-источник заказа и его статуса?",
+      "why": "Интеграция",
+      "owner": "TBD",
+      "impact": "orders.source_system",
+      "required_decision": "Утвердить мастер-систему",
+      "options": [
+        "Текущая система заказов",
+        "Новая ОС",
+        "Гибрид"
+      ],
+      "consequences": [
+        "Определяет направление синхронизации"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "orders",
+        "order_status_history"
+      ]
+    },
+    {
+      "id": "BD-017",
+      "question": "Какой мастер-источник идентичности курьера и ТТ?",
+      "why": "Сопоставление",
+      "owner": "TBD",
+      "impact": "couriers/courier_external_ids/shops",
+      "required_decision": "Утвердить мастер-источник",
+      "options": [
+        "HR",
+        "<ФИО> система",
+        "Superset как read-only"
+      ],
+      "consequences": [
+        "Определяет mapping внешних ID"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "couriers",
+        "courier_external_ids",
+        "shops"
+      ]
+    },
+    {
+      "id": "BD-018",
+      "question": "Какая СУБД будет использоваться в production?",
+      "why": "Физическая схема",
+      "owner": "TBD",
+      "impact": "DDL/типы",
+      "required_decision": "Утвердить СУБД",
+      "options": [
+        "PostgreSQL",
+        "SQLite (прототип)",
+        "Другая"
+      ],
+      "consequences": [
+        "Рекомендация: PostgreSQL; ADR-001"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "all"
+      ]
+    },
+    {
+      "id": "BD-019",
+      "question": "Какой стек backend и механизм авторизации?",
+      "why": "Реализация",
+      "owner": "TBD",
+      "impact": "auth/roles",
+      "required_decision": "Утвердить стек",
+      "options": [
+        "Существующий identity provider",
+        "Новый"
+      ],
+      "consequences": [
+        "Пароли самостоятельно не создаются"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "users/roles"
+      ]
+    },
+    {
+      "id": "BD-020",
+      "question": "Нужны ли слоты предварительного бронирования или только отметка прибытия?",
+      "why": "Смены/очередь",
+      "owner": "TBD",
+      "impact": "work_slots",
+      "required_decision": "Утвердить",
+      "options": [
+        "Только отметка прибытия",
+        "Слоты"
+      ],
+      "consequences": [
+        "work_slots опционален"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "work_slots",
+        "courier_shifts"
+      ]
+    },
+    {
+      "id": "BD-021",
+      "question": "Как обрабатывать неполную/частичную доставку?",
+      "why": "Оплата и статусы",
+      "owner": "TBD",
+      "impact": "delivery_attempts.result",
+      "required_decision": "Утвердить",
+      "options": [
+        "PARTIAL как отдельный результат",
+        "Только DELIVERED/FAILED"
+      ],
+      "consequences": [
+        "Влияет на начисление"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "delivery_attempts",
+        "courier_accruals"
+      ]
+    },
+    {
+      "id": "BD-022",
+      "question": "Нужно ли хранить историю геозон для воспроизведения назначений?",
+      "why": "Аудит и аналитика",
+      "owner": "TBD",
+      "impact": "zone_boundary_versions",
+      "required_decision": "Утвердить",
+      "options": [
+        "Да",
+        "Только текущая"
+      ],
+      "consequences": [
+        "Влияет на объём и аудит"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "zone_boundary_versions"
+      ]
+    },
+    {
+      "id": "BD-023",
+      "question": "Какой срок хранения событий и финансовых записей?",
+      "why": "Архивирование",
+      "owner": "TBD",
+      "impact": "retention policy",
+      "required_decision": "Утвердить",
+      "options": [
+        "1 год",
+        "3 года",
+        "5 лет"
+      ],
+      "consequences": [
+        "Влияет на партиционирование"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "domain_events",
+        "courier_accruals"
+      ]
+    },
+    {
+      "id": "BD-024",
+      "question": "Кто утверждает тарифы и с какой даты они действуют?",
+      "why": "Управление тарифами",
+      "owner": "TBD",
+      "impact": "tariff_versions.approved_by/effective_from",
+      "required_decision": "Утвердить процесс",
+      "options": [
+        "Финансы",
+        "Операционный директор",
+        "Коллегиально"
+      ],
+      "consequences": [
+        "Без утверждения тарифы в DRAFT"
+      ],
+      "status": "OPEN",
+      "affects": [
+        "tariff_versions"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+sequenceDiagram
+  participant C as Курьер
+  participant OS as <ФИО> система
+  participant T as tariff_versions
+  participant A as courier_accruals
+  participant F as Finance
+  C->>OS: доставка подтверждена
+  OS->>OS: ORDER_DELIVERED (идемпотентно)
+  OS->>T: выбрать действующую версию тарифа на момент доставки
+  alt Тариф найден
+    OS->>A: создать начисление (PENDING) + calculation_basis
+    A->>F: COURIER_ACCRUAL_CREATED
+    F->>A: APPROVED / PAID / REVERSED
+  else Тариф не утверждён
+    OS->>A: начисление ON_HOLD (доставка не теряется)
+  end
+  Note over A,F: Корректировки — отдельные записи (accrual_adjustments), исходное начисление не меняется

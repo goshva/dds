@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dds.local/schemas/events/COURIER_JOINED_QUEUE.schema.json",
+  "title": "COURIER_JOINED_QUEUE",
+  "allOf": [
+    {
+      "$ref": "../event-envelope.schema.json"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "const": "COURIER_JOINED_QUEUE"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "queue_entry_id",
+        "courier_id",
+        "shop_id",
+        "shift_id",
+        "queue_sequence"
+      ],
+      "properties": {
+        "queue_entry_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "courier_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "shop_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "shift_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "queue_sequence": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

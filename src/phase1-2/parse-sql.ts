@@ -593,3 +593,201 @@ export function classifyFieldName(name: string): {
   const isPiiCandidate = /^(inn|инн|phone|телефон|fio|фио|name_courier|курьер|email|passport|snils|birth)$/.test(n);
   return { isKeyCandidate, keyEntity, isTimeCandidate, isPiiCandidate };
 }
+
+// =====================================================================================
+// Этап 1.4: расширение парсера (аддитивно, обратная совместимость parseSql сохранена).
+// =====================================================================================
+
+export type SqlAggregate = { fn: string; expression: string; offset: number; line: number };
+export type SqlCast = { expression: string; type: string; offset: number; line: number };
+export type SqlDateTimeExpr = { fn: string; expression: string; offset: number; line: number };
+export type ParseStatus = "PARSED" | "PARTIAL" | "UNRESOLVED" | "UNSUPPORTED_SYNTAX" | "ERROR";
+
+export type ParsedSqlExtended = ParsedSql & {
+  nested_select_count: number;
+  aggregates: SqlAggregate[];
+  case_count: number;
+  casts: SqlCast[];
+  date_time_expressions: SqlDateTimeExpr[];
+  jinja_params: string[];
+  dialect: "CLICKHOUSE" | "POSTGRES" | "UNKNOWN";
+  dialect_evidence: string[];
+  parse_status: ParseStatus;
+  issues: string[];
+  construct_lines: Record<string, number[]>;
+};
+
+const EXT_AGGREGATES = [
+  "COUNT", "SUM", "AVG", "MIN", "MAX", "MEDIAN", "STDDEV", "VARIANCE", "ANY", "EVERY",
+  "GROUP_CONCAT", "STRING_AGG", "ARRAY_AGG", "UNIQEXACT", "UNIQEXACTIF", "QUANTILEEXACT",
+  "TOPN", "COUNTIF", "SUMIF", "AVGIF", "MODE",
+];
+
+const EXT_DATETIME_FNS = [
+  "DATE_TRUNC", "EXTRACT", "DATEDIFF", "DATEADD", "TODATE", "TODATETIME", "FORMATDATETIME",
+  "AGE", "NOW", "TODAY", "EPOCH", "TOSTARTOFDAY", "TOSTARTOFMONTH",
+];
+
+const UNSUPPORTED_CONSTRUCTS = ["PIVOT", "UNPIVOT", "LATERAL", "MATCH_RECOGNIZE", "CONNECT", "MODEL"];
+
+function lineAt(text: string, offset: number): number {
+  let line = 1;
+  for (let i = 0; i < offset && i < text.length; i++) if (text[i] === "\n") line++;
+  return line;
+}
+
+function captureBalanced(text: string, openIdx: number): { body: string; end: number } {
+  let depth = 0;
+  let inStr = false;
+  for (let i = openIdx; i < text.length; i++) {
+    const ch = text[i];
+    if (inStr) {
+      if (ch === "'" && text[i + 1] === "'") {
+        i++;
+        continue;
+      }
+      if (ch === "'") inStr = false;
+      continue;
+    }
+    if (ch === "'") {
+      inStr = true;
+      continue;
+    }
+    if (ch === "(") depth++;
+    else if (ch === ")") {
+      depth--;
+      if (depth === 0) return { body: text.slice(openIdx + 1, i), end: i };
+    }
+  }
+  return { body: text.slice(openIdx + 1), end: text.length - 1 };
+}
+
+function collectFnCalls(text: string, fns: string[]): Array<{ fn: string; expression: string; offset: number; line: number }> {
+  const out: Array<{ fn: string; expression: string; offset: number; line: number }> = [];
+  for (const fn of fns) {
+    const re = new RegExp(`\\b${fn}\\s*\\(`, "gi");
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(text))) {
+      const open = text.indexOf("(", m.index);
+      if (open < 0) continue;
+      const { body } = captureBalanced(text, open);
+      out.push({ fn, expression: body.trim().slice(0, 300), offset: m.index, line: lineAt(text, m.index) });
+    }
+  }
+  return out;
+}
+
+function detectDialect(cleaned: string): { dialect: "CLICKHOUSE" | "POSTGRES" | "UNKNOWN"; evidence: string[] } {
+  const ch: string[] = [];
+  const pg: string[] = [];
+  const chPatterns: Array<[RegExp, string]> = [
+    [/\bdictGet(OrNull)?\s*\(/i, "dictGetOrNull"],
+    [/\buniqExact(If)?\s*\(/i, "uniqExact"],
+    [/\bquantileExact\s*\(/i, "quantileExact"],
+    [/\bcountIf\s*\(/i, "countIf"],
+    [/\bmultiIf\s*\(/i, "multiIf"],
+    [/\btoDate\s*\(/i, "toDate"],
+    [/\bformatDateTime\s*\(/i, "formatDateTime"],
+    [/\bassumeNotNull\s*\(/i, "assumeNotNull"],
+  ];
+  const pgPatterns: Array<[RegExp, string]> = [
+    [/::\s*[a-zA-Z_]+/i, "postgres cast ::"],
+    [/\bEXTRACT\s*\(\s*EPOCH/i, "EXTRACT(EPOCH"],
+    [/~\*/i, "postgres regex ~*"],
+    [/\bdate_trunc\s*\(/i, "date_trunc"],
+    [/\bnow\(\)\s*-\s*interval/i, "now() - interval"],
+    [/\bjsonb?\b/i, "json/jsonb"],
+  ];
+  for (const [re, label] of chPatterns) if (re.test(cleaned)) ch.push(label);
+  for (const [re, label] of pgPatterns) if (re.test(cleaned)) pg.push(label);
+  if (ch.length && pg.length) {
+    return ch.length >= pg.length ? { dialect: "CLICKHOUSE", evidence: [...ch, ...pg] } : { dialect: "POSTGRES", evidence: [...pg, ...ch] };
+  }
+  if (ch.length) return { dialect: "CLICKHOUSE", evidence: ch };
+  if (pg.length) return { dialect: "POSTGRES", evidence: pg };
+  return { dialect: "UNKNOWN", evidence: [] };
+}
+
+function extractJinjaParams(sql: string): string[] {
+  const params = new Set<string>();
+  const kw = new Set(["if", "elif", "else", "endif", "for", "endfor", "in", "and", "or", "not", "none", "is", "true", "false", "set", "string", "replace", "join", "loop", "last"]);
+  for (const m of sql.matchAll(/\{\{\s*([A-Za-z_][A-Za-z0-9_]*)/g)) params.add(m[1]);
+  for (const m of sql.matchAll(/\{%\s*(?:if|elif|for)\s+([^%]+)%\}/g)) {
+    for (const id of m[1].matchAll(/[A-Za-z_][A-Za-z0-9_]*/g)) {
+      if (!kw.has(id[0].toLowerCase())) params.add(id[0]);
+    }
+  }
+  for (const m of sql.matchAll(/filter_values\s*\(\s*'([^']+)'/g)) params.add(m[1]);
+  return [...params];
+}
+
+/** Расширенный разбор SQL: базовый parseSql + aggregates/CASE/CAST/date-time/Jinja/dialect/positions/status. */
+export function parseSqlExtended(sql: string): ParsedSqlExtended {
+  const base = parseSql(sql);
+  const cleaned = base.cleaned;
+  const atoms = tokenize(cleaned);
+  const issues: string[] = [...base.uncertainties];
+
+  const nestedSelectCount = atoms.filter((a) => a.upper === "SELECT" && a.depth > 0).length;
+  const caseCount = atoms.filter((a) => a.upper === "CASE").length;
+
+  const aggregates: SqlAggregate[] = collectFnCalls(cleaned, EXT_AGGREGATES).map((x) => ({ ...x }));
+  const dateTimeExpressions: SqlDateTimeExpr[] = collectFnCalls(cleaned, EXT_DATETIME_FNS).map((x) => ({ ...x }));
+
+  const casts: SqlCast[] = [];
+  for (const m of cleaned.matchAll(/::\s*([A-Za-z_][A-Za-z0-9_ ()]*)/g)) {
+    casts.push({ expression: "", type: m[1].trim().slice(0, 80), offset: m.index ?? 0, line: lineAt(cleaned, m.index ?? 0) });
+  }
+  for (const m of cleaned.matchAll(/\bCAST\s*\(/gi)) {
+    const open = (m.index ?? 0) + m[0].length - 1;
+    const { body } = captureBalanced(cleaned, open);
+    const asMatch = body.match(/\bAS\s+([A-Za-z_][A-Za-z0-9_ ()]*)$/i);
+    casts.push({ expression: body.replace(/\bAS\s+[^]*$/i, "").trim().slice(0, 200), type: (asMatch?.[1] ?? "").trim().slice(0, 80), offset: m.index ?? 0, line: lineAt(cleaned, m.index ?? 0) });
+  }
+
+  const constructLines: Record<string, number[]> = {};
+  const pushLine = (key: string, line: number) => {
+    if (!constructLines[key]) constructLines[key] = [];
+    if (!constructLines[key].includes(line)) constructLines[key].push(line);
+  };
+  for (const a of atoms) {
+    if (a.type !== "word") continue;
+    if (a.upper === "SELECT") pushLine("select", lineAt(cleaned, a.start));
+    if (a.upper === "FROM") pushLine("from", lineAt(cleaned, a.start));
+    if (a.upper === "JOIN") pushLine("join", lineAt(cleaned, a.start));
+    if (a.upper === "WHERE") pushLine("where", lineAt(cleaned, a.start));
+    if (a.upper === "GROUP") pushLine("group_by", lineAt(cleaned, a.start));
+    if (a.upper === "HAVING") pushLine("having", lineAt(cleaned, a.start));
+    if (a.upper === "ORDER") pushLine("order_by", lineAt(cleaned, a.start));
+    if (a.upper === "LIMIT") pushLine("limit", lineAt(cleaned, a.start));
+    if (a.upper === "UNION") pushLine("union", lineAt(cleaned, a.start));
+    if (a.upper === "OVER") pushLine("window", lineAt(cleaned, a.start));
+    if (a.upper === "WITH") pushLine("with", lineAt(cleaned, a.start));
+  }
+
+  const upper = cleaned.toUpperCase();
+  for (const c of UNSUPPORTED_CONSTRUCTS) {
+    if (new RegExp(`\\b${c}\\b`).test(upper)) issues.push(`possibly unsupported construct: ${c}`);
+  }
+
+  const { dialect, evidence } = detectDialect(cleaned);
+  let parseStatus: ParseStatus = "PARSED";
+  if (base.selectItemCount === 0 && base.parseUncertain) parseStatus = "UNRESOLVED";
+  else if (issues.some((i) => i.startsWith("possibly unsupported"))) parseStatus = "UNSUPPORTED_SYNTAX";
+  else if (base.parseUncertain) parseStatus = "PARTIAL";
+
+  return {
+    ...base,
+    nested_select_count: nestedSelectCount,
+    aggregates,
+    case_count: caseCount,
+    casts,
+    date_time_expressions: dateTimeExpressions,
+    jinja_params: extractJinjaParams(sql),
+    dialect,
+    dialect_evidence: evidence,
+    parse_status: parseStatus,
+    issues,
+    construct_lines: constructLines,
+  };
+}

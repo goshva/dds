@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-11-21T15:59:19.889Z",
+  "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z",
+  "parser_version": "phase1-4@1",
+  "datasets_with_sql": 3222,
+  "errors": 0,
+  "status_counts": {
+    "PARSED": 3170,
+    "UNSUPPORTED_SYNTAX": 39,
+    "PARTIAL": 4,
+    "UNRESOLVED": 9
+  },
+  "dialect_counts": {
+    "POSTGRES": 646,
+    "UNKNOWN": 2198,
+    "CLICKHOUSE": 378
+  },
+  "rows": {
+    "sql": 3222,
+    "tables": 9976,
+    "columns": 8475,
+    "metrics": 4184,
+    "joins": 5590,
+    "issues": 68
+  }
+}

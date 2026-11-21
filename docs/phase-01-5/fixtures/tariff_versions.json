@@ -1,0 +1,10 @@
+[
+  {
+    "id": "cccccccc-cccc-4ccc-8ccc-cccccccccccc",
+    "name": "Fixture tariff (DRAFT)",
+    "base_amount": 100,
+    "currency": "RUB",
+    "effective_from": "2026-01-01T00:00:00Z",
+    "status": "DRAFT"
+  }
+]

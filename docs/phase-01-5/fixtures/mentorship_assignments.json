@@ -1,0 +1,10 @@
+[
+  {
+    "id": "dddddddd-dddd-4ddd-8ddd-dddddddddddd",
+    "mentor_courier_id": "22222222-2222-4222-8222-222222222222",
+    "trainee_courier_id": "33333333-3333-4333-8333-333333333333",
+    "starts_at": "2026-11-21T00:00:00Z",
+    "planned_ends_at": "2026-12-05T00:00:00Z",
+    "status": "ACTIVE"
+  }
+]

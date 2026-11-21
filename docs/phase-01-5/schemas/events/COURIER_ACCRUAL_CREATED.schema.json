@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dds.local/schemas/events/COURIER_ACCRUAL_CREATED.schema.json",
+  "title": "COURIER_ACCRUAL_CREATED",
+  "allOf": [
+    {
+      "$ref": "../event-envelope.schema.json"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "const": "COURIER_ACCRUAL_CREATED"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "accrual_id",
+        "courier_id",
+        "order_id",
+        "delivery_attempt_id",
+        "tariff_version_id",
+        "amount",
+        "currency",
+        "earned_at"
+      ],
+      "properties": {
+        "accrual_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "courier_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "order_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "delivery_attempt_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "tariff_version_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "amount": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "currency": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "earned_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

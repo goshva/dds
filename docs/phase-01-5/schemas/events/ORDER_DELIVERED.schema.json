@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dds.local/schemas/events/ORDER_DELIVERED.schema.json",
+  "title": "ORDER_DELIVERED",
+  "allOf": [
+    {
+      "$ref": "../event-envelope.schema.json"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "const": "ORDER_DELIVERED"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "order_id",
+        "delivered_at",
+        "courier_id",
+        "delivery_attempt_id"
+      ],
+      "properties": {
+        "order_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "delivered_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "courier_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "delivery_attempt_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

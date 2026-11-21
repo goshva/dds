@@ -1,0 +1,711 @@
+{
+  "generated_by": "phase1-5/generate.ts",
+  "envelope_fields": [
+    "event_id",
+    "event_type",
+    "aggregate_type",
+    "aggregate_id",
+    "occurred_at",
+    "recorded_at",
+    "actor_type",
+    "actor_id",
+    "source_system",
+    "source_event_id",
+    "correlation_id",
+    "causation_id",
+    "idempotency_key",
+    "schema_version",
+    "payload"
+  ],
+  "count": 58,
+  "events": [
+    {
+      "type": "ORDER_IMPORTED",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "external_order_id",
+        "source_system",
+        "shop_id",
+        "order_created_at"
+      ],
+      "idempotency_scope": "source_system+external_order_id+ORDER_IMPORTED"
+    },
+    {
+      "type": "ORDER_ACCEPTED",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "accepted_at",
+        "actor_id"
+      ],
+      "idempotency_scope": "order_id+ORDER_ACCEPTED"
+    },
+    {
+      "type": "COLLECTION_STARTED",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "collection_started_at"
+      ],
+      "idempotency_scope": "order_id+COLLECTION_STARTED"
+    },
+    {
+      "type": "COLLECTION_COMPLETED",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "collected_at"
+      ],
+      "idempotency_scope": "order_id+COLLECTION_COMPLETED"
+    },
+    {
+      "type": "ORDER_READY",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "ready_at",
+        "ready_source",
+        "ready_actor_type",
+        "ready_actor_id"
+      ],
+      "note": "Критическое событие; в Superset не подтверждено. Кандидат — 3466.time_ready (BD-013).",
+      "idempotency_scope": "order_id+ORDER_READY+ready_at",
+      "source_candidate": "3466.time_ready"
+    },
+    {
+      "type": "ORDER_ASSIGNED_TO_TRIP",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "trip_id",
+        "assigned_at",
+        "actor_id"
+      ],
+      "idempotency_scope": "order_id+trip_id+ORDER_ASSIGNED_TO_TRIP"
+    },
+    {
+      "type": "ORDER_REMOVED_FROM_TRIP",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "trip_id",
+        "removed_at",
+        "reason",
+        "actor_id"
+      ],
+      "note": "Разрешено только до TRIP_DEPARTED в обычном процессе",
+      "idempotency_scope": "order_id+trip_id+removed_at"
+    },
+    {
+      "type": "ORDER_DELIVERY_STARTED",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "delivery_started_at",
+        "courier_id",
+        "trip_id"
+      ],
+      "idempotency_scope": "order_id+ORDER_DELIVERY_STARTED"
+    },
+    {
+      "type": "ORDER_DELIVERED",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "delivered_at",
+        "courier_id",
+        "delivery_attempt_id"
+      ],
+      "note": "Основание начисления",
+      "idempotency_scope": "delivery_attempt_id+ORDER_DELIVERED"
+    },
+    {
+      "type": "ORDER_CANCELLED",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "cancelled_at",
+        "reason_code"
+      ],
+      "idempotency_scope": "order_id+ORDER_CANCELLED"
+    },
+    {
+      "type": "ORDER_RETURNED",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "returned_at",
+        "reason_code"
+      ],
+      "idempotency_scope": "order_id+ORDER_RETURNED"
+    },
+    {
+      "type": "ORDER_STATUS_CORRECTED",
+      "group": "orders",
+      "aggregate": "order",
+      "payload": [
+        "order_id",
+        "from_status",
+        "to_status",
+        "reason",
+        "actor_id"
+      ],
+      "idempotency_scope": "order_id+ORDER_STATUS_CORRECTED+occurred_at"
+    },
+    {
+      "type": "ZONE_CREATED",
+      "group": "zones",
+      "aggregate": "delivery_zone",
+      "payload": [
+        "zone_id",
+        "shop_id",
+        "code",
+        "name"
+      ],
+      "idempotency_scope": "zone_id+ZONE_CREATED"
+    },
+    {
+      "type": "ZONE_BOUNDARY_PROPOSED",
+      "group": "zones",
+      "aggregate": "delivery_zone",
+      "payload": [
+        "zone_id",
+        "version",
+        "geometry_ref",
+        "author_id"
+      ],
+      "idempotency_scope": "zone_id+version+PROPOSED"
+    },
+    {
+      "type": "ZONE_BOUNDARY_APPROVED",
+      "group": "zones",
+      "aggregate": "delivery_zone",
+      "payload": [
+        "zone_id",
+        "version",
+        "approved_by",
+        "approved_at"
+      ],
+      "idempotency_scope": "zone_id+version+APPROVED"
+    },
+    {
+      "type": "ZONE_ACTIVATED",
+      "group": "zones",
+      "aggregate": "delivery_zone",
+      "payload": [
+        "zone_id",
+        "valid_from"
+      ],
+      "idempotency_scope": "zone_id+ACTIVATED+valid_from"
+    },
+    {
+      "type": "ZONE_DEACTIVATED",
+      "group": "zones",
+      "aggregate": "delivery_zone",
+      "payload": [
+        "zone_id",
+        "valid_to",
+        "reason"
+      ],
+      "idempotency_scope": "zone_id+DEACTIVATED+valid_to"
+    },
+    {
+      "type": "ZONE_BOUNDARY_CHANGED",
+      "group": "zones",
+      "aggregate": "delivery_zone",
+      "payload": [
+        "zone_id",
+        "version",
+        "change_reason",
+        "approved_by"
+      ],
+      "idempotency_scope": "zone_id+version+CHANGED"
+    },
+    {
+      "type": "COURIER_REGISTERED",
+      "group": "couriers_shifts",
+      "aggregate": "courier",
+      "payload": [
+        "courier_id",
+        "source_system",
+        "external_id"
+      ],
+      "idempotency_scope": "courier_id+REGISTERED"
+    },
+    {
+      "type": "COURIER_STATUS_CHANGED",
+      "group": "couriers_shifts",
+      "aggregate": "courier",
+      "payload": [
+        "courier_id",
+        "from_status",
+        "to_status",
+        "reason"
+      ],
+      "idempotency_scope": "courier_id+STATUS_CHANGED+occurred_at"
+    },
+    {
+      "type": "SHIFT_PLANNED",
+      "group": "couriers_shifts",
+      "aggregate": "shift",
+      "payload": [
+        "shift_id",
+        "courier_id",
+        "shop_id",
+        "planned_start_at",
+        "planned_end_at"
+      ],
+      "idempotency_scope": "shift_id+PLANNED"
+    },
+    {
+      "type": "SHIFT_STARTED",
+      "group": "couriers_shifts",
+      "aggregate": "shift",
+      "payload": [
+        "shift_id",
+        "courier_id",
+        "shop_id",
+        "actual_start_at"
+      ],
+      "idempotency_scope": "shift_id+STARTED"
+    },
+    {
+      "type": "COURIER_ARRIVED_AT_SHOP",
+      "group": "couriers_shifts",
+      "aggregate": "shift",
+      "payload": [
+        "shift_id",
+        "courier_id",
+        "shop_id",
+        "arrived_at"
+      ],
+      "idempotency_scope": "shift_id+ARRIVED"
+    },
+    {
+      "type": "COURIER_JOINED_QUEUE",
+      "group": "couriers_shifts",
+      "aggregate": "queue_entry",
+      "payload": [
+        "queue_entry_id",
+        "courier_id",
+        "shop_id",
+        "shift_id",
+        "queue_sequence"
+      ],
+      "idempotency_scope": "queue_entry_id+JOINED"
+    },
+    {
+      "type": "COURIER_SKIPPED_IN_QUEUE",
+      "group": "couriers_shifts",
+      "aggregate": "queue_entry",
+      "payload": [
+        "queue_entry_id",
+        "skipped_at",
+        "skip_reason"
+      ],
+      "idempotency_scope": "queue_entry_id+SKIPPED+skipped_at"
+    },
+    {
+      "type": "COURIER_QUEUE_PAUSED",
+      "group": "couriers_shifts",
+      "aggregate": "queue_entry",
+      "payload": [
+        "queue_entry_id",
+        "paused_at",
+        "reason"
+      ],
+      "idempotency_scope": "queue_entry_id+PAUSED"
+    },
+    {
+      "type": "COURIER_QUEUE_RESUMED",
+      "group": "couriers_shifts",
+      "aggregate": "queue_entry",
+      "payload": [
+        "queue_entry_id",
+        "resumed_at"
+      ],
+      "idempotency_scope": "queue_entry_id+RESUMED"
+    },
+    {
+      "type": "BREAK_STARTED",
+      "group": "couriers_shifts",
+      "aggregate": "shift",
+      "payload": [
+        "shift_id",
+        "courier_id",
+        "break_started_at"
+      ],
+      "idempotency_scope": "shift_id+BREAK_STARTED+break_started_at"
+    },
+    {
+      "type": "BREAK_ENDED",
+      "group": "couriers_shifts",
+      "aggregate": "shift",
+      "payload": [
+        "shift_id",
+        "courier_id",
+        "break_ended_at"
+      ],
+      "idempotency_scope": "shift_id+BREAK_ENDED+break_ended_at"
+    },
+    {
+      "type": "COURIER_RETURNED_TO_SHOP",
+      "group": "couriers_shifts",
+      "aggregate": "shift",
+      "payload": [
+        "shift_id",
+        "courier_id",
+        "returned_at"
+      ],
+      "idempotency_scope": "shift_id+RETURNED+returned_at"
+    },
+    {
+      "type": "SHIFT_ENDED",
+      "group": "couriers_shifts",
+      "aggregate": "shift",
+      "payload": [
+        "shift_id",
+        "courier_id",
+        "actual_end_at"
+      ],
+      "idempotency_scope": "shift_id+ENDED"
+    },
+    {
+      "type": "NO_SHOW_RECORDED",
+      "group": "couriers_shifts",
+      "aggregate": "shift",
+      "payload": [
+        "shift_id",
+        "courier_id",
+        "recorded_at",
+        "reason"
+      ],
+      "note": "Косвенно подтверждается 5939.progul",
+      "idempotency_scope": "shift_id+NO_SHOW",
+      "source_candidate": "5939.progul"
+    },
+    {
+      "type": "COURIER_BLOCKED",
+      "group": "couriers_shifts",
+      "aggregate": "courier",
+      "payload": [
+        "courier_id",
+        "blocked_at",
+        "reason"
+      ],
+      "idempotency_scope": "courier_id+BLOCKED+blocked_at"
+    },
+    {
+      "type": "COURIER_UNBLOCKED",
+      "group": "couriers_shifts",
+      "aggregate": "courier",
+      "payload": [
+        "courier_id",
+        "unblocked_at"
+      ],
+      "idempotency_scope": "courier_id+UNBLOCKED+unblocked_at"
+    },
+    {
+      "type": "TRIP_FORMED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "shop_id",
+        "zone_id",
+        "formed_at",
+        "order_ids"
+      ],
+      "idempotency_scope": "trip_id+FORMED"
+    },
+    {
+      "type": "TRIP_ORDER_ADDED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "order_id",
+        "sequence_no",
+        "added_by"
+      ],
+      "idempotency_scope": "trip_id+order_id+ADDED"
+    },
+    {
+      "type": "TRIP_ORDER_REMOVED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "order_id",
+        "removed_by",
+        "reason"
+      ],
+      "idempotency_scope": "trip_id+order_id+REMOVED+occurred_at"
+    },
+    {
+      "type": "TRIP_ASSIGNED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "courier_id",
+        "queue_entry_id",
+        "assigned_at",
+        "assigned_by"
+      ],
+      "idempotency_scope": "trip_id+ASSIGNED"
+    },
+    {
+      "type": "TRIP_ASSIGNMENT_CANCELLED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "courier_id",
+        "cancelled_at",
+        "cancel_reason",
+        "actor_id"
+      ],
+      "idempotency_scope": "trip_id+ASSIGNMENT_CANCELLED+occurred_at"
+    },
+    {
+      "type": "TRIP_DEPARTED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "departed_at"
+      ],
+      "idempotency_scope": "trip_id+DEPARTED"
+    },
+    {
+      "type": "TRIP_RETURNED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "returned_at"
+      ],
+      "idempotency_scope": "trip_id+RETURNED"
+    },
+    {
+      "type": "TRIP_COMPLETED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "completed_at"
+      ],
+      "idempotency_scope": "trip_id+COMPLETED"
+    },
+    {
+      "type": "TRIP_CANCELLED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "cancelled_at",
+        "reason"
+      ],
+      "idempotency_scope": "trip_id+CANCELLED"
+    },
+    {
+      "type": "TRIP_EXCEPTION_RECORDED",
+      "group": "trips_assignments",
+      "aggregate": "trip",
+      "payload": [
+        "trip_id",
+        "exception_type",
+        "reason",
+        "actor_id"
+      ],
+      "idempotency_scope": "trip_id+EXCEPTION+occurred_at"
+    },
+    {
+      "type": "TARIFF_DRAFTED",
+      "group": "finance",
+      "aggregate": "tariff",
+      "payload": [
+        "tariff_version_id",
+        "name",
+        "base_amount",
+        "currency",
+        "author_id"
+      ],
+      "idempotency_scope": "tariff_version_id+DRAFTED"
+    },
+    {
+      "type": "TARIFF_APPROVED",
+      "group": "finance",
+      "aggregate": "tariff",
+      "payload": [
+        "tariff_version_id",
+        "approved_by",
+        "approved_at"
+      ],
+      "idempotency_scope": "tariff_version_id+APPROVED"
+    },
+    {
+      "type": "TARIFF_ACTIVATED",
+      "group": "finance",
+      "aggregate": "tariff",
+      "payload": [
+        "tariff_version_id",
+        "effective_from"
+      ],
+      "idempotency_scope": "tariff_version_id+ACTIVATED+effective_from"
+    },
+    {
+      "type": "COURIER_ACCRUAL_CREATED",
+      "group": "finance",
+      "aggregate": "accrual",
+      "payload": [
+        "accrual_id",
+        "courier_id",
+        "order_id",
+        "delivery_attempt_id",
+        "tariff_version_id",
+        "amount",
+        "currency",
+        "earned_at"
+      ],
+      "note": "Создаётся после подтверждённого ORDER_DELIVERED, не от суммы заказа",
+      "idempotency_scope": "delivery_attempt_id+ACCRUAL_CREATED"
+    },
+    {
+      "type": "COURIER_ACCRUAL_APPROVED",
+      "group": "finance",
+      "aggregate": "accrual",
+      "payload": [
+        "accrual_id",
+        "approved_by",
+        "approved_at"
+      ],
+      "idempotency_scope": "accrual_id+APPROVED"
+    },
+    {
+      "type": "COURIER_ACCRUAL_REVERSED",
+      "group": "finance",
+      "aggregate": "accrual",
+      "payload": [
+        "accrual_id",
+        "reversed_at",
+        "reason",
+        "actor_id"
+      ],
+      "idempotency_scope": "accrual_id+REVERSED+occurred_at"
+    },
+    {
+      "type": "COURIER_ACCRUAL_PAID",
+      "group": "finance",
+      "aggregate": "accrual",
+      "payload": [
+        "accrual_id",
+        "paid_at",
+        "payment_ref"
+      ],
+      "idempotency_scope": "accrual_id+PAID"
+    },
+    {
+      "type": "ACCRUAL_ADJUSTED",
+      "group": "finance",
+      "aggregate": "accrual",
+      "payload": [
+        "accrual_id",
+        "adjustment_id",
+        "adjustment_type",
+        "amount_delta",
+        "reason",
+        "approved_by"
+      ],
+      "idempotency_scope": "adjustment_id+ADJUSTED"
+    },
+    {
+      "type": "MENTORSHIP_ASSIGNED",
+      "group": "mentorship",
+      "aggregate": "mentorship",
+      "payload": [
+        "mentorship_id",
+        "mentor_courier_id",
+        "trainee_courier_id",
+        "starts_at",
+        "planned_ends_at",
+        "assigned_by"
+      ],
+      "idempotency_scope": "mentorship_id+ASSIGNED",
+      "source_candidate": "5939.mentorid"
+    },
+    {
+      "type": "MENTORSHIP_STARTED",
+      "group": "mentorship",
+      "aggregate": "mentorship",
+      "payload": [
+        "mentorship_id",
+        "started_at"
+      ],
+      "idempotency_scope": "mentorship_id+STARTED"
+    },
+    {
+      "type": "MENTORSHIP_SHIFT_REVIEWED",
+      "group": "mentorship",
+      "aggregate": "mentorship",
+      "payload": [
+        "mentorship_id",
+        "shift_id",
+        "shift_number",
+        "delivery_quality_score",
+        "rules_compliance_score",
+        "reviewed_by"
+      ],
+      "idempotency_scope": "mentorship_id+shift_id+REVIEWED",
+      "source_candidate": "5939.trainee_shift_in_five"
+    },
+    {
+      "type": "MENTORSHIP_COMPLETED",
+      "group": "mentorship",
+      "aggregate": "mentorship",
+      "payload": [
+        "mentorship_id",
+        "completed_at",
+        "confirmed_by"
+      ],
+      "idempotency_scope": "mentorship_id+COMPLETED"
+    },
+    {
+      "type": "MENTORSHIP_EXTENDED",
+      "group": "mentorship",
+      "aggregate": "mentorship",
+      "payload": [
+        "mentorship_id",
+        "new_planned_ends_at",
+        "reason",
+        "actor_id"
+      ],
+      "idempotency_scope": "mentorship_id+EXTENDED+new_planned_ends_at"
+    },
+    {
+      "type": "MENTORSHIP_CANCELLED",
+      "group": "mentorship",
+      "aggregate": "mentorship",
+      "payload": [
+        "mentorship_id",
+        "cancelled_at",
+        "reason",
+        "actor_id"
+      ],
+      "idempotency_scope": "mentorship_id+CANCELLED"
+    }
+  ]
+}

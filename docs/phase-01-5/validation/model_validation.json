@@ -1,0 +1,159 @@
+{
+  "phase": "1.5",
+  "status": "PASS",
+  "generated_at": "2026-11-21T17:00:44.799Z",
+  "counts": {
+    "tables": 25,
+    "events": 58,
+    "business_decisions": 24,
+    "business_rules": 40,
+    "mapping_rows": 60,
+    "migrations": 10,
+    "invariants": 36,
+    "lifecycles": 5,
+    "fixtures_rows": 15,
+    "ddl_tables": 25
+  },
+  "gates": {
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "PASS",
+    "G5": "PASS",
+    "G6": "PASS",
+    "G7": "PASS"
+  },
+  "checks": [
+    {
+      "id": "tables_unique",
+      "status": "PASS",
+      "details": "tables=25, unique=25"
+    },
+    {
+      "id": "every_table_has_pk",
+      "status": "PASS",
+      "details": "у каждой таблицы есть PK"
+    },
+    {
+      "id": "columns_unique_in_table",
+      "status": "PASS",
+      "details": "колонки уникальны"
+    },
+    {
+      "id": "fk_targets_exist",
+      "status": "PASS",
+      "details": "все FK указывают на существующие таблицы/колонки"
+    },
+    {
+      "id": "fk_types_compatible",
+      "status": "PASS",
+      "details": "типы FK совместимы"
+    },
+    {
+      "id": "lifecycle_states_defined",
+      "status": "PASS",
+      "details": "состояния жизненных циклов описаны в таблицах"
+    },
+    {
+      "id": "events_unique",
+      "status": "PASS",
+      "details": "events=58, unique=58"
+    },
+    {
+      "id": "events_payload_nonempty",
+      "status": "PASS",
+      "details": "у всех событий есть payload"
+    },
+    {
+      "id": "events_groups_valid",
+      "status": "PASS",
+      "details": "группы событий корректны"
+    },
+    {
+      "id": "invariants_reference_tables",
+      "status": "PASS",
+      "details": "инвариантов 36, таблицы существуют"
+    },
+    {
+      "id": "mapping_domain_tables_exist",
+      "status": "PASS",
+      "details": "mapping строк=60"
+    },
+    {
+      "id": "direct_mapping_has_source",
+      "status": "PASS",
+      "details": "DIRECT-строки имеют источник"
+    },
+    {
+      "id": "migrations_cover_tables",
+      "status": "PASS",
+      "details": "все таблицы покрыты ровно одной миграцией"
+    },
+    {
+      "id": "json_schemas_valid",
+      "status": "PASS",
+      "details": "JSON Schema конверта и ключевых событий корректны"
+    },
+    {
+      "id": "mermaid_valid",
+      "status": "PASS",
+      "details": "Mermaid-схемы корректны"
+    },
+    {
+      "id": "fixtures_no_pii",
+      "status": "PASS",
+      "details": "fixtures: 15 строк, PII нет"
+    },
+    {
+      "id": "ddl_draft_valid",
+      "status": "PASS",
+      "details": "DDL draft: 25 таблиц, все с пометкой DRAFT"
+    },
+    {
+      "id": "ddl_defaults_quoted",
+      "status": "PASS",
+      "details": "строковые DEFAULT заключены в кавычки"
+    },
+    {
+      "id": "decisions_unique",
+      "status": "PASS",
+      "details": "decisions=24, unique=24"
+    },
+    {
+      "id": "business_rules_present",
+      "status": "PASS",
+      "details": "business_rules=40, agreed=34, tbd=6"
+    },
+    {
+      "id": "writer_paths_allowed",
+      "status": "PASS",
+      "details": "генератор пишет только в docs/phase-01-5"
+    },
+    {
+      "id": "catalog_sqlite_unchanged",
+      "status": "PASS",
+      "details": "counts совпадают с backup"
+    },
+    {
+      "id": "typescript_compile",
+      "status": "PASS",
+      "details": "bunx tsc --noEmit exit 0"
+    },
+    {
+      "id": "model_tests",
+      "status": "PASS",
+      "details": "локальные тесты модели пройдены"
+    },
+    {
+      "id": "docs_no_pii",
+      "status": "PASS",
+      "details": "PII/секретов в артефактах этапа нет"
+    }
+  ],
+  "summary": {
+    "pass": 25,
+    "fail": 0,
+    "warn": 0
+  }
+}

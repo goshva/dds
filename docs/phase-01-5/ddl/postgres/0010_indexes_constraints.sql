@@ -1,0 +1,74 @@
+-- DRAFT ONLY. НЕ ПРИМЕНЯТЬ. Этап 1.5 — проектирование.
+-- Миграция 0010_indexes_constraints
+-- Назначение: Дополнительные индексы, уникальности, ограничения
+-- Зависимости: 0001, 0002, 0003, 0004, 0005, 0006, 0007, 0008
+-- Rollback: DROP INDEX/CONSTRAINT
+
+-- CREATE UNIQUE INDEX idx_shops_code ON shops (code);
+-- CREATE INDEX idx_shops_status ON shops (status);
+-- CREATE INDEX idx_addresses_normalized_hash ON addresses (normalized_hash);
+-- CREATE INDEX idx_addresses_latitude_longitude ON addresses (latitude, longitude);
+-- CREATE INDEX idx_couriers_operational_status ON couriers (operational_status);
+-- CREATE INDEX idx_couriers_is_blocked ON couriers (is_blocked);
+-- CREATE INDEX idx_couriers_external_hr_id ON couriers (external_hr_id);
+-- CREATE INDEX idx_courier_external_ids_courier_id ON courier_external_ids (courier_id);
+-- CREATE INDEX idx_courier_external_ids_source_system_external_id ON courier_external_ids (source_system, external_id);
+-- CREATE INDEX idx_delivery_zones_shop_id ON delivery_zones (shop_id);
+-- CREATE INDEX idx_delivery_zones_status ON delivery_zones (status);
+-- CREATE UNIQUE INDEX idx_delivery_zones_code ON delivery_zones (code);
+-- CREATE UNIQUE INDEX idx_zone_boundary_versions_zone_id_version ON zone_boundary_versions (zone_id, version);
+-- CREATE UNIQUE INDEX idx_orders_source_system_external_order_id ON orders (source_system, external_order_id);
+-- CREATE INDEX idx_orders_shop_id ON orders (shop_id);
+-- CREATE INDEX idx_orders_order_status ON orders (order_status);
+-- CREATE INDEX idx_orders_order_created_at ON orders (order_created_at);
+-- CREATE INDEX idx_orders_delivery_address_id ON orders (delivery_address_id);
+-- CREATE INDEX idx_order_amount_snapshots_order_id ON order_amount_snapshots (order_id);
+-- CREATE INDEX idx_order_amount_snapshots_order_id_amount_type_captured_at ON order_amount_snapshots (order_id, amount_type, captured_at);
+-- CREATE INDEX idx_order_status_history_order_id_changed_at ON order_status_history (order_id, changed_at);
+-- CREATE INDEX idx_order_status_history_source_event_id ON order_status_history (source_event_id);
+-- CREATE UNIQUE INDEX idx_order_readiness_order_id_attempt_no ON order_readiness (order_id, attempt_no);
+-- CREATE INDEX idx_order_readiness_ready_at ON order_readiness (ready_at);
+-- CREATE INDEX idx_work_slots_shop_id_starts_at ON work_slots (shop_id, starts_at);
+-- CREATE INDEX idx_courier_shifts_courier_id_actual_start_at ON courier_shifts (courier_id, actual_start_at);
+-- CREATE INDEX idx_courier_shifts_shop_id ON courier_shifts (shop_id);
+-- CREATE INDEX idx_courier_shifts_shift_status ON courier_shifts (shift_status);
+-- CREATE INDEX idx_courier_shifts_external_shift_id ON courier_shifts (external_shift_id);
+-- CREATE UNIQUE INDEX idx_courier_queue_entries_shop_id_queue_sequence ON courier_queue_entries (shop_id, queue_sequence);
+-- CREATE INDEX idx_courier_queue_entries_courier_id_queue_status ON courier_queue_entries (courier_id, queue_status);
+-- CREATE INDEX idx_courier_queue_entries_shift_id ON courier_queue_entries (shift_id);
+-- CREATE INDEX idx_trips_shop_id_trip_status ON trips (shop_id, trip_status);
+-- CREATE INDEX idx_trips_zone_id ON trips (zone_id);
+-- CREATE INDEX idx_trips_courier_id ON trips (courier_id);
+-- CREATE INDEX idx_trips_departed_at ON trips (departed_at);
+-- CREATE UNIQUE INDEX idx_trip_orders_trip_id_sequence_no ON trip_orders (trip_id, sequence_no);
+-- CREATE INDEX idx_trip_orders_order_id ON trip_orders (order_id);
+-- CREATE INDEX idx_trip_orders_trip_id ON trip_orders (trip_id);
+-- CREATE INDEX idx_trip_order_membership_history_trip_id_acted_at ON trip_order_membership_history (trip_id, acted_at);
+-- CREATE INDEX idx_trip_order_membership_history_order_id ON trip_order_membership_history (order_id);
+-- CREATE INDEX idx_trip_assignments_trip_id_assignment_status ON trip_assignments (trip_id, assignment_status);
+-- CREATE INDEX idx_trip_assignments_courier_id_assigned_at ON trip_assignments (courier_id, assigned_at);
+-- CREATE UNIQUE INDEX idx_delivery_attempts_order_id_attempt_no ON delivery_attempts (order_id, attempt_no);
+-- CREATE INDEX idx_delivery_attempts_courier_id_started_at ON delivery_attempts (courier_id, started_at);
+-- CREATE INDEX idx_delivery_attempts_trip_id ON delivery_attempts (trip_id);
+-- CREATE UNIQUE INDEX idx_courier_events_idempotency_key ON courier_events (idempotency_key);
+-- CREATE INDEX idx_courier_events_courier_id_occurred_at ON courier_events (courier_id, occurred_at);
+-- CREATE INDEX idx_courier_events_event_type ON courier_events (event_type);
+-- CREATE UNIQUE INDEX idx_domain_events_idempotency_key ON domain_events (idempotency_key);
+-- CREATE INDEX idx_domain_events_aggregate_type_aggregate_id_occurred_at ON domain_events (aggregate_type, aggregate_id, occurred_at);
+-- CREATE INDEX idx_domain_events_event_type ON domain_events (event_type);
+-- CREATE INDEX idx_domain_events_correlation_id ON domain_events (correlation_id);
+-- CREATE INDEX idx_tariff_versions_zone_id_effective_from ON tariff_versions (zone_id, effective_from);
+-- CREATE INDEX idx_tariff_versions_status ON tariff_versions (status);
+-- CREATE UNIQUE INDEX idx_courier_accruals_delivery_attempt_id ON courier_accruals (delivery_attempt_id);
+-- CREATE INDEX idx_courier_accruals_courier_id_earned_at ON courier_accruals (courier_id, earned_at);
+-- CREATE INDEX idx_courier_accruals_accrual_status ON courier_accruals (accrual_status);
+-- CREATE INDEX idx_accrual_adjustments_accrual_id ON accrual_adjustments (accrual_id);
+-- CREATE INDEX idx_mentorship_assignments_trainee_courier_id_status ON mentorship_assignments (trainee_courier_id, status);
+-- CREATE INDEX idx_mentorship_assignments_mentor_courier_id ON mentorship_assignments (mentor_courier_id);
+-- CREATE UNIQUE INDEX idx_mentorship_shift_reviews_mentorship_assignment_id_shift_id ON mentorship_shift_reviews (mentorship_assignment_id, shift_id);
+
+-- Частичные уникальные индексы (примеры, требуют подтверждения):
+-- CREATE UNIQUE INDEX uq_trip_orders_active_order ON trip_orders (order_id) WHERE removed_at IS NULL;
+-- CREATE UNIQUE INDEX uq_trip_active_assignment ON trip_assignments (trip_id) WHERE assignment_status IN ('PROPOSED','ACCEPTED','DEPARTED');
+-- CREATE UNIQUE INDEX uq_queue_active_shift ON courier_queue_entries (shift_id) WHERE queue_status IN ('WAITING','OFFERED','PAUSED');
+-- CREATE UNIQUE INDEX uq_mentorship_active_trainee ON mentorship_assignments (trainee_courier_id) WHERE status = 'ACTIVE';

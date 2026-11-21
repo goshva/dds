@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-11-21T15:49:44.551Z",
+  "phase": "1.4.1",
+  "target": {
+    "host": "superset.svc.vkusvill.ru",
+    "port": 443,
+    "protocol": "https:",
+    "base_url_configured": true
+  },
+  "credentials_present": true,
+  "status": "ACCESS_OK",
+  "duration_ms": 1585,
+  "layers": [
+    {
+      "layer": "dns.A",
+      "ok": true,
+      "duration_ms": 43,
+      "details": {
+        "addresses": [
+          "10.210.254.19"
+        ]
+      }
+    },
+    {
+      "layer": "dns.AAAA",
+      "ok": false,
+      "duration_ms": 8,
+      "error_code": "UNKNOWN",
+      "error_message": "undefined"
+    },
+    {
+      "layer": "tcp",
+      "ok": true,
+      "duration_ms": 78,
+      "details": {
+        "host": "superset.svc.vkusvill.ru",
+        "port": 443
+      }
+    },
+    {
+      "layer": "tls",
+      "ok": true,
+      "duration_ms": 31,
+      "details": {
+        "valid_to": "May 20 23:06:40 2027 GMT",
+        "issuer": "GlobalSign GCC R46 OV TLS CA 2025",
+        "subject": "*.svc.vkusvill.ru"
+      }
+    },
+    {
+      "layer": "http.GET_/health",
+      "ok": true,
+      "duration_ms": 34,
+      "status": 200,
+      "details": {
+        "preview_len": 2
+      }
+    }
+  ],
+  "auth": {
+    "attempted": true,
+    "login": "success",
+    "error_status": null,
+    "error_class": null,
+    "spot_checks": {
+      "dataset/4732": {
+        "ok": true,
+        "result_keys": 42
+      },
+      "chart/28360": {
+        "ok": true,
+        "result_keys": 22
+      },
+      "dashboard/1680": {
+        "ok": true,
+        "result_keys": 28
+      }
+    }
+  },
+  "spot_checks_ok": true,
+  "interpretation": {
+    "note": "Секреты не выводятся. Исторический успешный вход не подтверждает текущую доступность.",
+    "read_only": true
+  }
+}

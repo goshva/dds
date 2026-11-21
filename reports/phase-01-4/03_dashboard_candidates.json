@@ -1,0 +1,1298 @@
+{
+  "generated_at": "2026-11-21T15:57:11.239Z",
+  "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z",
+  "total_dashboards": 332,
+  "candidates": [
+    {
+      "dashboard_id": 1213,
+      "name": "Справочник нормативов времени сборки/доставки/общего времени заказов",
+      "matched_domains": [
+        "ORDERS",
+        "FULFILLMENT",
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "заказ",
+        "сборк",
+        "достав",
+        "ставк"
+      ],
+      "score": 20,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1673,
+      "name": "Доставки курьеров по дарксторам",
+      "matched_domains": [
+        "DELIVERY",
+        "COURIER",
+        "SHOP",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "курьер",
+        "даркстор",
+        "ставк"
+      ],
+      "score": 20,
+      "priority": "P2",
+      "chart_count": 3,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 667,
+      "name": "Доставка: ***REMOVED***ы с опозданием более чем в 2 раза",
+      "matched_domains": [
+        "ORDERS",
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "заказ",
+        "достав",
+        "ставк"
+      ],
+      "score": 18,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1152,
+      "name": "Сборка и Доставка в разрезе Сервисов",
+      "matched_domains": [
+        "FULFILLMENT",
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "сборк",
+        "достав",
+        "ставк"
+      ],
+      "score": 18,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 660,
+      "name": "Лояльность - CSI (Рейтинги доставки)",
+      "matched_domains": [
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "ставк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 48,
+      "dataset_count": 14
+    },
+    {
+      "dashboard_id": 663,
+      "name": "Статистика по заказам и курьерам (ответственные по гео)",
+      "matched_domains": [
+        "ORDERS",
+        "COURIER"
+      ],
+      "matched_terms": [
+        "заказ",
+        "курьер"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 96,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 665,
+      "name": "Онлайн статистика по заказам и курьерам",
+      "matched_domains": [
+        "ORDERS",
+        "COURIER"
+      ],
+      "matched_terms": [
+        "заказ",
+        "курьер"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 59,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 714,
+      "name": "Доставка: Новости доставки",
+      "matched_domains": [
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "ставк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 7,
+      "dataset_count": 3
+    },
+    {
+      "dashboard_id": 722,
+      "name": "Доставка: Вкусвильчик",
+      "matched_domains": [
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "ставк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 3,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 847,
+      "name": "Несборка продукции сервиса Кафе-Пекарни в слотовом заказе",
+      "matched_domains": [
+        "ORDERS",
+        "FULFILLMENT"
+      ],
+      "matched_terms": [
+        "заказ",
+        "сборк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 5,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 865,
+      "name": "Отчет по изменению весовых товаров при сборке",
+      "matched_domains": [
+        "FULFILLMENT",
+        "EVENTS"
+      ],
+      "matched_terms": [
+        "сборк",
+        "изменен"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 5,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 872,
+      "name": "Доставка ДаркКитчен [копия на новом источнике]",
+      "matched_domains": [
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "ставк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 63,
+      "dataset_count": 8
+    },
+    {
+      "dashboard_id": 982,
+      "name": "Выплаты уволенным сотрудникам",
+      "matched_domains": [
+        "COURIER",
+        "PAY"
+      ],
+      "matched_terms": [
+        "сотрудник",
+        "выплат"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1025,
+      "name": "Статистика доставок курьерами  в разрезе пулов",
+      "matched_domains": [
+        "DELIVERY",
+        "COURIER"
+      ],
+      "matched_terms": [
+        "достав",
+        "курьер"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 18,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 1083,
+      "name": "Статус заказа",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ",
+        "статус"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 44,
+      "dataset_count": 19
+    },
+    {
+      "dashboard_id": 1228,
+      "name": "HR Dashboard Доставка",
+      "matched_domains": [
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "ставк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 46,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 1311,
+      "name": "Аудиты доставки",
+      "matched_domains": [
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "ставк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 5,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1320,
+      "name": "Курьеры без заказов 6 дней",
+      "matched_domains": [
+        "ORDERS",
+        "COURIER"
+      ],
+      "matched_terms": [
+        "заказ",
+        "курьер"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 2,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1352,
+      "name": "Последний доставленный заказ",
+      "matched_domains": [
+        "ORDERS",
+        "DELIVERY"
+      ],
+      "matched_terms": [
+        "заказ",
+        "достав"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1577,
+      "name": "Статистика по доставке по управляющим и кустам",
+      "matched_domains": [
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "ставк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 11,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1585,
+      "name": "Выходы курьеров и прогноз заказов",
+      "matched_domains": [
+        "ORDERS",
+        "COURIER"
+      ],
+      "matched_terms": [
+        "заказ",
+        "курьер"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 10,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1594,
+      "name": "Отчет для сверок с партнером сторонней доставки",
+      "matched_domains": [
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "ставк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1599,
+      "name": "Ухудшение условий доставки",
+      "matched_domains": [
+        "DELIVERY",
+        "PAY"
+      ],
+      "matched_terms": [
+        "достав",
+        "ставк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 24,
+      "dataset_count": 10
+    },
+    {
+      "dashboard_id": 1636,
+      "name": "Развитие пути сборки заказов - отчет по несборке",
+      "matched_domains": [
+        "ORDERS",
+        "FULFILLMENT"
+      ],
+      "matched_terms": [
+        "заказ",
+        "сборк"
+      ],
+      "score": 16,
+      "priority": "P2",
+      "chart_count": 14,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 549,
+      "name": "Выходы новых курьеров",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 4,
+      "dataset_count": 3
+    },
+    {
+      "dashboard_id": 561,
+      "name": "Отчет по выработке сборщиков в дарксторах",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "даркстор"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 20,
+      "dataset_count": 5
+    },
+    {
+      "dashboard_id": 568,
+      "name": "Отчет по начислению бонусов",
+      "matched_domains": [
+        "PAY"
+      ],
+      "matched_terms": [
+        "начислен"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 10,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 619,
+      "name": "Эффективность дарксторов",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "даркстор"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 28,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 668,
+      "name": "Статистика по заказам и сборщикам",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 192,
+      "dataset_count": 12
+    },
+    {
+      "dashboard_id": 752,
+      "name": "Несборка по партнерам",
+      "matched_domains": [
+        "FULFILLMENT"
+      ],
+      "matched_terms": [
+        "сборк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 8,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 824,
+      "name": "МП. Магазины",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "магазин"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 6,
+      "dataset_count": 3
+    },
+    {
+      "dashboard_id": 831,
+      "name": "Прогноз составляющих комплектов Дарккитчен на складах",
+      "matched_domains": [
+        "FULFILLMENT"
+      ],
+      "matched_terms": [
+        "комплект"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 4,
+      "dataset_count": 3
+    },
+    {
+      "dashboard_id": 853,
+      "name": "Оформленные курьеры",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 36,
+      "dataset_count": 9
+    },
+    {
+      "dashboard_id": 869,
+      "name": "Скорость сборки по товарам в сек",
+      "matched_domains": [
+        "FULFILLMENT"
+      ],
+      "matched_terms": [
+        "сборк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 2,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 885,
+      "name": "Просроченные заказы по часам",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 4,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 892,
+      "name": "Отчёт по тесту Led-панелей в магазине 2.0",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "магазин"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 4,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 950,
+      "name": "Статистика по заказам для Мили",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 41,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 951,
+      "name": "Оффлайн точки Сгоряча",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "точк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 35,
+      "dataset_count": 7
+    },
+    {
+      "dashboard_id": 952,
+      "name": "Статистика по заказам <ФИО>",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 21,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 956,
+      "name": "Несборка весовой товар",
+      "matched_domains": [
+        "FULFILLMENT"
+      ],
+      "matched_terms": [
+        "сборк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 7,
+      "dataset_count": 3
+    },
+    {
+      "dashboard_id": 969,
+      "name": "Сборка для Пекарен",
+      "matched_domains": [
+        "FULFILLMENT"
+      ],
+      "matched_terms": [
+        "сборк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 5,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 971,
+      "name": "Тепловая карта заказов",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 977,
+      "name": "Статистика по заказам в разрезе сервисов лёгкая версия",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 23,
+      "dataset_count": 3
+    },
+    {
+      "dashboard_id": 991,
+      "name": "Отчет по продажам Зелени и ДаркСтор ФРОВ",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "даркстор"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 2,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1013,
+      "name": "Воронка виджета \"Куплю в магазине\"",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "магазин"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 3,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1021,
+      "name": "Доп поставки MVP УИ",
+      "matched_domains": [
+        "PAY"
+      ],
+      "matched_terms": [
+        "ставк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 7,
+      "dataset_count": 7
+    },
+    {
+      "dashboard_id": 1114,
+      "name": "Посещения ночных магазинов без продавца",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "магазин"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1122,
+      "name": "***REMOVED***ы поставщикам",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 6,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1136,
+      "name": "Отчет для предиктивной аналитики по ДаркСторам",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "даркстор"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 24,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1145,
+      "name": "<ФИО> технологов магазинами",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "магазин"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 33,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 1210,
+      "name": "Калькулятор курьеры",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 9,
+      "dataset_count": 6
+    },
+    {
+      "dashboard_id": 1229,
+      "name": "Карточка товара",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "точк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 53,
+      "dataset_count": 7
+    },
+    {
+      "dashboard_id": 1235,
+      "name": "logs_universal_logs_dq_dashboard",
+      "matched_domains": [
+        "EVENTS"
+      ],
+      "matched_terms": [
+        "log"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 4,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1262,
+      "name": "Статистика заказов Кафе/Пекарни",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 5,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1284,
+      "name": "***REMOVED***ы и авторизация",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 2,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1329,
+      "name": "Тестовый отчет (новая логика по выходам новых курьеров)",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1330,
+      "name": "Рейтинг магазинов (для Розницы)",
+      "matched_domains": [
+        "SHOP"
+      ],
+      "matched_terms": [
+        "магазин"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 93,
+      "dataset_count": 8
+    },
+    {
+      "dashboard_id": 1331,
+      "name": "Доступность оплат на месте",
+      "matched_domains": [
+        "QUEUE"
+      ],
+      "matched_terms": [
+        "доступн"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 14,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1353,
+      "name": "График работы ТТ с проектом Кафе",
+      "matched_domains": [
+        "SHIFT"
+      ],
+      "matched_terms": [
+        "график"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1356,
+      "name": "Активность курьеров",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 6,
+      "dataset_count": 5
+    },
+    {
+      "dashboard_id": 1369,
+      "name": "Переоформленные заказы (состав)",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 8,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1378,
+      "name": "Монитор онлайн-заказов",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1386,
+      "name": "ГЕО/КПО Доступность сервисов",
+      "matched_domains": [
+        "QUEUE"
+      ],
+      "matched_terms": [
+        "доступн"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 21,
+      "dataset_count": 12
+    },
+    {
+      "dashboard_id": 1405,
+      "name": "Скорость сборки ДКП",
+      "matched_domains": [
+        "FULFILLMENT"
+      ],
+      "matched_terms": [
+        "сборк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 7,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1412,
+      "name": "Изменение сервисов",
+      "matched_domains": [
+        "EVENTS"
+      ],
+      "matched_terms": [
+        "изменен"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 2,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1427,
+      "name": "Отчет по показателям для специалистов ДКП (ППР / Кураторы и т. д.)",
+      "matched_domains": [
+        "MENTOR"
+      ],
+      "matched_terms": [
+        "куратор"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1429,
+      "name": "Запланированные выходы курьеров",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 5,
+      "dataset_count": 3
+    },
+    {
+      "dashboard_id": 1433,
+      "name": "Доступность оплат на месте(клиентская воронка)",
+      "matched_domains": [
+        "QUEUE"
+      ],
+      "matched_terms": [
+        "доступн"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 18,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 1445,
+      "name": "Лиды и оформленные курьеры по amoCRM",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 41,
+      "dataset_count": 9
+    },
+    {
+      "dashboard_id": 1453,
+      "name": "<ФИО>",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 30,
+      "dataset_count": 6
+    },
+    {
+      "dashboard_id": 1472,
+      "name": "Метрики маршрутизатора",
+      "matched_domains": [
+        "ROUTE"
+      ],
+      "matched_terms": [
+        "маршрут"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 19,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1499,
+      "name": "МЕТРИКИ МАРШРУТИЗАТОРА",
+      "matched_domains": [
+        "ROUTE"
+      ],
+      "matched_terms": [
+        "маршрут"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 59,
+      "dataset_count": 24
+    },
+    {
+      "dashboard_id": 1503,
+      "name": "Несборки товаров весовых",
+      "matched_domains": [
+        "FULFILLMENT"
+      ],
+      "matched_terms": [
+        "сборк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 2,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1565,
+      "name": "Карты для теста Редактирование заказа",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 6,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 1571,
+      "name": "Доступность ассортимента в сервисах",
+      "matched_domains": [
+        "QUEUE"
+      ],
+      "matched_terms": [
+        "доступн"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 2,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1573,
+      "name": "Маркированные товары в отменённых онлайн-заказах",
+      "matched_domains": [
+        "ORDERS"
+      ],
+      "matched_terms": [
+        "заказ"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 14,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 1582,
+      "name": "Доступность ДКП",
+      "matched_domains": [
+        "QUEUE"
+      ],
+      "matched_terms": [
+        "доступн"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 10,
+      "dataset_count": 3
+    },
+    {
+      "dashboard_id": 1586,
+      "name": "Курьеры новички",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 1,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1604,
+      "name": "ВВ Агент | Курьеры",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 2,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1605,
+      "name": "Недопоставки по дням",
+      "matched_domains": [
+        "PAY"
+      ],
+      "matched_terms": [
+        "ставк"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 7,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1612,
+      "name": "Курьеры по дням",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 2,
+      "dataset_count": 1
+    },
+    {
+      "dashboard_id": 1617,
+      "name": "Опрос новичка после первой смены",
+      "matched_domains": [
+        "SHIFT"
+      ],
+      "matched_terms": [
+        "смен"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 20,
+      "dataset_count": 5
+    },
+    {
+      "dashboard_id": 1639,
+      "name": "Сгоряча (<ФИО>) · Обращения, жалобы, возвраты · МСК и МО · по месяцам",
+      "matched_domains": [
+        "DELIVERY"
+      ],
+      "matched_terms": [
+        "возврат"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 40,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 1646,
+      "name": "ИИ фотоконтроль начала смены",
+      "matched_domains": [
+        "SHIFT"
+      ],
+      "matched_terms": [
+        "смен"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 15,
+      "dataset_count": 2
+    },
+    {
+      "dashboard_id": 1658,
+      "name": "Графики и выходы",
+      "matched_domains": [
+        "SHIFT"
+      ],
+      "matched_terms": [
+        "график"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 72,
+      "dataset_count": 8
+    },
+    {
+      "dashboard_id": 1662,
+      "name": "Метрики МП курьеров",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 22,
+      "dataset_count": 5
+    },
+    {
+      "dashboard_id": 1664,
+      "name": "Наставники 12 группа",
+      "matched_domains": [
+        "MENTOR"
+      ],
+      "matched_terms": [
+        "наставник"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 20,
+      "dataset_count": 4
+    },
+    {
+      "dashboard_id": 1672,
+      "name": "Обращения курьеров в поддержку",
+      "matched_domains": [
+        "COURIER"
+      ],
+      "matched_terms": [
+        "курьер"
+      ],
+      "score": 14,
+      "priority": "P2",
+      "chart_count": 14,
+      "dataset_count": 4
+    }
+  ]
+}
