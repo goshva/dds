@@ -1,0 +1,62 @@
+erDiagram
+  ORDER {
+    string presence_status "VERIFIED"
+    string evidence "7021.id_order, 7027.id_order, 6836.id_order"
+  }
+  ORDER_ITEM {
+    string presence_status "UNKNOWN"
+    string evidence ""
+  }
+  DELIVERY {
+    string presence_status "VERIFIED"
+    string evidence "6836.id_delivery_job, 6836.id_general, 4369.id_delivery_job"
+  }
+  SHOP {
+    string presence_status "VERIFIED"
+    string evidence "7021.id_tt, 7021.shopno, 7027.shopno"
+  }
+  ADDRESS {
+    string presence_status "INFERRED"
+    string evidence "6836.geo, 4369.geo, 6757.geo"
+  }
+  COURIER {
+    string presence_status "VERIFIED"
+    string evidence "7027.id_courier, 6836.courier, 6836.id_courier"
+  }
+  ASSIGNMENT {
+    string presence_status "INFERRED"
+    string evidence "7027.flag_late_first_assignment, 7027.date_pickuped, 7006.date_pickuped"
+  }
+  ROUTE {
+    string presence_status "VERIFIED"
+    string evidence "7027.cluster_id, 6836.id_group, 7024.cluster_id"
+  }
+  SHIFT {
+    string presence_status "INFERRED"
+    string evidence "7021.is_night_shift, 7021.shift_type, 5939.enough_shifts_for_mentor"
+  }
+  EVENT {
+    string presence_status "INFERRED"
+    string evidence "7027.flag_courier_is_newbie, 7027.flag_courier_shortage, 7027.flag_fact_seq_noteq_plan_by_order"
+  }
+  ZONE {
+    string presence_status "INFERRED"
+    string evidence "7465.inactivity_zone, 7465.prev_inactivity_zone, 7465.zone"
+  }
+  ACCRUAL {
+    string presence_status "UNKNOWN"
+    string evidence "6836.sum_paid, 6836.sum_paid_disc, 4369.sum_paid"
+  }
+  MENTORSHIP {
+    string presence_status "INFERRED"
+    string evidence "5939.date_for_mentor, 5939.enough_shifts_for_mentor, 5939.mentor_at_date"
+  }
+  ORDER ||--o{ ORDER_ITEM : "не подтверждено"
+  ORDER ||--o{ DELIVERY : "id_order/parcel_id (INFERRED)"
+  SHOP ||--o{ ORDER : "shopno (VERIFIED)"
+  COURIER ||--o{ DELIVERY : "id_courier (INFERRED)"
+  DELIVERY }o--|| ROUTE : "parcel_id/id_route (INFERRED)"
+  COURIER ||--o{ SHIFT : "не подтверждено"
+  ZONE ||--o{ ORDER : "зона не подтверждена"
+  COURIER ||--o{ ACCRUAL : "тариф не подтверждён"
+  MENTORSHIP }o--|| COURIER : "name_curator (INFERRED)"

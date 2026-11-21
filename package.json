@@ -8,7 +8,17 @@
     "summary": "bun run src/cli.ts summary",
     "search": "bun run src/cli.ts search",
     "object": "bun run src/cli.ts object",
-    "help": "bun run src/cli.ts help"
+    "help": "bun run src/cli.ts help",
+    "phase1-4:audit": "bun run src/phase1-4/cli.ts audit",
+    "phase1-4:access": "bun run src/phase1-4/cli.ts access",
+    "phase1-4:sync": "bun run src/phase1-4/cli.ts sync",
+    "phase1-4:search": "bun run src/phase1-4/cli.ts search",
+    "phase1-4:extract": "bun run src/phase1-4/cli.ts extract",
+    "phase1-4:parse": "bun run src/phase1-4/cli.ts parse",
+    "phase1-4:model": "bun run src/phase1-4/cli.ts model",
+    "phase1-4:quality": "bun run src/phase1-4/cli.ts quality",
+    "phase1-4:validate": "bun run src/phase1-4/cli.ts validate",
+    "phase1-4:all": "bun run src/phase1-4/cli.ts all"
   },
   "devDependencies": {
     "@types/bun": "latest"

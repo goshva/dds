@@ -1,0 +1,16 @@
+[
+  {
+    "id": "22222222-2222-4222-8222-222222222222",
+    "display_name": "Courier-001",
+    "courier_type": "вело",
+    "operational_status": "ACTIVE",
+    "is_blocked": false
+  },
+  {
+    "id": "33333333-3333-4333-8333-333333333333",
+    "display_name": "Courier-002",
+    "courier_type": "авто",
+    "operational_status": "ACTIVE",
+    "is_blocked": false
+  }
+]

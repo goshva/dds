@@ -1,0 +1,87 @@
+{
+  "phase": "1.4",
+  "status": "PASS",
+  "generated_at": "2026-11-21T16:02:44.222Z",
+  "gates": {
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "PASS",
+    "G4": "PASS",
+    "G5": "PASS",
+    "G6": "PASS",
+    "G7": "PASS"
+  },
+  "approved_datasets_expected": 12,
+  "approved_datasets_found": 12,
+  "new_candidates": 659,
+  "deeply_parsed_datasets": 62,
+  "extracted_datasets": 62,
+  "tables": 436,
+  "columns": 8475,
+  "relationships": 5717,
+  "unresolved_refs": {
+    "dataset": 45,
+    "dashboard": 318,
+    "tables": 4979,
+    "columns": 669
+  },
+  "pii_leaks": 0,
+  "catalog_sqlite_modified": false,
+  "source_databases_queried": false,
+  "superset_objects_modified": false,
+  "git_committed": false,
+  "git_pushed": false,
+  "typescript_ok": true,
+  "tests_ok": true,
+  "checks": [
+    {
+      "id": "G0_repository_audit",
+      "gate": "G0",
+      "status": "PASS",
+      "details": "00_repository_audit.md присутствует"
+    },
+    {
+      "id": "G1_superset_access",
+      "gate": "G1",
+      "status": "PASS",
+      "details": "status=ACCESS_OK; login=success; spot_ok=true"
+    },
+    {
+      "id": "G2_catalog_sync",
+      "gate": "G2",
+      "status": "PASS",
+      "details": "snapshot=phase-01-4-2026-11-21T15-56-56-676Z; errors=0"
+    },
+    {
+      "id": "G3_candidates",
+      "gate": "G3",
+      "status": "PASS",
+      "details": "approved found=12/12; candidates=3778"
+    },
+    {
+      "id": "G4_extraction",
+      "gate": "G4",
+      "status": "PASS",
+      "details": "04_extraction_report.md присутствует"
+    },
+    {
+      "id": "G5_sql_parsing",
+      "gate": "G5",
+      "status": "PASS",
+      "details": "05_sql_parsing_report.md присутствует"
+    },
+    {
+      "id": "G6_modeling",
+      "gate": "G6",
+      "status": "PASS",
+      "details": "06_modeling_report.md присутствует"
+    },
+    {
+      "id": "G7_quality",
+      "gate": "G7",
+      "status": "PASS",
+      "details": "07_quality_report.md присутствует"
+    }
+  ]
+}

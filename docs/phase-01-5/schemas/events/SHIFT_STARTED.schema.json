@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dds.local/schemas/events/SHIFT_STARTED.schema.json",
+  "title": "SHIFT_STARTED",
+  "allOf": [
+    {
+      "$ref": "../event-envelope.schema.json"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "const": "SHIFT_STARTED"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "shift_id",
+        "courier_id",
+        "shop_id",
+        "actual_start_at"
+      ],
+      "properties": {
+        "shift_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "courier_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "shop_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "actual_start_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-11-21T16:02:41.739Z",
+  "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z",
+  "requirements": [
+    {
+      "requirement": "Общий список заказов",
+      "needed": "заказ, адрес, статус",
+      "status": "PARTIAL",
+      "evidence": "order_status/id_order/shopno есть (4732); адрес доставки как поле не подтверждён",
+      "gaps": "address_to_zone/адрес"
+    },
+    {
+      "requirement": "Готовность",
+      "needed": "подтверждённое событие/время готовности",
+      "status": "NEEDS_EVENT",
+      "evidence": "order_ready отсутствует; date_status_10/date_collected — гипотезы",
+      "gaps": "order_ready"
+    },
+    {
+      "requirement": "Зоны",
+      "needed": "адрес, координаты, справочник зон",
+      "status": "NEEDS_REFERENCE",
+      "evidence": "area_tt — территория ТТ; zone_cluster — кластер; inactivity_zone — зона бездействия",
+      "gaps": "zone_reference, address_to_zone"
+    },
+    {
+      "requirement": "Ходки",
+      "needed": "группа заказов, выезд",
+      "status": "PARTIAL",
+      "evidence": "id_pool/id_pool_calc/pool_size есть; «ходка» как сущность не подтверждена; выезд = date_pickuped (PROBABLE)",
+      "gaps": "batch_created/batch_assigned"
+    },
+    {
+      "requirement": "Очередь",
+      "needed": "прибытие, очередь, доступность",
+      "status": "NEEDS_EVENT",
+      "evidence": "arrival_time/wait_time есть, события очереди и order_ready нет",
+      "gaps": "order_ready, order_picked_up"
+    },
+    {
+      "requirement": "Назначение",
+      "needed": "курьер, заказ, ходка",
+      "status": "PARTIAL",
+      "evidence": "id_order+id_courier есть (4732/7006/7027/7119); событий назначения нет",
+      "gaps": "batch_assigned, courier_accepted_assignment"
+    },
+    {
+      "requirement": "Оплата",
+      "needed": "тариф, доставка, начисление",
+      "status": "NEEDS_REFERENCE",
+      "evidence": "sum_paid/sum_order — суммы заказа; shift_N_profit — только первые 5 смен (7473); тарифов нет",
+      "gaps": "tariff_reference, courier_income_accrued"
+    },
+    {
+      "requirement": "Смены",
+      "needed": "начало, конец, перерывы",
+      "status": "NEEDS_EVENT",
+      "evidence": "полной модели смен нет; есть только первые 5 смен/14 дней",
+      "gaps": "courier_shift_started/ended, shift_plan_reference"
+    },
+    {
+      "requirement": "Обучение",
+      "needed": "новичок, куратор, даты, результат",
+      "status": "PARTIAL",
+      "evidence": "name_curator/first_order_date/shifts_in_first_14d/fifth_shift_status есть; роль наставника не подтверждена",
+      "gaps": "courier_mentor_assigned, courier_training_completed"
+    }
+  ]
+}

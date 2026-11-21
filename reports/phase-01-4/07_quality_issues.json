@@ -1,0 +1,3422 @@
+{
+  "generated_at": "2026-11-21T16:02:41.735Z",
+  "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z",
+  "unresolved_refs": {
+    "dataset": 45,
+    "dashboard": 318,
+    "tables": 4979,
+    "columns": 669,
+    "metrics_with_unresolved_refs": 1094
+  },
+  "issues": [
+    {
+      "area": "unresolved_refs",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3202,3201,3054,2983,2982,2743,2278,2251,2247,1202",
+      "message": "charts ссылаются на 45 dataset id вне snapshot",
+      "evidence": "chart.datasource_id"
+    },
+    {
+      "area": "unresolved_refs",
+      "severity": "WARN",
+      "object_type": "dashboard",
+      "object_id": "1126,1679,1380,1480,1406,697,870,1544,1494,1491",
+      "message": "charts ссылаются на 318 dashboard id вне snapshot",
+      "evidence": "chart.dashboards[]"
+    },
+    {
+      "area": "unresolved_tables",
+      "severity": "WARN",
+      "object_type": "sql_source",
+      "object_id": "",
+      "message": "4979 источников не классифицированы как физическая таблица/CTE",
+      "evidence": "05_table_inventory.csv kind=unknown/subquery"
+    },
+    {
+      "area": "unresolved_columns",
+      "severity": "WARN",
+      "object_type": "column",
+      "object_id": "",
+      "message": "669 SQL-идентификаторов не найдены в columns",
+      "evidence": "05_column_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "7021.avg_real_1_pos_sheet",
+      "message": "метрика ссылается на отсутствующие поля: collection_time_real_sec_sheet",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "7021.share_collection_delay_all",
+      "message": "метрика ссылается на отсутствующие поля: slots;sla_order_time",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.share_sheets_col_15m_dk",
+      "message": "метрика ссылается на отсутствующие поля: toHour;date_diff;date_add",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_delivery_collection_>75_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.share_pos_collected_all",
+      "message": "метрика ссылается на отсутствующие поля: darkstore_time_sheet",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.dod_cnt_orders_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMMDD",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.wow_share_delivery_collection_>135_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYearWeek",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.dod_share_delivery_>45_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMMDD",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.avg_qty_orders_collected_per_1_sbor",
+      "message": "метрика ссылается на отсутствующие поля: CONCAT",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_out_of_slot",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.dod_share_collection_wait_>9_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMMDD",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.qty_ordered_DK_>14",
+      "message": "метрика ссылается на отсутствующие поля: toHour;date_diff;date_add",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_collection_wait_<8_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.dk_check_filling",
+      "message": "метрика ссылается на отсутствующие поля: NUMERIC",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.dod_share_collection_wait_>14_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMMDD",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.avg_waiting_area_time",
+      "message": "метрика ссылается на отсутствующие поля: concat;substring",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_delivery_collection_>135",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.wow_cnt_orders_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYearWeek",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.qty_ordered_DK_>13",
+      "message": "метрика ссылается на отсутствующие поля: toHour;date_diff;date_add",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.qty_tov_on_hour_per_1_sbor",
+      "message": "метрика ссылается на отсутствующие поля: CONCAT;toStartOfHour",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.wow_share_collection_wait_<8_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYearWeek",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.wow_share_out_of_slot_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYearWeek",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.wow_share_collection_wait_>14_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYearWeek",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.avg_qty_delivered_per_1_courier",
+      "message": "метрика ссылается на отсутствующие поля: CONCAT",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.avg_qty_genorders_delivered_per_1_courier",
+      "message": "метрика ссылается на отсутствующие поля: CONCAT",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_delivery_>90_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_collection_wait_>9_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.avg_qty_sheets_collected_per_1_sbor",
+      "message": "метрика ссылается на отсутствующие поля: concat",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_cnt_orders",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_delivery_>45",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.wow_share_delivery_>90_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYearWeek",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.share_sheets_col_15m_dk_not_ex",
+      "message": "метрика ссылается на отсутствующие поля: toHour;date_diff;date_add",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.dod_share_delivery_>20_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMMDD",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_collection_wait_>14_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.time_col_delay",
+      "message": "метрика ссылается на отсутствующие поля: toDayOfMonth;toHour;toMinute",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_delivery_>90",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.qty_newbies",
+      "message": "метрика ссылается на отсутствующие поля: date",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.qty_sheets_col_15m_dk",
+      "message": "метрика ссылается на отсутствующие поля: toHour;date_diff;date_add",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.wow_share_delivery_>45_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYearWeek",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.dod_share_delivery_collection_>135",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMMDD",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_delivery_collection_>135_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_delivery_collection_>75",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_delivery_>45_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.wow_share_collection_wait_>9_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYearWeek",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.qty_orders_on_hour_per_1_sbor",
+      "message": "метрика ссылается на отсутствующие поля: CONCAT;toStartOfHour",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.tov_DK_>_15_min_share",
+      "message": "метрика ссылается на отсутствующие поля: toHour;date_diff;date_add",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.dod_share_delivery_>90_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMMDD",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.dod_share_delivery_collection_>45",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMMDD",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.mom_share_delivery_>20",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYYYYMM",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "metric_unresolved_refs",
+      "severity": "ERROR",
+      "object_type": "metric",
+      "object_id": "6836.wow_share_delivery_>20_tt",
+      "message": "метрика ссылается на отсутствующие поля: lagInFrame;toYearWeek",
+      "evidence": "05_metric_inventory.csv"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "6837,6814",
+      "message": "duplicate table_name: tt_cluster_temp",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "1084,2117",
+      "message": "duplicate table_name: 1_1_stoimost_rejsov_postavshik_rc",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "4974,4110",
+      "message": "duplicate table_name: offline_tt_dk",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "1123,2123",
+      "message": "duplicate table_name: 1_2_stoimost_rejsov_rc_rc",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3746,3306",
+      "message": "duplicate table_name: tmz_darkstore",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3704,2503",
+      "message": "duplicate table_name: tsd",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "7703,5633",
+      "message": "duplicate table_name: geojson_test",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3793,7868",
+      "message": "duplicate table_name: first_touch_couriers_exits_v2",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "7429,7312",
+      "message": "duplicate table_name: frutcort_employees_fot_detailed",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "2482,2772",
+      "message": "duplicate table_name: dk",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "7000,7192",
+      "message": "duplicate table_name: zone_cluster_f",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "7059,7106",
+      "message": "duplicate table_name: dttk",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "6928,4493,5913",
+      "message": "duplicate table_name: запрос без имени 1",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3953,4071",
+      "message": "duplicate table_name: dict_tt",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3104,5495",
+      "message": "duplicate table_name: pom_f",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "1670,2131",
+      "message": "duplicate table_name: bottom_clients_weekly",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "4253,6485",
+      "message": "duplicate table_name: mile_test",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "5061,6207",
+      "message": "duplicate table_name: additional_supplies",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "2787,3466",
+      "message": "duplicate table_name: darkstore_time_sheet",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3788,3789",
+      "message": "duplicate table_name: аптеки уаги тест",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "4945,5847",
+      "message": "duplicate table_name: запрос без имени 10",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "4371,2485",
+      "message": "duplicate table_name: logs",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "18,6228,4910",
+      "message": "duplicate table_name: dtt",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "1800,5201",
+      "message": "duplicate table_name: sql_сборщики",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3228,5696",
+      "message": "duplicate table_name: test_jinja",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "6802,5068,5795",
+      "message": "duplicate table_name: customer_complaint",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "7017,6268,5820",
+      "message": "duplicate table_name: v_check",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "6016,6017",
+      "message": "duplicate table_name: losts_for_rtl",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "2676,5295",
+      "message": "duplicate table_name: pom_filter",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "1798,2295",
+      "message": "duplicate table_name: ksa_time_vw",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "2500,5294",
+      "message": "duplicate table_name: ds_filter",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "2447,5486",
+      "message": "duplicate table_name: test_1",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3160,3161",
+      "message": "duplicate table_name: test1",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "5844,5845",
+      "message": "duplicate table_name: запрос среднее количество товара в чеке a/b автоассортимент",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "5493,5051",
+      "message": "duplicate table_name: tt_format_f",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "7772,7773",
+      "message": "duplicate table_name: pa_16466_capacity_cluster_data",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "6127,6399",
+      "message": "duplicate table_name: product_card_ab_tool_design",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "5980,6039",
+      "message": "duplicate table_name: cart_data_main_dash_conversion_week",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "6337,6344",
+      "message": "duplicate table_name: s3_dir_sizes",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "5378,96",
+      "message": "duplicate table_name: unicode_test",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "2708,3961",
+      "message": "duplicate table_name: ws_tasks",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "duplicate_dataset_name",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "3264,4269,2707",
+      "message": "duplicate table_name: ws_projects",
+      "evidence": "datasets.compact.json"
+    },
+    {
+      "area": "unknown_grain",
+      "severity": "INFO",
+      "object_type": "dataset",
+      "object_id": "",
+      "message": "2490 datasets с неопределённым зерном",
+      "evidence": "06_data_grain_registry.csv"
+    },
+    {
+      "area": "unknown_entity",
+      "severity": "INFO",
+      "object_type": "logical_entity",
+      "object_id": "order_item",
+      "message": "сущность не подтверждена в исследованном охвате",
+      "evidence": "06_logical_entities.json"
+    },
+    {
+      "area": "unknown_entity",
+      "severity": "INFO",
+      "object_type": "logical_entity",
+      "object_id": "accrual",
+      "message": "сущность не подтверждена в исследованном охвате",
+      "evidence": "06_logical_entities.json"
+    },
+    {
+      "area": "cross_join",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "7027,7104,7518,7640,7742,6849,4567,5749,5737,7285",
+      "message": "188 CROSS JOIN",
+      "evidence": "05_join_inventory.csv"
+    },
+    {
+      "area": "join_without_on",
+      "severity": "INFO",
+      "object_type": "dataset",
+      "object_id": "2616,2616,2616,2616,2688,2688,7021,7027,3376,3376",
+      "message": "1779 JOIN без распознанного ON",
+      "evidence": "05_join_inventory.csv"
+    },
+    {
+      "area": "row_multiplication_risk",
+      "severity": "WARN",
+      "object_type": "dataset",
+      "object_id": "7027,6836,2910,3754,5200,5529,7124,7148,6543,3322",
+      "message": "338 datasets с >=5 JOIN — риск размножения строк",
+      "evidence": "05_sql_inventory.csv join_count"
+    },
+    {
+      "area": "grain_change_on_join",
+      "severity": "WARN",
+      "object_type": "relationship",
+      "object_id": "",
+      "message": "122 связей между датасетами с разным зерном",
+      "evidence": "06_relationships.csv + 06_data_grain_registry.csv"
+    },
+    {
+      "area": "temporal_transformations",
+      "severity": "INFO",
+      "object_type": "sql",
+      "object_id": "",
+      "message": "368 временных преобразований/sentinel",
+      "evidence": "05_sql_inventory.csv + snapshot sql"
+    }
+  ],
+  "temporal_transformations": [
+    [
+      "5940",
+      "radvogin_dc3_gp100",
+      "NOW() - INTERVAL",
+      26,
+      "relative window now()-interval"
+    ],
+    [
+      "6559",
+      "radvogin_dc3_gp100_week",
+      "date_trunc(",
+      25,
+      "date_trunc"
+    ],
+    [
+      "7027",
+      "cargo_main4",
+      "interval '3 hour'",
+      2,
+      "+3 hour timezone shift"
+    ],
+    [
+      "7027",
+      "cargo_main4",
+      "now() - interval",
+      9,
+      "relative window now()-interval"
+    ],
+    [
+      "6836",
+      "darkstore_time_sheet_21CH",
+      "interval '3 hour'",
+      607,
+      "+3 hour timezone shift"
+    ],
+    [
+      "5170",
+      "Индилавка_checks",
+      "NOW() - INTERVAL",
+      23,
+      "relative window now()-interval"
+    ],
+    [
+      "4939",
+      "indilavka_new_customers",
+      "NOW() - INTERVAL",
+      109,
+      "relative window now()-interval"
+    ],
+    [
+      "7124",
+      "cargo6",
+      "now() - interval",
+      83,
+      "relative window now()-interval"
+    ],
+    [
+      "7790",
+      "Категория · Промо недели: выручка к пред. периоду (как в отчёте категорий)",
+      "date_trunc(",
+      19,
+      "date_trunc"
+    ],
+    [
+      "7791",
+      "Категория · Позиции к пред. периоду с итогами подгрупп и ABC (GP)",
+      "date_trunc(",
+      19,
+      "date_trunc"
+    ],
+    [
+      "7024",
+      "cargo_main3",
+      "interval '3 hour'",
+      2,
+      "+3 hour timezone shift"
+    ],
+    [
+      "7024",
+      "cargo_main3",
+      "now() - interval",
+      9,
+      "relative window now()-interval"
+    ],
+    [
+      "6842",
+      "Luzhbin_month",
+      "DATE_TRUNC(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "6843",
+      "Luzhbin_weeks",
+      "DATE_TRUNC(",
+      10,
+      "date_trunc"
+    ],
+    [
+      "4966",
+      "indilavka_action_button",
+      "NOW() - INTERVAL",
+      24,
+      "relative window now()-interval"
+    ],
+    [
+      "3746",
+      "tmz_darkstore",
+      "date_trunc(",
+      54,
+      "date_trunc"
+    ],
+    [
+      "7090",
+      "cargo2",
+      "toDateTime('1970-01-01 00:00:00')",
+      14,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "7090",
+      "cargo2",
+      "now() - INTERVAL",
+      19,
+      "relative window now()-interval"
+    ],
+    [
+      "7131",
+      "cargo7",
+      "toDateTime('1970-01-01 00:00:00')",
+      14,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "7131",
+      "cargo7",
+      "now() - INTERVAL",
+      22,
+      "relative window now()-interval"
+    ],
+    [
+      "7640",
+      "Категория · Рестарты ЖЦТ (неделя × SKU × тип ТТ)",
+      "date_trunc(",
+      23,
+      "date_trunc"
+    ],
+    [
+      "7701",
+      "dt_test",
+      "NOW() - INTERVAL",
+      176,
+      "relative window now()-interval"
+    ],
+    [
+      "2027",
+      "Эфф-ть по зонам РЦ",
+      "date_trunc(",
+      12,
+      "date_trunc"
+    ],
+    [
+      "6496",
+      "milay_roznica_month_osn",
+      "date_trunc(",
+      139,
+      "date_trunc"
+    ],
+    [
+      "4567",
+      "dtt_test копия для отчета 50",
+      "NOW() - INTERVAL",
+      14,
+      "relative window now()-interval"
+    ],
+    [
+      "5723",
+      "dk_ose_pse_gp100",
+      "DATE_TRUNC(",
+      90,
+      "date_trunc"
+    ],
+    [
+      "6698",
+      " ratio_of_the_couriers",
+      "NOW() - INTERVAL",
+      13,
+      "relative window now()-interval"
+    ],
+    [
+      "7063",
+      "dynamic_offline_1_2_groups",
+      "date_trunc(",
+      5,
+      "date_trunc"
+    ],
+    [
+      "7218",
+      "cargo_veer6",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "7335",
+      "cargo_collect5",
+      "now() - INTERVAL",
+      11,
+      "relative window now()-interval"
+    ],
+    [
+      "6831",
+      "darkstore_time_sheet_with_hor",
+      "interval '3 hour'",
+      165,
+      "+3 hour timezone shift"
+    ],
+    [
+      "7006",
+      "cargo_main2",
+      "interval '3 hour'",
+      2,
+      "+3 hour timezone shift"
+    ],
+    [
+      "7006",
+      "cargo_main2",
+      "now() - interval",
+      9,
+      "relative window now()-interval"
+    ],
+    [
+      "6054",
+      "hr_daily_pers_turnover_dynamic",
+      "date_trunc(",
+      121,
+      "date_trunc"
+    ],
+    [
+      "6990",
+      "тестовый_выработка_рабочие часы",
+      "toDateTime('1970-01-01 00:00:00')",
+      198,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "6380",
+      "ksa_time_vs_ch240",
+      "NOW() - interval",
+      13,
+      "relative window now()-interval"
+    ],
+    [
+      "7250",
+      "cargo_samopools3",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "7089",
+      "cargo1",
+      "toDateTime('1970-01-01 00:00:00')",
+      41,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "7089",
+      "cargo1",
+      "now() - INTERVAL",
+      76,
+      "relative window now()-interval"
+    ],
+    [
+      "7098",
+      "cargo4",
+      "toDateTime('1970-01-01 00:00:00')",
+      14,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "7098",
+      "cargo4",
+      "now() - INTERVAL",
+      24,
+      "relative window now()-interval"
+    ],
+    [
+      "7160",
+      "cargo8",
+      "now() - INTERVAL",
+      13,
+      "relative window now()-interval"
+    ],
+    [
+      "7212",
+      "cargo_veer1",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "7248",
+      "cargo_samopools1",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "7326",
+      "cargo_collect4",
+      "now() - INTERVAL",
+      41,
+      "relative window now()-interval"
+    ],
+    [
+      "7560",
+      "draft_usov_forecast_quality_v1",
+      "date_trunc(",
+      5,
+      "date_trunc"
+    ],
+    [
+      "7561",
+      "draft_usov_forecast_latest_v1",
+      "date_trunc(",
+      2,
+      "date_trunc"
+    ],
+    [
+      "7623",
+      "Категория · Недопоставки",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "6995",
+      "test_shifts",
+      "toDateTime('1970-01-01 00:00:00')",
+      198,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "6897",
+      "customer_monthly_activity",
+      "DATE_TRUNC(",
+      10,
+      "date_trunc"
+    ],
+    [
+      "6898",
+      "e-commerce_area_bump",
+      "DATE_TRUNC(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "6489",
+      "sku_sbor_conflict",
+      "NOW() - INTERVAL",
+      30,
+      "relative window now()-interval"
+    ],
+    [
+      "7252",
+      "cargo_samopools2",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "7254",
+      "cargo_samopools4",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "7498",
+      "Кулинария · Промо факт",
+      "date_trunc(",
+      5,
+      "date_trunc"
+    ],
+    [
+      "7797",
+      "Кулинария · Рестарты (факт, по данным)",
+      "date_trunc(",
+      7,
+      "date_trunc"
+    ],
+    [
+      "4997",
+      "darkstore_time_sheet_test",
+      "NOW() - INTERVAL",
+      30,
+      "relative window now()-interval"
+    ],
+    [
+      "7173",
+      "darkstore_time_sheet_ch21_light",
+      "interval '3 hour'",
+      805,
+      "+3 hour timezone shift"
+    ],
+    [
+      "7174",
+      "darkstore_time_sheet_test_21ch_light",
+      "NOW() - INTERVAL",
+      30,
+      "relative window now()-interval"
+    ],
+    [
+      "7533",
+      "Кулинария · Рынки и форматы · SKU (последняя неделя)",
+      "date_trunc(",
+      10,
+      "date_trunc"
+    ],
+    [
+      "7534",
+      "Кулинария · Промо: эффект и последствия (8 недель)",
+      "date_trunc(",
+      5,
+      "date_trunc"
+    ],
+    [
+      "7714",
+      "Путь · Сеть и категории: 3 недели и год назад, каналы",
+      "date_trunc(",
+      7,
+      "date_trunc"
+    ],
+    [
+      "7715",
+      "Путь · SKU × канал: 3 недели и год назад, драйвер прироста",
+      "date_trunc(",
+      7,
+      "date_trunc"
+    ],
+    [
+      "7002",
+      "cargo_main",
+      "interval '3 hour'",
+      2,
+      "+3 hour timezone shift"
+    ],
+    [
+      "7002",
+      "cargo_main",
+      "now() - interval",
+      9,
+      "relative window now()-interval"
+    ],
+    [
+      "7062",
+      "plan_offline_1_2_groups",
+      "date_trunc(",
+      5,
+      "date_trunc"
+    ],
+    [
+      "7072",
+      "ws_projects_cafe_dk",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "7120",
+      "cargo_flags2",
+      "toDateTime('1970-01-01 00:00:00')",
+      27,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "7120",
+      "cargo_flags2",
+      "now() - INTERVAL",
+      84,
+      "relative window now()-interval"
+    ],
+    [
+      "7635",
+      "Категория · Протоколы качества (журнал проверок)",
+      "date_trunc(",
+      27,
+      "date_trunc"
+    ],
+    [
+      "7722",
+      "Путь · Экстренные блокировки (РПН, экстремальные ситуации)",
+      "date_trunc(",
+      19,
+      "date_trunc"
+    ],
+    [
+      "7724",
+      "Путь · Недопоставки + «в т.ч. не приняли»",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "7828",
+      "РНД · Недопоставки",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "7835",
+      "РНД · Промо: эффект и последствия (8 недель)",
+      "date_trunc(",
+      19,
+      "date_trunc"
+    ],
+    [
+      "4849",
+      "beauty_dtt_test",
+      "NOW() - INTERVAL",
+      123,
+      "relative window now()-interval"
+    ],
+    [
+      "6623",
+      "milay_roznica_month",
+      "date_trunc(",
+      183,
+      "date_trunc"
+    ],
+    [
+      "6705",
+      "load_transfer_ds_half_hour",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "7267",
+      "cargo_collect1",
+      "now() - INTERVAL",
+      14,
+      "relative window now()-interval"
+    ],
+    [
+      "7636",
+      "Категория · Упущенная выручка по блокировкам качества",
+      "date_trunc(",
+      51,
+      "date_trunc"
+    ],
+    [
+      "7639",
+      "Категория · Протоколы на 10 тыс. шт (месяц × товар × производитель)",
+      "date_trunc(",
+      15,
+      "date_trunc"
+    ],
+    [
+      "7840",
+      "РНД · Протоколы качества (журнал проверок)",
+      "date_trunc(",
+      27,
+      "date_trunc"
+    ],
+    [
+      "6576",
+      "dark_sheet_test",
+      "NOW() - INTERVAL",
+      158,
+      "relative window now()-interval"
+    ],
+    [
+      "7269",
+      "cargo_collect3",
+      "now() - INTERVAL",
+      12,
+      "relative window now()-interval"
+    ],
+    [
+      "7841",
+      "РНД · Упущенная выручка по блокировкам качества",
+      "date_trunc(",
+      51,
+      "date_trunc"
+    ],
+    [
+      "7844",
+      "РНД · Протоколы на 10 тыс. шт (месяц × товар × производитель)",
+      "date_trunc(",
+      15,
+      "date_trunc"
+    ],
+    [
+      "7845",
+      "РНД · Рестарты ЖЦТ (неделя × SKU × тип ТТ)",
+      "date_trunc(",
+      23,
+      "date_trunc"
+    ],
+    [
+      "7852",
+      "РНД · KPI недели: промо (показатель × неделя)",
+      "date_trunc(",
+      19,
+      "date_trunc"
+    ],
+    [
+      "3967",
+      "hr_tekuchest_daily",
+      "DATE_TRUNC(",
+      122,
+      "date_trunc"
+    ],
+    [
+      "7849",
+      "РНД · KPI недели: недопоставки (показатель × неделя)",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "6381",
+      "ksa_time_vs_ch240_test",
+      "NOW() - interval",
+      17,
+      "relative window now()-interval"
+    ],
+    [
+      "3791",
+      "darkstore_time_click_test_2",
+      "NOW() - INTERVAL",
+      21,
+      "relative window now()-interval"
+    ],
+    [
+      "6770",
+      "dict_cfo_dkp",
+      "now() - INTERVAL",
+      3,
+      "relative window now()-interval"
+    ],
+    [
+      "3915",
+      "sales_pf_crocus",
+      "date_trunc(",
+      25,
+      "date_trunc"
+    ],
+    [
+      "4284",
+      "Временный тестовый датасет default.darkstore_time_sheet",
+      "NOW() - INTERVAL",
+      164,
+      "relative window now()-interval"
+    ],
+    [
+      "4942",
+      "tsd test for monitor",
+      "NOW() - INTERVAL",
+      22,
+      "relative window now()-interval"
+    ],
+    [
+      "4282",
+      "report_zakaz_tbl_upg",
+      "NOW() - INTERVAL",
+      18,
+      "relative window now()-interval"
+    ],
+    [
+      "5031",
+      "cust_return",
+      "NOW() - INTERVAL",
+      14,
+      "relative window now()-interval"
+    ],
+    [
+      "7147",
+      "unique_clients_partners_pse",
+      "date_trunc(",
+      55,
+      "date_trunc"
+    ],
+    [
+      "7630",
+      "Категория · Промо: эффект и последствия (8 недель)",
+      "date_trunc(",
+      19,
+      "date_trunc"
+    ],
+    [
+      "2097",
+      "Разница между приходом и расходом_2",
+      "date_trunc (",
+      13,
+      "date_trunc"
+    ],
+    [
+      "5041",
+      "dts_test",
+      "NOW() - INTERVAL",
+      24,
+      "relative window now()-interval"
+    ],
+    [
+      "6758",
+      "load_transfer_ds_half_hour_week_befor",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "6762",
+      "test_dataset",
+      "date_trunc(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "7656",
+      "Категория · KPI недели: промо (показатель × неделя)",
+      "date_trunc(",
+      19,
+      "date_trunc"
+    ],
+    [
+      "2106",
+      "по 2 недели приход",
+      "date_trunc(",
+      13,
+      "date_trunc"
+    ],
+    [
+      "2107",
+      "по 2 неделям расход",
+      "date_trunc(",
+      12,
+      "date_trunc"
+    ],
+    [
+      "6795",
+      "test_test_dk_ose_pse",
+      "DATE_TRUNC(",
+      83,
+      "date_trunc"
+    ],
+    [
+      "6789",
+      "dk_ose_pse_gp100(тестовый)",
+      "DATE_TRUNC(",
+      90,
+      "date_trunc"
+    ],
+    [
+      "6821",
+      "Запрос test_test_dk_ose_pse 30.03.2026 09:55:24",
+      "DATE_TRUNC(",
+      83,
+      "date_trunc"
+    ],
+    [
+      "6822",
+      "Запрос test_test_dk_ose_pse 30.03.2026 10:02:02",
+      "DATE_TRUNC(",
+      83,
+      "date_trunc"
+    ],
+    [
+      "7660",
+      "draft_usov_day_forecast_latest_v1",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "2120",
+      "авто и слоты",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "2121",
+      "слоты и машины_отгрузка",
+      "date_trunc(",
+      21,
+      "date_trunc"
+    ],
+    [
+      "4771",
+      "radvogin_jinja_test",
+      "NOW() - INTERVAL",
+      15,
+      "relative window now()-interval"
+    ],
+    [
+      "2126",
+      "затраты РЦ-РЦ между перевозчиками",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "7016",
+      "тестовый_выработка_рабочие часы3",
+      "toDateTime('1970-01-01 00:00:00')",
+      183,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "6014",
+      "ost_group_ch240_old",
+      "NOW() - INTERVAL",
+      39,
+      "relative window now()-interval"
+    ],
+    [
+      "6015",
+      "ost_group_rozn_ch240_old",
+      "NOW() - INTERVAL",
+      40,
+      "relative window now()-interval"
+    ],
+    [
+      "2127",
+      "затраты РЦ-РЦ между поставщиками с детализацией",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "2129",
+      "price_rc_tt_full_2",
+      "date_trunc(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "2749",
+      "Untitled Query 1 05/26/2023 23:31:07",
+      "DATE_TRUNC(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "7214",
+      "cargo_veer2",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "2446",
+      "кол-во обр на 10 млн v.2",
+      "now()-interval",
+      20,
+      "relative window now()-interval"
+    ],
+    [
+      "3857",
+      "dtt_test",
+      "NOW() - INTERVAL",
+      12,
+      "relative window now()-interval"
+    ],
+    [
+      "4923",
+      "monitor_tt on darkstor_time_sheet",
+      "NOW() - INTERVAL",
+      60,
+      "relative window now()-interval"
+    ],
+    [
+      "7866",
+      "darkstore_orders_hour_gp100",
+      "date_trunc(",
+      48,
+      "date_trunc"
+    ],
+    [
+      "5982",
+      "ost_group_for_rtl",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "2447",
+      "test_1",
+      "now()-interval",
+      22,
+      "relative window now()-interval"
+    ],
+    [
+      "2295",
+      "ksa_time_vw",
+      "NOW() - interval",
+      18,
+      "relative window now()-interval"
+    ],
+    [
+      "2633",
+      "week_week_hours",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "2634",
+      "top_tov_hours",
+      "date_trunc(",
+      7,
+      "date_trunc"
+    ],
+    [
+      "2516",
+      "test_test",
+      "date_trunc(",
+      11,
+      "date_trunc"
+    ],
+    [
+      "2526",
+      "dk_rolls",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "2546",
+      "report_cafe_bake2",
+      "date_trunc(",
+      57,
+      "date_trunc"
+    ],
+    [
+      "6542",
+      "cfo_dkp_and_whitestore_cb",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "2857",
+      "dk_projects_data",
+      "DATE_TRUNC(",
+      15,
+      "date_trunc"
+    ],
+    [
+      "2863",
+      "coffe_juice_stat",
+      "date_trunc(",
+      36,
+      "date_trunc"
+    ],
+    [
+      "3146",
+      "tovar_project_tt",
+      "date_trunc(",
+      2,
+      "date_trunc"
+    ],
+    [
+      "3148",
+      "category_tt",
+      "date_trunc(",
+      2,
+      "date_trunc"
+    ],
+    [
+      "3160",
+      "test1",
+      "DATE_TRUNC(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "3217",
+      "coffee_avg",
+      "date_trunc(",
+      2,
+      "date_trunc"
+    ],
+    [
+      "3218",
+      "juice_avg",
+      "date_trunc(",
+      2,
+      "date_trunc"
+    ],
+    [
+      "3434",
+      "Отчёт по выработке сборщиков",
+      "DATE_TRUNC(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "4925",
+      "Запрос public.projects_part 24.12.2024 17:00:40",
+      "date_trunc(",
+      30,
+      "date_trunc"
+    ],
+    [
+      "1812",
+      "NPS_month",
+      "date_trunc(",
+      27,
+      "date_trunc"
+    ],
+    [
+      "6717",
+      "monitor_tt_share_del_services",
+      "interval '3 hour'",
+      23,
+      "+3 hour timezone shift"
+    ],
+    [
+      "2772",
+      "dk",
+      "date_trunc(",
+      31,
+      "date_trunc"
+    ],
+    [
+      "2890",
+      "HR_tekuchest",
+      "date_trunc(",
+      75,
+      "date_trunc"
+    ],
+    [
+      "2896",
+      "HR_tekuchest_filters",
+      "date_trunc(",
+      75,
+      "date_trunc"
+    ],
+    [
+      "3038",
+      "hr_dashboard_tekuchest",
+      "date_trunc(",
+      123,
+      "date_trunc"
+    ],
+    [
+      "3206",
+      "hr_dashboard_tekuchest_filter",
+      "date_trunc(",
+      104,
+      "date_trunc"
+    ],
+    [
+      "3237",
+      "dk_new",
+      "DATE_TRUNC(",
+      25,
+      "date_trunc"
+    ],
+    [
+      "4172",
+      "Чеки GP 120",
+      "now() - interval",
+      5,
+      "relative window now()-interval"
+    ],
+    [
+      "4176",
+      "Конверсия offline_tt_dk",
+      "DATE_TRUNC(",
+      10,
+      "date_trunc"
+    ],
+    [
+      "6701",
+      "load_transfer_ds",
+      "interval '3 hour'",
+      23,
+      "+3 hour timezone shift"
+    ],
+    [
+      "7215",
+      "cargo_veer3",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "7216",
+      "cargo_veer4",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "7217",
+      "cargo_veer5",
+      "now() - INTERVAL",
+      2,
+      "relative window now()-interval"
+    ],
+    [
+      "7653",
+      "Категория · KPI недели: недопоставки (показатель × неделя)",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "5165",
+      "courier_logs_test",
+      "NOW() - INTERVAL",
+      21,
+      "relative window now()-interval"
+    ],
+    [
+      "4629",
+      "Баги ВЧ по датам",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "4718",
+      "v_check_bug_monitor_reload_date",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "4748",
+      "vc_reload_target_time",
+      "date_trunc(",
+      8,
+      "date_trunc"
+    ],
+    [
+      "5240",
+      "courier_log_test",
+      "NOW() - INTERVAL",
+      15,
+      "relative window now()-interval"
+    ],
+    [
+      "5247",
+      "courier_logs_agg_couriers_daily",
+      "NOW() - INTERVAL",
+      32,
+      "relative window now()-interval"
+    ],
+    [
+      "5248",
+      "courier_logs_agg_tt_daily",
+      "NOW() - INTERVAL",
+      32,
+      "relative window now()-interval"
+    ],
+    [
+      "4823",
+      "Тепловая карта оффлайн агг",
+      "date_trunc(",
+      13,
+      "date_trunc"
+    ],
+    [
+      "5018",
+      "vc_data_completeness",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "5067",
+      "darkstore_time",
+      "DATE_TRUNC(",
+      9,
+      "date_trunc"
+    ],
+    [
+      "5249",
+      "courier_logs_agg_daily",
+      "NOW() - INTERVAL",
+      32,
+      "relative window now()-interval"
+    ],
+    [
+      "5282",
+      "forecast_sbor",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "5282",
+      "forecast_sbor",
+      "NOW() - INTERVAL",
+      29,
+      "relative window now()-interval"
+    ],
+    [
+      "5287",
+      "forecast_delivery",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "5287",
+      "forecast_delivery",
+      "NOW() - INTERVAL",
+      32,
+      "relative window now()-interval"
+    ],
+    [
+      "5323",
+      "forecast_couriers",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "5323",
+      "forecast_couriers",
+      "NOW() - INTERVAL",
+      27,
+      "relative window now()-interval"
+    ],
+    [
+      "5360",
+      "courier_qty_logs_agg_week",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "5360",
+      "courier_qty_logs_agg_week",
+      "NOW() - interval",
+      21,
+      "relative window now()-interval"
+    ],
+    [
+      "5365",
+      "avg_duration_difference_by_periods_v2",
+      "NOW() - INTERVAL",
+      4,
+      "relative window now()-interval"
+    ],
+    [
+      "5393",
+      "courier_logs_agg_week",
+      "date_trunc(",
+      19,
+      "date_trunc"
+    ],
+    [
+      "5393",
+      "courier_logs_agg_week",
+      "NOW() - interval",
+      22,
+      "relative window now()-interval"
+    ],
+    [
+      "5398",
+      "courier_logs_agg_tt_week",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "5398",
+      "courier_logs_agg_tt_week",
+      "NOW() - interval",
+      21,
+      "relative window now()-interval"
+    ],
+    [
+      "5399",
+      "courier_logs_agg_couriers_week",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "5399",
+      "courier_logs_agg_couriers_week",
+      "NOW() - interval",
+      21,
+      "relative window now()-interval"
+    ],
+    [
+      "5415",
+      "courier_qty_logs_agg_totalweek",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "5415",
+      "courier_qty_logs_agg_totalweek",
+      "NOW() - interval",
+      21,
+      "relative window now()-interval"
+    ],
+    [
+      "5416",
+      "courier_qty_logs_agg_totaldays",
+      "NOW() - INTERVAL",
+      23,
+      "relative window now()-interval"
+    ],
+    [
+      "5418",
+      "courier_qty_logs_agg_tt_week",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "5418",
+      "courier_qty_logs_agg_tt_week",
+      "NOW() - interval",
+      21,
+      "relative window now()-interval"
+    ],
+    [
+      "5419",
+      "productivity_group_role_period_gp100",
+      "DATE_TRUNC(",
+      240,
+      "date_trunc"
+    ],
+    [
+      "5420",
+      "courier_qty_logs_agg_daily",
+      "NOW() - INTERVAL",
+      26,
+      "relative window now()-interval"
+    ],
+    [
+      "5421",
+      "courier_qty_logs_agg_tt_daily",
+      "NOW() - INTERVAL",
+      32,
+      "relative window now()-interval"
+    ],
+    [
+      "5478",
+      "tracker_time",
+      "date_trunc(",
+      19,
+      "date_trunc"
+    ],
+    [
+      "5512",
+      "forecast_cnt_collecors",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "5556",
+      "Reasons_not_sbor_new",
+      "NOW() - INTERVAL",
+      44,
+      "relative window now()-interval"
+    ],
+    [
+      "5565",
+      "dates_of_current_month",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "5565",
+      "dates_of_current_month",
+      "NOW() - INTERVAL",
+      7,
+      "relative window now()-interval"
+    ],
+    [
+      "5566",
+      "yatracker_months",
+      "date_trunc(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "7572",
+      "Кулинария · ЗЦ и списания · последняя неделя (KPI)",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "3035",
+      "darkstore_time_click",
+      "NOW() - INTERVAL",
+      183,
+      "relative window now()-interval"
+    ],
+    [
+      "7503",
+      "Кулинария · ЗЦ и Списания по SKU",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "7573",
+      "Кулинария · ЗЦ и списания · 5 недель (таблицы)",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "6218",
+      "service_name_sla_list_ch41",
+      "NOW() - interval",
+      24,
+      "relative window now()-interval"
+    ],
+    [
+      "7053",
+      "ws_projects_cafe_bakery_dk",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "7091",
+      "cargo3",
+      "toDateTime('1970-01-01 00:00:00')",
+      12,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "7091",
+      "cargo3",
+      "now() - INTERVAL",
+      16,
+      "relative window now()-interval"
+    ],
+    [
+      "7220",
+      "cargo_veer7_vkusvill",
+      "now() - INTERVAL",
+      4,
+      "relative window now()-interval"
+    ],
+    [
+      "7221",
+      "cargo_veer7_veeroute",
+      "now() - INTERVAL",
+      3,
+      "relative window now()-interval"
+    ],
+    [
+      "7490",
+      "Новички и пользователи ФРОВ 16.09.2026 13:14:21",
+      "date_trunc(",
+      9,
+      "date_trunc"
+    ],
+    [
+      "7763",
+      "Путь · Драйверы прироста по SKU (реестр промо)",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "6056",
+      "hr_daily_pers_turnover_period",
+      "date_trunc(",
+      117,
+      "date_trunc"
+    ],
+    [
+      "6413",
+      "fruitcourt_retention_month",
+      "date_trunc(",
+      14,
+      "date_trunc"
+    ],
+    [
+      "7119",
+      "cargo_flags",
+      "toDateTime('1970-01-01 00:00:00')",
+      15,
+      "sentinel 1970-01-01"
+    ],
+    [
+      "7119",
+      "cargo_flags",
+      "now() - INTERVAL",
+      63,
+      "relative window now()-interval"
+    ],
+    [
+      "7268",
+      "cargo_collect2",
+      "now() - INTERVAL",
+      18,
+      "relative window now()-interval"
+    ],
+    [
+      "7580",
+      "Кулинария · Протоколы качества (журнал проверок)",
+      "date_trunc(",
+      21,
+      "date_trunc"
+    ],
+    [
+      "7581",
+      "Кулинария · Упущенная выручка по блокировкам качества",
+      "date_trunc(",
+      48,
+      "date_trunc"
+    ],
+    [
+      "6923",
+      "darkstore_time_sheet_team",
+      "interval '3 hour'",
+      179,
+      "+3 hour timezone shift"
+    ],
+    [
+      "2505",
+      "crocus_pf",
+      "date_trunc(",
+      84,
+      "date_trunc"
+    ],
+    [
+      "6017",
+      "losts_for_rtl",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "5950",
+      "fot_sborka_obedy",
+      "date_trunc(",
+      14,
+      "date_trunc"
+    ],
+    [
+      "5957",
+      "reports_for_rtl",
+      "date_trunc(",
+      14,
+      "date_trunc"
+    ],
+    [
+      "5972",
+      "service_110",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "5972",
+      "service_110",
+      "NOW() - INTERVAL",
+      108,
+      "relative window now()-interval"
+    ],
+    [
+      "6258",
+      "Выходы новых курьеров GP100",
+      "NOW() - INTERVAL",
+      111,
+      "relative window now()-interval"
+    ],
+    [
+      "1862",
+      "Для лояльности таблица",
+      "DATE_TRUNC(",
+      74,
+      "date_trunc"
+    ],
+    [
+      "6132",
+      "apt_rest_flowers_zoo_partners_ret",
+      "date_trunc(",
+      42,
+      "date_trunc"
+    ],
+    [
+      "6132",
+      "apt_rest_flowers_zoo_partners_ret",
+      "now() - interval",
+      42,
+      "relative window now()-interval"
+    ],
+    [
+      "6161",
+      "apt_rest_flowers_zoo_partners_customers",
+      "date_trunc(",
+      23,
+      "date_trunc"
+    ],
+    [
+      "6161",
+      "apt_rest_flowers_zoo_partners_customers",
+      "now() - interval",
+      23,
+      "relative window now()-interval"
+    ],
+    [
+      "6168",
+      "apt_rest_flowers_zoo_partners_conversion",
+      "date_trunc(",
+      17,
+      "date_trunc"
+    ],
+    [
+      "6168",
+      "apt_rest_flowers_zoo_partners_conversion",
+      "now() - interval",
+      17,
+      "relative window now()-interval"
+    ],
+    [
+      "6032",
+      "BDR_DKP",
+      "DATE_TRUNC(",
+      24,
+      "date_trunc"
+    ],
+    [
+      "5437",
+      "sql_сборщики2",
+      "NOW() - INTERVAL",
+      25,
+      "relative window now()-interval"
+    ],
+    [
+      "5438",
+      "darkstore_time_click_[id=977]",
+      "NOW() - INTERVAL",
+      99,
+      "relative window now()-interval"
+    ],
+    [
+      "5441",
+      "darkstore_time_click_pharmacy_rest_flowers",
+      "NOW() - INTERVAL",
+      131,
+      "relative window now()-interval"
+    ],
+    [
+      "5473",
+      "dtt_test_gp100",
+      "NOW() - INTERVAL",
+      12,
+      "relative window now()-interval"
+    ],
+    [
+      "5475",
+      "rulev_k_v_dts",
+      "NOW() - INTERVAL",
+      148,
+      "relative window now()-interval"
+    ],
+    [
+      "5599",
+      "ost_partners_dts_click240",
+      "now() - interval",
+      16,
+      "relative window now()-interval"
+    ],
+    [
+      "5601",
+      "ost_group_sources_TT_click240",
+      "now() - interval",
+      23,
+      "relative window now()-interval"
+    ],
+    [
+      "5602",
+      "ost_group_sources_TT_Partners_click240",
+      "now() - interval",
+      23,
+      "relative window now()-interval"
+    ],
+    [
+      "7595",
+      "Кулинария · Протоколы на 10 тыс. шт (месяц × товар × производитель)",
+      "date_trunc(",
+      12,
+      "date_trunc"
+    ],
+    [
+      "5953",
+      "audits_for_rtl",
+      "date_trunc(",
+      5,
+      "date_trunc"
+    ],
+    [
+      "5956",
+      "sborka_for_rtl",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "5956",
+      "sborka_for_rtl",
+      "NOW() - INTERVAL",
+      26,
+      "relative window now()-interval"
+    ],
+    [
+      "5964",
+      "darkstore_time_sheet_st_pr_sl",
+      "NOW() - INTERVAL",
+      28,
+      "relative window now()-interval"
+    ],
+    [
+      "6257",
+      "radvogin_test09/10/25",
+      "now() - INTERVAL",
+      31,
+      "relative window now()-interval"
+    ],
+    [
+      "6312",
+      "assembly_time_test_for_hb",
+      "NOW() - INTERVAL",
+      30,
+      "relative window now()-interval"
+    ],
+    [
+      "6030",
+      "darkstore_time_[id=1262]",
+      "NOW() - INTERVAL",
+      40,
+      "relative window now()-interval"
+    ],
+    [
+      "6483",
+      "dtt_for_rtl_ch41",
+      "NOW() - INTERVAL",
+      27,
+      "relative window now()-interval"
+    ],
+    [
+      "4626",
+      "top_tt_by_delivery_delay",
+      "NOW() - INTERVAL",
+      62,
+      "relative window now()-interval"
+    ],
+    [
+      "5884",
+      "Перевод нагрузки 41 click",
+      "interval '3 hour'",
+      14,
+      "+3 hour timezone shift"
+    ],
+    [
+      "7077",
+      "ws_project_bakery",
+      "date_trunc(",
+      18,
+      "date_trunc"
+    ],
+    [
+      "7110",
+      "pharmacy_rest_flowers_partners_action_button_ch21",
+      "NOW() - INTERVAL",
+      62,
+      "relative window now()-interval"
+    ],
+    [
+      "7596",
+      "Кулинария · Рестарты ЖЦТ (неделя × SKU × тип ТТ)",
+      "date_trunc(",
+      28,
+      "date_trunc"
+    ],
+    [
+      "7659",
+      "draft_usov_day_forecast_quality_v1",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "6495",
+      "darkstore_time_sheet_smile",
+      "NOW() - INTERVAL",
+      163,
+      "relative window now()-interval"
+    ],
+    [
+      "6545",
+      "BI-1000002666",
+      "now() - INTERVAL",
+      17,
+      "relative window now()-interval"
+    ],
+    [
+      "6310",
+      "audit_delivery_ds",
+      "date_trunc(",
+      77,
+      "date_trunc"
+    ],
+    [
+      "5175",
+      "dt_marketpalce",
+      "NOW() - INTERVAL",
+      88,
+      "relative window now()-interval"
+    ],
+    [
+      "4766",
+      "couriers_on_week_dst",
+      "NOW() - INTERVAL",
+      58,
+      "relative window now()-interval"
+    ],
+    [
+      "4778",
+      "curier_profit_new",
+      "NOW() - INTERVAL",
+      20,
+      "relative window now()-interval"
+    ],
+    [
+      "4804",
+      "pool_with_rest/pharm_delay",
+      "NOW() - INTERVAL",
+      79,
+      "relative window now()-interval"
+    ],
+    [
+      "4914",
+      "indicators by hour new",
+      "NOW() - INTERVAL",
+      37,
+      "relative window now()-interval"
+    ],
+    [
+      "4921",
+      "monitor_tt on click41",
+      "NOW() - INTERVAL",
+      60,
+      "relative window now()-interval"
+    ],
+    [
+      "4999",
+      "tds_ud_for_monitor",
+      "NOW() - INTERVAL",
+      47,
+      "relative window now()-interval"
+    ],
+    [
+      "5553",
+      "ost_group_rozn_ch41",
+      "NOW() - INTERVAL",
+      53,
+      "relative window now()-interval"
+    ],
+    [
+      "5586",
+      "data_from_yatracker_test",
+      "date_trunc(",
+      57,
+      "date_trunc"
+    ],
+    [
+      "5888",
+      "Причины не сборки 41 click",
+      "NOW() - interval",
+      54,
+      "relative window now()-interval"
+    ],
+    [
+      "7122",
+      "cargo5",
+      "now() - interval",
+      30,
+      "relative window now()-interval"
+    ],
+    [
+      "7511",
+      "Андерсон · продажи по неделям",
+      "date_trunc(",
+      10,
+      "date_trunc"
+    ],
+    [
+      "7512",
+      "Андерсон · SKU по неделям",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "7513",
+      "Андерсон · год к году",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "7604",
+      "draft_usov_forecast_quality_daily_v1",
+      "date_trunc(",
+      22,
+      "date_trunc"
+    ],
+    [
+      "7681",
+      "cluster_hour_forecast_quality",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "7682",
+      "cluster_hour_forecast_latest",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "7683",
+      "cluster_hour_forecast_daily",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "7684",
+      "cluster_day_forecast_quality",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "7685",
+      "cluster_day_forecast_latest",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "6301",
+      "monitor_tt_new_41",
+      "NOW() - INTERVAL",
+      58,
+      "relative window now()-interval"
+    ],
+    [
+      "4547",
+      "dts_for_late_delivery",
+      "NOW() - INTERVAL",
+      91,
+      "relative window now()-interval"
+    ],
+    [
+      "3466",
+      "darkstore_time_sheet",
+      "interval '3 hour'",
+      525,
+      "+3 hour timezone shift"
+    ],
+    [
+      "5642",
+      "sql_сборщики_(час_день)",
+      "NOW() - INTERVAL",
+      26,
+      "relative window now()-interval"
+    ],
+    [
+      "7618",
+      "Категория · Год к году по неделям",
+      "date_trunc(",
+      7,
+      "date_trunc"
+    ],
+    [
+      "7880",
+      "Путь · Сеть и категории: 3 недели и год назад, каналы (как PBI, GP)",
+      "date_trunc(",
+      12,
+      "date_trunc"
+    ],
+    [
+      "7892",
+      "bak_7724_nedopostavki_20261118 (резерв до правки 18.11)",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "7895",
+      "bak_7623 недопоставки до 18.11 вечер",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "7896",
+      "bak_7653 недопоставки до 18.11 вечер",
+      "date_trunc(",
+      20,
+      "date_trunc"
+    ],
+    [
+      "7897",
+      "bak_7724 недопоставки до 18.11 вечер",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "7898",
+      "Молочка · Недопоставки как Power BI",
+      "date_trunc(",
+      10,
+      "date_trunc"
+    ],
+    [
+      "7900",
+      "Молочка · Промо недели как в отчёте",
+      "date_trunc(",
+      9,
+      "date_trunc"
+    ],
+    [
+      "7901",
+      "Молочка · Обнуления ТТ в 18:00 как Power BI, с причинами",
+      "date_trunc(",
+      10,
+      "date_trunc"
+    ],
+    [
+      "7902",
+      "Молочка · Обнуления 18:00 и причины (PBI)",
+      "date_trunc(",
+      12,
+      "date_trunc"
+    ],
+    [
+      "7904",
+      "Молочка · Новинки недели как в отчёте",
+      "date_trunc(",
+      9,
+      "date_trunc"
+    ],
+    [
+      "2092",
+      "Разница между приходом и расходом",
+      "date_trunc (",
+      11,
+      "date_trunc"
+    ],
+    [
+      "6319",
+      "time_of_one_position_test_test",
+      "NOW() - INTERVAL",
+      30,
+      "relative window now()-interval"
+    ],
+    [
+      "6320",
+      "time_by_order_test_test",
+      "NOW() - INTERVAL",
+      15,
+      "relative window now()-interval"
+    ],
+    [
+      "6560",
+      "radvogin_dc3_gp100_month",
+      "date_trunc(",
+      59,
+      "date_trunc"
+    ],
+    [
+      "6379",
+      "test_semyon",
+      "DATE_TRUNC(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "6449",
+      "dataset_kusvill",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "4876",
+      "dtt_test_frut",
+      "NOW() - INTERVAL",
+      12,
+      "relative window now()-interval"
+    ],
+    [
+      "5201",
+      "sql_сборщики",
+      "NOW() - INTERVAL",
+      26,
+      "relative window now()-interval"
+    ],
+    [
+      "5232",
+      "darkstore_time_sheet_[id=23150]",
+      "NOW() - INTERVAL",
+      32,
+      "relative window now()-interval"
+    ],
+    [
+      "5269",
+      "Причины не сборки click",
+      "NOW() - INTERVAL",
+      41,
+      "relative window now()-interval"
+    ],
+    [
+      "5435",
+      "darkstore_time_click_[id=1151]",
+      "NOW() - INTERVAL",
+      29,
+      "relative window now()-interval"
+    ],
+    [
+      "5481",
+      "v_dtt_greystor_sgoracha",
+      "NOW() - INTERVAL",
+      10,
+      "relative window now()-interval"
+    ],
+    [
+      "5580",
+      "Reasons_not_sbor_click240",
+      "now() - interval",
+      19,
+      "relative window now()-interval"
+    ],
+    [
+      "7619",
+      "Категория · Обнуления ТТ по дням",
+      "date_trunc(",
+      5,
+      "date_trunc"
+    ],
+    [
+      "2580",
+      "avg_revenue_service",
+      "date_trunc(",
+      41,
+      "date_trunc"
+    ],
+    [
+      "2623",
+      "meat_avg",
+      "date_trunc(",
+      41,
+      "date_trunc"
+    ],
+    [
+      "2025",
+      "эфф-ть_2",
+      "date_trunc(",
+      17,
+      "date_trunc"
+    ],
+    [
+      "2524",
+      "dk_avg_4group",
+      "date_trunc(",
+      38,
+      "date_trunc"
+    ],
+    [
+      "6006",
+      "checks_for_rtl_ch240",
+      "date_trunc(",
+      33,
+      "date_trunc"
+    ],
+    [
+      "6006",
+      "checks_for_rtl_ch240",
+      "NOW() - INTERVAL",
+      21,
+      "relative window now()-interval"
+    ],
+    [
+      "5616",
+      "darkstore_time_sheet_[collectors]",
+      "NOW() - INTERVAL",
+      79,
+      "relative window now()-interval"
+    ],
+    [
+      "5776",
+      "modificators_conversion_rate",
+      "NOW() - INTERVAL",
+      12,
+      "relative window now()-interval"
+    ],
+    [
+      "5918",
+      "darkstore_time_sheet_[slice_id=24271]",
+      "NOW() - INTERVAL",
+      146,
+      "relative window now()-interval"
+    ],
+    [
+      "5921",
+      "checks_for_demo",
+      "NOW() - INTERVAL",
+      12,
+      "relative window now()-interval"
+    ],
+    [
+      "6632",
+      "Прохождение аудитов",
+      "date_trunc(",
+      2,
+      "date_trunc"
+    ],
+    [
+      "7691",
+      "Сгоряча МСК+МО · ТТ×неделя: заказы, возвраты, обращения",
+      "DATE_TRUNC(",
+      50,
+      "date_trunc"
+    ],
+    [
+      "7692",
+      "Сгоряча МСК+МО · обращения (строки)",
+      "DATE_TRUNC(",
+      24,
+      "date_trunc"
+    ],
+    [
+      "7693",
+      "Сгоряча МСК+МО · SKU×ТТ×неделя: возвраты и обращения",
+      "DATE_TRUNC(",
+      24,
+      "date_trunc"
+    ],
+    [
+      "7694",
+      "Сгоряча МСК+МО · жалобы: недовес, температура, внешний вид",
+      "DATE_TRUNC(",
+      59,
+      "date_trunc"
+    ],
+    [
+      "6148",
+      "apt_rest_flowers_zoo_partners_ret_ds",
+      "date_trunc(",
+      40,
+      "date_trunc"
+    ],
+    [
+      "6148",
+      "apt_rest_flowers_zoo_partners_ret_ds",
+      "now() - interval",
+      40,
+      "relative window now()-interval"
+    ],
+    [
+      "6511",
+      "dk_tov_refund_revenue_100gp",
+      "date_trunc(",
+      48,
+      "date_trunc"
+    ],
+    [
+      "5160",
+      "dtt_frut_gp100",
+      "NOW() - INTERVAL",
+      16,
+      "relative window now()-interval"
+    ],
+    [
+      "2540",
+      "report_project_cafe_bake",
+      "date_trunc(",
+      65,
+      "date_trunc"
+    ],
+    [
+      "3666",
+      "hr_tekuchest_office",
+      "date_trunc(",
+      114,
+      "date_trunc"
+    ],
+    [
+      "3519",
+      "hr_all_pers_freelance",
+      "DATE_TRUNC(",
+      107,
+      "date_trunc"
+    ],
+    [
+      "5402",
+      "productivity_pom_role_period_gp100",
+      "DATE_TRUNC(",
+      242,
+      "date_trunc"
+    ],
+    [
+      "7696",
+      "count_delay_generals",
+      "now() - interval",
+      132,
+      "relative window now()-interval"
+    ],
+    [
+      "2015",
+      "эфф-ть",
+      "date_trunc(",
+      11,
+      "date_trunc"
+    ],
+    [
+      "2054",
+      "по 2м неделям",
+      "date_trunc(",
+      7,
+      "date_trunc"
+    ],
+    [
+      "2098",
+      "расход коробов на 1 ТТ",
+      "date_trunc (",
+      8,
+      "date_trunc"
+    ],
+    [
+      "2100",
+      "приход коробов на 1 ТТ",
+      "date_trunc (",
+      8,
+      "date_trunc"
+    ],
+    [
+      "2104",
+      "like for like",
+      "date_trunc(",
+      16,
+      "date_trunc"
+    ],
+    [
+      "2105",
+      "like for like расход",
+      "date_trunc(",
+      16,
+      "date_trunc"
+    ],
+    [
+      "2114",
+      "cars_out by RC",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "3695",
+      "dk_tov_refund_revenue",
+      "date_trunc(",
+      47,
+      "date_trunc"
+    ],
+    [
+      "2597",
+      "rate_checks_dynamics",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "2231",
+      "кол-во обр на 10 млн",
+      "now()-interval",
+      16,
+      "relative window now()-interval"
+    ],
+    [
+      "2232",
+      "отклонение от среднего финал",
+      "now()-interval",
+      15,
+      "relative window now()-interval"
+    ],
+    [
+      "4907",
+      "log_rep_new",
+      "DATE_TRUNC(",
+      89,
+      "date_trunc"
+    ],
+    [
+      "5037",
+      "Запрос service.log_rep_new 27.01.2025 15:43:12",
+      "DATE_TRUNC(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "5038",
+      "Запрос service.log_rep_new 27.01.2025 15:49:47",
+      "DATE_TRUNC(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "5081",
+      "logs_error_name",
+      "DATE_TRUNC(",
+      89,
+      "date_trunc"
+    ],
+    [
+      "5308",
+      "avg_duration_difference",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "5336",
+      "avg_duration_difference_by_periods_v1",
+      "NOW() - INTERVAL",
+      4,
+      "relative window now()-interval"
+    ],
+    [
+      "5455",
+      "events_by_week",
+      "date_trunc(",
+      23,
+      "date_trunc"
+    ],
+    [
+      "5469",
+      "users_by_week",
+      "date_trunc(",
+      23,
+      "date_trunc"
+    ],
+    [
+      "245",
+      "Запрос без имени 2-aSGARjmSY",
+      "date_trunc(",
+      2,
+      "date_trunc"
+    ],
+    [
+      "6309",
+      "random_data_for_comparement",
+      "NOW() - INTERVAL",
+      9,
+      "relative window now()-interval"
+    ],
+    [
+      "226",
+      "Query druid.checks-wSpWddxNI",
+      "date_trunc(",
+      1,
+      "date_trunc"
+    ],
+    [
+      "1293",
+      "Евгений Целиков-Запрос без имени 2-7ZxLAGKUP",
+      "date_trunc(",
+      6,
+      "date_trunc"
+    ],
+    [
+      "232",
+      "Перцентили-W19lDG8jU",
+      "date_trunc(",
+      2,
+      "date_trunc"
+    ],
+    [
+      "228",
+      "Евгений Целиков-Запрос для активности пользователей",
+      "interval '3 hour'",
+      3,
+      "+3 hour timezone shift"
+    ],
+    [
+      "228",
+      "Евгений Целиков-Запрос для активности пользователей",
+      "date_trunc(",
+      3,
+      "date_trunc"
+    ],
+    [
+      "6113",
+      "logs_for_1.09_7.09",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "4875",
+      "log_rep_for_cnt",
+      "NOW() - INTERVAL",
+      80,
+      "relative window now()-interval"
+    ],
+    [
+      "5505",
+      "events_by_week_datasets",
+      "date_trunc(",
+      23,
+      "date_trunc"
+    ],
+    [
+      "5506",
+      "users_by_week_datasets",
+      "date_trunc(",
+      23,
+      "date_trunc"
+    ],
+    [
+      "5554",
+      "data_from_yatracker",
+      "date_trunc(",
+      22,
+      "date_trunc"
+    ],
+    [
+      "5560",
+      "working_days",
+      "date_trunc(",
+      4,
+      "date_trunc"
+    ],
+    [
+      "5612",
+      "random_data_for_year",
+      "NOW() - INTERVAL",
+      11,
+      "relative window now()-interval"
+    ],
+    [
+      "5659",
+      "working_days_test",
+      "date_trunc(",
+      13,
+      "date_trunc"
+    ]
+  ],
+  "pii_hits": [],
+  "phase_1_2_discrepancies": [
+    "Phase 1.2: datasets_expected=12, marts=11, kpis=48, status=PASS",
+    "Phase 1.4 snapshot: dashboards=332, charts=19927, datasets=3778",
+    "Различия количеств объясняются новым snapshot Superset (см. 02_catalog_diff)."
+  ]
+}

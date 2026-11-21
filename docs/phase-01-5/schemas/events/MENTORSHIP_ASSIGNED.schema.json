@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dds.local/schemas/events/MENTORSHIP_ASSIGNED.schema.json",
+  "title": "MENTORSHIP_ASSIGNED",
+  "allOf": [
+    {
+      "$ref": "../event-envelope.schema.json"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "const": "MENTORSHIP_ASSIGNED"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "mentorship_id",
+        "mentor_courier_id",
+        "trainee_courier_id",
+        "starts_at",
+        "planned_ends_at",
+        "assigned_by"
+      ],
+      "properties": {
+        "mentorship_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "mentor_courier_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "trainee_courier_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "starts_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "planned_ends_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "assigned_by": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

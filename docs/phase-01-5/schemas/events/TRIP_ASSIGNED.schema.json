@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dds.local/schemas/events/TRIP_ASSIGNED.schema.json",
+  "title": "TRIP_ASSIGNED",
+  "allOf": [
+    {
+      "$ref": "../event-envelope.schema.json"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "const": "TRIP_ASSIGNED"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "trip_id",
+        "courier_id",
+        "queue_entry_id",
+        "assigned_at",
+        "assigned_by"
+      ],
+      "properties": {
+        "trip_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "courier_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "queue_entry_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "assigned_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "assigned_by": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

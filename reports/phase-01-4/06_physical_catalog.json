@@ -1,0 +1,7673 @@
+{
+  "generated_at": "2026-11-21T16:00:12.132Z",
+  "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z",
+  "tables": [
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "darkstore_time",
+      "datasets_using": 82,
+      "dataset_ids": [
+        "3035",
+        "3162",
+        "4547",
+        "4626",
+        "4766",
+        "4778",
+        "4804",
+        "4921",
+        "4934",
+        "5067",
+        "5175",
+        "5287",
+        "5321",
+        "5323",
+        "5431",
+        "5435",
+        "5438",
+        "5556",
+        "5585",
+        "5707",
+        "5780",
+        "5885",
+        "5979",
+        "6223",
+        "6258",
+        "6545",
+        "6577",
+        "6652",
+        "6653",
+        "6654",
+        "6698",
+        "6705",
+        "6717",
+        "6758",
+        "6809",
+        "6917",
+        "6947",
+        "6971",
+        "6998",
+        "7001",
+        "7002",
+        "7006",
+        "7024",
+        "7027",
+        "7050",
+        "7066",
+        "7070",
+        "7071",
+        "7103",
+        "7212",
+        "7214",
+        "7215",
+        "7216",
+        "7217",
+        "7218",
+        "7220",
+        "7221",
+        "7248",
+        "7250",
+        "7252",
+        "7254",
+        "7267",
+        "7268",
+        "7269",
+        "7326",
+        "7335",
+        "7351",
+        "7399",
+        "7607",
+        "7696",
+        "7700",
+        "7701",
+        "7702",
+        "7707",
+        "7710",
+        "7712",
+        "7713",
+        "7766",
+        "7767",
+        "7802",
+        "7866",
+        "7872"
+      ],
+      "occurrences": 92,
+      "join_types": [
+        "JOIN",
+        "INNER JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "82 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_tt",
+      "datasets_using": 81,
+      "dataset_ids": [
+        "4370",
+        "5091",
+        "5159",
+        "5160",
+        "5161",
+        "5165",
+        "5210",
+        "5267",
+        "5311",
+        "5315",
+        "5321",
+        "5327",
+        "5357",
+        "5358",
+        "5359",
+        "5362",
+        "5391",
+        "5401",
+        "5402",
+        "5408",
+        "5419",
+        "5482",
+        "5489",
+        "5490",
+        "5492",
+        "5511",
+        "5514",
+        "5676",
+        "5680",
+        "5705",
+        "5708",
+        "5710",
+        "5719",
+        "5720",
+        "5738",
+        "5739",
+        "5762",
+        "5881",
+        "5905",
+        "5914",
+        "5917",
+        "5943",
+        "5950",
+        "5954",
+        "5957",
+        "5970",
+        "5972",
+        "6017",
+        "6032",
+        "6157",
+        "6159",
+        "6258",
+        "6266",
+        "6296",
+        "6303",
+        "6335",
+        "6476",
+        "6524",
+        "6777",
+        "6778",
+        "6779",
+        "6834",
+        "6861",
+        "7112",
+        "7264",
+        "7271",
+        "7332",
+        "7399",
+        "7400",
+        "7444",
+        "7560",
+        "7561",
+        "7607",
+        "7659",
+        "7660",
+        "7710",
+        "7712",
+        "7713",
+        "7766",
+        "7767",
+        "7802"
+      ],
+      "occurrences": 118,
+      "join_types": [
+        "LEFT JOIN",
+        "JOIN",
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "81 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "dtt",
+      "datasets_using": 68,
+      "dataset_ids": [
+        "4370",
+        "5159",
+        "5160",
+        "5161",
+        "5327",
+        "5473",
+        "5489",
+        "5490",
+        "5876",
+        "5878",
+        "5906",
+        "5922",
+        "5924",
+        "5925",
+        "5926",
+        "5927",
+        "6026",
+        "6270",
+        "6449",
+        "6483",
+        "6523",
+        "6766",
+        "6903",
+        "7065",
+        "7068",
+        "7194",
+        "7197",
+        "7332",
+        "7444",
+        "7498",
+        "7503",
+        "7533",
+        "7534",
+        "7565",
+        "7566",
+        "7567",
+        "7569",
+        "7571",
+        "7572",
+        "7573",
+        "7587",
+        "7588",
+        "7589",
+        "7590",
+        "7591",
+        "7595",
+        "7618",
+        "7619",
+        "7627",
+        "7628",
+        "7630",
+        "7639",
+        "7656",
+        "7714",
+        "7715",
+        "7763",
+        "7790",
+        "7791",
+        "7797",
+        "7815",
+        "7832",
+        "7833",
+        "7835",
+        "7844",
+        "7852",
+        "7900",
+        "7904",
+        "7921"
+      ],
+      "occurrences": 90,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "68 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "darkstore_time_sheet",
+      "datasets_using": 49,
+      "dataset_ids": [
+        "3035",
+        "3466",
+        "4648",
+        "4914",
+        "4997",
+        "5201",
+        "5232",
+        "5282",
+        "5315",
+        "5321",
+        "5475",
+        "5512",
+        "5642",
+        "5707",
+        "5799",
+        "5872",
+        "5884",
+        "5918",
+        "5964",
+        "5987",
+        "6177",
+        "6218",
+        "6263",
+        "6495",
+        "6576",
+        "6652",
+        "6653",
+        "6701",
+        "6757",
+        "6812",
+        "6813",
+        "6831",
+        "6836",
+        "6857",
+        "6881",
+        "6923",
+        "6978",
+        "6980",
+        "6983",
+        "6990",
+        "6995",
+        "7007",
+        "7016",
+        "7021",
+        "7043",
+        "7087",
+        "7173",
+        "7174",
+        "7321"
+      ],
+      "occurrences": 62,
+      "join_types": [
+        "INNER JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "49 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "darkstore_time",
+      "datasets_using": 36,
+      "dataset_ids": [
+        "2682",
+        "2716",
+        "2788",
+        "3362",
+        "3363",
+        "3682",
+        "3756",
+        "3791",
+        "3804",
+        "3968",
+        "3972",
+        "4279",
+        "4328",
+        "4615",
+        "4628",
+        "4633",
+        "4635",
+        "4640",
+        "4753",
+        "4754",
+        "4755",
+        "4786",
+        "4799",
+        "4982",
+        "4987",
+        "4988",
+        "4989",
+        "4990",
+        "4993",
+        "5269",
+        "5441",
+        "5956",
+        "7599",
+        "7600",
+        "7746",
+        "7759"
+      ],
+      "occurrences": 36,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "36 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "curator_soo_chef",
+      "datasets_using": 33,
+      "dataset_ids": [
+        "2639",
+        "2681",
+        "5348",
+        "5450",
+        "5708",
+        "5719",
+        "5720",
+        "5723",
+        "5738",
+        "5739",
+        "6157",
+        "6159",
+        "6303",
+        "6318",
+        "6335",
+        "6551",
+        "6557",
+        "6632",
+        "6667",
+        "6789",
+        "6795",
+        "6821",
+        "6822",
+        "6851",
+        "6903",
+        "7271",
+        "7274",
+        "7275",
+        "7276",
+        "7277",
+        "7400",
+        "7409",
+        "7505"
+      ],
+      "occurrences": 34,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "33 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_tovari_all_tbl",
+      "datasets_using": 32,
+      "dataset_ids": [
+        "4370",
+        "5159",
+        "5160",
+        "5161",
+        "5210",
+        "5327",
+        "5511",
+        "5906",
+        "5922",
+        "5924",
+        "5925",
+        "5926",
+        "6026",
+        "6335",
+        "6405",
+        "6476",
+        "7264",
+        "7332",
+        "7444",
+        "7623",
+        "7653",
+        "7724",
+        "7815",
+        "7828",
+        "7849",
+        "7892",
+        "7895",
+        "7896",
+        "7897",
+        "7898",
+        "7902",
+        "7921"
+      ],
+      "occurrences": 33,
+      "join_types": [
+        "LEFT JOIN",
+        "JOIN",
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "32 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "org_unit_actual",
+      "datasets_using": 31,
+      "dataset_ids": [
+        "4328",
+        "4628",
+        "4732",
+        "5357",
+        "5438",
+        "5441",
+        "5885",
+        "6757",
+        "6834",
+        "6836",
+        "7000",
+        "7087",
+        "7103",
+        "7109",
+        "7112",
+        "7173",
+        "7418",
+        "7420",
+        "7508",
+        "7510",
+        "7544",
+        "7554",
+        "7560",
+        "7561",
+        "7599",
+        "7659",
+        "7660",
+        "7707",
+        "7766",
+        "7767",
+        "7802"
+      ],
+      "occurrences": 39,
+      "join_types": [
+        "LEFT JOIN",
+        "INNER JOIN",
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "31 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "v_check",
+      "datasets_using": 24,
+      "dataset_ids": [
+        "4172",
+        "4822",
+        "4939",
+        "5362",
+        "5595",
+        "5838",
+        "5844",
+        "5845",
+        "5846",
+        "5847",
+        "5848",
+        "5851",
+        "5856",
+        "5857",
+        "5863",
+        "5869",
+        "5870",
+        "5876",
+        "5878",
+        "5879",
+        "5898",
+        "5903",
+        "5904",
+        "7563"
+      ],
+      "occurrences": 24,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "24 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "m4_tasks",
+      "datasets_using": 23,
+      "dataset_ids": [
+        "5680",
+        "5761",
+        "5762",
+        "5763",
+        "5807",
+        "5837",
+        "5840",
+        "5887",
+        "5928",
+        "5929",
+        "6131",
+        "6208",
+        "6271",
+        "6303",
+        "6382",
+        "6389",
+        "6390",
+        "6419",
+        "6777",
+        "6778",
+        "6779",
+        "6861",
+        "7400"
+      ],
+      "occurrences": 23,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "23 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "m4_tasks_checklists",
+      "datasets_using": 22,
+      "dataset_ids": [
+        "5761",
+        "5762",
+        "5763",
+        "5807",
+        "5837",
+        "5840",
+        "5887",
+        "5928",
+        "5929",
+        "6131",
+        "6208",
+        "6271",
+        "6303",
+        "6382",
+        "6389",
+        "6390",
+        "6419",
+        "6777",
+        "6778",
+        "6779",
+        "6861",
+        "7400"
+      ],
+      "occurrences": 22,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "22 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "m4_tasks_checklists_users_answers",
+      "datasets_using": 21,
+      "dataset_ids": [
+        "5761",
+        "5763",
+        "5807",
+        "5837",
+        "5840",
+        "5887",
+        "5928",
+        "5929",
+        "6131",
+        "6208",
+        "6271",
+        "6303",
+        "6382",
+        "6389",
+        "6390",
+        "6419",
+        "6777",
+        "6778",
+        "6779",
+        "6861",
+        "7400"
+      ],
+      "occurrences": 21,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "21 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "sku_actual",
+      "datasets_using": 21,
+      "dataset_ids": [
+        "2639",
+        "4208",
+        "6836",
+        "7037",
+        "7039",
+        "7107",
+        "7132",
+        "7198",
+        "7418",
+        "7420",
+        "7461",
+        "7565",
+        "7566",
+        "7567",
+        "7568",
+        "7571",
+        "7588",
+        "7589",
+        "7590",
+        "7591",
+        "7904"
+      ],
+      "occurrences": 22,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "21 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_pomoschniki_tbl",
+      "datasets_using": 21,
+      "dataset_ids": [
+        "5091",
+        "5210",
+        "5267",
+        "5282",
+        "5311",
+        "5315",
+        "5321",
+        "5358",
+        "5359",
+        "5391",
+        "5401",
+        "5402",
+        "5408",
+        "5419",
+        "5489",
+        "5490",
+        "5512",
+        "5710",
+        "5872",
+        "5914",
+        "6296"
+      ],
+      "occurrences": 36,
+      "join_types": [
+        "LEFT JOIN",
+        "INNER JOIN",
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "21 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "m4_tasks_checklists_question",
+      "datasets_using": 18,
+      "dataset_ids": [
+        "5763",
+        "5807",
+        "5837",
+        "5840",
+        "5928",
+        "5929",
+        "6131",
+        "6208",
+        "6271",
+        "6303",
+        "6382",
+        "6389",
+        "6390",
+        "6777",
+        "6778",
+        "6779",
+        "6861",
+        "7400"
+      ],
+      "occurrences": 18,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "18 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dict_pom",
+      "datasets_using": 17,
+      "dataset_ids": [
+        "5652",
+        "5705",
+        "5807",
+        "5837",
+        "5840",
+        "6303",
+        "6382",
+        "6389",
+        "6390",
+        "6777",
+        "6778",
+        "6779",
+        "6861",
+        "7400",
+        "7905",
+        "7910",
+        "7913"
+      ],
+      "occurrences": 17,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "17 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "courier_events_logs_aggr",
+      "datasets_using": 16,
+      "dataset_ids": [
+        "5240",
+        "5247",
+        "5248",
+        "5249",
+        "5360",
+        "5393",
+        "5398",
+        "5399",
+        "5415",
+        "5416",
+        "5418",
+        "5420",
+        "5421",
+        "5422",
+        "5423",
+        "5424"
+      ],
+      "occurrences": 24,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "16 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "check",
+      "datasets_using": 15,
+      "dataset_ids": [
+        "4629",
+        "5410",
+        "5414",
+        "5447",
+        "5882",
+        "5906",
+        "5922",
+        "5924",
+        "5925",
+        "5926",
+        "6021",
+        "7490",
+        "7511",
+        "7512",
+        "7513"
+      ],
+      "occurrences": 21,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "15 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "customer_complaint",
+      "datasets_using": 15,
+      "dataset_ids": [
+        "5196",
+        "5267",
+        "5311",
+        "5315",
+        "5321",
+        "5359",
+        "5957",
+        "7050",
+        "7066",
+        "7103",
+        "7567",
+        "7588",
+        "7589",
+        "7590",
+        "7591"
+      ],
+      "occurrences": 15,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "15 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "dtt_test",
+      "datasets_using": 14,
+      "dataset_ids": [
+        "3857",
+        "3882",
+        "4069",
+        "4077",
+        "4091",
+        "4259",
+        "4441",
+        "4567",
+        "4849",
+        "4876",
+        "4912",
+        "4917",
+        "4918",
+        "4920"
+      ],
+      "occurrences": 24,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "14 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_hot_team",
+      "table": "routing_results_v1",
+      "datasets_using": 14,
+      "dataset_ids": [
+        "7119",
+        "7120",
+        "7212",
+        "7214",
+        "7215",
+        "7216",
+        "7217",
+        "7218",
+        "7220",
+        "7221",
+        "7248",
+        "7250",
+        "7252",
+        "7254"
+      ],
+      "occurrences": 16,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "14 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "store_group",
+      "datasets_using": 14,
+      "dataset_ids": [
+        "5102",
+        "5974",
+        "7319",
+        "7414",
+        "7421",
+        "7592",
+        "7603",
+        "7690",
+        "7876",
+        "7877",
+        "7893",
+        "7911",
+        "7912",
+        "7920"
+      ],
+      "occurrences": 14,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "14 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "dictionaries",
+      "table": "dict_tt",
+      "datasets_using": 13,
+      "dataset_ids": [
+        "4771",
+        "5269",
+        "5797",
+        "5923",
+        "6832",
+        "7010",
+        "7162",
+        "7394",
+        "7413",
+        "7465",
+        "7473",
+        "7687",
+        "7915"
+      ],
+      "occurrences": 14,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "13 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "m4_tasks_checklists_question_fields",
+      "datasets_using": 12,
+      "dataset_ids": [
+        "5763",
+        "5807",
+        "5837",
+        "5840",
+        "5928",
+        "5929",
+        "6131",
+        "6208",
+        "6271",
+        "6382",
+        "6389",
+        "6390"
+      ],
+      "occurrences": 12,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "12 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "orders_header",
+      "datasets_using": 12,
+      "dataset_ids": [
+        "4648",
+        "7087",
+        "7109",
+        "7508",
+        "7510",
+        "7543",
+        "7544",
+        "7554",
+        "7559",
+        "7667",
+        "7668",
+        "7671"
+      ],
+      "occurrences": 12,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "12 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "user_rating_for_products",
+      "datasets_using": 12,
+      "dataset_ids": [
+        "7240",
+        "7500",
+        "7501",
+        "7502",
+        "7624",
+        "7625",
+        "7641",
+        "7655",
+        "7829",
+        "7830",
+        "7846",
+        "7851"
+      ],
+      "occurrences": 12,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "12 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_analitika_dbo_mbdr",
+      "datasets_using": 12,
+      "dataset_ids": [
+        "5091",
+        "5327",
+        "5357",
+        "5358",
+        "5359",
+        "5391",
+        "5401",
+        "5402",
+        "5408",
+        "5419",
+        "5950",
+        "5957"
+      ],
+      "occurrences": 20,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "12 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "darkstore_time_sheet",
+      "datasets_using": 11,
+      "dataset_ids": [
+        "3791",
+        "4063",
+        "4098",
+        "4227",
+        "4284",
+        "4369",
+        "4465",
+        "4732",
+        "5041",
+        "5437",
+        "5616"
+      ],
+      "occurrences": 13,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "11 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "hr_delivery",
+      "datasets_using": 11,
+      "dataset_ids": [
+        "5797",
+        "7281",
+        "7293",
+        "7294",
+        "7394",
+        "7413",
+        "7465",
+        "7473",
+        "7687",
+        "7748",
+        "7915"
+      ],
+      "occurrences": 11,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "11 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "ms_6_tt_activity",
+      "datasets_using": 11,
+      "dataset_ids": [
+        "5837",
+        "5840",
+        "6303",
+        "6777",
+        "6778",
+        "6779",
+        "6861",
+        "7400",
+        "7905",
+        "7910",
+        "7913"
+      ],
+      "occurrences": 11,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "11 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_reference29",
+      "datasets_using": 11,
+      "dataset_ids": [
+        "5210",
+        "5326",
+        "7581",
+        "7595",
+        "7636",
+        "7639",
+        "7722",
+        "7841",
+        "7844",
+        "7923",
+        "7924"
+      ],
+      "occurrences": 11,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "11 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_timesheetfact",
+      "datasets_using": 11,
+      "dataset_ids": [
+        "5091",
+        "5315",
+        "5321",
+        "5357",
+        "5358",
+        "5391",
+        "5401",
+        "5402",
+        "5408",
+        "5419",
+        "5872"
+      ],
+      "occurrences": 11,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "11 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_zak_post_date_sklad_har",
+      "datasets_using": 11,
+      "dataset_ids": [
+        "6450",
+        "7623",
+        "7653",
+        "7724",
+        "7828",
+        "7849",
+        "7892",
+        "7895",
+        "7896",
+        "7897",
+        "7898"
+      ],
+      "occurrences": 11,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "11 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "verification_product_owner",
+      "datasets_using": 11,
+      "dataset_ids": [
+        "6864",
+        "6867",
+        "6868",
+        "6869",
+        "6870",
+        "7201",
+        "7202",
+        "7432",
+        "7434",
+        "7435",
+        "7709"
+      ],
+      "occurrences": 20,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "11 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "hr_daily_pers",
+      "datasets_using": 10,
+      "dataset_ids": [
+        "4379",
+        "5102",
+        "5939",
+        "7421",
+        "7422",
+        "7592",
+        "7603",
+        "7911",
+        "7912",
+        "7920"
+      ],
+      "occurrences": 10,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "10 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "ms_6_tt_kuratori",
+      "datasets_using": 10,
+      "dataset_ids": [
+        "5680",
+        "5762",
+        "6303",
+        "6318",
+        "6389",
+        "6507",
+        "6713",
+        "6851",
+        "6861",
+        "7400"
+      ],
+      "occurrences": 10,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "10 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_hot_team",
+      "table": "order_delivery_base",
+      "datasets_using": 10,
+      "dataset_ids": [
+        "7089",
+        "7090",
+        "7091",
+        "7098",
+        "7119",
+        "7120",
+        "7122",
+        "7124",
+        "7131",
+        "7160"
+      ],
+      "occurrences": 12,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "10 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_promo_actions_for_report",
+      "datasets_using": 10,
+      "dataset_ids": [
+        "7498",
+        "7534",
+        "7630",
+        "7656",
+        "7763",
+        "7790",
+        "7797",
+        "7835",
+        "7852",
+        "7900"
+      ],
+      "occurrences": 12,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "10 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_reference2539",
+      "datasets_using": 10,
+      "dataset_ids": [
+        "7224",
+        "7581",
+        "7595",
+        "7636",
+        "7639",
+        "7722",
+        "7841",
+        "7844",
+        "7923",
+        "7924"
+      ],
+      "occurrences": 10,
+      "join_types": [
+        "LEFT JOIN",
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "10 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_tt_delivery_service",
+      "datasets_using": 10,
+      "dataset_ids": [
+        "5482",
+        "5883",
+        "7560",
+        "7561",
+        "7659",
+        "7660",
+        "7681",
+        "7682",
+        "7684",
+        "7685"
+      ],
+      "occurrences": 10,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "10 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dash_projects_new_gp100",
+      "datasets_using": 9,
+      "dataset_ids": [
+        "5391",
+        "5401",
+        "5402",
+        "5408",
+        "5419",
+        "6795",
+        "6821",
+        "6822",
+        "7279"
+      ],
+      "occurrences": 9,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "9 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "services_sla",
+      "datasets_using": 9,
+      "dataset_ids": [
+        "3791",
+        "4098",
+        "4227",
+        "4284",
+        "4369",
+        "4615",
+        "4732",
+        "5041",
+        "5107"
+      ],
+      "occurrences": 9,
+      "join_types": [
+        "LEFT JOIN",
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "9 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "timesheetfact",
+      "datasets_using": 9,
+      "dataset_ids": [
+        "6978",
+        "6980",
+        "6983",
+        "6990",
+        "6995",
+        "7007",
+        "7016",
+        "7021",
+        "7043"
+      ],
+      "occurrences": 9,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "9 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_raspr_report",
+      "datasets_using": 9,
+      "dataset_ids": [
+        "7623",
+        "7653",
+        "7724",
+        "7828",
+        "7849",
+        "7892",
+        "7895",
+        "7896",
+        "7897"
+      ],
+      "occurrences": 9,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "9 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_logs",
+      "datasets_using": 8,
+      "dataset_ids": [
+        "5701",
+        "5704",
+        "5721",
+        "5742",
+        "6150",
+        "6191",
+        "6192",
+        "6193"
+      ],
+      "occurrences": 10,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "8 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_reserved_v2",
+      "datasets_using": 8,
+      "dataset_ids": [
+        "6501",
+        "6619",
+        "6631",
+        "7388",
+        "7389",
+        "7392",
+        "7398",
+        "7705"
+      ],
+      "occurrences": 12,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "8 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_couriers",
+      "datasets_using": 8,
+      "dataset_ids": [
+        "5482",
+        "5570",
+        "6258",
+        "7408",
+        "7607",
+        "7712",
+        "7713",
+        "7802"
+      ],
+      "occurrences": 9,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "8 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_delivery_jobs",
+      "datasets_using": 8,
+      "dataset_ids": [
+        "7560",
+        "7561",
+        "7659",
+        "7660",
+        "7681",
+        "7682",
+        "7684",
+        "7685"
+      ],
+      "occurrences": 8,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "8 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_delivery_parcels",
+      "datasets_using": 8,
+      "dataset_ids": [
+        "7560",
+        "7561",
+        "7659",
+        "7660",
+        "7681",
+        "7682",
+        "7684",
+        "7685"
+      ],
+      "occurrences": 8,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "8 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_kontr",
+      "datasets_using": 8,
+      "dataset_ids": [
+        "7240",
+        "7623",
+        "7724",
+        "7828",
+        "7892",
+        "7895",
+        "7897",
+        "7898"
+      ],
+      "occurrences": 14,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "8 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "group_tt",
+      "datasets_using": 7,
+      "dataset_ids": [
+        "5764",
+        "5807",
+        "6235",
+        "6382",
+        "6389",
+        "6390",
+        "6484"
+      ],
+      "occurrences": 7,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "7 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_gtin_dict",
+      "datasets_using": 7,
+      "dataset_ids": [
+        "5701",
+        "5742",
+        "6150",
+        "6191",
+        "6192",
+        "6193",
+        "7705"
+      ],
+      "occurrences": 7,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "7 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference29817",
+      "datasets_using": 7,
+      "dataset_ids": [
+        "5267",
+        "5311",
+        "5315",
+        "5321",
+        "5331",
+        "5354",
+        "5359"
+      ],
+      "occurrences": 7,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "7 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_document3035",
+      "datasets_using": 7,
+      "dataset_ids": [
+        "7623",
+        "7653",
+        "7724",
+        "7895",
+        "7896",
+        "7897",
+        "7898"
+      ],
+      "occurrences": 9,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "7 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_tt_format_project_tbl",
+      "datasets_using": 7,
+      "dataset_ids": [
+        "5159",
+        "5160",
+        "5161",
+        "5210",
+        "5490",
+        "5493",
+        "6017"
+      ],
+      "occurrences": 7,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "7 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "ab_logs_mart_routing_results_v1",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "6998",
+        "7001",
+        "7002",
+        "7006",
+        "7024",
+        "7027"
+      ],
+      "occurrences": 7,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_ose_tov_gp100",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "5723",
+        "5738",
+        "6789",
+        "6795",
+        "6821",
+        "6822"
+      ],
+      "occurrences": 6,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_pse_tov_gp100",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "5723",
+        "5739",
+        "6789",
+        "6795",
+        "6821",
+        "6822"
+      ],
+      "occurrences": 6,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "dtt_sales_monthly",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "7595",
+        "7596",
+        "7639",
+        "7640",
+        "7844",
+        "7845"
+      ],
+      "occurrences": 6,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "hr_daily_pers_freelance",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "7876",
+        "7877",
+        "7893",
+        "7911",
+        "7912",
+        "7920"
+      ],
+      "occurrences": 6,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_manufacturer_dict",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "5701",
+        "5742",
+        "6150",
+        "6191",
+        "6192",
+        "6193"
+      ],
+      "occurrences": 6,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "dwh",
+      "table": "mart_mixed",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "4911",
+        "6449",
+        "6767",
+        "6769",
+        "6914",
+        "7179"
+      ],
+      "occurrences": 7,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "partners_projects_economics",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "4648",
+        "6818",
+        "6846",
+        "6849",
+        "7087",
+        "7256"
+      ],
+      "occurrences": 6,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "tovhgr",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "5362",
+        "5363",
+        "5473",
+        "5489",
+        "5490",
+        "5780"
+      ],
+      "occurrences": 9,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__accumrg37960",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "7623",
+        "7653",
+        "7895",
+        "7896",
+        "7897",
+        "7898"
+      ],
+      "occurrences": 6,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_couriers_cluster_shops",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "6998",
+        "7001",
+        "7681",
+        "7682",
+        "7684",
+        "7685"
+      ],
+      "occurrences": 6,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_projects_tt",
+      "datasets_using": 6,
+      "dataset_ids": [
+        "6335",
+        "6389",
+        "6390",
+        "6667",
+        "7264",
+        "7409"
+      ],
+      "occurrences": 10,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "6 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "curator_soo_chef",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "4604",
+        "6329",
+        "6484",
+        "6774",
+        "7796"
+      ],
+      "occurrences": 5,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_moyka_gp100",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "5723",
+        "6789",
+        "6795",
+        "6821",
+        "6822"
+      ],
+      "occurrences": 5,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "first_touch_couriers_dyn",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "7528",
+        "7546",
+        "7599",
+        "7600",
+        "7708"
+      ],
+      "occurrences": 6,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "milay_roznica_cards_week_1",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "6680",
+        "6691",
+        "6692",
+        "6696",
+        "6734"
+      ],
+      "occurrences": 19,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "recruiters_work",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "6492",
+        "6535",
+        "6536",
+        "6544",
+        "7165"
+      ],
+      "occurrences": 5,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "soc_polka_tovlist",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "5978",
+        "6126",
+        "6129",
+        "7041",
+        "7042"
+      ],
+      "occurrences": 8,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "tt_cluster_temp",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "6814",
+        "6836",
+        "6837",
+        "7036",
+        "7173"
+      ],
+      "occurrences": 5,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__info_rg15933",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "5676",
+        "5680",
+        "5762",
+        "6834",
+        "7112"
+      ],
+      "occurrences": 5,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "whitestores_fot",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "7053",
+        "7062",
+        "7063",
+        "7072",
+        "7077"
+      ],
+      "occurrences": 5,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "ws_projects_cafe_bakery_dk",
+      "datasets_using": 5,
+      "dataset_ids": [
+        "7053",
+        "7062",
+        "7063",
+        "7072",
+        "7077"
+      ],
+      "occurrences": 7,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "5 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "dwh",
+      "table": "agile_mart_techaudit",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "6318",
+        "6507",
+        "6713",
+        "6851"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "kitchen_plan_detail",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "5708",
+        "5719",
+        "5720",
+        "7271"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "milay_roznica_cards_month_1",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "6622",
+        "6636",
+        "6648",
+        "6650"
+      ],
+      "occurrences": 18,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "reestr_vozvrat_tag_dkp",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "6752",
+        "6774",
+        "6796",
+        "6803"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "s3_dir_sizes",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "6355",
+        "6361",
+        "6362",
+        "6363"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__info_rg15193",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "7581",
+        "7636",
+        "7722",
+        "7841"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "v__mart_check_from_100gp",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "5031",
+        "5050",
+        "5170",
+        "6006"
+      ],
+      "occurrences": 5,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference34671",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "7581",
+        "7636",
+        "7722",
+        "7841"
+      ],
+      "occurrences": 4,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_courier_job_type",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "7408",
+        "7607",
+        "7712",
+        "7713"
+      ],
+      "occurrences": 4,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_couriers_clusters_name",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "7681",
+        "7682",
+        "7684",
+        "7685"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_delivery_job_lines",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "7002",
+        "7006",
+        "7024",
+        "7027"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_har_kontr",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "7623",
+        "7724",
+        "7895",
+        "7898"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_profit",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "5482",
+        "7747",
+        "7749",
+        "7752"
+      ],
+      "occurrences": 4,
+      "join_types": [
+        "JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_tt_geographical_zone",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "7700",
+        "7702",
+        "7703",
+        "7710"
+      ],
+      "occurrences": 4,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_tt_property_history",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "5708",
+        "5719",
+        "5720",
+        "7271"
+      ],
+      "occurrences": 8,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "weekly_rep_productivity_ds_ws",
+      "datasets_using": 4,
+      "dataset_ids": [
+        "7311",
+        "7315",
+        "7316",
+        "7368"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "4 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "complaints_autoreply",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7331",
+        "7344",
+        "7487"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "courier_first_shift",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7733",
+        "7735",
+        "7778"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "cust_compl_dash",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "2858",
+        "5587",
+        "6169"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "customer_complaint_help",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "2858",
+        "5267",
+        "6169"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "dict_email_dostavka",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5287",
+        "5323",
+        "5652"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "dict_pomoschniki",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "3499",
+        "5495",
+        "5923"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_refund",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6502",
+        "6510",
+        "6511"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "events_for_couriers",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6675",
+        "6693",
+        "6695"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "hr_daily_pers_office",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5774",
+        "7283",
+        "7806"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "hr_daily_pers_office_fl",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5774",
+        "7283",
+        "7806"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "m4_fbuz_tt",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7905",
+        "7910",
+        "7913"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "dwh",
+      "table": "mart",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "4857",
+        "5631",
+        "5634"
+      ],
+      "occurrences": 11,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "mart_sku_from_100gp",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7565",
+        "7566",
+        "7567"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "milay_roznica_cards_month",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6473",
+        "6496",
+        "6623"
+      ],
+      "occurrences": 7,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "newsletters",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7394",
+        "7413",
+        "7915"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "newsletters_couriers",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7394",
+        "7413",
+        "7915"
+      ],
+      "occurrences": 8,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "ord_hist_emp",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6313",
+        "7319",
+        "7414"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "orders",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7070",
+        "7071",
+        "7351"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "org_unit_history",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7733",
+        "7735",
+        "7778"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "osn_pom",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6977",
+        "6984",
+        "7153"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "ost_group",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5542",
+        "6858",
+        "7680"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "ost_sborka_tbl",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "2639",
+        "5888",
+        "7707"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "partners_orders",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6132",
+        "6148",
+        "6161"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "projects_tt_history_ch21",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7443",
+        "7452",
+        "7816"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "radvogin_dc3",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5940",
+        "6559",
+        "6560"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "rashodniki_dk_cafe_bake",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5450",
+        "6308",
+        "6329"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "sku_supplier_manufacturer",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7511",
+        "7512",
+        "7513"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "syv_tt1_csv",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "4899",
+        "4903",
+        "4904"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "teams_list",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6836",
+        "6838",
+        "7173"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "test_history_anomaly_check",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5188",
+        "5193",
+        "5392"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "tovari_all_tbl",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6017",
+        "6490",
+        "7707"
+      ],
+      "occurrences": 5,
+      "join_types": [
+        "LEFT JOIN",
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "trainees_project_list_full",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7771",
+        "7781",
+        "7864"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "tsd",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "4565",
+        "4710",
+        "4715"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "unique_clients_pse_zone",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7144",
+        "7147",
+        "7150"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__document6642",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7595",
+        "7639",
+        "7844"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__inforg34876",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7595",
+        "7639",
+        "7844"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference6890",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5332",
+        "5351",
+        "5584"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_couriers_payments_courier_types",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7607",
+        "7712",
+        "7713"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_email_dostavka_tbl",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5267",
+        "5359",
+        "7607"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "v_order_status_new_2",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5119",
+        "6217",
+        "6221"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_reference27",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6834",
+        "7107",
+        "7112"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_reference42",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "5210",
+        "6834",
+        "7112"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_segment_connections",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7700",
+        "7702",
+        "7710"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_segment_settings",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7700",
+        "7702",
+        "7710"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_tasks_settings",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7607",
+        "7712",
+        "7713"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "vir_eff_7gr",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "6479",
+        "6491",
+        "6493"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "vkusvill_availability_superset_agg_day_by_sku",
+      "datasets_using": 3,
+      "dataset_ids": [
+        "7650",
+        "7657",
+        "7704"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "3 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "`check`",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7065",
+        "7073"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "dwh",
+      "table": "agile_mart_operational",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "3237",
+        "6013"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN",
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "assortment_store",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7443",
+        "7452"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "audit_delivery",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6310",
+        "6317"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "bi_loyalty_tt_lost_revenue",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5943",
+        "5954"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "cart_data_superset_metrics_map_retention",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "4705",
+        "4706"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "checks_and_occupancy",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7018",
+        "7352"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "coffee_adhock",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5881",
+        "5905"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "combination_on_service_tt",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7290",
+        "7291"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "combinations_of_services_now_tt",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7578",
+        "7741"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "complaints_autoreply_returned",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7339",
+        "7344"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "customers_by_store",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6330",
+        "7574"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_tov_revenue",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6796",
+        "6803"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dkp_and_dk_cafe_bake",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7263",
+        "7796"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "ds_half_hour",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6960",
+        "7047"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dttk_robfk",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6792",
+        "6829"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "employee_all",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6258",
+        "6533"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "expire_goods",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6707",
+        "7105"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "favourite_city",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7906",
+        "7907"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "forecast_fact_ds",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5652",
+        "5791"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "hr_daily_pers_rc",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7794",
+        "7806"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "id_tt_for_hires",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5102",
+        "7422"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "ispring_learning_for_db",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7319",
+        "7771"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "job_posted_predictions",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7560",
+        "7561"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_de_reserved",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7182",
+        "7223"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_fisc_data",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7182",
+        "7223"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_reserved",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7182",
+        "7223"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_sale",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7182",
+        "7223"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "losts_1850",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5815",
+        "7423"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_hot_team",
+      "table": "losts_n_sales",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6272",
+        "6325"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "milay_roznica_tt_bush",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6712",
+        "7607"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "monitor_ds_half_hour",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6705",
+        "6758"
+      ],
+      "occurrences": 5,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "dwh",
+      "table": "ods",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "2687",
+        "7149"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "projects_tovs",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6335",
+        "7264"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "radvogin_service_01",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6659",
+        "6660"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "register_opening_nomenclature",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5773",
+        "7263"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "sales_b2b",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7056",
+        "7255"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "sales_cafe_drinks_new",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6791",
+        "7450"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "segments_rasp",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5881",
+        "5905"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "shifts",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7445",
+        "7875"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_hot_team",
+      "table": "sku",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6272",
+        "6325"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "sku_price",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6017",
+        "6449"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "INNER JOIN",
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "store_and_dark",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5884",
+        "5885"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "store_stock_balance_by_recipe",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7132",
+        "7198"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "tov_zc_rule",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "4003",
+        "4015"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "trace_raw_materials",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6682",
+        "6772"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_hot_team",
+      "table": "tt",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7122",
+        "7124"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__document5160",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6632",
+        "6667"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__document8796",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7902",
+        "7921"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__document8796_vt8810",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7902",
+        "7921"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__inforg4347",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6632",
+        "6667"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference15881",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5333",
+        "5352"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference17556",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5335",
+        "5353"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__Reference25767",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7923",
+        "7924"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference29",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7203",
+        "7224"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference33887",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6834",
+        "7112"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference4331",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6632",
+        "6667"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference4332",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6632",
+        "6667"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference5816",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6632",
+        "6667"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference5816_vt5818",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6632",
+        "6667"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_assortment_tt",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7037",
+        "7039"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_connections_tt",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6834",
+        "7112"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "v_dash_projects_new_gp100",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5723",
+        "6789"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_document3033",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7923",
+        "7924"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_document3033_vt3077",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7923",
+        "7924"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_email_teruprav_tbl",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6930",
+        "6932"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_enum3040",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7923",
+        "7924"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_enum3273",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7923",
+        "7924"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_ins_source",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5482",
+        "5883"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_item_inventory_expiry_used_utilized_dates",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6335",
+        "7264"
+      ],
+      "occurrences": 4,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_order_status",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7866",
+        "7872"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_partner_properties",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6017",
+        "7461"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_pim_dbo_partners",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7148",
+        "7461"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_projects_tt_history",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6013",
+        "6770"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_Reference1321",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7923",
+        "7924"
+      ],
+      "occurrences": 3,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_sebest_tov",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5326",
+        "6490"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_shop_partners",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6834",
+        "7112"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "vkusvill_availability_finance_agg_day",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "7648",
+        "7704"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "vv_bt_training",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6627",
+        "7806"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "vv_departments_class",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6627",
+        "7806"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "vv_leaders",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "6627",
+        "7806"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "zones_report_zones",
+      "datasets_using": 2,
+      "dataset_ids": [
+        "5059",
+        "5060"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "2 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "active_couriers_predictions_full_history",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7437"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "additional_supplies",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5942"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "all_couriers_without_ord_3_days",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6392"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "assembly_time",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6484"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "assortment_store",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7707"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "audit_visits_score_dk",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6262"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "audits",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5953"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "BBgroup",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7353"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "bonus_sberspasibo",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "4099"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "bot_frov_foto",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5917"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "bot_frov_photo",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5923"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "calendar",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5915"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "cancelled_orders_with_price_from_2026_05_01_to_2026_08_01",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7398"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "change_order_time_map_today",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6786"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "change_order_time_map_yesterday",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6786"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "check_b2b",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7486"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "checks",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5972"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "combinations_of_services_E293790",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7036"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "combinations_of_services_map",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6689"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "combinations_of_services_now",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6830"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "combinations_of_services_v4",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6688"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "complaints_autoreply_test",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7364"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "coom",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6847"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "coom_bez_su",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7363"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "cour_without_ord_3_days",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6368"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "courier_job_type",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7775"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "courier_newsletters_effect",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7780"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "courier_store_statistics_daily",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6440"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "couriers_beginners_daily",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7425"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "couriers_first_touch_active_touch",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6416"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "couriers_zone_transitions_forecast",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7399"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "darkstore_time_draft",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "3036"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dataset_tasks_of_technologists",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7471"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "delivery_promises",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7153"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "dict_email_dostavka",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7161"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dict_recruiters_group",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6534"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "dict_tt_format",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "4870"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "digust_dash",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5983"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_cafe_bake",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6146"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_cafe_bake_fot_post_categories",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6190"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_cafe_bake_fot_revenue",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5462"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_cafe_bake_revenue",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5157"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_defrost_calendar_ch21",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7816"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_defrost_ch21",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7816"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_nesobr",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "2681"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_nesobr_cafe",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "2531"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_ose_tov_ch21",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7274"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_ose_tov_oper_ch21",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7276"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_ose_tov_oper_gp100",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6157"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_pse_tov_ch21",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7275"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_pse_tov_oper_ch21",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7277"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_pse_tov_oper_gp100",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6159"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_revenue",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6551"
+      ],
+      "occurrences": 3,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_source",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6902"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dk_vozvrat_tag",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5796"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dkp_and_dk_cafe_bake_ch21",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5348"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "dkp_sales_hourly_ch21",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7505"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "ds_half_hour_today",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7225"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "ds_weekly_stats",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7047"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "dttk",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7107"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "elastic_orders_upload_by_datehour",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "4615"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "email_do",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6258"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "employee_shifts",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5981"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "expenses_on_dk_and_bc",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "4604"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "explo_actions_new",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6726"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "first_touch_couriers_exits_v2",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7787"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "fruitcourt_product_card",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6617"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "frutcort_overrepres_monthly",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7313"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "frutcort_overrepresentation",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7158"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "dictionaries",
+      "table": "head_of_retail_in_pse",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6831"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "hr_delivery_five_shifts",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7473"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "inaccessibility_dkp_detail",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7420"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "inaccessibility_dkp_summary",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7418"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "ispring_learning_test_tracks",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7414"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_api_v4_true_api_codes_check",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7182"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_cashbox_reserved",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7705"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_check_code",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7182"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_codes_check_with_products",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6396"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_logs_dashboard_daily",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7188"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_logs_dashboard_daily_agg",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7208"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_operations",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7182"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "km_gis_mt_reserved_goods_yesterday",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7222"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "late_deliveries",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6505"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "m4_users",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5764"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "m4_users_activity",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5764"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "mart_check_fields_priority",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5436"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "mart_check_stats",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "4747"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "milay_roznica_cards_week",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6543"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "milay_roznica_mon",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6585"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "milay_roznica_tt",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6494"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "milay_roznica_tt_mon",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6622"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "milay_roznica_tt_week",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6734"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "min_ned_ost_frov",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6476"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "new_couriers_start",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6324"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "new_tt",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "3881"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "newbies_dk",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6836"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "oprosso_courier_first_shift",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7778"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "oprosso_nps_csi",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5972"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "order_line",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6836"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "ost_day_tt_tov",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6017"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "ost_group_rozn",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5553"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "ost_sborka_tbl",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5269"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "partner_products_description_full",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7461"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "partners_orders_conversion",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6168"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "partners_projects_assortment_no_stock",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7104"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "partners_projects_daily_assortment",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7237"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "partners_projects_unique_clients",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6925"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "partners_projects_wm_assortment",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7241"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "pharmacy_effectiveness_clusters",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7459"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "pharmacy_effectiveness_summary",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7458"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "pim_product_group_classes_id",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7110"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "prepackaging",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5914"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "radvogin_service_02",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6674"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "reestr_vozvrat_dk",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6539"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "reserved_cis_more_then_one_store",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7101"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "rest_couriers",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7488"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "rfm_segment_customer_sk",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5595"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "roznica_weekly_rating",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6798"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "sales_cafe_drinks",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6439"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "sberspasibo_accounting_vv",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5976"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "services",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7696"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "sku_abc_analysis_actual",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7791"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "sku_stock_conflict",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6489"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "dwh",
+      "table": "stage_outer_sources",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5196"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "store_delivery_aggregated_daily",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6301"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "structura",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5481"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_hot_team",
+      "table": "subscription_by_purchase_type",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7306"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_hot_team",
+      "table": "subscription_by_vector",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7305"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_hot_team",
+      "table": "subscription_network_metrics",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7307"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "tact_of_purchase",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7909"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "td_move",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6017"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "test_pereborka_frov",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7205"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "test_pereborka_frov_complaints",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7209"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "test_pereborka_frov_corr",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7207"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "test_pereborka_frov_detailed",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7206"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "tmz_darkstore",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "3746"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "tmz_sebest_buh",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "3746"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "top_communcations_dash",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5389"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "tov_spis_zc",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "4015"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "tov_zc_rule",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6523"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "tovhgr",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5481"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "trainees_learning",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7864"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "trainees_project_checks",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7781"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "trainees_shopno_metrics",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7786"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "trudoemkosty",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6977"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "trudoemkosty_forecast",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6984"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "trudoemkosty_fot",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6984"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "FULL JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "trudoemkosty_itog",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5705"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "tt",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7431"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "tt",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6631"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "tt_logs_temp",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7163"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "tt_metrics_accessibility_and_delay",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7397"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "tt_online_services_for1c",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6218"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "tt_services",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6484"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "tt_under_clamped_ds",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5677"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__chrc16941",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7203"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__document3034",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7923"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__document3034_vt3100",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7923"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__info_rg_16942",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7203"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__info_rg21519",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5781"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__info_rg21816",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5781"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference10080",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7359"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v__reference15410",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5781"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_budget",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6032"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_catalog_categories_products",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7148"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_catalog_reports",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7404"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "v_couriers",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7775"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_couriers_curator",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6258"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_couriers_job_types",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5482"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_couriers_payments_contracts",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5570"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "v_couriers_payments_courier_types",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7775"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_couriers_shifts",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7767"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_curators",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6258"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "v_dtt",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5481"
+      ],
+      "occurrences": 2,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_employees",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7404"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_export_tt",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6330"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_info_rg19319",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5210"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_info_rg3217",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7898"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_kitchen_plan_detail",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7409"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_new_plans",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6914"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart_mixed",
+      "table": "v_new_tt",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "4384"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_order_line_collected",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5780"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_orders_header",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5780"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_ost_day_sklad_tov",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5511"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_ost_day_tt_tov",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5210"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_ost_sborka_tbl",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5556"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_partner_product_property_values",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5780"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_partner_products_description",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5780"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_partner_types",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6017"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_pim__classes",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7148"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_pim_partner_product_type",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7148"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_pim_partner_products",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7148"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_privileges",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5447"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_privileges_bwlist",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5447"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_reference1321",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5210"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_reference17989",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5210"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_Reference42",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5781"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_shops_excep",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5781"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_sql19_dbo_catalog_images_vw",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7904"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_status",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7866"
+      ],
+      "occurrences": 2,
+      "join_types": [
+        "INNER JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "default",
+      "table": "v_tovs_actions_new",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5776"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_tt_delivery_properties",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6834"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_tt_services",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5482"
+      ],
+      "occurrences": 1,
+      "join_types": [
+        "LEFT JOIN"
+      ],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "v_whites_darks_zone_intersect",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5676"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "vir_targets_7gr",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7058"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "vkusvill_availability_superset_agg_day",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7648"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "ods",
+      "table": "vkusvill_the_stories",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7297"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "WatchList",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7355"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "weekly_rep_productivity_sotr_ds_ws",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7387"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "WhiteList",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "7354"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "wow_showcase",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6402"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "agile_mart_techaudit",
+      "table": "wow_showcase_purchase_time",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6612"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "mart",
+      "table": "wrong_cis",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "6631"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    },
+    {
+      "database": null,
+      "schema": "sandbox",
+      "table": "zones_report_data",
+      "datasets_using": 1,
+      "dataset_ids": [
+        "5062"
+      ],
+      "occurrences": 1,
+      "join_types": [],
+      "status": "VERIFIED",
+      "evidence": "1 dataset SQL ссылается на таблицу",
+      "snapshot_id": "phase-01-4-2026-11-21T15-56-56-676Z"
+    }
+  ]
+}

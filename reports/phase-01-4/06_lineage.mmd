@@ -1,0 +1,8 @@
+graph LR
+  DASH["dashboards: 332"] --> CH["charts: 19927"]
+  CH --> DS["datasets: 3778"]
+  DASH -- "13822 dashboard→chart refs (318 unresolved)" --> CH
+  CH -- "19763 chart→dataset refs (45 unresolved)" --> DS
+  DS --> SQL["SQL definitions: 3222 parsed"]
+  SQL --> TBL["physical tables: 436"]
+  SQL --> COL["columns/refs: 8475"]

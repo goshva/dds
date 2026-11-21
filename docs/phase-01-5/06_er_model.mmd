@@ -1,0 +1,395 @@
+erDiagram
+  SHOPS {
+    uuid id PK
+    text external_source_id
+    text code UK
+    text name
+    uuid address_id FK
+    text timezone
+    text status
+    timestamptz valid_from
+    timestamptz valid_to
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  ADDRESSES {
+    uuid id PK
+    text country_code
+    text region
+    text city
+    text street
+    text house
+    text building
+    text apartment
+    text postal_code
+    double latitude
+    double longitude
+    text geocode_source
+    numeric geocode_confidence
+    text normalized_hash
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  COURIERS {
+    uuid id PK
+    text external_hr_id
+    text external_user_id
+    text display_name
+    text courier_type
+    text employment_type
+    text operational_status
+    boolean is_blocked
+    timestamptz hired_at
+    timestamptz terminated_at
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  COURIER_EXTERNAL_IDS {
+    uuid id PK
+    uuid courier_id FK
+    text source_system
+    text external_id
+    timestamptz valid_from
+    timestamptz valid_to
+    timestamptz created_at
+  }
+  DELIVERY_ZONES {
+    uuid id PK
+    uuid shop_id FK
+    text code UK
+    text name
+    text boundary_type
+    geography boundary_geometry
+    text status
+    uuid approved_by
+    timestamptz approved_at
+    timestamptz valid_from
+    timestamptz valid_to
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  ZONE_BOUNDARY_VERSIONS {
+    uuid id PK
+    uuid zone_id FK
+    integer version
+    geography boundary_geometry
+    text change_reason
+    uuid created_by
+    uuid approved_by
+    timestamptz valid_from
+    timestamptz valid_to
+    timestamptz created_at
+  }
+  ORDERS {
+    uuid id PK
+    text external_order_id
+    text source_system
+    uuid shop_id FK
+    uuid delivery_address_id FK
+    text customer_reference
+    text order_status
+    text priority
+    timestamptz order_created_at
+    timestamptz accepted_at
+    timestamptz collection_started_at
+    timestamptz collected_at
+    timestamptz ready_at
+    timestamptz delivery_started_at
+    timestamptz delivered_at
+    timestamptz cancelled_at
+    timestamptz returned_at
+    timestamptz sla_due_at
+    timestamptz source_updated_at
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  ORDER_AMOUNT_SNAPSHOTS {
+    uuid id PK
+    uuid order_id FK
+    numeric amount
+    text currency
+    text amount_type
+    text source_system
+    timestamptz captured_at
+    timestamptz created_at
+  }
+  ORDER_STATUS_HISTORY {
+    uuid id PK
+    uuid order_id FK
+    text from_status
+    text to_status
+    timestamptz changed_at
+    text changed_by_type
+    uuid changed_by_id
+    text source_system
+    text source_event_id
+    text reason
+    timestamptz created_at
+  }
+  ORDER_READINESS {
+    uuid id PK
+    uuid order_id FK
+    timestamptz ready_at
+    text ready_source
+    text ready_actor_type
+    uuid ready_actor_id
+    text confirmation_status
+    integer attempt_no
+    timestamptz created_at
+  }
+  WORK_SLOTS {
+    uuid id PK
+    uuid shop_id FK
+    timestamptz starts_at
+    timestamptz ends_at
+    integer capacity
+    text status
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  COURIER_SHIFTS {
+    uuid id PK
+    uuid courier_id FK
+    uuid shop_id FK
+    uuid work_slot_id FK
+    text external_shift_id
+    text shift_type
+    boolean is_night_shift
+    timestamptz planned_start_at
+    timestamptz planned_end_at
+    timestamptz actual_start_at
+    timestamptz actual_end_at
+    text shift_status
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  COURIER_QUEUE_ENTRIES {
+    uuid id PK
+    uuid courier_id FK
+    uuid shop_id FK
+    uuid shift_id FK
+    timestamptz arrived_at
+    bigint queue_sequence
+    text queue_status
+    timestamptz ready_for_assignment_at
+    timestamptz skipped_at
+    timestamptz closed_at
+    text skip_reason
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  TRIPS {
+    uuid id PK
+    uuid shop_id FK
+    uuid zone_id FK
+    uuid courier_id FK
+    uuid shift_id FK
+    text external_trip_ref
+    text trip_number
+    text trip_status
+    timestamptz formed_at
+    timestamptz assigned_at
+    timestamptz departed_at
+    timestamptz returned_at
+    timestamptz completed_at
+    uuid created_by
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  TRIP_ORDERS {
+    uuid id PK
+    uuid trip_id FK
+    uuid order_id FK
+    integer sequence_no
+    timestamptz added_at
+    uuid added_by
+    timestamptz removed_at
+    uuid removed_by
+    text removal_reason
+    timestamptz created_at
+  }
+  TRIP_ORDER_MEMBERSHIP_HISTORY {
+    uuid id PK
+    uuid trip_id FK
+    uuid order_id FK
+    text action
+    timestamptz acted_at
+    uuid acted_by
+    text reason
+    timestamptz created_at
+  }
+  TRIP_ASSIGNMENTS {
+    uuid id PK
+    uuid trip_id FK
+    uuid courier_id FK
+    uuid queue_entry_id FK
+    timestamptz assigned_at
+    uuid assigned_by
+    text assignment_status
+    timestamptz cancelled_at
+    text cancel_reason
+    timestamptz created_at
+  }
+  DELIVERY_ATTEMPTS {
+    uuid id PK
+    uuid order_id FK
+    uuid trip_id FK
+    uuid courier_id FK
+    integer attempt_no
+    timestamptz started_at
+    timestamptz completed_at
+    text result
+    text failure_reason
+    text proof_reference
+    timestamptz created_at
+  }
+  COURIER_EVENTS {
+    uuid id PK
+    uuid courier_id FK
+    uuid shift_id FK
+    uuid shop_id FK
+    text event_type
+    timestamptz occurred_at
+    timestamptz recorded_at
+    text actor_type
+    uuid actor_id
+    text source_system
+    text source_event_id
+    jsonb payload
+    text idempotency_key
+    timestamptz created_at
+  }
+  DOMAIN_EVENTS {
+    uuid id PK
+    text aggregate_type
+    text aggregate_id
+    text event_type
+    integer event_version
+    timestamptz occurred_at
+    timestamptz recorded_at
+    text actor_type
+    uuid actor_id
+    text source_system
+    text source_event_id
+    text correlation_id
+    text causation_id
+    text idempotency_key
+    jsonb payload
+    text schema_version
+    timestamptz created_at
+  }
+  TARIFF_VERSIONS {
+    uuid id PK
+    text name
+    uuid zone_id FK
+    uuid shop_id FK
+    integer distance_from_m
+    integer distance_to_m
+    text order_type
+    numeric base_amount
+    text currency
+    timestamptz effective_from
+    timestamptz effective_to
+    uuid approved_by
+    timestamptz approved_at
+    text status
+    timestamptz created_at
+  }
+  COURIER_ACCRUALS {
+    uuid id PK
+    uuid courier_id FK
+    uuid order_id FK
+    uuid delivery_attempt_id FK
+    uuid trip_id FK
+    uuid tariff_version_id FK
+    jsonb calculation_basis
+    numeric amount
+    text currency
+    text accrual_status
+    timestamptz earned_at
+    timestamptz approved_at
+    timestamptz paid_at
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  ACCRUAL_ADJUSTMENTS {
+    uuid id PK
+    uuid accrual_id FK
+    text adjustment_type
+    numeric amount_delta
+    text reason
+    uuid approved_by
+    timestamptz created_at
+  }
+  MENTORSHIP_ASSIGNMENTS {
+    uuid id PK
+    uuid mentor_courier_id FK
+    uuid trainee_courier_id FK
+    uuid assigned_by
+    timestamptz starts_at
+    timestamptz planned_ends_at
+    timestamptz actual_ends_at
+    text status
+    uuid completion_confirmed_by
+    timestamptz completion_confirmed_at
+    timestamptz created_at
+    timestamptz updated_at
+  }
+  MENTORSHIP_SHIFT_REVIEWS {
+    uuid id PK
+    uuid mentorship_assignment_id FK
+    uuid shift_id FK
+    integer shift_number
+    numeric delivery_quality_score
+    numeric rules_compliance_score
+    text review_comment
+    uuid reviewed_by
+    timestamptz reviewed_at
+  }
+  ADDRESSES |o--o{ SHOPS : "address_id"
+  COURIERS ||--o{ COURIER_EXTERNAL_IDS : "courier_id"
+  SHOPS ||--o{ DELIVERY_ZONES : "shop_id"
+  DELIVERY_ZONES ||--o{ ZONE_BOUNDARY_VERSIONS : "zone_id"
+  SHOPS ||--o{ ORDERS : "shop_id"
+  ADDRESSES |o--o{ ORDERS : "delivery_address_id"
+  ORDERS ||--o{ ORDER_AMOUNT_SNAPSHOTS : "order_id"
+  ORDERS ||--o{ ORDER_STATUS_HISTORY : "order_id"
+  ORDERS ||--o{ ORDER_READINESS : "order_id"
+  SHOPS ||--o{ WORK_SLOTS : "shop_id"
+  COURIERS ||--o{ COURIER_SHIFTS : "courier_id"
+  SHOPS ||--o{ COURIER_SHIFTS : "shop_id"
+  WORK_SLOTS |o--o{ COURIER_SHIFTS : "work_slot_id"
+  COURIERS ||--o{ COURIER_QUEUE_ENTRIES : "courier_id"
+  SHOPS ||--o{ COURIER_QUEUE_ENTRIES : "shop_id"
+  COURIER_SHIFTS ||--o{ COURIER_QUEUE_ENTRIES : "shift_id"
+  SHOPS ||--o{ TRIPS : "shop_id"
+  DELIVERY_ZONES ||--o{ TRIPS : "zone_id"
+  COURIERS |o--o{ TRIPS : "courier_id"
+  COURIER_SHIFTS |o--o{ TRIPS : "shift_id"
+  TRIPS ||--o{ TRIP_ORDERS : "trip_id"
+  ORDERS ||--o{ TRIP_ORDERS : "order_id"
+  TRIPS ||--o{ TRIP_ORDER_MEMBERSHIP_HISTORY : "trip_id"
+  ORDERS ||--o{ TRIP_ORDER_MEMBERSHIP_HISTORY : "order_id"
+  TRIPS ||--o{ TRIP_ASSIGNMENTS : "trip_id"
+  COURIERS ||--o{ TRIP_ASSIGNMENTS : "courier_id"
+  COURIER_QUEUE_ENTRIES |o--o{ TRIP_ASSIGNMENTS : "queue_entry_id"
+  ORDERS ||--o{ DELIVERY_ATTEMPTS : "order_id"
+  TRIPS |o--o{ DELIVERY_ATTEMPTS : "trip_id"
+  COURIERS ||--o{ DELIVERY_ATTEMPTS : "courier_id"
+  COURIERS ||--o{ COURIER_EVENTS : "courier_id"
+  COURIER_SHIFTS |o--o{ COURIER_EVENTS : "shift_id"
+  SHOPS |o--o{ COURIER_EVENTS : "shop_id"
+  DELIVERY_ZONES |o--o{ TARIFF_VERSIONS : "zone_id"
+  SHOPS |o--o{ TARIFF_VERSIONS : "shop_id"
+  COURIERS ||--o{ COURIER_ACCRUALS : "courier_id"
+  ORDERS ||--o{ COURIER_ACCRUALS : "order_id"
+  DELIVERY_ATTEMPTS ||--o{ COURIER_ACCRUALS : "delivery_attempt_id"
+  TRIPS |o--o{ COURIER_ACCRUALS : "trip_id"
+  TARIFF_VERSIONS |o--o{ COURIER_ACCRUALS : "tariff_version_id"
+  COURIER_ACCRUALS ||--o{ ACCRUAL_ADJUSTMENTS : "accrual_id"
+  COURIERS ||--o{ MENTORSHIP_ASSIGNMENTS : "mentor_courier_id"
+  COURIERS ||--o{ MENTORSHIP_ASSIGNMENTS : "trainee_courier_id"
+  MENTORSHIP_ASSIGNMENTS ||--o{ MENTORSHIP_SHIFT_REVIEWS : "mentorship_assignment_id"
+  COURIER_SHIFTS ||--o{ MENTORSHIP_SHIFT_REVIEWS : "shift_id"
+
+  %% PK/FK/UK — из логической модели; SQL JOIN из Superset не считается FK.

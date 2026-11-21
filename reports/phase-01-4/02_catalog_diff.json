@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-11-21T15:50:53.298Z",
+  "resources": {
+    "dashboard": {
+      "previous_count": 331,
+      "current_count": 332,
+      "added": [
+        "1681"
+      ],
+      "not_seen": [],
+      "changed_ids": []
+    },
+    "chart": {
+      "previous_count": 19924,
+      "current_count": 19927,
+      "added": [
+        "32584",
+        "32583",
+        "32582"
+      ],
+      "not_seen": [],
+      "changed_ids": [
+        "32417"
+      ]
+    },
+    "dataset": {
+      "previous_count": 3776,
+      "current_count": 3778,
+      "added": [
+        "7923",
+        "7924"
+      ],
+      "not_seen": [],
+      "changed_ids": []
+    }
+  }
+}

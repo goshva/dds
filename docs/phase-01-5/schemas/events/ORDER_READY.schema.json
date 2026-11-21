@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dds.local/schemas/events/ORDER_READY.schema.json",
+  "title": "ORDER_READY",
+  "allOf": [
+    {
+      "$ref": "../event-envelope.schema.json"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "event_type": {
+      "const": "ORDER_READY"
+    },
+    "payload": {
+      "type": "object",
+      "required": [
+        "order_id",
+        "ready_at",
+        "ready_source",
+        "ready_actor_type",
+        "ready_actor_id"
+      ],
+      "properties": {
+        "order_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "ready_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ready_source": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "ready_actor_type": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        },
+        "ready_actor_id": {
+          "type": [
+            "string",
+            "number",
+            "array",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
