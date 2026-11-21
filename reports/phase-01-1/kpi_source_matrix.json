@@ -1,9 +1,21 @@
 {
-  "generated_at": "2026-11-20T11:04:10.375Z",
-  "method": "локальный SQL из dataset payload (SQLite readonly) + API chart-links (api_chart_links_priority.json) + API dataset-details (api_spot_checks.json)",
-  "confidence_levels": {
-    "HIGH": "поле/выражение прямо найдено в SQL датасета",
-    "MEDIUM": "косвенные признаки (домен датасета, агрегатная витрина)"
+  "generated_at": "2026-11-20T20:23:07.823Z",
+  "source": "output/dataset_details/*.json — полные detail 12 приоритетных датасетов (SQL, columns, metrics, calculated_columns)",
+  "kpi_model": {
+    "name": "Операционная модель — 18 показателей",
+    "count": 18,
+    "statuses": [
+      "FOUND",
+      "PARTIAL",
+      "NOT_FOUND",
+      "NOT_VERIFIED"
+    ],
+    "status_counts": {
+      "FOUND": 9,
+      "PARTIAL": 4,
+      "NOT_FOUND": 1,
+      "NOT_VERIFIED": 4
+    }
   },
   "datasets": [
     {
@@ -13,633 +25,13 @@
       "database": "ch_10.0.15.240/default",
       "schema": "default",
       "sql_length": 4897,
-      "api_changed_on": "2026-09-02T09:04:43.401054",
-      "api_columns_count": 127,
-      "select_aliases_sample": [
-        "feature_tt",
-        "pom_old",
-        "pom_now",
-        "pom",
-        "sla_collection_time_all",
-        "sla_delivery_time_all",
-        "sla_order_time",
-        "is_express",
-        "direction",
-        "sla"
-      ],
-      "charts_count_api": 13,
-      "charts_sample": [
-        {
-          "id": 21680,
-          "name": "Аптеки_сводная_в разрезе Партнеров",
-          "viz_type": "table"
-        },
-        {
-          "id": 15932,
-          "name": "Аптеки динамика просрочек сборки",
-          "viz_type": "echarts_timeseries_bar"
-        },
-        {
-          "id": 21681,
-          "name": "Аптеки_сводная таблица ТТ-Партнер",
-          "viz_type": "pivot_table_v2"
-        },
-        {
-          "id": 21679,
-          "name": "Аптеки_сводная_в разрезе Партнера и ТТ",
-          "viz_type": "pivot_table_v2"
-        },
-        {
-          "id": 27294,
-          "name": "test",
-          "viz_type": "pivot_table_v2"
-        }
-      ],
-      "dashboards": [
-        {
-          "id": 717,
-          "title": "Показатели проекта Аптеки"
-        },
-        {
-          "id": 1054,
-          "title": "Показатели проекта Цветы_архив с 08.10.2026"
-        },
-        {
-          "id": 983,
-          "title": "Показатели проекта Рестораны"
-        }
-      ],
-      "kpi_candidates": [
-        {
-          "kpi": "Объём заказов",
-          "fields": [
-            "id_order",
-            "order_status"
-          ],
-          "confidence": "HIGH",
-          "note": "COUNT(id_order); статусы есть в SQL"
-        },
-        {
-          "kpi": "Просрочка заказов (SLA)",
-          "fields": [
-            "sla_order_time",
-            "date_supply_until"
-          ],
-          "confidence": "HIGH",
-          "note": "Доля is_late=1; sla_order_time задаёт норматив"
-        },
-        {
-          "kpi": "Время доставки (delivery duration)",
-          "fields": [
-            "date_delivery_start",
-            "date_delivered",
-            "date_supply"
-          ],
-          "confidence": "HIGH",
-          "note": "date_delivered - date_delivery_start"
-        },
-        {
-          "kpi": "Время сборки заказа",
-          "fields": [
-            "date_collect_start",
-            "date_collected",
-            "date_printed"
-          ],
-          "confidence": "HIGH"
-        },
-        {
-          "kpi": "Суммы заказов (GMV/paid)",
-          "fields": [
-            "sum_order",
-            "sum_paid",
-            "sum_paid_disc"
-          ],
-          "confidence": "HIGH"
-        }
-      ]
-    },
-    {
-      "dataset_id": 5247,
-      "table_name": "courier_logs_agg_couriers_daily",
-      "kind": "virtual",
-      "database": "gp_10.0.112.100/dwh",
-      "schema": "agile_mart_techaudit",
-      "sql_length": 2378,
-      "api_changed_on": "2025-08-20T08:04:04.770504",
-      "api_columns_count": 15,
-      "select_aliases_sample": [
-        "events_qty",
-        "max_day",
-        "days_count",
-        "max_day_event_qty",
-        "count_distinct_day_no",
-        "sum_events_qty_all_days"
-      ],
-      "charts_count_api": 1,
-      "charts_sample": [
-        {
-          "id": 22839,
-          "name": "Кол-во событий по курьерам (дни). Отчет по логам МП курьера",
-          "viz_type": "pivot_table_v2"
-        }
-      ],
-      "dashboards": [
-        {
-          "id": 1079,
-          "title": "Отчет по логам МП курьера_архив"
-        }
-      ],
-      "kpi_candidates": [
-        {
-          "kpi": "Онлайн/событийная активность курьера (день/неделя)",
-          "fields": [
-            "events_qty",
-            "max_day",
-            "days_count",
-            "max_day_event_qty",
-            "count_distinct_day_no",
-            "sum_events_qty_all_days"
-          ],
-          "confidence": "HIGH",
-          "note": "courier_logs_agg_*: events_qty по дням/неделям + пики активности; витрина agile_mart_techaudit"
-        }
-      ]
-    },
-    {
-      "dataset_id": 5399,
-      "table_name": "courier_logs_agg_couriers_week",
-      "kind": "virtual",
-      "database": "gp_10.0.112.100/dwh",
-      "schema": "agile_mart_techaudit",
-      "sql_length": 2889,
-      "api_changed_on": "2025-08-20T08:06:23.534580",
-      "api_columns_count": 15,
-      "select_aliases_sample": [
-        "events_qty",
-        "max_week",
-        "week_count",
-        "max_week_event_qty",
-        "count_distinct_week_no",
-        "sum_events_qty_all_weeks"
-      ],
-      "charts_count_api": 1,
-      "charts_sample": [
-        {
-          "id": 22664,
-          "name": "Кол-во событий по курьерам (недели). Отчет по логам МП курьера",
-          "viz_type": "pivot_table_v2"
-        }
-      ],
-      "dashboards": [
-        {
-          "id": 1079,
-          "title": "Отчет по логам МП курьера_архив"
-        }
-      ],
-      "kpi_candidates": [
-        {
-          "kpi": "Онлайн/событийная активность курьера (день/неделя)",
-          "fields": [
-            "events_qty",
-            "max_week",
-            "week_count",
-            "max_week_event_qty",
-            "count_distinct_week_no",
-            "sum_events_qty_all_weeks"
-          ],
-          "confidence": "HIGH",
-          "note": "courier_logs_agg_*: events_qty по дням/неделям + пики активности; витрина agile_mart_techaudit"
-        }
-      ]
-    },
-    {
-      "dataset_id": 5797,
-      "table_name": "hr_couriers",
-      "kind": "virtual",
-      "database": "ch_10.0.15.240/default",
-      "schema": "agile_mart_techaudit",
-      "sql_length": 2246,
-      "api_changed_on": "2026-10-14T14:15:27.162178",
-      "api_columns_count": 65,
-      "select_aliases_sample": [
-        "fio",
-        "active",
-        "wk",
-        "date_day",
-        "date_day_str",
-        "second_hire",
-        "repeated_hire",
-        "pause_days",
-        "exp_days",
-        "exp_months",
-        "cnt_orders",
-        "orders_after_hire",
-        "orders_before_dism_total",
-        "orders_before_dism",
-        "days_with_orders",
-        "enough_shifts_flg",
-        "region_name",
-        "dt"
-      ],
-      "charts_count_api": 54,
-      "charts_sample": [
-        {
-          "id": 26022,
-          "name": "HR доставка - численность на дату по типу 2",
-          "viz_type": "pie"
-        },
-        {
-          "id": 24276,
-          "name": "HR доставка - численность на дату по стажу",
-          "viz_type": "pie"
-        },
-        {
-          "id": 24091,
-          "name": "HR доставка - детализация численности на дату",
-          "viz_type": "table"
-        },
-        {
-          "id": 29738,
-          "name": "HR доставка - детализация численности на дату (переход в красную зону)",
-          "viz_type": "table"
-        },
-        {
-          "id": 29737,
-          "name": "HR доставка - детализация численности на дату (переход в оранжевую зону)",
-          "viz_type": "table"
-        }
-      ],
-      "dashboards": [
-        {
-          "id": 1228,
-          "title": "HR Dashboard Доставка"
-        },
-        {
-          "id": 1124,
-          "title": "HR верхнеуровневый"
-        }
-      ],
-      "kpi_candidates": [
-        {
-          "kpi": "Численность / активность курьеров (HR)",
-          "fields": [
-            "id_courier",
-            "active",
-            "event_hiring",
-            "event_date",
-            "date_dismissed",
-            "uvol",
-            "cnt_orders",
-            "days_with_orders",
-            "enough_shifts_flg",
-            "exp_days",
-            "exp_months",
-            "pause_days",
-            "second_hire",
-            "repeated_hire",
-            "job_type_name",
-            "region_name"
-          ],
-          "confidence": "HIGH",
-          "note": "HR-домен: onboarding/attrition/опыт/продуктивность из hr_couriers* (cnt_orders, days_with_orders, enough_shifts_flg)"
-        },
-        {
-          "kpi": "Продуктивность курьера (заказы/дни со сменами)",
-          "fields": [
-            "cnt_orders",
-            "orders_after_hire",
-            "days_with_orders",
-            "enough_shifts_flg"
-          ],
-          "confidence": "HIGH",
-          "note": "Прямые агрегаты в SELECT hr_couriers*"
-        }
-      ]
-    },
-    {
-      "dataset_id": 7006,
-      "table_name": "cargo_main2",
-      "kind": "virtual",
-      "database": "gp_10.0.112.100/dwh",
-      "schema": "logs_mart",
-      "sql_length": 8891,
-      "api_changed_on": "2026-05-19T10:59:39.954920",
-      "api_columns_count": 44,
-      "select_aliases_sample": [
-        "calculation_time",
-        "rn_calc",
-        "rn",
-        "duration_plan",
-        "courier_type",
-        "is_late",
-        "plan_arrival_deadline",
-        "minutes_late",
-        "fact_arrival_before_deadline",
-        "planned_late",
-        "is_deadline_close",
-        "plan_late_minute",
-        "fact_seq",
-        "plan_seq",
-        "prev_max_delivered",
-        "is_new_pool",
-        "pool_seq",
-        "id_pool_calc",
-        "pool_size",
-        "late_orders_cnt",
-        "is_fact_eq_plan_for_pool",
-        "pool_size_text",
-        "minutes_late_group",
-        "lvl0",
-        "plan_late_bucket"
-      ],
-      "charts_count_api": 17,
-      "charts_sample": [
-        {
-          "id": 28156,
-          "name": ". ",
-          "viz_type": "supersetTA-custom-kpi-card"
-        },
-        {
-          "id": 28155,
-          "name": ". ",
-          "viz_type": "supersetTA-custom-kpi-card"
-        },
-        {
-          "id": 28115,
-          "name": "Распределение размеров пулов",
-          "viz_type": "echarts_timeseries_bar"
-        },
-        {
-          "id": 28134,
-          "name": "Распределение запланированных опозданий по минутам",
-          "viz_type": "echarts_timeseries_bar"
-        },
-        {
-          "id": 28158,
-          "name": ".",
-          "viz_type": "supersetTA-custom-kpi-card"
-        }
-      ],
-      "dashboards": [
-        {
-          "id": 1472,
-          "title": "Метрики маршрутизатора"
-        }
-      ],
-      "kpi_candidates": [
-        {
-          "kpi": "Объём заказов",
-          "fields": [
-            "id_order",
-            "status_name"
-          ],
-          "confidence": "HIGH",
-          "note": "COUNT(id_order); статусы есть в SQL"
-        },
-        {
-          "kpi": "Просрочка заказов (SLA)",
-          "fields": [
-            "is_late",
-            "sla_order_time",
-            "date_supply_until"
-          ],
-          "confidence": "HIGH",
-          "note": "Доля is_late=1; sla_order_time задаёт норматив"
-        },
-        {
-          "kpi": "Время доставки (delivery duration)",
-          "fields": [
-            "date_delivery_start",
-            "date_delivered",
-            "date_supply"
-          ],
-          "confidence": "HIGH",
-          "note": "date_delivered - date_delivery_start"
-        },
-        {
-          "kpi": "Время сборки заказа",
-          "fields": [
-            "date_collected"
-          ],
-          "confidence": "MEDIUM"
-        },
-        {
-          "kpi": "Маршрутизация: расстояние/время между точками",
-          "fields": [
-            "parcel_id",
-            "cluster_id",
-            "duration_from_previous",
-            "arrival_time"
-          ],
-          "confidence": "HIGH"
-        }
-      ]
-    },
-    {
-      "dataset_id": 7024,
-      "table_name": "cargo_main3",
-      "kind": "virtual",
-      "database": "gp_10.0.112.100/dwh",
-      "schema": "logs_mart",
-      "sql_length": 5819,
-      "api_changed_on": "2026-05-19T10:50:27.003578",
-      "api_columns_count": 11,
-      "select_aliases_sample": [
-        "calculation_time",
-        "rn_calc",
-        "rn",
-        "courier_type",
-        "fact_seq",
-        "plan_seq",
-        "prev_max_delivered",
-        "is_new_pool",
-        "pool_seq",
-        "id_pool_calc",
-        "pool_size",
-        "max_arrival_time",
-        "max_calculation_time",
-        "max_date_delivered",
-        "max_date_pickuped",
-        "pool_size_text",
-        "plan_duration_min",
-        "fact_duration_min",
-        "id_pool",
-        "distance",
-        "date_delivered",
-        "shopno",
-        "cluster_id",
-        "gettype",
-        "delta_pct"
-      ],
-      "charts_count_api": 5,
-      "charts_sample": [
-        {
-          "id": 28143,
-          "name": "Распределение доли в %: разница факт-план от плана (ВЕЛО курьеры)",
-          "viz_type": "histogram_v2"
-        },
-        {
-          "id": 28151,
-          "name": "Распределение доли в %: разница факт-план от плана (АВТО курьеры)",
-          "viz_type": "histogram_v2"
-        },
-        {
-          "id": 28152,
-          "name": " .",
-          "viz_type": "supersetTA-custom-kpi-card"
-        },
-        {
-          "id": 28153,
-          "name": ". ",
-          "viz_type": "supersetTA-custom-kpi-card"
-        },
-        {
-          "id": 28141,
-          "name": "Средняя план. и факт. время на маршрут (по размеру пула)",
-          "viz_type": "echarts_timeseries_bar"
-        }
-      ],
-      "dashboards": [
-        {
-          "id": 1472,
-          "title": "Метрики маршрутизатора"
-        }
-      ],
-      "kpi_candidates": [
-        {
-          "kpi": "Объём заказов",
-          "fields": [
-            "id_order",
-            "status_name"
-          ],
-          "confidence": "HIGH",
-          "note": "COUNT(id_order); статусы есть в SQL"
-        },
-        {
-          "kpi": "Просрочка заказов (SLA)",
-          "fields": [
-            "sla_order_time",
-            "date_supply_until"
-          ],
-          "confidence": "HIGH",
-          "note": "Доля is_late=1; sla_order_time задаёт норматив"
-        },
-        {
-          "kpi": "Время доставки (delivery duration)",
-          "fields": [
-            "date_delivery_start",
-            "date_delivered",
-            "date_supply"
-          ],
-          "confidence": "HIGH",
-          "note": "date_delivered - date_delivery_start"
-        },
-        {
-          "kpi": "Время сборки заказа",
-          "fields": [
-            "date_collected"
-          ],
-          "confidence": "MEDIUM"
-        },
-        {
-          "kpi": "Маршрутизация: расстояние/время между точками",
-          "fields": [
-            "parcel_id",
-            "cluster_id",
-            "duration_from_previous",
-            "distance_from_previous",
-            "arrival_time"
-          ],
-          "confidence": "HIGH"
-        }
-      ]
-    },
-    {
-      "dataset_id": 7027,
-      "table_name": "cargo_main4",
-      "kind": "virtual",
-      "database": "gp_10.0.112.100/dwh",
-      "schema": "logs_mart",
-      "sql_length": 11820,
-      "api_changed_on": "2026-05-18T07:48:50.811733",
-      "api_columns_count": 50,
-      "select_aliases_sample": [
-        "calculation_time",
-        "rn_calc",
-        "rn",
-        "courier_type",
-        "is_late",
-        "plan_arrival_before_deadline",
-        "fact_minutes_late",
-        "fact_arrival_before_deadline",
-        "planned_late",
-        "flag_is_near_deadline",
-        "plan_late_minute",
-        "fact_seq",
-        "plan_seq",
-        "release_to_first_assignment",
-        "id_pool_ps",
-        "pool_size",
-        "late_orders_cnt_in_pool",
-        "total_pool_distance",
-        "max_date_pickuped",
-        "min_date_pickuped",
-        "max_date_delivered",
-        "max_arrival_time",
-        "max_calculation_time",
-        "flag_fact_seq_eq_plan_for_pool",
-        "max_fact_late_in_pool"
-      ],
-      "charts_count_api": 0,
-      "charts_sample": [],
-      "dashboards": [],
-      "kpi_candidates": [
-        {
-          "kpi": "Объём заказов",
-          "fields": [
-            "id_order",
-            "status_name"
-          ],
-          "confidence": "HIGH",
-          "note": "COUNT(id_order); статусы есть в SQL"
-        },
-        {
-          "kpi": "Просрочка заказов (SLA)",
-          "fields": [
-            "is_late",
-            "sla_order_time",
-            "date_supply_until"
-          ],
-          "confidence": "HIGH",
-          "note": "Доля is_late=1; sla_order_time задаёт норматив"
-        },
-        {
-          "kpi": "Время доставки (delivery duration)",
-          "fields": [
-            "date_delivery_start",
-            "date_delivered",
-            "date_supply"
-          ],
-          "confidence": "HIGH",
-          "note": "date_delivered - date_delivery_start"
-        },
-        {
-          "kpi": "Время сборки заказа",
-          "fields": [
-            "date_collected"
-          ],
-          "confidence": "MEDIUM"
-        },
-        {
-          "kpi": "Маршрутизация: расстояние/время между точками",
-          "fields": [
-            "parcel_id",
-            "cluster_id",
-            "distance_from_previous",
-            "arrival_time"
-          ],
-          "confidence": "HIGH"
-        }
+      "columns_count": 127,
+      "metrics_count": 22,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-09-02T09:04:43.401054",
+      "pii_columns": [
+        "phone",
+        "user_inn"
       ]
     },
     {
@@ -649,110 +41,141 @@
       "database": "ch_10.0.112.21",
       "schema": null,
       "sql_length": 15282,
-      "api_changed_on": "2026-06-10T12:48:13.714862",
-      "api_columns_count": 55,
-      "select_aliases_sample": [
-        "shopno",
-        "gettype",
-        "date_pickuped",
-        "plan_arrival_before_deadline",
-        "fact_minutes_late",
-        "fact_arrival_before_deadline",
-        "planned_late",
-        "flag_is_near_deadline",
-        "plan_late_minute",
-        "fact_seq",
-        "plan_seq",
-        "release_to_first_assignment",
-        "id_pool_ps",
-        "pool_size",
-        "late_orders_cnt_in_pool",
-        "total_pool_distance",
-        "max_date_pickuped",
-        "min_date_pickuped",
-        "flag_fact_seq_eq_plan_for_pool",
-        "max_fact_late_in_pool",
-        "sum_fact_late_minutes_in_pool",
-        "flag_pool_with_planned_late",
-        "p90_total_pool_distance",
-        "cnt",
-        "flag_pool_distance_too_long"
-      ],
-      "charts_count_api": 0,
-      "charts_sample": [],
-      "dashboards": [],
-      "kpi_candidates": [
-        {
-          "kpi": "Объём заказов",
-          "fields": [
-            "id_order",
-            "status_name"
-          ],
-          "confidence": "HIGH",
-          "note": "COUNT(id_order); статусы есть в SQL"
-        },
-        {
-          "kpi": "Просрочка заказов (SLA)",
-          "fields": [
-            "is_late",
-            "sla_order_time",
-            "date_supply_until"
-          ],
-          "confidence": "HIGH",
-          "note": "Доля is_late=1; sla_order_time задаёт норматив"
-        },
-        {
-          "kpi": "Время доставки (delivery duration)",
-          "fields": [
-            "date_delivery_start",
-            "date_delivered",
-            "date_supply"
-          ],
-          "confidence": "HIGH",
-          "note": "date_delivered - date_delivery_start"
-        },
-        {
-          "kpi": "Время сборки заказа",
-          "fields": [
-            "date_collect_start",
-            "date_collected"
-          ],
-          "confidence": "HIGH"
-        },
-        {
-          "kpi": "Маршрутизация: расстояние/время между точками",
-          "fields": [
-            "parcel_id",
-            "cluster_id",
-            "duration_from_previous",
-            "distance_from_previous",
-            "arrival_time"
-          ],
-          "confidence": "HIGH"
-        },
-        {
-          "kpi": "Флаги качества/аномалий заказа",
-          "fields": [
-            "shopno",
-            "gettype",
-            "date_pickuped",
-            "plan_arrival_before_deadline",
-            "fact_minutes_late",
-            "fact_arrival_before_deadline",
-            "planned_late",
-            "flag_is_near_deadline",
-            "plan_late_minute",
-            "fact_seq",
-            "plan_seq",
-            "release_to_first_assignment",
-            "id_pool_ps",
-            "pool_size",
-            "late_orders_cnt_in_pool"
-          ],
-          "confidence": "MEDIUM",
-          "note": "cargo_flags содержит производные флаги (is_late и аналоги) — детализация требует полного SQL-разбора"
-        }
+      "columns_count": 55,
+      "metrics_count": 1,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-06-10T12:48:13.714862",
+      "pii_columns": []
+    },
+    {
+      "dataset_id": 7006,
+      "table_name": "cargo_main2",
+      "kind": "virtual",
+      "database": "gp_10.0.112.100/dwh",
+      "schema": "logs_mart",
+      "sql_length": 8891,
+      "columns_count": 44,
+      "metrics_count": 1,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-05-19T10:59:39.954920",
+      "pii_columns": []
+    },
+    {
+      "dataset_id": 7024,
+      "table_name": "cargo_main3",
+      "kind": "virtual",
+      "database": "gp_10.0.112.100/dwh",
+      "schema": "logs_mart",
+      "sql_length": 5819,
+      "columns_count": 11,
+      "metrics_count": 1,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-05-19T10:50:27.003578",
+      "pii_columns": []
+    },
+    {
+      "dataset_id": 7027,
+      "table_name": "cargo_main4",
+      "kind": "virtual",
+      "database": "gp_10.0.112.100/dwh",
+      "schema": "logs_mart",
+      "sql_length": 11820,
+      "columns_count": 50,
+      "metrics_count": 1,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-05-18T07:48:50.811733",
+      "pii_columns": []
+    },
+    {
+      "dataset_id": 7775,
+      "table_name": "all_couriers_list",
+      "kind": "virtual",
+      "database": "ch_10.0.15.240/default",
+      "schema": null,
+      "sql_length": 600,
+      "columns_count": 11,
+      "metrics_count": 1,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-10-28T10:47:38.077331",
+      "pii_columns": [
+        "ИНН",
+        "Курьер",
+        "Телефон"
       ]
+    },
+    {
+      "dataset_id": 5797,
+      "table_name": "hr_couriers",
+      "kind": "virtual",
+      "database": "ch_10.0.15.240/default",
+      "schema": "agile_mart_techaudit",
+      "sql_length": 2246,
+      "columns_count": 65,
+      "metrics_count": 38,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-10-14T14:15:27.162178",
+      "pii_columns": [
+        "fio",
+        "inn",
+        "phone"
+      ]
+    },
+    {
+      "dataset_id": 7465,
+      "table_name": "hr_couriers_5shifts",
+      "kind": "virtual",
+      "database": "ch_10.0.15.240/default",
+      "schema": "agile_mart_techaudit",
+      "sql_length": 2331,
+      "columns_count": 59,
+      "metrics_count": 38,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-09-11T13:15:35.586920",
+      "pii_columns": [
+        "fio",
+        "phone"
+      ]
+    },
+    {
+      "dataset_id": 7473,
+      "table_name": "hr_couriers_five_shifts",
+      "kind": "virtual",
+      "database": "ch_10.0.15.240/default",
+      "schema": "agile_mart_techaudit",
+      "sql_length": 2772,
+      "columns_count": 54,
+      "metrics_count": 38,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-09-18T12:46:06.313300",
+      "pii_columns": [
+        "name_courier"
+      ]
+    },
+    {
+      "dataset_id": 5247,
+      "table_name": "courier_logs_agg_couriers_daily",
+      "kind": "virtual",
+      "database": "gp_10.0.112.100/dwh",
+      "schema": "agile_mart_techaudit",
+      "sql_length": 2378,
+      "columns_count": 15,
+      "metrics_count": 2,
+      "calculated_columns_count": 0,
+      "changed_on": "2025-08-20T08:04:04.770504",
+      "pii_columns": []
+    },
+    {
+      "dataset_id": 5399,
+      "table_name": "courier_logs_agg_couriers_week",
+      "kind": "virtual",
+      "database": "gp_10.0.112.100/dwh",
+      "schema": "agile_mart_techaudit",
+      "sql_length": 2889,
+      "columns_count": 15,
+      "metrics_count": 5,
+      "calculated_columns_count": 0,
+      "changed_on": "2025-08-20T08:06:23.534580",
+      "pii_columns": []
     },
     {
       "dataset_id": 7293,
@@ -761,35 +184,1055 @@
       "database": "ch_10.0.15.240/default",
       "schema": null,
       "sql_length": 1515,
-      "api_changed_on": "2026-07-24T07:51:44.294783",
-      "api_columns_count": 8,
-      "select_aliases_sample": [
-        "date",
-        "zone_from",
-        "zone_to",
-        "zone",
-        "zone_order",
-        "positive_flow",
-        "negative_flow",
-        "max_flow",
-        "balance",
-        "positive_pct",
-        "negative_pct",
-        "zf",
-        "dm"
-      ],
-      "charts_count_api": 1,
-      "charts_sample": [
+      "columns_count": 8,
+      "metrics_count": 1,
+      "calculated_columns_count": 0,
+      "changed_on": "2026-07-24T07:51:44.294783",
+      "pii_columns": []
+    }
+  ],
+  "kpis": [
+    {
+      "id": "orders_volume",
+      "name": "Объём заказов",
+      "status": "FOUND",
+      "declared_status": "FOUND",
+      "definition": "Количество заказов и их распределение по статусам/типам.",
+      "formula_hint": "COUNT(id_order) / COUNT(DISTINCT id_order); группировка по order_status, gettype.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
         {
-          "id": 29758,
-          "name": "тест перетоки",
-          "viz_type": "handlebars"
+          "dataset_id": 4732,
+          "table_name": "darkstore_ts_partners_new",
+          "fields": [
+            "id_order",
+            "id_general",
+            "order_status",
+            "gettype"
+          ],
+          "metrics": [
+            "qty_orders_all",
+            "qty_orders_delivered",
+            "qty_orders_declined"
+          ],
+          "note": "Прямые поля заказа и готовые метрики объёма.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7006,
+          "table_name": "cargo_main2",
+          "fields": [
+            "id_order",
+            "id_pool",
+            "gettype"
+          ],
+          "note": "Заказ присутствует в логистическом контуре cargo_main.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7024,
+          "table_name": "cargo_main3",
+          "fields": [
+            "id_pool",
+            "gettype"
+          ],
+          "note": "Пул/маршрут; id_order не входит в список колонок.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7027,
+          "table_name": "cargo_main4",
+          "fields": [
+            "id_order",
+            "id_pool",
+            "gettype"
+          ],
+          "note": "Заказ присутствует в логистическом контуре cargo_main.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
         }
       ],
-      "dashboards": [],
-      "kpi_candidates": [
+      "caveats": [
+        "id_order подтверждён не во всех cargo_main*; для 7024 объём заказов напрямую не подтверждён."
+      ]
+    },
+    {
+      "id": "sla_late",
+      "name": "Просрочка заказов (SLA)",
+      "status": "FOUND",
+      "declared_status": "FOUND",
+      "definition": "Доля заказов с нарушением SLA и величина просрочки.",
+      "formula_hint": "AVG(is_late); AVG(minutes_late); сравнение date_delivered/date_supply_until.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
         {
-          "kpi": "Баланс миграции курьеров между зонами активности",
+          "dataset_id": 4732,
+          "table_name": "darkstore_ts_partners_new",
+          "fields": [
+            "sla_order_time",
+            "sla_collection_time_all",
+            "sla_delivery_time_all",
+            "date_supply_untill",
+            "date_status_10"
+          ],
+          "note": "Нормативы SLA и контрольная дата поставки.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7006,
+          "table_name": "cargo_main2",
+          "fields": [
+            "is_late",
+            "minutes_late",
+            "plan_late_minute",
+            "planned_late",
+            "sla_order_time",
+            "date_supply_until"
+          ],
+          "note": "Прямые флаги и минуты просрочки.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7027,
+          "table_name": "cargo_main4",
+          "fields": [
+            "is_late",
+            "fact_minutes_late",
+            "plan_late_minute",
+            "planned_late",
+            "sla_order_time",
+            "date_supply_until"
+          ],
+          "note": "Прямые флаги и минуты просрочки.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7119,
+          "table_name": "cargo_flags",
+          "fields": [
+            "is_late",
+            "fact_minutes_late",
+            "flag_is_near_deadline",
+            "flag_planned_1_minute_late",
+            "sla_order_time"
+          ],
+          "note": "Флаговый контур качества/аномалий.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "Семантика sla_order_time едина для 4732 и cargo_main* не подтверждена; формулы могут различаться."
+      ]
+    },
+    {
+      "id": "delivery_duration",
+      "name": "Время доставки",
+      "status": "FOUND",
+      "declared_status": "FOUND",
+      "definition": "Длительность доставки от старта до вручения.",
+      "formula_hint": "date_delivered - date_delivery_start; duration_fact; delivery_time.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 4732,
+          "table_name": "darkstore_ts_partners_new",
+          "fields": [
+            "date_delivery_start",
+            "date_delivered",
+            "delivery_time",
+            "delivery_time_all"
+          ],
+          "note": "Прямые временные метки и длительность.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7006,
+          "table_name": "cargo_main2",
+          "fields": [
+            "duration_fact",
+            "duration_plan",
+            "date_pickuped",
+            "date_delivered"
+          ],
+          "note": "Факт/план длительности.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7024,
+          "table_name": "cargo_main3",
+          "fields": [
+            "fact_duration_min",
+            "plan_duration_min",
+            "date_delivered"
+          ],
+          "note": "Факт/план длительности в минутах.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7027,
+          "table_name": "cargo_main4",
+          "fields": [
+            "fact_duration_min",
+            "plan_duration_min",
+            "date_pickuped",
+            "date_delivered"
+          ],
+          "note": "Факт/план длительности в минутах.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "Единицы измерения (секунды/минуты) различаются между 4732 и cargo_main*; требуется унификация."
+      ]
+    },
+    {
+      "id": "assembly_duration",
+      "name": "Время сборки заказа",
+      "status": "FOUND",
+      "declared_status": "FOUND",
+      "definition": "Длительность сборки заказа на тёмной/обычной точке.",
+      "formula_hint": "date_collected - date_collect_start; collection_time.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 4732,
+          "table_name": "darkstore_ts_partners_new",
+          "fields": [
+            "date_collect_start",
+            "date_collected",
+            "date_printed",
+            "collection_time",
+            "collection_time_all",
+            "date_collect_start_plan",
+            "date_collected_plan"
+          ],
+          "note": "Прямые метки старта/завершения сборки и план.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7006,
+          "table_name": "cargo_main2",
+          "fields": [
+            "date_collected"
+          ],
+          "note": "Только дата сборки; старт сборки не подтверждён.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7027,
+          "table_name": "cargo_main4",
+          "fields": [
+            "date_collected"
+          ],
+          "note": "Только дата сборки; старт сборки не подтверждён.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "В cargo_main* нет date_collect_start; длительность сборки там не вычисляется без внешнего источника."
+      ]
+    },
+    {
+      "id": "gmv",
+      "name": "Суммы заказов (GMV/paid)",
+      "status": "FOUND",
+      "declared_status": "FOUND",
+      "definition": "Стоимость заказа и оплаченная сумма.",
+      "formula_hint": "SUM(sum_order); SUM(sum_paid); SUM(sum_paid_disc).",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 4732,
+          "table_name": "darkstore_ts_partners_new",
+          "fields": [
+            "sum_order",
+            "sum_paid",
+            "sum_paid_disc",
+            "sum_paid_sheet"
+          ],
+          "metrics": [
+            "sum_without_bonuses",
+            "avg_sum"
+          ],
+          "note": "Прямые суммы заказа и оплаты.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "sum_order — сумма заказа, а не доход курьера; для дохода курьера использовать 7473 shift_*_profit.",
+        "GMV подтверждён только по 4732; в cargo_main* суммы не входят в список колонок."
+      ]
+    },
+    {
+      "id": "routing",
+      "name": "Маршрутизация: расстояние/время между точками",
+      "status": "FOUND",
+      "declared_status": "FOUND",
+      "definition": "Параметры маршрута: расстояние, время между точками, порядок объезда.",
+      "formula_hint": "SUM(distance); SUM(duration_fact); сравнение plan_seq/fact_seq.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 7006,
+          "table_name": "cargo_main2",
+          "fields": [
+            "duration_fact",
+            "duration_plan",
+            "pickup_minute",
+            "pickup_to_courier_minute",
+            "arrival_time",
+            "plan_arrival_deadline",
+            "cluster_id",
+            "id_pool",
+            "plan_seq",
+            "fact_seq"
+          ],
+          "note": "Прямые параметры маршрута.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7024,
+          "table_name": "cargo_main3",
+          "fields": [
+            "distance",
+            "delta_pct",
+            "fact_duration_min",
+            "plan_duration_min",
+            "cluster_id",
+            "id_pool"
+          ],
+          "note": "Расстояние и отклонение.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7027,
+          "table_name": "cargo_main4",
+          "fields": [
+            "total_pool_distance",
+            "fact_duration_min",
+            "plan_duration_min",
+            "arrival_time",
+            "cluster_id",
+            "id_pool",
+            "plan_seq",
+            "fact_seq"
+          ],
+          "note": "Расстояние пула и времена.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "Геометрия маршрута (координаты) в detail не подтверждена; distance/duration — агрегаты."
+      ]
+    },
+    {
+      "id": "headcount",
+      "name": "Численность / активная база курьеров",
+      "status": "FOUND",
+      "declared_status": "FOUND",
+      "definition": "Число курьеров, активных/заблокированных, по типу занятости и зоне.",
+      "formula_hint": "COUNT(DISTINCT id_courier); фильтры active, is_banned, job_type.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 7775,
+          "table_name": "all_couriers_list",
+          "fields": [
+            "ID",
+            "id_courier_type",
+            "job_type",
+            "Активный",
+            "Бан",
+            "Тип занятости",
+            "Тип курьера"
+          ],
+          "note": "Справочник всех курьеров; PII-поля не выгружаются.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 5797,
+          "table_name": "hr_couriers",
+          "fields": [
+            "id_courier",
+            "active",
+            "is_banned",
+            "is_blocked",
+            "job_type_name",
+            "region_name"
+          ],
+          "note": "HR-контур: активность и блокировки.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7465,
+          "table_name": "hr_couriers_5shifts",
+          "fields": [
+            "id_courier",
+            "active",
+            "is_banned",
+            "is_blocked",
+            "job_type_name",
+            "region_name"
+          ],
+          "note": "HR-контур: активность и блокировки.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7473,
+          "table_name": "hr_couriers_five_shifts",
+          "fields": [
+            "id_courier",
+            "is_banned",
+            "job_type_name",
+            "region_name"
+          ],
+          "note": "HR-контур пяти смен; поле active отсутствует.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "7775 содержит PII (ИНН, телефон); в отчётах используются только имена полей."
+      ]
+    },
+    {
+      "id": "productivity",
+      "name": "Продуктивность курьера (заказы/дни со сменами)",
+      "status": "FOUND",
+      "declared_status": "FOUND",
+      "definition": "Заказы на курьера и число дней с заказами.",
+      "formula_hint": "SUM(cnt_orders); AVG(days_with_orders); доля enough_shifts_flg.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 5797,
+          "table_name": "hr_couriers",
+          "fields": [
+            "cnt_orders",
+            "orders_after_hire",
+            "days_with_orders",
+            "enough_shifts_flg",
+            "first_order_date",
+            "last_order_date"
+          ],
+          "note": "Прямые агрегаты продуктивности.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7465,
+          "table_name": "hr_couriers_5shifts",
+          "fields": [
+            "cnt_orders",
+            "enough_shifts_flg",
+            "first_order_date",
+            "last_order_date"
+          ],
+          "note": "Прямые агрегаты продуктивности (без orders_after_hire/days_with_orders).",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7473,
+          "table_name": "hr_couriers_five_shifts",
+          "fields": [
+            "last_order_date",
+            "fifth_shift_date",
+            "shifts_in_14_days"
+          ],
+          "note": "Косвенные признаки продуктивности через даты заказов/смен.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "Метрика не учитывает почасовую производительность; для неё нужен доход/часы."
+      ]
+    },
+    {
+      "id": "shifts",
+      "name": "Смены (фактические выходы)",
+      "status": "PARTIAL",
+      "declared_status": "PARTIAL",
+      "definition": "Количество и параметры смен курьера.",
+      "formula_hint": "COUNT(shift_*); SUM(shift_*_work_minutes); shifts_in_14_days.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 7473,
+          "table_name": "hr_couriers_five_shifts",
+          "fields": [
+            "shift_1",
+            "shift_2",
+            "shift_3",
+            "shift_4",
+            "shift_5",
+            "shifts_in_14_days",
+            "fifth_shift_date",
+            "fifth_shift_status",
+            "days_to_fifth_shift",
+            "had_enough_time"
+          ],
+          "note": "Пять смен новичка и их атрибуты.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 5797,
+          "table_name": "hr_couriers",
+          "fields": [
+            "shifts_in_first_14d",
+            "5_shifts_in_14d",
+            "is_5_shifts_in_14d",
+            "has_5_shifts_in_first_14d",
+            "enough_shifts_flg"
+          ],
+          "note": "Признаки смен в первые 14 дней.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7465,
+          "table_name": "hr_couriers_5shifts",
+          "fields": [
+            "shifts_in_first_14d",
+            "5_shifts_in_14d",
+            "is_5_shifts_in_14d",
+            "has_5_shifts_in_first_14d",
+            "enough_shifts_flg"
+          ],
+          "note": "Признаки смен в первые 14 дней.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "Подтверждённая модель смен ограничена первыми 5 сменами новичка (five_shifts) и 14-дневным окном.",
+        "Полной таблицы смен/графика по всем курьерам в 12 detail не найдено."
+      ]
+    },
+    {
+      "id": "attendance",
+      "name": "Явка на смену",
+      "status": "NOT_VERIFIED",
+      "declared_status": "NOT_VERIFIED",
+      "definition": "Факт выхода курьера на смену относительно плана.",
+      "formula_hint": "Не подтверждена; events_qty не является явкой без семантики событий.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 5247,
+          "table_name": "courier_logs_agg_couriers_daily",
+          "fields": [
+            "event_name",
+            "events_qty",
+            "courier_id",
+            "d",
+            "dey",
+            "week_no"
+          ],
+          "note": "Событийный лог; семантика event_name не подтверждена.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 5399,
+          "table_name": "courier_logs_agg_couriers_week",
+          "fields": [
+            "event_name",
+            "events_qty",
+            "courier_id",
+            "d",
+            "dey",
+            "week_no"
+          ],
+          "note": "Событийный лог; семантика event_name не подтверждена.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "events_qty — количество событий, а не явка. Нужна расшифровка event_name и связь с планом смен.",
+        "Планового графика смен в 12 detail нет."
+      ]
+    },
+    {
+      "id": "no_shows",
+      "name": "Невыходы",
+      "status": "NOT_FOUND",
+      "declared_status": "NOT_FOUND",
+      "definition": "Количество/доля невыходов на смену.",
+      "formula_hint": "Не найдено подтверждённого поля невыхода.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 5797,
+          "table_name": "hr_couriers",
+          "fields": [
+            "no_orders_days_streak",
+            "pause_days"
+          ],
+          "note": "Косвенные признаки простоя/паузы, но не невыход.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "no_orders_days_streak и pause_days не являются невыходом; статус NOT_FOUND."
+      ]
+    },
+    {
+      "id": "shifts_12h",
+      "name": "12-часовые смены",
+      "status": "PARTIAL",
+      "declared_status": "PARTIAL",
+      "definition": "Смены длительностью 12 часов и их доля.",
+      "formula_hint": "shift_*_work_minutes >= 720; группировка по сменам.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 7473,
+          "table_name": "hr_couriers_five_shifts",
+          "fields": [
+            "shift_1_work_minutes",
+            "shift_2_work_minutes",
+            "shift_3_work_minutes",
+            "shift_4_work_minutes",
+            "shift_5_work_minutes"
+          ],
+          "note": "Минуты работы по пяти сменам; 12 часов вычисляются как 720 минут.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "Порог 720 минут — вычисление, а не сохранённый признак 12-часовой смены.",
+        "Модель ограничена первыми 5 сменами новичка."
+      ]
+    },
+    {
+      "id": "trips",
+      "name": "Ходки",
+      "status": "NOT_VERIFIED",
+      "declared_status": "NOT_VERIFIED",
+      "definition": "Количество ходок (рейсов) курьера.",
+      "formula_hint": "Кандидат: COUNT(DISTINCT id_pool) по курьеру; семантика ходки не подтверждена.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 7006,
+          "table_name": "cargo_main2",
+          "fields": [
+            "id_pool",
+            "id_courier",
+            "fact_seq",
+            "plan_seq"
+          ],
+          "note": "id_pool — пул/маршрут; прямая связь с понятием «ходка» не подтверждена.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7027,
+          "table_name": "cargo_main4",
+          "fields": [
+            "id_pool",
+            "id_courier",
+            "fact_seq",
+            "plan_seq"
+          ],
+          "note": "id_pool — пул/маршрут; прямая связь с понятием «ходка» не подтверждена.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "Поля trip/trip_id/ходка в detail не найдены; id_pool нельзя выдавать за ходку без подтверждения."
+      ]
+    },
+    {
+      "id": "orders_per_trip",
+      "name": "Заказы в ходке",
+      "status": "NOT_VERIFIED",
+      "declared_status": "NOT_VERIFIED",
+      "definition": "Среднее/распределение числа заказов в одной ходке.",
+      "formula_hint": "COUNT(id_order) / COUNT(DISTINCT id_pool); семантика ходки не подтверждена.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 7006,
+          "table_name": "cargo_main2",
+          "fields": [
+            "id_order",
+            "id_pool",
+            "pool_size",
+            "fact_seq"
+          ],
+          "note": "Заказы и пул; pool_size — размер пула.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7027,
+          "table_name": "cargo_main4",
+          "fields": [
+            "id_order",
+            "id_pool",
+            "pool_size",
+            "fact_seq"
+          ],
+          "note": "Заказы и пул; pool_size — размер пула.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "pool_size — размер пула, а не подтверждённое число заказов в ходке."
+      ]
+    },
+    {
+      "id": "available_pool",
+      "name": "Доступный пул заказов",
+      "status": "NOT_VERIFIED",
+      "declared_status": "NOT_VERIFIED",
+      "definition": "Объём доступных заказов/пула для назначения курьеру.",
+      "formula_hint": "pool_size; late_orders_cnt_in_pool; flag_courier_shortage.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 7006,
+          "table_name": "cargo_main2",
+          "fields": [
+            "pool_size",
+            "pool_size_text",
+            "id_pool"
+          ],
+          "note": "Размер пула; flag_courier_shortage в 7006 отсутствует.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7024,
+          "table_name": "cargo_main3",
+          "fields": [
+            "pool_size",
+            "id_pool"
+          ],
+          "note": "Размер пула.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7027,
+          "table_name": "cargo_main4",
+          "fields": [
+            "pool_size",
+            "late_orders_cnt_in_pool",
+            "max_fact_late_in_pool",
+            "sum_fact_late_minutes_in_pool",
+            "flag_courier_shortage",
+            "id_pool"
+          ],
+          "note": "Размер пула и просрочки внутри пула.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7119,
+          "table_name": "cargo_flags",
+          "fields": [
+            "pool_size",
+            "late_orders_cnt_in_pool",
+            "max_fact_late_in_pool",
+            "sum_fact_late_minutes_in_pool",
+            "flag_courier_shortage",
+            "id_pool"
+          ],
+          "note": "Флаговый контур пула.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "pool_size — размер пула, но бизнес-определение «доступного пула заказов» не подтверждено.",
+        "Нет полей свободных/неназначенных заказов."
+      ]
+    },
+    {
+      "id": "idle_time",
+      "name": "Простои",
+      "status": "PARTIAL",
+      "declared_status": "PARTIAL",
+      "definition": "Время ожидания/простоя курьера.",
+      "formula_hint": "wait_time; pickup_minute; pickup_to_courier_minute; flag_wait_orders_with_planlate.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 4732,
+          "table_name": "darkstore_ts_partners_new",
+          "fields": [
+            "wait_time",
+            "wait_time2",
+            "waiting_area_time",
+            "collection_time",
+            "delivery_time"
+          ],
+          "note": "Поля ожидания; семантика не подтверждена.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7006,
+          "table_name": "cargo_main2",
+          "fields": [
+            "pickup_minute",
+            "pickup_to_courier_minute",
+            "duration_plan",
+            "duration_fact",
+            "minutes_late"
+          ],
+          "note": "Времена ожидания/подачи.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7027,
+          "table_name": "cargo_main4",
+          "fields": [
+            "flag_wait_orders_with_planlate"
+          ],
+          "note": "Флаг ожидания заказов (near_deadline в 7027 отсутствует).",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "Нет подтверждённой формулы простоя; wait_time* могут означать разные интервалы."
+      ]
+    },
+    {
+      "id": "courier_income_per_hour",
+      "name": "Доход курьера в час",
+      "status": "PARTIAL",
+      "declared_status": "PARTIAL",
+      "definition": "Доход курьера, нормированный на часы работы.",
+      "formula_hint": "shift_*_profit / (shift_*_work_minutes / 60).",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 7473,
+          "table_name": "hr_couriers_five_shifts",
+          "fields": [
+            "shift_1_profit",
+            "shift_2_profit",
+            "shift_3_profit",
+            "shift_4_profit",
+            "shift_5_profit",
+            "shift_1_work_minutes",
+            "shift_2_work_minutes",
+            "shift_3_work_minutes",
+            "shift_4_work_minutes",
+            "shift_5_work_minutes",
+            "thresholds_taken_payments"
+          ],
+          "note": "Прибыль и минуты по пяти сменам; доход в час вычисляется.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        }
+      ],
+      "caveats": [
+        "sum_order/sum_paid — суммы заказа, а не доход курьера; для дохода используется shift_*_profit.",
+        "Модель ограничена первыми 5 сменами новичка; выплаты/удержания не подтверждены."
+      ]
+    },
+    {
+      "id": "retention",
+      "name": "Удержание курьеров",
+      "status": "FOUND",
+      "declared_status": "FOUND",
+      "definition": "Удержание/отток курьеров, возвраты и переходы по зонам.",
+      "formula_hint": "turnover; attrition; ret_14_d; returns; second_hire; balance_*.",
+      "evidence_verified": true,
+      "evidence_issues": [],
+      "evidence": [
+        {
+          "dataset_id": 5797,
+          "table_name": "hr_couriers",
+          "fields": [
+            "uvol",
+            "date_dismissed",
+            "event_hiring",
+            "second_hire",
+            "repeated_hire",
+            "active",
+            "enough_shifts_flg",
+            "first_order_date",
+            "last_order_date",
+            "pause_days",
+            "no_orders_days_streak",
+            "inactivity_zone",
+            "zone_changed",
+            "zone_transition_type"
+          ],
+          "metrics": [
+            "turnover",
+            "attrition",
+            "ret_14_d",
+            "returns",
+            "hirings_qty",
+            "dismissal_qty",
+            "newcomers"
+          ],
+          "note": "HR-контур удержания и оттока.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7465,
+          "table_name": "hr_couriers_5shifts",
+          "fields": [
+            "uvol",
+            "date_dismissed",
+            "event_hiring",
+            "second_hire",
+            "repeated_hire",
+            "active",
+            "enough_shifts_flg",
+            "first_order_date",
+            "last_order_date",
+            "pause_days",
+            "no_orders_days_streak",
+            "inactivity_zone",
+            "zone_changed",
+            "zone_transition_type"
+          ],
+          "metrics": [
+            "turnover",
+            "attrition",
+            "ret_14_d",
+            "returns",
+            "hirings_qty",
+            "dismissal_qty",
+            "newcomers"
+          ],
+          "note": "HR-контур удержания и оттока.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7473,
+          "table_name": "hr_couriers_five_shifts",
+          "fields": [
+            "repeated_hiring",
+            "fifth_shift_status",
+            "had_enough_time",
+            "thresholds_taken",
+            "last_order_date",
+            "inactivity_zone_ordered",
+            "zone_transition_type"
+          ],
+          "metrics": [
+            "turnover",
+            "attrition",
+            "ret_14_d",
+            "returns",
+            "hirings_qty",
+            "dismissal_qty",
+            "newcomers"
+          ],
+          "note": "HR-контур пяти смен.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
+        },
+        {
+          "dataset_id": 7293,
+          "table_name": "hr_couriers_zone_balance",
           "fields": [
             "date",
             "zone",
@@ -800,195 +1243,25 @@
             "positive_pct",
             "negative_pct"
           ],
-          "confidence": "HIGH",
-          "note": "hr_delivery.zone_changed: positive/negative flow Green→Lost, balance = pos-neg, % от дневного максимума"
-        }
-      ]
-    },
-    {
-      "dataset_id": 7465,
-      "table_name": "hr_couriers_5shifts",
-      "kind": "virtual",
-      "database": "ch_10.0.15.240/default",
-      "schema": "agile_mart_techaudit",
-      "sql_length": 2331,
-      "api_changed_on": "2026-09-11T13:15:35.586920",
-      "api_columns_count": 59,
-      "select_aliases_sample": [
-        "fio",
-        "active",
-        "cal_days",
-        "wk",
-        "second_hire",
-        "repeated_hire",
-        "pause_days",
-        "exp_days",
-        "exp_months",
-        "cnt_orders",
-        "enough_shifts_flg",
-        "name_tt",
-        "last_order_date",
-        "day_number",
-        "region_name",
-        "leader",
-        "feature_tt",
-        "name_curator",
-        "dt"
-      ],
-      "charts_count_api": 0,
-      "charts_sample": [],
-      "dashboards": [],
-      "kpi_candidates": [
-        {
-          "kpi": "Численность / активность курьеров (HR)",
-          "fields": [
-            "id_courier",
-            "active",
-            "event_hiring",
-            "event_date",
-            "date_dismissed",
-            "uvol",
-            "cnt_orders",
-            "enough_shifts_flg",
-            "exp_days",
-            "exp_months",
-            "pause_days",
-            "second_hire",
-            "repeated_hire",
-            "job_type_name",
-            "region_name"
-          ],
-          "confidence": "HIGH",
-          "note": "HR-домен: onboarding/attrition/опыт/продуктивность из hr_couriers* (cnt_orders, days_with_orders, enough_shifts_flg)"
-        },
-        {
-          "kpi": "Продуктивность курьера (заказы/дни со сменами)",
-          "fields": [
-            "cnt_orders",
-            "orders_after_hire",
-            "days_with_orders",
-            "enough_shifts_flg"
-          ],
-          "confidence": "HIGH",
-          "note": "Прямые агрегаты в SELECT hr_couriers*"
-        }
-      ]
-    },
-    {
-      "dataset_id": 7473,
-      "table_name": "hr_couriers_five_shifts",
-      "kind": "virtual",
-      "database": "ch_10.0.15.240/default",
-      "schema": "agile_mart_techaudit",
-      "sql_length": 2772,
-      "api_changed_on": "2026-09-18T12:46:06.313300",
-      "api_columns_count": 54,
-      "select_aliases_sample": [
-        "last_order_date",
-        "id_courier",
-        "event_date",
-        "shopno",
-        "shift_1",
-        "shift_2",
-        "shift_3",
-        "shift_4",
-        "shift_5",
-        "shift_1_profit",
-        "shift_2_profit",
-        "shift_3_profit",
-        "shift_4_profit",
-        "shift_5_profit",
-        "shift_1_work_minutes",
-        "shift_2_work_minutes",
-        "shift_3_work_minutes",
-        "shift_4_work_minutes",
-        "shift_5_work_minutes",
-        "thresholds_taken",
-        "thresholds_taken_payments",
-        "region_name",
-        "fs",
-        "lo",
-        "dt"
-      ],
-      "charts_count_api": 15,
-      "charts_sample": [
-        {
-          "id": 30379,
-          "name": "HR доставка - заказов в день",
-          "viz_type": "big_number"
-        },
-        {
-          "id": 30460,
-          "name": "HR доставка - оплата в день",
-          "viz_type": "big_number"
-        },
-        {
-          "id": 30396,
-          "name": "HR доставка - 5 смен hb взяли 3 порога - зрелые",
-          "viz_type": "handlebars"
-        },
-        {
-          "id": 30395,
-          "name": "HR доставка - 5 смен hb набрали 5 смен - зрелые",
-          "viz_type": "handlebars"
-        },
-        {
-          "id": 30394,
-          "name": "HR доставка - 5 смен hb взяли 4 порога по оплатам - зрелые",
-          "viz_type": "handlebars"
+          "note": "Баланс миграции между зонами.",
+          "verified": true,
+          "missing_fields": [],
+          "missing_metrics": []
         }
       ],
-      "dashboards": [
-        {
-          "id": 1228,
-          "title": "HR Dashboard Доставка"
-        }
-      ],
-      "kpi_candidates": [
-        {
-          "kpi": "Численность / активность курьеров (HR)",
-          "fields": [
-            "id_courier",
-            "event_date",
-            "job_type_name",
-            "region_name"
-          ],
-          "confidence": "HIGH",
-          "note": "HR-домен: onboarding/attrition/опыт/продуктивность из hr_couriers* (cnt_orders, days_with_orders, enough_shifts_flg)"
-        }
-      ]
-    },
-    {
-      "dataset_id": 7775,
-      "table_name": "all_couriers_list",
-      "kind": "virtual",
-      "database": "ch_10.0.15.240/default",
-      "schema": null,
-      "sql_length": 600,
-      "api_changed_on": "2026-10-28T10:47:38.077331",
-      "api_columns_count": 11,
-      "select_aliases_sample": [],
-      "charts_count_api": 1,
-      "charts_sample": [
-        {
-          "id": 31906,
-          "name": "Список курьеров (полный)",
-          "viz_type": "table"
-        }
-      ],
-      "dashboards": [],
-      "kpi_candidates": [
-        {
-          "kpi": "Численность / активность курьеров (HR)",
-          "fields": [
-            "id_courier",
-            "active",
-            "job_type_name"
-          ],
-          "confidence": "HIGH",
-          "note": "Справочник всех курьеров: поля 'Активный'/'Бан' (case is_blocked/active), job_type, тип курьера — источник показателя активной базы"
-        }
+      "caveats": [
+        "Метрики turnover/attrition определены в SQL датасета; единая корпоративная формула удержания не подтверждена."
       ]
     }
-  ]
+  ],
+  "limitations": [
+    "Матрица отражает только 12 приоритетных датасетов; остальные 3 759 датасетов не проверялись.",
+    "Статус FOUND означает наличие подтверждённых полей/метрик, а не согласованную бизнес-формулу.",
+    "sum_order/sum_paid — суммы заказа, а не доход курьера.",
+    "events_qty — события, а не явка; семантика event_name не подтверждена.",
+    "Модель смен ограничена первыми 5 сменами новичка и 14-дневным окном.",
+    "Ходки и доступный пул заказов не подтверждены как бизнес-сущности.",
+    "PII-поля перечислены как имена; их значения не выгружаются."
+  ],
+  "pii_note": "PII-поля присутствуют в 4732, 5797, 7465, 7473, 7775; в отчётах используются только имена полей."
 }

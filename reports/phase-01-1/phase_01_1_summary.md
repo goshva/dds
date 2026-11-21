@@ -1,67 +1,106 @@
 # Сводка Этапа 1.1 — phase_01_1_summary
 
-**Дата:** 20 ноября 2026 г. · **Проект:** Courier Analytics — Discovery & SQL Audit  
-**Режим:** аудит; SQLite не изменялся; массовая дозагрузка не выполнялась; PII и секреты в отчёты не записаны.
+**Дата:** 2026-11-20 · **Проект:** Courier Analytics — Discovery & SQL Audit
+**Режим:** read-only аудит; `data/catalog.sqlite` не изменялась; массовая дозагрузка detail не выполнялась.
 
 ---
 
-## Вердикт этапа: **PASS_WITH_LIMITATIONS → ограничения сняты на уровне диагностики; полное закрытие требует дозагрузки (отдельное разрешение)**
+## Вердикт этапа: **PASS_WITH_BLOCKER**
 
-Главное событие этапа: **доступ к Superset API восстановлен/подтверждён**. Ранешний `ECONNREFUSED` был временным (транспорт/VPN), что доказано послоевой диагностикой. Это переопределило выводы Этапа 1: часть «пропавших» объектов оказалась следствием двух багов выгрузки, а не недоступности источника.
+Код и локальные артефакты приведены в согласованное состояние, но **живые API-проверки
+заблокированы**:
 
----
+1. в `.env` отсутствуют `SUPERSET_PASSWORD` и `SUPERSET_ACCESS_TOKEN`;
+2. `api_transport_diagnostics.json` (обновлён 2026-11-20) фиксирует
+   `verdict = BLOCKED_TCP`, `tcp.443 = TCP_TIMEOUT` — маршрут/VPN до Superset сейчас недоступен.
 
-## Задача 1 — Исправленная отчётность ✅
-Файл: `discovery_corrected.md`
-- Новая семантика Detail / Matched / Missing + формулы от ground-truth `.count` API.
-- Ключевые пересчёты: charts coverage **18,9%** (3 766 detail из 19 920); datasets detail 0, но SQL есть в list-payload у 3 514/3 767; dashboards 100%.
-- Реальные недостающие объекты: **14 920 charts** не в локальном list (усечение MAX_PAGES=50), 4 dataset ID отсутствуют.
-
-## Задача 2 — Диагностика API ✅
-Файлы: `api_transport_diagnostics.json`, `api_spot_checks.json`
-- Все слои OK: DNS A → 10.210.254.19, TCP/443 56 мс, TLS (сертификат GlobalSign до 20.05.2027), HTTP `/health` 200, login успешен. Вердикт: **TRANSPORT_AND_AUTH_OK**.
-- Найден баг URL: detail работает только **без завершающего слэша** (`/api/v1/dataset/4732` → 200, со слэшем → 404). Именно он + истёкший токен (5 660×401) дали «пустые» detail на Этапе 1.
-- Уточнён синтаксис фильтров Superset 6.2: ключ `opr`, форма `operator` игнорируется молча.
-
-## Задача 3 — Lineage ✅ (в границах локальных данных)
-Файлы: `lineage_preview.json`, `lineage_relations.csv` (13 520 связей), `lineage_quality.md`
-- Методы: position_json (7 900 пар, HIGH), chart.dashboards[] (1 757 пар, HIGH; 1 371 пар подтверждены обоими методами), datasource_id (3 755, VERIFIED), API-фильтр по 12 приоритетным dataset (+108, VERIFIED).
-- Покрытие: 330/330 дашбордов имеют хотя бы одну связь с chart; 4 569 chart-ссылок ведут за пределы усечённого каталога — **не ошибка lineage, а следствие усечения выгрузки**.
-- Таблица `relations` в SQLite **не изменялась** (подтверждено: relations=0, идентично бэкапу).
-
-## Задача 4 — KPI-каталог ✅
-Файлы: `kpi_source_matrix.md`, `kpi_source_matrix.json`
-- 11 операционных KPI сопоставлены с 12 приоритетными датасетами по **фактическим полям SQL** (без выдуманных имён), с confidence HIGH/MEDIUM.
-- Ядра: тёмные магазины/заказы (4732 → SLA, доставка, сборка, суммы), маршрутизация (cargo_main2/3/4, cargo_flags → distance/duration/is_late/флаги), HR-курьеры (hr_couriers* → найм/увольнение/продуктивность cnt_orders/enough_shifts_flg), логи (5247/5399 → events_qty по дням/неделям), зоны (7293 → positive/negative flow balance).
-- Пробелы зафиксированы: metric-слой Superset недоступен без dataset_detail; 3 dataset без прямых charts.
+Из-за этого `final_validation.json` не подтверждает полноту Discovery
+(chart 5 000 / 19 920, dataset 3 767 / 3 771).
 
 ---
 
-## Целостность данных (финальная проверка перед сдачей)
-| Проверка | Результат |
-|----------|-----------|
-| `PRAGMA quick_check` | ok |
-| objects / relations | 13 193 / 0 — без изменений |
-| Список таблиц и counts vs `backups/catalog-before-discovery.sqlite` | идентичны |
-| sha256 бэкапа | 697c4dca… — совпадает с эталоном Этапа 0 |
+## Что сделано
 
-## Что дальше (требует отдельного решения)
-1. **Дозагрузка**: патч `discovery.ts` (слэш, MAX_PAGES≥200, ретрай на 401) → полные charts (19 920) и dataset_detail (SQL/columns/metrics).
-2. После дозагрузки: пересборка lineage (ожидается ~полное покрытие chart→dataset) и расширение KPI-матрицы на все датасеты.
-3. Только затем — переход к этапу SQL-аудита запросов.
+### Задача 1 — Discovery
+- `SupersetClient.listFull()` переведён на Rison `(page:N,page_size:N)`, читает `.count`,
+  проверяет структуру страниц, уникальность ID и дубли; при неполноте — `PaginationError`.
+- `discovery.ts` больше не делает массовую загрузку `*_detail`; по умолчанию работает
+  read-only, точечно проверяет dashboard/chart detail и классифицирует ошибки.
+- Итоговый статус `discovery_summary.json` содержит `complete/incomplete/failed`,
+  `api_count`, `downloaded_count`, `unique_ids_count`, `duplicate_rows`; при критических
+  ошибках выставляется `process.exitCode = 1`.
 
-## Артефакты этапа
+### Задача 2 — Диагностика API
+- `api_transport_diagnostics.json`: DNS A → TCP/443 → TLS → HTTP `/health` → auth.
+- Транспортные категории (DNS/TCP/TLS/timeout/proxy) сохранены в `classifyNetworkError`
+  и доступны через `tryGet()`; секреты в отчёты не попадают.
+
+### Задача 3 — Lineage
+- Единый snapshot: `lineage_evidence.csv`, `lineage_relations.csv`, `lineage_preview.json`,
+  сгенерированный `lineage_quality.md`.
+- Факт: **14 426 свидетельств**, **13 037 уникальных связей**, D2C = 9 174, C2D = 3 863.
+- `evidence_count` добавлен в `Rel`; сумма `evidence_count` = числу свидетельств.
+- Категории `chart_detail`: with datasource = 3 755, without = 11, invalid = 0
+  (сумма = 3 766 = total).
+- API chart count уникален по ID: 108 charts вне локального каталога.
+- `datasets_unused_by_charts_local` = 3 606 (через пересечение множеств, без отрицательных значений).
+- CSV экранируется; проверки JSON ↔ CSV выполняются в самом builder и в final validation.
+- Расхождение 1757/2645 пересчитано: 1 757 = число chart_detail с непустым `dashboards[]`,
+  2 645 = число уникальных пар dashboard|chart; объяснение сохранено с результатами сверки.
+
+### Задача 4 — KPI Matrix (18 показателей)
+- `kpi_source_matrix.json` + `.md`: **18 KPI**, статусы FOUND = 9, PARTIAL = 4,
+  NOT_FOUND = 1, NOT_VERIFIED = 4; все заявленные поля найдены в detail JSON (18/18).
+- `kpi_field_inventory.json`: инвентарь columns/metrics/calculated_columns по 12 датасетам.
+- Явно зафиксировано: `sum_order` — не доход курьера; `events_qty` — не явка;
+  подтверждённой модели смен/ходок/доступного пула нет.
+
+### Задача 5 — Dataset Detail Loader
+- 12/12 приоритетных dataset detail валидны (`output/dataset_details/*.json`).
+- Checkpoint восстанавливает summary из файла, сравнивает ID через `String()`,
+  обрабатывает ошибку записи отдельного dataset, разделяет `successful_fetch_attempts`
+  и `unique_saved_datasets`, фильтрует `permanent_failed` по 12 приоритетным ID.
+- `dataset_detail_summary.json`: `verification.all_valid = true`.
+
+### Задача 6 — Final Validation
+`final_validation.json`: 8 PASS, 1 FAIL, 0 WARN.
+- PASS: SQLite readonly/quick_check, неизменность SQLite vs backup, relations, 12 detail,
+  Lineage consistency, KPI 18, отсутствие PII/секретов, наличие отчётов.
+- FAIL: полнота Discovery — `chart: downloaded=5000 api=19920`, `dataset: downloaded=3767 api=3771`
+  (старый `discovery_summary.json` от 2026-11-19).
+
+---
+
+## Что блокирует полное закрытие
+
+1. **Нет credentials** (`SUPERSET_PASSWORD`/`SUPERSET_ACCESS_TOKEN`) — API-тесты и
+   перевыгрузка list невозможны.
+2. **`MAX_PAGES`** должен быть ≥ 200 для полной выгрузки 19 920 charts.
+3. После появления credentials: `bun src/discovery.ts --skip-relations` →
+   `bun src/phase1-1-api-pagination-test.ts` → `bun src/phase1-1-final-validation.ts`.
+
+## Артефакты
+
 ```
 reports/phase-01-1/
-├── api_transport_diagnostics.json   (задача 2)
-├── api_spot_checks.json             (задачи 1–2)
-├── api_chart_links_priority.json    (задача 3, API-уточнение)
-├── discovery_corrected.md           (задача 1)
-├── lineage_preview.json             (задача 3)
-├── lineage_relations.csv            (задача 3, 13 520 связей)
-├── lineage_quality.md               (задача 3)
-├── kpi_source_matrix.json           (задача 4)
-├── kpi_source_matrix.md             (задача 4)
-└── phase_01_1_summary.md            (этот файл)
+├── api_transport_diagnostics.json
+├── api_spot_checks.json
+├── api_chart_links_priority.json
+├── api_pagination_test.json          (blocked: нет credentials)
+├── discovery_corrected.md
+├── discovery_test.json               (read-only smoke)
+├── lineage_evidence.csv              (14 426)
+├── lineage_relations.csv             (13 037)
+├── lineage_preview.json
+├── lineage_quality.md                (сгенерирован)
+├── kpi_source_matrix.json            (18 KPI)
+├── kpi_source_matrix.md
+├── kpi_field_inventory.json
+├── final_validation.json
+└── phase_01_1_summary.md
 ```
-Код: `src/phase1-1-{diagnostics,api-check,lineage,api-lineage,lineage-update,lineage-coverage,verify-method-a,kpi-catalog,kpi-fields}.ts` — все readonly.
+
+Код: `src/superset.ts`, `src/discovery.ts`, `src/phase1-1-dataset-detail-loader.ts`,
+`src/phase1-1-lineage.ts`, `src/phase1-1-kpi-catalog.ts`, `src/phase1-1-kpi-fields.ts`,
+`src/phase1-1-discovery-test.ts`, `src/phase1-1-api-pagination-test.ts`,
+`src/phase1-1-final-validation.ts` — read-only по отношению к SQLite.

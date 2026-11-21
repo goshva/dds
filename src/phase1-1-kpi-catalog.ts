@@ -341,8 +341,8 @@ const KPIS: KpiDef[] = [
       {
         dataset_id: 7465,
         table_name: "hr_couriers_5shifts",
-        fields: ["cnt_orders", "orders_after_hire", "days_with_orders", "enough_shifts_flg", "first_order_date", "last_order_date"],
-        note: "Прямые агрегаты продуктивности.",
+        fields: ["cnt_orders", "enough_shifts_flg", "first_order_date", "last_order_date"],
+        note: "Прямые агрегаты продуктивности (без orders_after_hire/days_with_orders).",
       },
       {
         dataset_id: 7473,
@@ -498,8 +498,8 @@ const KPIS: KpiDef[] = [
       {
         dataset_id: 7006,
         table_name: "cargo_main2",
-        fields: ["pool_size", "pool_size_text", "flag_courier_shortage", "id_pool"],
-        note: "Размер пула и флаг нехватки курьеров.",
+        fields: ["pool_size", "pool_size_text", "id_pool"],
+        note: "Размер пула; flag_courier_shortage в 7006 отсутствует.",
       },
       {
         dataset_id: 7024,
@@ -547,8 +547,8 @@ const KPIS: KpiDef[] = [
       {
         dataset_id: 7027,
         table_name: "cargo_main4",
-        fields: ["flag_wait_orders_with_planlate", "flag_wait_orders_with_near_deadline"],
-        note: "Флаги ожидания заказов.",
+        fields: ["flag_wait_orders_with_planlate"],
+        note: "Флаг ожидания заказов (near_deadline в 7027 отсутствует).",
       },
     ],
     caveats: ["Нет подтверждённой формулы простоя; wait_time* могут означать разные интервалы."],

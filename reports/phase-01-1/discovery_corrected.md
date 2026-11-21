@@ -1,74 +1,77 @@
 # Исправленная отчётность Discovery (discovery_corrected)
 
-**Этап 1.1, задача 1.** Дата: 20 ноября 2026 г.  
-Документ заменяет семантику и формулы отчётов Этапа 1 (`reports/phase-01/*`), которые давали неверную картину из-за двух багов выгрузки.
+**Этап 1.1, задача 1.** Обновлено: 2026-11-20.
+Документ фиксирует исправленную семантику и фактическое состояние после правок
+`superset.ts`, `discovery.ts`, `phase1-1-dataset-detail-loader.ts`, `phase1-1-lineage.ts`
+и `phase1-1-kpi-catalog.ts`.
 
 ---
 
-## 1. Два корневых бага исходной выгрузки
+## 1. Что исправлено в коде
 
-### Баг A — Detail endpoint со завершающим слэшем
-`src/discovery.ts` запрашивал `/api/v1/{resource}/{id}/`. В Superset 6.2.4 эта форма возвращает **404**. Корректная форма — **без слэша**: `/api/v1/dataset/4732` → 200 OK (проверено точечно, см. `api_spot_checks.json → endpoint_shape_probe`).
+- **Rison-формат `q`.** `SupersetClient.listFull()` использует проверенный формат
+  `(page:N,page_size:N)`, а не `JSON.stringify`.
+- **Полнота пагинации.** Первый ответ читается как `.count` (ground truth); проверяются
+  структура каждой страницы, уникальность ID, дубли и общее число строк. При неполноте
+  или дублях выбрасывается `PaginationError`.
+- **Read-only Discovery.** Массовая загрузка `*_detail` удалена; остались только
+  точечные проверки dashboard/chart (по умолчанию 2). `data/catalog.sqlite` в обычном
+  режиме не изменяется; запись возможна только в явном режиме `--build-catalog`.
+- **Синтаксис detail.** `GET /api/v1/{resource}/{id}` — без завершающего слэша
+  (форма со слэшем даёт 404 в Superset 6.2.4).
+- **Ретраи.** 401 → одна переавторизация и повтор исходного запроса через общий
+  retry-loop; 429/5xx/network → exponential backoff; `Retry-After` принимается и как
+  секунды, и как HTTP-date; после исчерпания повторов 429/5xx помечаются `transient`.
+- **Ошибки detail** классифицируются как HTTP 401 / 403 / 429 / 5xx / network / 4xx / other.
 
-### Баг B — Усечение списка charts лимитом пагинации
-`MAX_PAGES=50 × PAGE_SIZE=100 = 5 000` — скрипт останавливался на 5 000 записях. Фактический count API: **19 920 charts**. Пропущено **14 920 charts (74,9%)**.
+## 2. Фактическое состояние каталога (readonly)
 
-### Фоновое условие — истёкшая сессия
-На момент Этапа 1 токен протух: 5 661 ошибка загрузки detail = 5 660×HTTP 401 + 1 AbortError (dataset_detail 3 767, chart_detail 1 234, dashboard_charts 330, dashboard_datasets 330). Login по учётным данным из `.env` восстанавливает доступ (пароли/токены в отчёты не пишутся).
+| Ресурс | API count | Локальный list | `*_detail` в SQLite | `dataset_details` в output |
+|---|---:|---:|---:|---:|
+| dashboard | 330 | 330 | 330 | — |
+| chart | 19 920 | 5 000 | 3 766 | — |
+| dataset | 3 771 | 3 767 | 0 (read-only) | **12 валидных** |
 
----
+Источник API count: `reports/phase-01-1/api_spot_checks.json`.
+`data/catalog.sqlite`: `quick_check = ok`, objects = 13 193, relations = 0;
+counts по `object_type` совпадают с `backups/catalog-before-discovery.sqlite`.
 
-## 2. Исправленная семантика терминов
+### Семантика терминов
 
-| Термин | Старое (некорректное) толкование | Исправленное определение |
-|--------|-----------------------------------|--------------------------|
-| **Detail** | «объект не догружен из-за проблем сети/API» | Запись `*_detail` появляется только при успешном GET без слэша с валидным токеном. Её отсутствие ≠ потеря данных, если объект отсутствует в источнике или список усечён |
-| **Matched** | list↔detail совпадение по ID | Доля объектов локального каталога (list), для которых есть корректная detail-запись: `matched / min(local_count, api_count)` |
-| **Missing** | «потерянные объекты» | **Два разных множества:** (1) *не докачанные* — есть в API-каталоге, нет detail; (2) *невидимые из-за усечения* — вообще не попали в локальный list (для charts это 14 920 объектов) |
+| Термин | Значение |
+|---|---|
+| **Detail** | `dataset_details/<id>.json` — полный ответ API, сохранённый в `output/`, а не в SQLite. |
+| **Missing list** | `api_count − local_list_count`: 14 920 chart и 4 dataset не попали в локальный list из-за усечения. |
+| **Missing detail** | Для 12 приоритетных dataset — 0; остальные dataset detail не загружались (ограничение ТЗ). |
 
-Старый вывод «chart missing = 1 234» был занижен: он считался от **усечённого** локального числа 5 000. Реальное число charts без локальной копии: **19 920 − 3 766 = 16 154**.
+## 3. Пробел, который остаётся
 
----
+Живые API-проверки **заблокированы** по двум причинам:
 
-## 3. Исправленные формулы
+1. в `.env` отсутствуют `SUPERSET_PASSWORD` и `SUPERSET_ACCESS_TOKEN`, поэтому `login()`
+   не выполняется;
+2. `api_transport_diagnostics.json` (обновлён) фиксирует `verdict = BLOCKED_TCP`,
+   `tcp.443 = TCP_TIMEOUT` — маршрут/VPN до `superset.svc.vkusvill.ru` сейчас недоступен.
+
+Как следствие:
+
+- `reports/phase-01-1/api_pagination_test.json` — статус `blocked`;
+- `output/discovery_summary.json` — старый (2026-11-19), chart=5 000, dataset=3 767,
+  поэтому `final_validation.json` фиксирует `discovery_complete = FAIL`.
+
+После восстановления маршрута и появления валидных credentials достаточно выполнить:
 
 ```
-api_count            = GET /api/v1/{res}/?q={"page_size":1} → .count
-local_list_count     = COUNT(objects WHERE type='chart'|'dashboard'|'dataset')
-not_loaded_count     = max(api_count − local_list_count, 0)        # следствие усечения
-details_ok           = COUNT(objects WHERE type='{res}_detail')
-undownloaded_details = local_list_count − details_ok               # только докачка detail
-coverage_pct         = details_ok / api_count × 100                # правильная полнота каталога
+bun src/discovery.ts --skip-relations        # read-only, без массового detail
+bun src/phase1-1-api-pagination-test.ts      # полная пагинация + сверка с каталогом
+bun src/phase1-1-final-validation.ts
 ```
 
-### Пересчитанные показатели (источник: api_spot_checks.json + SQLite)
+`MAX_PAGES` для полной выгрузки charts (19 920 / 100 = 200 страниц) должен быть ≥ 200.
 
-| Ресурс | api_count | local_list | details_ok | not_loaded | undownloaded_details | coverage |
-|--------|-----------|------------|------------|------------|----------------------|----------|
-| dashboard | 330 | 330 | 330 | 0 | 0 | **100%** |
-| chart | 19 920 | 5 000 | 3 766 | **14 920** | 1 234 | **18,9%** |
-| dataset | 3 771 | 3 767 | 0 ⚠️ | 4 | 3 767 | **0%** ⚠️ |
-
-⚠️ По датасетам: `dataset_detail` в таблице 0 записей, однако **SQL определений доступен прямо в list-payload** у 3 514 из 3 767 датасетов (virtual 3 213 + physical 554; NO_SQL = 253). Для аудита SQL это достаточный источник; detail-загрузка нужна ради columns/metrics верификации (пример 4732: 127 колонок доступны только через detail).
-
-### Сверка расхождений Этапа 1
-- «chart missing = 1 234»: 1 233×HTTP 401 + 1 AbortError; unique error IDs = 1 234, пересечение с успешно восстановленными detail = 0. Формула была верна относительно *локального* списка, но сама база (5 000) была усечена ⇒ реальная доля недостающих detail считать нужно от api_count.
-- «dashboard errors 330+330» (charts/datasets массивы): detail дашбордов фактически присутствуют все 330 (position_json непуст у 329; NULL только у 1558 «Чек»). Ошибки относились к вторичным полям, критичных потерь нет.
-
----
-
-## 4. Правильный синтаксис запросов Superset 6.2 (для будущих прогонов)
+## 4. Правильный синтаксис запросов Superset 6.2
 
 - Detail: `GET /api/v1/{resource}/{id}` — **без** завершающего слэша.
-- Фильтр списка: `q={"page_size":N,"filters":[{"col":"datasource_id","opr":"eq","value":ID}]}` — ключ **`opr`**; форма `{"operator":...}` молча игнорируется (возвращается полный count).
-- Пагинация: `q={"page":p,"page_size":100,...}`; для charts требуется ≥ 200 страниц либо увеличение `MAX_PAGES`/`PAGE_SIZE`.
-- Счётчик: любой list-ответ содержит `.count` — использовать как ground truth перед выгрузкой.
-
----
-
-## 5. Что менять в коде (НЕ выполнялось — только после отдельного разрешения)
-
-1. `src/discovery.ts`: убрать слэш в detail URL; читать `.count` до старта и ставить цель выгрузки; `MAX_PAGES` поднять (или циклом до `count`); при HTTP 401 — пере-lologin с ретраем страницы.
-2. После дозагрузки charts/dataset_detail — пересобрать lineage и KPI-матрицу (сейчас покрытие charts 18,9%).
-
-**Массовая дозагрузка в рамках Этапа 1.1 НЕ запускалась.** SQLite `data/catalog.sqlite` не изменялся (quick_check ok; objects=13 193, relations=0; идентичен бэкапу `backups/catalog-before-discovery.sqlite` по списку таблиц и количествам).
+- Фильтр списка: `q={"filters":[{"col":"datasource_id","opr":"eq","value":ID}]}`;
+  ключ **`opr`** (форма `operator` молча игнорируется).
+- Пагинация: `q=(page:p,page_size:100)`; счётчик `.count` — ground truth.

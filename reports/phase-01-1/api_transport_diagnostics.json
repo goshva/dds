@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-11-20T10:25:20.752Z",
+  "generated_at": "2026-11-20T20:26:45.683Z",
   "target": "https://superset.svc.vkusvill.ru:443",
   "environment": {
     "SUPERSET_URL_configured": true,
     "SUPERSET_USERNAME_configured": true,
-    "SUPERSET_PASSWORD_configured": true,
+    "SUPERSET_PASSWORD_configured": false,
     "SUPERSET_ACCESS_TOKEN_configured": false,
     "proxy_env_present": [],
     "no_proxy_present": []
@@ -13,7 +13,7 @@
     {
       "layer": "dns.A",
       "ok": true,
-      "duration_ms": 36,
+      "duration_ms": 87,
       "details": {
         "addresses": [
           "10.210.254.19"
@@ -23,43 +23,37 @@
     {
       "layer": "dns.AAAA",
       "ok": false,
-      "duration_ms": 17,
+      "duration_ms": 18,
       "error_code": "UNKNOWN",
       "error_message": "undefined"
     },
     {
       "layer": "tcp.443",
-      "ok": true,
-      "duration_ms": 56
+      "ok": false,
+      "duration_ms": 10097,
+      "error_code": "TCP_TIMEOUT",
+      "error_message": "socket timeout"
     },
     {
       "layer": "tls",
-      "ok": true,
-      "duration_ms": 62,
-      "details": {
-        "valid_to": "May 20 23:06:40 2027 GMT",
-        "issuer": {
-          "C": "BE",
-          "O": "GlobalSign nv-sa",
-          "CN": "GlobalSign GCC R46 OV TLS CA 2025"
-        }
-      }
+      "ok": false,
+      "duration_ms": 0,
+      "error_code": "SKIPPED_TCP_FAILED",
+      "error_message": "TCP недоступен — TLS не тестировался"
     },
     {
       "layer": "http.GET_/health",
-      "ok": true,
-      "duration_ms": 33,
-      "details": {
-        "status": 200,
-        "body_preview": "OK"
-      }
+      "ok": false,
+      "duration_ms": 0,
+      "error_code": "SKIPPED_TLS_FAILED",
+      "error_message": "TLS недоступен — HTTP не тестировался"
     }
   ],
   "auth": {
-    "performed": true,
-    "login": "success"
+    "performed": false,
+    "reason": "transport_unavailable"
   },
-  "verdict": "TRANSPORT_AND_AUTH_OK",
+  "verdict": "BLOCKED_TCP",
   "interpretation": {
     "ECONNREFUSED_note": "ECONNREFUSED в bun:fetch на Windows может маскировать отсутствие маршрута/VPN к internal-хосту; точная классификация — по слоям выше.",
     "auth_vs_transport": "Ошибки транспорта (DNS/TCP/TLS) НЕ являются ошибками авторизации и не должны записываться как auth_failed."

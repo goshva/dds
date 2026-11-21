@@ -1,0 +1,34 @@
+{
+  "generated_at": "2026-11-20T20:24:52.382Z",
+  "base_url": "https://superset.svc.vkusvill.ru",
+  "page_size": 100,
+  "rate_limit_ms": 1000,
+  "status": "blocked",
+  "resources": {},
+  "local_catalog": {
+    "dashboard": 330,
+    "chart": 5000,
+    "dataset": 3767
+  },
+  "dataset_details": {},
+  "sqlite": {
+    "before": {
+      "chart": 5000,
+      "chart_detail": 3766,
+      "dashboard": 330,
+      "dashboard_detail": 330,
+      "dataset": 3767
+    },
+    "after": {
+      "chart": 5000,
+      "chart_detail": 3766,
+      "dashboard": 330,
+      "dashboard_detail": 330,
+      "dataset": 3767
+    }
+  },
+  "errors": [
+    "login failed: Set SUPERSET_ACCESS_TOKEN or SUPERSET_USERNAME + SUPERSET_PASSWORD"
+  ],
+  "auth": "failed"
+}

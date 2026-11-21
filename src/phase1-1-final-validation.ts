@@ -25,6 +25,14 @@ const OUT = join(OUT_DIR, "final_validation.json");
 
 const PRIORITY_IDS = [4732, 7119, 7006, 7024, 7027, 7775, 5797, 7465, 7473, 5247, 5399, 7293];
 const OPERATIONAL_KPI_IDS = [
+  "orders_volume",
+  "sla_late",
+  "delivery_duration",
+  "assembly_duration",
+  "gmv",
+  "routing",
+  "headcount",
+  "productivity",
   "shifts",
   "attendance",
   "no_shows",
@@ -453,7 +461,6 @@ function checkReports() {
     "lineage_preview.json",
     "lineage_evidence.csv",
     "lineage_relations.csv",
-    "final_validation.json",
   ];
   const missing = required.filter((f) => !existsSync(join(OUT_DIR, f)));
   add({
