@@ -1,0 +1,310 @@
+{
+  "generated_at": "2026-11-22T15:07:22.226Z",
+  "source": "data/snapshots/phase-01-6-2 (datasets.list.json + datasets.detail.json)",
+  "total": 12,
+  "confirmed": 11,
+  "conflicts": 1,
+  "not_verifiable": 0,
+  "results": [
+    {
+      "check_id": "F1",
+      "finding": "7802 содержит SQL references shifts/pools/courier_queue",
+      "status": "CONFIRMED",
+      "detail": "dataset 7802 found, sql_len=10498",
+      "sql_len": 10498
+    },
+    {
+      "check_id": "F2",
+      "finding": "7802 содержит поля id_shift/id_courier/id_pool/shift_start/shift_finish/pool_start/pool_finish/queue_in_dttm/queue_out_dttm/first_delivery_dttm/has_order",
+      "status": "CONFIRMED",
+      "detail": "[{\"field\":\"id_shift\",\"present\":true},{\"field\":\"id_courier\",\"present\":true},{\"field\":\"id_pool\",\"present\":true},{\"field\":\"shift_start\",\"present\":true},{\"field\":\"shift_finish\",\"present\":true},{\"field\":\"pool_start\",\"present\":true},{\"field\":\"pool_finish\",\"present\":true},{\"field\":\"queue_in_dttm\",\"present\":true},{\"field\":\"queue_out_dttm\",\"present\":true},{\"field\":\"first_delivery_dttm\",\"present\":true},{\"field\":\"has_order\",\"present\":true}]",
+      "fields": [
+        {
+          "field": "id_shift",
+          "present": true
+        },
+        {
+          "field": "id_courier",
+          "present": true
+        },
+        {
+          "field": "id_pool",
+          "present": true
+        },
+        {
+          "field": "shift_start",
+          "present": true
+        },
+        {
+          "field": "shift_finish",
+          "present": true
+        },
+        {
+          "field": "pool_start",
+          "present": true
+        },
+        {
+          "field": "pool_finish",
+          "present": true
+        },
+        {
+          "field": "queue_in_dttm",
+          "present": true
+        },
+        {
+          "field": "queue_out_dttm",
+          "present": true
+        },
+        {
+          "field": "first_delivery_dttm",
+          "present": true
+        },
+        {
+          "field": "has_order",
+          "present": true
+        }
+      ]
+    },
+    {
+      "check_id": "F3",
+      "finding": "cargo datasets содержат id_order/id_general/id_pool/courier_id_darkstore",
+      "status": "CONFIRMED",
+      "detail": "[{\"id\":7006,\"name\":\"cargo_main2\",\"in_detail\":true,\"id_order\":true,\"id_general\":true,\"id_pool\":true,\"courier_id_darkstore\":false},{\"id\":7089,\"name\":\"cargo1\",\"in_detail\":true,\"id_order\":true,\"id_general\":true,\"id_pool\":true,\"courier_id_darkstore\":true},{\"id\":7090,\"name\":\"cargo2\",\"in_detail\":true,\"id_order\":false,\"id_general\":false,\"id_pool\":true,\"courier_id_darkstore\":false},{\"id\":7091,\"name\":\"cargo3\",\"in_detail\":false,\"id_order\":false,\"id_general\":false,\"id_pool\":false,\"courier_id_darkstore\":false},{\"id\":7120,\"name\":\"cargo_flags2\",\"in_detail\":true,\"id_order\":true,\"id_general\":true,\"id_pool\":true,\"courier_id_darkstore\":true},{\"id\":7027,\"name\":\"cargo_main4\",\"in_detail\":true,\"id_order\":true,\"id_general\":true,\"id_pool\":true,\"courier_id_darkstore\":false},{\"id\":7119,\"name\":\"cargo_flags\",\"in_detail\":true,\"id_order\":true,\"id_general\":true,\"id_pool\":true,\"courier_id_darkstore\":true}]",
+      "datasets": [
+        {
+          "id": 7006,
+          "name": "cargo_main2",
+          "in_detail": true,
+          "id_order": true,
+          "id_general": true,
+          "id_pool": true,
+          "courier_id_darkstore": false
+        },
+        {
+          "id": 7089,
+          "name": "cargo1",
+          "in_detail": true,
+          "id_order": true,
+          "id_general": true,
+          "id_pool": true,
+          "courier_id_darkstore": true
+        },
+        {
+          "id": 7090,
+          "name": "cargo2",
+          "in_detail": true,
+          "id_order": false,
+          "id_general": false,
+          "id_pool": true,
+          "courier_id_darkstore": false
+        },
+        {
+          "id": 7091,
+          "name": "cargo3",
+          "in_detail": false,
+          "id_order": false,
+          "id_general": false,
+          "id_pool": false,
+          "courier_id_darkstore": false
+        },
+        {
+          "id": 7120,
+          "name": "cargo_flags2",
+          "in_detail": true,
+          "id_order": true,
+          "id_general": true,
+          "id_pool": true,
+          "courier_id_darkstore": true
+        },
+        {
+          "id": 7027,
+          "name": "cargo_main4",
+          "in_detail": true,
+          "id_order": true,
+          "id_general": true,
+          "id_pool": true,
+          "courier_id_darkstore": false
+        },
+        {
+          "id": 7119,
+          "name": "cargo_flags",
+          "in_detail": true,
+          "id_order": true,
+          "id_general": true,
+          "id_pool": true,
+          "courier_id_darkstore": true
+        }
+      ]
+    },
+    {
+      "check_id": "F4",
+      "finding": "в одном из cargo datasets pool_size = count(distinct id_general)",
+      "status": "CONFLICT",
+      "detail": "не подтверждено по datasets.detail.json 1.6.2; отсутствуют в detail: 7091; в 1.7 отчёте указан 7091 cargo3, но его деталь в 1.6.2 не загружена",
+      "datasets": [
+        {
+          "id": 7006,
+          "in_detail": true,
+          "count_distinct_id_general": false
+        },
+        {
+          "id": 7089,
+          "in_detail": true,
+          "count_distinct_id_general": false
+        },
+        {
+          "id": 7090,
+          "in_detail": true,
+          "count_distinct_id_general": false
+        },
+        {
+          "id": 7091,
+          "in_detail": false,
+          "count_distinct_id_general": false
+        },
+        {
+          "id": 7120,
+          "in_detail": true,
+          "count_distinct_id_general": false
+        },
+        {
+          "id": 7027,
+          "in_detail": true,
+          "count_distinct_id_general": false
+        },
+        {
+          "id": 7119,
+          "in_detail": true,
+          "count_distinct_id_general": false
+        }
+      ],
+      "missing_in_detail": [
+        7091
+      ],
+      "reported_in_17": "7091 cargo3"
+    },
+    {
+      "check_id": "F5",
+      "finding": "SQL 3466 не содержит time_ready/time_ready_plan",
+      "status": "CONFIRMED",
+      "detail": "sql_len=38370; time_ready=0; time_ready_plan=0",
+      "sql_len": 38370,
+      "time_ready": 0,
+      "time_ready_plan": 0
+    },
+    {
+      "check_id": "F6",
+      "finding": "7021 — timesheet сборщиков, id_courier отсутствует",
+      "status": "CONFIRMED",
+      "detail": "timesheetfact=true; id_courier=false"
+    },
+    {
+      "check_id": "F7",
+      "finding": "5939 содержит mentor/trainee поля; date_for_mentor в SQL отсутствует (metadata-only)",
+      "status": "CONFIRMED",
+      "detail": "mentorid=true; mentorid_at_date=true; date_for_mentor_sql=false; date_for_mentor_column=true",
+      "sql_has": false,
+      "column_has": true
+    },
+    {
+      "check_id": "F8",
+      "finding": "7473 содержит shift_1_profit … shift_5_profit",
+      "status": "CONFIRMED",
+      "detail": "[{\"field\":\"shift_1_profit\",\"present\":true},{\"field\":\"shift_2_profit\",\"present\":true},{\"field\":\"shift_3_profit\",\"present\":true},{\"field\":\"shift_4_profit\",\"present\":true},{\"field\":\"shift_5_profit\",\"present\":true}]",
+      "fields": [
+        {
+          "field": "shift_1_profit",
+          "present": true
+        },
+        {
+          "field": "shift_2_profit",
+          "present": true
+        },
+        {
+          "field": "shift_3_profit",
+          "present": true
+        },
+        {
+          "field": "shift_4_profit",
+          "present": true
+        },
+        {
+          "field": "shift_5_profit",
+          "present": true
+        }
+      ]
+    },
+    {
+      "check_id": "F9",
+      "finding": "длина SQL 3466 согласуется с 1.7 отчётом (38 370), но не с ТЗ (~35 926)",
+      "status": "CONFIRMED",
+      "detail": "actual_sql_len=38370; 1.7 report=38370; ТЗ claim ~35926",
+      "actual_sql_len": 38370,
+      "report_17": 38370,
+      "tz_claim": 35926
+    },
+    {
+      "check_id": "F10",
+      "finding": "количество датасетов 1.6.2 = 3778 (в 1.7 отчёте 3767)",
+      "status": "CONFIRMED",
+      "detail": "actual=3778; 1.6.2 baseline=3778; 1.7 report=3767",
+      "actual": 3778,
+      "baseline_162": 3778,
+      "report_17": 3767
+    },
+    {
+      "check_id": "F11",
+      "finding": "детали 7802/3466/7021/5939 присутствуют в datasets.detail.json",
+      "status": "CONFIRMED",
+      "detail": "[{\"id\":7802,\"present\":true,\"name\":\"shift_time_breakdown\"},{\"id\":3466,\"present\":true,\"name\":\"darkstore_time_sheet\"},{\"id\":7021,\"present\":true,\"name\":\"ds_collectors_prod\"},{\"id\":5939,\"present\":true,\"name\":\"hr_daily_pers_mentors\"}]",
+      "datasets": [
+        {
+          "id": 7802,
+          "present": true,
+          "name": "shift_time_breakdown"
+        },
+        {
+          "id": 3466,
+          "present": true,
+          "name": "darkstore_time_sheet"
+        },
+        {
+          "id": 7021,
+          "present": true,
+          "name": "ds_collectors_prod"
+        },
+        {
+          "id": 5939,
+          "present": true,
+          "name": "hr_daily_pers_mentors"
+        }
+      ]
+    },
+    {
+      "check_id": "F12",
+      "finding": "детали 7091/7098/7160 отсутствуют в datasets.detail.json 1.6.2",
+      "status": "CONFIRMED",
+      "detail": "[{\"id\":7091,\"in_detail\":false,\"in_list\":true,\"name\":\"cargo3\"},{\"id\":7098,\"in_detail\":false,\"in_list\":true,\"name\":\"cargo4\"},{\"id\":7160,\"in_detail\":false,\"in_list\":true,\"name\":\"cargo8\"}]",
+      "datasets": [
+        {
+          "id": 7091,
+          "in_detail": false,
+          "in_list": true,
+          "name": "cargo3"
+        },
+        {
+          "id": 7098,
+          "in_detail": false,
+          "in_list": true,
+          "name": "cargo4"
+        },
+        {
+          "id": 7160,
+          "in_detail": false,
+          "in_list": true,
+          "name": "cargo8"
+        }
+      ]
+    }
+  ]
+}

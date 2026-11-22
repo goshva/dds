@@ -1,0 +1,1312 @@
+[
+  {
+    "id": "ENT-ORDER",
+    "name": "Order",
+    "ru_name": "***REMOVED***",
+    "layer": "BOTH",
+    "bounded_context": "CTX-ORDER",
+    "description": "***REMOVED*** клиента: то, что клиент заказал, с жизненным циклом и статусами.",
+    "business_purpose": "Основа операционного экрана и SLA-метрик.",
+    "grain": "Одна строка на заказ; конкретное зерно не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "id_order",
+        "id_general"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-001",
+      "EVD-014"
+    ],
+    "dataset_ids": [
+      3466,
+      4732,
+      7119
+    ],
+    "lifecycle": "Создан → собирается → готов → назначен → доставлен / отменён / возвращён.",
+    "decision": "KEEP",
+    "decision_reason": "Ядро MVP; источник и идентичность требуют подтверждения.",
+    "open_decision_ids": [
+      "DEC-001",
+      "DEC-002"
+    ],
+    "pii": "NONE",
+    "notes": "id_order и id_general могут быть разными уровнями; не объединять без проверки."
+  },
+  {
+    "id": "ENT-ORDER-ITEM",
+    "name": "OrderItem",
+    "ru_name": "Строка заказа",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-ORDER",
+    "description": "Позиция заказа: товар, количество, цена.",
+    "business_purpose": "Детализация заказа для аналитики и сверки.",
+    "grain": "Одна строка на позицию заказа; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "order_item_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-030"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Создана → изменена → отменена.",
+    "decision": "NEEDS_EVIDENCE",
+    "decision_reason": "Line-item источник не подтверждён; без него нельзя строить состав заказа.",
+    "open_decision_ids": [
+      "DEC-003"
+    ],
+    "pii": "NONE",
+    "notes": "Не путать с заказом; не выводить из SUM/COUNT."
+  },
+  {
+    "id": "ENT-DARKSTORE",
+    "name": "Darkstore",
+    "ru_name": "Даркстор / ТТ",
+    "layer": "BOTH",
+    "bounded_context": "CTX-DARKSTORE",
+    "description": "Торговая точка/даркстор, к которой привязаны заказы, курьеры и смены.",
+    "business_purpose": "<ФИО> единица и место сборки/выдачи.",
+    "grain": "Одна строка на ТТ; мастер-ключ не подтверждён.",
+    "identity": {
+      "candidate_keys": [
+        "shopno",
+        "id_tt"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-001",
+      "EVD-010"
+    ],
+    "dataset_ids": [
+      3466,
+      4732,
+      7036,
+      7802
+    ],
+    "lifecycle": "Открыта → активна → закрыта.",
+    "decision": "KEEP",
+    "decision_reason": "Присутствует в SQL и метаданных; мастер-реестр не найден.",
+    "open_decision_ids": [
+      "DEC-004"
+    ],
+    "pii": "NONE",
+    "notes": "shopno и id_tt могут быть разными ключами."
+  },
+  {
+    "id": "ENT-COURIER",
+    "name": "Courier",
+    "ru_name": "Курьер",
+    "layer": "BOTH",
+    "bounded_context": "CTX-COURIER",
+    "description": "Курьер: исполнитель доставки, участник смен и очереди.",
+    "business_purpose": "Идентичность исполнителя и основа HR/финансов.",
+    "grain": "Одна строка на курьера; мастер-идентичность не подтверждена.",
+    "identity": {
+      "candidate_keys": [
+        "id_courier",
+        "employee_code"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-011",
+      "EVD-022"
+    ],
+    "dataset_ids": [
+      5797,
+      7775,
+      7802,
+      7119
+    ],
+    "lifecycle": "Нанят → активен → заблокирован/уволен.",
+    "decision": "KEEP",
+    "decision_reason": "Присутствует в SQL; PII-поля не выгружались.",
+    "open_decision_ids": [
+      "DEC-005"
+    ],
+    "pii": "CONFIRMED",
+    "notes": "fio, phone, inn — PII; в отчётах только маскирование."
+  },
+  {
+    "id": "ENT-DELIVERY",
+    "name": "Delivery",
+    "ru_name": "Доставка",
+    "layer": "BOTH",
+    "bounded_context": "CTX-ORDER",
+    "description": "Результат доставки конкретного заказа: факт, время, исход.",
+    "business_purpose": "Основа SLA и оплаты за доставленный заказ.",
+    "grain": "Одна строка на доставку заказа; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "delivery_id",
+        "order_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-001",
+      "EVD-003"
+    ],
+    "dataset_ids": [
+      3466,
+      7119,
+      7006
+    ],
+    "lifecycle": "Назначена → в пути → доставлена / отменена.",
+    "decision": "KEEP",
+    "decision_reason": "Логически подтверждена; точный источник и событие требуют проверки.",
+    "open_decision_ids": [
+      "DEC-006"
+    ],
+    "pii": "NONE",
+    "notes": "Не смешивать с OrderStatus."
+  },
+  {
+    "id": "ENT-TRIP",
+    "name": "Trip",
+    "ru_name": "Поездка",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-COURIER",
+    "description": "Один маршрут курьера, включающий несколько заказов.",
+    "business_purpose": "<ФИО>-единица маршрута и оплаты.",
+    "grain": "Одна строка на поездку; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "trip_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-015",
+      "EVD-003"
+    ],
+    "dataset_ids": [
+      7119,
+      7802,
+      7006
+    ],
+    "lifecycle": "Сформирована → назначен курьер → выезд → доставки → завершена.",
+    "decision": "KEEP",
+    "decision_reason": "<ФИО>-концепт; Pool — наблюдаемый источник, не доказано равенство.",
+    "open_decision_ids": [
+      "DEC-007"
+    ],
+    "pii": "NONE",
+    "notes": "Не переименовывать Pool в Trip без подтверждения Operations."
+  },
+  {
+    "id": "ENT-POOL",
+    "name": "Pool",
+    "ru_name": "Пул",
+    "layer": "OBSERVED_SOURCE",
+    "bounded_context": "CTX-COURIER",
+    "description": "Наблюдаемое понятие группировки заказов в SQL (id_pool).",
+    "business_purpose": "Источник-кандидат для поездки/маршрута.",
+    "grain": "Одна строка на pool; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "id_pool"
+      ],
+      "canonical_key": null,
+      "status": "CANDIDATE"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-002",
+      "EVD-003"
+    ],
+    "dataset_ids": [
+      7802,
+      7119,
+      7006
+    ],
+    "lifecycle": "Создан → получен → закрыт.",
+    "decision": "KEEP",
+    "decision_reason": "Наблюдаемый source concept; сохранять отдельно от Trip.",
+    "open_decision_ids": [
+      "DEC-007"
+    ],
+    "pii": "NONE",
+    "notes": "pool_size и pickup_seq — кандидаты, не доказанная семантика."
+  },
+  {
+    "id": "ENT-TRIP-ORDER",
+    "name": "TripOrder",
+    "ru_name": "Состав поездки",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-COURIER",
+    "description": "Связь поездки и заказа с историей изменений состава.",
+    "business_purpose": "Фиксация состава и его изменений до выезда.",
+    "grain": "Одна строка на пару поездка-заказ; история изменений.",
+    "identity": {
+      "candidate_keys": [
+        "trip_id",
+        "order_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-016",
+      "EVD-003"
+    ],
+    "dataset_ids": [
+      7119,
+      7802
+    ],
+    "lifecycle": "Добавлен → изменён → зафиксирован.",
+    "decision": "NEW",
+    "decision_reason": "<ФИО> требует историю изменений состава; источник не найден.",
+    "open_decision_ids": [
+      "DEC-008"
+    ],
+    "pii": "NONE",
+    "notes": "История изменений — обязательное требование, источник отсутствует."
+  },
+  {
+    "id": "ENT-COURIER-ASSIGNMENT",
+    "name": "CourierAssignment",
+    "ru_name": "Назначение курьера",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-COURIER",
+    "description": "Назначение курьера на поездку/пул, отдельно от состава.",
+    "business_purpose": "Разделить состав и назначение; поддерживать аудит.",
+    "grain": "Одна строка на назначение; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "assignment_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-017",
+      "EVD-003"
+    ],
+    "dataset_ids": [
+      7119,
+      7802
+    ],
+    "lifecycle": "Назначен → отменён → заменён.",
+    "decision": "NEW",
+    "decision_reason": "<ФИО> отделяет назначение от состава; источник не подтверждён.",
+    "open_decision_ids": [
+      "DEC-009"
+    ],
+    "pii": "NONE",
+    "notes": "courier_id_darkstore — кандидат, не доказанное назначение."
+  },
+  {
+    "id": "ENT-QUEUE-ENTRY",
+    "name": "QueueEntry",
+    "ru_name": "Запись в очереди",
+    "layer": "BOTH",
+    "bounded_context": "CTX-COURIER",
+    "description": "Факт входа курьера в очередь и выхода из неё.",
+    "business_purpose": "FIFO-назначение и метрика ожидания.",
+    "grain": "Одна строка на вход; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "queue_id",
+        "courier_id",
+        "queue_in_dttm"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-002",
+      "EVD-033"
+    ],
+    "dataset_ids": [
+      7802
+    ],
+    "lifecycle": "Вошёл → вызван → пропущен → вернулся → вышел.",
+    "decision": "KEEP",
+    "decision_reason": "courier_queue — кандидат; полный event model не подтверждён.",
+    "open_decision_ids": [
+      "DEC-010"
+    ],
+    "pii": "NONE",
+    "notes": "queue_in_dttm / queue_out_dttm / has_order — кандидаты."
+  },
+  {
+    "id": "ENT-QUEUE-EVENT",
+    "name": "QueueEvent",
+    "ru_name": "Событие очереди",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-COURIER",
+    "description": "Вызов, пропуск, возврат, отказ — отдельные события.",
+    "business_purpose": "Прозрачность FIFO и no-show.",
+    "grain": "Одна строка на событие.",
+    "identity": {
+      "candidate_keys": [
+        "event_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-033",
+      "EVD-017"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Вызов → пропуск → возврат.",
+    "decision": "NEW",
+    "decision_reason": "<ФИО> требует, но подтверждённого event log нет.",
+    "open_decision_ids": [
+      "DEC-011"
+    ],
+    "pii": "NONE",
+    "notes": "Не выводить из QueueEntry автоматически."
+  },
+  {
+    "id": "ENT-COURIER-SHIFT",
+    "name": "CourierShift",
+    "ru_name": "***REMOVED*** курьера",
+    "layer": "BOTH",
+    "bounded_context": "CTX-COURIER",
+    "description": "Временной интервал работы курьера.",
+    "business_purpose": "Учёт смен, перерывов, возвратов.",
+    "grain": "Одна строка на смену; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "id_shift",
+        "id_courier",
+        "shift_start"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-002",
+      "EVD-005"
+    ],
+    "dataset_ids": [
+      7802
+    ],
+    "lifecycle": "Открыта → перерыв → закрыта.",
+    "decision": "KEEP",
+    "decision_reason": "shifts — кандидат; 7021 не источник курьерской смены.",
+    "open_decision_ids": [
+      "DEC-012"
+    ],
+    "pii": "NONE",
+    "notes": "Не использовать shift_type из 7021."
+  },
+  {
+    "id": "ENT-SHIFT-BREAK",
+    "name": "ShiftBreak",
+    "ru_name": "Перерыв смены",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-COURIER",
+    "description": "Перерыв внутри смены.",
+    "business_purpose": "Учёт перерывов и доступности.",
+    "grain": "Одна строка на перерыв.",
+    "identity": {
+      "candidate_keys": [
+        "break_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-017"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Начат → завершён.",
+    "decision": "NEW",
+    "decision_reason": "<ФИО> упоминает перерыв; источник не найден.",
+    "open_decision_ids": [
+      "DEC-013"
+    ],
+    "pii": "NONE",
+    "notes": "Не выводить из разницы timestamp без подтверждения."
+  },
+  {
+    "id": "ENT-SHIFT-SLOT",
+    "name": "ShiftSlot",
+    "ru_name": "Слот смены",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-COURIER",
+    "description": "Планируемый слот, отдельно от фактической смены.",
+    "business_purpose": "Планирование и бронирование.",
+    "grain": "Одна строка на слот.",
+    "identity": {
+      "candidate_keys": [
+        "slot_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-034"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Создан → забронирован → подтверждён → отменён.",
+    "decision": "DEFER",
+    "decision_reason": "Процесс бронирования/отметки не определён.",
+    "open_decision_ids": [
+      "DEC-014"
+    ],
+    "pii": "NONE",
+    "notes": "Не смешивать со сменой."
+  },
+  {
+    "id": "ENT-ROUTE",
+    "name": "Route",
+    "ru_name": "Маршрут",
+    "layer": "BOTH",
+    "bounded_context": "CTX-GEO",
+    "description": "Маршрут доставки: последовательность точек, расстояние, время.",
+    "business_purpose": "Основа расчёта SLA и стоимости.",
+    "grain": "Одна строка на маршрут; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "route_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-026",
+      "EVD-003"
+    ],
+    "dataset_ids": [
+      7024,
+      7119
+    ],
+    "lifecycle": "Построен → выполнен.",
+    "decision": "KEEP",
+    "decision_reason": "Логически подтверждён; связь с Trip не доказана.",
+    "open_decision_ids": [
+      "DEC-015"
+    ],
+    "pii": "NONE",
+    "notes": "Route ≠ Trip; не объединять."
+  },
+  {
+    "id": "ENT-READY-EVENT",
+    "name": "ReadyEvent",
+    "ru_name": "Событие готовности",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-ORDER",
+    "description": "Момент, когда заказ готов к выдаче курьеру.",
+    "business_purpose": "Метрика «готовность → доставка».",
+    "grain": "Одна строка на заказ/событие.",
+    "identity": {
+      "candidate_keys": [
+        "ready_event_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-001"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Событие готовности.",
+    "decision": "NEEDS_EVIDENCE",
+    "decision_reason": "time_ready отсутствует в SQL 3466; кандидаты не подтверждены.",
+    "open_decision_ids": [
+      "DEC-016"
+    ],
+    "pii": "NONE",
+    "notes": "Не подменять date_set_cell или is_collected без подтверждения."
+  },
+  {
+    "id": "ENT-ASSEMBLY-EVENT",
+    "name": "AssemblyEvent",
+    "ru_name": "Событие сборки",
+    "layer": "OBSERVED_SOURCE",
+    "bounded_context": "CTX-ORDER",
+    "description": "Начало и окончание сборки заказа.",
+    "business_purpose": "Разделить сборку и готовность.",
+    "grain": "Одна строка на событие; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "assembly_event_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-001"
+    ],
+    "dataset_ids": [
+      3466,
+      4732
+    ],
+    "lifecycle": "Начата → завершена.",
+    "decision": "KEEP",
+    "decision_reason": "date_collect_start / date_collected присутствуют; семантика требует подтверждения.",
+    "open_decision_ids": [
+      "DEC-017"
+    ],
+    "pii": "NONE",
+    "notes": "Не равна готовности."
+  },
+  {
+    "id": "ENT-DELIVERY-ZONE",
+    "name": "DeliveryZone",
+    "ru_name": "Зона доставки",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-GEO",
+    "description": "Зона = ТТ + прилегающая территория, с границами.",
+    "business_purpose": "Распределение заказов и расчёт доставки.",
+    "grain": "Одна строка на зону; версии границ.",
+    "identity": {
+      "candidate_keys": [
+        "zone_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-009",
+      "EVD-025",
+      "EVD-031"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Утверждена → изменена.",
+    "decision": "KEEP",
+    "decision_reason": "<ФИО> требует; справочник и геометрия не подтверждены.",
+    "open_decision_ids": [
+      "DEC-018"
+    ],
+    "pii": "NONE",
+    "notes": "zone_cluster, inactivity_zone, cluster — разные понятия."
+  },
+  {
+    "id": "ENT-ZONE-BOUNDARY",
+    "name": "ZoneBoundaryVersion",
+    "ru_name": "Версия границы зоны",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-GEO",
+    "description": "Версия полигона зоны.",
+    "business_purpose": "История изменений границ.",
+    "grain": "Одна строка на версию.",
+    "identity": {
+      "candidate_keys": [
+        "boundary_version_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "DESIGN_PROPOSAL",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-009"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Создана → заменена.",
+    "decision": "NEW",
+    "decision_reason": "История границ желательна, но не обязательна; это проектное предложение.",
+    "open_decision_ids": [
+      "DEC-019"
+    ],
+    "pii": "NONE",
+    "notes": "Не выдавать за бизнес-требование."
+  },
+  {
+    "id": "ENT-ADDRESS",
+    "name": "Address",
+    "ru_name": "Адрес",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-GEO",
+    "description": "Адрес доставки/точки, нормализованный.",
+    "business_purpose": "Привязка к зоне и маршруту.",
+    "grain": "Одна строка на адрес.",
+    "identity": {
+      "candidate_keys": [
+        "address_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-032"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Создан → изменён.",
+    "decision": "KEEP",
+    "decision_reason": "Адреса есть в metadata; мастер-реестр не подтверждён.",
+    "open_decision_ids": [
+      "DEC-020"
+    ],
+    "pii": "CONFIRMED",
+    "notes": "PII: адреса не выгружать."
+  },
+  {
+    "id": "ENT-ADDRESS-ZONE",
+    "name": "AddressToZoneAssignment",
+    "ru_name": "Привязка адреса к зоне",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-GEO",
+    "description": "Отнесение адреса к зоне с минимальным временем доставки.",
+    "business_purpose": "***REMOVED*** выбора зоны.",
+    "grain": "Одна строка на адрес/зону.",
+    "identity": {
+      "candidate_keys": [
+        "address_id",
+        "zone_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-009"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Назначена → изменена.",
+    "decision": "NEW",
+    "decision_reason": "<ФИО>-правило есть, источник не найден.",
+    "open_decision_ids": [
+      "DEC-021"
+    ],
+    "pii": "CONFIRMED",
+    "notes": "Не путать с Address."
+  },
+  {
+    "id": "ENT-ORDER-STATUS",
+    "name": "OrderStatus",
+    "ru_name": "Статус заказа",
+    "layer": "OBSERVED_SOURCE",
+    "bounded_context": "CTX-ORDER",
+    "description": "Текущий статус заказа и история переходов.",
+    "business_purpose": "Операционный экран и SLA.",
+    "grain": "Одна строка на заказ/переход.",
+    "identity": {
+      "candidate_keys": [
+        "order_id",
+        "status",
+        "changed_at"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-014",
+      "EVD-040"
+    ],
+    "dataset_ids": [
+      4732,
+      3466,
+      7119
+    ],
+    "lifecycle": "Создан → собирается → готов → доставлен → отменён.",
+    "decision": "KEEP",
+    "decision_reason": "status_name присутствует; state machine не утверждён.",
+    "open_decision_ids": [
+      "DEC-022"
+    ],
+    "pii": "NONE",
+    "notes": "Не смешивать с Delivery."
+  },
+  {
+    "id": "ENT-PHOTO-CONTROL",
+    "name": "PhotoControlAttempt",
+    "ru_name": "Попытка фото-контроля",
+    "layer": "OBSERVED_SOURCE",
+    "bounded_context": "CTX-DARKSTORE",
+    "description": "Попытка фото-контроля смены.",
+    "business_purpose": "Контроль качества и дисциплины.",
+    "grain": "Одна строка на попытку.",
+    "identity": {
+      "candidate_keys": [
+        "attempt_id"
+      ],
+      "canonical_key": null,
+      "status": "CANDIDATE"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-012",
+      "EVD-039"
+    ],
+    "dataset_ids": [
+      7712,
+      7713
+    ],
+    "lifecycle": "Попытка → результат.",
+    "decision": "KEEP",
+    "decision_reason": "Отдельный процесс; не часть смены.",
+    "open_decision_ids": [
+      "DEC-023"
+    ],
+    "pii": "NONE",
+    "notes": "Не смешивать со сменой."
+  },
+  {
+    "id": "ENT-COURIER-EVENT",
+    "name": "CourierAppEvent",
+    "ru_name": "Событие приложения курьера",
+    "layer": "OBSERVED_SOURCE",
+    "bounded_context": "CTX-ANALYTICS",
+    "description": "Агрегированные события приложения курьера.",
+    "business_purpose": "Аналитика поведения и SLA.",
+    "grain": "Агрегат по дню/курьеру; не event store.",
+    "identity": {
+      "candidate_keys": [
+        "event_name",
+        "courier_id",
+        "d"
+      ],
+      "canonical_key": null,
+      "status": "CANDIDATE"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-008"
+    ],
+    "dataset_ids": [
+      5247,
+      5399
+    ],
+    "lifecycle": "Событие → агрегат.",
+    "decision": "KEEP",
+    "decision_reason": "Агрегат, не нормализованный event log.",
+    "open_decision_ids": [
+      "DEC-024"
+    ],
+    "pii": "NONE",
+    "notes": "events_qty ≠ факт явки."
+  },
+  {
+    "id": "ENT-HR-COURIER-STATUS",
+    "name": "HrCourierStatus",
+    "ru_name": "HR-статус курьера",
+    "layer": "OBSERVED_SOURCE",
+    "bounded_context": "CTX-HR",
+    "description": "Статус курьера в HR: активен, заблокирован, уволен.",
+    "business_purpose": "Учёт доступности и жизненного цикла.",
+    "grain": "Одна строка на курьера/изменение.",
+    "identity": {
+      "candidate_keys": [
+        "id_courier",
+        "changed_at"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-011",
+      "EVD-027"
+    ],
+    "dataset_ids": [
+      5797,
+      6054,
+      6386
+    ],
+    "lifecycle": "Нанят → активен → уволен.",
+    "decision": "KEEP",
+    "decision_reason": "Статусы присутствуют; история переходов не подтверждена.",
+    "open_decision_ids": [
+      "DEC-025"
+    ],
+    "pii": "CONFIRMED",
+    "notes": "PII: ФИО, телефон."
+  },
+  {
+    "id": "ENT-HR-MENTORSHIP",
+    "name": "HrMentorship",
+    "ru_name": "HR-наставничество",
+    "layer": "OBSERVED_SOURCE",
+    "bounded_context": "CTX-HR",
+    "description": "Наставничество: наставник, стажёр, период, оценка.",
+    "business_purpose": "Адаптация новичков.",
+    "grain": "Одна строка на назначение; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "mentor_id",
+        "trainee_id",
+        "start_date"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-006",
+      "EVD-036"
+    ],
+    "dataset_ids": [
+      5939,
+      7771,
+      7864
+    ],
+    "lifecycle": "Назначен → две недели → оценка → завершён.",
+    "decision": "KEEP",
+    "decision_reason": "Атрибуты есть; применимость к курьерам не доказана.",
+    "open_decision_ids": [
+      "DEC-026"
+    ],
+    "pii": "CONFIRMED",
+    "notes": "date_for_mentor — stale metadata."
+  },
+  {
+    "id": "ENT-MENTORSHIP-ASSESSMENT",
+    "name": "MentorshipAssessment",
+    "ru_name": "Оценка наставничества",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-HR",
+    "description": "Оценка стажёра по первым пяти сменам, качеству и правилам.",
+    "business_purpose": "Завершение/продление обучения.",
+    "grain": "Одна строка на оценку.",
+    "identity": {
+      "candidate_keys": [
+        "assessment_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-019"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Оценка → решение.",
+    "decision": "NEW",
+    "decision_reason": "Критерии и источник не определены.",
+    "open_decision_ids": [
+      "DEC-027"
+    ],
+    "pii": "POSSIBLE",
+    "notes": "Не путать с HR-профилем."
+  },
+  {
+    "id": "ENT-TARIFF",
+    "name": "Tariff",
+    "ru_name": "Тариф",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-FINANCE",
+    "description": "Правила расчёта оплаты за доставленный заказ.",
+    "business_purpose": "Расчёт начислений.",
+    "grain": "Одна строка на тариф; версии.",
+    "identity": {
+      "candidate_keys": [
+        "tariff_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-029"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Утверждён → действует → заменён.",
+    "decision": "KEEP",
+    "decision_reason": "<ФИО> требует; источник и владелец не найдены.",
+    "open_decision_ids": [
+      "DEC-028"
+    ],
+    "pii": "NONE",
+    "notes": "shift_N_profit — не тариф."
+  },
+  {
+    "id": "ENT-COURIER-ACCRUAL",
+    "name": "CourierAccrual",
+    "ru_name": "Начисление курьеру",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-FINANCE",
+    "description": "Начисление за доставленный заказ.",
+    "business_purpose": "Расчёт заработка.",
+    "grain": "Одна строка на начисление; не подтверждено.",
+    "identity": {
+      "candidate_keys": [
+        "accrual_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-018",
+      "EVD-035"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Начислено → скорректировано → выплачено.",
+    "decision": "KEEP",
+    "decision_reason": "Целевая сущность; физический источник не найден.",
+    "open_decision_ids": [
+      "DEC-029"
+    ],
+    "pii": "POSSIBLE",
+    "notes": "sum_order / sum_paid — не заработок."
+  },
+  {
+    "id": "ENT-ACCRUAL-LINE",
+    "name": "AccrualLine",
+    "ru_name": "Строка начисления",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-FINANCE",
+    "description": "Детализация начисления по заказу/тарифу.",
+    "business_purpose": "Прозрачность расчёта.",
+    "grain": "Одна строка на компонент начисления.",
+    "identity": {
+      "candidate_keys": [
+        "accrual_line_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "DESIGN_PROPOSAL",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-018"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Создана → изменена.",
+    "decision": "NEW",
+    "decision_reason": "<ФИО>ное предложение для детализации.",
+    "open_decision_ids": [
+      "DEC-030"
+    ],
+    "pii": "NONE",
+    "notes": "Не выдавать за подтверждённую сущность."
+  },
+  {
+    "id": "ENT-PAYOUT",
+    "name": "Payout",
+    "ru_name": "Выплата",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-FINANCE",
+    "description": "Фактическая выплата курьеру за период.",
+    "business_purpose": "Отделить начисление от выплаты.",
+    "grain": "Одна строка на выплату/период.",
+    "identity": {
+      "candidate_keys": [
+        "payout_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "NOT_FOUND_IN_SUPERSET",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-028"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Рассчитана → выплачена.",
+    "decision": "KEEP",
+    "decision_reason": "<ФИО> требует отделять выплату; источник не найден.",
+    "open_decision_ids": [
+      "DEC-031"
+    ],
+    "pii": "POSSIBLE",
+    "notes": "Не смешивать с accrual."
+  },
+  {
+    "id": "ENT-PAYOUT-LINE",
+    "name": "PayoutLine",
+    "ru_name": "Строка выплаты",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-FINANCE",
+    "description": "Детализация выплаты по начислениям.",
+    "business_purpose": "Сверка выплат.",
+    "grain": "Одна строка на компонент выплаты.",
+    "identity": {
+      "candidate_keys": [
+        "payout_line_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "DESIGN_PROPOSAL",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-028"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Создана → изменена.",
+    "decision": "NEW",
+    "decision_reason": "<ФИО>ное предложение.",
+    "open_decision_ids": [
+      "DEC-032"
+    ],
+    "pii": "NONE",
+    "notes": "Не выдавать за подтверждённую сущность."
+  },
+  {
+    "id": "ENT-SLA-METRIC",
+    "name": "SlaMetric",
+    "ru_name": "Метрика SLA",
+    "layer": "OBSERVED_SOURCE",
+    "bounded_context": "CTX-ANALYTICS",
+    "description": "Показатель соблюдения SLA по заказу.",
+    "business_purpose": "Контроль сроков доставки.",
+    "grain": "Одна строка на заказ/интервал.",
+    "identity": {
+      "candidate_keys": [
+        "order_id",
+        "sla_interval"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "FOUND_IN_SUPERSET_SQL",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-038"
+    ],
+    "dataset_ids": [
+      4732,
+      7119
+    ],
+    "lifecycle": "Рассчитана.",
+    "decision": "KEEP",
+    "decision_reason": "Метрики присутствуют; бизнес-семантика не подтверждена.",
+    "open_decision_ids": [
+      "DEC-033"
+    ],
+    "pii": "NONE",
+    "notes": "Не исключать отмены/возвраты без решения."
+  },
+  {
+    "id": "ENT-BUSINESS-EVENT",
+    "name": "BusinessEvent",
+    "ru_name": "<ФИО>-событие",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-SHARED",
+    "description": "Единое событие домена с типом, временем, актором и сущностью.",
+    "business_purpose": "Аудит и интеграция.",
+    "grain": "Одна строка на событие.",
+    "identity": {
+      "candidate_keys": [
+        "event_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-037"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Создано → обработано.",
+    "decision": "DEFER",
+    "decision_reason": "Единый event log не найден; не навязывать модель.",
+    "open_decision_ids": [
+      "DEC-034"
+    ],
+    "pii": "POSSIBLE",
+    "notes": "Не выдавать за подтверждённую сущность."
+  },
+  {
+    "id": "ENT-TRIP-COMPOSITION-CHANGE",
+    "name": "TripCompositionChange",
+    "ru_name": "Изменение состава поездки",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-COURIER",
+    "description": "История добавления/удаления заказов до выезда.",
+    "business_purpose": "Аудит ручных корректировок куратора.",
+    "grain": "Одна строка на изменение.",
+    "identity": {
+      "candidate_keys": [
+        "change_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-016"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Изменено → зафиксировано.",
+    "decision": "NEW",
+    "decision_reason": "<ФИО> требует историю; источник не найден.",
+    "open_decision_ids": [
+      "DEC-035"
+    ],
+    "pii": "NONE",
+    "notes": "Не путать с TripOrder."
+  },
+  {
+    "id": "ENT-SOURCE-SYSTEM",
+    "name": "SourceSystem",
+    "ru_name": "Система-источник",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-SHARED",
+    "description": "Система, из которой получены данные.",
+    "business_purpose": "Трассировка происхождения.",
+    "grain": "Одна строка на систему.",
+    "identity": {
+      "candidate_keys": [
+        "system_code"
+      ],
+      "canonical_key": null,
+      "status": "CANDIDATE"
+    },
+    "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-021"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Зарегистрирована.",
+    "decision": "NEW",
+    "decision_reason": "Полезно для трассировки; конкретные системы не подтверждены.",
+    "open_decision_ids": [
+      "DEC-036"
+    ],
+    "pii": "NONE",
+    "notes": "Не выдавать за подтверждённую сущность."
+  },
+  {
+    "id": "ENT-EVIDENCE-REFERENCE",
+    "name": "DataEvidenceReference",
+    "ru_name": "Ссылка на evidence",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-SHARED",
+    "description": "Ссылка на evidence для утверждений модели.",
+    "business_purpose": "Трассируемость модели.",
+    "grain": "Одна строка на evidence.",
+    "identity": {
+      "candidate_keys": [
+        "evidence_id"
+      ],
+      "canonical_key": null,
+      "status": "CANDIDATE"
+    },
+    "status": "DESIGN_PROPOSAL",
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "EVD-021"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Создана.",
+    "decision": "NEW",
+    "decision_reason": "Технический реестр этапа, не бизнес-сущность.",
+    "open_decision_ids": [],
+    "pii": "NONE",
+    "notes": "Не включать в бизнес-модель как доменную сущность."
+  },
+  {
+    "id": "ENT-TARIFF-VERSION",
+    "name": "TariffVersion",
+    "ru_name": "Версия тарифа",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-FINANCE",
+    "description": "Версия тарифных правил с периодом действия.",
+    "business_purpose": "Позволить версионировать тарифы и не терять историю изменений.",
+    "grain": "Одна строка на версию тарифа.",
+    "identity": {
+      "candidate_keys": [
+        "tariff_version_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-018",
+      "EVD-029"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Черновик → утверждена → архив.",
+    "decision": "NEW",
+    "decision_reason": "<ФИО> требует версионируемые тарифы; источник не найден.",
+    "open_decision_ids": [
+      "DEC-037"
+    ],
+    "pii": "NONE",
+    "notes": "Формула и владелец версии не утверждены."
+  },
+  {
+    "id": "ENT-TARIFF-RULE",
+    "name": "TariffRule",
+    "ru_name": "***REMOVED*** тарифа",
+    "layer": "TARGET_LOGICAL",
+    "bounded_context": "CTX-FINANCE",
+    "description": "***REMOVED*** расчёта начисления по тарифу.",
+    "business_purpose": "Зафиксировать, как тариф применяется к доставленному заказу.",
+    "grain": "Одна строка на правило версии тарифа.",
+    "identity": {
+      "candidate_keys": [
+        "tariff_rule_id"
+      ],
+      "canonical_key": null,
+      "status": "UNRESOLVED"
+    },
+    "status": "BUSINESS_REQUIRED_NOT_FOUND",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-018",
+      "EVD-029"
+    ],
+    "dataset_ids": [],
+    "lifecycle": "Черновик → утверждено → архив.",
+    "decision": "NEW",
+    "decision_reason": "Правила расчёта не подтверждены; возможная зависимость от нагрузки не формализована.",
+    "open_decision_ids": [
+      "DEC-037"
+    ],
+    "pii": "NONE",
+    "notes": "Не путать с shift_N_profit: это не тарифная модель."
+  }
+]

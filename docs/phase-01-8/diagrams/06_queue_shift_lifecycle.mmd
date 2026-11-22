@@ -1,0 +1,19 @@
+stateDiagram-v2
+  [*] --> ShiftPlanned: ShiftSlot planned (unconfirmed)
+  ShiftPlanned --> ShiftStarted: shift_start
+  ShiftStarted --> InQueue: queue_in_dttm
+  InQueue --> Called: CourierCalled
+  Called --> Assigned: CourierAssigned
+  Called --> Skipped: CourierSkipped
+  Skipped --> InQueue: return (rule open)
+  Assigned --> OnTrip: TripDeparted
+  OnTrip --> Delivered: OrderDelivered
+  Delivered --> InQueue: queue_in_dttm (next)
+  InQueue --> Break: break (rules open)
+  Break --> InQueue: return
+  InQueue --> ShiftEnded: shift_finish
+  ShiftEnded --> [*]
+  note right of Skipped
+    Поведение пропущенного курьера
+    при возвращении не определено.
+  end note

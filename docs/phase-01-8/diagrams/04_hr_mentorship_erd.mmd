@@ -1,0 +1,12 @@
+erDiagram
+  %% HR / Mentorship ERD
+  HR_COURIER_STATUS {
+    enum status
+  }
+  HR_MENTORSHIP {
+    string mentor_id
+    date mentor_at_date
+  }
+  MENTORSHIP_ASSESSMENT {
+  }
+  MENTORSHIP_ASSESSMENT }o--|| HR_MENTORSHIP : NOT_VERIFIABLE_assesses

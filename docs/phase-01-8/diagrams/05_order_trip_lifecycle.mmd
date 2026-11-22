@@ -1,0 +1,18 @@
+stateDiagram-v2
+  [*] --> Created: OrderCreated
+  Created --> Assembling: AssemblyStarted
+  Assembling --> Collected: date_collected
+  Collected --> Ready: READY_UNCONFIRMED
+  Ready --> InTrip: TripDeparted
+  InTrip --> Delivered: OrderDelivered
+  InTrip --> Cancelled: OrderCancelled
+  InTrip --> Returned: OrderReturned
+  Delivered --> [*]
+  Cancelled --> [*]
+  Returned --> [*]
+  note right of Ready
+    ReadyEvent не подтверждён:
+    time_ready отсутствует в SQL 3466.
+    Кандидаты date_set_cell/is_collected
+    не эквивалентны бизнес-событию.
+  end note

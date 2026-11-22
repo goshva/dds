@@ -1,0 +1,5521 @@
+{
+  "stage": "1.8",
+  "generated_at": "2026-11-22T15:07:15.503Z",
+  "layers": {
+    "observed_source": 8,
+    "target_logical": 24,
+    "both": 7
+  },
+  "contexts": [
+    {
+      "id": "CTX-ORDER",
+      "name": "Order Management",
+      "ru_name": "***REMOVED***ы и доставка",
+      "purpose": "***REMOVED*** клиента, его состав, статусы, готовность, доставка и SLA.",
+      "entities": [
+        "ENT-ORDER",
+        "ENT-ORDER-ITEM",
+        "ENT-ORDER-STATUS",
+        "ENT-DELIVERY",
+        "ENT-READY-EVENT",
+        "ENT-ASSEMBLY-EVENT"
+      ],
+      "owner": "OWNER_UNKNOWN",
+      "mvp_scope": "MVP",
+      "gaps": [
+        "GAP-001",
+        "GAP-002",
+        "GAP-003"
+      ]
+    },
+    {
+      "id": "CTX-DARKSTORE",
+      "name": "Darkstore Operations",
+      "ru_name": "Дарксторы и ТТ",
+      "purpose": "Торговая точка, даркстор, сборка, фото-контроль, операционные события.",
+      "entities": [
+        "ENT-DARKSTORE",
+        "ENT-PHOTO-CONTROL"
+      ],
+      "owner": "OWNER_UNKNOWN",
+      "mvp_scope": "MVP",
+      "gaps": [
+        "GAP-004"
+      ]
+    },
+    {
+      "id": "CTX-COURIER",
+      "name": "Courier Operations",
+      "ru_name": "Курьеры, смены, очередь, поездки",
+      "purpose": "Курьер, смена, очередь, пул, поездка, назначение, маршрут.",
+      "entities": [
+        "ENT-COURIER",
+        "ENT-COURIER-SHIFT",
+        "ENT-SHIFT-BREAK",
+        "ENT-SHIFT-SLOT",
+        "ENT-QUEUE-ENTRY",
+        "ENT-QUEUE-EVENT",
+        "ENT-POOL",
+        "ENT-TRIP",
+        "ENT-TRIP-ORDER",
+        "ENT-COURIER-ASSIGNMENT",
+        "ENT-TRIP-COMPOSITION-CHANGE"
+      ],
+      "owner": "OWNER_UNKNOWN",
+      "mvp_scope": "MVP",
+      "gaps": [
+        "GAP-005",
+        "GAP-006",
+        "GAP-007"
+      ]
+    },
+    {
+      "id": "CTX-GEO",
+      "name": "Geo & Delivery",
+      "ru_name": "География и зоны",
+      "purpose": "***REMOVED*** доставки, границы, адреса, привязка адреса к зоне.",
+      "entities": [
+        "ENT-DELIVERY-ZONE",
+        "ENT-ZONE-BOUNDARY",
+        "ENT-ADDRESS",
+        "ENT-ADDRESS-ZONE",
+        "ENT-ROUTE"
+      ],
+      "owner": "OWNER_UNKNOWN",
+      "mvp_scope": "LATER",
+      "gaps": [
+        "GAP-008",
+        "GAP-009"
+      ]
+    },
+    {
+      "id": "CTX-FINANCE",
+      "name": "Courier Finance",
+      "ru_name": "Финансы курьеров",
+      "purpose": "Тарифы, начисления, выплаты, корректировки.",
+      "entities": [
+        "ENT-TARIFF",
+        "ENT-TARIFF-VERSION",
+        "ENT-TARIFF-RULE",
+        "ENT-COURIER-ACCRUAL",
+        "ENT-ACCRUAL-LINE",
+        "ENT-PAYOUT",
+        "ENT-PAYOUT-LINE"
+      ],
+      "owner": "OWNER_UNKNOWN",
+      "mvp_scope": "LATER",
+      "gaps": [
+        "GAP-010",
+        "GAP-011",
+        "GAP-012"
+      ]
+    },
+    {
+      "id": "CTX-HR",
+      "name": "Mentorship & HR",
+      "ru_name": "Наставничество и HR",
+      "purpose": "Наставник, стажёр, период сопровождения, оценка, статусы курьера.",
+      "entities": [
+        "ENT-HR-COURIER-STATUS",
+        "ENT-HR-MENTORSHIP",
+        "ENT-MENTORSHIP-ASSESSMENT"
+      ],
+      "owner": "OWNER_UNKNOWN",
+      "mvp_scope": "LATER",
+      "gaps": [
+        "GAP-013",
+        "GAP-014"
+      ]
+    },
+    {
+      "id": "CTX-ANALYTICS",
+      "name": "Analytics & SLA",
+      "ru_name": "Аналитика и SLA",
+      "purpose": "<ФИО> приложения, агрегаты, метрики SLA, BI-слой.",
+      "entities": [
+        "ENT-COURIER-EVENT",
+        "ENT-SLA-METRIC"
+      ],
+      "owner": "OWNER_UNKNOWN",
+      "mvp_scope": "MVP",
+      "gaps": [
+        "GAP-015"
+      ]
+    },
+    {
+      "id": "CTX-SHARED",
+      "name": "Shared & Audit",
+      "ru_name": "Общие и аудит",
+      "purpose": "Единые события, журнал изменений, источники, ссылки на evidence.",
+      "entities": [
+        "ENT-BUSINESS-EVENT",
+        "ENT-SOURCE-SYSTEM",
+        "ENT-EVIDENCE-REFERENCE"
+      ],
+      "owner": "OWNER_UNKNOWN",
+      "mvp_scope": "LATER",
+      "gaps": [
+        "GAP-016"
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "ENT-ORDER",
+      "name": "Order",
+      "ru_name": "***REMOVED***",
+      "layer": "BOTH",
+      "bounded_context": "CTX-ORDER",
+      "description": "***REMOVED*** клиента: то, что клиент заказал, с жизненным циклом и статусами.",
+      "business_purpose": "Основа операционного экрана и SLA-метрик.",
+      "grain": "Одна строка на заказ; конкретное зерно не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "id_order",
+          "id_general"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-014"
+      ],
+      "dataset_ids": [
+        3466,
+        4732,
+        7119
+      ],
+      "lifecycle": "Создан → собирается → готов → назначен → доставлен / отменён / возвращён.",
+      "decision": "KEEP",
+      "decision_reason": "Ядро MVP; источник и идентичность требуют подтверждения.",
+      "open_decision_ids": [
+        "DEC-001",
+        "DEC-002"
+      ],
+      "pii": "NONE",
+      "notes": "id_order и id_general могут быть разными уровнями; не объединять без проверки."
+    },
+    {
+      "id": "ENT-ORDER-ITEM",
+      "name": "OrderItem",
+      "ru_name": "Строка заказа",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-ORDER",
+      "description": "Позиция заказа: товар, количество, цена.",
+      "business_purpose": "Детализация заказа для аналитики и сверки.",
+      "grain": "Одна строка на позицию заказа; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "order_item_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-030"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Создана → изменена → отменена.",
+      "decision": "NEEDS_EVIDENCE",
+      "decision_reason": "Line-item источник не подтверждён; без него нельзя строить состав заказа.",
+      "open_decision_ids": [
+        "DEC-003"
+      ],
+      "pii": "NONE",
+      "notes": "Не путать с заказом; не выводить из SUM/COUNT."
+    },
+    {
+      "id": "ENT-DARKSTORE",
+      "name": "Darkstore",
+      "ru_name": "Даркстор / ТТ",
+      "layer": "BOTH",
+      "bounded_context": "CTX-DARKSTORE",
+      "description": "Торговая точка/даркстор, к которой привязаны заказы, курьеры и смены.",
+      "business_purpose": "<ФИО> единица и место сборки/выдачи.",
+      "grain": "Одна строка на ТТ; мастер-ключ не подтверждён.",
+      "identity": {
+        "candidate_keys": [
+          "shopno",
+          "id_tt"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-010"
+      ],
+      "dataset_ids": [
+        3466,
+        4732,
+        7036,
+        7802
+      ],
+      "lifecycle": "Открыта → активна → закрыта.",
+      "decision": "KEEP",
+      "decision_reason": "Присутствует в SQL и метаданных; мастер-реестр не найден.",
+      "open_decision_ids": [
+        "DEC-004"
+      ],
+      "pii": "NONE",
+      "notes": "shopno и id_tt могут быть разными ключами."
+    },
+    {
+      "id": "ENT-COURIER",
+      "name": "Courier",
+      "ru_name": "Курьер",
+      "layer": "BOTH",
+      "bounded_context": "CTX-COURIER",
+      "description": "Курьер: исполнитель доставки, участник смен и очереди.",
+      "business_purpose": "Идентичность исполнителя и основа HR/финансов.",
+      "grain": "Одна строка на курьера; мастер-идентичность не подтверждена.",
+      "identity": {
+        "candidate_keys": [
+          "id_courier",
+          "employee_code"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-011",
+        "EVD-022"
+      ],
+      "dataset_ids": [
+        5797,
+        7775,
+        7802,
+        7119
+      ],
+      "lifecycle": "Нанят → активен → заблокирован/уволен.",
+      "decision": "KEEP",
+      "decision_reason": "Присутствует в SQL; PII-поля не выгружались.",
+      "open_decision_ids": [
+        "DEC-005"
+      ],
+      "pii": "CONFIRMED",
+      "notes": "fio, phone, inn — PII; в отчётах только маскирование."
+    },
+    {
+      "id": "ENT-DELIVERY",
+      "name": "Delivery",
+      "ru_name": "Доставка",
+      "layer": "BOTH",
+      "bounded_context": "CTX-ORDER",
+      "description": "Результат доставки конкретного заказа: факт, время, исход.",
+      "business_purpose": "Основа SLA и оплаты за доставленный заказ.",
+      "grain": "Одна строка на доставку заказа; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "delivery_id",
+          "order_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-003"
+      ],
+      "dataset_ids": [
+        3466,
+        7119,
+        7006
+      ],
+      "lifecycle": "Назначена → в пути → доставлена / отменена.",
+      "decision": "KEEP",
+      "decision_reason": "Логически подтверждена; точный источник и событие требуют проверки.",
+      "open_decision_ids": [
+        "DEC-006"
+      ],
+      "pii": "NONE",
+      "notes": "Не смешивать с OrderStatus."
+    },
+    {
+      "id": "ENT-TRIP",
+      "name": "Trip",
+      "ru_name": "Поездка",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-COURIER",
+      "description": "Один маршрут курьера, включающий несколько заказов.",
+      "business_purpose": "<ФИО>-единица маршрута и оплаты.",
+      "grain": "Одна строка на поездку; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "trip_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-015",
+        "EVD-003"
+      ],
+      "dataset_ids": [
+        7119,
+        7802,
+        7006
+      ],
+      "lifecycle": "Сформирована → назначен курьер → выезд → доставки → завершена.",
+      "decision": "KEEP",
+      "decision_reason": "<ФИО>-концепт; Pool — наблюдаемый источник, не доказано равенство.",
+      "open_decision_ids": [
+        "DEC-007"
+      ],
+      "pii": "NONE",
+      "notes": "Не переименовывать Pool в Trip без подтверждения Operations."
+    },
+    {
+      "id": "ENT-POOL",
+      "name": "Pool",
+      "ru_name": "Пул",
+      "layer": "OBSERVED_SOURCE",
+      "bounded_context": "CTX-COURIER",
+      "description": "Наблюдаемое понятие группировки заказов в SQL (id_pool).",
+      "business_purpose": "Источник-кандидат для поездки/маршрута.",
+      "grain": "Одна строка на pool; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "id_pool"
+        ],
+        "canonical_key": null,
+        "status": "CANDIDATE"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-003"
+      ],
+      "dataset_ids": [
+        7802,
+        7119,
+        7006
+      ],
+      "lifecycle": "Создан → получен → закрыт.",
+      "decision": "KEEP",
+      "decision_reason": "Наблюдаемый source concept; сохранять отдельно от Trip.",
+      "open_decision_ids": [
+        "DEC-007"
+      ],
+      "pii": "NONE",
+      "notes": "pool_size и pickup_seq — кандидаты, не доказанная семантика."
+    },
+    {
+      "id": "ENT-TRIP-ORDER",
+      "name": "TripOrder",
+      "ru_name": "Состав поездки",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-COURIER",
+      "description": "Связь поездки и заказа с историей изменений состава.",
+      "business_purpose": "Фиксация состава и его изменений до выезда.",
+      "grain": "Одна строка на пару поездка-заказ; история изменений.",
+      "identity": {
+        "candidate_keys": [
+          "trip_id",
+          "order_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-016",
+        "EVD-003"
+      ],
+      "dataset_ids": [
+        7119,
+        7802
+      ],
+      "lifecycle": "Добавлен → изменён → зафиксирован.",
+      "decision": "NEW",
+      "decision_reason": "<ФИО> требует историю изменений состава; источник не найден.",
+      "open_decision_ids": [
+        "DEC-008"
+      ],
+      "pii": "NONE",
+      "notes": "История изменений — обязательное требование, источник отсутствует."
+    },
+    {
+      "id": "ENT-COURIER-ASSIGNMENT",
+      "name": "CourierAssignment",
+      "ru_name": "Назначение курьера",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-COURIER",
+      "description": "Назначение курьера на поездку/пул, отдельно от состава.",
+      "business_purpose": "Разделить состав и назначение; поддерживать аудит.",
+      "grain": "Одна строка на назначение; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "assignment_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-017",
+        "EVD-003"
+      ],
+      "dataset_ids": [
+        7119,
+        7802
+      ],
+      "lifecycle": "Назначен → отменён → заменён.",
+      "decision": "NEW",
+      "decision_reason": "<ФИО> отделяет назначение от состава; источник не подтверждён.",
+      "open_decision_ids": [
+        "DEC-009"
+      ],
+      "pii": "NONE",
+      "notes": "courier_id_darkstore — кандидат, не доказанное назначение."
+    },
+    {
+      "id": "ENT-QUEUE-ENTRY",
+      "name": "QueueEntry",
+      "ru_name": "Запись в очереди",
+      "layer": "BOTH",
+      "bounded_context": "CTX-COURIER",
+      "description": "Факт входа курьера в очередь и выхода из неё.",
+      "business_purpose": "FIFO-назначение и метрика ожидания.",
+      "grain": "Одна строка на вход; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "queue_id",
+          "courier_id",
+          "queue_in_dttm"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-033"
+      ],
+      "dataset_ids": [
+        7802
+      ],
+      "lifecycle": "Вошёл → вызван → пропущен → вернулся → вышел.",
+      "decision": "KEEP",
+      "decision_reason": "courier_queue — кандидат; полный event model не подтверждён.",
+      "open_decision_ids": [
+        "DEC-010"
+      ],
+      "pii": "NONE",
+      "notes": "queue_in_dttm / queue_out_dttm / has_order — кандидаты."
+    },
+    {
+      "id": "ENT-QUEUE-EVENT",
+      "name": "QueueEvent",
+      "ru_name": "Событие очереди",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-COURIER",
+      "description": "Вызов, пропуск, возврат, отказ — отдельные события.",
+      "business_purpose": "Прозрачность FIFO и no-show.",
+      "grain": "Одна строка на событие.",
+      "identity": {
+        "candidate_keys": [
+          "event_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-033",
+        "EVD-017"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Вызов → пропуск → возврат.",
+      "decision": "NEW",
+      "decision_reason": "<ФИО> требует, но подтверждённого event log нет.",
+      "open_decision_ids": [
+        "DEC-011"
+      ],
+      "pii": "NONE",
+      "notes": "Не выводить из QueueEntry автоматически."
+    },
+    {
+      "id": "ENT-COURIER-SHIFT",
+      "name": "CourierShift",
+      "ru_name": "***REMOVED*** курьера",
+      "layer": "BOTH",
+      "bounded_context": "CTX-COURIER",
+      "description": "Временной интервал работы курьера.",
+      "business_purpose": "Учёт смен, перерывов, возвратов.",
+      "grain": "Одна строка на смену; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "id_shift",
+          "id_courier",
+          "shift_start"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-005"
+      ],
+      "dataset_ids": [
+        7802
+      ],
+      "lifecycle": "Открыта → перерыв → закрыта.",
+      "decision": "KEEP",
+      "decision_reason": "shifts — кандидат; 7021 не источник курьерской смены.",
+      "open_decision_ids": [
+        "DEC-012"
+      ],
+      "pii": "NONE",
+      "notes": "Не использовать shift_type из 7021."
+    },
+    {
+      "id": "ENT-SHIFT-BREAK",
+      "name": "ShiftBreak",
+      "ru_name": "Перерыв смены",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-COURIER",
+      "description": "Перерыв внутри смены.",
+      "business_purpose": "Учёт перерывов и доступности.",
+      "grain": "Одна строка на перерыв.",
+      "identity": {
+        "candidate_keys": [
+          "break_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-017"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Начат → завершён.",
+      "decision": "NEW",
+      "decision_reason": "<ФИО> упоминает перерыв; источник не найден.",
+      "open_decision_ids": [
+        "DEC-013"
+      ],
+      "pii": "NONE",
+      "notes": "Не выводить из разницы timestamp без подтверждения."
+    },
+    {
+      "id": "ENT-SHIFT-SLOT",
+      "name": "ShiftSlot",
+      "ru_name": "Слот смены",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-COURIER",
+      "description": "Планируемый слот, отдельно от фактической смены.",
+      "business_purpose": "Планирование и бронирование.",
+      "grain": "Одна строка на слот.",
+      "identity": {
+        "candidate_keys": [
+          "slot_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-034"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Создан → забронирован → подтверждён → отменён.",
+      "decision": "DEFER",
+      "decision_reason": "Процесс бронирования/отметки не определён.",
+      "open_decision_ids": [
+        "DEC-014"
+      ],
+      "pii": "NONE",
+      "notes": "Не смешивать со сменой."
+    },
+    {
+      "id": "ENT-ROUTE",
+      "name": "Route",
+      "ru_name": "Маршрут",
+      "layer": "BOTH",
+      "bounded_context": "CTX-GEO",
+      "description": "Маршрут доставки: последовательность точек, расстояние, время.",
+      "business_purpose": "Основа расчёта SLA и стоимости.",
+      "grain": "Одна строка на маршрут; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "route_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-026",
+        "EVD-003"
+      ],
+      "dataset_ids": [
+        7024,
+        7119
+      ],
+      "lifecycle": "Построен → выполнен.",
+      "decision": "KEEP",
+      "decision_reason": "Логически подтверждён; связь с Trip не доказана.",
+      "open_decision_ids": [
+        "DEC-015"
+      ],
+      "pii": "NONE",
+      "notes": "Route ≠ Trip; не объединять."
+    },
+    {
+      "id": "ENT-READY-EVENT",
+      "name": "ReadyEvent",
+      "ru_name": "Событие готовности",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-ORDER",
+      "description": "Момент, когда заказ готов к выдаче курьеру.",
+      "business_purpose": "Метрика «готовность → доставка».",
+      "grain": "Одна строка на заказ/событие.",
+      "identity": {
+        "candidate_keys": [
+          "ready_event_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-001"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Событие готовности.",
+      "decision": "NEEDS_EVIDENCE",
+      "decision_reason": "time_ready отсутствует в SQL 3466; кандидаты не подтверждены.",
+      "open_decision_ids": [
+        "DEC-016"
+      ],
+      "pii": "NONE",
+      "notes": "Не подменять date_set_cell или is_collected без подтверждения."
+    },
+    {
+      "id": "ENT-ASSEMBLY-EVENT",
+      "name": "AssemblyEvent",
+      "ru_name": "Событие сборки",
+      "layer": "OBSERVED_SOURCE",
+      "bounded_context": "CTX-ORDER",
+      "description": "Начало и окончание сборки заказа.",
+      "business_purpose": "Разделить сборку и готовность.",
+      "grain": "Одна строка на событие; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "assembly_event_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-001"
+      ],
+      "dataset_ids": [
+        3466,
+        4732
+      ],
+      "lifecycle": "Начата → завершена.",
+      "decision": "KEEP",
+      "decision_reason": "date_collect_start / date_collected присутствуют; семантика требует подтверждения.",
+      "open_decision_ids": [
+        "DEC-017"
+      ],
+      "pii": "NONE",
+      "notes": "Не равна готовности."
+    },
+    {
+      "id": "ENT-DELIVERY-ZONE",
+      "name": "DeliveryZone",
+      "ru_name": "Зона доставки",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-GEO",
+      "description": "Зона = ТТ + прилегающая территория, с границами.",
+      "business_purpose": "Распределение заказов и расчёт доставки.",
+      "grain": "Одна строка на зону; версии границ.",
+      "identity": {
+        "candidate_keys": [
+          "zone_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-009",
+        "EVD-025",
+        "EVD-031"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Утверждена → изменена.",
+      "decision": "KEEP",
+      "decision_reason": "<ФИО> требует; справочник и геометрия не подтверждены.",
+      "open_decision_ids": [
+        "DEC-018"
+      ],
+      "pii": "NONE",
+      "notes": "zone_cluster, inactivity_zone, cluster — разные понятия."
+    },
+    {
+      "id": "ENT-ZONE-BOUNDARY",
+      "name": "ZoneBoundaryVersion",
+      "ru_name": "Версия границы зоны",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-GEO",
+      "description": "Версия полигона зоны.",
+      "business_purpose": "История изменений границ.",
+      "grain": "Одна строка на версию.",
+      "identity": {
+        "candidate_keys": [
+          "boundary_version_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "DESIGN_PROPOSAL",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-009"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Создана → заменена.",
+      "decision": "NEW",
+      "decision_reason": "История границ желательна, но не обязательна; это проектное предложение.",
+      "open_decision_ids": [
+        "DEC-019"
+      ],
+      "pii": "NONE",
+      "notes": "Не выдавать за бизнес-требование."
+    },
+    {
+      "id": "ENT-ADDRESS",
+      "name": "Address",
+      "ru_name": "Адрес",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-GEO",
+      "description": "Адрес доставки/точки, нормализованный.",
+      "business_purpose": "Привязка к зоне и маршруту.",
+      "grain": "Одна строка на адрес.",
+      "identity": {
+        "candidate_keys": [
+          "address_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-032"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Создан → изменён.",
+      "decision": "KEEP",
+      "decision_reason": "Адреса есть в metadata; мастер-реестр не подтверждён.",
+      "open_decision_ids": [
+        "DEC-020"
+      ],
+      "pii": "CONFIRMED",
+      "notes": "PII: адреса не выгружать."
+    },
+    {
+      "id": "ENT-ADDRESS-ZONE",
+      "name": "AddressToZoneAssignment",
+      "ru_name": "Привязка адреса к зоне",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-GEO",
+      "description": "Отнесение адреса к зоне с минимальным временем доставки.",
+      "business_purpose": "***REMOVED*** выбора зоны.",
+      "grain": "Одна строка на адрес/зону.",
+      "identity": {
+        "candidate_keys": [
+          "address_id",
+          "zone_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-009"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Назначена → изменена.",
+      "decision": "NEW",
+      "decision_reason": "<ФИО>-правило есть, источник не найден.",
+      "open_decision_ids": [
+        "DEC-021"
+      ],
+      "pii": "CONFIRMED",
+      "notes": "Не путать с Address."
+    },
+    {
+      "id": "ENT-ORDER-STATUS",
+      "name": "OrderStatus",
+      "ru_name": "Статус заказа",
+      "layer": "OBSERVED_SOURCE",
+      "bounded_context": "CTX-ORDER",
+      "description": "Текущий статус заказа и история переходов.",
+      "business_purpose": "Операционный экран и SLA.",
+      "grain": "Одна строка на заказ/переход.",
+      "identity": {
+        "candidate_keys": [
+          "order_id",
+          "status",
+          "changed_at"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-014",
+        "EVD-040"
+      ],
+      "dataset_ids": [
+        4732,
+        3466,
+        7119
+      ],
+      "lifecycle": "Создан → собирается → готов → доставлен → отменён.",
+      "decision": "KEEP",
+      "decision_reason": "status_name присутствует; state machine не утверждён.",
+      "open_decision_ids": [
+        "DEC-022"
+      ],
+      "pii": "NONE",
+      "notes": "Не смешивать с Delivery."
+    },
+    {
+      "id": "ENT-PHOTO-CONTROL",
+      "name": "PhotoControlAttempt",
+      "ru_name": "Попытка фото-контроля",
+      "layer": "OBSERVED_SOURCE",
+      "bounded_context": "CTX-DARKSTORE",
+      "description": "Попытка фото-контроля смены.",
+      "business_purpose": "Контроль качества и дисциплины.",
+      "grain": "Одна строка на попытку.",
+      "identity": {
+        "candidate_keys": [
+          "attempt_id"
+        ],
+        "canonical_key": null,
+        "status": "CANDIDATE"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-012",
+        "EVD-039"
+      ],
+      "dataset_ids": [
+        7712,
+        7713
+      ],
+      "lifecycle": "Попытка → результат.",
+      "decision": "KEEP",
+      "decision_reason": "Отдельный процесс; не часть смены.",
+      "open_decision_ids": [
+        "DEC-023"
+      ],
+      "pii": "NONE",
+      "notes": "Не смешивать со сменой."
+    },
+    {
+      "id": "ENT-COURIER-EVENT",
+      "name": "CourierAppEvent",
+      "ru_name": "Событие приложения курьера",
+      "layer": "OBSERVED_SOURCE",
+      "bounded_context": "CTX-ANALYTICS",
+      "description": "Агрегированные события приложения курьера.",
+      "business_purpose": "Аналитика поведения и SLA.",
+      "grain": "Агрегат по дню/курьеру; не event store.",
+      "identity": {
+        "candidate_keys": [
+          "event_name",
+          "courier_id",
+          "d"
+        ],
+        "canonical_key": null,
+        "status": "CANDIDATE"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-008"
+      ],
+      "dataset_ids": [
+        5247,
+        5399
+      ],
+      "lifecycle": "Событие → агрегат.",
+      "decision": "KEEP",
+      "decision_reason": "Агрегат, не нормализованный event log.",
+      "open_decision_ids": [
+        "DEC-024"
+      ],
+      "pii": "NONE",
+      "notes": "events_qty ≠ факт явки."
+    },
+    {
+      "id": "ENT-HR-COURIER-STATUS",
+      "name": "HrCourierStatus",
+      "ru_name": "HR-статус курьера",
+      "layer": "OBSERVED_SOURCE",
+      "bounded_context": "CTX-HR",
+      "description": "Статус курьера в HR: активен, заблокирован, уволен.",
+      "business_purpose": "Учёт доступности и жизненного цикла.",
+      "grain": "Одна строка на курьера/изменение.",
+      "identity": {
+        "candidate_keys": [
+          "id_courier",
+          "changed_at"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-011",
+        "EVD-027"
+      ],
+      "dataset_ids": [
+        5797,
+        6054,
+        6386
+      ],
+      "lifecycle": "Нанят → активен → уволен.",
+      "decision": "KEEP",
+      "decision_reason": "Статусы присутствуют; история переходов не подтверждена.",
+      "open_decision_ids": [
+        "DEC-025"
+      ],
+      "pii": "CONFIRMED",
+      "notes": "PII: ФИО, телефон."
+    },
+    {
+      "id": "ENT-HR-MENTORSHIP",
+      "name": "HrMentorship",
+      "ru_name": "HR-наставничество",
+      "layer": "OBSERVED_SOURCE",
+      "bounded_context": "CTX-HR",
+      "description": "Наставничество: наставник, стажёр, период, оценка.",
+      "business_purpose": "Адаптация новичков.",
+      "grain": "Одна строка на назначение; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "mentor_id",
+          "trainee_id",
+          "start_date"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-006",
+        "EVD-036"
+      ],
+      "dataset_ids": [
+        5939,
+        7771,
+        7864
+      ],
+      "lifecycle": "Назначен → две недели → оценка → завершён.",
+      "decision": "KEEP",
+      "decision_reason": "Атрибуты есть; применимость к курьерам не доказана.",
+      "open_decision_ids": [
+        "DEC-026"
+      ],
+      "pii": "CONFIRMED",
+      "notes": "date_for_mentor — stale metadata."
+    },
+    {
+      "id": "ENT-MENTORSHIP-ASSESSMENT",
+      "name": "MentorshipAssessment",
+      "ru_name": "Оценка наставничества",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-HR",
+      "description": "Оценка стажёра по первым пяти сменам, качеству и правилам.",
+      "business_purpose": "Завершение/продление обучения.",
+      "grain": "Одна строка на оценку.",
+      "identity": {
+        "candidate_keys": [
+          "assessment_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-019"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Оценка → решение.",
+      "decision": "NEW",
+      "decision_reason": "Критерии и источник не определены.",
+      "open_decision_ids": [
+        "DEC-027"
+      ],
+      "pii": "POSSIBLE",
+      "notes": "Не путать с HR-профилем."
+    },
+    {
+      "id": "ENT-TARIFF",
+      "name": "Tariff",
+      "ru_name": "Тариф",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-FINANCE",
+      "description": "Правила расчёта оплаты за доставленный заказ.",
+      "business_purpose": "Расчёт начислений.",
+      "grain": "Одна строка на тариф; версии.",
+      "identity": {
+        "candidate_keys": [
+          "tariff_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-029"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Утверждён → действует → заменён.",
+      "decision": "KEEP",
+      "decision_reason": "<ФИО> требует; источник и владелец не найдены.",
+      "open_decision_ids": [
+        "DEC-028"
+      ],
+      "pii": "NONE",
+      "notes": "shift_N_profit — не тариф."
+    },
+    {
+      "id": "ENT-COURIER-ACCRUAL",
+      "name": "CourierAccrual",
+      "ru_name": "Начисление курьеру",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-FINANCE",
+      "description": "Начисление за доставленный заказ.",
+      "business_purpose": "Расчёт заработка.",
+      "grain": "Одна строка на начисление; не подтверждено.",
+      "identity": {
+        "candidate_keys": [
+          "accrual_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-035"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Начислено → скорректировано → выплачено.",
+      "decision": "KEEP",
+      "decision_reason": "Целевая сущность; физический источник не найден.",
+      "open_decision_ids": [
+        "DEC-029"
+      ],
+      "pii": "POSSIBLE",
+      "notes": "sum_order / sum_paid — не заработок."
+    },
+    {
+      "id": "ENT-ACCRUAL-LINE",
+      "name": "AccrualLine",
+      "ru_name": "Строка начисления",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-FINANCE",
+      "description": "Детализация начисления по заказу/тарифу.",
+      "business_purpose": "Прозрачность расчёта.",
+      "grain": "Одна строка на компонент начисления.",
+      "identity": {
+        "candidate_keys": [
+          "accrual_line_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "DESIGN_PROPOSAL",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-018"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Создана → изменена.",
+      "decision": "NEW",
+      "decision_reason": "<ФИО>ное предложение для детализации.",
+      "open_decision_ids": [
+        "DEC-030"
+      ],
+      "pii": "NONE",
+      "notes": "Не выдавать за подтверждённую сущность."
+    },
+    {
+      "id": "ENT-PAYOUT",
+      "name": "Payout",
+      "ru_name": "Выплата",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-FINANCE",
+      "description": "Фактическая выплата курьеру за период.",
+      "business_purpose": "Отделить начисление от выплаты.",
+      "grain": "Одна строка на выплату/период.",
+      "identity": {
+        "candidate_keys": [
+          "payout_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "NOT_FOUND_IN_SUPERSET",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-028"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Рассчитана → выплачена.",
+      "decision": "KEEP",
+      "decision_reason": "<ФИО> требует отделять выплату; источник не найден.",
+      "open_decision_ids": [
+        "DEC-031"
+      ],
+      "pii": "POSSIBLE",
+      "notes": "Не смешивать с accrual."
+    },
+    {
+      "id": "ENT-PAYOUT-LINE",
+      "name": "PayoutLine",
+      "ru_name": "Строка выплаты",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-FINANCE",
+      "description": "Детализация выплаты по начислениям.",
+      "business_purpose": "Сверка выплат.",
+      "grain": "Одна строка на компонент выплаты.",
+      "identity": {
+        "candidate_keys": [
+          "payout_line_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "DESIGN_PROPOSAL",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-028"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Создана → изменена.",
+      "decision": "NEW",
+      "decision_reason": "<ФИО>ное предложение.",
+      "open_decision_ids": [
+        "DEC-032"
+      ],
+      "pii": "NONE",
+      "notes": "Не выдавать за подтверждённую сущность."
+    },
+    {
+      "id": "ENT-SLA-METRIC",
+      "name": "SlaMetric",
+      "ru_name": "Метрика SLA",
+      "layer": "OBSERVED_SOURCE",
+      "bounded_context": "CTX-ANALYTICS",
+      "description": "Показатель соблюдения SLA по заказу.",
+      "business_purpose": "Контроль сроков доставки.",
+      "grain": "Одна строка на заказ/интервал.",
+      "identity": {
+        "candidate_keys": [
+          "order_id",
+          "sla_interval"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-038"
+      ],
+      "dataset_ids": [
+        4732,
+        7119
+      ],
+      "lifecycle": "Рассчитана.",
+      "decision": "KEEP",
+      "decision_reason": "Метрики присутствуют; бизнес-семантика не подтверждена.",
+      "open_decision_ids": [
+        "DEC-033"
+      ],
+      "pii": "NONE",
+      "notes": "Не исключать отмены/возвраты без решения."
+    },
+    {
+      "id": "ENT-BUSINESS-EVENT",
+      "name": "BusinessEvent",
+      "ru_name": "<ФИО>-событие",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-SHARED",
+      "description": "Единое событие домена с типом, временем, актором и сущностью.",
+      "business_purpose": "Аудит и интеграция.",
+      "grain": "Одна строка на событие.",
+      "identity": {
+        "candidate_keys": [
+          "event_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-037"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Создано → обработано.",
+      "decision": "DEFER",
+      "decision_reason": "Единый event log не найден; не навязывать модель.",
+      "open_decision_ids": [
+        "DEC-034"
+      ],
+      "pii": "POSSIBLE",
+      "notes": "Не выдавать за подтверждённую сущность."
+    },
+    {
+      "id": "ENT-TRIP-COMPOSITION-CHANGE",
+      "name": "TripCompositionChange",
+      "ru_name": "Изменение состава поездки",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-COURIER",
+      "description": "История добавления/удаления заказов до выезда.",
+      "business_purpose": "Аудит ручных корректировок куратора.",
+      "grain": "Одна строка на изменение.",
+      "identity": {
+        "candidate_keys": [
+          "change_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-016"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Изменено → зафиксировано.",
+      "decision": "NEW",
+      "decision_reason": "<ФИО> требует историю; источник не найден.",
+      "open_decision_ids": [
+        "DEC-035"
+      ],
+      "pii": "NONE",
+      "notes": "Не путать с TripOrder."
+    },
+    {
+      "id": "ENT-SOURCE-SYSTEM",
+      "name": "SourceSystem",
+      "ru_name": "Система-источник",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-SHARED",
+      "description": "Система, из которой получены данные.",
+      "business_purpose": "Трассировка происхождения.",
+      "grain": "Одна строка на систему.",
+      "identity": {
+        "candidate_keys": [
+          "system_code"
+        ],
+        "canonical_key": null,
+        "status": "CANDIDATE"
+      },
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-021"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Зарегистрирована.",
+      "decision": "NEW",
+      "decision_reason": "Полезно для трассировки; конкретные системы не подтверждены.",
+      "open_decision_ids": [
+        "DEC-036"
+      ],
+      "pii": "NONE",
+      "notes": "Не выдавать за подтверждённую сущность."
+    },
+    {
+      "id": "ENT-EVIDENCE-REFERENCE",
+      "name": "DataEvidenceReference",
+      "ru_name": "Ссылка на evidence",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-SHARED",
+      "description": "Ссылка на evidence для утверждений модели.",
+      "business_purpose": "Трассируемость модели.",
+      "grain": "Одна строка на evidence.",
+      "identity": {
+        "candidate_keys": [
+          "evidence_id"
+        ],
+        "canonical_key": null,
+        "status": "CANDIDATE"
+      },
+      "status": "DESIGN_PROPOSAL",
+      "confidence": "HIGH",
+      "evidence_ids": [
+        "EVD-021"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Создана.",
+      "decision": "NEW",
+      "decision_reason": "Технический реестр этапа, не бизнес-сущность.",
+      "open_decision_ids": [],
+      "pii": "NONE",
+      "notes": "Не включать в бизнес-модель как доменную сущность."
+    },
+    {
+      "id": "ENT-TARIFF-VERSION",
+      "name": "TariffVersion",
+      "ru_name": "Версия тарифа",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-FINANCE",
+      "description": "Версия тарифных правил с периодом действия.",
+      "business_purpose": "Позволить версионировать тарифы и не терять историю изменений.",
+      "grain": "Одна строка на версию тарифа.",
+      "identity": {
+        "candidate_keys": [
+          "tariff_version_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-029"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Черновик → утверждена → архив.",
+      "decision": "NEW",
+      "decision_reason": "<ФИО> требует версионируемые тарифы; источник не найден.",
+      "open_decision_ids": [
+        "DEC-037"
+      ],
+      "pii": "NONE",
+      "notes": "Формула и владелец версии не утверждены."
+    },
+    {
+      "id": "ENT-TARIFF-RULE",
+      "name": "TariffRule",
+      "ru_name": "***REMOVED*** тарифа",
+      "layer": "TARGET_LOGICAL",
+      "bounded_context": "CTX-FINANCE",
+      "description": "***REMOVED*** расчёта начисления по тарифу.",
+      "business_purpose": "Зафиксировать, как тариф применяется к доставленному заказу.",
+      "grain": "Одна строка на правило версии тарифа.",
+      "identity": {
+        "candidate_keys": [
+          "tariff_rule_id"
+        ],
+        "canonical_key": null,
+        "status": "UNRESOLVED"
+      },
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-029"
+      ],
+      "dataset_ids": [],
+      "lifecycle": "Черновик → утверждено → архив.",
+      "decision": "NEW",
+      "decision_reason": "Правила расчёта не подтверждены; возможная зависимость от нагрузки не формализована.",
+      "open_decision_ids": [
+        "DEC-037"
+      ],
+      "pii": "NONE",
+      "notes": "Не путать с shift_N_profit: это не тарифная модель."
+    }
+  ],
+  "attributes": [
+    {
+      "id": "ATT-ORDER-001",
+      "entity_id": "ENT-ORDER",
+      "name": "order_id",
+      "ru_name": "Идентификатор заказа",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "id_order",
+      "dataset_id": 3466,
+      "evidence_id": "EVD-001",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Кандидат канонического ключа; id_general — альтернатива."
+    },
+    {
+      "id": "ATT-ORDER-002",
+      "entity_id": "ENT-ORDER",
+      "name": "order_status",
+      "ru_name": "Статус заказа",
+      "logical_type": "enum",
+      "nullable": "UNKNOWN",
+      "source_field": "status_name",
+      "dataset_id": 4732,
+      "evidence_id": "EVD-014",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Список статусов не утверждён."
+    },
+    {
+      "id": "ATT-ORDER-003",
+      "entity_id": "ENT-ORDER",
+      "name": "created_at",
+      "ru_name": "Время создания",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "date_order",
+      "dataset_id": 3466,
+      "evidence_id": "EVD-001",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Часовой пояс требует подтверждения."
+    },
+    {
+      "id": "ATT-ORDER-004",
+      "entity_id": "ENT-ORDER",
+      "name": "delivered_at",
+      "ru_name": "Время доставки",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "date_delivered",
+      "dataset_id": 3466,
+      "evidence_id": "EVD-001",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Может быть пустым для отменённых."
+    },
+    {
+      "id": "ATT-ORDER-005",
+      "entity_id": "ENT-ORDER",
+      "name": "amount",
+      "ru_name": "Сумма заказа",
+      "logical_type": "decimal",
+      "nullable": "UNKNOWN",
+      "source_field": "sum_order",
+      "dataset_id": 3466,
+      "evidence_id": "EVD-001",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Не является заработком курьера."
+    },
+    {
+      "id": "ATT-ORDER-006",
+      "entity_id": "ENT-ORDER",
+      "name": "paid_amount",
+      "ru_name": "Оплаченная сумма",
+      "logical_type": "decimal",
+      "nullable": "UNKNOWN",
+      "source_field": "sum_paid",
+      "dataset_id": 3466,
+      "evidence_id": "EVD-001",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Не является заработком курьера."
+    },
+    {
+      "id": "ATT-DS-001",
+      "entity_id": "ENT-DARKSTORE",
+      "name": "shopno",
+      "ru_name": "Номер ТТ",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "shopno",
+      "dataset_id": 3466,
+      "evidence_id": "EVD-001",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Кандидат ключа; мастер-ключ не подтверждён."
+    },
+    {
+      "id": "ATT-DS-002",
+      "entity_id": "ENT-DARKSTORE",
+      "name": "name",
+      "ru_name": "Название ТТ",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "name_tt",
+      "dataset_id": 3466,
+      "evidence_id": "EVD-001",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Может дублироваться."
+    },
+    {
+      "id": "ATT-DS-003",
+      "entity_id": "ENT-DARKSTORE",
+      "name": "region",
+      "ru_name": "Регион",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "region_name",
+      "dataset_id": 7036,
+      "evidence_id": "EVD-010",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Не зона доставки."
+    },
+    {
+      "id": "ATT-COURIER-001",
+      "entity_id": "ENT-COURIER",
+      "name": "courier_id",
+      "ru_name": "Идентификатор курьера",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "id_courier",
+      "dataset_id": 5797,
+      "evidence_id": "EVD-011",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Мастер-идентичность не подтверждена."
+    },
+    {
+      "id": "ATT-COURIER-002",
+      "entity_id": "ENT-COURIER",
+      "name": "status",
+      "ru_name": "Статус курьера",
+      "logical_type": "enum",
+      "nullable": "UNKNOWN",
+      "source_field": "active",
+      "dataset_id": 5797,
+      "evidence_id": "EVD-011",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Список статусов не утверждён."
+    },
+    {
+      "id": "ATT-COURIER-003",
+      "entity_id": "ENT-COURIER",
+      "name": "hired_at",
+      "ru_name": "Дата найма",
+      "logical_type": "date",
+      "nullable": "UNKNOWN",
+      "source_field": "event_hiring",
+      "dataset_id": 5797,
+      "evidence_id": "EVD-011",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Может быть датой события."
+    },
+    {
+      "id": "ATT-COURIER-004",
+      "entity_id": "ENT-COURIER",
+      "name": "dismissed_at",
+      "ru_name": "Дата увольнения",
+      "logical_type": "date",
+      "nullable": "UNKNOWN",
+      "source_field": "date_dismissed",
+      "dataset_id": 5797,
+      "evidence_id": "EVD-011",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Пусто для активных."
+    },
+    {
+      "id": "ATT-DELIVERY-001",
+      "entity_id": "ENT-DELIVERY",
+      "name": "delivery_id",
+      "ru_name": "Идентификатор доставки",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "delivery_id",
+      "dataset_id": 7119,
+      "evidence_id": "EVD-003",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Кандидат; не доказан."
+    },
+    {
+      "id": "ATT-DELIVERY-002",
+      "entity_id": "ENT-DELIVERY",
+      "name": "delivered_at",
+      "ru_name": "Время доставки",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "date_delivered",
+      "dataset_id": 7119,
+      "evidence_id": "EVD-003",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Часовой пояс не подтверждён."
+    },
+    {
+      "id": "ATT-DELIVERY-003",
+      "entity_id": "ENT-DELIVERY",
+      "name": "outcome",
+      "ru_name": "Исход доставки",
+      "logical_type": "enum",
+      "nullable": "UNKNOWN",
+      "source_field": "status_name",
+      "dataset_id": 7119,
+      "evidence_id": "EVD-003",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Список исходов не утверждён."
+    },
+    {
+      "id": "ATT-TRIP-001",
+      "entity_id": "ENT-TRIP",
+      "name": "trip_id",
+      "ru_name": "Идентификатор поездки",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "id_pool",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "pii": "NONE",
+      "notes": "id_pool — кандидат, не доказано равенство Trip."
+    },
+    {
+      "id": "ATT-TRIP-002",
+      "entity_id": "ENT-TRIP",
+      "name": "departure_at",
+      "ru_name": "Время выезда",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "pool_finish",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "pii": "NONE",
+      "notes": "Семантика pool_finish не подтверждена."
+    },
+    {
+      "id": "ATT-TRIPORDER-001",
+      "entity_id": "ENT-TRIP-ORDER",
+      "name": "trip_id",
+      "ru_name": "Поездка",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "id_pool",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "pii": "NONE",
+      "notes": "Связь с Trip не подтверждена."
+    },
+    {
+      "id": "ATT-TRIPORDER-002",
+      "entity_id": "ENT-TRIP-ORDER",
+      "name": "order_id",
+      "ru_name": "***REMOVED***",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "id_order",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "pii": "NONE",
+      "notes": "Состав поездки не подтверждён."
+    },
+    {
+      "id": "ATT-ASSIGN-001",
+      "entity_id": "ENT-COURIER-ASSIGNMENT",
+      "name": "courier_id",
+      "ru_name": "Курьер",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "courier_id_darkstore",
+      "dataset_id": 7119,
+      "evidence_id": "EVD-003",
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "pii": "NONE",
+      "notes": "Не доказано, что это назначение."
+    },
+    {
+      "id": "ATT-ASSIGN-002",
+      "entity_id": "ENT-COURIER-ASSIGNMENT",
+      "name": "assigned_at",
+      "ru_name": "Время назначения",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "date_pickuped",
+      "dataset_id": 7006,
+      "evidence_id": "EVD-004",
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "pii": "NONE",
+      "notes": "date_pickuped — кандидат, не доказано."
+    },
+    {
+      "id": "ATT-QUEUE-001",
+      "entity_id": "ENT-QUEUE-ENTRY",
+      "name": "queue_in",
+      "ru_name": "Вход в очередь",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "queue_in_dttm",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует в SQL."
+    },
+    {
+      "id": "ATT-QUEUE-002",
+      "entity_id": "ENT-QUEUE-ENTRY",
+      "name": "queue_out",
+      "ru_name": "Выход из очереди",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "queue_out_dttm",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует в SQL."
+    },
+    {
+      "id": "ATT-QUEUE-003",
+      "entity_id": "ENT-QUEUE-ENTRY",
+      "name": "has_order",
+      "ru_name": "Получил заказ",
+      "logical_type": "boolean",
+      "nullable": "UNKNOWN",
+      "source_field": "has_order",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Семантика не подтверждена."
+    },
+    {
+      "id": "ATT-SHIFT-001",
+      "entity_id": "ENT-COURIER-SHIFT",
+      "name": "shift_id",
+      "ru_name": "Идентификатор смены",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "id_shift",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует в SQL."
+    },
+    {
+      "id": "ATT-SHIFT-002",
+      "entity_id": "ENT-COURIER-SHIFT",
+      "name": "shift_start",
+      "ru_name": "Начало смены",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "shift_start",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует в SQL."
+    },
+    {
+      "id": "ATT-SHIFT-003",
+      "entity_id": "ENT-COURIER-SHIFT",
+      "name": "shift_finish",
+      "ru_name": "Окончание смены",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "shift_finish",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует в SQL."
+    },
+    {
+      "id": "ATT-BREAK-001",
+      "entity_id": "ENT-SHIFT-BREAK",
+      "name": "break_start",
+      "ru_name": "Начало перерыва",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "break_start",
+      "dataset_id": 7802,
+      "evidence_id": "EVD-002",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Отдельная сущность перерыва не подтверждена."
+    },
+    {
+      "id": "ATT-SLOT-001",
+      "entity_id": "ENT-SHIFT-SLOT",
+      "name": "slot_id",
+      "ru_name": "Идентификатор слота",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "slot_id",
+      "dataset_id": null,
+      "evidence_id": "EVD-034",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Процесс слотов не определён."
+    },
+    {
+      "id": "ATT-READY-001",
+      "entity_id": "ENT-READY-EVENT",
+      "name": "ready_at",
+      "ru_name": "Время готовности",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "time_ready",
+      "dataset_id": null,
+      "evidence_id": "EVD-001",
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "time_ready отсутствует в SQL 3466."
+    },
+    {
+      "id": "ATT-ASSEMBLY-001",
+      "entity_id": "ENT-ASSEMBLY-EVENT",
+      "name": "assembly_start",
+      "ru_name": "Начало сборки",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "date_collect_start",
+      "dataset_id": 3466,
+      "evidence_id": "EVD-001",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует; семантика требует подтверждения."
+    },
+    {
+      "id": "ATT-ASSEMBLY-002",
+      "entity_id": "ENT-ASSEMBLY-EVENT",
+      "name": "assembly_end",
+      "ru_name": "Окончание сборки",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "date_collected",
+      "dataset_id": 3466,
+      "evidence_id": "EVD-001",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует; семантика требует подтверждения."
+    },
+    {
+      "id": "ATT-ROUTE-001",
+      "entity_id": "ENT-ROUTE",
+      "name": "route_id",
+      "ru_name": "Идентификатор маршрута",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "id_route",
+      "dataset_id": 7119,
+      "evidence_id": "EVD-003",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует; связь с Trip не доказана."
+    },
+    {
+      "id": "ATT-ROUTE-002",
+      "entity_id": "ENT-ROUTE",
+      "name": "distance",
+      "ru_name": "Расстояние",
+      "logical_type": "decimal",
+      "nullable": "UNKNOWN",
+      "source_field": "distance",
+      "dataset_id": 7024,
+      "evidence_id": "EVD-026",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Единицы измерения не подтверждены."
+    },
+    {
+      "id": "ATT-ZONE-001",
+      "entity_id": "ENT-DELIVERY-ZONE",
+      "name": "zone_id",
+      "ru_name": "Идентификатор зоны",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "zone_id",
+      "dataset_id": null,
+      "evidence_id": "EVD-009",
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Справочник зон не найден."
+    },
+    {
+      "id": "ATT-ZONE-002",
+      "entity_id": "ENT-DELIVERY-ZONE",
+      "name": "geometry",
+      "ru_name": "Геометрия зоны",
+      "logical_type": "geometry",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-009",
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Полигоны не подтверждены."
+    },
+    {
+      "id": "ATT-ZB-001",
+      "entity_id": "ENT-ZONE-BOUNDARY",
+      "name": "version_id",
+      "ru_name": "Версия границы",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-009",
+      "status": "DESIGN_PROPOSAL",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "<ФИО>ное предложение, не бизнес-требование."
+    },
+    {
+      "id": "ATT-ADDR-001",
+      "entity_id": "ENT-ADDRESS",
+      "name": "address_id",
+      "ru_name": "Идентификатор адреса",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-032",
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "pii": "CONFIRMED",
+      "notes": "Адреса — PII; мастер-реестр не подтверждён."
+    },
+    {
+      "id": "ATT-AZ-001",
+      "entity_id": "ENT-ADDRESS-ZONE",
+      "name": "address_id",
+      "ru_name": "Адрес",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-009",
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "pii": "CONFIRMED",
+      "notes": "***REMOVED*** привязки не подтверждено."
+    },
+    {
+      "id": "ATT-OSTATUS-001",
+      "entity_id": "ENT-ORDER-STATUS",
+      "name": "status",
+      "ru_name": "Статус",
+      "logical_type": "enum",
+      "nullable": "UNKNOWN",
+      "source_field": "status_name",
+      "dataset_id": 4732,
+      "evidence_id": "EVD-014",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Список статусов не утверждён."
+    },
+    {
+      "id": "ATT-OSTATUS-002",
+      "entity_id": "ENT-ORDER-STATUS",
+      "name": "changed_at",
+      "ru_name": "Время изменения",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "changed_at",
+      "dataset_id": 4732,
+      "evidence_id": "EVD-014",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "История переходов не подтверждена."
+    },
+    {
+      "id": "ATT-PHOTO-001",
+      "entity_id": "ENT-PHOTO-CONTROL",
+      "name": "attempt_id",
+      "ru_name": "Идентификатор попытки",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "attempt_id",
+      "dataset_id": 7712,
+      "evidence_id": "EVD-012",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует в SQL."
+    },
+    {
+      "id": "ATT-PHOTO-002",
+      "entity_id": "ENT-PHOTO-CONTROL",
+      "name": "attempt_at",
+      "ru_name": "Время попытки",
+      "logical_type": "timestamp",
+      "nullable": "UNKNOWN",
+      "source_field": "attempt_dt",
+      "dataset_id": 7712,
+      "evidence_id": "EVD-012",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Поле присутствует в SQL."
+    },
+    {
+      "id": "ATT-CEVENT-001",
+      "entity_id": "ENT-COURIER-EVENT",
+      "name": "event_name",
+      "ru_name": "Название события",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "event_name",
+      "dataset_id": 5247,
+      "evidence_id": "EVD-008",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Агрегат, не event store."
+    },
+    {
+      "id": "ATT-CEVENT-002",
+      "entity_id": "ENT-COURIER-EVENT",
+      "name": "events_qty",
+      "ru_name": "Количество событий",
+      "logical_type": "integer",
+      "nullable": "UNKNOWN",
+      "source_field": "events_qty",
+      "dataset_id": 5247,
+      "evidence_id": "EVD-008",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Агрегат; не факт явки."
+    },
+    {
+      "id": "ATT-SLA-001",
+      "entity_id": "ENT-SLA-METRIC",
+      "name": "sla_interval",
+      "ru_name": "Интервал SLA",
+      "logical_type": "interval",
+      "nullable": "UNKNOWN",
+      "source_field": "sla_interval",
+      "dataset_id": 4732,
+      "evidence_id": "EVD-038",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Формула не утверждена."
+    },
+    {
+      "id": "ATT-SLA-002",
+      "entity_id": "ENT-SLA-METRIC",
+      "name": "compliance",
+      "ru_name": "Соблюдение SLA",
+      "logical_type": "boolean",
+      "nullable": "UNKNOWN",
+      "source_field": "sla_compliance",
+      "dataset_id": 7119,
+      "evidence_id": "EVD-038",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "Исключения не утверждены."
+    },
+    {
+      "id": "ATT-TARIFF-001",
+      "entity_id": "ENT-TARIFF",
+      "name": "tariff_id",
+      "ru_name": "Идентификатор тарифа",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-029",
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Источник не найден."
+    },
+    {
+      "id": "ATT-TARIFF-002",
+      "entity_id": "ENT-TARIFF",
+      "name": "formula",
+      "ru_name": "Формула",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-029",
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Формула не утверждена."
+    },
+    {
+      "id": "ATT-ACCRUAL-001",
+      "entity_id": "ENT-COURIER-ACCRUAL",
+      "name": "accrual_id",
+      "ru_name": "Идентификатор начисления",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-018",
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Ledger не найден."
+    },
+    {
+      "id": "ATT-ACCRUAL-002",
+      "entity_id": "ENT-COURIER-ACCRUAL",
+      "name": "amount",
+      "ru_name": "Сумма",
+      "logical_type": "decimal",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-018",
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Формула не утверждена."
+    },
+    {
+      "id": "ATT-PAYOUT-001",
+      "entity_id": "ENT-PAYOUT",
+      "name": "payout_id",
+      "ru_name": "Идентификатор выплаты",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-028",
+      "status": "NOT_FOUND_IN_SUPERSET",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Источник не найден."
+    },
+    {
+      "id": "ATT-MENTOR-001",
+      "entity_id": "ENT-HR-MENTORSHIP",
+      "name": "mentor_id",
+      "ru_name": "Наставник",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": "mentorid",
+      "dataset_id": 5939,
+      "evidence_id": "EVD-006",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "POSSIBLE",
+      "notes": "Курьерская применимость не доказана."
+    },
+    {
+      "id": "ATT-MENTOR-002",
+      "entity_id": "ENT-HR-MENTORSHIP",
+      "name": "mentor_at_date",
+      "ru_name": "Наставник на дату",
+      "logical_type": "date",
+      "nullable": "UNKNOWN",
+      "source_field": "mentor_at_date",
+      "dataset_id": 5939,
+      "evidence_id": "EVD-006",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "POSSIBLE",
+      "notes": "date_for_mentor — stale metadata."
+    },
+    {
+      "id": "ATT-HRSTATUS-001",
+      "entity_id": "ENT-HR-COURIER-STATUS",
+      "name": "status",
+      "ru_name": "HR-статус",
+      "logical_type": "enum",
+      "nullable": "UNKNOWN",
+      "source_field": "status",
+      "dataset_id": 5797,
+      "evidence_id": "EVD-011",
+      "status": "FOUND_IN_SUPERSET_SQL",
+      "confidence": "MEDIUM",
+      "pii": "NONE",
+      "notes": "История не подтверждена."
+    },
+    {
+      "id": "ATT-BEVENT-001",
+      "entity_id": "ENT-BUSINESS-EVENT",
+      "name": "event_id",
+      "ru_name": "Идентификатор события",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-037",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "Единый event log не найден."
+    },
+    {
+      "id": "ATT-TCC-001",
+      "entity_id": "ENT-TRIP-COMPOSITION-CHANGE",
+      "name": "change_id",
+      "ru_name": "Идентификатор изменения",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-016",
+      "status": "BUSINESS_REQUIRED_NOT_FOUND",
+      "confidence": "NONE",
+      "pii": "NONE",
+      "notes": "История изменений не найдена."
+    },
+    {
+      "id": "ATT-SRC-001",
+      "entity_id": "ENT-SOURCE-SYSTEM",
+      "name": "system_code",
+      "ru_name": "Код системы",
+      "logical_type": "string",
+      "nullable": "UNKNOWN",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-021",
+      "status": "INFERRED_FROM_MULTIPLE_SOURCES",
+      "confidence": "LOW",
+      "pii": "NONE",
+      "notes": "Конкретные системы не подтверждены."
+    },
+    {
+      "id": "ATT-EVD-001",
+      "entity_id": "ENT-EVIDENCE-REFERENCE",
+      "name": "evidence_id",
+      "ru_name": "Идентификатор evidence",
+      "logical_type": "string",
+      "nullable": "NO",
+      "source_field": null,
+      "dataset_id": null,
+      "evidence_id": "EVD-021",
+      "status": "DESIGN_PROPOSAL",
+      "confidence": "HIGH",
+      "pii": "NONE",
+      "notes": "Технический реестр этапа."
+    }
+  ],
+  "relationships": [
+    {
+      "id": "REL-001",
+      "from_entity": "ENT-TRIP",
+      "to_entity": "ENT-TRIP-ORDER",
+      "name": "contains",
+      "cardinality": "1:N",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "BUSINESS_RULE",
+      "confidence": "HIGH",
+      "evidence_ids": [
+        "EVD-015",
+        "EVD-016"
+      ],
+      "rationale": "Поездка содержит несколько заказов по бизнес-определению.",
+      "notes": "Физическое соответствие id_pool не подтверждено."
+    },
+    {
+      "id": "REL-002",
+      "from_entity": "ENT-TRIP-ORDER",
+      "to_entity": "ENT-ORDER",
+      "name": "refers_to",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-003"
+      ],
+      "rationale": "id_pool и id_order встречаются в одном SQL; состав не доказан.",
+      "notes": "SQL JOIN не является FK."
+    },
+    {
+      "id": "REL-003",
+      "from_entity": "ENT-COURIER-ASSIGNMENT",
+      "to_entity": "ENT-TRIP",
+      "name": "assigns",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-003"
+      ],
+      "rationale": "courier_id_darkstore и id_pool встречаются в одном SQL.",
+      "notes": "Назначение отдельно от состава; не доказано."
+    },
+    {
+      "id": "REL-004",
+      "from_entity": "ENT-TRIP",
+      "to_entity": "ENT-COURIER",
+      "name": "assigned_courier",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-003"
+      ],
+      "rationale": "Курьер связан с поездкой через назначение.",
+      "notes": "Не объединять с составом."
+    },
+    {
+      "id": "REL-005",
+      "from_entity": "ENT-COURIER-SHIFT",
+      "to_entity": "ENT-COURIER",
+      "name": "worked_by",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "SQL_JOIN",
+      "status": "SQL_JOIN_CANDIDATE",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-002"
+      ],
+      "rationale": "id_courier и id_shift присутствуют в SQL 7802.",
+      "notes": "SQL JOIN не является FK."
+    },
+    {
+      "id": "REL-006",
+      "from_entity": "ENT-QUEUE-ENTRY",
+      "to_entity": "ENT-COURIER",
+      "name": "queued_by",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "SQL_JOIN",
+      "status": "SQL_JOIN_CANDIDATE",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-002"
+      ],
+      "rationale": "courier_id и queue_in_dttm присутствуют в SQL 7802.",
+      "notes": "SQL JOIN не является FK."
+    },
+    {
+      "id": "REL-007",
+      "from_entity": "ENT-DELIVERY",
+      "to_entity": "ENT-ORDER",
+      "name": "delivers",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-003"
+      ],
+      "rationale": "date_delivered и id_order присутствуют в одном SQL.",
+      "notes": "SQL JOIN не является FK."
+    },
+    {
+      "id": "REL-008",
+      "from_entity": "ENT-ORDER",
+      "to_entity": "ENT-DARKSTORE",
+      "name": "fulfilled_at",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "SQL_JOIN",
+      "status": "SQL_JOIN_CANDIDATE",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-001"
+      ],
+      "rationale": "shopno присутствует в SQL заказов.",
+      "notes": "SQL JOIN не является FK."
+    },
+    {
+      "id": "REL-009",
+      "from_entity": "ENT-COURIER",
+      "to_entity": "ENT-DARKSTORE",
+      "name": "works_at",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-011"
+      ],
+      "rationale": "shopno и id_courier присутствуют в HR-датасете.",
+      "notes": "Трудоустройство не подтверждено."
+    },
+    {
+      "id": "REL-010",
+      "from_entity": "ENT-READY-EVENT",
+      "to_entity": "ENT-ORDER",
+      "name": "ready_for",
+      "cardinality": "1:1",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-001"
+      ],
+      "rationale": "Событие готовности требуется бизнесом, но источник не найден.",
+      "notes": "time_ready отсутствует в SQL 3466."
+    },
+    {
+      "id": "REL-011",
+      "from_entity": "ENT-ASSEMBLY-EVENT",
+      "to_entity": "ENT-ORDER",
+      "name": "assembled_for",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-001"
+      ],
+      "rationale": "date_collect_start и date_collected присутствуют в SQL.",
+      "notes": "Семантика требует подтверждения."
+    },
+    {
+      "id": "REL-012",
+      "from_entity": "ENT-ORDER",
+      "to_entity": "ENT-ADDRESS",
+      "name": "delivered_to",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-032"
+      ],
+      "rationale": "Адрес доставки подразумевается, но мастер-реестр не подтверждён.",
+      "notes": "PII."
+    },
+    {
+      "id": "REL-013",
+      "from_entity": "ENT-ADDRESS",
+      "to_entity": "ENT-DELIVERY-ZONE",
+      "name": "belongs_to",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-009"
+      ],
+      "rationale": "***REMOVED*** привязки адреса к зоне есть, источник не найден.",
+      "notes": "PII."
+    },
+    {
+      "id": "REL-014",
+      "from_entity": "ENT-DELIVERY-ZONE",
+      "to_entity": "ENT-DARKSTORE",
+      "name": "served_by",
+      "cardinality": "1:1",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "BUSINESS_RULE",
+      "confidence": "HIGH",
+      "evidence_ids": [
+        "EVD-009"
+      ],
+      "rationale": "Одна зона = одна ТТ плюс территория.",
+      "notes": "Мастер-справочник не найден."
+    },
+    {
+      "id": "REL-015",
+      "from_entity": "ENT-TARIFF",
+      "to_entity": "ENT-COURIER-ACCRUAL",
+      "name": "prices",
+      "cardinality": "1:N",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-029"
+      ],
+      "rationale": "Тариф определяет начисление, но источник не найден.",
+      "notes": "shift_N_profit — не тариф."
+    },
+    {
+      "id": "REL-016",
+      "from_entity": "ENT-COURIER-ACCRUAL",
+      "to_entity": "ENT-DELIVERY",
+      "name": "accrued_for",
+      "cardinality": "1:1",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-018"
+      ],
+      "rationale": "Начисление за доставленный заказ; ledger не найден.",
+      "notes": "sum_order/sum_paid — не заработок."
+    },
+    {
+      "id": "REL-017",
+      "from_entity": "ENT-COURIER-ACCRUAL",
+      "to_entity": "ENT-PAYOUT",
+      "name": "paid_in",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-028"
+      ],
+      "rationale": "Начисление и выплата — разные сущности.",
+      "notes": "Источник выплат не найден."
+    },
+    {
+      "id": "REL-018",
+      "from_entity": "ENT-HR-MENTORSHIP",
+      "to_entity": "ENT-COURIER",
+      "name": "mentors",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-006"
+      ],
+      "rationale": "mentorid присутствует в HR-датасете.",
+      "notes": "Курьерская применимость не доказана."
+    },
+    {
+      "id": "REL-019",
+      "from_entity": "ENT-COURIER-EVENT",
+      "to_entity": "ENT-COURIER",
+      "name": "logged_for",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "SQL_JOIN",
+      "status": "SQL_JOIN_CANDIDATE",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-008"
+      ],
+      "rationale": "courier_id присутствует в агрегате событий.",
+      "notes": "Агрегат, не event store."
+    },
+    {
+      "id": "REL-020",
+      "from_entity": "ENT-SLA-METRIC",
+      "to_entity": "ENT-ORDER",
+      "name": "measured_on",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-038"
+      ],
+      "rationale": "SLA-поля присутствуют в SQL заказов.",
+      "notes": "Формула не утверждена."
+    },
+    {
+      "id": "REL-021",
+      "from_entity": "ENT-TRIP-ORDER",
+      "to_entity": "ENT-TRIP",
+      "name": "belongs_to",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "BUSINESS_RULE",
+      "confidence": "HIGH",
+      "evidence_ids": [
+        "EVD-015"
+      ],
+      "rationale": "Состав принадлежит поездке.",
+      "notes": "Физическая связь не подтверждена."
+    },
+    {
+      "id": "REL-022",
+      "from_entity": "ENT-COURIER-ASSIGNMENT",
+      "to_entity": "ENT-COURIER",
+      "name": "assigns_courier",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-003"
+      ],
+      "rationale": "Назначение связывает курьера и поездку.",
+      "notes": "Назначение отдельно от состава."
+    },
+    {
+      "id": "REL-023",
+      "from_entity": "ENT-POOL",
+      "to_entity": "ENT-TRIP",
+      "name": "maps_to",
+      "cardinality": "UNKNOWN",
+      "optionality": "UNKNOWN",
+      "kind": "MAPPING",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-003"
+      ],
+      "rationale": "Pool — наблюдаемое понятие; Trip — бизнес-поездка; равенство не доказано.",
+      "notes": "Не объявлять VERIFIED."
+    },
+    {
+      "id": "REL-024",
+      "from_entity": "ENT-QUEUE-EVENT",
+      "to_entity": "ENT-QUEUE-ENTRY",
+      "name": "event_of",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-033"
+      ],
+      "rationale": "<ФИО> вызова/пропуска подразумеваются, но event log не найден.",
+      "notes": "Не выдавать за подтверждённое."
+    },
+    {
+      "id": "REL-025",
+      "from_entity": "ENT-SHIFT-BREAK",
+      "to_entity": "ENT-COURIER-SHIFT",
+      "name": "break_of",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-002"
+      ],
+      "rationale": "Перерыв упоминается бизнесом, но отдельная сущность не найдена.",
+      "notes": "Не выдавать за подтверждённое."
+    },
+    {
+      "id": "REL-026",
+      "from_entity": "ENT-SHIFT-SLOT",
+      "to_entity": "ENT-COURIER-SHIFT",
+      "name": "planned_as",
+      "cardinality": "1:1",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-034"
+      ],
+      "rationale": "Слот и смена — разные понятия; процесс не определён.",
+      "notes": "Не смешивать."
+    },
+    {
+      "id": "REL-027",
+      "from_entity": "ENT-ROUTE",
+      "to_entity": "ENT-TRIP",
+      "name": "route_of",
+      "cardinality": "1:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-026"
+      ],
+      "rationale": "Маршрут и поездка связаны, но соответствие не доказано.",
+      "notes": "Не объединять."
+    },
+    {
+      "id": "REL-028",
+      "from_entity": "ENT-PHOTO-CONTROL",
+      "to_entity": "ENT-COURIER-SHIFT",
+      "name": "photo_of",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-012"
+      ],
+      "rationale": "Фото-контроль связан со сменой, но связь не доказана.",
+      "notes": "Отдельный процесс."
+    },
+    {
+      "id": "REL-029",
+      "from_entity": "ENT-ORDER-STATUS",
+      "to_entity": "ENT-ORDER",
+      "name": "status_of",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-014"
+      ],
+      "rationale": "Статус относится к заказу.",
+      "notes": "История переходов не подтверждена."
+    },
+    {
+      "id": "REL-030",
+      "from_entity": "ENT-HR-COURIER-STATUS",
+      "to_entity": "ENT-COURIER",
+      "name": "status_of",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "INFERRED",
+      "status": "INFERRED_RELATIONSHIP",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-011"
+      ],
+      "rationale": "HR-статус относится к курьеру.",
+      "notes": "История не подтверждена."
+    },
+    {
+      "id": "REL-031",
+      "from_entity": "ENT-MENTORSHIP-ASSESSMENT",
+      "to_entity": "ENT-HR-MENTORSHIP",
+      "name": "assesses",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "NOT_VERIFIABLE",
+      "confidence": "NONE",
+      "evidence_ids": [
+        "EVD-019"
+      ],
+      "rationale": "Оценка обучения требуется бизнесом, источник не найден.",
+      "notes": "Критерии не утверждены."
+    },
+    {
+      "id": "REL-032",
+      "from_entity": "ENT-TRIP-COMPOSITION-CHANGE",
+      "to_entity": "ENT-TRIP",
+      "name": "change_of",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "BUSINESS_RULE",
+      "confidence": "HIGH",
+      "evidence_ids": [
+        "EVD-016"
+      ],
+      "rationale": "Изменения состава должны иметь историю.",
+      "notes": "Источник истории не найден."
+    },
+    {
+      "id": "REL-033",
+      "from_entity": "ENT-COURIER-ASSIGNMENT",
+      "to_entity": "ENT-TRIP-ORDER",
+      "name": "assignment_scope",
+      "cardinality": "1:N",
+      "optionality": "UNKNOWN",
+      "kind": "PROPOSED",
+      "status": "PROPOSED",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-015"
+      ],
+      "rationale": "Назначение может относиться к поездке, а не к отдельному заказу.",
+      "notes": "<ФИО>ное предложение."
+    },
+    {
+      "id": "REL-034",
+      "from_entity": "ENT-BUSINESS-EVENT",
+      "to_entity": "ENT-SOURCE-SYSTEM",
+      "name": "emitted_by",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "PROPOSED",
+      "status": "PROPOSED",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-037"
+      ],
+      "rationale": "Единая модель событий не обоснована.",
+      "notes": "Не навязывать единый event log."
+    },
+    {
+      "id": "REL-035",
+      "from_entity": "ENT-EVIDENCE-REFERENCE",
+      "to_entity": "ENT-SOURCE-SYSTEM",
+      "name": "references",
+      "cardinality": "N:1",
+      "optionality": "UNKNOWN",
+      "kind": "PROPOSED",
+      "status": "PROPOSED",
+      "confidence": "HIGH",
+      "evidence_ids": [
+        "EVD-021"
+      ],
+      "rationale": "Технический реестр evidence.",
+      "notes": "Не доменная сущность."
+    },
+    {
+      "id": "REL-036",
+      "from_entity": "ENT-TARIFF",
+      "to_entity": "ENT-TARIFF-VERSION",
+      "name": "has_versions",
+      "cardinality": "1:N",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "BUSINESS_RULE",
+      "confidence": "HIGH",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-029"
+      ],
+      "rationale": "Тарифы должны быть версионируемыми; конкретная модель версий не подтверждена.",
+      "notes": "Источник версий не найден."
+    },
+    {
+      "id": "REL-037",
+      "from_entity": "ENT-TARIFF-VERSION",
+      "to_entity": "ENT-TARIFF-RULE",
+      "name": "contains_rules",
+      "cardinality": "1:N",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "BUSINESS_RULE",
+      "confidence": "MEDIUM",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-029"
+      ],
+      "rationale": "Правила расчёта входят в версию тарифа; формула не утверждена.",
+      "notes": "Формула — open decision DEC-037."
+    },
+    {
+      "id": "REL-038",
+      "from_entity": "ENT-COURIER-ACCRUAL",
+      "to_entity": "ENT-ACCRUAL-LINE",
+      "name": "has_lines",
+      "cardinality": "1:N",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "PROPOSED",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-018"
+      ],
+      "rationale": "Начисление за доставленный заказ; детализация по строкам — проектное предложение.",
+      "notes": "Ledger не подтверждён."
+    },
+    {
+      "id": "REL-039",
+      "from_entity": "ENT-PAYOUT",
+      "to_entity": "ENT-PAYOUT-LINE",
+      "name": "has_lines",
+      "cardinality": "1:N",
+      "optionality": "UNKNOWN",
+      "kind": "BUSINESS_CONCEPT",
+      "status": "PROPOSED",
+      "confidence": "LOW",
+      "evidence_ids": [
+        "EVD-028"
+      ],
+      "rationale": "Выплата состоит из строк; источник не подтверждён.",
+      "notes": "Источник выплат не найден."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "EVD-001",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "3466",
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "field": "date_order, date_collect_start, date_collected, date_delivered",
+      "observation": "SQL датасета 3466 содержит временные поля заказа и сборки; поля time_ready и time_ready_plan отсутствуют.",
+      "limitations": [
+        "Проверено только SQL definition; строки не выбирались",
+        "SQL Lab недоступен"
+      ],
+      "confidence": "HIGH",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#3466"
+    },
+    {
+      "id": "EVD-002",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7802",
+      "dataset_id": 7802,
+      "dataset_name": "shift_time_breakdown",
+      "field": "shifts, pools, courier_queue",
+      "observation": "SQL 7802 ссылается на agile_mart_operational.shifts, .pools и .courier_queue и содержит поля смен, пулов и очереди.",
+      "limitations": [
+        "Три физические таблицы известны только по SQL; доступность и наполнение не проверены"
+      ],
+      "confidence": "HIGH",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7802"
+    },
+    {
+      "id": "EVD-003",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7119",
+      "dataset_id": 7119,
+      "dataset_name": "cargo_flags",
+      "field": "id_order, id_general, id_pool, courier_id_darkstore, arrival_time",
+      "observation": "SQL 7119 содержит id_order, id_general, id_pool и courier_id_darkstore; id_pool используется как группировка заказов.",
+      "limitations": [
+        "Семантика id_general и id_pool не доказана",
+        "SQL JOIN не является FK"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7119"
+    },
+    {
+      "id": "EVD-004",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7006",
+      "dataset_id": 7006,
+      "dataset_name": "cargo_main2",
+      "field": "arrival_time, pool_size, pickup_seq, date_pickuped",
+      "observation": "В SQL 7006 присутствуют arrival_time, pool_size, pickup_seq и date_pickuped как кандидаты времени прибытия, размера пула и порядка получения.",
+      "limitations": [
+        "Кандидаты не подтверждены как бизнес-семантика"
+      ],
+      "confidence": "LOW",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7006"
+    },
+    {
+      "id": "EVD-005",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7021",
+      "dataset_id": 7021,
+      "dataset_name": "ds_collectors_prod",
+      "field": "shift_type, timesheetfact",
+      "observation": "shift_type в 7021 вычисляется из времени смены picker в ods.timesheetfact; id_courier отсутствует.",
+      "limitations": [
+        "<ФИО> смена picker, а не курьера"
+      ],
+      "confidence": "HIGH",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7021"
+    },
+    {
+      "id": "EVD-006",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "5939",
+      "dataset_id": 5939,
+      "dataset_name": "hr_daily_pers_mentors",
+      "field": "mentorid, mentor_at_date, date_for_mentor",
+      "observation": "В 5939 есть mentorid и mentor_at_date; date_for_mentor присутствует только в metadata, не в SQL.",
+      "limitations": [
+        "Применимость к курьерскому наставничеству не доказана"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#5939"
+    },
+    {
+      "id": "EVD-007",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7473",
+      "dataset_id": 7473,
+      "dataset_name": "hr_couriers_five_shifts",
+      "field": "shift_N_profit",
+      "observation": "shift_N_profit — аналитический показатель первых пяти смен, не универсальный тариф и не ledger начислений.",
+      "limitations": [
+        "Формула и владелец тарифа не найдены"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7473"
+    },
+    {
+      "id": "EVD-008",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "5247",
+      "dataset_id": 5247,
+      "dataset_name": "courier_logs_agg_couriers_daily",
+      "field": "event_name, events_qty",
+      "observation": "Агрегированные события курьера по дням; это агрегат, а не нормализованный event store.",
+      "limitations": [
+        "Нет полного жизненного цикла события"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#5247"
+    },
+    {
+      "id": "EVD-009",
+      "evidence_type": "METADATA_ONLY",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7293",
+      "dataset_id": 7293,
+      "dataset_name": "hr_couriers_zone_balance",
+      "field": "zone",
+      "observation": "zone в 7293 — HR-зона баланса курьеров, не геометрическая зона доставки.",
+      "limitations": [
+        "Семантика zone не равна DeliveryZone"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7293"
+    },
+    {
+      "id": "EVD-010",
+      "evidence_type": "METADATA_ONLY",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7036",
+      "dataset_id": 7036,
+      "dataset_name": "combintion_of_services_E293790",
+      "field": "region_name, city, district, latitude, longitude",
+      "observation": "В 7036 есть регион, город, район и координаты ТТ; это атрибуты точки, а не полигон зоны.",
+      "limitations": [
+        "Нет границ зоны и версий"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7036"
+    },
+    {
+      "id": "EVD-011",
+      "evidence_type": "METADATA_ONLY",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "5797",
+      "dataset_id": 5797,
+      "dataset_name": "hr_couriers",
+      "field": "id_courier, active, is_blocked, date_dismissed, fio, phone",
+      "observation": "hr_couriers содержит идентификатор курьера, статусы и PII-поля; значения не выгружались.",
+      "limitations": [
+        "Мастер-источник идентичности не доказан",
+        "PII"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#5797"
+    },
+    {
+      "id": "EVD-012",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7712",
+      "dataset_id": 7712,
+      "dataset_name": "photo_control_shift_bi",
+      "field": "attempt_dt, photos_cnt, selfie_ok, bag_ok",
+      "observation": "Фото-контроль смены: попытки, количество фото, статусы selfie и bag.",
+      "limitations": [
+        "<ФИО> отдельный процесс, не полный lifecycle смены"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7712"
+    },
+    {
+      "id": "EVD-013",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7713",
+      "dataset_id": 7713,
+      "dataset_name": "photo_control_photo_kind",
+      "field": "photo_kind, n_ok, n_failed",
+      "observation": "Разрез фото-контроля по типу фото.",
+      "limitations": [
+        "Только агрегат по типу"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7713"
+    },
+    {
+      "id": "EVD-014",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "4732",
+      "dataset_id": 4732,
+      "dataset_name": "darkstore_ts",
+      "field": "id_order, status_name, date_order, date_delivered",
+      "observation": "SQL 4732 содержит заказ, статус и временные поля; используется как основа заказов.",
+      "limitations": [
+        "Гранулярность строки не проверена"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#4732"
+    },
+    {
+      "id": "EVD-015",
+      "evidence_type": "BUSINESS_REQUIREMENT",
+      "source_kind": "STAGE_ARTIFACT",
+      "source_id": "1.7",
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": null,
+      "observation": "<ФИО>-правила 1.7: Trip — один маршрут курьера с несколькими заказами; Pool — наблюдаемое понятие, не доказано равенство Trip.",
+      "limitations": [
+        "Требование бизнеса, не доказательство источника"
+      ],
+      "confidence": "HIGH",
+      "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+    },
+    {
+      "id": "EVD-016",
+      "evidence_type": "BUSINESS_REQUIREMENT",
+      "source_kind": "STAGE_ARTIFACT",
+      "source_id": "1.7",
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": null,
+      "observation": "<ФИО>-правила 1.7: состав поездки меняется только куратором до выезда; после выезда неизменяем; история изменений обязательна.",
+      "limitations": [
+        "Требование бизнеса"
+      ],
+      "confidence": "HIGH",
+      "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+    },
+    {
+      "id": "EVD-017",
+      "evidence_type": "BUSINESS_REQUIREMENT",
+      "source_kind": "STAGE_ARTIFACT",
+      "source_id": "1.7",
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": null,
+      "observation": "<ФИО>-правила 1.7: курьер назначается только после прибытия в даркстор и входа в очередь; FIFO; отказ от поездки не допускается.",
+      "limitations": [
+        "Требование бизнеса"
+      ],
+      "confidence": "HIGH",
+      "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+    },
+    {
+      "id": "EVD-018",
+      "evidence_type": "BUSINESS_REQUIREMENT",
+      "source_kind": "STAGE_ARTIFACT",
+      "source_id": "1.7",
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": null,
+      "observation": "<ФИО>-правила 1.7: оплата за доставленный заказ; отменённый заказ не оплачивается; ожидание включено в стоимость; штрафов нет.",
+      "limitations": [
+        "Требование бизнеса; формула тарифа не утверждена"
+      ],
+      "confidence": "HIGH",
+      "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+    },
+    {
+      "id": "EVD-019",
+      "evidence_type": "BUSINESS_REQUIREMENT",
+      "source_kind": "STAGE_ARTIFACT",
+      "source_id": "1.7",
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": null,
+      "observation": "<ФИО>-правила 1.7: куратор = наставник; сопровождение две недели; оценка по первым пяти сменам, качеству и правилам.",
+      "limitations": [
+        "Требование бизнеса"
+      ],
+      "confidence": "HIGH",
+      "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+    },
+    {
+      "id": "EVD-020",
+      "evidence_type": "BUSINESS_REQUIREMENT",
+      "source_kind": "STAGE_ARTIFACT",
+      "source_id": "1.7",
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": null,
+      "observation": "<ФИО>-правила 1.7: SLA — московское время; 1970-01-01 означает отсутствие даты; глобальный +3h не применять; отмены/возвраты не исключать без решения.",
+      "limitations": [
+        "Требование бизнеса"
+      ],
+      "confidence": "HIGH",
+      "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+    },
+    {
+      "id": "EVD-021",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "ACCESS_LIMITATION",
+      "source_id": "SQL_LAB",
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": null,
+      "observation": "SQL Lab и chart_data API недоступны (403/401); фактические строки не выбирались, распределения и уникальность не измерены.",
+      "limitations": [
+        "Без read-only доступа к SQL Lab проверка невозможна"
+      ],
+      "confidence": "HIGH",
+      "location": "reports/phase-01-6-2/final_validation.json"
+    },
+    {
+      "id": "EVD-022",
+      "evidence_type": "METADATA_ONLY",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7775",
+      "dataset_id": 7775,
+      "dataset_name": "all_couriers",
+      "field": "id_courier, status, phone",
+      "observation": "Список курьеров со статусами и PII; значения не выгружались.",
+      "limitations": [
+        "Мастер-реестр не подтверждён"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7775"
+    },
+    {
+      "id": "EVD-023",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7771",
+      "dataset_id": 7771,
+      "dataset_name": "trainees_group_12",
+      "field": "fio_trainee, fio_trainer, shifts_qty, completionstatus",
+      "observation": "Стажёры и наставники, количество смен, статус завершения обучения.",
+      "limitations": [
+        "PII; применимость к курьерскому процессу требует подтверждения"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7771"
+    },
+    {
+      "id": "EVD-024",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7864",
+      "dataset_id": 7864,
+      "dataset_name": "mentorship_weekly",
+      "field": "mentor_id, trainee_id, week, assessment",
+      "observation": "Недельная оценка наставничества; связь с курьерским наставничеством не доказана.",
+      "limitations": [
+        "Только метаданные/структура"
+      ],
+      "confidence": "LOW",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7864"
+    },
+    {
+      "id": "EVD-025",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7000",
+      "dataset_id": 7000,
+      "dataset_name": "zone_cluster_f",
+      "field": "zone_cluster",
+      "observation": "zone_cluster — единственное поле; это справочник кластеров, а не геометрия зоны.",
+      "limitations": [
+        "Нет полигонов и версий"
+      ],
+      "confidence": "LOW",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7000"
+    },
+    {
+      "id": "EVD-026",
+      "evidence_type": "SQL_DEFINITION",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": "7024",
+      "dataset_id": 7024,
+      "dataset_name": "routing_agg",
+      "field": "route_id, distance, duration",
+      "observation": "Маршрутные агрегаты: идентификатор маршрута, расстояние, длительность.",
+      "limitations": [
+        "Связь с бизнес-поездкой не доказана"
+      ],
+      "confidence": "MEDIUM",
+      "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7024"
+    },
+    {
+      "id": "EVD-027",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6020 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6020 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-028",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6100 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6100 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-029",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6200 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6200 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-030",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6300 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6300 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-031",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6400 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6400 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-032",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6500 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6500 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-033",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6600 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6600 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-034",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6700 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6700 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-035",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6800 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6800 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-036",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6900 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6900 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-037",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6950 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6950 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-038",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6970 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6970 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-039",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6980 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6980 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    },
+    {
+      "id": "EVD-040",
+      "evidence_type": "NOT_VERIFIABLE",
+      "source_kind": "SUPERSET_DATASET",
+      "source_id": null,
+      "dataset_id": null,
+      "dataset_name": null,
+      "field": "n/a",
+      "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6990 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+      "limitations": [
+        "dataset id 6990 не подтверждён в снимке 1.6.2",
+        "Значения и схема не проверялись"
+      ],
+      "confidence": "LOW",
+      "location": "n/a (dataset id не найден в снимке 1.6.2)"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "DEC-001",
+      "title": "Канонический идентификатор заказа",
+      "question": "Что является стабильным ID заказа: id_order, id_general или иной ключ?",
+      "context": "В SQL встречаются оба идентификатора; их семантика не разграничена.",
+      "options": [
+        "id_order",
+        "id_general",
+        "составной ключ",
+        "внешний мастер-ключ"
+      ],
+      "recommendation": "Не выбирать до SELECT-проверки уникальности и покрытия.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Идентичность заказа и связи с поездкой/доставкой.",
+      "blocking": "SQL Lab недоступен; уникальность не проверена.",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-003",
+        "EVD-021"
+      ],
+      "closes_with": "SELECT-проверка уникальности и покрытия id_order/id_general."
+    },
+    {
+      "id": "DEC-002",
+      "title": "Зерно заказа",
+      "question": "Одна строка на заказ или на строку заказа?",
+      "context": "В SQL заказов встречаются агрегаты и позиции; зерно не подтверждено.",
+      "options": [
+        "заказ",
+        "строка заказа",
+        "смешанное зерно"
+      ],
+      "recommendation": "Зафиксировать как UNKNOWN до проверки.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Все метрики и связи.",
+      "blocking": "Нет доступа к фактическим строкам.",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-021"
+      ],
+      "closes_with": "SELECT count, distinct по id_order и id_order_item."
+    },
+    {
+      "id": "DEC-003",
+      "title": "Источник строк заказа",
+      "question": "Где хранится OrderItem и как он связан с заказом?",
+      "context": "OrderItem не найден в проверенном охвате.",
+      "options": [
+        "отдельная таблица",
+        "JSON в заказе",
+        "внешняя система"
+      ],
+      "recommendation": "Оставить BUSINESS_REQUIRED_NOT_FOUND.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Детализация заказа и часть метрик.",
+      "blocking": "Источник не найден.",
+      "evidence_ids": [
+        "EVD-030"
+      ],
+      "closes_with": "Найти мастер-источник строк заказа."
+    },
+    {
+      "id": "DEC-004",
+      "title": "Мастер-реестр ТТ",
+      "question": "Какой источник является мастер-реестром торговых точек?",
+      "context": "ТТ встречаются в SQL, но мастер-реестр не подтверждён.",
+      "options": [
+        "справочник в Superset",
+        "внешняя система",
+        "таблица в DWH"
+      ],
+      "recommendation": "Считать кандидатом, не подтверждённым мастером.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "Идентичность ТТ и связи.",
+      "blocking": "Нет подтверждённого мастер-источника.",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-010"
+      ],
+      "closes_with": "Подтвердить мастер-реестр у владельца."
+    },
+    {
+      "id": "DEC-005",
+      "title": "Мастер-реестр курьеров",
+      "question": "Где мастер-данные курьера и как связаны HR и Operations?",
+      "context": "Курьер встречается в HR- и операционных датасетах.",
+      "options": [
+        "HR-система",
+        "операционная система",
+        "гибрид"
+      ],
+      "recommendation": "Не объединять до подтверждения.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Идентичность курьера и связи.",
+      "blocking": "Нет доступа к мастер-источнику.",
+      "evidence_ids": [
+        "EVD-011",
+        "EVD-022"
+      ],
+      "closes_with": "Согласовать мастер-источник HR + Operations."
+    },
+    {
+      "id": "DEC-006",
+      "title": "Источник факта доставки",
+      "question": "Какое событие считать фактом доставки заказа?",
+      "context": "date_delivered присутствует, но семантика не подтверждена.",
+      "options": [
+        "date_delivered",
+        "событие сканера",
+        "статус заказа"
+      ],
+      "recommendation": "Не выбирать до подтверждения.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "Метрики доставки и SLA.",
+      "blocking": "Семантика не подтверждена.",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-003"
+      ],
+      "closes_with": "Подтвердить событие доставки у Operations."
+    },
+    {
+      "id": "DEC-007",
+      "title": "Эквивалентность Pool и Trip",
+      "question": "Является ли Pool физической реализацией Trip?",
+      "context": "Pool наблюдается в SQL; Trip — бизнес-концепт.",
+      "options": [
+        "Pool = Trip",
+        "Pool — часть Trip",
+        "Pool — другое понятие"
+      ],
+      "recommendation": "Не объявлять равенство без подтверждения.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Структура поездки и связи.",
+      "blocking": "Семантика Pool не подтверждена.",
+      "evidence_ids": [
+        "EVD-003",
+        "EVD-015"
+      ],
+      "closes_with": "Подтвердить семантику Pool у Operations."
+    },
+    {
+      "id": "DEC-008",
+      "title": "История состава поездки",
+      "question": "Где хранится история добавления/удаления заказов?",
+      "context": "<ФИО> требует историю, источник не найден.",
+      "options": [
+        "event log",
+        "audit table",
+        "версионирование"
+      ],
+      "recommendation": "Оставить BUSINESS_REQUIRED_NOT_FOUND.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Аудит и восстановление состава.",
+      "blocking": "Источник не найден.",
+      "evidence_ids": [
+        "EVD-016"
+      ],
+      "closes_with": "Найти или спроектировать источник истории."
+    },
+    {
+      "id": "DEC-009",
+      "title": "Назначение курьера",
+      "question": "Где фиксируется назначение курьера на поездку?",
+      "context": "courier_id_darkstore встречается, но назначение не подтверждено.",
+      "options": [
+        "отдельная таблица",
+        "поле в поездке",
+        "событие"
+      ],
+      "recommendation": "Не объединять с составом.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "Связь курьера и поездки.",
+      "blocking": "Назначение не подтверждено.",
+      "evidence_ids": [
+        "EVD-003"
+      ],
+      "closes_with": "Подтвердить модель назначения."
+    },
+    {
+      "id": "DEC-010",
+      "title": "<ФИО> очереди",
+      "question": "Какие события очереди нужно хранить: вход, вызов, пропуск, возврат?",
+      "context": "QueueEntry наблюдается; полной event model нет.",
+      "options": [
+        "только вход/выход",
+        "полный event log",
+        "гибрид"
+      ],
+      "recommendation": "Начать с входа/выхода, события — отдельным решением.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "FIFO и метрики ожидания.",
+      "blocking": "<ФИО> вызова/пропуска не подтверждены.",
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-033"
+      ],
+      "closes_with": "Согласовать event model очереди."
+    },
+    {
+      "id": "DEC-011",
+      "title": "<ФИО> очереди",
+      "question": "Нужны ли отдельные события вызова и пропуска?",
+      "context": "<ФИО> описывает FIFO и пропуск, но источник событий не найден.",
+      "options": [
+        "да",
+        "нет",
+        "только вызов"
+      ],
+      "recommendation": "Оставить открытым.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "OPEN",
+      "impact": "Точность метрики ожидания.",
+      "blocking": "Нет источника событий.",
+      "evidence_ids": [
+        "EVD-017",
+        "EVD-033"
+      ],
+      "closes_with": "***REMOVED*** Operations."
+    },
+    {
+      "id": "DEC-012",
+      "title": "Источник смены курьера",
+      "question": "Является ли agile_mart_operational.shifts источником смены курьера?",
+      "context": "shifts наблюдается в SQL 7802; dataset 7021 — не смены курьера.",
+      "options": [
+        "да",
+        "нет",
+        "частично"
+      ],
+      "recommendation": "Считать кандидатом, требующим проверки.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "Смены и метрики.",
+      "blocking": "Физическое наполнение не проверено.",
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-005"
+      ],
+      "closes_with": "SELECT-проверка shifts."
+    },
+    {
+      "id": "DEC-013",
+      "title": "Перерывы в смене",
+      "question": "Как учитывать перерыв: отдельная сущность или поле смены?",
+      "context": "<ФИО> упоминает перерыв, отдельная сущность не найдена.",
+      "options": [
+        "отдельная сущность",
+        "поля смены",
+        "не учитывать"
+      ],
+      "recommendation": "Не создавать сущность без подтверждения.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "OPEN",
+      "impact": "Учёт рабочего времени.",
+      "blocking": "Нет источника.",
+      "evidence_ids": [
+        "EVD-002"
+      ],
+      "closes_with": "***REMOVED*** Operations."
+    },
+    {
+      "id": "DEC-014",
+      "title": "Слоты и бронирование",
+      "question": "Нужна ли отдельная сущность слота и бронирования?",
+      "context": "Процесс не определён; смена и слот — разные понятия.",
+      "options": [
+        "слот = смена",
+        "отдельный слот",
+        "без слотов"
+      ],
+      "recommendation": "Отложить до определения процесса.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "OPEN",
+      "impact": "Планирование смен.",
+      "blocking": "Процесс не определён.",
+      "evidence_ids": [
+        "EVD-034"
+      ],
+      "closes_with": "***REMOVED*** Operations."
+    },
+    {
+      "id": "DEC-015",
+      "title": "Маршрут и поездка",
+      "question": "Является ли Route тем же, что Trip?",
+      "context": "Route и Trip связаны, но соответствие не доказано.",
+      "options": [
+        "Route = Trip",
+        "Route — часть Trip",
+        "разные"
+      ],
+      "recommendation": "Не объединять.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "Маршрутизация и связи.",
+      "blocking": "Соответствие не подтверждено.",
+      "evidence_ids": [
+        "EVD-026"
+      ],
+      "closes_with": "Подтвердить у Geo/Operations."
+    },
+    {
+      "id": "DEC-016",
+      "title": "Событие готовности заказа",
+      "question": "Какое событие считать готовностью заказа?",
+      "context": "time_ready отсутствует в SQL 3466; кандидаты не подтверждены.",
+      "options": [
+        "новое событие",
+        "существующее поле",
+        "статус"
+      ],
+      "recommendation": "Не создавать атрибут до подтверждения.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Метрика готовность → доставка.",
+      "blocking": "Источник не найден.",
+      "evidence_ids": [
+        "EVD-001"
+      ],
+      "closes_with": "Найти событие готовности у Darkstore."
+    },
+    {
+      "id": "DEC-017",
+      "title": "Сборка заказа",
+      "question": "Какие события сборки подтверждены?",
+      "context": "date_collect_start/date_collected присутствуют, семантика не подтверждена.",
+      "options": [
+        "начало/окончание",
+        "только окончание",
+        "этапы"
+      ],
+      "recommendation": "Считать кандидатом.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "Метрики сборки.",
+      "blocking": "Семантика не подтверждена.",
+      "evidence_ids": [
+        "EVD-001"
+      ],
+      "closes_with": "Подтвердить у Darkstore."
+    },
+    {
+      "id": "DEC-018",
+      "title": "Справочник зон",
+      "question": "Где хранится справочник зон доставки и их границы?",
+      "context": "***REMOVED*** не подтверждены; zone_cluster/inactivity_zone — другие семантики.",
+      "options": [
+        "гео-система",
+        "таблица в DWH",
+        "внешний сервис"
+      ],
+      "recommendation": "Оставить BUSINESS_REQUIRED_NOT_FOUND.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "***REMOVED*** и адресная привязка.",
+      "blocking": "Источник не найден.",
+      "evidence_ids": [
+        "EVD-009",
+        "EVD-025",
+        "EVD-031"
+      ],
+      "closes_with": "Найти мастер-источник зон."
+    },
+    {
+      "id": "DEC-019",
+      "title": "Версионирование границ зон",
+      "question": "Нужна ли история изменения границ зон?",
+      "context": "<ФИО> говорит «технически желательно, но не обязательно».",
+      "options": [
+        "да",
+        "нет",
+        "позже"
+      ],
+      "recommendation": "Считать проектным предложением, не обязательным требованием.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "OPEN",
+      "impact": "Историческая корректность зон.",
+      "blocking": "Нет утверждённого требования.",
+      "evidence_ids": [
+        "EVD-009"
+      ],
+      "closes_with": "***REMOVED*** Geo."
+    },
+    {
+      "id": "DEC-020",
+      "title": "Привязка адреса к зоне",
+      "question": "Как определяется зона для адреса доставки?",
+      "context": "***REMOVED*** есть, источник не найден.",
+      "options": [
+        "минимальное время доставки",
+        "полигон",
+        "ручное"
+      ],
+      "recommendation": "Оставить NOT_VERIFIABLE.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Зональная маршрутизация.",
+      "blocking": "Нет источника геометрии.",
+      "evidence_ids": [
+        "EVD-009",
+        "EVD-032"
+      ],
+      "closes_with": "Найти гео-модель."
+    },
+    {
+      "id": "DEC-021",
+      "title": "Мастер-адрес",
+      "question": "Где мастер-данные адресов и координат?",
+      "context": "Адреса — PII; мастер-реестр не подтверждён.",
+      "options": [
+        "гео-система",
+        "клиентская система",
+        "DWH"
+      ],
+      "recommendation": "Не выгружать PII.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Адреса и гео-связи.",
+      "blocking": "PII и отсутствие мастер-реестра.",
+      "evidence_ids": [
+        "EVD-032"
+      ],
+      "closes_with": "Согласовать мастер-адрес и PII-политику."
+    },
+    {
+      "id": "DEC-022",
+      "title": "Статусы заказа",
+      "question": "Какой набор статусов заказа является каноническим?",
+      "context": "Статусы встречаются в SQL, но справочник не подтверждён.",
+      "options": [
+        "существующий справочник",
+        "новый",
+        "гибрид"
+      ],
+      "recommendation": "<ФИО> статусы из SQL и подтвердить у бизнеса.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "Lifecycle и метрики.",
+      "blocking": "Нет утверждённого справочника.",
+      "evidence_ids": [
+        "EVD-014",
+        "EVD-040"
+      ],
+      "closes_with": "Согласовать справочник статусов."
+    },
+    {
+      "id": "DEC-023",
+      "title": "Фото-контроль",
+      "question": "Является ли PhotoControl частью смены или отдельным процессом?",
+      "context": "PhotoControl наблюдается, связь со сменой не доказана.",
+      "options": [
+        "часть смены",
+        "отдельный процесс",
+        "не включать"
+      ],
+      "recommendation": "Считать отдельным процессом до подтверждения.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "Качество и контроль.",
+      "blocking": "Связь не подтверждена.",
+      "evidence_ids": [
+        "EVD-012"
+      ],
+      "closes_with": "Подтвердить у Operations."
+    },
+    {
+      "id": "DEC-024",
+      "title": "Единый event log",
+      "question": "Нужен ли единый BusinessEvent для всех доменов?",
+      "context": "Единый event log не найден; событийные таблицы разрознены.",
+      "options": [
+        "единый",
+        "по доменам",
+        "без единого"
+      ],
+      "recommendation": "Не навязывать единый event log.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "OPEN",
+      "impact": "Аудит и интеграция.",
+      "blocking": "Нет подтверждённого источника.",
+      "evidence_ids": [
+        "EVD-037"
+      ],
+      "closes_with": "***REMOVED*** Data/IT."
+    },
+    {
+      "id": "DEC-025",
+      "title": "Начисление и выплата",
+      "question": "Где хранятся начисления и выплаты курьеру?",
+      "context": "sum_order/sum_paid — не заработок; ledger не найден.",
+      "options": [
+        "финансовая система",
+        "DWH",
+        "внешний сервис"
+      ],
+      "recommendation": "Оставить NOT_VERIFIABLE.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Финансовая модель.",
+      "blocking": "Источник не найден.",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-028",
+        "EVD-035"
+      ],
+      "closes_with": "Найти финансовый источник."
+    },
+    {
+      "id": "DEC-026",
+      "title": "Тариф и формула",
+      "question": "Какая формула тарифа и кто её утверждает?",
+      "context": "Тарифы не найдены; формула не утверждена.",
+      "options": [
+        "фиксированная",
+        "за заказ",
+        "за зону/расстояние"
+      ],
+      "recommendation": "Оставить BUSINESS_DECISION_REQUIRED.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Начисления и метрики.",
+      "blocking": "Нет формулы и владельца.",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-029"
+      ],
+      "closes_with": "***REMOVED*** Finance."
+    },
+    {
+      "id": "DEC-027",
+      "title": "Наставничество курьеров",
+      "question": "Как связаны HR-наставничество и курьерское сопровождение?",
+      "context": "HR-атрибуты есть, курьерская применимость не доказана.",
+      "options": [
+        "одна модель",
+        "разные модели",
+        "частично"
+      ],
+      "recommendation": "Разделять HRMentorship и CourierMentorship.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "Обучение и оценка.",
+      "blocking": "Применимость не подтверждена.",
+      "evidence_ids": [
+        "EVD-006",
+        "EVD-023",
+        "EVD-036"
+      ],
+      "closes_with": "Подтвердить у HR/Mentorship."
+    },
+    {
+      "id": "DEC-028",
+      "title": "Оценка обучения",
+      "question": "Какие критерии завершения обучения после двух недель?",
+      "context": "Критерии не утверждены.",
+      "options": [
+        "5 смен",
+        "качество",
+        "комбинированные"
+      ],
+      "recommendation": "Оставить открытым.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "OPEN",
+      "impact": "MentorshipAssessment.",
+      "blocking": "Нет утверждённых критериев.",
+      "evidence_ids": [
+        "EVD-019"
+      ],
+      "closes_with": "***REMOVED*** HR/Mentorship."
+    },
+    {
+      "id": "DEC-029",
+      "title": "SLA-методика",
+      "question": "Как считать SLA и учитывать отмены/возвраты?",
+      "context": "Метрики есть в BI, но методика не подтверждена.",
+      "options": [
+        "существующая",
+        "новая",
+        "гибрид"
+      ],
+      "recommendation": "Не исключать отмены/возвраты без решения.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "SLA compliance.",
+      "blocking": "Методика не утверждена.",
+      "evidence_ids": [
+        "EVD-038"
+      ],
+      "closes_with": "***REMOVED*** Analytics/Operations."
+    },
+    {
+      "id": "DEC-030",
+      "title": "MVP-экран заказов",
+      "question": "Какие поля обязательны на первом экране MVP?",
+      "context": "MVP допускает запуск без зон и очереди.",
+      "options": [
+        "минимальный набор",
+        "расширенный",
+        "по согласованию"
+      ],
+      "recommendation": "Зафиксировать минимальный набор и отметить gaps.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "READY_FOR_BUSINESS_APPROVAL",
+      "impact": "Scope MVP.",
+      "blocking": "Нет утверждения бизнеса.",
+      "evidence_ids": [
+        "EVD-015",
+        "EVD-021"
+      ],
+      "closes_with": "Утверждение бизнеса."
+    },
+    {
+      "id": "DEC-031",
+      "title": "Источник выплат курьерам",
+      "question": "Где подтверждённый ledger выплат, отдельный от начислений?",
+      "context": "<ФИО> Payout и PayoutLine — target-сущности без подтверждённого источника.",
+      "options": [
+        "найти ledger",
+        "считать выплатой факт перевода",
+        "отложить"
+      ],
+      "recommendation": "Не объявлять Payout подтверждённой до SELECT и подтверждения Finance.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Финансовая модель и сверка начислений.",
+      "blocking": "Источник выплат не найден.",
+      "evidence_ids": [
+        "EVD-028"
+      ],
+      "closes_with": "Подтверждение ledger выплат у Finance."
+    },
+    {
+      "id": "DEC-032",
+      "title": "Зерно PayoutLine",
+      "question": "Одна строка выплаты — это заказ, период или транш?",
+      "context": "Зерно не установлено; нельзя строить агрегаты.",
+      "options": [
+        "заказ",
+        "период",
+        "транш"
+      ],
+      "recommendation": "Зафиксировать после подтверждения ledger.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Детализация выплат.",
+      "blocking": "Нет подтверждённого источника.",
+      "evidence_ids": [
+        "EVD-028"
+      ],
+      "closes_with": "Ответ Finance по зерну выплаты."
+    },
+    {
+      "id": "DEC-033",
+      "title": "Методика SLA",
+      "question": "Какая формула SLA применяется ко всем заказам, включая отмены и возвраты?",
+      "context": "Датасеты применяют разные фильтры и scope.",
+      "options": [
+        "единая формула",
+        "разные формулы по каналам",
+        "новая методика"
+      ],
+      "recommendation": "Утвердить единую методику и правило учёта отмен/возвратов.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "PARTIAL_EVIDENCE",
+      "impact": "SLA compliance и сравнение периодов.",
+      "blocking": "Методика не утверждена.",
+      "evidence_ids": [
+        "EVD-020",
+        "EVD-038"
+      ],
+      "closes_with": "***REMOVED*** Analytics/Operations."
+    },
+    {
+      "id": "DEC-034",
+      "title": "Единый event log",
+      "question": "Нужна ли единая модель BusinessEvent или достаточно доменных событий?",
+      "context": "Единый журнал не подтверждён; доменные события разрознены.",
+      "options": [
+        "единый event log",
+        "доменные события",
+        "гибрид"
+      ],
+      "recommendation": "Не навязывать единую модель без подтверждения.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "OPEN",
+      "impact": "Аудит и интеграция.",
+      "blocking": "Нет подтверждённого источника.",
+      "evidence_ids": [
+        "EVD-037"
+      ],
+      "closes_with": "***REMOVED*** Data/IT по событийной модели."
+    },
+    {
+      "id": "DEC-035",
+      "title": "История состава поездки",
+      "question": "Где хранить историю изменений состава до выезда?",
+      "context": "Изменения состава должны иметь историю; источник не найден.",
+      "options": [
+        "append-only change log",
+        "versioned composition",
+        "event sourcing"
+      ],
+      "recommendation": "<ФИО>ировать append-only журнал изменений.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "OPEN",
+      "impact": "Аудит и разбор инцидентов.",
+      "blocking": "Нет подтверждённого источника.",
+      "evidence_ids": [
+        "EVD-016"
+      ],
+      "closes_with": "Согласование с Operations."
+    },
+    {
+      "id": "DEC-036",
+      "title": "Реестр систем-источников",
+      "question": "Какие системы-источники и их владельцы должны быть в SourceSystem?",
+      "context": "SourceSystem — проектная сущность; реестр не подтверждён.",
+      "options": [
+        "минимальный реестр",
+        "полный реестр",
+        "внешний каталог"
+      ],
+      "recommendation": "Начать с минимального реестра и расширять.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "OPEN",
+      "impact": "Трассировка происхождения.",
+      "blocking": "Нет подтверждённого реестра.",
+      "evidence_ids": [
+        "EVD-021"
+      ],
+      "closes_with": "***REMOVED*** Data/IT."
+    },
+    {
+      "id": "DEC-037",
+      "title": "Формула тарифа и версионирование",
+      "question": "Какую формулу тарифа применять и как версионировать правила?",
+      "context": "Тарифы зависят от зоны и расстояния; возможная зависимость от нагрузки не формализована.",
+      "options": [
+        "фиксированная формула",
+        "формула с нагрузкой",
+        "ручные корректировки"
+      ],
+      "recommendation": "Утвердить формулу и версионирование до физического проектирования.",
+      "owner": "OWNER_UNKNOWN",
+      "status": "BLOCKED",
+      "impact": "Начисления и выплаты.",
+      "blocking": "Формула и владелец не утверждены.",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-029"
+      ],
+      "closes_with": "***REMOVED*** Finance."
+    }
+  ],
+  "invariants": [
+    {
+      "id": "INV-001",
+      "statement": "Одна поездка относится только к одной зоне.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-015"
+      ],
+      "validation_method": "Проверка бизнес-правила; данных для проверки нет.",
+      "result": "***REMOVED*** зафиксировано, не проверено на данных."
+    },
+    {
+      "id": "INV-002",
+      "statement": "Состав поездки изменяем только до выезда.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-016"
+      ],
+      "validation_method": "Проверка бизнес-правила; истории состава нет.",
+      "result": "***REMOVED*** зафиксировано, источник истории не найден."
+    },
+    {
+      "id": "INV-003",
+      "statement": "После выезда состав поездки неизменяем.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-016"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-004",
+      "statement": "Состав поездки вручную меняет только куратор.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-016"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-005",
+      "statement": "CourierAssignment отделён от состава поездки.",
+      "type": "DESIGN_GUARD",
+      "status": "CHECKED",
+      "evidence_ids": [
+        "EVD-015",
+        "EVD-016"
+      ],
+      "validation_method": "Проверка модели: отдельные сущности и связи.",
+      "result": "<ФИО> разделяет назначение и состав."
+    },
+    {
+      "id": "INV-006",
+      "statement": "Поездка содержит несколько заказов как бизнес-концепт; 3–5 не является DB CHECK.",
+      "type": "BUSINESS_RULE",
+      "status": "CHECKED",
+      "evidence_ids": [
+        "EVD-015"
+      ],
+      "validation_method": "Проверка модели: cardinality 1:N без жёсткого CHECK.",
+      "result": "<ФИО> не вводит CHECK."
+    },
+    {
+      "id": "INV-007",
+      "statement": "Смешение зон в одной поездке запрещено без отдельного согласования.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-015"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-008",
+      "statement": "Курьер назначается только после прибытия в даркстор и входа в очередь.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-017"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-009",
+      "statement": "***REMOVED*** работает по FIFO.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-017"
+      ],
+      "validation_method": "Проверка бизнес-правила; данных очереди нет.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-010",
+      "statement": "Неготового курьера пропускают; поведение при возврате не определено.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-017"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано; re-entry открыт."
+    },
+    {
+      "id": "INV-011",
+      "statement": "Отменённый заказ не оплачивается.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-018"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-012",
+      "statement": "В многозаказной поездке оплачиваются только доставленные заказы.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-018"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-013",
+      "statement": "Ожидание включено в стоимость заказа; отдельной оплаты простоя нет.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-018"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-014",
+      "statement": "Штрафов нет.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-018"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-015",
+      "statement": "Тариф зависит от зоны и расстояния; формула не утверждена.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-029"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано; формула открыта."
+    },
+    {
+      "id": "INV-016",
+      "statement": "Наставничество длится две недели; оценка — первые пять смен.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-019"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-017",
+      "statement": "Отменённые и возвращённые заказы не исключаются из SLA без отдельного решения.",
+      "type": "BUSINESS_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-020"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-018",
+      "statement": "Глобальный сдвиг +3 часа не применяется.",
+      "type": "DESIGN_GUARD",
+      "status": "CHECKED",
+      "evidence_ids": [
+        "EVD-020"
+      ],
+      "validation_method": "Проверка модели и документов.",
+      "result": "Сдвиг не введён."
+    },
+    {
+      "id": "INV-019",
+      "statement": "1970-01-01 означает отсутствие даты/значения.",
+      "type": "DATA_RULE",
+      "status": "DOCUMENTED_ONLY",
+      "evidence_ids": [
+        "EVD-020"
+      ],
+      "validation_method": "Проверка бизнес-правила.",
+      "result": "***REMOVED*** зафиксировано."
+    },
+    {
+      "id": "INV-020",
+      "statement": "SQL JOIN не является подтверждённым FK.",
+      "type": "DESIGN_GUARD",
+      "status": "CHECKED",
+      "evidence_ids": [
+        "EVD-003",
+        "EVD-021"
+      ],
+      "validation_method": "Проверка модели: связи помечены как кандидаты/выводы.",
+      "result": "<ФИО> не объявляет FK."
+    }
+  ],
+  "gaps": [
+    {
+      "id": "GAP-001",
+      "title": "Канонический ID заказа",
+      "context": "CTX-ORDER",
+      "priority": "P0_BLOCKER",
+      "gap_type": "IDENTITY_UNRESOLVED",
+      "missing": "Не разграничены id_order и id_general.",
+      "searched": "SQL 3466, 4732, 7119; metadata 1.6.2.",
+      "impact": "Идентичность заказа и связи.",
+      "resolution": "SELECT-проверка уникальности и покрытия.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-003"
+      ]
+    },
+    {
+      "id": "GAP-002",
+      "title": "Зерно заказа",
+      "context": "CTX-ORDER",
+      "priority": "P0_BLOCKER",
+      "gap_type": "SEMANTICS_UNRESOLVED",
+      "missing": "Зерно результата не подтверждено.",
+      "searched": "SQL definitions; фактических строк нет.",
+      "impact": "Метрики и агрегаты.",
+      "resolution": "SELECT count/distinct.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-001",
+        "EVD-021"
+      ]
+    },
+    {
+      "id": "GAP-003",
+      "title": "Событие готовности",
+      "context": "CTX-ORDER",
+      "priority": "P0_BLOCKER",
+      "gap_type": "EVENT_SOURCE_MISSING",
+      "missing": "time_ready отсутствует в SQL 3466.",
+      "searched": "Полный SQL 3466; кандидаты не подтверждены.",
+      "impact": "Метрика готовность → доставка.",
+      "resolution": "Найти событие у Darkstore.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-001"
+      ]
+    },
+    {
+      "id": "GAP-004",
+      "title": "Формирование поездки",
+      "context": "CTX-COURIER",
+      "priority": "P1_HIGH",
+      "gap_type": "SEMANTICS_UNRESOLVED",
+      "missing": "Pool и Trip не разграничены.",
+      "searched": "SQL 7119, 7006, 7802.",
+      "impact": "Структура поездки.",
+      "resolution": "Подтвердить у Operations.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-003",
+        "EVD-015"
+      ]
+    },
+    {
+      "id": "GAP-005",
+      "title": "История состава поездки",
+      "context": "CTX-COURIER",
+      "priority": "P1_HIGH",
+      "gap_type": "EVENT_SOURCE_MISSING",
+      "missing": "Нет подтверждённой истории изменений.",
+      "searched": "SQL и metadata.",
+      "impact": "Аудит и восстановление.",
+      "resolution": "Найти/спроектировать источник.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-016"
+      ]
+    },
+    {
+      "id": "GAP-006",
+      "title": "Назначение курьера",
+      "context": "CTX-COURIER",
+      "priority": "P1_HIGH",
+      "gap_type": "SEMANTICS_UNRESOLVED",
+      "missing": "courier_id_darkstore не подтверждён как назначение.",
+      "searched": "SQL 7119.",
+      "impact": "Связь курьера и поездки.",
+      "resolution": "Подтвердить модель назначения.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-003"
+      ]
+    },
+    {
+      "id": "GAP-007",
+      "title": "<ФИО> очереди",
+      "context": "CTX-COURIER",
+      "priority": "P1_HIGH",
+      "gap_type": "EVENT_SOURCE_MISSING",
+      "missing": "Вызов, пропуск, возврат не подтверждены.",
+      "searched": "SQL 7802; metadata.",
+      "impact": "FIFO и ожидание.",
+      "resolution": "Найти event log очереди.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-033"
+      ]
+    },
+    {
+      "id": "GAP-008",
+      "title": "***REMOVED*** и фиксация состава",
+      "context": "CTX-COURIER",
+      "priority": "P1_HIGH",
+      "gap_type": "EVENT_SOURCE_MISSING",
+      "missing": "Событие выезда не найдено.",
+      "searched": "SQL и metadata.",
+      "impact": "Неизменяемость состава.",
+      "resolution": "Найти событие выезда.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-016"
+      ]
+    },
+    {
+      "id": "GAP-009",
+      "title": "Частичное завершение поездки",
+      "context": "CTX-ORDER",
+      "priority": "P2_MEDIUM",
+      "gap_type": "SEMANTICS_UNRESOLVED",
+      "missing": "Правила частичного завершения не подтверждены.",
+      "searched": "SQL definitions.",
+      "impact": "Финансы и SLA.",
+      "resolution": "Подтвердить у Operations.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-018"
+      ]
+    },
+    {
+      "id": "GAP-010",
+      "title": "Отмена и возврат",
+      "context": "CTX-ORDER",
+      "priority": "P1_HIGH",
+      "gap_type": "SEMANTICS_UNRESOLVED",
+      "missing": "Правила учёта в SLA не утверждены.",
+      "searched": "SQL и бизнес-правила.",
+      "impact": "SLA и оплата.",
+      "resolution": "***REMOVED*** Analytics/Operations.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-020"
+      ]
+    },
+    {
+      "id": "GAP-011",
+      "title": "***REMOVED*** и перерыв",
+      "context": "CTX-COURIER",
+      "priority": "P1_HIGH",
+      "gap_type": "SEMANTICS_UNRESOLVED",
+      "missing": "Перерыв и возврат не подтверждены.",
+      "searched": "SQL 7802.",
+      "impact": "Учёт рабочего времени.",
+      "resolution": "Подтвердить модель смены.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-002"
+      ]
+    },
+    {
+      "id": "GAP-012",
+      "title": "Начисление и выплата",
+      "context": "CTX-FINANCE",
+      "priority": "P0_BLOCKER",
+      "gap_type": "MASTER_SOURCE_MISSING",
+      "missing": "Ledger начислений и выплат не найден.",
+      "searched": "SQL и metadata; sum_order/sum_paid не подходят.",
+      "impact": "Финансовая модель.",
+      "resolution": "Найти финансовый источник.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-028",
+        "EVD-035"
+      ]
+    },
+    {
+      "id": "GAP-013",
+      "title": "Наставничество курьеров",
+      "context": "CTX-HR",
+      "priority": "P1_HIGH",
+      "gap_type": "SEMANTICS_UNRESOLVED",
+      "missing": "HR-модель не подтверждена как курьерская.",
+      "searched": "SQL 5939.",
+      "impact": "Обучение и оценка.",
+      "resolution": "Подтвердить у HR/Mentorship.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-006",
+        "EVD-036"
+      ]
+    },
+    {
+      "id": "GAP-014",
+      "title": "SLA-методика",
+      "context": "CTX-ANALYTICS",
+      "priority": "P1_HIGH",
+      "gap_type": "SEMANTICS_UNRESOLVED",
+      "missing": "Формула и исключения не утверждены.",
+      "searched": "SQL и BI-метрики.",
+      "impact": "SLA compliance.",
+      "resolution": "***REMOVED*** Analytics/Operations.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-038"
+      ]
+    },
+    {
+      "id": "GAP-015",
+      "title": "Справочник зон",
+      "context": "CTX-GEO",
+      "priority": "P1_HIGH",
+      "gap_type": "MASTER_SOURCE_MISSING",
+      "missing": "Геометрия и мастер-реестр зон не найдены.",
+      "searched": "SQL, metadata, zone_cluster/inactivity_zone.",
+      "impact": "Зональная маршрутизация.",
+      "resolution": "Найти гео-модель.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-009",
+        "EVD-025",
+        "EVD-031"
+      ]
+    },
+    {
+      "id": "GAP-016",
+      "title": "Адрес и привязка к зоне",
+      "context": "CTX-GEO",
+      "priority": "P2_MEDIUM",
+      "gap_type": "MASTER_SOURCE_MISSING",
+      "missing": "Мастер-адрес и правило привязки не подтверждены.",
+      "searched": "SQL и metadata.",
+      "impact": "Доставка и зоны.",
+      "resolution": "Найти мастер-адрес.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-032"
+      ]
+    },
+    {
+      "id": "GAP-017",
+      "title": "Тариф и формула",
+      "context": "CTX-FINANCE",
+      "priority": "P0_BLOCKER",
+      "gap_type": "BUSINESS_RULE_MISSING",
+      "missing": "Формула и владелец тарифа не установлены.",
+      "searched": "SQL и metadata.",
+      "impact": "Начисления.",
+      "resolution": "***REMOVED*** Finance.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-018",
+        "EVD-029"
+      ]
+    },
+    {
+      "id": "GAP-018",
+      "title": "Единый event log",
+      "context": "CTX-SHARED",
+      "priority": "P2_MEDIUM",
+      "gap_type": "EVENT_SOURCE_MISSING",
+      "missing": "Единый журнал событий не найден.",
+      "searched": "SQL и metadata.",
+      "impact": "Аудит и интеграция.",
+      "resolution": "***REMOVED*** Data/IT.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-037"
+      ]
+    },
+    {
+      "id": "GAP-019",
+      "title": "Владельцы доменов",
+      "context": "CTX-SHARED",
+      "priority": "P2_MEDIUM",
+      "gap_type": "OWNER_UNKNOWN",
+      "missing": "Конкретные владельцы не названы.",
+      "searched": "Артефакты 1.5–1.7.",
+      "impact": "Утверждение модели.",
+      "resolution": "Назначить владельцев.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-021"
+      ]
+    },
+    {
+      "id": "GAP-020",
+      "title": "Доступ к SQL Lab",
+      "context": "CTX-SHARED",
+      "priority": "P0_BLOCKER",
+      "gap_type": "NOT_VERIFIABLE_ACCESS",
+      "missing": "SQL Lab и chart_data недоступны (403/401).",
+      "searched": "Матрица доступа 1.6.2.",
+      "impact": "Все проверки данными.",
+      "resolution": "Выдать read-only доступ.",
+      "owner": "OWNER_UNKNOWN",
+      "evidence_ids": [
+        "EVD-021"
+      ]
+    }
+  ],
+  "processes": [
+    {
+      "id": "PRC-001",
+      "name": "Order creation and change",
+      "ru_name": "Создание и изменение заказа",
+      "context": "CTX-ORDER",
+      "actors": [
+        "Клиент",
+        "Система заказов",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Создание заказа",
+        "Изменение состава/статуса",
+        "Отмена"
+      ],
+      "events": [
+        "OrderCreated",
+        "OrderUpdated",
+        "OrderCancelled"
+      ],
+      "timestamps": [
+        "created_at",
+        "updated_at"
+      ],
+      "invariants": [
+        "INV-011"
+      ],
+      "gaps": [
+        "GAP-001",
+        "GAP-002"
+      ],
+      "source": "SQL_DEFINITION / BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-002",
+      "name": "Assembly to readiness",
+      "ru_name": "Сборка и переход к готовности",
+      "context": "CTX-ORDER",
+      "actors": [
+        "Сборщик",
+        "Darkstore",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Начало сборки",
+        "Сборка",
+        "Готовность"
+      ],
+      "events": [
+        "AssemblyStarted",
+        "AssemblyCompleted",
+        "OrderReady"
+      ],
+      "timestamps": [
+        "date_collect_start",
+        "date_collected",
+        "ready_at"
+      ],
+      "invariants": [
+        "INV-018"
+      ],
+      "gaps": [
+        "GAP-003"
+      ],
+      "source": "SQL_DEFINITION; готовность не подтверждена"
+    },
+    {
+      "id": "PRC-003",
+      "name": "Trip formation",
+      "ru_name": "Формирование поездки",
+      "context": "CTX-COURIER",
+      "actors": [
+        "Система",
+        "Куратор",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Подбор заказов",
+        "Формирование состава",
+        "Ручная корректировка"
+      ],
+      "events": [
+        "TripCreated",
+        "TripCompositionChanged"
+      ],
+      "timestamps": [
+        "created_at"
+      ],
+      "invariants": [
+        "INV-001",
+        "INV-002",
+        "INV-006"
+      ],
+      "gaps": [
+        "GAP-004"
+      ],
+      "source": "BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-004",
+      "name": "Manual composition correction",
+      "ru_name": "Ручная корректировка состава",
+      "context": "CTX-COURIER",
+      "actors": [
+        "Куратор",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Добавление заказа",
+        "Удаление заказа",
+        "Фиксация истории"
+      ],
+      "events": [
+        "TripOrderAdded",
+        "TripOrderRemoved"
+      ],
+      "timestamps": [
+        "changed_at"
+      ],
+      "invariants": [
+        "INV-002",
+        "INV-004"
+      ],
+      "gaps": [
+        "GAP-005"
+      ],
+      "source": "BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-005",
+      "name": "Courier assignment",
+      "ru_name": "Назначение курьера",
+      "context": "CTX-COURIER",
+      "actors": [
+        "Система",
+        "Куратор",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Выбор курьера",
+        "Назначение",
+        "Подтверждение"
+      ],
+      "events": [
+        "CourierAssigned"
+      ],
+      "timestamps": [
+        "assigned_at"
+      ],
+      "invariants": [
+        "INV-005",
+        "INV-008"
+      ],
+      "gaps": [
+        "GAP-006"
+      ],
+      "source": "BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-006",
+      "name": "Queue entry, FIFO, call, skip",
+      "ru_name": "***REMOVED***: вход, FIFO, вызов, пропуск",
+      "context": "CTX-COURIER",
+      "actors": [
+        "Курьер",
+        "Система",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Вход в очередь",
+        "Ожидание",
+        "Вызов",
+        "Пропуск",
+        "Возврат"
+      ],
+      "events": [
+        "QueueEntered",
+        "CourierCalled",
+        "CourierSkipped",
+        "QueueReturned"
+      ],
+      "timestamps": [
+        "queue_in_dttm",
+        "queue_out_dttm"
+      ],
+      "invariants": [
+        "INV-008",
+        "INV-009",
+        "INV-010"
+      ],
+      "gaps": [
+        "GAP-007"
+      ],
+      "source": "SQL_DEFINITION + BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-007",
+      "name": "Departure and immutable composition",
+      "ru_name": "***REMOVED*** и неизменяемый состав",
+      "context": "CTX-COURIER",
+      "actors": [
+        "Курьер",
+        "Система",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "***REMOVED***",
+        "Фиксация состава",
+        "Доставка"
+      ],
+      "events": [
+        "TripDeparted",
+        "TripCompositionLocked"
+      ],
+      "timestamps": [
+        "departed_at"
+      ],
+      "invariants": [
+        "INV-003"
+      ],
+      "gaps": [
+        "GAP-008"
+      ],
+      "source": "BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-008",
+      "name": "Delivery and partial completion",
+      "ru_name": "Доставка и частичное завершение",
+      "context": "CTX-ORDER",
+      "actors": [
+        "Курьер",
+        "Клиент",
+        "Система",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Доставка заказа",
+        "Фиксация результата",
+        "Частичное завершение поездки"
+      ],
+      "events": [
+        "OrderDelivered",
+        "TripPartiallyCompleted"
+      ],
+      "timestamps": [
+        "delivered_at"
+      ],
+      "invariants": [
+        "INV-012"
+      ],
+      "gaps": [
+        "GAP-009"
+      ],
+      "source": "SQL_DEFINITION + BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-009",
+      "name": "Cancellation and return",
+      "ru_name": "Отмена и возврат",
+      "context": "CTX-ORDER",
+      "actors": [
+        "Клиент",
+        "Куратор",
+        "Система",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Отмена",
+        "Возврат",
+        "Фиксация причины"
+      ],
+      "events": [
+        "OrderCancelled",
+        "OrderReturned"
+      ],
+      "timestamps": [
+        "cancelled_at",
+        "returned_at"
+      ],
+      "invariants": [
+        "INV-011",
+        "INV-017"
+      ],
+      "gaps": [
+        "GAP-010"
+      ],
+      "source": "BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-010",
+      "name": "Shift, break, return",
+      "ru_name": "***REMOVED***, перерыв, возврат",
+      "context": "CTX-COURIER",
+      "actors": [
+        "Курьер",
+        "Система",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Начало смены",
+        "Перерыв",
+        "Окончание смены",
+        "Возврат в очередь"
+      ],
+      "events": [
+        "ShiftStarted",
+        "BreakStarted",
+        "ShiftEnded"
+      ],
+      "timestamps": [
+        "shift_start",
+        "shift_finish"
+      ],
+      "invariants": [
+        "INV-008"
+      ],
+      "gaps": [
+        "GAP-011"
+      ],
+      "source": "SQL_DEFINITION"
+    },
+    {
+      "id": "PRC-011",
+      "name": "Accrual and payout",
+      "ru_name": "Начисление и выплата",
+      "context": "CTX-FINANCE",
+      "actors": [
+        "Finance",
+        "Система",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Начисление за доставку",
+        "Формирование выплаты",
+        "Выплата"
+      ],
+      "events": [
+        "AccrualCreated",
+        "PayoutCreated"
+      ],
+      "timestamps": [
+        "accrued_at",
+        "paid_at"
+      ],
+      "invariants": [
+        "INV-011",
+        "INV-012",
+        "INV-013",
+        "INV-014"
+      ],
+      "gaps": [
+        "GAP-012"
+      ],
+      "source": "BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-012",
+      "name": "Mentor assignment and training assessment",
+      "ru_name": "Назначение наставника и оценка обучения",
+      "context": "CTX-HR",
+      "actors": [
+        "HR",
+        "Куратор",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Назначение наставника",
+        "Сопровождение",
+        "Оценка",
+        "Завершение"
+      ],
+      "events": [
+        "MentorAssigned",
+        "MentorshipAssessed"
+      ],
+      "timestamps": [
+        "assigned_at",
+        "completed_at"
+      ],
+      "invariants": [
+        "INV-016"
+      ],
+      "gaps": [
+        "GAP-013"
+      ],
+      "source": "BUSINESS_REQUIREMENT"
+    },
+    {
+      "id": "PRC-013",
+      "name": "SLA and analytics refresh",
+      "ru_name": "SLA и обновление аналитики",
+      "context": "CTX-ANALYTICS",
+      "actors": [
+        "Analytics",
+        "BI",
+        "OWNER_UNKNOWN"
+      ],
+      "steps": [
+        "Расчёт SLA",
+        "Обновление витрин",
+        "Публикация"
+      ],
+      "events": [
+        "SlaCalculated"
+      ],
+      "timestamps": [
+        "calculated_at"
+      ],
+      "invariants": [
+        "INV-017"
+      ],
+      "gaps": [
+        "GAP-014"
+      ],
+      "source": "BUSINESS_REQUIREMENT"
+    }
+  ],
+  "mvp_fields": [
+    {
+      "field": "order_id",
+      "ru_name": "Стабильный ID заказа",
+      "status": "PARTIAL",
+      "source": "EVD-001, EVD-003",
+      "notes": "id_order/id_general не разграничены."
+    },
+    {
+      "field": "order_status",
+      "ru_name": "Текущий статус",
+      "status": "PARTIAL",
+      "source": "EVD-014",
+      "notes": "Справочник статусов не утверждён."
+    },
+    {
+      "field": "darkstore_id",
+      "ru_name": "ТТ",
+      "status": "PARTIAL",
+      "source": "EVD-001",
+      "notes": "Мастер-реестр ТТ не подтверждён."
+    },
+    {
+      "field": "created_at",
+      "ru_name": "Основные timestamps",
+      "status": "PARTIAL",
+      "source": "EVD-001",
+      "notes": "Семантика и часовой пояс не подтверждены."
+    },
+    {
+      "field": "trip_id",
+      "ru_name": "Связь с поездкой/пулом",
+      "status": "PARTIAL",
+      "source": "EVD-003",
+      "notes": "Pool ≠ Trip не доказано."
+    },
+    {
+      "field": "courier_id",
+      "ru_name": "Курьер, если назначен",
+      "status": "PARTIAL",
+      "source": "EVD-003",
+      "notes": "Назначение не подтверждено."
+    },
+    {
+      "field": "zone_id",
+      "ru_name": "Зона, если доступна",
+      "status": "NOT_FOUND",
+      "source": "EVD-009",
+      "notes": "Справочник зон не найден."
+    },
+    {
+      "field": "ready_at",
+      "ru_name": "Готовность",
+      "status": "NOT_FOUND",
+      "source": "EVD-001",
+      "notes": "time_ready отсутствует в SQL 3466."
+    },
+    {
+      "field": "delivered_at",
+      "ru_name": "Факт доставки",
+      "status": "PARTIAL",
+      "source": "EVD-001",
+      "notes": "Семантика не подтверждена."
+    },
+    {
+      "field": "cancelled_at",
+      "ru_name": "Отмена",
+      "status": "PARTIAL",
+      "source": "EVD-014",
+      "notes": "Правила SLA не утверждены."
+    }
+  ],
+  "metrics": [
+    {
+      "id": "MET-001",
+      "name": "Courier waiting time",
+      "ru_name": "Ожидание курьера",
+      "formula": "METRIC_DEFINITION_REQUIRED",
+      "status": "METRIC_DEFINITION_REQUIRED",
+      "required_fields": [
+        "queue_in_dttm",
+        "queue_out_dttm",
+        "courier_called_at"
+      ],
+      "evidence_ids": [
+        "EVD-002",
+        "EVD-017"
+      ],
+      "notes": "wait_minutes из 7802 не приравнивать к ожиданию в очереди без подтверждения."
+    },
+    {
+      "id": "MET-002",
+      "name": "Ready to delivery",
+      "ru_name": "Готовность → доставка",
+      "formula": "METRIC_DEFINITION_REQUIRED",
+      "status": "NOT_VERIFIABLE",
+      "required_fields": [
+        "ready_at",
+        "delivered_at"
+      ],
+      "evidence_ids": [
+        "EVD-001"
+      ],
+      "notes": "Событие готовности не подтверждено."
+    },
+    {
+      "id": "MET-003",
+      "name": "Deliveries per courier",
+      "ru_name": "Доставки на курьера",
+      "formula": "METRIC_DEFINITION_REQUIRED",
+      "status": "METRIC_DEFINITION_REQUIRED",
+      "required_fields": [
+        "courier_id",
+        "delivered_at",
+        "order_id"
+      ],
+      "evidence_ids": [
+        "EVD-003"
+      ],
+      "notes": "Нужна договорённость о периоде и исключениях."
+    },
+    {
+      "id": "MET-004",
+      "name": "SLA compliance",
+      "ru_name": "Соблюдение SLA",
+      "formula": "METRIC_DEFINITION_REQUIRED",
+      "status": "METRIC_DEFINITION_REQUIRED",
+      "required_fields": [
+        "sla_interval",
+        "delivered_at",
+        "cancelled_at"
+      ],
+      "evidence_ids": [
+        "EVD-038"
+      ],
+      "notes": "Методика и учёт отмен/возвратов не утверждены."
+    }
+  ],
+  "summary": {
+    "entities": 39,
+    "attributes": 60,
+    "relationships": 39,
+    "evidence": 40,
+    "decisions": 37,
+    "invariants": 20,
+    "gaps": 20,
+    "contexts": 8,
+    "processes": 13,
+    "mvp_fields": 10,
+    "metrics": 4,
+    "by_status": {
+      "FOUND_IN_SUPERSET_SQL": 15,
+      "BUSINESS_REQUIRED_NOT_FOUND": 12,
+      "INFERRED_FROM_MULTIPLE_SOURCES": 5,
+      "NOT_VERIFIABLE": 2,
+      "DESIGN_PROPOSAL": 4,
+      "NOT_FOUND_IN_SUPERSET": 1
+    },
+    "by_confidence": {
+      "MEDIUM": 16,
+      "NONE": 18,
+      "LOW": 4,
+      "HIGH": 1
+    },
+    "by_context": {
+      "CTX-ORDER": 6,
+      "CTX-DARKSTORE": 2,
+      "CTX-COURIER": 11,
+      "CTX-GEO": 5,
+      "CTX-ANALYTICS": 2,
+      "CTX-HR": 3,
+      "CTX-FINANCE": 7,
+      "CTX-SHARED": 3
+    }
+  }
+}
