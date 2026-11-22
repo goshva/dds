@@ -1,0 +1,41 @@
+{
+  "datasource": {
+    "id": 3035,
+    "type": "table"
+  },
+  "force": false,
+  "queries": [
+    {
+      "result_type": "columns",
+      "columns": [],
+      "metrics": [],
+      "orderby": []
+    }
+  ],
+  "form_data": {
+    "enableEmptyFilter": false,
+    "datasource": "3035__table",
+    "adhoc_filters": [],
+    "extra_filters": [],
+    "extra_form_data": {},
+    "metrics": [
+      "count"
+    ],
+    "row_limit": 2000,
+    "showSearch": true,
+    "defaultValue": [
+      "date_supply"
+    ],
+    "url_params": {},
+    "inView": true,
+    "viz_type": "filter_timecolumn",
+    "type": "NATIVE_FILTER",
+    "dashboardId": 977,
+    "native_filter_id": "NATIVE_FILTER-CbBXkIUJh",
+    "force": false,
+    "result_format": "json",
+    "result_type": "full"
+  },
+  "result_format": "json",
+  "result_type": "full"
+}

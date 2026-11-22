@@ -1,0 +1,1254 @@
+{
+ "har": {
+  "dashboardSlug": "services_lite",
+  "dashboardId": 977,
+  "datasetDetailIds": [
+   3035,
+   7000,
+   3100,
+   2694,
+   2693,
+   3101,
+   2698,
+   2709,
+   2710,
+   3495,
+   3102,
+   3103,
+   2675,
+   3104,
+   3499,
+   2293,
+   2679,
+   2685,
+   2848,
+   3106,
+   2712,
+   2667,
+   2687,
+   2323,
+   2324,
+   5874,
+   3108,
+   2690,
+   2701,
+   2318,
+   3109,
+   4730,
+   2674,
+   3110,
+   2692,
+   2735,
+   7008,
+   5428
+  ],
+  "sliceIds": [
+   20161,
+   20403,
+   20623,
+   20624,
+   20404,
+   20405
+  ],
+  "nativeFilters": [
+   {
+    "id": "NATIVE_FILTER-CbBXkIUJh",
+    "extraFormData": {
+     "granularity_sqla": "date_supply"
+    },
+    "filterState": {
+     "value": [
+      "date_supply"
+     ]
+    },
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-PaUit8SbF",
+    "extraFormData": {
+     "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+    },
+    "filterState": {
+     "value": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+    },
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-r2GJE3I0A",
+    "extraFormData": {
+     "time_grain_sqla": "P1D"
+    },
+    "filterState": {
+     "label": "День",
+     "value": [
+      "P1D"
+     ]
+    },
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-DofwS_6i8",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-Ge2yiYkB4msUcvStZv1W5",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-0QLlIyQTNh",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-DlKAqz-JayIroaGrCftKG",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-3nbaRVKfX",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-xlVj4C9dy",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-6vljMpWnE",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-gatz_jDPm",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-XXy8xOi91",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-z1-mWlm3y",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-pJcK9zDVK",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-npsejQJM-",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-k_iv6Sgti",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-hRGGlQCAi",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-67tISJ6ZO",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-UGHy82Pfu",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-BEEaC8Lf5",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-se8ZYyxyp",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-xY1pKYb8B",
+    "extraFormData": {
+     "filters": [
+      {
+       "col": "shopno",
+       "op": "IN",
+       "val": [
+        "7745"
+       ]
+      }
+     ]
+    },
+    "filterState": {
+     "label": "7745",
+     "value": [
+      "7745"
+     ],
+     "excludeFilterValues": true
+    },
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-R1ghs4mqE",
+    "extraFormData": {
+     "filters": [
+      {
+       "col": "shopno",
+       "op": "NOT IN",
+       "val": [
+        "99888",
+        "8519"
+       ]
+      }
+     ]
+    },
+    "filterState": {
+     "validateMessage": false,
+     "label": "99888, 8519 (не включительно)",
+     "value": [
+      "99888",
+      "8519"
+     ],
+     "dataLength": 1,
+     "excludeFilterValues": true
+    },
+    "ownState": {},
+    "__cache": {
+     "validateMessage": false,
+     "validateStatus": false,
+     "label": "99888, 8519 (не включительно)",
+     "value": [
+      "99888",
+      "8519"
+     ],
+     "dataLength": 1
+    }
+   },
+   {
+    "id": "NATIVE_FILTER-VRXzIxA6G",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-L6BXBZT_2",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-3n4TScFj5",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-7BpfA7IZq",
+    "extraFormData": {
+     "filters": [
+      {
+       "col": "feature_tt",
+       "op": "IN",
+       "val": [
+        "ДаркСтор"
+       ]
+      }
+     ]
+    },
+    "filterState": {
+     "label": "ДаркСтор",
+     "value": [
+      "ДаркСтор"
+     ],
+     "excludeFilterValues": true
+    },
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-B4_FPofcG",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-KdgYQaPnk",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-5tyXLb8va",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-cfAYRec_z",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-qZbbO6CBY",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-tiEIsyKnzq",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-GpNbUH5FK",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-S3GIO6-fP",
+    "extraFormData": {
+     "filters": [
+      {
+       "col": "night",
+       "op": "IN",
+       "val": [
+        "1"
+       ]
+      }
+     ]
+    },
+    "filterState": {
+     "validateMessage": false,
+     "validateStatus": false,
+     "label": "1",
+     "value": [
+      "1"
+     ],
+     "dataLength": 2
+    },
+    "ownState": {},
+    "__cache": {
+     "validateMessage": false,
+     "validateStatus": false,
+     "label": "1",
+     "value": [
+      "1"
+     ],
+     "dataLength": 2
+    }
+   },
+   {
+    "id": "NATIVE_FILTER-Y15ZQLgnX",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-br_39APaZ",
+    "extraFormData": {
+     "filters": [
+      {
+       "col": "slots",
+       "op": "IN",
+       "val": [
+        1
+       ]
+      }
+     ]
+    },
+    "filterState": {
+     "validateMessage": false,
+     "validateStatus": false,
+     "label": "1",
+     "value": [
+      1
+     ],
+     "dataLength": 2
+    },
+    "ownState": {},
+    "__cache": {
+     "validateMessage": false,
+     "validateStatus": false,
+     "label": "1",
+     "value": [
+      1
+     ],
+     "dataLength": 2
+    }
+   },
+   {
+    "id": "NATIVE_FILTER-x7pFCue-EE",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-f_O8GRO5PP",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-5tUZHPL2W",
+    "extraFormData": {
+     "filters": [
+      {
+       "col": "delivery_type_group",
+       "op": "IN",
+       "val": [
+        "Курьеры",
+        "Такси"
+       ]
+      }
+     ]
+    },
+    "filterState": {
+     "validateMessage": false,
+     "label": "Курьеры, Такси",
+     "value": [
+      "Курьеры",
+      "Такси"
+     ],
+     "dataLength": 5,
+     "excludeFilterValues": true
+    },
+    "ownState": {},
+    "__cache": {
+     "validateMessage": false,
+     "validateStatus": false,
+     "label": "Курьеры, Такси",
+     "value": [
+      "Курьеры",
+      "Такси"
+     ],
+     "dataLength": 5
+    }
+   },
+   {
+    "id": "NATIVE_FILTER-0t5GHtUT8",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-OdYt6B3Ro",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-PWs1LTCNm",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-iTDG1ffag",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-Gp0QYZHOif",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-OT42hfINU",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-zbMRIvVG6",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-WL3pY-QUI",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-fgVT3SVpz",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER--OC9K6dLYWEUY4k-7RQEG",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-TEFBB_Ae4cOUelP2LR54k",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-S8k3NK1fAF",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   },
+   {
+    "id": "NATIVE_FILTER-1nscCSQ2HS",
+    "extraFormData": {
+     "filters": [
+      {
+       "col": "name_service",
+       "op": "NOT IN",
+       "val": [
+        "Самовывоз сейчас                                  "
+       ]
+      }
+     ]
+    },
+    "filterState": {
+     "validateMessage": false,
+     "validateStatus": false,
+     "label": "Самовывоз сейчас                                   (не включительно)",
+     "value": [
+      "Самовывоз сейчас                                  "
+     ]
+    },
+    "ownState": {},
+    "__cache": {
+     "validateMessage": false,
+     "validateStatus": false,
+     "label": "Самовывоз сейчас                                   (не включительно)",
+     "value": [
+      "Самовывоз сейчас                                  "
+     ]
+    }
+   },
+   {
+    "id": "NATIVE_FILTER-uV3-lPC6bM",
+    "extraFormData": {},
+    "filterState": {},
+    "ownState": {}
+   }
+  ]
+ },
+ "local": {
+  "charts": 19928,
+  "dashboards": 332,
+  "filters": 3264,
+  "dashMatch": [
+   {
+    "dashboard_id": 977,
+    "title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "published": true,
+    "chart_count": 23,
+    "dataset_count": 3,
+    "native_filters_count": 57,
+    "access": "METADATA_ONLY"
+   }
+  ],
+  "filtersForDashboard": [
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Отправная дата отчета",
+    "filter_type": "filter_timecolumn",
+    "dataset_id": 3035,
+    "column_name": null,
+    "default_value": [
+     "date_supply"
+    ],
+    "multi_select": false,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Фильтр по времени (сегодня)",
+    "filter_type": "filter_time",
+    "dataset_id": null,
+    "column_name": null,
+    "default_value": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+    "multi_select": false,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Грануляция времени (шаг)",
+    "filter_type": "filter_timegrain",
+    "dataset_id": 3035,
+    "column_name": null,
+    "default_value": [
+     "P1D"
+    ],
+    "multi_select": false,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Группировка",
+    "filter_type": "filter_groupby",
+    "dataset_id": 5438,
+    "column_name": [
+     " Управляющий по доставке",
+     "За МКАДом",
+     " Регион ТТ",
+     " Район / город ТТ",
+     " Служба",
+     " Номер ТТ",
+     " Группа розницы",
+     " Сервис",
+     " Ответственный по гео",
+     " Руководитель",
+     " Руководитель по экспресс-лоставке",
+     " Наименование ТТ",
+     " Курьер",
+     "Куратор курьера",
+     " Куратор",
+     "Тип сервиса + длительность",
+     "name_service",
+     "Тип сервиса",
+     "Длительность доставки",
+     " id курьера",
+     "Тип партнера",
+     "Тип ПСЕ",
+     "restr_taking_time",
+     "restr_orders",
+     "Куст"
+    ],
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Группировка",
+    "filter_type": "filter_groupby",
+    "dataset_id": 3035,
+    "column_name": [
+     "За МКАДом",
+     "kontr_job_delivery",
+     "type_service",
+     "nova_kontr",
+     " Курьер",
+     " Куратор",
+     "pom",
+     "head_of_delivery",
+     "region_tt",
+     "pom_now",
+     "job_type_name",
+     "city_tt",
+     "leader_express",
+     "name_tt",
+     "courier_kontr",
+     "user_code",
+     "courier",
+     " Регион ТТ",
+     "delivery_type",
+     " Руководитель",
+     "night_and_others",
+     "Куратор курьера",
+     " Номер ТТ",
+     "area_tt",
+     "Тип ПСЕ",
+     "senior_of_courier",
+     "courier_type",
+     "delivery_type_group",
+     "senior"
+    ],
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Тип сервиса + длительность доставки",
+    "filter_type": "filter_select",
+    "dataset_id": 5778,
+    "column_name": "Тип сервиса + длительность",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Куст",
+    "filter_type": "filter_select",
+    "dataset_id": 7000,
+    "column_name": "zone_cluster",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Управляющий по доставке",
+    "filter_type": "filter_select",
+    "dataset_id": 3100,
+    "column_name": "head_of_delivery",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Руководитель",
+    "filter_type": "filter_select",
+    "dataset_id": 2694,
+    "column_name": "leader",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Куратор",
+    "filter_type": "filter_select",
+    "dataset_id": 2693,
+    "column_name": "senior",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Куратор (исключающий)",
+    "filter_type": "filter_select",
+    "dataset_id": 2693,
+    "column_name": "senior",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Руководитель по экспресс-доставке",
+    "filter_type": "filter_select",
+    "dataset_id": 3101,
+    "column_name": "leader_express",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Куратор по экспресс-доставке",
+    "filter_type": "filter_select",
+    "dataset_id": 2698,
+    "column_name": "senior_express",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Курьер",
+    "filter_type": "filter_select",
+    "dataset_id": 2709,
+    "column_name": "courier",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "id курьера",
+    "filter_type": "filter_select",
+    "dataset_id": 2710,
+    "column_name": "id_courier",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Тип курьера",
+    "filter_type": "filter_select",
+    "dataset_id": 3495,
+    "column_name": "courier_type",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Куратор курьера",
+    "filter_type": "filter_select",
+    "dataset_id": 3102,
+    "column_name": "senior_of_courier",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Ответственный по гео",
+    "filter_type": "filter_select",
+    "dataset_id": 3103,
+    "column_name": "geo",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Группа розницы",
+    "filter_type": "filter_select",
+    "dataset_id": 2675,
+    "column_name": "id_group",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Помощник розницы",
+    "filter_type": "filter_select",
+    "dataset_id": 3104,
+    "column_name": "pom",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Текущий помощник розницы",
+    "filter_type": "filter_select",
+    "dataset_id": 3499,
+    "column_name": "pom_now",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Номер ТТ",
+    "filter_type": "filter_select",
+    "dataset_id": 2293,
+    "column_name": "shopno",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Номер ТТ (исключающий)",
+    "filter_type": "filter_select",
+    "dataset_id": 2293,
+    "column_name": "shopno",
+    "default_value": [
+     "99888",
+     "8519"
+    ],
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Регион ТТ",
+    "filter_type": "filter_select",
+    "dataset_id": 2679,
+    "column_name": "region_tt",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Регион ТТ (исключающий)",
+    "filter_type": "filter_select",
+    "dataset_id": 2679,
+    "column_name": "region_tt",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Район / город ТТ",
+    "filter_type": "filter_select",
+    "dataset_id": 2685,
+    "column_name": "area_tt",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Признак ТТ",
+    "filter_type": "filter_select",
+    "dataset_id": 2848,
+    "column_name": "feature_tt",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Расположение за МКАД",
+    "filter_type": "filter_select",
+    "dataset_id": 3106,
+    "column_name": "out_of_mkad",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Нахождение в зоне ДС",
+    "filter_type": "filter_select",
+    "dataset_id": 2712,
+    "column_name": "in_dark_area",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Номер ДС, в зоне которого ТТ",
+    "filter_type": "filter_select",
+    "dataset_id": 2667,
+    "column_name": "dark",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Сервис",
+    "filter_type": "filter_select",
+    "dataset_id": 2687,
+    "column_name": "name_service",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Тип сервиса",
+    "filter_type": "filter_select",
+    "dataset_id": 5711,
+    "column_name": "type_service",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Длительность доставки",
+    "filter_type": "filter_select",
+    "dataset_id": 5722,
+    "column_name": "Длительность доставки",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Ночной заказ",
+    "filter_type": "filter_select",
+    "dataset_id": 2323,
+    "column_name": "night",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Ночной заказ",
+    "filter_type": "filter_select",
+    "dataset_id": 2323,
+    "column_name": "night",
+    "default_value": [
+     "1"
+    ],
+    "multi_select": false,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Слотовый заказ",
+    "filter_type": "filter_select",
+    "dataset_id": 2324,
+    "column_name": "slots",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Слотовый заказ",
+    "filter_type": "filter_select",
+    "dataset_id": 2324,
+    "column_name": "slots",
+    "default_value": [
+     1
+    ],
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Тип ПСЕ",
+    "filter_type": "filter_select",
+    "dataset_id": 5911,
+    "column_name": "union_pse_type",
+    "default_value": null,
+    "multi_select": false,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Дарккитчен",
+    "filter_type": "filter_select",
+    "dataset_id": 5874,
+    "column_name": "dk_flag",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Тип службы",
+    "filter_type": "filter_select",
+    "dataset_id": 3108,
+    "column_name": "delivery_type_group",
+    "default_value": [
+     "Курьеры",
+     "Такси"
+    ],
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Служба",
+    "filter_type": "filter_select",
+    "dataset_id": 2690,
+    "column_name": "delivery_type",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Номер генерального заказа",
+    "filter_type": "filter_select",
+    "dataset_id": 2701,
+    "column_name": "id_general",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Номер заказа",
+    "filter_type": "filter_select",
+    "dataset_id": 2318,
+    "column_name": "id_order",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Партнер",
+    "filter_type": "filter_select",
+    "dataset_id": 3109,
+    "column_name": "name_partner",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "<ФИО>",
+    "filter_type": "filter_select",
+    "dataset_id": 4730,
+    "column_name": "name_partner_type",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Способ оплаты",
+    "filter_type": "filter_select",
+    "dataset_id": 2674,
+    "column_name": "name_pay_way",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Статус заказа",
+    "filter_type": "filter_select",
+    "dataset_id": 3110,
+    "column_name": "status_name",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Источник заказа",
+    "filter_type": "filter_select",
+    "dataset_id": 2692,
+    "column_name": "source_name",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Доставка в срок",
+    "filter_type": "filter_select",
+    "dataset_id": 2735,
+    "column_name": "luck_or_fall",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Кафе-пекарня в заказе",
+    "filter_type": "filter_select",
+    "dataset_id": 3035,
+    "column_name": "dk_flag",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Кафе-пекарня в магазине",
+    "filter_type": "filter_select",
+    "dataset_id": 7008,
+    "column_name": "cafebakery_shopno",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Вернулся в магазин",
+    "filter_type": "filter_select",
+    "dataset_id": 3035,
+    "column_name": "is_returned_store",
+    "default_value": null,
+    "multi_select": false,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Исключение самовывоз",
+    "filter_type": "filter_select",
+    "dataset_id": 5438,
+    "column_name": "name_service",
+    "default_value": [
+     "Самовывоз сейчас                                  "
+    ],
+    "multi_select": true,
+    "default_to_first": null
+   },
+   {
+    "dashboard_id": 977,
+    "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+    "filter_name": "Причина возврата в магазин (исключающий)",
+    "filter_type": "filter_select",
+    "dataset_id": 5428,
+    "column_name": "return_due_to_customer_fault",
+    "default_value": null,
+    "multi_select": true,
+    "default_to_first": null
+   }
+  ],
+  "chartsOnDashboard": 23,
+  "missingCharts": []
+ }
+}

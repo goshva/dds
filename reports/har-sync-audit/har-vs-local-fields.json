@@ -1,0 +1,931 @@
+[
+ {
+  "dataset_id": 2293,
+  "name": "shopno_f",
+  "local_columns": 4,
+  "local_metrics": 1,
+  "har_fields": [
+   "shopno"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2318,
+  "name": "id_order_f",
+  "local_columns": 1,
+  "local_metrics": 1,
+  "har_fields": [
+   "id_order"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2323,
+  "name": "night_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "night"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "night"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2324,
+  "name": "slots_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "slots"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "slots"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2667,
+  "name": "dark_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "dark"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "dark"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2674,
+  "name": "name_pay_way_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "name_pay_way"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "name_pay_way"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2675,
+  "name": "id_group_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "id_group"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "id_group"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2679,
+  "name": "region_tt_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "region_tt"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "region_tt"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2685,
+  "name": "area_tt_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "area_tt"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "area_tt"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2687,
+  "name": "name_service_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "name_service"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "name_service"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2690,
+  "name": "delivery_type_f",
+  "local_columns": 1,
+  "local_metrics": 1,
+  "har_fields": [
+   "delivery_type"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2692,
+  "name": "source_name_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "source_name"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "source_name"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2693,
+  "name": "senior_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "senior"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "senior"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2694,
+  "name": "leader_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "leader"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "leader"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2698,
+  "name": "senior_express_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "senior_express"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "senior_express"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2701,
+  "name": "id_general_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "id_general"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "id_general"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2709,
+  "name": "courier_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "courier"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "courier"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2710,
+  "name": "id_courier_f",
+  "local_columns": 1,
+  "local_metrics": 1,
+  "har_fields": [
+   "id_courier"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2712,
+  "name": "in_dark_area_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "in_dark_area"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "in_dark_area"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2735,
+  "name": "luck_or_fall_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "luck_or_fall"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "luck_or_fall"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 2848,
+  "name": "feature_tt_filter_new",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "feature_tt"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "feature_tt"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3035,
+  "name": "darkstore_time_click",
+  "local_columns": 165,
+  "local_metrics": 417,
+  "har_fields": [
+   "night_and_others",
+   "name_service",
+   "name_tt",
+   "head_of_delivery",
+   "Слот / динамическая",
+   "dk_flag",
+   "is_returned_store",
+   "shopno",
+   "delivery_type_group",
+   "date_supply",
+   "feature_tt"
+  ],
+  "har_metrics": [
+   "qty_orders_delivered",
+   "qty_orders_declined",
+   "qty_orders_in_work",
+   "share_orders_delivered",
+   "share_delivered_taxi",
+   "qty_not_in_slot_all",
+   "share_not_in_slot_all",
+   "share_not_in_slot_under_all",
+   "share_not_in_slot_above_all",
+   "sum_without_bonuses",
+   "sum_with_bonuses",
+   "count"
+  ],
+  "viz_types": [
+   "table",
+   "echarts_area",
+   "pivot_table_v2",
+   "filter_timecolumn",
+   "filter_timegrain",
+   "filter_select"
+  ],
+  "row_limits": [
+   100,
+   0,
+   10000,
+   2000
+  ],
+  "filter_ops": [
+   "shopno NOT IN",
+   "delivery_type_group IN",
+   "date_supply TEMPORAL_RANGE",
+   "shopno IN",
+   "feature_tt IN"
+  ],
+  "fields_absent_in_local_catalog": [],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3100,
+  "name": "head_of_delivery_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "head_of_delivery"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "head_of_delivery"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3101,
+  "name": "leader_express_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "leader_express"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "leader_express"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3102,
+  "name": "senior_of_courier_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "senior_of_courier"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "senior_of_courier"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3103,
+  "name": "geo_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "geo"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "geo"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3104,
+  "name": "pom_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "pom"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "pom"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3106,
+  "name": "out_of_mkad_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "out_of_mkad"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "out_of_mkad"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3108,
+  "name": "delivery_type_group_f",
+  "local_columns": 1,
+  "local_metrics": 1,
+  "har_fields": [
+   "delivery_type_group"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3109,
+  "name": "name_partner_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "name_partner"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "name_partner"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3110,
+  "name": "status_name_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "status_name"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "status_name"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3495,
+  "name": "courier_type_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "courier_type"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "courier_type"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 3499,
+  "name": "pom_now_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "pom_now"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "pom_now"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 4730,
+  "name": "partner_type_new_f",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "name_partner_type"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "name_partner_type"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 5428,
+  "name": "return_due_to_customer_fault_filter",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "return_due_to_customer_fault"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "return_due_to_customer_fault"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 5874,
+  "name": "dk_flag",
+  "local_columns": 0,
+  "local_metrics": 0,
+  "har_fields": [
+   "dk_flag"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [
+   "dk_flag"
+  ],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 5979,
+  "name": "darkstore_time_date_update",
+  "local_columns": 1,
+  "local_metrics": 1,
+  "har_fields": [
+   "date_update",
+   "shopno",
+   "delivery_type_group",
+   "feature_tt"
+  ],
+  "har_metrics": [
+   "[object Object]"
+  ],
+  "viz_types": [
+   "table"
+  ],
+  "row_limits": [
+   1
+  ],
+  "filter_ops": [
+   "shopno NOT IN",
+   "delivery_type_group IN",
+   "date_update TEMPORAL_RANGE",
+   "shopno IN",
+   "feature_tt IN"
+  ],
+  "fields_absent_in_local_catalog": [
+   "shopno",
+   "delivery_type_group",
+   "feature_tt"
+  ],
+  "metrics_absent_in_local_catalog": [
+   "[object Object]"
+  ]
+ },
+ {
+  "dataset_id": 7000,
+  "name": "zone_cluster_f",
+  "local_columns": 1,
+  "local_metrics": 1,
+  "har_fields": [
+   "zone_cluster"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [],
+  "metrics_absent_in_local_catalog": []
+ },
+ {
+  "dataset_id": 7008,
+  "name": "cafebakery_shopno_f",
+  "local_columns": 1,
+  "local_metrics": 1,
+  "har_fields": [
+   "cafebakery_shopno"
+  ],
+  "har_metrics": [
+   "count"
+  ],
+  "viz_types": [
+   "filter_select"
+  ],
+  "row_limits": [
+   2000
+  ],
+  "filter_ops": [],
+  "fields_absent_in_local_catalog": [],
+  "metrics_absent_in_local_catalog": []
+ }
+]

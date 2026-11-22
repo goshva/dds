@@ -1,0 +1,1556 @@
+[
+ {
+  "i": 1,
+  "t": "2026-11-22T17:57:25.139Z",
+  "ms": 378,
+  "method": "GET",
+  "path": "/superset/language_pack/ru/",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 532847,
+  "post": null,
+  "reqHeadersOfInterest": {}
+ },
+ {
+  "i": 2,
+  "t": "2026-11-22T17:57:26.457Z",
+  "ms": 12875,
+  "method": "GET",
+  "path": "/api/v1/release_notes/status/",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 52,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 3,
+  "t": "2026-11-22T17:57:41.025Z",
+  "ms": 3309,
+  "method": "GET",
+  "path": "/api/v1/dashboard/services_lite",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 404932,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 4,
+  "t": "2026-11-22T17:57:41.026Z",
+  "ms": 3309,
+  "method": "GET",
+  "path": "/api/v1/dashboard/services_lite/charts",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 91894,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 5,
+  "t": "2026-11-22T17:57:41.026Z",
+  "ms": 3459,
+  "method": "GET",
+  "path": "/api/v1/dashboard/services_lite/datasets",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 526156,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 6,
+  "t": "2026-11-22T17:57:43.836Z",
+  "ms": 954,
+  "method": "GET",
+  "path": "/api/v1/manage/dynamic-plugins/",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 6093,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 7,
+  "t": "2026-11-22T17:58:49.118Z",
+  "ms": 287,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20161%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1107,
+  "post": "datasource=5979",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 8,
+  "t": "2026-11-22T17:58:49.124Z",
+  "ms": 1852,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20403%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 57771,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 9,
+  "t": "2026-11-22T17:58:49.125Z",
+  "ms": 891,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20623%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 32932,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 10,
+  "t": "2026-11-22T17:58:49.127Z",
+  "ms": 4748,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20624%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 403921,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 11,
+  "t": "2026-11-22T17:58:49.128Z",
+  "ms": 935,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20404%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 64397,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 12,
+  "t": "2026-11-22T17:58:49.130Z",
+  "ms": 1079,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20405%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 67933,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 13,
+  "t": "2026-11-22T17:58:49.168Z",
+  "ms": 90,
+  "method": "POST",
+  "path": "/api/v1/dashboard/977/filter_state??tab_id=3",
+  "status": 403,
+  "statusText": "",
+  "respBytes": 133,
+  "post": "filter_state",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 14,
+  "t": "2026-11-22T17:58:49.228Z",
+  "ms": 230,
+  "method": "GET",
+  "path": "/api/v1/dashboard/favorite_status/??q=!(977)",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 37,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 15,
+  "t": "2026-11-22T17:58:50.644Z",
+  "ms": 159,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 25078,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 16,
+  "t": "2026-11-22T17:58:50.646Z",
+  "ms": 105,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1357,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 17,
+  "t": "2026-11-22T17:58:50.649Z",
+  "ms": 329,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 2204,
+  "post": "datasource=7000",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 18,
+  "t": "2026-11-22T17:58:50.650Z",
+  "ms": 211,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1352,
+  "post": "datasource=3100",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 19,
+  "t": "2026-11-22T17:58:50.652Z",
+  "ms": 149,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 7759,
+  "post": "datasource=2694",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 20,
+  "t": "2026-11-22T17:58:50.653Z",
+  "ms": 284,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 64564,
+  "post": "datasource=2693",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 21,
+  "t": "2026-11-22T17:58:50.655Z",
+  "ms": 174,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 64564,
+  "post": "datasource=2693",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 22,
+  "t": "2026-11-22T17:58:50.657Z",
+  "ms": 148,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 801,
+  "post": "datasource=3101",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 23,
+  "t": "2026-11-22T17:58:50.658Z",
+  "ms": 206,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 800,
+  "post": "datasource=2698",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 24,
+  "t": "2026-11-22T17:58:50.659Z",
+  "ms": 242,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 700,
+  "post": "datasource=2709",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 25,
+  "t": "2026-11-22T17:58:50.660Z",
+  "ms": 176,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 727,
+  "post": "datasource=2710",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 26,
+  "t": "2026-11-22T17:58:50.661Z",
+  "ms": 178,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 4305,
+  "post": "datasource=3495",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 27,
+  "t": "2026-11-22T17:58:50.663Z",
+  "ms": 228,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 181071,
+  "post": "datasource=3102",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 28,
+  "t": "2026-11-22T17:58:50.664Z",
+  "ms": 219,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1555,
+  "post": "datasource=3103",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 29,
+  "t": "2026-11-22T17:58:50.665Z",
+  "ms": 243,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 10598,
+  "post": "datasource=2675",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 30,
+  "t": "2026-11-22T17:58:50.665Z",
+  "ms": 287,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 15695,
+  "post": "datasource=3104",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 31,
+  "t": "2026-11-22T17:58:50.666Z",
+  "ms": 255,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 16527,
+  "post": "datasource=3499",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 32,
+  "t": "2026-11-22T17:58:50.667Z",
+  "ms": 162,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 768,
+  "post": "datasource=2293",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 33,
+  "t": "2026-11-22T17:58:50.669Z",
+  "ms": 234,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 768,
+  "post": "datasource=2293",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 34,
+  "t": "2026-11-22T17:58:50.670Z",
+  "ms": 236,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 11174,
+  "post": "datasource=2679",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 35,
+  "t": "2026-11-22T17:58:50.671Z",
+  "ms": 228,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 11174,
+  "post": "datasource=2679",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 36,
+  "t": "2026-11-22T17:58:50.673Z",
+  "ms": 359,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 68553,
+  "post": "datasource=2685",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 37,
+  "t": "2026-11-22T17:58:50.675Z",
+  "ms": 239,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1324,
+  "post": "datasource=2848",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 38,
+  "t": "2026-11-22T17:58:50.676Z",
+  "ms": 243,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 835,
+  "post": "datasource=3106",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 39,
+  "t": "2026-11-22T17:58:50.677Z",
+  "ms": 235,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 926,
+  "post": "datasource=2712",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 40,
+  "t": "2026-11-22T17:58:50.678Z",
+  "ms": 245,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 673,
+  "post": "datasource=2667",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 41,
+  "t": "2026-11-22T17:58:50.679Z",
+  "ms": 294,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 15458,
+  "post": "datasource=2687",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 42,
+  "t": "2026-11-22T17:58:50.680Z",
+  "ms": 182,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 727,
+  "post": "datasource=2323",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 43,
+  "t": "2026-11-22T17:58:50.681Z",
+  "ms": 228,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 765,
+  "post": "datasource=2324",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 44,
+  "t": "2026-11-22T17:58:50.683Z",
+  "ms": 281,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 847,
+  "post": "datasource=5874",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 45,
+  "t": "2026-11-22T17:58:50.684Z",
+  "ms": 231,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1562,
+  "post": "datasource=3108",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 46,
+  "t": "2026-11-22T17:58:50.686Z",
+  "ms": 269,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 6922,
+  "post": "datasource=2690",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 47,
+  "t": "2026-11-22T17:58:50.691Z",
+  "ms": 275,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 727,
+  "post": "datasource=2701",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 48,
+  "t": "2026-11-22T17:58:50.693Z",
+  "ms": 265,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 709,
+  "post": "datasource=2318",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 49,
+  "t": "2026-11-22T17:58:50.695Z",
+  "ms": 267,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 35903,
+  "post": "datasource=3109",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 50,
+  "t": "2026-11-22T17:58:50.697Z",
+  "ms": 214,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 2268,
+  "post": "datasource=4730",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 51,
+  "t": "2026-11-22T17:58:50.698Z",
+  "ms": 270,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1987,
+  "post": "datasource=2674",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 52,
+  "t": "2026-11-22T17:58:50.700Z",
+  "ms": 256,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1577,
+  "post": "datasource=3110",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 53,
+  "t": "2026-11-22T17:58:50.702Z",
+  "ms": 259,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 8758,
+  "post": "datasource=2692",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 54,
+  "t": "2026-11-22T17:58:50.703Z",
+  "ms": 256,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1482,
+  "post": "datasource=2735",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 55,
+  "t": "2026-11-22T17:58:50.705Z",
+  "ms": 641,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 10305,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 56,
+  "t": "2026-11-22T17:58:50.707Z",
+  "ms": 263,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1349,
+  "post": "datasource=7008",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 57,
+  "t": "2026-11-22T17:58:50.708Z",
+  "ms": 692,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 10370,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 58,
+  "t": "2026-11-22T17:58:50.710Z",
+  "ms": 258,
+  "method": "POST",
+  "path": "/api/v1/chart/data",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1731,
+  "post": "datasource=5428",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 59,
+  "t": "2026-11-22T17:58:52.325Z",
+  "ms": 1675,
+  "method": "GET",
+  "path": "/api/v1/dataset/3035??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 177531,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 60,
+  "t": "2026-11-22T17:58:52.326Z",
+  "ms": 1612,
+  "method": "GET",
+  "path": "/api/v1/dataset/7000??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 537,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 61,
+  "t": "2026-11-22T17:58:52.327Z",
+  "ms": 1622,
+  "method": "GET",
+  "path": "/api/v1/dataset/3100??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 507,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 62,
+  "t": "2026-11-22T17:58:52.328Z",
+  "ms": 1610,
+  "method": "GET",
+  "path": "/api/v1/dataset/2694??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 565,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 63,
+  "t": "2026-11-22T17:58:52.329Z",
+  "ms": 1635,
+  "method": "GET",
+  "path": "/api/v1/dataset/2693??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 459,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 64,
+  "t": "2026-11-22T17:58:52.330Z",
+  "ms": 1618,
+  "method": "GET",
+  "path": "/api/v1/dataset/3101??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 499,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 65,
+  "t": "2026-11-22T17:58:52.331Z",
+  "ms": 1661,
+  "method": "GET",
+  "path": "/api/v1/dataset/2698??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 491,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 66,
+  "t": "2026-11-22T17:58:52.332Z",
+  "ms": 1654,
+  "method": "GET",
+  "path": "/api/v1/dataset/2709??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 426,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 67,
+  "t": "2026-11-22T17:58:52.333Z",
+  "ms": 1621,
+  "method": "GET",
+  "path": "/api/v1/dataset/2710??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 435,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 68,
+  "t": "2026-11-22T17:58:52.334Z",
+  "ms": 1648,
+  "method": "GET",
+  "path": "/api/v1/dataset/3495??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 525,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 69,
+  "t": "2026-11-22T17:58:52.335Z",
+  "ms": 1582,
+  "method": "GET",
+  "path": "/api/v1/dataset/3102??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 511,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 70,
+  "t": "2026-11-22T17:58:52.336Z",
+  "ms": 1628,
+  "method": "GET",
+  "path": "/api/v1/dataset/3103??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 455,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 71,
+  "t": "2026-11-22T17:58:52.336Z",
+  "ms": 1649,
+  "method": "GET",
+  "path": "/api/v1/dataset/2675??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1225,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 72,
+  "t": "2026-11-22T17:58:52.337Z",
+  "ms": 1611,
+  "method": "GET",
+  "path": "/api/v1/dataset/3104??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 463,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 73,
+  "t": "2026-11-22T17:58:52.338Z",
+  "ms": 1611,
+  "method": "GET",
+  "path": "/api/v1/dataset/3499??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 501,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 74,
+  "t": "2026-11-22T17:58:52.340Z",
+  "ms": 1647,
+  "method": "GET",
+  "path": "/api/v1/dataset/2293??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 908,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 75,
+  "t": "2026-11-22T17:58:52.342Z",
+  "ms": 1643,
+  "method": "GET",
+  "path": "/api/v1/dataset/2679??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 471,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 76,
+  "t": "2026-11-22T17:58:52.343Z",
+  "ms": 1650,
+  "method": "GET",
+  "path": "/api/v1/dataset/2685??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 463,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 77,
+  "t": "2026-11-22T17:58:52.344Z",
+  "ms": 1649,
+  "method": "GET",
+  "path": "/api/v1/dataset/2848??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 980,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 78,
+  "t": "2026-11-22T17:58:52.345Z",
+  "ms": 2066,
+  "method": "GET",
+  "path": "/api/v1/dataset/3106??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 497,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 79,
+  "t": "2026-11-22T17:58:52.345Z",
+  "ms": 1663,
+  "method": "GET",
+  "path": "/api/v1/dataset/2712??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 813,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 80,
+  "t": "2026-11-22T17:58:52.346Z",
+  "ms": 1660,
+  "method": "GET",
+  "path": "/api/v1/dataset/2667??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 418,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 81,
+  "t": "2026-11-22T17:58:52.347Z",
+  "ms": 1664,
+  "method": "GET",
+  "path": "/api/v1/dataset/2687??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 962,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 82,
+  "t": "2026-11-22T17:58:52.348Z",
+  "ms": 1663,
+  "method": "GET",
+  "path": "/api/v1/dataset/2323??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 465,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 83,
+  "t": "2026-11-22T17:58:52.349Z",
+  "ms": 1658,
+  "method": "GET",
+  "path": "/api/v1/dataset/2324??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 623,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 84,
+  "t": "2026-11-22T17:58:52.350Z",
+  "ms": 1658,
+  "method": "GET",
+  "path": "/api/v1/dataset/5874??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 525,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 85,
+  "t": "2026-11-22T17:58:52.351Z",
+  "ms": 1606,
+  "method": "GET",
+  "path": "/api/v1/dataset/3108??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 825,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 86,
+  "t": "2026-11-22T17:58:52.352Z",
+  "ms": 1669,
+  "method": "GET",
+  "path": "/api/v1/dataset/2690??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 3491,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 87,
+  "t": "2026-11-22T17:58:52.352Z",
+  "ms": 1633,
+  "method": "GET",
+  "path": "/api/v1/dataset/2701??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 435,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 88,
+  "t": "2026-11-22T17:58:52.353Z",
+  "ms": 1602,
+  "method": "GET",
+  "path": "/api/v1/dataset/2318??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 431,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 89,
+  "t": "2026-11-22T17:58:52.354Z",
+  "ms": 1609,
+  "method": "GET",
+  "path": "/api/v1/dataset/3109??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 611,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 90,
+  "t": "2026-11-22T17:58:52.355Z",
+  "ms": 1602,
+  "method": "GET",
+  "path": "/api/v1/dataset/4730??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1518,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 91,
+  "t": "2026-11-22T17:58:52.356Z",
+  "ms": 1628,
+  "method": "GET",
+  "path": "/api/v1/dataset/2674??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 629,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 92,
+  "t": "2026-11-22T17:58:52.357Z",
+  "ms": 1630,
+  "method": "GET",
+  "path": "/api/v1/dataset/3110??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 487,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 93,
+  "t": "2026-11-22T17:58:52.358Z",
+  "ms": 1648,
+  "method": "GET",
+  "path": "/api/v1/dataset/2692??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 476,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 94,
+  "t": "2026-11-22T17:59:05.005Z",
+  "ms": 229,
+  "method": "GET",
+  "path": "/api/v1/dataset/2735??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 804,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 95,
+  "t": "2026-11-22T17:59:05.008Z",
+  "ms": 232,
+  "method": "GET",
+  "path": "/api/v1/dataset/7008??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 782,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 96,
+  "t": "2026-11-22T17:59:05.009Z",
+  "ms": 233,
+  "method": "GET",
+  "path": "/api/v1/dataset/5428??q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 936,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 97,
+  "t": "2026-11-22T17:59:12.973Z",
+  "ms": 2472,
+  "method": "GET",
+  "path": "/api/v1/time_range/??q=%27DATETIME(%22today%22)+:%20DATEADD(DATETIME(%22tomorrow%22),%20-1%2C%20seco",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 175,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 98,
+  "t": "2026-11-22T17:59:28.224Z",
+  "ms": 493,
+  "method": "GET",
+  "path": "/api/v1/time_range/??q=%27DATETIME(%22today%22)+:%20DATEADD(DATETIME(%22tomorrow%22),%20-1%2C%20seco",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 175,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 99,
+  "t": "2026-11-22T17:59:28.225Z",
+  "ms": 531,
+  "method": "GET",
+  "path": "/api/v1/time_range/??q=%27DATETIME(%22today%22)+:%20DATEADD(DATETIME(%22tomorrow%22),%20-1%2C%20seco",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 175,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 100,
+  "t": "2026-11-22T18:00:15.612Z",
+  "ms": 1368,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20161%7D&dashboard_id=977",
+  "status": 202,
+  "statusText": "",
+  "respBytes": 188,
+  "post": "datasource=5979",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 101,
+  "t": "2026-11-22T18:00:15.613Z",
+  "ms": 9177,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20403%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 38625,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 102,
+  "t": "2026-11-22T18:00:15.614Z",
+  "ms": 2771,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20623%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 13087,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 103,
+  "t": "2026-11-22T18:00:15.615Z",
+  "ms": 3611,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20624%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 11781,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 104,
+  "t": "2026-11-22T18:00:15.616Z",
+  "ms": 2830,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20404%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 16638,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 105,
+  "t": "2026-11-22T18:00:15.617Z",
+  "ms": 2218,
+  "method": "POST",
+  "path": "/api/v1/chart/data??form_data=%7B%22slice_id%22%3A20405%7D&dashboard_id=977",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 24106,
+  "post": "datasource=3035",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 106,
+  "t": "2026-11-22T18:00:16.039Z",
+  "ms": 644,
+  "method": "POST",
+  "path": "/api/v1/dashboard/977/filter_state??tab_id=3",
+  "status": 403,
+  "statusText": "",
+  "respBytes": 133,
+  "post": "filter_state",
+  "reqHeadersOfInterest": {
+   "content-type": "application/json",
+   "x-csrftoken": ""
+  }
+ },
+ {
+  "i": 107,
+  "t": "2026-11-22T18:00:18.124Z",
+  "ms": 253,
+  "method": "GET",
+  "path": "/api/v1/chart/data/qc-5c6c9257f1f62234c723ae9ca9051a32",
+  "status": 200,
+  "statusText": "",
+  "respBytes": 1217,
+  "post": null,
+  "reqHeadersOfInterest": {
+   "x-csrftoken": ""
+  }
+ }
+]

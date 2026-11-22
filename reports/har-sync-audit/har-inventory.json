@@ -1,0 +1,293 @@
+{
+  "generatedAt": "2026-11-22T18:31:51.758Z",
+  "harVersion": "1.2",
+  "creator": {
+    "name": "WebInspector",
+    "version": "537.36"
+  },
+  "pages": [
+    {
+      "id": "page_1",
+      "title": "https://superset.svc.vkusvill.ru/superset/dashboard/services_lite/",
+      "startedDateTime": "2026-11-22T17:51:27.060Z"
+    }
+  ],
+  "entryCount": 107,
+  "timeRange": {
+    "first": "2026-11-22T17:57:25.139Z",
+    "last": "2026-11-22T18:00:18.124Z"
+  },
+  "statusTotals": {
+    "200": 104,
+    "202": 1,
+    "403": 2
+  },
+  "methodTotals": {
+    "GET": 49,
+    "POST": 58
+  },
+  "resourceTypes": {
+    "fetch": 107
+  },
+  "groups": [
+    {
+      "method": "POST",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/chart/data",
+      "count": 56,
+      "statuses": {
+        "200": 55,
+        "202": 1
+      },
+      "mime": {
+        "application/json": 56
+      },
+      "queryKeys": [
+        "dashboard_id",
+        "form_data"
+      ],
+      "totalBodyBytes": 1331785,
+      "maxBodyBytes": 403921,
+      "firstSeen": "2026-11-22T17:58:49.118Z",
+      "lastSeen": "2026-11-22T18:00:15.617Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/chart/data?form_data=%7B%22slice_id%22%3A20161%7D&dashboard_id=977",
+        "https://superset.svc.vkusvill.ru/api/v1/chart/data?form_data=%7B%22slice_id%22%3A20403%7D&dashboard_id=977",
+        "https://superset.svc.vkusvill.ru/api/v1/chart/data?form_data=%7B%22slice_id%22%3A20623%7D&dashboard_id=977"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/dataset/{id}",
+      "count": 38,
+      "statuses": {
+        "200": 38
+      },
+      "mime": {
+        "application/json": 38
+      },
+      "queryKeys": [
+        "q"
+      ],
+      "totalBodyBytes": 203680,
+      "maxBodyBytes": 177531,
+      "firstSeen": "2026-11-22T17:58:52.325Z",
+      "lastSeen": "2026-11-22T17:59:05.009Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/dataset/3035?q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.is_dttm,columns.type,columns.verbose_name,database.id,database.database_name,datasource_type,filter_select_enabled,id,is_sqllab_view,main_dttm_col,metrics.metric_name,metrics.verbose_name,schema,sql,table_name))",
+        "https://superset.svc.vkusvill.ru/api/v1/dataset/7000?q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.is_dttm,columns.type,columns.verbose_name,database.id,database.database_name,datasource_type,filter_select_enabled,id,is_sqllab_view,main_dttm_col,metrics.metric_name,metrics.verbose_name,schema,sql,table_name))",
+        "https://superset.svc.vkusvill.ru/api/v1/dataset/3100?q=(columns:!(columns.column_name,columns.expression,columns.filterable,columns.is_dttm,columns.type,columns.verbose_name,database.id,database.database_name,datasource_type,filter_select_enabled,id,is_sqllab_view,main_dttm_col,metrics.metric_name,metrics.verbose_name,schema,sql,table_name))"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/time_range/",
+      "count": 3,
+      "statuses": {
+        "200": 3
+      },
+      "mime": {
+        "application/json": 3
+      },
+      "queryKeys": [
+        "q"
+      ],
+      "totalBodyBytes": 525,
+      "maxBodyBytes": 175,
+      "firstSeen": "2026-11-22T17:59:12.973Z",
+      "lastSeen": "2026-11-22T17:59:28.225Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/time_range/?q=%27DATETIME(%22today%22)+:%20DATEADD(DATETIME(%22tomorrow%22),%20-1%2C%20second)%27",
+        "https://superset.svc.vkusvill.ru/api/v1/time_range/?q=%27DATETIME(%22today%22)+:%20DATEADD(DATETIME(%22tomorrow%22),%20-1%2C%20second)%27",
+        "https://superset.svc.vkusvill.ru/api/v1/time_range/?q=%27DATETIME(%22today%22)+:%20DATEADD(DATETIME(%22tomorrow%22),%20-1%2C%20second)%27"
+      ]
+    },
+    {
+      "method": "POST",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/dashboard/{id}/filter_state",
+      "count": 2,
+      "statuses": {
+        "403": 2
+      },
+      "mime": {
+        "application/json": 2
+      },
+      "queryKeys": [
+        "tab_id"
+      ],
+      "totalBodyBytes": 266,
+      "maxBodyBytes": 133,
+      "firstSeen": "2026-11-22T17:58:49.168Z",
+      "lastSeen": "2026-11-22T18:00:16.039Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/dashboard/977/filter_state?tab_id=3",
+        "https://superset.svc.vkusvill.ru/api/v1/dashboard/977/filter_state?tab_id=3"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/superset/language_pack/ru/",
+      "count": 1,
+      "statuses": {
+        "200": 1
+      },
+      "mime": {
+        "application/json": 1
+      },
+      "queryKeys": [],
+      "totalBodyBytes": 532847,
+      "maxBodyBytes": 532847,
+      "firstSeen": "2026-11-22T17:57:25.139Z",
+      "lastSeen": "2026-11-22T17:57:25.139Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/superset/language_pack/ru/"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/release_notes/status/",
+      "count": 1,
+      "statuses": {
+        "200": 1
+      },
+      "mime": {
+        "application/json": 1
+      },
+      "queryKeys": [],
+      "totalBodyBytes": 52,
+      "maxBodyBytes": 52,
+      "firstSeen": "2026-11-22T17:57:26.457Z",
+      "lastSeen": "2026-11-22T17:57:26.457Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/release_notes/status/"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/dashboard/services_lite",
+      "count": 1,
+      "statuses": {
+        "200": 1
+      },
+      "mime": {
+        "application/json": 1
+      },
+      "queryKeys": [],
+      "totalBodyBytes": 404932,
+      "maxBodyBytes": 404932,
+      "firstSeen": "2026-11-22T17:57:41.025Z",
+      "lastSeen": "2026-11-22T17:57:41.025Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/dashboard/services_lite"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/dashboard/services_lite/charts",
+      "count": 1,
+      "statuses": {
+        "200": 1
+      },
+      "mime": {
+        "application/json": 1
+      },
+      "queryKeys": [],
+      "totalBodyBytes": 91894,
+      "maxBodyBytes": 91894,
+      "firstSeen": "2026-11-22T17:57:41.026Z",
+      "lastSeen": "2026-11-22T17:57:41.026Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/dashboard/services_lite/charts"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/dashboard/services_lite/datasets",
+      "count": 1,
+      "statuses": {
+        "200": 1
+      },
+      "mime": {
+        "application/json": 1
+      },
+      "queryKeys": [],
+      "totalBodyBytes": 526156,
+      "maxBodyBytes": 526156,
+      "firstSeen": "2026-11-22T17:57:41.026Z",
+      "lastSeen": "2026-11-22T17:57:41.026Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/dashboard/services_lite/datasets"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/manage/dynamic-plugins/",
+      "count": 1,
+      "statuses": {
+        "200": 1
+      },
+      "mime": {
+        "application/json": 1
+      },
+      "queryKeys": [],
+      "totalBodyBytes": 6093,
+      "maxBodyBytes": 6093,
+      "firstSeen": "2026-11-22T17:57:43.836Z",
+      "lastSeen": "2026-11-22T17:57:43.836Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/manage/dynamic-plugins/"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/dashboard/favorite_status/",
+      "count": 1,
+      "statuses": {
+        "200": 1
+      },
+      "mime": {
+        "application/json": 1
+      },
+      "queryKeys": [
+        "q"
+      ],
+      "totalBodyBytes": 37,
+      "maxBodyBytes": 37,
+      "firstSeen": "2026-11-22T17:58:49.228Z",
+      "lastSeen": "2026-11-22T17:58:49.228Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/dashboard/favorite_status/?q=!(977)"
+      ]
+    },
+    {
+      "method": "GET",
+      "host": "superset.svc.vkusvill.ru",
+      "path": "/api/v1/chart/data/qc-5c6c9257f1f62234c723ae9ca9051a32",
+      "count": 1,
+      "statuses": {
+        "200": 1
+      },
+      "mime": {
+        "application/json": 1
+      },
+      "queryKeys": [],
+      "totalBodyBytes": 1217,
+      "maxBodyBytes": 1217,
+      "firstSeen": "2026-11-22T18:00:18.124Z",
+      "lastSeen": "2026-11-22T18:00:18.124Z",
+      "sampleUrls": [
+        "https://superset.svc.vkusvill.ru/api/v1/chart/data/qc-5c6c9257f1f62234c723ae9ca9051a32"
+      ]
+    }
+  ]
+}

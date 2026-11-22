@@ -1,0 +1,1257 @@
+{
+ "harSelects": [
+  {
+   "native_filter_id": "NATIVE_FILTER-CbBXkIUJh",
+   "dataset_id": 3035,
+   "column": null,
+   "defaultValue": [
+    "date_supply"
+   ],
+   "multiSelect": null,
+   "inverseSelection": null,
+   "rowLimit": null
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-r2GJE3I0A",
+   "dataset_id": 3035,
+   "column": null,
+   "defaultValue": [
+    "P1D"
+   ],
+   "multiSelect": null,
+   "inverseSelection": null,
+   "rowLimit": null
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-DlKAqz-JayIroaGrCftKG",
+   "dataset_id": 7000,
+   "column": "zone_cluster",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-3nbaRVKfX",
+   "dataset_id": 3100,
+   "column": "head_of_delivery",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-xlVj4C9dy",
+   "dataset_id": 2694,
+   "column": "leader",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-6vljMpWnE",
+   "dataset_id": 2693,
+   "column": "senior",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-gatz_jDPm",
+   "dataset_id": 2693,
+   "column": "senior",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": true,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-XXy8xOi91",
+   "dataset_id": 3101,
+   "column": "leader_express",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-z1-mWlm3y",
+   "dataset_id": 2698,
+   "column": "senior_express",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-pJcK9zDVK",
+   "dataset_id": 2709,
+   "column": "courier",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-npsejQJM-",
+   "dataset_id": 2710,
+   "column": "id_courier",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-k_iv6Sgti",
+   "dataset_id": 3495,
+   "column": "courier_type",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-hRGGlQCAi",
+   "dataset_id": 3102,
+   "column": "senior_of_courier",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-67tISJ6ZO",
+   "dataset_id": 3103,
+   "column": "geo",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-UGHy82Pfu",
+   "dataset_id": 2675,
+   "column": "id_group",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-BEEaC8Lf5",
+   "dataset_id": 3104,
+   "column": "pom",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-se8ZYyxyp",
+   "dataset_id": 3499,
+   "column": "pom_now",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-xY1pKYb8B",
+   "dataset_id": 2293,
+   "column": "shopno",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-R1ghs4mqE",
+   "dataset_id": 2293,
+   "column": "shopno",
+   "defaultValue": [
+    "99888",
+    "8519"
+   ],
+   "multiSelect": true,
+   "inverseSelection": true,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-VRXzIxA6G",
+   "dataset_id": 2679,
+   "column": "region_tt",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-L6BXBZT_2",
+   "dataset_id": 2679,
+   "column": "region_tt",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": true,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-3n4TScFj5",
+   "dataset_id": 2685,
+   "column": "area_tt",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-7BpfA7IZq",
+   "dataset_id": 2848,
+   "column": "feature_tt",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-B4_FPofcG",
+   "dataset_id": 3106,
+   "column": "out_of_mkad",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-KdgYQaPnk",
+   "dataset_id": 2712,
+   "column": "in_dark_area",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-5tyXLb8va",
+   "dataset_id": 2667,
+   "column": "dark",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-cfAYRec_z",
+   "dataset_id": 2687,
+   "column": "name_service",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-GpNbUH5FK",
+   "dataset_id": 2323,
+   "column": "night",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-Y15ZQLgnX",
+   "dataset_id": 2324,
+   "column": "slots",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-f_O8GRO5PP",
+   "dataset_id": 5874,
+   "column": "dk_flag",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-5tUZHPL2W",
+   "dataset_id": 3108,
+   "column": "delivery_type_group",
+   "defaultValue": [
+    "Курьеры",
+    "Такси"
+   ],
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-0t5GHtUT8",
+   "dataset_id": 2690,
+   "column": "delivery_type",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-OdYt6B3Ro",
+   "dataset_id": 2701,
+   "column": "id_general",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-PWs1LTCNm",
+   "dataset_id": 2318,
+   "column": "id_order",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-iTDG1ffag",
+   "dataset_id": 3109,
+   "column": "name_partner",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-Gp0QYZHOif",
+   "dataset_id": 4730,
+   "column": "name_partner_type",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-OT42hfINU",
+   "dataset_id": 2674,
+   "column": "name_pay_way",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-zbMRIvVG6",
+   "dataset_id": 3110,
+   "column": "status_name",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-WL3pY-QUI",
+   "dataset_id": 2692,
+   "column": "source_name",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-fgVT3SVpz",
+   "dataset_id": 2735,
+   "column": "luck_or_fall",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER--OC9K6dLYWEUY4k-7RQEG",
+   "dataset_id": 3035,
+   "column": "dk_flag",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-TEFBB_Ae4cOUelP2LR54k",
+   "dataset_id": 7008,
+   "column": "cafebakery_shopno",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-S8k3NK1fAF",
+   "dataset_id": 3035,
+   "column": "is_returned_store",
+   "defaultValue": null,
+   "multiSelect": false,
+   "inverseSelection": false,
+   "rowLimit": 2000
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-uV3-lPC6bM",
+   "dataset_id": 5428,
+   "column": "return_due_to_customer_fault",
+   "defaultValue": null,
+   "multiSelect": true,
+   "inverseSelection": true,
+   "rowLimit": 2000
+  }
+ ],
+ "detail": [
+  {
+   "native_filter_id": "NATIVE_FILTER-CbBXkIUJh",
+   "dataset_id": 3035,
+   "column": null,
+   "har_default": [
+    "date_supply"
+   ],
+   "har_multi_select": null,
+   "local_candidates": [
+    {
+     "filter_name": "Отправная дата отчета",
+     "default_value": [
+      "date_supply"
+     ],
+     "multi_select": false
+    },
+    {
+     "filter_name": "Грануляция времени (шаг)",
+     "default_value": [
+      "P1D"
+     ],
+     "multi_select": false
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-r2GJE3I0A",
+   "dataset_id": 3035,
+   "column": null,
+   "har_default": [
+    "P1D"
+   ],
+   "har_multi_select": null,
+   "local_candidates": [
+    {
+     "filter_name": "Отправная дата отчета",
+     "default_value": [
+      "date_supply"
+     ],
+     "multi_select": false
+    },
+    {
+     "filter_name": "Грануляция времени (шаг)",
+     "default_value": [
+      "P1D"
+     ],
+     "multi_select": false
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-DlKAqz-JayIroaGrCftKG",
+   "dataset_id": 7000,
+   "column": "zone_cluster",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Куст",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-3nbaRVKfX",
+   "dataset_id": 3100,
+   "column": "head_of_delivery",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Управляющий по доставке",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-xlVj4C9dy",
+   "dataset_id": 2694,
+   "column": "leader",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Руководитель",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-6vljMpWnE",
+   "dataset_id": 2693,
+   "column": "senior",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Куратор",
+     "default_value": null,
+     "multi_select": true
+    },
+    {
+     "filter_name": "Куратор (исключающий)",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-gatz_jDPm",
+   "dataset_id": 2693,
+   "column": "senior",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Куратор",
+     "default_value": null,
+     "multi_select": true
+    },
+    {
+     "filter_name": "Куратор (исключающий)",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-XXy8xOi91",
+   "dataset_id": 3101,
+   "column": "leader_express",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Руководитель по экспресс-доставке",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-z1-mWlm3y",
+   "dataset_id": 2698,
+   "column": "senior_express",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Куратор по экспресс-доставке",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-pJcK9zDVK",
+   "dataset_id": 2709,
+   "column": "courier",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Курьер",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-npsejQJM-",
+   "dataset_id": 2710,
+   "column": "id_courier",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "id курьера",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-k_iv6Sgti",
+   "dataset_id": 3495,
+   "column": "courier_type",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Тип курьера",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-hRGGlQCAi",
+   "dataset_id": 3102,
+   "column": "senior_of_courier",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Куратор курьера",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-67tISJ6ZO",
+   "dataset_id": 3103,
+   "column": "geo",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Ответственный по гео",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-UGHy82Pfu",
+   "dataset_id": 2675,
+   "column": "id_group",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Группа розницы",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-BEEaC8Lf5",
+   "dataset_id": 3104,
+   "column": "pom",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Помощник розницы",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-se8ZYyxyp",
+   "dataset_id": 3499,
+   "column": "pom_now",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Текущий помощник розницы",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-xY1pKYb8B",
+   "dataset_id": 2293,
+   "column": "shopno",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Номер ТТ",
+     "default_value": null,
+     "multi_select": true
+    },
+    {
+     "filter_name": "Номер ТТ (исключающий)",
+     "default_value": [
+      "99888",
+      "8519"
+     ],
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-R1ghs4mqE",
+   "dataset_id": 2293,
+   "column": "shopno",
+   "har_default": [
+    "99888",
+    "8519"
+   ],
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Номер ТТ",
+     "default_value": null,
+     "multi_select": true
+    },
+    {
+     "filter_name": "Номер ТТ (исключающий)",
+     "default_value": [
+      "99888",
+      "8519"
+     ],
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-VRXzIxA6G",
+   "dataset_id": 2679,
+   "column": "region_tt",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Регион ТТ",
+     "default_value": null,
+     "multi_select": true
+    },
+    {
+     "filter_name": "Регион ТТ (исключающий)",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-L6BXBZT_2",
+   "dataset_id": 2679,
+   "column": "region_tt",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Регион ТТ",
+     "default_value": null,
+     "multi_select": true
+    },
+    {
+     "filter_name": "Регион ТТ (исключающий)",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-3n4TScFj5",
+   "dataset_id": 2685,
+   "column": "area_tt",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Район / город ТТ",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-7BpfA7IZq",
+   "dataset_id": 2848,
+   "column": "feature_tt",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Признак ТТ",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-B4_FPofcG",
+   "dataset_id": 3106,
+   "column": "out_of_mkad",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Расположение за МКАД",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-KdgYQaPnk",
+   "dataset_id": 2712,
+   "column": "in_dark_area",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Нахождение в зоне ДС",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-5tyXLb8va",
+   "dataset_id": 2667,
+   "column": "dark",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Номер ДС, в зоне которого ТТ",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-cfAYRec_z",
+   "dataset_id": 2687,
+   "column": "name_service",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Сервис",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-GpNbUH5FK",
+   "dataset_id": 2323,
+   "column": "night",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Ночной заказ",
+     "default_value": null,
+     "multi_select": true
+    },
+    {
+     "filter_name": "Ночной заказ",
+     "default_value": [
+      "1"
+     ],
+     "multi_select": false
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-Y15ZQLgnX",
+   "dataset_id": 2324,
+   "column": "slots",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Слотовый заказ",
+     "default_value": null,
+     "multi_select": true
+    },
+    {
+     "filter_name": "Слотовый заказ",
+     "default_value": [
+      1
+     ],
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-f_O8GRO5PP",
+   "dataset_id": 5874,
+   "column": "dk_flag",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Дарккитчен",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-5tUZHPL2W",
+   "dataset_id": 3108,
+   "column": "delivery_type_group",
+   "har_default": [
+    "Курьеры",
+    "Такси"
+   ],
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Тип службы",
+     "default_value": [
+      "Курьеры",
+      "Такси"
+     ],
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-0t5GHtUT8",
+   "dataset_id": 2690,
+   "column": "delivery_type",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Служба",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-OdYt6B3Ro",
+   "dataset_id": 2701,
+   "column": "id_general",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Номер генерального заказа",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-PWs1LTCNm",
+   "dataset_id": 2318,
+   "column": "id_order",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Номер заказа",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-iTDG1ffag",
+   "dataset_id": 3109,
+   "column": "name_partner",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Партнер",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-Gp0QYZHOif",
+   "dataset_id": 4730,
+   "column": "name_partner_type",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "<ФИО>",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-OT42hfINU",
+   "dataset_id": 2674,
+   "column": "name_pay_way",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Способ оплаты",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-zbMRIvVG6",
+   "dataset_id": 3110,
+   "column": "status_name",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Статус заказа",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-WL3pY-QUI",
+   "dataset_id": 2692,
+   "column": "source_name",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Источник заказа",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-fgVT3SVpz",
+   "dataset_id": 2735,
+   "column": "luck_or_fall",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Доставка в срок",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER--OC9K6dLYWEUY4k-7RQEG",
+   "dataset_id": 3035,
+   "column": "dk_flag",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Кафе-пекарня в заказе",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-TEFBB_Ae4cOUelP2LR54k",
+   "dataset_id": 7008,
+   "column": "cafebakery_shopno",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Кафе-пекарня в магазине",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-S8k3NK1fAF",
+   "dataset_id": 3035,
+   "column": "is_returned_store",
+   "har_default": null,
+   "har_multi_select": false,
+   "local_candidates": [
+    {
+     "filter_name": "Вернулся в магазин",
+     "default_value": null,
+     "multi_select": false
+    }
+   ]
+  },
+  {
+   "native_filter_id": "NATIVE_FILTER-uV3-lPC6bM",
+   "dataset_id": 5428,
+   "column": "return_due_to_customer_fault",
+   "har_default": null,
+   "har_multi_select": true,
+   "local_candidates": [
+    {
+     "filter_name": "Причина возврата в магазин (исключающий)",
+     "default_value": null,
+     "multi_select": true
+    }
+   ]
+  }
+ ],
+ "notExercised": [
+  {
+   "dashboard_id": 977,
+   "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+   "filter_name": "Фильтр по времени (сегодня)",
+   "filter_type": "filter_time",
+   "dataset_id": null,
+   "column_name": null,
+   "default_value": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "multi_select": false,
+   "default_to_first": null
+  },
+  {
+   "dashboard_id": 977,
+   "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+   "filter_name": "Группировка",
+   "filter_type": "filter_groupby",
+   "dataset_id": 5438,
+   "column_name": [
+    " Управляющий по доставке",
+    "За МКАДом",
+    " Регион ТТ",
+    " Район / город ТТ",
+    " Служба",
+    " Номер ТТ",
+    " Группа розницы",
+    " Сервис",
+    " Ответственный по гео",
+    " Руководитель",
+    " Руководитель по экспресс-лоставке",
+    " Наименование ТТ",
+    " Курьер",
+    "Куратор курьера",
+    " Куратор",
+    "Тип сервиса + длительность",
+    "name_service",
+    "Тип сервиса",
+    "Длительность доставки",
+    " id курьера",
+    "Тип партнера",
+    "Тип ПСЕ",
+    "restr_taking_time",
+    "restr_orders",
+    "Куст"
+   ],
+   "default_value": null,
+   "multi_select": true,
+   "default_to_first": null
+  },
+  {
+   "dashboard_id": 977,
+   "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+   "filter_name": "Группировка",
+   "filter_type": "filter_groupby",
+   "dataset_id": 3035,
+   "column_name": [
+    "За МКАДом",
+    "kontr_job_delivery",
+    "type_service",
+    "nova_kontr",
+    " Курьер",
+    " Куратор",
+    "pom",
+    "head_of_delivery",
+    "region_tt",
+    "pom_now",
+    "job_type_name",
+    "city_tt",
+    "leader_express",
+    "name_tt",
+    "courier_kontr",
+    "user_code",
+    "courier",
+    " Регион ТТ",
+    "delivery_type",
+    " Руководитель",
+    "night_and_others",
+    "Куратор курьера",
+    " Номер ТТ",
+    "area_tt",
+    "Тип ПСЕ",
+    "senior_of_courier",
+    "courier_type",
+    "delivery_type_group",
+    "senior"
+   ],
+   "default_value": null,
+   "multi_select": true,
+   "default_to_first": null
+  },
+  {
+   "dashboard_id": 977,
+   "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+   "filter_name": "Тип сервиса + длительность доставки",
+   "filter_type": "filter_select",
+   "dataset_id": 5778,
+   "column_name": "Тип сервиса + длительность",
+   "default_value": null,
+   "multi_select": true,
+   "default_to_first": null
+  },
+  {
+   "dashboard_id": 977,
+   "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+   "filter_name": "Тип сервиса",
+   "filter_type": "filter_select",
+   "dataset_id": 5711,
+   "column_name": "type_service",
+   "default_value": null,
+   "multi_select": true,
+   "default_to_first": null
+  },
+  {
+   "dashboard_id": 977,
+   "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+   "filter_name": "Длительность доставки",
+   "filter_type": "filter_select",
+   "dataset_id": 5722,
+   "column_name": "Длительность доставки",
+   "default_value": null,
+   "multi_select": true,
+   "default_to_first": null
+  },
+  {
+   "dashboard_id": 977,
+   "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+   "filter_name": "Тип ПСЕ",
+   "filter_type": "filter_select",
+   "dataset_id": 5911,
+   "column_name": "union_pse_type",
+   "default_value": null,
+   "multi_select": false,
+   "default_to_first": null
+  },
+  {
+   "dashboard_id": 977,
+   "dashboard_title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+   "filter_name": "Исключение самовывоз",
+   "filter_type": "filter_select",
+   "dataset_id": 5438,
+   "column_name": "name_service",
+   "default_value": [
+    "Самовывоз сейчас                                  "
+   ],
+   "multi_select": true,
+   "default_to_first": null
+  }
+ ]
+}

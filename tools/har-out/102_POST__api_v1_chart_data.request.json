@@ -1,0 +1,990 @@
+{
+  "datasource": {
+    "id": 3035,
+    "type": "table"
+  },
+  "force": false,
+  "queries": [
+    {
+      "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+      "granularity": "date_supply",
+      "filters": [
+        {
+          "col": "shopno",
+          "op": "IN",
+          "val": [
+            "7745"
+          ]
+        },
+        {
+          "col": "shopno",
+          "op": "NOT IN",
+          "val": [
+            "99888",
+            "8519"
+          ]
+        },
+        {
+          "col": "feature_tt",
+          "op": "IN",
+          "val": [
+            "ДаркСтор"
+          ]
+        },
+        {
+          "col": "delivery_type_group",
+          "op": "IN",
+          "val": [
+            "Курьеры",
+            "Такси"
+          ]
+        }
+      ],
+      "extras": {
+        "time_grain_sqla": "P1D",
+        "having": "",
+        "where": ""
+      },
+      "applied_time_extras": {},
+      "columns": [
+        "name_service"
+      ],
+      "metrics": [
+        "qty_orders_delivered"
+      ],
+      "orderby": [
+        [
+          "qty_orders_delivered",
+          false
+        ]
+      ],
+      "annotation_layers": [],
+      "row_limit": 10000,
+      "series_columns": [
+        "name_service"
+      ],
+      "series_limit": 0,
+      "group_others_when_limit_reached": false,
+      "order_desc": true,
+      "url_params": {},
+      "custom_params": {},
+      "custom_form_data": {},
+      "is_timeseries": true,
+      "time_offsets": [],
+      "post_processing": [
+        {
+          "operation": "pivot",
+          "options": {
+            "index": [
+              "__timestamp"
+            ],
+            "columns": [
+              "name_service"
+            ],
+            "aggregates": {
+              "qty_orders_delivered": {
+                "operator": "mean"
+              }
+            },
+            "drop_missing_columns": false,
+            "sort": true
+          }
+        },
+        {
+          "operation": "rename",
+          "options": {
+            "columns": {
+              "qty_orders_delivered": null
+            },
+            "level": 0,
+            "inplace": true
+          }
+        },
+        {
+          "operation": "flatten"
+        }
+      ]
+    }
+  ],
+  "form_data": {
+    "datasource": "3035__table",
+    "viz_type": "echarts_area",
+    "slice_id": 20623,
+    "url_params": {},
+    "matrixify_show_column_headers": true,
+    "matrixify_mode_columns": "metrics",
+    "matrixify_dimension_selection_mode_columns": "members",
+    "matrixify_dimension_columns": {
+      "dimension": "",
+      "values": []
+    },
+    "matrixify_topn_value_columns": 10,
+    "matrixify_topn_order_columns": "desc",
+    "matrixify_show_row_labels": true,
+    "matrixify_mode_rows": "metrics",
+    "matrixify_dimension_selection_mode_rows": "members",
+    "matrixify_dimension_rows": {
+      "dimension": "",
+      "values": []
+    },
+    "matrixify_topn_value_rows": 10,
+    "matrixify_topn_order_rows": "desc",
+    "matrixify_row_height": 300,
+    "matrixify_fit_columns_dynamically": true,
+    "matrixify_charts_per_row": 4,
+    "time_grain_sqla": "P1W",
+    "x_axis_sort_asc": true,
+    "metrics": [
+      "qty_orders_delivered"
+    ],
+    "groupby": [
+      "name_service"
+    ],
+    "adhoc_filters": [],
+    "order_desc": true,
+    "row_limit": 10000,
+    "truncate_metric": true,
+    "show_empty_columns": true,
+    "comparison_type": "values",
+    "annotation_layers": [],
+    "forecastPeriods": 10,
+    "forecastInterval": 0.8,
+    "x_axis_title": "",
+    "x_axis_title_margin": 30,
+    "y_axis_title": "Кол-во ген. заказов в статусе Успешно завершен",
+    "y_axis_title_margin": 75,
+    "y_axis_title_position": "Left",
+    "sort_series_type": "sum",
+    "sort_series_ascending": false,
+    "color_scheme": "googleCategory10c",
+    "time_shift_color": true,
+    "seriesType": "line",
+    "opacity": 0.2,
+    "show_value": true,
+    "stack": "Stack",
+    "only_total": true,
+    "percentage_threshold": 10,
+    "show_extra_controls": true,
+    "markerEnabled": true,
+    "markerSize": 4,
+    "show_legend": true,
+    "legendType": "scroll",
+    "legendOrientation": "left",
+    "legendMargin": 300,
+    "x_axis_time_format": "%d.%m.%Y",
+    "xAxisLabelInterval": "auto",
+    "rich_tooltip": true,
+    "showTooltipTotal": true,
+    "tooltipSortByMetric": true,
+    "tooltipTimeFormat": "%d.%m.%Y",
+    "y_axis_format": ",d",
+    "minorSplitLine": false,
+    "truncateXAxis": true,
+    "y_axis_bounds": [
+      null,
+      null
+    ],
+    "bar_label_position": "top",
+    "color_pn": false,
+    "dashboards": [
+      697
+    ],
+    "extra_form_data": {
+      "filters": [
+        {
+          "col": "shopno",
+          "op": "IN",
+          "val": [
+            "7745"
+          ]
+        },
+        {
+          "col": "shopno",
+          "op": "NOT IN",
+          "val": [
+            "99888",
+            "8519"
+          ]
+        },
+        {
+          "col": "feature_tt",
+          "op": "IN",
+          "val": [
+            "ДаркСтор"
+          ]
+        },
+        {
+          "col": "delivery_type_group",
+          "op": "IN",
+          "val": [
+            "Курьеры",
+            "Такси"
+          ]
+        }
+      ],
+      "granularity_sqla": "date_supply",
+      "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+      "time_grain_sqla": "P1D"
+    },
+    "granularity_sqla": "date_supply",
+    "show_cell_bars": false,
+    "time_range": "2024-01-01T00:00:00 : 2024-03-25T00:00:00",
+    "chart_id": 20623,
+    "label_colors": {
+      "1. Оформленные заказы": "#3366cc",
+      "1343M_Лихоборские6": "#dc3912",
+      "1399М_Талдомская15": "#ff9900",
+      "1621М_Михалковская20": "#109618",
+      "1696М_СофьиКовалевской4": "#990099",
+      "2. Кол-во заказов в сборке": "#0099c6",
+      "2569М_Коровинское23": "#dd4477",
+      "2572Ш_Новая10": "#66aa00",
+      "3. Кол-во собранных заказов": "#b82e2e",
+      "3283Ш_Базовская15": "#316395",
+      "3321Ш_Ангарская53": "#3366cc",
+      "3775М_Онежская11": "#dc3912",
+      "4. Кол-во заказов в доставке": "#ff9900",
+      "845М_Михалковская4": "#109618",
+      "COUNT(minute_all)": "#990099",
+      "COUNT(minute_collect)": "#0099c6",
+      "COUNT(minute_collect_delivery)": "#dd4477",
+      "COUNT(minute_delivery)": "#66aa00",
+      "COUNT(minute_start_collect)": "#b82e2e",
+      "COUNT(minute_wait1)": "#316395",
+      "Cр. время сборки": "#3366cc",
+      "Cр. время сборки общее": "#dc3912",
+      "Dostavista": "#ff9900",
+      "Gett": "#109618",
+      "Net-fi": "#990099",
+      "ВайтСтор": "#0099c6",
+      "Время доставки": "#dd4477",
+      "Время ожидания доставки": "#66aa00",
+      "Время ожидания сборки": "#b82e2e",
+      "Время сборки": "#316395",
+      "ДаркСтор": "#3366cc",
+      "Доставка": "#dc3912",
+      "Доставка GetTaxi ВВ": "#ff9900",
+      "Доставка Net-fi ВВ": "#109618",
+      "<ФИО> и Забери": "#990099",
+      "Доставка ЗиЗ-2": "#0099c6",
+      "Доставка ЗиЗ-3": "#dd4477",
+      "Доставка ЗиЗ-4": "#66aa00",
+      "<ФИО>": "#b82e2e",
+      "<ФИО>": "#316395",
+      "Доставка СитиМобил  ВВ": "#3366cc",
+      "Доставка ЧекБокс  ВВ": "#dc3912",
+      "<ФИО>.Такси ВВ": "#ff9900",
+      "Доставка на завтра": "#109618",
+      "Доставка сейчас": "#990099",
+      "Кол-во заказов в доставке": "#0099c6",
+      "Кол-во заказов в сборке": "#dd4477",
+      "Кол-во заказов, дост, курьерами": "#66aa00",
+      "Кол-во заказов, дост. народными курьерами": "#b82e2e",
+      "Кол-во заказов, дост. такси": "#316395",
+      "Кол-во заказов, дост. штатными курьерами": "#3366cc",
+      "Кол-во заказов, недоставленных в назначенный день": "#dc3912",
+      "Кол-во заказов, оформленных на вчера, но не доставленных": "#ff9900",
+      "Кол-во заказов, оформленных на сегодня, но не доставленных": "#109618",
+      "Кол-во заказов, переназначенных на сегодня": "#990099",
+      "Кол-во собр. заказов": "#0099c6",
+      "Не завершили в назначенный день": "#dd4477",
+      "Не завершили к настоящему моменту": "#66aa00",
+      "Ожидание доставки": "#b82e2e",
+      "Ожидание сборки": "#316395",
+      "Оформленные заказы": "#3366cc",
+      "Сборка": "#dc3912",
+      "СитиМобил": "#ff9900",
+      "Собственные курьеры": "#109618",
+      "Ср. время ожид. сборки": "#990099",
+      "Среднее время ожид. сборки": "#0099c6",
+      "Среднее время сборки": "#dd4477",
+      "Среднее общее время сборки": "#66aa00",
+      "ЧекБокс": "#b82e2e",
+      "Яндекс": "#316395"
+    },
+    "shared_label_colors": [],
+    "map_label_colors": {},
+    "dashboard_color_scheme": "googleCategory10c",
+    "own_color_scheme": "SUPERSET_DEFAULT",
+    "extra_filters": [],
+    "dataMask": {
+      "20161": {
+        "id": "20161",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20209": {
+        "id": "20209",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20216": {
+        "id": "20216",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20224": {
+        "id": "20224",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20233": {
+        "id": "20233",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20234": {
+        "id": "20234",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20235": {
+        "id": "20235",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20281": {
+        "id": "20281",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20403": {
+        "id": "20403",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20404": {
+        "id": "20404",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20405": {
+        "id": "20405",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20445": {
+        "id": "20445",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20450": {
+        "id": "20450",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20480": {
+        "id": "20480",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20481": {
+        "id": "20481",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20493": {
+        "id": "20493",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20502": {
+        "id": "20502",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20512": {
+        "id": "20512",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20623": {
+        "id": "20623",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "20624": {
+        "id": "20624",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "23266": {
+        "id": "23266",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "23267": {
+        "id": "23267",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "23268": {
+        "id": "23268",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-CbBXkIUJh": {
+        "id": "NATIVE_FILTER-CbBXkIUJh",
+        "extraFormData": {
+          "granularity_sqla": "date_supply"
+        },
+        "filterState": {
+          "value": [
+            "date_supply"
+          ]
+        },
+        "ownState": {}
+      },
+      "NATIVE_FILTER-PaUit8SbF": {
+        "id": "NATIVE_FILTER-PaUit8SbF",
+        "extraFormData": {
+          "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+        },
+        "filterState": {
+          "value": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+        },
+        "ownState": {}
+      },
+      "NATIVE_FILTER-r2GJE3I0A": {
+        "id": "NATIVE_FILTER-r2GJE3I0A",
+        "extraFormData": {
+          "time_grain_sqla": "P1D"
+        },
+        "filterState": {
+          "label": "День",
+          "value": [
+            "P1D"
+          ]
+        },
+        "ownState": {}
+      },
+      "NATIVE_FILTER-DofwS_6i8": {
+        "id": "NATIVE_FILTER-DofwS_6i8",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-Ge2yiYkB4msUcvStZv1W5": {
+        "id": "NATIVE_FILTER-Ge2yiYkB4msUcvStZv1W5",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-0QLlIyQTNh": {
+        "id": "NATIVE_FILTER-0QLlIyQTNh",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-DlKAqz-JayIroaGrCftKG": {
+        "id": "NATIVE_FILTER-DlKAqz-JayIroaGrCftKG",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER_DIVIDER-epwhHQlk-": {
+        "id": "NATIVE_FILTER_DIVIDER-epwhHQlk-",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-3nbaRVKfX": {
+        "id": "NATIVE_FILTER-3nbaRVKfX",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-xlVj4C9dy": {
+        "id": "NATIVE_FILTER-xlVj4C9dy",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-6vljMpWnE": {
+        "id": "NATIVE_FILTER-6vljMpWnE",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-gatz_jDPm": {
+        "id": "NATIVE_FILTER-gatz_jDPm",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-XXy8xOi91": {
+        "id": "NATIVE_FILTER-XXy8xOi91",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-z1-mWlm3y": {
+        "id": "NATIVE_FILTER-z1-mWlm3y",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-pJcK9zDVK": {
+        "id": "NATIVE_FILTER-pJcK9zDVK",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-npsejQJM-": {
+        "id": "NATIVE_FILTER-npsejQJM-",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-k_iv6Sgti": {
+        "id": "NATIVE_FILTER-k_iv6Sgti",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-hRGGlQCAi": {
+        "id": "NATIVE_FILTER-hRGGlQCAi",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-67tISJ6ZO": {
+        "id": "NATIVE_FILTER-67tISJ6ZO",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-UGHy82Pfu": {
+        "id": "NATIVE_FILTER-UGHy82Pfu",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-BEEaC8Lf5": {
+        "id": "NATIVE_FILTER-BEEaC8Lf5",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-se8ZYyxyp": {
+        "id": "NATIVE_FILTER-se8ZYyxyp",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER_DIVIDER-x8y_VYrhB": {
+        "id": "NATIVE_FILTER_DIVIDER-x8y_VYrhB",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-xY1pKYb8B": {
+        "id": "NATIVE_FILTER-xY1pKYb8B",
+        "extraFormData": {
+          "filters": [
+            {
+              "col": "shopno",
+              "op": "IN",
+              "val": [
+                "7745"
+              ]
+            }
+          ]
+        },
+        "filterState": {
+          "label": "7745",
+          "value": [
+            "7745"
+          ],
+          "excludeFilterValues": true
+        },
+        "ownState": {}
+      },
+      "NATIVE_FILTER-R1ghs4mqE": {
+        "id": "NATIVE_FILTER-R1ghs4mqE",
+        "extraFormData": {
+          "filters": [
+            {
+              "col": "shopno",
+              "op": "NOT IN",
+              "val": [
+                "99888",
+                "8519"
+              ]
+            }
+          ]
+        },
+        "filterState": {
+          "validateMessage": false,
+          "label": "99888, 8519 (не включительно)",
+          "value": [
+            "99888",
+            "8519"
+          ],
+          "dataLength": 1,
+          "excludeFilterValues": true
+        },
+        "ownState": {},
+        "__cache": {
+          "validateMessage": false,
+          "validateStatus": false,
+          "label": "99888, 8519 (не включительно)",
+          "value": [
+            "99888",
+            "8519"
+          ],
+          "dataLength": 1
+        }
+      },
+      "NATIVE_FILTER-VRXzIxA6G": {
+        "id": "NATIVE_FILTER-VRXzIxA6G",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-L6BXBZT_2": {
+        "id": "NATIVE_FILTER-L6BXBZT_2",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-3n4TScFj5": {
+        "id": "NATIVE_FILTER-3n4TScFj5",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-7BpfA7IZq": {
+        "id": "NATIVE_FILTER-7BpfA7IZq",
+        "extraFormData": {
+          "filters": [
+            {
+              "col": "feature_tt",
+              "op": "IN",
+              "val": [
+                "ДаркСтор"
+              ]
+            }
+          ]
+        },
+        "filterState": {
+          "label": "ДаркСтор",
+          "value": [
+            "ДаркСтор"
+          ],
+          "excludeFilterValues": true
+        },
+        "ownState": {}
+      },
+      "NATIVE_FILTER-B4_FPofcG": {
+        "id": "NATIVE_FILTER-B4_FPofcG",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-KdgYQaPnk": {
+        "id": "NATIVE_FILTER-KdgYQaPnk",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-5tyXLb8va": {
+        "id": "NATIVE_FILTER-5tyXLb8va",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER_DIVIDER-8Tw9JLobG": {
+        "id": "NATIVE_FILTER_DIVIDER-8Tw9JLobG",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-cfAYRec_z": {
+        "id": "NATIVE_FILTER-cfAYRec_z",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-qZbbO6CBY": {
+        "id": "NATIVE_FILTER-qZbbO6CBY",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-tiEIsyKnzq": {
+        "id": "NATIVE_FILTER-tiEIsyKnzq",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-GpNbUH5FK": {
+        "id": "NATIVE_FILTER-GpNbUH5FK",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-S3GIO6-fP": {
+        "id": "NATIVE_FILTER-S3GIO6-fP",
+        "extraFormData": {
+          "filters": [
+            {
+              "col": "night",
+              "op": "IN",
+              "val": [
+                "1"
+              ]
+            }
+          ]
+        },
+        "filterState": {
+          "validateMessage": false,
+          "validateStatus": false,
+          "label": "1",
+          "value": [
+            "1"
+          ],
+          "dataLength": 2
+        },
+        "ownState": {},
+        "__cache": {
+          "validateMessage": false,
+          "validateStatus": false,
+          "label": "1",
+          "value": [
+            "1"
+          ],
+          "dataLength": 2
+        }
+      },
+      "NATIVE_FILTER-Y15ZQLgnX": {
+        "id": "NATIVE_FILTER-Y15ZQLgnX",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-br_39APaZ": {
+        "id": "NATIVE_FILTER-br_39APaZ",
+        "extraFormData": {
+          "filters": [
+            {
+              "col": "slots",
+              "op": "IN",
+              "val": [
+                1
+              ]
+            }
+          ]
+        },
+        "filterState": {
+          "validateMessage": false,
+          "validateStatus": false,
+          "label": "1",
+          "value": [
+            1
+          ],
+          "dataLength": 2
+        },
+        "ownState": {},
+        "__cache": {
+          "validateMessage": false,
+          "validateStatus": false,
+          "label": "1",
+          "value": [
+            1
+          ],
+          "dataLength": 2
+        }
+      },
+      "NATIVE_FILTER-x7pFCue-EE": {
+        "id": "NATIVE_FILTER-x7pFCue-EE",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-f_O8GRO5PP": {
+        "id": "NATIVE_FILTER-f_O8GRO5PP",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-5tUZHPL2W": {
+        "id": "NATIVE_FILTER-5tUZHPL2W",
+        "extraFormData": {
+          "filters": [
+            {
+              "col": "delivery_type_group",
+              "op": "IN",
+              "val": [
+                "Курьеры",
+                "Такси"
+              ]
+            }
+          ]
+        },
+        "filterState": {
+          "validateMessage": false,
+          "label": "Курьеры, Такси",
+          "value": [
+            "Курьеры",
+            "Такси"
+          ],
+          "dataLength": 5,
+          "excludeFilterValues": true
+        },
+        "ownState": {},
+        "__cache": {
+          "validateMessage": false,
+          "validateStatus": false,
+          "label": "Курьеры, Такси",
+          "value": [
+            "Курьеры",
+            "Такси"
+          ],
+          "dataLength": 5
+        }
+      },
+      "NATIVE_FILTER-0t5GHtUT8": {
+        "id": "NATIVE_FILTER-0t5GHtUT8",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-OdYt6B3Ro": {
+        "id": "NATIVE_FILTER-OdYt6B3Ro",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-PWs1LTCNm": {
+        "id": "NATIVE_FILTER-PWs1LTCNm",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-iTDG1ffag": {
+        "id": "NATIVE_FILTER-iTDG1ffag",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-Gp0QYZHOif": {
+        "id": "NATIVE_FILTER-Gp0QYZHOif",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-OT42hfINU": {
+        "id": "NATIVE_FILTER-OT42hfINU",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-zbMRIvVG6": {
+        "id": "NATIVE_FILTER-zbMRIvVG6",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-WL3pY-QUI": {
+        "id": "NATIVE_FILTER-WL3pY-QUI",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-fgVT3SVpz": {
+        "id": "NATIVE_FILTER-fgVT3SVpz",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER--OC9K6dLYWEUY4k-7RQEG": {
+        "id": "NATIVE_FILTER--OC9K6dLYWEUY4k-7RQEG",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-TEFBB_Ae4cOUelP2LR54k": {
+        "id": "NATIVE_FILTER-TEFBB_Ae4cOUelP2LR54k",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-S8k3NK1fAF": {
+        "id": "NATIVE_FILTER-S8k3NK1fAF",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      },
+      "NATIVE_FILTER-1nscCSQ2HS": {
+        "id": "NATIVE_FILTER-1nscCSQ2HS",
+        "extraFormData": {
+          "filters": [
+            {
+              "col": "name_service",
+              "op": "NOT IN",
+              "val": [
+                "Самовывоз сейчас                                  "
+              ]
+            }
+          ]
+        },
+        "filterState": {
+          "validateMessage": false,
+          "validateStatus": false,
+          "label": "Самовывоз сейчас                                   (не включительно)",
+          "value": [
+            "Самовывоз сейчас                                  "
+          ]
+        },
+        "ownState": {},
+        "__cache": {
+          "validateMessage": false,
+          "validateStatus": false,
+          "label": "Самовывоз сейчас                                   (не включительно)",
+          "value": [
+            "Самовывоз сейчас                                  "
+          ]
+        }
+      },
+      "NATIVE_FILTER-uV3-lPC6bM": {
+        "id": "NATIVE_FILTER-uV3-lPC6bM",
+        "extraFormData": {},
+        "filterState": {},
+        "ownState": {}
+      }
+    },
+    "extraControls": {},
+    "dashboardId": 977,
+    "chartChangedOn": 1793949412604,
+    "force": false,
+    "result_format": "json",
+    "result_type": "full"
+  },
+  "result_format": "json",
+  "result_type": "full",
+  "client_id": "DgakqDXUNf-"
+}
