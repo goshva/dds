@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-11-21T21:16:42.090Z",
+  "note": "журнал пополняется на каждом этапе 1.6",
+  "queries": [
+    {
+      "label": "Q-016-000-probe",
+      "database_id": 92,
+      "schema": null,
+      "sql": "SELECT 1 AS probe",
+      "sql_redacted": "SELECT 1 AS probe",
+      "started_at": "2026-11-21T21:16:41.514Z",
+      "guard": "OK",
+      "http_status": 403,
+      "http_body": "{\"message\":\"Forbidden\"}\n",
+      "raw_status": null,
+      "query_id": null,
+      "finished_at": "2026-11-21T21:16:42.089Z",
+      "status": "error",
+      "columns": [],
+      "row_count": 0,
+      "errors": []
+    }
+  ]
+}

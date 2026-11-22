@@ -1,0 +1,3017 @@
+{
+  "generated_at": "2026-11-21T21:14:51.282Z",
+  "api_availability": {
+    "saved_query": {
+      "status": 200,
+      "count": 0
+    },
+    "query_history": {
+      "status": 200,
+      "count": 17
+    }
+  },
+  "datasets": [
+    {
+      "dataset_id": 5939,
+      "table_name": "hr_daily_pers_mentors",
+      "kind": "virtual",
+      "schema": "agile_mart_techaudit",
+      "database": {
+        "id": 96,
+        "name": "ch_10.0.112.21",
+        "backend": "clickhousedb"
+      },
+      "sql_len": 4301,
+      "sources": [
+        "agile_mart_techaudit.actual_assistant_tt",
+        "agile_mart_techaudit.hr_daily_pers",
+        "stage_outer_sources.fio_employee"
+      ],
+      "columns": [
+        {
+          "name": "age",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "age_group",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "bir_flag",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "cfo_name",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "cfo_name_for_pu",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "city_name",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "date",
+          "type": "Nullable(Date)",
+          "is_dttm": true
+        },
+        {
+          "name": "date_dismissed",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_for_mentor",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_start_work",
+          "type": "Nullable(Date)",
+          "is_dttm": true
+        },
+        {
+          "name": "days_in_month",
+          "type": "Nullable(Decimal(76, 32))",
+          "is_dttm": false
+        },
+        {
+          "name": "direct_name",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "employee_code",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "enough_shifts_for_mentor",
+          "type": "UInt64",
+          "is_dttm": false
+        },
+        {
+          "name": "event_date",
+          "type": "Nullable(Date)",
+          "is_dttm": true
+        },
+        {
+          "name": "event_type",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "exp_days",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "experience_txt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "exp_months",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "exp_years_months",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "fio",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "first_shift_date",
+          "type": "Nullable(Date)",
+          "is_dttm": true
+        },
+        {
+          "name": "hdp.id_tt",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_service_position",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "last_shift_date",
+          "type": "Nullable(Date)",
+          "is_dttm": true
+        },
+        {
+          "name": "mentor_at_date",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "mentorfio",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "mentorid",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "mentorid_at_date",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "mentor_in_five",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "mentor_same_tt_date",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "no_pause",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "num_ТТ",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "pause_days",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "pause_groups",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "pause_months",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "period_from",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "person_code",
+          "type": "String",
+          "is_dttm": false
+        },
+        {
+          "name": "position_name",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "progul",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "progul_text",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "pu_code",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "pu_feature_day",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "pu_feature_month",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "pu_feature_week",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "pu_name",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "pu_name_for_tt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "pu_position",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "quantity",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "region_name",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "role",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "second_hire",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "sex",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "shift_rn",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "shift_rn_trainee",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "shift_rn_trainee_by_mentor",
+          "type": "Nullable(UInt64)",
+          "is_dttm": false
+        },
+        {
+          "name": "shifts_qty",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "shortterm_flg",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "soon_hire",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "stake",
+          "type": "Nullable(Decimal(22, 6))",
+          "is_dttm": false
+        },
+        {
+          "name": "status_bir",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "trainee_shift_in_five",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "trainee_shifts_qty",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "tt_cluster",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "TTfeature",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "tt_name",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "type_tt_coalesce",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "type_ТТ",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "under18_flag",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "uvol",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        }
+      ],
+      "metrics": [
+        "count",
+        "dismissals_qty",
+        "employee_qty_lm",
+        "exp_months_dism",
+        "first_shift_empl",
+        "fisrt_shifts_wo_mentor2",
+        "hiring_result",
+        "hirings_qty",
+        "hirings_qty_all",
+        "mentor_empl",
+        "mentor_empl2",
+        "mentor_empl_dism2m",
+        "mentor_empl_still_working",
+        "return_pers",
+        "returns",
+        "trainees_for_mentors_list",
+        "trainees_share",
+        "trainees_worked_1m",
+        "trainees_worked_1m_share",
+        "Кол-во уволенных",
+        "Коэф оттока за выбранный в грануляции период",
+        "Коэф оттока за период",
+        "Коэф текучести за неделю",
+        "Коэф текучести кадров",
+        "Макс стаж для сортировки фильтра",
+        "ССЧ за выбранный в грануляции период",
+        "ССЧ за любой период",
+        "ССЧ за месяц",
+        "ССЧ за неделю",
+        "ССЧ за период_кд",
+        "Численность штатных сотрудников"
+      ],
+      "charts": [
+        {
+          "id": 22527,
+          "name": "Стажерские смены",
+          "viz_type": "table",
+          "datasource_id": 5939
+        },
+        {
+          "id": 24252,
+          "name": "Менторы и кол-во стажеров",
+          "viz_type": "table",
+          "datasource_id": 5939
+        }
+      ],
+      "related_objects": {
+        "status": 200,
+        "keys": [
+          "charts",
+          "dashboards"
+        ]
+      },
+      "chart_query_context": {
+        "chart_id": 22527,
+        "len": 3671,
+        "redacted": "{\"datasource\":{\"id\":5939,\"type\":\"table\"},\"force\":false,\"queries\":[{\"filters\":[{\"col\":\"date\",\"op\":\"TEMPORAL_RANGE\",\"include_boundaries\":{\"left\":true,\"right\":true},\"val\":\"previous month + 1 month : today\"}],\"extras\":{\"having\":\"\",\"where\":\"(shift_rn_trainee is not null and shift_rn between 1 and 5 )\"},\"applied_time_extras\":{},\"columns\":[\"person_code\",\"fio\",\"date\",\"shift_rn_trainee\",\"shift_rn\",\"date_start_work\",\"tt_name\",\"tt_cluster\",\"pu_name\",\"mentorid_at_date\",\"mentor_at_date\"],\"orderby\":[[\"date\",false]],\"annotation_layers\":[],\"row_limit\":50000,\"series_limit\":0,\"group_others_when_limit_reached\":false,\"order_desc\":true,\"url_params\":{},\"custom_params\":{},\"custom_form_data\":{},\"post_processing\":[],\"time_offsets\":[],\"is_timeseries\":false}],\"form_data\":{\"datasource\":\"5939__table\",\"viz_type\":\"table\",\"slice_id\":22527,\"matrixify_show_column_headers\":true,\"matrixify_mode_columns\":\"metrics\",\"matrixify_dimension_selection_mode_columns\":\"members\",\"matrixify_dimension_columns\":{\"dimension\":\"\",\"values\":[]},\"matrixify_topn_value_columns\":10,\"matrixify_topn_order_columns\":\"desc\",\"matrixify_show_row_labels\":true,\"matrixify_mode_rows\":\"metrics\",\"matrixify_dimension_selection_mode_rows\":\"members\",\"matrixify_dimension_rows\":{\"dimension\":\"\",\"values\":[]},\"matrixify_topn_value_rows\":10,\"matrixify_topn_order_rows\":\"desc\",\"matrixify_row_height\":300,\"matrixify_fit_columns_dynamically\":true,\"matrixify_charts_per_row\":3,\"query_mode\":\"raw\",\"groupby\":[\"tt_name\"],\"temporal_columns_lookup\":{\"date\":true,\"date_dismissed\":true,\"date_start_work\":true,\"event_date\":true,\"first_shift_date\":true,\"last_shift_date\":true},\"all_columns\":[\"person_code\",\"fio\",\"date\",\"shift_rn_trainee\",\"shift_rn\",\"date_start_work\",\"tt_name\",\"tt_cluster\",\"pu_name\",\"mentorid_at_date\",\"mentor_at_date\"],\"percent_metrics\":[],\"adhoc_filters\":[{\"activeTab\":null,\"clause\":\"WHERE\",\"comparator\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"filterOptionName\":\"filter_s1xfefopm5_z2kg5xnwwg\",\"isExtra\":false,\"isNew\":false,\"operator\":null,\"sqlExpression\":\"shift_rn_trainee is not null and shift_rn between 1 and 5 \",\"subject\":null},{\"activeTab\":\"Advanced\",\"clause\":\"WHERE\",\"comparator\":\"previous month + 1 month : today\",\"datasourceWarning\":false,\"expressionType\":\"SIMPLE\",\"filterOptionName\":\"filter_2r53wkmjelu_a0qud9q5rwi\",\"includeBoundaries\":{\"left\":true,\"right\":true},\"isExtra\":false,\"isNew\":false,\"operator\":\"TEMPORAL_RANGE\",\"sqlExpression\":null,\"subject\":\"date\"}],\"order_by_cols\":[\"[\\\"date\\\", false]\"],\"order_desc\":true,\"server_page_length\":10,\"row_limit\":\"50000\",\"percent_metric_calculation\":\"row_limit\",\"table_timestamp_format\":\"smart_date\",\"include_search\":true,\"allow_render_html\":true,\"value_font_size\":12,\"header_font_size\":12,\"header_align\":\"auto\",\"column_config\":{\"date\":{\"d3TimeFormat\":\"%Y-%m-%d\"},\"date_start_work\":{\"columnWidth\":100,\"d3TimeFormat\":\"%Y-%m-%d\"},\"fio\":{\"columnWidth\":160},\"mentor_at_date\":{\"columnWidth\":140},\"pu_name\":{\"columnWidth\":140},\"shift_rn\":{\"columnWidth\":60,\"horizontalAlign\":\"right\",\"showCellBars\":false,\"textWrap\":\"normal\",\"truncateLongCells\":false},\"shift_rn_trainee\":{\"columnWidth\":60,\"horizontalAlign\":\"right\",\"showCellBars\":false,\"textWrap\":\"normal\",\"truncateLongCells\":false},\"tt_cluster\":{\"columnWidth\":60},\"tt_name\":{\"columnWidth\":220,\"truncateLongCells\":true}},\"show_cell_bars\":false,\"color_pn\":false,\"comparison_color_scheme\":\"Green\",\"conditional_formatting\":[],\"comparison_type\":\"values\",\"extra_form_data\":{},\"dashboard_color_scheme\":\"supersetColors\",\"color_scheme_scope\":{\"apply_to_all\":true,\"slice_ids\":[]},\"dashboards\":[736,1431],\"force\":false,\"result_format\":\"json\",\"result_type\":\"full\",\"include_time\":false},\"result_format\":\"json\",\"result_type\":\"full\"}"
+      }
+    },
+    {
+      "dataset_id": 7802,
+      "table_name": "shift_time_breakdown",
+      "kind": "virtual",
+      "schema": "agile_mart_operational",
+      "database": {
+        "id": 76,
+        "name": "gp_10.0.112.100/dwh",
+        "backend": "postgresql"
+      },
+      "sql_len": 10498,
+      "sources": [
+        "agile_mart_operational.shifts",
+        "agile_mart_operational.pools",
+        "mart_mixed.darkstore_time",
+        "agile_mart_operational.courier_queue",
+        "ods.v_couriers",
+        "ods.v_tt",
+        "mart.org_unit_actual"
+      ],
+      "columns": [
+        {
+          "name": "assembly_minutes",
+          "type": "DECIMAL",
+          "is_dttm": false
+        },
+        {
+          "name": "bar_label",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "bush",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "courier_name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_minutes",
+          "type": "DECIMAL",
+          "is_dttm": false
+        },
+        {
+          "name": "dt",
+          "type": "DATE",
+          "is_dttm": true
+        },
+        {
+          "name": "id_courier",
+          "type": "LONGINTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "id_shift",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "pu",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "region",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "rn_shift",
+          "type": "LONGINTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "rn_shift_bush",
+          "type": "LONGINTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "rn_shift_pu",
+          "type": "LONGINTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "rn_shift_region",
+          "type": "LONGINTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "rn_shift_tt",
+          "type": "LONGINTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "rn_shift_tu",
+          "type": "LONGINTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "shift_minutes",
+          "type": "DECIMAL",
+          "is_dttm": false
+        },
+        {
+          "name": "shopno",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "tt_name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "tt_type",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "tu",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "useless_minutes",
+          "type": "DECIMAL",
+          "is_dttm": false
+        },
+        {
+          "name": "wait_minutes",
+          "type": "DECIMAL",
+          "is_dttm": false
+        }
+      ],
+      "metrics": [
+        "count"
+      ],
+      "charts": [
+        {
+          "id": 32393,
+          "name": "Время смены по курьерам",
+          "viz_type": "table",
+          "datasource_id": 7802
+        },
+        {
+          "id": 32389,
+          "name": "Время смены по региону",
+          "viz_type": "table",
+          "datasource_id": 7802
+        },
+        {
+          "id": 32388,
+          "name": "Время смены по кусту",
+          "viz_type": "table",
+          "datasource_id": 7802
+        },
+        {
+          "id": 32387,
+          "name": "Время смены по ТТ",
+          "viz_type": "table",
+          "datasource_id": 7802
+        },
+        {
+          "id": 32386,
+          "name": "Время смены по ТУ",
+          "viz_type": "table",
+          "datasource_id": 7802
+        }
+      ],
+      "related_objects": {
+        "status": 200,
+        "keys": [
+          "charts",
+          "dashboards"
+        ]
+      },
+      "chart_query_context": {
+        "chart_id": 32393,
+        "len": 9078,
+        "redacted": "{\"datasource\":{\"id\":7802,\"type\":\"table\"},\"force\":false,\"queries\":[{\"filters\":[],\"extras\":{\"having\":\"\",\"where\":\"\"},\"applied_time_extras\":{},\"columns\":[\"id_courier\",\"courier_name\"],\"metrics\":[{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Ожидание набора заказов\",\"optionName\":\"metric_hb7lni64y6i\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN wait_minutes ELSE 0 END)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Набор заказов\",\"optionName\":\"metric_wv71g0ppoug\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN assembly_minutes ELSE 0 END)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Доставка\",\"optionName\":\"metric_delivery_minutes\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN delivery_minutes ELSE 0 END)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Остаток от времени смены\",\"optionName\":\"metric_n1mjfy19gce\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN useless_minutes ELSE 0 END)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Ожидание набора заказов, среднее по сменам\",\"optionName\":\"metric_2zforb08lmr_4hvdxkzwrwr\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN wait_minutes ELSE 0 END)/COUNT(DISTINCT id_shift)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Набор заказов, среднее по сменам\",\"optionName\":\"metric_xsnfim02tzr_pms78ieocy\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN assembly_minutes ELSE 0 END)/COUNT(DISTINCT id_shift)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Доставка, среднее по сменам\",\"optionName\":\"metric_9p0hy3k4q9j_cc6njewt69\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN delivery_minutes ELSE 0 END)/COUNT(DISTINCT id_shift)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Остаток от времени смены, среднее по сменам\",\"optionName\":\"metric_xswfk9w6a9n_9uq3u3gfocg\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN useless_minutes ELSE 0 END)/ COUNT(DISTINCT id_shift)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"% Ожидание набора заказов\",\"optionName\":\"metric_0ehapj14qps9_yvtxxfl4xxb\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN wait_minutes ELSE 0 END)*100.0/SUM(CASE WHEN rn_shift = 1 THEN shift_minutes ELSE 0 END)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"% Набор заказов\",\"optionName\":\"metric_47czqc2cl3t_qeb5w49cgxg\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN assembly_minutes ELSE 0 END)*100.0/SUM(CASE WHEN rn_shift = 1 THEN shift_minutes ELSE 0 END)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"% Доставка\",\"optionName\":\"metric_6gtkgfxj614_27luq8dwg8n\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN delivery_minutes ELSE 0 END)*100.0/SUM(CASE WHEN rn_shift = 1 THEN shift_minutes ELSE 0 END)\"},{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"% Остаток от времени смены\",\"optionName\":\"metric_9rhgnajqgwr_9hflmrmmpmc\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN useless_minutes ELSE 0 END)*100.0/SUM(CASE WHEN rn_shift = 1 THEN shift_minutes ELSE 0 END)\"}],\"orderby\":[[{\"aggregate\":null,\"column\":null,\"datasourceWarning\":false,\"expressionType\":\"SQL\",\"hasCustomLabel\":true,\"label\":\"Ожидание набора заказов\",\"optionName\":\"metric_hb7lni64y6i\",\"sqlExpression\":\"SUM(CASE WHEN rn_shift = 1 THEN wait_minutes ELSE 0 END)\"},false]],\"annotation_layers\":[],\"row_limit\":500000,\"series_limit\":0,\"group_others_whe"
+      }
+    },
+    {
+      "dataset_id": 7712,
+      "table_name": "photo_control_shift_bi",
+      "kind": "virtual",
+      "schema": "agile_mart_operational",
+      "database": {
+        "id": 76,
+        "name": "gp_10.0.112.100/dwh",
+        "backend": "postgresql"
+      },
+      "sql_len": 6396,
+      "sources": [
+        "mart_mixed.darkstore_time",
+        "ods.v_tasks_settings",
+        "ods.v_tt",
+        "report.v_org_unit_actual",
+        "ods.v_couriers",
+        "ods.v_couriers_payments_courier_types",
+        "ods.v_courier_job_type",
+        "agile_mart_operational.photo_control_shift_attempt"
+      ],
+      "columns": [
+        {
+          "name": "active",
+          "type": "BOOLEAN",
+          "is_dttm": false
+        },
+        {
+          "name": "ai_photos_cnt",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "attempt_dt",
+          "type": "DATE",
+          "is_dttm": true
+        },
+        {
+          "name": "attempt_min",
+          "type": "DECIMAL",
+          "is_dttm": false
+        },
+        {
+          "name": "attempt_n",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "attempt_start",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "bag_failed",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "bag_first_status",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "bag_no_ai",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "bag_ok",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "bag_warning",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "bush_chern",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "courier_id",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "courier_type_name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_manager",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "first_try_pass",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "has_ai",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "id_name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "is_attempt",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "job_type_name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "later_opened",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "leader",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "name_tt",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "photo_end",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "photos_cnt",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "photos_failed",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "photos_no_ai",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "photos_ok",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "photo_span_sec",
+          "type": "DECIMAL",
+          "is_dttm": false
+        },
+        {
+          "name": "photos_unavailable",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "photos_warning",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "region_tt",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "selfie_failed",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "selfie_first_status",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "selfie_no_ai",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "selfie_ok",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "selfie_warning",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "shift_opened",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "shift_open_time",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "shopno",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "success_sec",
+          "type": "DECIMAL",
+          "is_dttm": false
+        },
+        {
+          "name": "task_124",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "task_164",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "task_292",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "task_378",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "tt_number",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "type_tt",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "vehicle_failed",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "vehicle_first_status",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "vehicle_no_ai",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "vehicle_ok",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "vehicle_warning",
+          "type": "INTEGER",
+          "is_dttm": false
+        },
+        {
+          "name": "wasted_sec",
+          "type": "DECIMAL",
+          "is_dttm": false
+        }
+      ],
+      "metrics": [
+        "count"
+      ],
+      "charts": [
+        {
+          "id": 31601,
+          "name": "Детализация попыток",
+          "viz_type": "table",
+          "datasource_id": 7712
+        },
+        {
+          "id": 31608,
+          "name": "Исход смены за период",
+          "viz_type": "pie",
+          "datasource_id": 7712
+        },
+        {
+          "id": 31607,
+          "name": "Доля: ок, спорные, не ок",
+          "viz_type": "echarts_timeseries_bar",
+          "datasource_id": 7712
+        },
+        {
+          "id": 31606,
+          "name": "Динамика: ок, спорные, не ок",
+          "viz_type": "echarts_timeseries_line",
+          "datasource_id": 7712
+        },
+        {
+          "id": 31599,
+          "name": "Динамика числа фото",
+          "viz_type": "echarts_timeseries_line",
+          "datasource_id": 7712
+        }
+      ],
+      "related_objects": {
+        "status": 200,
+        "keys": [
+          "charts",
+          "dashboards"
+        ]
+      },
+      "chart_query_context": null
+    },
+    {
+      "dataset_id": 7021,
+      "table_name": "ds_collectors_prod",
+      "kind": "virtual",
+      "schema": null,
+      "database": {
+        "id": 96,
+        "name": "ch_10.0.112.21",
+        "backend": "clickhousedb"
+      },
+      "sql_len": 9437,
+      "sources": [
+        "ods.timesheetfact",
+        "mart_mixed.darkstore_time_sheet"
+      ],
+      "columns": [
+        {
+          "name": "base_row_num",
+          "type": "UInt64",
+          "is_dttm": false
+        },
+        {
+          "name": "collection_time_all",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "darkkitchen_closed",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_collected",
+          "type": "Nullable(Date)",
+          "is_dttm": true
+        },
+        {
+          "name": "date_collected_dt",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_f_status_3_5",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_order",
+          "type": "DateTime64(6)",
+          "is_dttm": true
+        },
+        {
+          "name": "date_set_cell",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_status_10",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_supply",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_supply_untill",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "feature_sbor",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "has_timesheet",
+          "type": "UInt8",
+          "is_dttm": false
+        },
+        {
+          "name": "hours_on_schedule",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "hours_row_num",
+          "type": "UInt64",
+          "is_dttm": false
+        },
+        {
+          "name": "id_assemblysheet",
+          "type": "Nullable(Int64)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_order",
+          "type": "Int32",
+          "is_dttm": false
+        },
+        {
+          "name": "id_sbor",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_service",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_source",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_tt",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_collected",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_night_shift",
+          "type": "Nullable(UInt8)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_overdue",
+          "type": "UInt8",
+          "is_dttm": false
+        },
+        {
+          "name": "join_row_num",
+          "type": "UInt64",
+          "is_dttm": false
+        },
+        {
+          "name": "name_tt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "order_status",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "order_type",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "part_end",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "part_start",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "pom",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "qty_collected",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "region_tt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "sbor",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "shift_type",
+          "type": "String",
+          "is_dttm": false
+        },
+        {
+          "name": "shopno",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "sla_collection_time_all",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "sla_delivery_time_all",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "time_end",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "time_start",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "user_code",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        }
+      ],
+      "metrics": [
+        "avg_real_1_pos_sheet",
+        "hours_worked",
+        "orders_per_hour",
+        "pos_per_hour",
+        "qty_collected_orders",
+        "qty_collected_pos",
+        "qty_not_overdue_pos",
+        "qty_orders_with_cell",
+        "qty_overdue_pos",
+        "share_collection_delay_all",
+        "share_orders_with_cell",
+        "share_overdue_pos"
+      ],
+      "charts": [
+        {
+          "id": 28142,
+          "name": "Выработка по дням со сборщикам",
+          "viz_type": "table",
+          "datasource_id": 7021
+        },
+        {
+          "id": 28181,
+          "name": "Сводная таблица по заказам по часам",
+          "viz_type": "pivot_table_v2",
+          "datasource_id": 7021
+        },
+        {
+          "id": 28180,
+          "name": "Сводная таблица по часам и дням",
+          "viz_type": "pivot_table_v2",
+          "datasource_id": 7021
+        },
+        {
+          "id": 28188,
+          "name": "Сводная таблица по позициям по часам",
+          "viz_type": "pivot_table_v2",
+          "datasource_id": 7021
+        },
+        {
+          "id": 28187,
+          "name": "Сводная таблица по заказам по часам1",
+          "viz_type": "pivot_table_v2",
+          "datasource_id": 7021
+        }
+      ],
+      "related_objects": {
+        "status": 200,
+        "keys": [
+          "charts",
+          "dashboards"
+        ]
+      },
+      "chart_query_context": {
+        "chart_id": 28142,
+        "len": 5127,
+        "redacted": "{\"force\": false, \"queries\": [{\"extras\": {\"where\": \"\", \"having\": \"\", \"time_grain_sqla\": \"P1D\"}, \"columns\": [{\"label\": \"date_collected\", \"timeGrain\": \"P1D\", \"columnType\": \"BASE_AXIS\", \"sqlExpression\": \"date_collected\", \"expressionType\": \"SQL\"}, \"id_sbor\", \"user_code\", \"sbor\", \"feature_sbor\", \"shift_type\", \"name_tt\", \"region_tt\", \"pom\"], \"filters\": [{\"op\": \"NOT IN\", \"col\": \"user_code\", \"val\": [\"0\", \"111111\"]}, {\"op\": \"TEMPORAL_RANGE\", \"col\": \"date_collected\", \"val\": \"No filter\", \"include_boundaries\": {\"left\": true, \"right\": true}}], \"metrics\": [\"hours_worked\", \"qty_collected_orders\", \"orders_per_hour\", \"qty_collected_pos\", \"pos_per_hour\", \"qty_not_overdue_pos\", \"qty_overdue_pos\", \"share_overdue_pos\", \"share_orders_with_cell\", \"avg_real_1_pos_sheet\", \"share_collection_delay_all\"], \"orderby\": [[{\"label\": \"min(\\r\\n concat(\\r\\n leftPad(toString(user_code), 20, '0'),\\r\\n '_',\\r\\n formatDateTime(toDateTime(date_collected), '%Y%m%d')\\r\\n )\\r\\n)\", \"column\": null, \"aggregate\": null, \"optionName\": \"metric_a0j7f4yv1w_pgoeugj9yh\", \"sqlExpression\": \"min(\\r\\n concat(\\r\\n leftPad(toString(user_code), 20, '0'),\\r\\n '_',\\r\\n formatDateTime(toDateTime(date_collected), '%Y%m%d')\\r\\n )\\r\\n)\", \"expressionType\": \"SQL\", \"hasCustomLabel\": false, \"datasourceWarning\": false}, true]], \"row_limit\": 50000, \"order_desc\": false, \"url_params\": {}, \"series_limit\": 0, \"time_offsets\": [], \"custom_params\": {}, \"is_timeseries\": false, \"post_processing\": [], \"custom_form_data\": {}, \"annotation_layers\": [], \"applied_time_extras\": {}, \"series_limit_metric\": {\"label\": \"min(\\r\\n concat(\\r\\n leftPad(toString(user_code), 20, '0'),\\r\\n '_',\\r\\n formatDateTime(toDateTime(date_collected), '%Y%m%d')\\r\\n )\\r\\n)\", \"column\": null, \"aggregate\": null, \"optionName\": \"metric_a0j7f4yv1w_pgoeugj9yh\", \"sqlExpression\": \"min(\\r\\n concat(\\r\\n leftPad(toString(user_code), 20, '0'),\\r\\n '_',\\r\\n formatDateTime(toDateTime(date_collected), '%Y%m%d')\\r\\n )\\r\\n)\", \"expressionType\": \"SQL\", \"hasCustomLabel\": false, \"datasourceWarning\": false}}], \"form_data\": {\"force\": false, \"groupby\": [\"date_collected\", \"id_sbor\", \"user_code\", \"sbor\", \"feature_sbor\", \"shift_type\", \"name_tt\", \"region_tt\", \"pom\"], \"metrics\": [\"hours_worked\", \"qty_collected_orders\", \"orders_per_hour\", \"qty_collected_pos\", \"pos_per_hour\", \"qty_not_overdue_pos\", \"qty_overdue_pos\", \"share_overdue_pos\", \"share_orders_with_cell\", \"avg_real_1_pos_sheet\", \"share_collection_delay_all\"], \"color_pn\": false, \"slice_id\": 28142, \"viz_type\": \"table\", \"row_limit\": 50000, \"dashboards\": [561], \"datasource\": \"7021__table\", \"order_desc\": false, \"query_mode\": \"aggregate\", \"all_columns\": [], \"page_length\": 20, \"result_type\": \"full\", \"header_align\": \"auto\", \"adhoc_filters\": [{\"isNew\": false, \"clause\": \"WHERE\", \"isExtra\": false, \"subject\": \"user_code\", \"operator\": \"NOT IN\", \"activeTab\": null, \"comparator\": [\"0\", \"111111\"], \"operatorId\": \"NOT IN\", \"sqlExpression\": null, \"expressionType\": \"SIMPLE\", \"filterOptionName\": \"filter_dy9xvbm6yqi_iu8lg000y7c\", \"datasourceWarning\": false}, {\"clause\": \"WHERE\", \"isExtra\": true, \"subject\": \"date_collected\", \"operator\": \"TEMPORAL_RANGE\", \"activeTab\": \"Days\", \"comparator\": \"No filter\", \"expressionType\": \"SIMPLE\", \"includeBoundaries\": {\"left\": true, \"right\": true}}], \"column_config\": {\"hours_worked\": {\"d3NumberFormat\": \",.2f\"}, \"pos_per_hour\": {\"d3NumberFormat\": \",.2f\"}, \"orders_per_hour\": {\"d3NumberFormat\": \".2f\"}, \"qty_overdue_pos\": {\"d3NumberFormat\": \",d\"}, \"qty_collected_pos\": {\"d3NumberFormat\": \",d\"}, \"share_overdue_pos\": {\"d3NumberFormat\": \",.1%\"}, \"qty_not_overdue_pos\": {\"d3NumberFormat\": \",d\"}, \"qty_collected_orders\": {\"d3NumberFormat\": \",d\"}, \"share_orders_with_cell\": {\"d3NumberFormat\": \",.1%\"}, \"share_collection_delay_all\": {\"d3NumberFormat\": \",.1%\"}}, \"order_by_cols\": [], \"result_format\": \"json\", \"include_search\": true, \"show_cell_bars\": false, \"comparison_type\": \"values\", \"extra_form_data\": {}, \"percent_metrics\": [], \"time_grain_sqla\": \"P1D\", \"value_font_size\": 12, \"header_font_size\": 12, \"allow_render_html\": t"
+      }
+    },
+    {
+      "dataset_id": 3466,
+      "table_name": "darkstore_time_sheet",
+      "kind": "virtual",
+      "schema": "mart_mixed",
+      "database": {
+        "id": 92,
+        "name": "ch_10.0.112.21/default",
+        "backend": "clickhousedb"
+      },
+      "sql_len": 38370,
+      "sources": [
+        "dt.date_supply",
+        "mart_mixed.darkstore_time_sheet",
+        "report.v_org_unit_actual"
+      ],
+      "columns": [
+        {
+          "name": "date_of_collected",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "phone",
+          "type": "Nullable(Int64)",
+          "is_dttm": false
+        },
+        {
+          "name": "wait_time2",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "collection_time_real_sec",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_group",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "hour_supply",
+          "type": "Nullable(UInt8)",
+          "is_dttm": false
+        },
+        {
+          "name": "sum_paid",
+          "type": "Nullable(Decimal(76, 32))",
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_leader",
+          "type": "String",
+          "is_dttm": false
+        },
+        {
+          "name": "date_supply",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "zone_cluster",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_final_sheet",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "sort_sheet",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "time_collect_start",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "night",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_collected_sheet",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_check_closed",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "id_tt",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "deadline_sbor__1",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "collection_time_real_sec_sheet",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "management_type",
+          "type": "String",
+          "is_dttm": false
+        },
+        {
+          "name": "id_order",
+          "type": "Int32",
+          "is_dttm": false
+        },
+        {
+          "name": "date_order",
+          "type": "DateTime64(6)",
+          "is_dttm": true
+        },
+        {
+          "name": "date_supply_double",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "online_manager",
+          "type": "String",
+          "is_dttm": false
+        },
+        {
+          "name": "darkkitchen_closed",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_partner",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "slots",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "sum_mark",
+          "type": "Nullable(Decimal(76, 32))",
+          "is_dttm": false
+        },
+        {
+          "name": "id_status",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "shopno",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_time_all",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "Помощник розницы",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "courier",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "pickup",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "order_source",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "kyst_name",
+          "type": "String",
+          "is_dttm": false
+        },
+        {
+          "name": "id_pay_way",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_supply_untill",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_status",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "feature_tt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_source",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_cell_link",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "sort_order",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "sub_project",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_pool",
+          "type": "Nullable(Int64)",
+          "is_dttm": false
+        },
+        {
+          "name": "Помощник мили",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "Группа мили",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "assembly_leader",
+          "type": "String",
+          "is_dttm": false
+        },
+        {
+          "name": "penalty_date",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_f_status_3_5",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_set_cell",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "is_in_dark_area",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "pom",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "senior",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_delivered",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "gettype",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "waiting_area_time",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_service_type",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "sla_collection_time_all",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "user_inn",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "vv_week",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "pay_way",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "cafebakery_closed",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "type_sheet",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "vv_week_date_order",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "time_ready_plan",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "qty_sl_dk_by_TT",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_type",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_sbor",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "qty_collected",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "service_type",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "time_supply",
+          "type": "String",
+          "is_dttm": false
+        },
+        {
+          "name": "date_supply_sheet",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_supply_untill_sheet",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "is_collected",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "collection_time_all",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_delivery_start",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "sum_order",
+          "type": "Nullable(Decimal(76, 32))",
+          "is_dttm": false
+        },
+        {
+          "name": "source_name",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "time_set_cell_last",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_collected_plan",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "date_collect_start_plan",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "weight_sheet",
+          "type": "Nullable(Decimal(76, 32))",
+          "is_dttm": false
+        },
+        {
+          "name": "partner_type",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_partner_type",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "pse",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "leader",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "wait_time",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "hour_collected",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "hour",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "order_type",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_pse_type",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "deadline_sbor",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "dark",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_assemblysheet",
+          "type": "Nullable(Int64)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_collect_start",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "region_tt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "leader_express",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_collected",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "sbor",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_user_kontr",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "Номер ТТ",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "sum_paid_disc",
+          "type": "Nullable(Decimal(76, 32))",
+          "is_dttm": false
+        },
+        {
+          "name": "id_delivery_job",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "order_time",
+          "type": "Nullable(Decimal(76, 32))",
+          "is_dttm": false
+        },
+        {
+          "name": "collection_time",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "set_cell_time",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_status_10",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "delivery_type_group",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "qty_ordered",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "qty_collected_services",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_time",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "senior_express",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "number",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_service",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_update",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "pse_no",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "geo",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "last_sbor_touch",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "time_ready",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "order_status",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "pay_time",
+          "type": "Nullable(Float64)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_update_msk",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "time_type_collected_dk",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "time_status",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "time_collect_start_plan",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "ph_scheme",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "internal_orders_of_DC",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "user_position",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "Группа розницы",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "last_sbor_touch__1",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "ose_no",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "area_tt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "qty_collected_goods",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "pse_type",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_collect_start_sheet",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "feature_sbor",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "sla_order_time",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "order_service",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_out_of_mkad",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "date_printed",
+          "type": "Nullable(DateTime64(6))",
+          "is_dttm": true
+        },
+        {
+          "name": "name_tt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "sla_delivery_time_all",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "final_sheet_type",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "feature_tt_dt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "dk_or_roll",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_general",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "user_code",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "id_courier",
+          "type": "Nullable(Int32)",
+          "is_dttm": false
+        },
+        {
+          "name": "partner",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "supply_hour",
+          "type": "Nullable(UInt8)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_express",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "pom_now",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "device_id",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "device_type",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_canceled",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_returned_store",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "city_tt",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "pom_old",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "head_of_delivery",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "user_kontr",
+          "type": "Nullable(String)",
+          "is_dttm": false
+        },
+        {
+          "name": "is_collection_overdue",
+          "type": "Nullable(Bool)",
+          "is_dttm": false
+        },
+        {
+          "name": "collection_time_real_min_sheet<новый столбец>",
+          "type": "NUMERIC",
+          "is_dttm": false
+        },
+        {
+          "name": "time_give_on_kassa",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "collect_time_type",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "collection_type",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "time_order",
+          "type": null,
+          "is_dttm": false
+        }
+      ],
+      "metrics": [
+        "qty_sheet_with_wait&collect_9min_dk_express",
+        "qty_ordered_DK_>13",
+        "avg_real_col_per_1_pos",
+        "share_not_in_slot_above_service_48_60_only",
+        "qty_genorders_collection",
+        "mom_cnt_orders_tt",
+        "qty_wait_10_ex",
+        "qty_goods_collected",
+        "qty_orders_out_of_slot",
+        "qty_deliv_delay",
+        "share_collection_wait_<8",
+        "share_collection_delay_all",
+        "qty_col_15_60",
+        "qty_vkusvillchik",
+        "share_delivery_collection__wait>165",
+        "sum_without_bonuses",
+        "тест_количество заказов>165",
+        "qty_col_>15_all_collected",
+        "qty_sheets_dk_not_ex",
+        "mom_cnt_orders",
+        "share_deliv_delay",
+        "share_delivery_collection_>30",
+        "qty_orders_ordered_under_slot_<60",
+        "qty_ordered_DK",
+        "qty_sheets_collected",
+        "qty_all_express",
+        "share_sheet_with_wait&collect_8min_dk_express",
+        "ind_share_sheet_with_wait&collect_13min_dk_w/o_expres",
+        "qty_couriers",
+        "share_sheet_with_wait&collect_14min_dk_w/o_express",
+        "share_delivery_collection__wait>180",
+        "qty_col_30_120/pos_collected",
+        "share_col_10_ex_collected",
+        "sum_qty_tov",
+        "sum_qty_ln_order",
+        "qty_col_delay_vkusvillchik",
+        "share_dk",
+        "qty_orders_collection",
+        "avg_qty_delivered_per_1_courier",
+        "share_orders_delivered_taxi",
+        "share_not_in_slot_above_all",
+        "qty_orders_all",
+        "share_not_in_slot_above_service_55_57_only",
+        "share_not_in_slot_above_service_55_57",
+        "share_not_in_slot_above_service_72_only",
+        "share_col_10_30min",
+        "mom_share_delivery_collection_>135",
+        "qty_orders_delivered",
+        "wow_share_delivery_>20_tt",
+        "qty_orders_col_d/w_30/60_90/120/240",
+        "collected>20m_qty",
+        "qty_general_orders_declined",
+        "share_collection_wait_>13",
+        "mom_share_collection_wait_>9",
+        "sum_qty_tov_ln",
+        "qty_all_60_pos",
+        "share_not_in_slot_above_4_5_6_hours",
+        "dod_share_delivery_collection_>135",
+        "mom_share_delivery_>45_tt",
+        "wow_share_delivery_collection_>45_tt",
+        "qty_collection_>20",
+        "share_sheet_with_wait&collect_13min_dk_w/o_express",
+        "ind_share_sheet_with_wait&collect_14min_dk_w/o_express",
+        "share_delivery_>60",
+        "qty_all_next_day_d",
+        "share_not_in_slot_above_service_51",
+        "qty_genorders_ready_without_slots",
+        "share_not_in_slot_above_service_11",
+        "mom_share_delivery_>20_tt",
+        "wow_share_collection_wait_>14_tt",
+        "dod_cnt_orders_tt",
+        "wow_share_out_of_slot_tt",
+        "share_collection_wait_>8",
+        "qty_orders_ordered",
+        "qty_orders_collect_start",
+        "qty_orders_collected",
+        "qty_genorders_delivery",
+        "qty_sheet_with_wait&collect_13min_dk_w/o_express",
+        "share_delivery_collection_>135",
+        "wow_share_delivery_>45_tt",
+        "share_collection_wait_>9",
+        "avg_col_time_without_wait",
+        "avg_waiting_area_time",
+        "share_not_in_slot_above_service_51_only",
+        "wow_share_collection_wait_<8_tt",
+        "dod_share_collection_wait_<8_tt",
+        "avg_diff_qty_ord_col",
+        "qty_all_next_day_w",
+        "qty_ordered_DK_>14",
+        "share_pos_collected_outs",
+        "qty_orders_delivery",
+        "share_collection_>20",
+        "share_not_in_slot_above_service_72",
+        "mom_share_delivery_>90_tt",
+        "share_delivery_>20",
+        "qty_collection_8-10",
+        "qty_collection_wait_<8",
+        "avg_real_sheet",
+        "avg_wait",
+        "avg_real_1_pos_sheet",
+        "avg_qty_collected_sheet",
+        "avg_qty_collected_ord",
+        "qty_sheets",
+        "qty_collection_delay_all_new",
+        "qty_sheet_with_wait&collect_8min_dk_express",
+        "qty_collection_wait_>13",
+        "wow_share_collection_wait_>9_tt",
+        "qty_sheets_col_15m_dk_not_ex",
+        "qty_orders_returned",
+        "share_sheets_col_10m_dk_ex",
+        "avg_qty_tov_collected_per_1_sbor",
+        "share_col_delay_vkusvillchik",
+        "qty_collection_wait_>14",
+        "avg_pay2cell",
+        "share_not_in_slot_above_service_62_only",
+        "share_not_in_slot_above_service_11_only",
+        "qty_collection_15-20",
+        "share_collection_wait_<15",
+        "share_delivery_collection_>45",
+        "qty_orders_delivery_start",
+        "share_orders_out_of_slot",
+        "qty_collection_30_all",
+        "qty_collection_15_all",
+        "qty_orders_30min",
+        "qty_sl_uz_dk_exp",
+        "qty_collection_wait_>9",
+        "share_not_in_slot_above_service_49_52_53_only",
+        "share_not_in_slot_above_service_49_52_53",
+        "share_not_in_slot_above_service_32_47",
+        "avg_real_col",
+        "share_collection_15-20",
+        "qty_orders_declined",
+        "qty_collect_10_ex",
+        "qty_genorders_all",
+        "qty_numbers_distinct",
+        "share_collection_delay_all_new",
+        "share_col_30_120/pos_collected",
+        "qty_all_120_120",
+        "share_all_120_120",
+        "qty_orders_on_hour_per_1_sbor",
+        "qty_tov_on_hour_per_1_sbor",
+        "share_not_in_slot_above_service_6",
+        "avg_collection",
+        "share_not_in_slot_above_service_62",
+        "share_not_in_slot_above_4_5_6_hours_only",
+        "share_not_in_slot_above_service_43_56_only",
+        "mom_share_collection_wait_>14",
+        "dod_share_delivery_>90_tt",
+        "dod_share_collection_wait_>14_tt",
+        "mom_share_out_of_slot_tt",
+        "mom_share_collection_wait_<8_tt",
+        "wow_cnt_orders_tt",
+        "share_collection_8-10",
+        "dod_share_delivery_>20_tt",
+        "avg_qty_collected_per_1_sbor",
+        "share_orders_col_d/w_30/60_90/120/240",
+        "avg_qty_genorders_delivered_per_1_courier",
+        "share_delivery_collection_>75",
+        "share_delivery_>45",
+        "share_delivery_collection_>120",
+        "share_not_in_slot_above_service_48_60",
+        "wow_share_delivery_collection_>135_tt",
+        "mom_share_delivery_collection_>135_tt",
+        "mom_share_delivery_collection_>75_tt",
+        "dod_share_out_of_slot_tt",
+        "avg_orders_col_real",
+        "qty_pickers",
+        "qty_orders_express",
+        "qty_services_collected",
+        "qty_positions_collected",
+        "qty_col_delay_vkusvillchik_new",
+        "mom_share_delivery_>20",
+        "qty_collection_10-15",
+        "share_collection_10-15",
+        "qty_orders_above_slot",
+        "qty_orders_cancelled",
+        "share_sheet_with_wait&collect_9min_dk_express",
+        "dod_share_collection_wait_>9_tt",
+        "qty_all_next_day",
+        "d/w_share_col_30/60_120/pos/slot",
+        "share_all_120_120/slot",
+        "qty_orders_ready",
+        "wow_share_delivery_collection_>75_tt",
+        "mom_share_delivery_collection_>75",
+        "mom_share_delivery_>45",
+        "qty_collection_wait_<15",
+        "qty_genorders_ordered",
+        "qty_genorders_ready",
+        "avg_real_col_per_1_poz_order",
+        "qty_sheets_dk_ex",
+        "qty_sheets_col_10m_dk_ex",
+        "avg_qty_tov",
+        "share_collection_wait_>14",
+        "share_delivery_>90",
+        "qty_general_orders_collected",
+        "share_col_<=15_all_collected",
+        "qty_col_10_ex_collected",
+        "avg_qty_orders_per_1_sbor",
+        "avg_qty_orders_collected_per_1_sbor",
+        "share_genorders_delivered_taxi",
+        "qty_sheets_dk",
+        "avg_qty_sheets_collected_per_1_sbor",
+        "share_col_30",
+        "wow_share_delivery_>90_tt",
+        "dod_share_delivery_collection_>75",
+        "dod_share_delivery_>45_tt",
+        "mom_share_delivery_collection_>45",
+        "mom_share_out_of_slot",
+        "dod_share_delivery_collection_>45",
+        "apt_coll_>20m_share",
+        "qty_not_in_slot_above_all",
+        "avg_sum",
+        "qty_genorders_delivered",
+        "share_col_>15_all_collected",
+        "qty_col_10_30min",
+        "time_col_delay",
+        "share_all_60_pos",
+        "qty_collection_wait_>8",
+        "qty_orders_collected_no_slots",
+        "share_diff",
+        "share_not_in_slot_above_service_32_47_only",
+        "mom_share_collection_wait_<8",
+        "qty_collection_delay_all",
+        "share_sheets_col_15m_dk",
+        "qty_col_30",
+        "qty_sl_uz_dk_not_exp",
+        "share_pos_collected_all",
+        "share_delivery_collection_>60",
+        "qty_sheets_col_15m_dk",
+        "qty_sheet_with_wait&collect_14min_dk_w/o_express",
+        "qty_orders_60min",
+        "тест_количество заказов>165 - для сравнения",
+        "share_col_delay_vkusvillchik_new",
+        "tov_DK_>_15_min_share",
+        "mom_share_collection_wait_>9_tt",
+        "mom_share_collection_wait_>14_tt",
+        "mom_share_delivery_collection_>45_tt",
+        "sum_qty_ln",
+        "share_not_in_slot_above_service_43_56",
+        "mom_share_delivery_>90",
+        "share_sheets_col_15m_dk_not_ex",
+        "share_col_15_60",
+        "share_not_in_slot_above_service_6_only"
+      ],
+      "charts": [
+        {
+          "id": 32583,
+          "name": "1.2.01 | Сборка | Общая статистика",
+          "viz_type": "table",
+          "datasource_id": 3466
+        },
+        {
+          "id": 32518,
+          "name": "Итоговая таблица по магазинам по дням BI-1000004530",
+          "viz_type": "table",
+          "datasource_id": 3466
+        },
+        {
+          "id": 32517,
+          "name": "Итоговая таблица по дням BI-1000004530",
+          "viz_type": "table",
+          "datasource_id": 3466
+        },
+        {
+          "id": 32497,
+          "name": "Итоги по дням 5848,7450,6571 Сборка",
+          "viz_type": "table",
+          "datasource_id": 3466
+        },
+        {
+          "id": 32439,
+          "name": "1.2.06 | Сборка | Общая статистика",
+          "viz_type": "table",
+          "datasource_id": 3466
+        }
+      ],
+      "related_objects": {
+        "status": 200,
+        "keys": [
+          "charts",
+          "dashboards"
+        ]
+      },
+      "chart_query_context": {
+        "chart_id": 32583,
+        "len": 8448,
+        "redacted": "{\"datasource\":{\"id\":3466,\"type\":\"table\"},\"force\":false,\"queries\":[{\"filters\":[{\"col\":\"date_supply\",\"op\":\"TEMPORAL_RANGE\",\"include_boundaries\":{\"left\":true,\"right\":false},\"val\":\"today : DATEADD(DATETIME(\\\"today\\\"), 1, day)\"},{\"col\":\"name_tt\",\"op\":\"IN\",\"val\":[\"1083М_Хим_Центральная6\",\"7181М_Руз_Кутузовский2\",\"1499М_Хим_Новозаводская10\",\"1727М_Хим_Кирова3\",\"3324М_Подол_Некрасова6\",\"850М_Зеленоград1215\",\"6850ДС_Зел_2йЗападный2\",\"9000ДС_Зел_Савелкинский6\",\"9035ДС_Зел_Панфиловский\",\"4824ДС_Андр_Алабушевская4\",\"9038ДС_Сол_Почтовая25\",\"5377ДС_Хим_Овражная24\",\"3653Ш_Зеленоград2008эт1\",\"4106М_Хим_2-йМичуринскийТупик1\",\"796М_Зел_Яблоневая_аллея2\",\"1505М_Зел_корпус826\",\"4825М_Зеленоград_439\",\"4895М_Зел_корпус1805\",\"9095Ш_Зеленоград_1634\",\"6557М_Повар_Почтовая28\",\"1587Ш_пос_Андреевка29\",\"4809Ж_Сол_Красная2\",\"1132Ш_Зел_корпус834А\",\"5853М_Кли_МишиБалакирева6переезд\",\"1584М_Сол_Дзержинского15\",\"1591Ш_Зел_корпус612\",\"1633М_Зел_Привокзальная1\",\"7405Ж_Зел_Георгиевский33\",\"1592Ш_Зел_Корпус1406\",\"7161М_Зел_2309\",\"7013Ш_Зел_355\",\"1532М_Зел_Юности2\",\"6529Ш_Крив_77\"]}],\"extras\":{\"time_grain_sqla\":\"P1D\",\"having\":\"\",\"where\":\"\"},\"applied_time_extras\":{},\"columns\":[{\"timeGrain\":\"P1D\",\"columnType\":\"BASE_AXIS\",\"sqlExpression\":\"date_supply_double\",\"label\":\"date_supply_double\",\"expressionType\":\"SQL\"},\"pom\",\"id_group\",\"name_tt\"],\"metrics\":[\"qty_orders_all\",\"qty_orders_delivered\",\"qty_pickers\",\"qty_collection_delay_all\",\"share_collection_delay_all\",\"share_not_in_slot_above_all\"],\"orderby\":[[\"share_collection_delay_all\",false]],\"annotation_layers\":[],\"row_limit\":50,\"series_limit\":0,\"series_limit_metric\":\"share_collection_delay_all\",\"group_others_when_limit_reached\":false,\"order_desc\":true,\"url_params\":{},\"custom_params\":{},\"custom_form_data\":{},\"post_processing\":[],\"time_offsets\":[],\"is_timeseries\":false}],\"form_data\":{\"datasource\":\"3466__table\",\"viz_type\":\"table\",\"slice_id\":32439,\"cache_timeout\":300,\"matrixify_show_column_headers\":true,\"matrixify_mode_columns\":\"metrics\",\"matrixify_dimension_selection_mode_columns\":\"members\",\"matrixify_dimension_columns\":{\"dimension\":\"\",\"values\":[]},\"matrixify_topn_value_columns\":10,\"matrixify_topn_order_columns\":\"desc\",\"matrixify_show_row_labels\":true,\"matrixify_mode_rows\":\"metrics\",\"matrixify_dimension_selection_mode_rows\":\"members\",\"matrixify_dimension_rows\":{\"dimension\":\"\",\"values\":[]},\"matrixify_topn_value_rows\":10,\"matrixify_topn_order_rows\":\"desc\",\"matrixify_row_height\":300,\"matrixify_fit_columns_dynamically\":true,\"matrixify_charts_per_row\":3,\"query_mode\":\"aggregate\",\"groupby\":[\"date_supply_double\",\"pom\",\"id_group\",\"name_tt\"],\"time_grain_sqla\":\"P1D\",\"temporal_columns_lookup\":{\"date_supply\":true,\"date_collected_sheet\":true,\"date_check_closed\":true,\"deadline_sbor__1\":true,\"date_order\":true,\"date_supply_double\":true,\"date_supply_untill\":true,\"date_status\":true,\"penalty_date\":true,\"date_f_status_3_5\":true,\"date_set_cell\":true,\"date_delivered\":true,\"date_supply_sheet\":true,\"date_supply_untill_sheet\":true,\"date_delivery_start\":true,\"date_collected_plan\":true,\"date_collect_start_plan\":true,\"deadline_sbor\":true,\"date_collect_start\":true,\"date_collected\":true,\"date_status_10\":true,\"date_update\":true,\"last_sbor_touch\":true,\"last_sbor_touch__1\":true,\"date_collect_start_sheet\":true,\"date_printed\":true},\"metrics\":[\"qty_orders_all\",\"qty_orders_delivered\",\"qty_pickers\",\"qty_collection_delay_all\",\"share_collection_delay_all\",\"share_not_in_slot_above_all\"],\"all_columns\":[],\"percent_metrics\":[],\"adhoc_filters\":[{\"expressionType\":\"SIMPLE\",\"subject\":\"date_supply\",\"operator\":\"TEMPORAL_RANGE\",\"comparator\":\"today : DATEADD(DATETIME(\\\"today\\\"), 1, day)\",\"clause\":\"WHERE\",\"sqlExpression\":null,\"isExtra\":false,\"isNew\":false,\"datasourceWarning\":false,\"activeTab\":\"Custom\",\"includeBoundaries\":{\"left\":true,\"right\":false},\"filterOptionName\":\"filter_jmuxdv0mhen_zcfumbyenz\"},{\"expressionType\":\"SIMPLE\",\"subject\":\"name_tt\",\"operator\":\"IN\",\"operatorId\":\"IN\",\"comparator\":[\"1083М_Хим_Центральная6\",\"7181М_Руз_Кутузовский2\",\"1499М_Хим_Новозаводская10\",\"1727М_Хим"
+      }
+    },
+    {
+      "dataset_id": 2339,
+      "table_name": "Перенесенные заказы",
+      "kind": "virtual",
+      "schema": "dbo",
+      "database": {
+        "id": 6,
+        "name": "Reports",
+        "backend": "mssql"
+      },
+      "sql_len": 881,
+      "sources": [
+        "Loyalty_srv03.dbo.Webcall_log_ui_period",
+        "Reports.dbo.ksa_time_vw"
+      ],
+      "columns": [
+        {
+          "name": "date_supply_con",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_collect_start_con",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_delivery_start_con",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_collected_con",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_delivered_con",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_order_con",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "Дата, на которую перенос",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "new_value_cast",
+          "type": null,
+          "is_dttm": true
+        },
+        {
+          "name": "order_all",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "old_value_conv",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_add_conv",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_diff",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "date_add_cast",
+          "type": null,
+          "is_dttm": true
+        },
+        {
+          "name": "old_value_cast",
+          "type": null,
+          "is_dttm": true
+        },
+        {
+          "name": "date_supply_cast",
+          "type": null,
+          "is_dttm": true
+        },
+        {
+          "name": "ОтветственныйГЕО",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "Наименование ТТ",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "Причина переноса 1",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "Скорость переназначения 1",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "Причина переноса 2",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "Скорость переназначения 2",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "Причина переноса 3",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "Скорость переназначения 3",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "comment",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "wait_time2",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "date_collect_start",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "date_delivery_start",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "date_collected",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "date_delivered",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "date_order",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "date_supply",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "name_TT",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "status_name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "wait_time",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "id_courier",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "order_time",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "gettype",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "status_name_",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "Кол-во переносов",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "Служба 2",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "Служба 3",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "Искомая служба",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "date_status",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "Pom",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "city_tt",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_type",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "region_tt",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "leader",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "courier",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "senior",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "Район",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "collection_time",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "id_order",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_time",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "shopno",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "Куратор",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_type_1",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "date_for_wait2",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "delivery_type_2",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "delivery_type_3",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "new_value_n",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "date_add",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "date_update",
+          "type": "DATETIME",
+          "is_dttm": true
+        },
+        {
+          "name": "log_data",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "object_name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "descr_format",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "source_name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "orders_assignment",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "prop_name",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "status_tt",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "log_type",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "action",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "autor",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "source",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "type",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "prop",
+          "type": "STRING",
+          "is_dttm": false
+        },
+        {
+          "name": "amountMinutes",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "collecting_real_sec",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "courier_per_day",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "qty_date_shop",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "quantity_batch",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "qty_date",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "object_id",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "job_type",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "rating",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "id",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "rn",
+          "type": "INT",
+          "is_dttm": false
+        },
+        {
+          "name": "id_group",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "old_value",
+          "type": "STRING",
+          "is_dttm": true
+        },
+        {
+          "name": "new_value",
+          "type": "STRING",
+          "is_dttm": true
+        },
+        {
+          "name": "id_assemblysheet_header",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "sum_cash_refunded",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "sum_paid_disc",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "sum_bonus_refunded",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "qty_pos_l",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "id_cause",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "name_service",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "refund_reason",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "sum_paid",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "id_job",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "user_code",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "str_orders",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "qty_tov",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "nkormax",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "sbor",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "error",
+          "type": null,
+          "is_dttm": false
+        },
+        {
+          "name": "СвойствоПродавца",
+          "type": null,
+          "is_dttm": false
+        }
+      ],
+      "metrics": [
+        "Кол-во заказов"
+      ],
+      "charts": [
+        {
+          "id": 13904,
+          "name": "Динамика перенесенных заказов по дням в разрезе причин",
+          "viz_type": "dist_bar",
+          "datasource_id": 2339
+        },
+        {
+          "id": 13898,
+          "name": "Динамика перенесенных заказов по дням в разрезе ТТ и статусов",
+          "viz_type": "pivot_table_v2",
+          "datasource_id": 2339
+        },
+        {
+          "id": 13896,
+          "name": "Заказы, перенесенные на сегодня",
+          "viz_type": "table",
+          "datasource_id": 2339
+        },
+        {
+          "id": 13895,
+          "name": "Динамика перенесенных заказов по дням в разрезе статусов",
+          "viz_type": "dist_bar",
+          "datasource_id": 2339
+        }
+      ],
+      "related_objects": {
+        "status": 200,
+        "keys": [
+          "charts",
+          "dashboards"
+        ]
+      },
+      "chart_query_context": {
+        "chart_id": 13904,
+        "len": 1158,
+        "redacted": "{\"force\": false, \"queries\": [{\"extras\": {\"where\": \"\", \"having\": \"\"}, \"columns\": [\"comment\", \"new_value_cast\"], \"filters\": [], \"metrics\": [\"Кол-во заказов\"], \"row_limit\": 10000, \"order_desc\": true, \"time_range\": \"2021-09-04T00:00:00 : now\", \"url_params\": {}, \"custom_params\": {}, \"custom_form_data\": {}, \"timeseries_limit\": 0, \"annotation_layers\": [], \"applied_time_extras\": {}}], \"form_data\": {\"force\": false, \"columns\": [\"comment\"], \"groupby\": [\"new_value_cast\"], \"metrics\": [\"Кол-во заказов\"], \"color_pn\": false, \"slice_id\": 13904, \"viz_type\": \"dist_bar\", \"row_limit\": 10000, \"datasource\": \"2339__table\", \"order_bars\": true, \"order_desc\": true, \"time_range\": \"2021-09-04T00:00:00 : now\", \"url_params\": {}, \"bar_stacked\": true, \"result_type\": \"full\", \"color_scheme\": \"googleCategory10c\", \"label_colors\": {}, \"adhoc_filters\": [], \"bottom_margin\": \"auto\", \"result_format\": \"json\", \"y_axis_bounds\": [null, null], \"y_axis_format\": \"~g\", \"show_bar_value\": true, \"show_cell_bars\": false, \"x_ticks_layout\": \"flat\", \"extra_form_data\": {}, \"granularity_sqla\": \"new_value\"}, \"datasource\": {\"id\": 2339, \"type\": \"table\"}, \"result_type\": \"full\", \"result_format\": \"json\"}"
+      }
+    }
+  ],
+  "saved_queries": [],
+  "query_history": [
+    {
+      "id": 25611146,
+      "status": "pending",
+      "rows": null,
+      "sql_len": 0
+    },
+    {
+      "id": 20309330,
+      "status": "pending",
+      "rows": null,
+      "sql_len": 0
+    },
+    {
+      "id": 20309317,
+      "status": "pending",
+      "rows": null,
+      "sql_len": 0
+    },
+    {
+      "id": 19561246,
+      "status": "pending",
+      "rows": null,
+      "sql_len": 0
+    },
+    {
+      "id": 14803903,
+      "status": "pending",
+      "rows": null,
+      "sql_len": 0
+    }
+  ],
+  "errors": []
+}

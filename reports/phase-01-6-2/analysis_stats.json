@@ -1,0 +1,3714 @@
+{
+  "generated_at": "2026-11-22T09:54:14.933Z",
+  "datasets_total": 3778,
+  "datasets_detail_loaded": 671,
+  "datasets_by_priority": {
+    "P2": 2637,
+    "OUT_OF_SCOPE": 470,
+    "P1": 659,
+    "P0": 12
+  },
+  "charts_total": 19928,
+  "charts_by_priority": {
+    "P1": 9009,
+    "P2": 10136,
+    "UNKNOWN": 675,
+    "P0": 108
+  },
+  "dashboards_total": 332,
+  "dashboard_filters_total": 3264,
+  "columns_total": 17216,
+  "columns_with_values": 2028,
+  "columns_not_available": 16577,
+  "column_values_total": 18605,
+  "metrics_dataset_total": 9472,
+  "metrics_chart_total": 76742,
+  "relationships_total": 274,
+  "relationships_verified": 0,
+  "status_columns": 356,
+  "status_values": [
+    {
+      "dataset_id": 4732,
+      "dataset_name": "darkstore_ts_partners_new",
+      "column_name": "partner_type",
+      "values": [
+        "Цветы"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5797,
+      "dataset_name": "hr_couriers",
+      "column_name": "zone_transition_type",
+      "values": [
+        "Возврат в Green"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7006,
+      "dataset_name": "cargo_main2",
+      "column_name": "pickup_minute",
+      "values": [
+        "20"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7006,
+      "dataset_name": "cargo_main2",
+      "column_name": "pickup_seq",
+      "values": [
+        "2",
+        "12"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7006,
+      "dataset_name": "cargo_main2",
+      "column_name": "pickup_to_courier_minute",
+      "values": [
+        "15"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7024,
+      "dataset_name": "cargo_main3",
+      "column_name": "courier_type",
+      "values": [
+        "вело",
+        "авто"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "is_paid",
+      "values": [
+        "false",
+        "true"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "date_collected",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"today\"), 1, day)",
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "date_delivered",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+        "DATEADD(DATETIME(\"now\"), -7, day) : now",
+        "DATEADD(DATETIME(\"2026-04-17T00:00:00\"), -7, day) : 2026-04-17T00:00:00",
+        "today :",
+        "2026-01-01 : today",
+        "DATEADD(DATETIME(\"2026-04-14T00:00:00\"), -7, day) : 2026-04-14T00:00:00",
+        "dateadd(datetime('today'), -7, day) : datetime('tomorrow')"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "gettype",
+      "values": [
+        "6"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "id_partner_type",
+      "values": [
+        "2",
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "courier_type",
+      "values": [
+        "Мобильный Авто Курьер",
+        "Мобильный Вело Курьер",
+        "Мобильный Ночной Авто Курьер",
+        "Автономный мобильный Авто курьер",
+        "Автономный мобильный Вело курьер",
+        "Ночной Вело Курьер",
+        "Ночной авто курьер"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "delivery_type",
+      "values": [
+        "ЗиЗ-12",
+        "ЗиЗ-11",
+        "ЗиЗ-20",
+        "ЗиЗ-10",
+        "ЗиЗ-13",
+        "ЗиЗ-06",
+        "ЗиЗ-21",
+        "ЗиЗ-01",
+        "Доставка Яндекс.Доставка",
+        "Достависта"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "delivery_type_group",
+      "values": [
+        "Курьеры",
+        "Такси"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "partner_type",
+      "values": [
+        "Роллы Йуми"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "delivery_type_incl_out",
+      "values": [
+        "Курьеры Аутсорс",
+        "Курьеры ВкусВилл",
+        "Курьеры Не определен",
+        "Такси"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3035,
+      "dataset_name": "darkstore_time_click",
+      "column_name": "type_service",
+      "values": [
+        "ГОРОД",
+        "Город экспресс"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "date_collected_sheet",
+      "values": [
+        "Last week"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "type_sheet",
+      "values": [
+        "Партнеры"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "is_collected",
+      "values": [
+        "true"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "id_pse_type",
+      "values": [
+        "1",
+        "11"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "date_collect_start",
+      "values": [
+        "today : tomorrow"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "date_collected",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+        "today : tomorrow",
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)",
+        "2024-02-27 : 2024-02-28",
+        "Last week"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "collection_time",
+      "values": [
+        "60"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "order_status",
+      "values": [
+        "Отменен"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "is_canceled",
+      "values": [
+        "false"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3466,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "is_collection_overdue",
+      "values": [
+        "true"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5799,
+      "dataset_name": "darkstore_time_sheet_by_date_collected",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5799,
+      "dataset_name": "darkstore_time_sheet_by_date_collected",
+      "column_name": "date_collected",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+        "DATETIME(\"YESTERDAY\") : DATETIME(\"TODAY\")"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7712,
+      "dataset_name": "photo_control_shift_bi",
+      "column_name": "is_attempt",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4373,
+      "dataset_name": "report_execution_log_with_report_schedule",
+      "column_name": "state",
+      "values": [
+        "Error",
+        "Success"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4565,
+      "dataset_name": "logs_frov_sbor",
+      "column_name": "collection_device_type",
+      "values": [
+        "УТ"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5438,
+      "dataset_name": "darkstore_time_click_[id=977]",
+      "column_name": "date_delivered",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5438,
+      "dataset_name": "darkstore_time_click_[id=977]",
+      "column_name": "date_delivered_double",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5438,
+      "dataset_name": "darkstore_time_click_[id=977]",
+      "column_name": "delivery_type_group",
+      "values": [
+        "Курьеры",
+        "Такси"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5888,
+      "dataset_name": "Причины не сборки 41 click",
+      "column_name": "darkkitchen_flag",
+      "values": [
+        "да"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5888,
+      "dataset_name": "Причины не сборки 41 click",
+      "column_name": "time_collected",
+      "values": [
+        "DATETIME(\"today\") : DATETIME(\"tomorrow\")",
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)",
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7713,
+      "dataset_name": "photo_control_photo_kind",
+      "column_name": "is_attempt",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2338,
+      "dataset_name": "Исторические_данные_статусы",
+      "column_name": "date_status",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2724,
+      "dataset_name": "Заказы_Вкусвильчик",
+      "column_name": "date_collected",
+      "values": [
+        "today : tomorrow"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3406,
+      "dataset_name": "not_collected_kafe_pek",
+      "column_name": "date_collected",
+      "values": [
+        "2024-01-30T00:00:00 : 2024-01-30T23:59:59",
+        "2024-01-29T00:00:00 : 2024-01-29T23:59:59"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3406,
+      "dataset_name": "not_collected_kafe_pek",
+      "column_name": "Not_collected",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3406,
+      "dataset_name": "not_collected_kafe_pek",
+      "column_name": "not_collected_before_work",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3406,
+      "dataset_name": "not_collected_kafe_pek",
+      "column_name": "not_collected_before_work_slot",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4240,
+      "dataset_name": "wait_list_bakery",
+      "column_name": "order_status",
+      "values": [
+        "Успешно завершен"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4547,
+      "dataset_name": "dts_for_late_delivery",
+      "column_name": "delivery_type_group",
+      "values": [
+        "Курьеры",
+        "Такси"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 4778,
+      "dataset_name": "curier_profit_new",
+      "column_name": "delivery_type_group",
+      "values": [
+        "Курьеры",
+        "Такси"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5232,
+      "dataset_name": "darkstore_time_sheet_[id=23150]",
+      "column_name": "date_collected",
+      "values": [
+        "dateadd(datetime(\"now\"), 1, hour) : dateadd(datetime(\"now\"), 3, hour)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5964,
+      "dataset_name": "darkstore_time_sheet_st_pr_sl",
+      "column_name": "order_status",
+      "values": [
+        "Успешно завершен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5964,
+      "dataset_name": "darkstore_time_sheet_st_pr_sl",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 6757,
+      "dataset_name": "darkstore_time_sheet_for_1000002697",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 6786,
+      "dataset_name": "change_order_time_map",
+      "column_name": "today_flag",
+      "values": [
+        "neutral"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6836,
+      "dataset_name": "darkstore_time_sheet_21CH",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 6964,
+      "dataset_name": "geo_service_logs_hour_msk2",
+      "column_name": "service_free_problem_type",
+      "values": [
+        "замедление",
+        "ускорение"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7021,
+      "dataset_name": "ds_collectors_prod",
+      "column_name": "date_collected",
+      "values": [
+        "2026-05-18 00:00:00 : 2026-05-19 23:59:59.999"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7021,
+      "dataset_name": "ds_collectors_prod",
+      "column_name": "order_status",
+      "values": [
+        "Успешно завершен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 7021,
+      "dataset_name": "ds_collectors_prod",
+      "column_name": "shift_type",
+      "values": [
+        "Ночной"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 7173,
+      "dataset_name": "darkstore_time_sheet_ch21_light",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7174,
+      "dataset_name": "darkstore_time_sheet_test_21ch_light",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7174,
+      "dataset_name": "darkstore_time_sheet_test_21ch_light",
+      "column_name": "order_status",
+      "values": [
+        "Успешно завершен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 7726,
+      "dataset_name": "courier_leads_events_partisans",
+      "column_name": "event_type",
+      "values": [
+        "lead_created"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 7765,
+      "dataset_name": "pkdata_1464_courier_exits",
+      "column_name": "has_order",
+      "values": [
+        "0"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7765,
+      "dataset_name": "pkdata_1464_courier_exits",
+      "column_name": "has_plan",
+      "values": [
+        "0"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7765,
+      "dataset_name": "pkdata_1464_courier_exits",
+      "column_name": "has_tech_shift",
+      "values": [
+        "0"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2492,
+      "dataset_name": "dk_order_types",
+      "column_name": "order_type",
+      "values": [
+        "15-20 мин",
+        "> 20 мин"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 2762,
+      "dataset_name": "hr_daily_pers_dynamics",
+      "column_name": "event_type",
+      "values": [
+        "Прием"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3702,
+      "dataset_name": "complaints_sbor",
+      "column_name": "date_collected",
+      "values": [
+        "previous calendar week"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4376,
+      "dataset_name": "СтатусТочекИТоваровНаДанныйМоментВключенаИлиОтключена",
+      "column_name": "status",
+      "values": [
+        "off"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 6484,
+      "dataset_name": "assembly_time_ch240",
+      "column_name": "date_collected_sheet",
+      "values": [
+        "Last day"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7075,
+      "dataset_name": "couriers_leads_by_amo",
+      "column_name": "lead_stage",
+      "values": [
+        "КАНДИДАТ ОФОРМЛЕН",
+        "Успех",
+        "Успешно реализовано"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7153,
+      "dataset_name": "delivery_promises",
+      "column_name": "is_ds",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7267,
+      "dataset_name": "cargo_collect1",
+      "column_name": "collect_duration_min",
+      "values": [
+        "30"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7269,
+      "dataset_name": "cargo_collect3",
+      "column_name": "start_collect_duration_min",
+      "values": [
+        "30"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7742,
+      "dataset_name": "oprosso_first_shift_pu_problems",
+      "column_name": "issue_reason",
+      "values": [
+        "Другое"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1623,
+      "dataset_name": "Активность когорт курьеров",
+      "column_name": "cancel",
+      "values": [
+        "1 weeks ago : 1 weeks ahead"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2331,
+      "dataset_name": "Заказы Готов - УЗ",
+      "column_name": "date_status",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2366,
+      "dataset_name": "Причины не сборки",
+      "column_name": "darkkitchen_flag",
+      "values": [
+        "да"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 2366,
+      "dataset_name": "Причины не сборки",
+      "column_name": "time_collected",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)",
+        "DATETIME(\"today\") : DATETIME(\"tomorrow\")",
+        "01-04-2024 00:00:00 : 02-04-2024 00:00:00"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2377,
+      "dataset_name": "запрос_заказ_курьеры",
+      "column_name": "date_delivered",
+      "values": [
+        "previous calendar week"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4804,
+      "dataset_name": "pool_with_rest/pharm_delay",
+      "column_name": "group_by_partner_type",
+      "values": [
+        "with_rest",
+        "with_pharm"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5774,
+      "dataset_name": "hr_daily_pers_office_both_forms",
+      "column_name": "event_type",
+      "values": [
+        "Увольнение"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6857,
+      "dataset_name": "darkstore_time_sheet_group_4_diff_weeks",
+      "column_name": "qty_orders_delivered",
+      "values": [
+        "10"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6923,
+      "dataset_name": "darkstore_time_sheet_team",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 7057,
+      "dataset_name": "amo_couriers_leads",
+      "column_name": "is_success",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7909,
+      "dataset_name": "GFK-сегментация · отток и предотток по неделям",
+      "column_name": "churn_status",
+      "values": [
+        "Высокий риск оттока",
+        "Средний риск оттока",
+        "Была покупка на неделе",
+        "Норма",
+        "Отток",
+        "Низкий риск оттока",
+        "Меньше 3-х чеков"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 2320,
+      "dataset_name": "По курьерам_Экспресс_доп",
+      "column_name": "delivery_type_new",
+      "values": [
+        "Такси",
+        "Курьеры"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 2341,
+      "dataset_name": "Таблица по курьерам по дням (дополнительно)",
+      "column_name": "Date_delivery_start_2",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4284,
+      "dataset_name": "Временный тестовый датасет default.darkstore_time_sheet",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 4284,
+      "dataset_name": "Временный тестовый датасет default.darkstore_time_sheet",
+      "column_name": "order_status",
+      "values": [
+        "Успешно завершен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 4369,
+      "dataset_name": "darkstore_time_sheet_TEST_j_join",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 4997,
+      "dataset_name": "darkstore_time_sheet_test",
+      "column_name": "order_status",
+      "values": [
+        "Успешно завершен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 4997,
+      "dataset_name": "darkstore_time_sheet_test",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5721,
+      "dataset_name": "Запрос mart.km_gis_mt_logs_not_sale_for_date",
+      "column_name": "status",
+      "values": [
+        "sold",
+        "for_sale",
+        "reserved"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 6489,
+      "dataset_name": "sku_sbor_conflict",
+      "column_name": "date_collected_cast",
+      "values": [
+        "datetime('today') : datetime('tomorrow')"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7043,
+      "dataset_name": "ds_collectors_downtime",
+      "column_name": "collected_date",
+      "values": [
+        "2026-05-04 00:00:00 : 2026-05-05 23:59:59.999"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3664,
+      "dataset_name": "hr_daily_pers_office",
+      "column_name": "event_type",
+      "values": [
+        "Увольнение",
+        "Перевод из розницы"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3334,
+      "dataset_name": "Экраны магазина",
+      "column_name": "device_type",
+      "values": [
+        "ios",
+        "android"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4464,
+      "dataset_name": "Норматив сборки",
+      "column_name": "type_sbor",
+      "values": [
+        "Ночной"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5093,
+      "dataset_name": "radvogin_darkstore_time_sheet_test",
+      "column_name": "date_collected",
+      "values": [
+        "Last month"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5580,
+      "dataset_name": "Reasons_not_sbor_click240",
+      "column_name": "darkkitchen_flag",
+      "values": [
+        "да"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6495,
+      "dataset_name": "darkstore_time_sheet_smile",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 7508,
+      "dataset_name": "user_funnel_geo",
+      "column_name": "is_latest_period",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7508,
+      "dataset_name": "user_funnel_geo",
+      "column_name": "period_type",
+      "values": [
+        "day"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7508,
+      "dataset_name": "user_funnel_geo",
+      "column_name": "stage_order",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3108,
+      "dataset_name": "delivery_type_group_f",
+      "column_name": "delivery_type_group",
+      "values": [
+        "Курьеры",
+        "Такси"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 4710,
+      "dataset_name": "logs_frov_28new",
+      "column_name": "collection_device_type",
+      "values": [
+        "УТ"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 4896,
+      "dataset_name": "logs_rep_test",
+      "column_name": "state",
+      "values": [
+        "Error",
+        "Success",
+        "Not triggered",
+        "Working",
+        "On Grace"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5704,
+      "dataset_name": "mart.km_gis_mt_logs_reserved_not_sale",
+      "column_name": "status",
+      "values": [
+        "sold",
+        "for_sale",
+        "reserved"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5872,
+      "dataset_name": "collectors_productivity",
+      "column_name": "order_status",
+      "values": [
+        "Успешно завершен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5918,
+      "dataset_name": "darkstore_time_sheet_[slice_id=24271]",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 6177,
+      "dataset_name": "test для времени сборки",
+      "column_name": "order_status",
+      "values": [
+        "Успешно завершен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 6263,
+      "dataset_name": "test_dk_delivery(new_source)",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 6831,
+      "dataset_name": "darkstore_time_sheet_with_hor",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 6995,
+      "dataset_name": "test_shifts",
+      "column_name": "order_status",
+      "values": [
+        "Успешно завершен"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 7182,
+      "dataset_name": "Датасет Товары за вчера не перешедшие в другой статус",
+      "column_name": "status",
+      "values": [
+        "sold",
+        "for_sale",
+        "reserved"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5439,
+      "dataset_name": "проверка_darkstore_time_click",
+      "column_name": "check_flag",
+      "values": [
+        "отсутствует в основном датасете",
+        "отличается от основного датасета"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5542,
+      "dataset_name": "ost_group_ch41",
+      "column_name": "date_collected_cast",
+      "values": [
+        "DATETIME(\"today\") : DATETIME(\"tomorrow\")",
+        "DATEADD(DATETRUNC(DATETIME(\"today\"), week), -52, week) : DATETIME(\"tomorrow\")",
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"today\"), 1, day)",
+        "2026-05-01 00:00:00 : 2026-05-31 23:59:59.999",
+        "today : DATEADD(DATETIME(\"today\"), 1, day)",
+        "2026-07-09 00:00:00 : 2026-07-21 23:59:59.999",
+        "Last month"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4378,
+      "dataset_name": "dq checks with status",
+      "column_name": "is_okay",
+      "values": [
+        "false"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2550,
+      "dataset_name": "Сборщики_заплатка",
+      "column_name": "date_collect",
+      "values": [
+        "DATETIME(\"yesterday\") : DATETIME(\"today\")",
+        "DATETIME(\"today\") : DATETIME(\"tomorrow\")"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3863,
+      "dataset_name": "staff_tb",
+      "column_name": "is_fired",
+      "values": [
+        "Уволеный"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5553,
+      "dataset_name": "ost_group_rozn_ch41",
+      "column_name": "date_collected_cast",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"today\"), 1, day)",
+        "DATETIME(\"today\") : DATETIME(\"tomorrow\")",
+        "previous calendar week",
+        "Last week"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7089,
+      "dataset_name": "cargo1",
+      "column_name": "pickup_to_courier_minute",
+      "values": [
+        "10"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7122,
+      "dataset_name": "cargo5",
+      "column_name": "courier_type",
+      "values": [
+        "вело",
+        "авто"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1324,
+      "dataset_name": "Иван Жижин-Query druid.<ФИО> Жижин-Запрос без имени 3-idgXL4lew-6YXNSXpPq",
+      "column_name": "type_delivery",
+      "values": [
+        "idk",
+        "Сторонняя доставка"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2292,
+      "dataset_name": "Assembl_lists",
+      "column_name": "date_collected",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2295,
+      "dataset_name": "ksa_time_vw",
+      "column_name": "Date_delivery_start_2",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2295,
+      "dataset_name": "ksa_time_vw",
+      "column_name": "delivery_type",
+      "values": [
+        "ЗиЗ-04"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2295,
+      "dataset_name": "ksa_time_vw",
+      "column_name": "delivery_type_new",
+      "values": [
+        "Курьеры",
+        "Такси"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2295,
+      "dataset_name": "ksa_time_vw",
+      "column_name": "date_delivered2",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2584,
+      "dataset_name": "success_cou_taxi",
+      "column_name": "delivery_type_new",
+      "values": [
+        "Курьеры",
+        "Такси"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 2670,
+      "dataset_name": "time_coll_dk_express",
+      "column_name": "order_type",
+      "values": [
+        "10-15 мин",
+        "8 -10 мин",
+        "> 15 мин"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 2802,
+      "dataset_name": "complaints_33_4",
+      "column_name": "type_or_tag",
+      "values": [
+        "06_3 / 47_3 Привезли с опозданием/не привезли (отмена покупателем)",
+        "Смена времени заказа",
+        "Статус заказа",
+        "Добавление комментариев к заказу",
+        "Смена состава заказа",
+        "Отмена заказа - причина Покупатель",
+        "Вопросы по оформленному заказу",
+        "Смена магазина/конкуренция",
+        "Оформлен ли заказ?",
+        "Функционал корзины",
+        "Другое",
+        "Пожелания",
+        "Баги",
+        "33_4 Корзина и Заказ"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 3982,
+      "dataset_name": "ta_internal:kaiten",
+      "column_name": "card_state",
+      "values": [
+        "Готово"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4984,
+      "dataset_name": "apt_rest_flowers_sales with PSE",
+      "column_name": "date_delivered",
+      "values": [
+        "Last day"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5234,
+      "dataset_name": "logs_for_inner_dash_dashboards",
+      "column_name": "datasource_type",
+      "values": [
+        "table"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5612,
+      "dataset_name": "random_data_for_year",
+      "column_name": "prev_status",
+      "values": [
+        "Новый",
+        "В работе"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5666,
+      "dataset_name": "Витрина чеков покупателей",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5680,
+      "dataset_name": "m4_tasks_dkp",
+      "column_name": "statusName",
+      "values": [
+        "НЕ ОТКРЫТА (задача не начата)",
+        "ОТКРЫТА (задача в работе)",
+        "ЗАКРЫТА (задача выполнена)",
+        "ОТМЕНЕНА (кухня не работала)",
+        "ОТМЕНЕНА (задача не была выполнена)",
+        "ОТМЕНЕНА (задача не выполнена)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5680,
+      "dataset_name": "m4_tasks_dkp",
+      "column_name": "statusProcessName",
+      "values": [
+        "ДКП Журналы и чек-листы (КАФЕ-ПЕКАРНЯ) [БП]",
+        "ДКП Журналы и чек-листы (КУХНЯ) [БП]",
+        "ДКП Журналы и чек-листы (КАФЕ) [БП]",
+        "СУШИПОИНТ Журналы и чек-листы [БП]",
+        "ДКП Журналы и чек-листы (ВВ Го) [БП]"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5762,
+      "dataset_name": "m4_bar_char",
+      "column_name": "statusName",
+      "values": [
+        "ОТКРЫТА (задача в работе)",
+        "НЕ ОТКРЫТА (задача не начата)",
+        "ЗАКРЫТА (задача выполнена)",
+        "ОТМЕНЕНА (задача не выполнена)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5762,
+      "dataset_name": "m4_bar_char",
+      "column_name": "statusProcessName",
+      "values": [
+        "ДКП Журналы и чек-листы (КАФЕ) [БП]",
+        "ДКП Генеральная уборка (КАФЕ) [БП]",
+        "СУШИПОИНТ Генеральная уборка [БП]",
+        "СУШИПОИНТ Журналы и чек-листы [БП]",
+        "ДКП Журналы и чек-листы (КУХНЯ) [БП]",
+        "ДКП Генеральная уборка (КАФЕ-ПЕКАРНЯ) [БП]",
+        "ДКП Генеральная уборка (КУХНЯ) [БП]",
+        "ДКП Журналы и чек-листы (КАФЕ-ПЕКАРНЯ) [БП]",
+        "ДКП Журналы и чек-листы (ВВ Го) [БП]"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5815,
+      "dataset_name": "1850_Loses_ch240",
+      "column_name": "def_kuh_reason",
+      "values": [
+        "Дефицит РЦ (выведено)"
+      ],
+      "source": "dataset_sql"
+    },
+    {
+      "dataset_id": 5815,
+      "dataset_name": "1850_Loses_ch240",
+      "column_name": "is_dark_store",
+      "values": [
+        "true"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5815,
+      "dataset_name": "1850_Loses_ch240",
+      "column_name": "kuh_reason",
+      "values": [
+        "Завал  сборка доставка",
+        "Повар опоздал",
+        "Прочее",
+        "Нет повара",
+        "Тех проблема",
+        "Завал"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5815,
+      "dataset_name": "1850_Loses_ch240",
+      "column_name": "losses_reason",
+      "values": [
+        "Отключение кухни",
+        "Отключение товара"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5815,
+      "dataset_name": "1850_Loses_ch240",
+      "column_name": "losses_reason_2",
+      "values": [
+        "Отключение товара"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5815,
+      "dataset_name": "1850_Loses_ch240",
+      "column_name": "losses_reason_whitestore",
+      "values": [
+        "Отключение товара"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7087,
+      "dataset_name": "apt_sales with PSE_ch21",
+      "column_name": "date_delivered",
+      "values": [
+        "Last day"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7109,
+      "dataset_name": "flowers_sales with PSE_ch21",
+      "column_name": "date_delivered",
+      "values": [
+        "Last day"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7283,
+      "dataset_name": "hr_daily_pers_office_click",
+      "column_name": "event_type",
+      "values": [
+        "Увольнение"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7443,
+      "dataset_name": "vkusvill_availability_superset_extended",
+      "column_name": "sku_category",
+      "values": [
+        "ДаркКитчен",
+        "Пекарня"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7532,
+      "dataset_name": "Кулинария · Витрина чеков + рынок и формат ТТ",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7615,
+      "dataset_name": "Категория · Витрина чеков + рынок и формат ТТ",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7696,
+      "dataset_name": "count_delay_generals",
+      "column_name": "type_service",
+      "values": [
+        "Больше товаров",
+        "Бесплатный",
+        "Экспресс"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7869,
+      "dataset_name": "ds_hours_test_ch21",
+      "column_name": "id_status",
+      "values": [
+        "4",
+        "10",
+        "18",
+        "1001"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7869,
+      "dataset_name": "ds_hours_test_ch21",
+      "column_name": "date_status",
+      "values": [
+        "2026-11-11 00:00:00 : 2026-11-12 00:00:00"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5106,
+      "dataset_name": "dd_fun_action",
+      "column_name": "device_type",
+      "values": [
+        "ios"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7774,
+      "dataset_name": "pa_16466_capacity_cluster_data2",
+      "column_name": "grain_type",
+      "values": [
+        "category",
+        "group"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7774,
+      "dataset_name": "pa_16466_capacity_cluster_data2",
+      "column_name": "scope_type",
+      "values": [
+        "cluster",
+        "network"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7862,
+      "dataset_name": "courier_support_category_trends",
+      "column_name": "category_kind",
+      "values": [
+        "tag",
+        "type"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3949,
+      "dataset_name": "ds_hours_test",
+      "column_name": "id_status",
+      "values": [
+        "4",
+        "10",
+        "18",
+        "1001"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7857,
+      "dataset_name": "b2b_carts_mart_v2",
+      "column_name": "card_type",
+      "values": [
+        "b2b"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7857,
+      "dataset_name": "b2b_carts_mart_v2",
+      "column_name": "basket_status",
+      "values": [
+        "потерянная корзинка",
+        "архивная"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7815,
+      "dataset_name": "vv_culinary_channels_ww_pbi",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7810,
+      "dataset_name": "vv_culinary_sales_weekly_pbi_5w",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7531,
+      "dataset_name": "Кулинария · Год к году по SKU · по каналам",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7529,
+      "dataset_name": "Кулинария · Год к году по неделям · по каналам",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7628,
+      "dataset_name": "Категория · Год к году по SKU · по каналам",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7627,
+      "dataset_name": "Категория · Год к году по неделям · по каналам",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6963,
+      "dataset_name": "partner_unassembled_order",
+      "column_name": "collected_dt",
+      "values": [
+        "today - 6 month : today"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7788,
+      "dataset_name": "Категория · Выручка по группам × период (сводная)",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7598,
+      "dataset_name": "Кулинария · Новинки и SKU по неделям (продажи, ЗЦ, списания, онлайн, маржа)",
+      "column_name": "is_last",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7594,
+      "dataset_name": "Кулинария · АСР-сегменты по месяцам (ГкГ / МкМ / абсолюты)",
+      "column_name": "is_last",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7593,
+      "dataset_name": "Кулинария · АСР-сегменты по неделям (ГкГ / НкН / абсолюты)",
+      "column_name": "is_last",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7626,
+      "dataset_name": "Категория · Покупатели по сегментам CLC · по каналам",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7614,
+      "dataset_name": "Категория · недельные продажи (с пред. неделей)",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7616,
+      "dataset_name": "Категория · Новинки и SKU по неделям (продажи, ЗЦ, списания, онлайн, маржа)",
+      "column_name": "is_last",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7530,
+      "dataset_name": "Кулинария · Покупатели по сегментам CLC · по каналам",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7638,
+      "dataset_name": "Категория · АСР-сегменты по месяцам (ГкГ / МкМ / абсолюты)",
+      "column_name": "is_last",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7637,
+      "dataset_name": "Категория · АСР-сегменты по неделям (ГкГ / НкН / абсолюты)",
+      "column_name": "is_last",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4208,
+      "dataset_name": "fruitcourt_rating",
+      "column_name": "there_is_comment",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5080,
+      "dataset_name": "bucket_complaints",
+      "column_name": "complaint_type",
+      "values": [
+        "33_4 Корзина и Заказ"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7797,
+      "dataset_name": "Кулинария · Рестарты (факт, по данным)",
+      "column_name": "is_last",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7791,
+      "dataset_name": "Категория · Позиции к пред. периоду с итогами подгрупп и ABC (GP)",
+      "column_name": "purchase_type",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7640,
+      "dataset_name": "Категория · Рестарты ЖЦТ (неделя × SKU × тип ТТ)",
+      "column_name": "is_last",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7793,
+      "dataset_name": "GFK-сегментация · по периодам",
+      "column_name": "is_last_period",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7782,
+      "dataset_name": "mp_audience_daily",
+      "column_name": "audience_type",
+      "values": [
+        "МП",
+        "Раздел"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6391,
+      "dataset_name": "web_logs_mart",
+      "column_name": "last_significant_traffic_type",
+      "values": [
+        "webview",
+        "organic_search",
+        "direct",
+        "internal",
+        "other_site_clicks"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 7734,
+      "dataset_name": "general_communication_dashboard_m",
+      "column_name": "communication_type",
+      "values": [
+        "инапп",
+        "пуш"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7648,
+      "dataset_name": "vkusvill_availability_superset_agg_day",
+      "column_name": "is_service_excluded_week",
+      "values": [
+        "0"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7596,
+      "dataset_name": "Кулинария · Рестарты ЖЦТ (неделя × SKU × тип ТТ)",
+      "column_name": "is_last",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7671,
+      "dataset_name": "banner_funnel_periods",
+      "column_name": "stage_order",
+      "values": [
+        "7",
+        "5",
+        "4"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7667,
+      "dataset_name": "user_funnel_by_type",
+      "column_name": "stage_order",
+      "values": [
+        "5",
+        "3",
+        "1",
+        "2"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7467,
+      "dataset_name": "finmcomp",
+      "column_name": "type_comp",
+      "values": [
+        "Бонус",
+        "Купон",
+        "Возврат за экспресс"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7612,
+      "dataset_name": "autobanner_cart_data_v3",
+      "column_name": "is_normal",
+      "values": [
+        "0"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7559,
+      "dataset_name": "worsening_informed_funnel",
+      "column_name": "period_type",
+      "values": [
+        "month"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7548,
+      "dataset_name": "worsening_repeat_encounters",
+      "column_name": "period_type",
+      "values": [
+        "day",
+        "month"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7311,
+      "dataset_name": "weekly_report_productivity_ds_ws",
+      "column_name": "productivity_type",
+      "values": [
+        "По ДС без сервисов",
+        "По ДС с сервисами",
+        "По ВС"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7387,
+      "dataset_name": "weekly_rep_productivity_sotr_ds_ws",
+      "column_name": "productivity_type",
+      "values": [
+        "ВС",
+        "ДС"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7368,
+      "dataset_name": "weekly_productivity_ds_role_period_ch21",
+      "column_name": "productivity_type",
+      "values": [
+        "По ДС без сервисов",
+        "По ДС с сервисами"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7295,
+      "dataset_name": "site_af_events_daily",
+      "column_name": "event_type",
+      "values": [
+        "af_purchase",
+        "first_purchase_all_time",
+        "af_login_start",
+        "install"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7315,
+      "dataset_name": "weekly_report_productivity_ds_ws_period",
+      "column_name": "productivity_type",
+      "values": [
+        "По ВС",
+        "По ДС без сервисов",
+        "По ДС с сервисами"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5559,
+      "dataset_name": null,
+      "column_name": "event_type",
+      "values": [
+        "Увольнение"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7259,
+      "dataset_name": "binding_success_daily",
+      "column_name": "pay_type_v",
+      "values": [
+        "YANDEX_PAY",
+        "SBP",
+        "SBERPAY",
+        "CARD"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7259,
+      "dataset_name": "binding_success_daily",
+      "column_name": "os_type",
+      "values": [
+        "web"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7210,
+      "dataset_name": "courier_leads",
+      "column_name": "lead_stage",
+      "values": [
+        "Успешно реализовано",
+        "Кандидат оформлен",
+        "Успех"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7132,
+      "dataset_name": "nedostupnost_detailed",
+      "column_name": "rn_status_update",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7132,
+      "dataset_name": "nedostupnost_detailed",
+      "column_name": "dish_type",
+      "values": [
+        "1",
+        "2"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6752,
+      "dataset_name": "reestr_vozvrat_tag_dkp",
+      "column_name": "appeal_type_id",
+      "values": [
+        "330"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6646,
+      "dataset_name": "payments_place_access_2",
+      "column_name": "point_type",
+      "values": [
+        "Вкус вилл GO",
+        "Интернет торговля",
+        "Производство",
+        "Пространство вкуса"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6807,
+      "dataset_name": "payments_daily_v2_new",
+      "column_name": "pay_type_v",
+      "values": [
+        "YANDEX_PAY",
+        "SBP",
+        "SBERPAY",
+        "CARD"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6635,
+      "dataset_name": "gift_card_daily",
+      "column_name": "customer_type",
+      "values": [
+        "С картой",
+        "Без карты"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6391,
+      "dataset_name": "web_logs_mart",
+      "column_name": "is_authorized",
+      "values": [
+        "false",
+        "true"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6175,
+      "dataset_name": "b2b_carts_mart",
+      "column_name": "pay_type",
+      "values": [
+        "b2b",
+        "empty"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6175,
+      "dataset_name": "b2b_carts_mart",
+      "column_name": "basket_status",
+      "values": [
+        "архивная",
+        "потерянная корзинка"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6456,
+      "dataset_name": "Запрос Запрос ecommerce_acquiring_commission 27.11.2025 17:39:10 27.11.2025 18:01:08",
+      "column_name": "gate_type",
+      "values": [
+        "Сбер",
+        "РБС"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6983,
+      "dataset_name": "тест_выработка_сборщиков",
+      "column_name": "date_collected",
+      "values": [
+        "last week :"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6980,
+      "dataset_name": "простои сборщиков: тестовый",
+      "column_name": "collected_date",
+      "values": [
+        "2026-05-04 00:00:00 : 2026-05-05 23:59:59.999"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7064,
+      "dataset_name": "Статистика использования Плагин.ТА",
+      "column_name": "viz_type",
+      "values": [
+        "%supersetTA%"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1799,
+      "dataset_name": "sql_Выработка_сборщиков",
+      "column_name": "date_collected",
+      "values": [
+        "Last week",
+        "2023-01-18T00:00:00 : 2023-01-19T00:00:00",
+        "last week :"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5811,
+      "dataset_name": "product_card_dashboard_rr_churn ",
+      "column_name": "period_type",
+      "values": [
+        "Месяц",
+        "Неделя"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5819,
+      "dataset_name": "product_card_dashboard_main",
+      "column_name": "action_type",
+      "values": [
+        "В течение сессии",
+        "В течение недели"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5819,
+      "dataset_name": "product_card_dashboard_main",
+      "column_name": "period_type",
+      "values": [
+        "Неделя",
+        "День"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 2374,
+      "dataset_name": "ost_group",
+      "column_name": "date_collected_cast",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"today\"), 1, day)",
+        "DATETIME(\"today\") : DATETIME(\"tomorrow\")",
+        "previous calendar week"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2571,
+      "dataset_name": "outflow_news_month",
+      "column_name": "type_new",
+      "values": [
+        "offline",
+        "online"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5796,
+      "dataset_name": "dk_refund_tags",
+      "column_name": "appeal_type_id",
+      "values": [
+        "330"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2787,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "was_collected",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2787,
+      "dataset_name": "darkstore_time_sheet",
+      "column_name": "id_status",
+      "values": [
+        "18"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6619,
+      "dataset_name": "Запрос mart.reserved_v2 sold ",
+      "column_name": "is_sold",
+      "values": [
+        "0"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6579,
+      "dataset_name": "v_orders_collection",
+      "column_name": "collected_date",
+      "values": [
+        "Sun, 11 Jan 2026 00:00:00 GMT",
+        "1768867200000"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 6398,
+      "dataset_name": "product_card_ctr",
+      "column_name": "period_type",
+      "values": [
+        "Неделя",
+        "День"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5521,
+      "dataset_name": "anomalies_forecast_melted",
+      "column_name": "model_type",
+      "values": [
+        "SeasonalNaive21",
+        "MSTL",
+        "SeasonalNaive14",
+        "AutoARIMA"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6127,
+      "dataset_name": "product_card_ab_tool_design",
+      "column_name": "metric_type",
+      "values": [
+        "ratio",
+        "binary",
+        "quantitative"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4669,
+      "dataset_name": null,
+      "column_name": "delivery_type_group",
+      "values": [
+        "Курьеры"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 6299,
+      "dataset_name": "meta_dwh.dq_all_checks 20.10.2025",
+      "column_name": "table_type",
+      "values": [
+        "Витрины"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 4859,
+      "dataset_name": "v_check_bug_monitor_daily_pivot",
+      "column_name": "metric_type",
+      "values": [
+        "checkline_cnt"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5406,
+      "dataset_name": "check",
+      "column_name": "sku_category",
+      "values": [
+        "Кулинария",
+        "Молочная Продукция",
+        "Мясо. Птица. П/ф охл. Яйца",
+        "Торты, пирожные, десерты",
+        "Хлеб"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5615,
+      "dataset_name": "все поля датасетов ecom",
+      "column_name": "type_flag",
+      "values": [
+        "столбец",
+        "вычисляемый столбец",
+        "показатель"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3232,
+      "dataset_name": "ost_group_rozn",
+      "column_name": "date_collected_cast",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"today\"), 1, day)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5521,
+      "dataset_name": "anomalies_forecast_melted",
+      "column_name": "is_anomaly",
+      "values": [
+        "True"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5188,
+      "dataset_name": "test_history_anomaly_check",
+      "column_name": "result",
+      "values": [
+        "Отклонение"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5406,
+      "dataset_name": "check",
+      "column_name": "discount_type",
+      "values": [
+        "Аналог ЛП",
+        "ЛП",
+        "Абонемент"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5366,
+      "dataset_name": "cart_data_cart_metrics_map_21_superset_240",
+      "column_name": "is_authorized",
+      "values": [
+        "Да"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 5366,
+      "dataset_name": "cart_data_cart_metrics_map_21_superset_240",
+      "column_name": "device_type",
+      "values": [
+        "ios",
+        "android"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4527,
+      "dataset_name": "Для чата баги без задач",
+      "column_name": "is_okay",
+      "values": [
+        "false"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4527,
+      "dataset_name": "Для чата баги без задач",
+      "column_name": "is_active",
+      "values": [
+        "true"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 809,
+      "dataset_name": "Запрос онлайн/оффлайн",
+      "column_name": "category",
+      "values": [
+        "Мобильное приложение",
+        "Маркетплейсы",
+        "Сервисы доставки"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4927,
+      "dataset_name": "comment_indilavka",
+      "column_name": "there_is_comment",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4585,
+      "dataset_name": "for_urz",
+      "column_name": "flag",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4637,
+      "dataset_name": "dataset_elements",
+      "column_name": "is_used_in_graph",
+      "values": [
+        "Используется в графиках"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4627,
+      "dataset_name": null,
+      "column_name": "state",
+      "values": [
+        "Error"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4851,
+      "dataset_name": "beauty_dtt_new",
+      "column_name": "is_online",
+      "values": [
+        "Другое"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4860,
+      "dataset_name": "comment_beauty",
+      "column_name": "there_is_comment",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4717,
+      "dataset_name": "for_crosstab_date_er",
+      "column_name": "total_value_type",
+      "values": [
+        "checkline_cnt"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4764,
+      "dataset_name": "meteor_export_all_task",
+      "column_name": "is_last",
+      "values": [
+        "true"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4674,
+      "dataset_name": "for_urz_1",
+      "column_name": "flag",
+      "values": [
+        "1",
+        "0"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4543,
+      "dataset_name": "Все баги",
+      "column_name": "check_type_id",
+      "values": [
+        "20"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4054,
+      "dataset_name": "samocart_out_qty_ord_time&tov",
+      "column_name": "date_collected",
+      "values": [
+        "2024-10-11 : 2024-10-12"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4478,
+      "dataset_name": "veg",
+      "column_name": "this_month",
+      "values": [
+        "2023-06-01",
+        "2024-09-01"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4477,
+      "dataset_name": "gastronomy",
+      "column_name": "this_month",
+      "values": [
+        "2023-08-01",
+        "2023-07-01",
+        "2024-07-01",
+        "2024-08-01",
+        "2023-09-01",
+        "2023-10-01",
+        "2023-11-01",
+        "2023-12-01",
+        "2024-01-01",
+        "2024-02-01",
+        "2024-03-01",
+        "2024-04-01",
+        "2024-06-01",
+        "2024-05-01"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4475,
+      "dataset_name": "meat",
+      "column_name": "this_month",
+      "values": [
+        "2023-07-01",
+        "2023-08-01",
+        "2023-09-01",
+        "2023-10-01",
+        "2023-11-01",
+        "2023-12-01",
+        "2024-01-01",
+        "2024-02-01",
+        "2024-03-01",
+        "2024-04-01",
+        "2024-05-01",
+        "2024-06-01",
+        "2024-07-01",
+        "2024-08-01"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 4214,
+      "dataset_name": "tsd_test",
+      "column_name": "date_collect_start_sheet",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3665,
+      "dataset_name": "hr_all_dynamics_office",
+      "column_name": "event_type",
+      "values": [
+        "Прием"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2583,
+      "dataset_name": "samocart_out_qty_ord&tov",
+      "column_name": "date_collected",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2680,
+      "dataset_name": "outsource_data",
+      "column_name": "date_collected",
+      "values": [
+        "Last week"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3765,
+      "dataset_name": "Запрос без имени 3 14.03.2024 11:25:39",
+      "column_name": "date_collect_start_",
+      "values": [
+        "Last week"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3764,
+      "dataset_name": "Запрос без имени 3 14.03.2024 11:24:39",
+      "column_name": "date_collect_start_",
+      "values": [
+        "Last week"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2757,
+      "dataset_name": "tmn_11",
+      "column_name": "flag",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3524,
+      "dataset_name": "dk_kul",
+      "column_name": "category",
+      "values": [
+        "Кулинария",
+        "ДаркКитчен"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2740,
+      "dataset_name": "hr_hours_draft",
+      "column_name": "type",
+      "values": [
+        "ГПХ",
+        "ТД",
+        "Аутсорсинг"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3348,
+      "dataset_name": "Дегустации и продажи РП",
+      "column_name": "region_flag",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1408,
+      "dataset_name": "Запрос М.Садыков - когорты лояльность",
+      "column_name": "type_user",
+      "values": [
+        "Репертуарн",
+        "Новичок",
+        "Средние кл",
+        "Амбассадор"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3150,
+      "dataset_name": "flowers_users",
+      "column_name": "bet_flag",
+      "values": [
+        "0",
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3150,
+      "dataset_name": "flowers_users",
+      "column_name": "flag_bet",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3150,
+      "dataset_name": "flowers_users",
+      "column_name": "flag_flow",
+      "values": [
+        "1",
+        "0"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 3090,
+      "dataset_name": "restoran_users",
+      "column_name": "flag_rest",
+      "values": [
+        "1",
+        "0"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2589,
+      "dataset_name": "outflow_news",
+      "column_name": "type_new",
+      "values": [
+        "offline",
+        "online"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2533,
+      "dataset_name": "outflow_news_test",
+      "column_name": "type_new",
+      "values": [
+        "offline",
+        "online"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 694,
+      "dataset_name": "price_rc_tt_full",
+      "column_name": "is_tilsy",
+      "values": [
+        "Без внешней розницы"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 694,
+      "dataset_name": "price_rc_tt_full",
+      "column_name": "is_sebest",
+      "values": [
+        "Без себестоимости"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2134,
+      "dataset_name": "losses_3_4_1",
+      "column_name": "FlagPoter",
+      "values": [
+        "излишки",
+        "списания"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2594,
+      "dataset_name": "outflow_news_tt",
+      "column_name": "type_new",
+      "values": [
+        "online",
+        "offline"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2809,
+      "dataset_name": "shopno_cases",
+      "column_name": "flag",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2442,
+      "dataset_name": "complaints_report",
+      "column_name": "flag3",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2442,
+      "dataset_name": "complaints_report",
+      "column_name": "flag2",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2442,
+      "dataset_name": "complaints_report",
+      "column_name": "flag",
+      "values": [
+        "1"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1319,
+      "dataset_name": "Проигрыш по корзине_общее",
+      "column_name": "reason",
+      "values": [
+        "Нет на РЦ более одного дня",
+        "Ротация"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1322,
+      "dataset_name": "Проигрыш_по_корзине",
+      "column_name": "reason",
+      "values": [
+        "Нет на РЦ более одного дня",
+        "Ротация"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2525,
+      "dataset_name": "Собранные позиции по сборщикам",
+      "column_name": "date_collect",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATETIME(\"today\"), 1, day)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 238,
+      "dataset_name": "Евгений Целиков-Query dbo.Checks-7zePlRlo5",
+      "column_name": "Status",
+      "values": [
+        "Открыт"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2855,
+      "dataset_name": "rating_golden_cart",
+      "column_name": "date_collected_cast",
+      "values": [
+        "Last month"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 930,
+      "dataset_name": "new",
+      "column_name": "minute_collect_delivery",
+      "values": [
+        "60"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 930,
+      "dataset_name": "new",
+      "column_name": "minute_start_collect",
+      "values": [
+        "60"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2761,
+      "dataset_name": "hr_all_pers",
+      "column_name": "event_type",
+      "values": [
+        "Увольнение"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2328,
+      "dataset_name": "ЭкоСбор",
+      "column_name": "date_delivered2",
+      "values": [
+        "2021-12-22T00:00:00 : 2021-12-23T23:59:59"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1795,
+      "dataset_name": "Сборщики_Самокарт",
+      "column_name": "date_collected_",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2457,
+      "dataset_name": "Untitled Query 5 11/23/2022 12:05:25",
+      "column_name": "date_collected",
+      "values": [
+        "last week :",
+        "DATEADD(DATETIME(\"2022-11-22T00:00:00\"), -1, day) : 2022-11-22T00:00:00"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 2210,
+      "dataset_name": "вторсырье",
+      "column_name": "date_delivered2",
+      "values": [
+        "DATETIME(\"today\") : DATEADD(DATEADD(DATETIME(\"today\"), 1, day), -1, second)"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1402,
+      "dataset_name": null,
+      "column_name": "gettype",
+      "values": [
+        "4",
+        "44",
+        "46",
+        "48",
+        "50",
+        "12",
+        "14",
+        "16",
+        "17",
+        "18",
+        "19",
+        "34",
+        "42",
+        "54",
+        "56",
+        "58",
+        "60",
+        "62",
+        "64"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1386,
+      "dataset_name": "Сборщики_выработка",
+      "column_name": "date_collected",
+      "values": [
+        "Last week",
+        "Last 7 days"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "gettype",
+      "values": [
+        "6",
+        "4",
+        "44",
+        "46",
+        "48",
+        "50",
+        "54",
+        "56",
+        "58",
+        "60",
+        "62",
+        "64",
+        "8"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1414,
+      "dataset_name": "Проигрыш_по_ПУ",
+      "column_name": "reason",
+      "values": [
+        "Ротация"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "date_collect_start",
+      "values": [
+        "today : now"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "date_delivered2",
+      "values": [
+        "today : today 23:59:59",
+        "today : now",
+        "2021-05-28T00:00:00 : 2021-05-29T00:00:00",
+        "today : today"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "date_delivery_start",
+      "values": [
+        "today : today 23:59:59"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "Date_delivery_start_2",
+      "values": [
+        "today : now",
+        "today : today",
+        "today : today 23:59:59"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1402,
+      "dataset_name": null,
+      "column_name": "delivery_start",
+      "values": [
+        "today : now"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1323,
+      "dataset_name": null,
+      "column_name": "delivery_time",
+      "values": [
+        "today : now",
+        "today : today"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1494,
+      "dataset_name": null,
+      "column_name": "gettype",
+      "values": [
+        "4",
+        "8",
+        "44",
+        "46",
+        "48",
+        "50",
+        "54",
+        "56",
+        "58",
+        "60",
+        "62",
+        "64",
+        "12",
+        "14",
+        "16",
+        "17",
+        "18",
+        "19",
+        "34",
+        "42"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1202,
+      "dataset_name": null,
+      "column_name": "date_delivered",
+      "values": [
+        "2021-07-11T00:00:00 : 2021-07-11T23:59:59",
+        "2021-07-09T00:00:00 : now"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1326,
+      "dataset_name": null,
+      "column_name": "delivery_type",
+      "values": [
+        "Доставка Dostavista ВВ",
+        "Доставка GetTaxi ВВ",
+        "Доставка Net-fi ВВ",
+        "Доставка Везет ВВ",
+        "Доставка Закажи и Забери",
+        "Доставка СитиМобил  ВВ",
+        "Доставка Яндекс.Такси ВВ",
+        "Доставка ЧекБокс  ВВ",
+        "Доставка Поселки",
+        "Доставка Maxim ВВ"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1326,
+      "dataset_name": null,
+      "column_name": "date_status",
+      "values": [
+        "today : today"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "delivery_type",
+      "values": [
+        "Доставка Закажи и Забери",
+        "Доставка Поселки",
+        "Доставка Dostavista ВВ",
+        "Доставка GetTaxi ВВ",
+        "Доставка Net-fi ВВ",
+        "Доставка Везет ВВ",
+        "Доставка СитиМобил  ВВ",
+        "Доставка Яндекс.Такси ВВ",
+        "Доставка ЧекБокс  ВВ",
+        "Доставка Maxim ВВ",
+        "Доставка Народный Курьер",
+        "Доставка ЗиЗ-2",
+        "Доставка ЗиЗ-3",
+        "Доставка ЗиЗ-4"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "mon_delivery",
+      "values": [
+        "0",
+        "30"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "mon_collect",
+      "values": [
+        "0",
+        "30"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1011,
+      "dataset_name": null,
+      "column_name": "delivery_type",
+      "values": [
+        "Dostavista",
+        "GetTaxi",
+        "Net-fi",
+        "СитиМобил",
+        "Собственные курьеры",
+        "Яндекс.Такси",
+        "Поселки",
+        "ЧекБокс"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "date_collected",
+      "values": [
+        "today : today"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1088,
+      "dataset_name": null,
+      "column_name": "collection_time_all",
+      "values": [
+        "60"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1202,
+      "dataset_name": null,
+      "column_name": "delivery_type",
+      "values": [
+        "Доставка Dostavista ВВ",
+        "Доставка GetTaxi ВВ",
+        "Доставка Net-fi ВВ",
+        "Доставка Везет ВВ",
+        "Доставка Закажи и Забери",
+        "Доставка СитиМобил  ВВ",
+        "Доставка Яндекс.Такси ВВ",
+        "Доставка ЧекБокс  ВВ",
+        "Доставка Поселки",
+        "Доставка Maxim ВВ",
+        "Доставка Народный Курьер",
+        "Доставка ЗиЗ-2",
+        "Доставка ЗиЗ-3",
+        "Доставка ЗиЗ-4"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1121,
+      "dataset_name": null,
+      "column_name": "delivery_type",
+      "values": [
+        "Доставка Dostavista ВВ",
+        "Доставка GetTaxi ВВ",
+        "Доставка Net-fi ВВ",
+        "Доставка Везет ВВ",
+        "Доставка Закажи и Забери",
+        "Доставка СитиМобил  ВВ",
+        "Доставка Яндекс.Такси ВВ",
+        "Доставка ЧекБокс  ВВ",
+        "Доставка Поселки"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1127,
+      "dataset_name": null,
+      "column_name": "delivery_type",
+      "values": [
+        "Доставка Dostavista ВВ",
+        "Доставка GetTaxi ВВ",
+        "Доставка Net-fi ВВ",
+        "Доставка Везет ВВ",
+        "Доставка Закажи и Забери",
+        "Доставка СитиМобил  ВВ",
+        "Доставка Яндекс.Такси ВВ",
+        "Доставка ЧекБокс  ВВ",
+        "Доставка Поселки"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1209,
+      "dataset_name": "Юлия Стасюк-Запрос без имени 2-Okx60lZ0i",
+      "column_name": "delivery_type",
+      "values": [
+        "Доставка Dostavista ВВ",
+        "Доставка GetTaxi ВВ",
+        "Доставка Net-fi ВВ",
+        "Доставка Везет ВВ",
+        "Доставка Закажи и Забери",
+        "Доставка СитиМобил  ВВ",
+        "Доставка Яндекс.Такси ВВ",
+        "Доставка ЧекБокс  ВВ",
+        "Доставка Поселки",
+        "Доставка Maxim ВВ"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 1126,
+      "dataset_name": null,
+      "column_name": "delivery_type",
+      "values": [
+        "Доставка Dostavista ВВ",
+        "Доставка GetTaxi ВВ",
+        "Доставка Net-fi ВВ",
+        "Доставка Везет ВВ",
+        "Доставка Закажи и Забери",
+        "Доставка СитиМобил  ВВ",
+        "Доставка Яндекс.Такси ВВ",
+        "Доставка ЧекБокс  ВВ",
+        "Доставка Поселки"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 11402,
+      "dataset_name": "Юлия Стасюк-Тест в 1 час-_BDQ_HzAYkk",
+      "column_name": "gettype",
+      "values": [
+        "4",
+        "44",
+        "46",
+        "48",
+        "50",
+        "12",
+        "14",
+        "16",
+        "17",
+        "18",
+        "19",
+        "34",
+        "42",
+        "54",
+        "56",
+        "58",
+        "60",
+        "62",
+        "64"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 11402,
+      "dataset_name": "Юлия Стасюк-Тест в 1 час-_BDQ_HzAYkk",
+      "column_name": "delivery_start",
+      "values": [
+        "today : today"
+      ],
+      "source": "chart_data"
+    },
+    {
+      "dataset_id": 7666,
+      "dataset_name": "Параметр · Категория товара (внутри пути)",
+      "column_name": "category_param",
+      "values": [
+        "Мировые бренды",
+        "Напитки",
+        "Алкоголь",
+        "Молочная Продукция",
+        "Детское питание",
+        "Мороженое",
+        "Сыры",
+        "Мясо. Птица. П/ф охл. Яйца",
+        "Мясные деликатесы. Колбасы",
+        "Замороженные п/ф",
+        "Отдел без упаковки",
+        "Бакалея",
+        "Консервация",
+        "Нон-Фуд",
+        "Сухофрукты. Сушеные грибы, ягоды. Орехи",
+        "Торты, пирожные, десерты",
+        "Сладости, кондитерские изделия",
+        "Хлеб",
+        "Торты, десерты замороженные",
+        "Рыба. Морепродукты",
+        "РНД"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 7460,
+      "dataset_name": "atc_sources_state",
+      "column_name": "period_type",
+      "values": [
+        "week"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 3562,
+      "dataset_name": "pse_type_f",
+      "column_name": "pse_type",
+      "values": [
+        "ДаркКитчен",
+        "Грейс ДаркКитчен"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 6767,
+      "dataset_name": "dict_complaint_appeal_type",
+      "column_name": "appeal_type",
+      "values": [
+        "60 Проекты"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 7306,
+      "dataset_name": "abon_by_purchase_type",
+      "column_name": "purchase_type",
+      "values": [
+        "all"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 7734,
+      "dataset_name": "general_communication_dashboard_m",
+      "column_name": "period_type",
+      "values": [
+        "неделя",
+        "месяц"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 4643,
+      "dataset_name": "cart_data_cart_metrics_map_superset",
+      "column_name": "is_authorized",
+      "values": [
+        "Да"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 4643,
+      "dataset_name": "cart_data_cart_metrics_map_superset",
+      "column_name": "device_type",
+      "values": [
+        "ios",
+        "android"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 6661,
+      "dataset_name": "loyalty_pa_checks_share",
+      "column_name": "type",
+      "values": [
+        "total"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5977,
+      "dataset_name": "is_corrected_f",
+      "column_name": "is_corrected_text",
+      "values": [
+        "Нет"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 7658,
+      "dataset_name": "availability_filters",
+      "column_name": "hourly_status_filter",
+      "values": [
+        "Все"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 7667,
+      "dataset_name": "user_funnel_by_type",
+      "column_name": "period_type",
+      "values": [
+        "day"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 7667,
+      "dataset_name": "user_funnel_by_type",
+      "column_name": "deterioration_type",
+      "values": [
+        "Все типы"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 7385,
+      "dataset_name": "share_cart_funnel",
+      "column_name": "is_feature_version",
+      "values": [
+        "1"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 6689,
+      "dataset_name": "combinations_of_services_map",
+      "column_name": "flag",
+      "values": [
+        "Только самовывоз",
+        "Только экспресс"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5294,
+      "dataset_name": "ds_filter",
+      "column_name": "type_tab",
+      "values": [
+        "ДС"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5295,
+      "dataset_name": "pom_filter",
+      "column_name": "type_tab",
+      "values": [
+        "Помощники"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5296,
+      "dataset_name": "group_filter",
+      "column_name": "type_tab",
+      "values": [
+        "Группа"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5262,
+      "dataset_name": "white_prod_f",
+      "column_name": "type_tt",
+      "values": [
+        "Вайт"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5263,
+      "dataset_name": "dark_prod_f",
+      "column_name": "type_tt",
+      "values": [
+        "Дарк"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5298,
+      "dataset_name": "service_f",
+      "column_name": "type_service",
+      "values": [
+        "Сервис"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5299,
+      "dataset_name": "wo_service_f",
+      "column_name": "type_service",
+      "values": [
+        "Без Сервиса"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5768,
+      "dataset_name": "m4_tasks_checkline_types",
+      "column_name": "checkline_type",
+      "values": [
+        "Любого типа"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 4878,
+      "dataset_name": "jinja_frut_reven",
+      "column_name": "jinja_type_rev",
+      "values": [
+        "Онлайн + Офлайн"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 3704,
+      "dataset_name": "tsd",
+      "column_name": [
+        "collection_device_type",
+        "dt",
+        "feature_tt",
+        "group_tov",
+        "id_assemblysheet",
+        "id_group",
+        "id_order",
+        "name_tov",
+        "name_tt",
+        "pom",
+        "sub_group_tov",
+        "user_code",
+        "is_by_weight",
+        "sbor"
+      ],
+      "values": [
+        "group_tov",
+        "id_group",
+        "is_by_weight",
+        "name_tov",
+        "pom",
+        "sub_group_tov",
+        "name_tt"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 3491,
+      "dataset_name": "id_partner_type_f",
+      "column_name": "id_partner_type",
+      "values": [
+        "1"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 3163,
+      "dataset_name": "fish_meat_tovs",
+      "column_name": "category",
+      "values": [
+        "Мясная Витрина ВВ"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 5409,
+      "dataset_name": "sid_bucket_compaints_2_upd",
+      "column_name": "complaint_type",
+      "values": [
+        "33_4 Корзина и Заказ"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 4718,
+      "dataset_name": "v_check_bug_monitor_reload_date",
+      "column_name": "metric_type",
+      "values": [
+        "checkline_cnt"
+      ],
+      "source": "dashboard_filter"
+    },
+    {
+      "dataset_id": 6546,
+      "dataset_name": "courier_type_short",
+      "column_name": "courier_type_short",
+      "values": [
+        "Дневной курьер"
+      ],
+      "source": "dashboard_filter"
+    }
+  ],
+  "temporal_fields_total": 3161,
+  "by_domain": {
+    "shop": 528,
+    "other": 1134,
+    "mentor": 12,
+    "fulfillment": 157,
+    "orders": 1171,
+    "courier": 181,
+    "delivery": 97,
+    "events": 259,
+    "pay": 59,
+    "geo": 114,
+    "shift": 30,
+    "queue": 21,
+    "route": 15
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "generated_at": "2026-11-21T20:59:18.661Z",
+  "git": {
+    "branch": "main",
+    "head": "06add1a ph1.4 finish",
+    "status_short": [
+      "?? src/phase1-6/",
+      "?? task.md"
+    ],
+    "tracked_count": 221,
+    "tracked_phase15": 77
+  },
+  "phase_1_5": {
+    "required_files": 35,
+    "missing_files": [],
+    "model_validation_status": "PASS",
+    "model_validation_checks": 25,
+    "model_validation_failures": [],
+    "final_validation_status": "PASS",
+    "gates": {
+      "G0": "PASS",
+      "G1": "PASS",
+      "G2": "PASS",
+      "G3": "PASS",
+      "G4": "PASS",
+      "G5": "PASS",
+      "G6": "PASS",
+      "G7": "PASS"
+    },
+    "tables": 25,
+    "events": 58,
+    "decisions": 24,
+    "decision_ids": [
+      "BD-001",
+      "BD-002",
+      "BD-003",
+      "BD-004",
+      "BD-005",
+      "BD-006",
+      "BD-007",
+      "BD-008",
+      "BD-009",
+      "BD-010",
+      "BD-011",
+      "BD-012",
+      "BD-013",
+      "BD-014",
+      "BD-015",
+      "BD-016",
+      "BD-017",
+      "BD-018",
+      "BD-019",
+      "BD-020",
+      "BD-021",
+      "BD-022",
+      "BD-023",
+      "BD-024"
+    ],
+    "missing_decisions": [],
+    "mapping_rows": 60,
+    "ddl_files": 10,
+    "ddl_tables": 25,
+    "event_schemas": 8,
+    "fixtures": 10,
+    "sqlite_unchanged_check": "PASS",
+    "docs_no_pii_check": "PASS"
+  }
+}

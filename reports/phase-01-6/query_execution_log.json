@@ -1,0 +1,242 @@
+{
+  "generated_at": "2026-11-21T21:16:58.492Z",
+  "blocker": "BLOCK-1",
+  "summary": {
+    "sql_attempted": 6,
+    "sql_success": 0,
+    "sql_failed": 9,
+    "chart_data_attempted": 3,
+    "chart_data_success": 0
+  },
+  "queries": [
+    {
+      "id": "Q-016-001",
+      "kind": "SQL_SELECT",
+      "dataset_id": 3466,
+      "database_id": 92,
+      "dbms": "clickhouse",
+      "sql": "SELECT 1 AS probe",
+      "purpose": "проверка доступности SQL Lab",
+      "params": null,
+      "executed_at": "2026-11-21T21:16:33.054Z",
+      "duration_ms": 575,
+      "status": "FAILED_HTTP_403",
+      "row_count": 0,
+      "columns": [],
+      "error": "HTTP 403 Forbidden",
+      "evidence": "evidence/connectivity_probe.json",
+      "related_bd": []
+    },
+    {
+      "id": "Q-016-002",
+      "kind": "SQL_SELECT",
+      "dataset_id": null,
+      "database_id": null,
+      "dbms": null,
+      "sql": "SELECT 1 AS probe",
+      "purpose": "диагностика sqllab-execute-clickhouse",
+      "params": null,
+      "executed_at": "2026-11-21T21:01:20.011Z",
+      "duration_ms": null,
+      "status": "FAILED_HTTP_403",
+      "row_count": null,
+      "columns": null,
+      "error": "\"{\\\"message\\\":\\\"Forbidden\\\"}\"",
+      "evidence": "evidence/sqllab_diagnostics.json",
+      "related_bd": [
+        "BD-013"
+      ]
+    },
+    {
+      "id": "Q-016-003",
+      "kind": "SQL_SELECT",
+      "dataset_id": null,
+      "database_id": null,
+      "dbms": null,
+      "sql": "SELECT 1 AS probe",
+      "purpose": "диагностика sqllab-execute-gp",
+      "params": null,
+      "executed_at": "2026-11-21T21:01:20.011Z",
+      "duration_ms": null,
+      "status": "FAILED_HTTP_403",
+      "row_count": null,
+      "columns": null,
+      "error": "\"{\\\"message\\\":\\\"Forbidden\\\"}\"",
+      "evidence": "evidence/sqllab_diagnostics.json",
+      "related_bd": [
+        "BD-013"
+      ]
+    },
+    {
+      "id": "Q-016-004",
+      "kind": "SQL_SELECT",
+      "dataset_id": null,
+      "database_id": null,
+      "dbms": null,
+      "sql": "SELECT 1 AS probe",
+      "purpose": "диагностика sqllab-estimate",
+      "params": null,
+      "executed_at": "2026-11-21T21:01:20.011Z",
+      "duration_ms": null,
+      "status": "FAILED_HTTP_403",
+      "row_count": null,
+      "columns": null,
+      "error": "\"{\\\"message\\\":\\\"Forbidden\\\"}\"",
+      "evidence": "evidence/sqllab_diagnostics.json",
+      "related_bd": [
+        "BD-013"
+      ]
+    },
+    {
+      "id": "Q-016-005",
+      "kind": "SQL_SELECT",
+      "dataset_id": null,
+      "database_id": null,
+      "dbms": null,
+      "sql": "SELECT 1 AS probe",
+      "purpose": "диагностика legacy-sql-json",
+      "params": null,
+      "executed_at": "2026-11-21T21:01:20.011Z",
+      "duration_ms": null,
+      "status": "FAILED_HTTP_404",
+      "row_count": null,
+      "columns": null,
+      "error": "\"{\\\"errors\\\":[{\\\"message\\\":\\\"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\\\",\\\"error_type\\\":\\\"GENERIC_BACKEND_ERROR\\\",\\\"level\\\":\\\"error\\\",\\\"extra\\\":{\\\"issue_codes\\\":[{\\\"code\\\":1011,\\\"message\\\":\\\"Issue 1011 - Пр",
+      "evidence": "evidence/sqllab_diagnostics.json",
+      "related_bd": [
+        "BD-013"
+      ]
+    },
+    {
+      "id": "Q-016-006",
+      "kind": "CHART_DATA",
+      "dataset_id": null,
+      "database_id": null,
+      "dbms": null,
+      "sql": "chart query (datasource aggregate)",
+      "purpose": "диагностика chart-data-7802",
+      "params": null,
+      "executed_at": "2026-11-21T21:01:20.011Z",
+      "duration_ms": null,
+      "status": "FAILED_HTTP_401",
+      "row_count": null,
+      "columns": null,
+      "error": "\"{\\\"message\\\":\\\"Not authorized\\\"}\"",
+      "evidence": "evidence/sqllab_diagnostics.json",
+      "related_bd": [
+        "BD-013"
+      ]
+    },
+    {
+      "id": "Q-016-007",
+      "kind": "CHART_DATA",
+      "dataset_id": null,
+      "database_id": null,
+      "dbms": null,
+      "sql": "chart query (datasource aggregate)",
+      "purpose": "диагностика chart-data-3466",
+      "params": null,
+      "executed_at": "2026-11-21T21:01:20.011Z",
+      "duration_ms": null,
+      "status": "FAILED_HTTP_401",
+      "row_count": null,
+      "columns": null,
+      "error": "\"{\\\"message\\\":\\\"Not authorized\\\"}\"",
+      "evidence": "evidence/sqllab_diagnostics.json",
+      "related_bd": [
+        "BD-013"
+      ]
+    },
+    {
+      "id": "Q-016-008",
+      "kind": "CHART_DATA",
+      "dataset_id": null,
+      "database_id": null,
+      "dbms": null,
+      "sql": "chart query (datasource aggregate)",
+      "purpose": "диагностика chart-data-5939",
+      "params": null,
+      "executed_at": "2026-11-21T21:01:20.011Z",
+      "duration_ms": null,
+      "status": "FAILED_HTTP_401",
+      "row_count": null,
+      "columns": null,
+      "error": "\"{\\\"message\\\":\\\"Not authorized\\\"}\"",
+      "evidence": "evidence/sqllab_diagnostics.json",
+      "related_bd": [
+        "BD-013"
+      ]
+    },
+    {
+      "id": "Q-016-009",
+      "kind": "SQL_SELECT",
+      "dataset_id": null,
+      "database_id": null,
+      "dbms": null,
+      "sql": "SELECT 1 AS probe",
+      "purpose": "диагностика sqllab-get",
+      "params": null,
+      "executed_at": "2026-11-21T21:01:20.011Z",
+      "duration_ms": null,
+      "status": "FAILED_HTTP_403",
+      "row_count": null,
+      "columns": null,
+      "error": "\"{\\\"message\\\":\\\"Forbidden\\\"}\"",
+      "evidence": "evidence/sqllab_diagnostics.json",
+      "related_bd": [
+        "BD-013"
+      ]
+    }
+  ],
+  "api_calls": [
+    {
+      "path": "/api/v1/security/login",
+      "method": "POST",
+      "status": 200,
+      "note": "аутентификация"
+    },
+    {
+      "path": "/api/v1/security/csrf_token/",
+      "method": "GET",
+      "status": 200,
+      "note": "CSRF"
+    },
+    {
+      "path": "/api/v1/database/?q=(page:0,page_size:100)",
+      "method": "GET",
+      "status": 200,
+      "note": "count=0"
+    },
+    {
+      "path": "/api/v1/dataset/{5939,7802,7712,7021,3466,2339}",
+      "method": "GET",
+      "status": 200,
+      "note": "метаданные 6 датасетов"
+    },
+    {
+      "path": "/api/v1/chart/?q=(filters:...datasource_id)",
+      "method": "GET",
+      "status": 200,
+      "note": "чарты на датасетах"
+    },
+    {
+      "path": "/api/v1/saved_query/",
+      "method": "GET",
+      "status": 200,
+      "note": "count=0"
+    },
+    {
+      "path": "/api/v1/query/",
+      "method": "GET",
+      "status": 200,
+      "note": "count=17, SQL недоступен"
+    },
+    {
+      "path": "/api/v1/dataset/{id}/related_objects",
+      "method": "GET",
+      "status": 200,
+      "note": "связанные объекты"
+    }
+  ],
+  "note": "SQL Lab и chart data недоступны для учётной записи; метаданные получены через GET."
+}

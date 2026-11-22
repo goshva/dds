@@ -1,0 +1,169 @@
+{
+  "phase": "1.6",
+  "status": "PASS_WITH_BLOCKERS",
+  "generated_at": "2026-11-21T21:16:59.129Z",
+  "gates": {
+    "G0": "PASS",
+    "G1": "PASS",
+    "G2": "PASS",
+    "G3": "BLOCKED",
+    "G4": "BLOCKED",
+    "G5": "PASS",
+    "G6": "PASS",
+    "G7": "PASS"
+  },
+  "blocker": {
+    "id": "BLOCK-1",
+    "title": "SQL Lab недоступен для учётной записи API",
+    "evidence": "POST /api/v1/sqllab/execute/ → 403; /api/v1/sqllab/ → 403; /api/v1/sqllab/estimate/ → 403; /api/v1/chart/data → 401; /superset/sql_json/ → 404; GET /api/v1/database/ → count=0",
+    "impact": "G3 и G4 не выполнены; фактические данные не проверены",
+    "required": "Права can_sqllab/can_execute_sql и видимость баз для read-only аккаунта"
+  },
+  "counts": {
+    "datasets_checked": 6,
+    "metadata_files": 6,
+    "sql_attempted": 6,
+    "sql_success": 0,
+    "sql_failed": 6,
+    "chart_data_attempted": 3,
+    "chart_data_success": 0,
+    "relationships": 10,
+    "relationships_verified": 0,
+    "decisions": 24,
+    "decisions_by_status": {
+      "CONFIRMED_BY_DATA": 0,
+      "READY_FOR_BUSINESS_APPROVAL": 4,
+      "BUSINESS_DECISION_REQUIRED": 13,
+      "PARTIAL_EVIDENCE": 6,
+      "NOT_VERIFIABLE": 0,
+      "CONTRADICTED": 1
+    },
+    "model_tables": 25,
+    "source_tables_extracted": 25,
+    "planned_queries": 18
+  },
+  "checks": [
+    {
+      "id": "C01_all_decisions_present",
+      "gate": "G5",
+      "status": "PASS",
+      "details": "BD: 24/24; отсутствуют: нет"
+    },
+    {
+      "id": "C02_each_decision_has_status",
+      "gate": "G5",
+      "status": "PASS",
+      "details": "статусы заданы у 24/24"
+    },
+    {
+      "id": "C03_each_decision_has_evidence",
+      "gate": "G5",
+      "status": "PASS",
+      "details": "доказательство/причина есть у 24/24"
+    },
+    {
+      "id": "C04_six_datasets_metadata",
+      "gate": "G2",
+      "status": "PASS",
+      "details": "файлов метаданных: 6; в dataset_checks: 6"
+    },
+    {
+      "id": "C05_at_least_one_safe_query",
+      "gate": "G3",
+      "status": "BLOCKED",
+      "details": "SQL-запросы выполнены (6), но все отклонены: HTTP 403/401 (BLOCK-1). Причина: у учётной записи нет прав can_sqllab/can_execute_sql и видимости баз (GET /api/v1/database/ → count=0)."
+    },
+    {
+      "id": "C06_all_queries_logged",
+      "gate": "G3",
+      "status": "PASS",
+      "details": "в журнале 9 SQL/chart попыток, все с id и статусом"
+    },
+    {
+      "id": "C07_failed_not_confirmation",
+      "gate": "G3",
+      "status": "PASS",
+      "details": "ни один неуспешный запрос не использован как подтверждение (data_verified=false у всех датасетов)"
+    },
+    {
+      "id": "C08_relationships_have_status",
+      "gate": "G4",
+      "status": "PASS",
+      "details": "связей: 10, статусы: NOT_VERIFIED, CONTRADICTED, PARTIAL, INFERRED"
+    },
+    {
+      "id": "C08b_relationship_data_coverage",
+      "gate": "G4",
+      "status": "BLOCKED",
+      "details": "доли сопоставления не измерены: SQL Lab 403 (BLOCK-1); ни одна связь не получила VERIFIED"
+    },
+    {
+      "id": "C09_no_pii",
+      "gate": "G7",
+      "status": "PASS",
+      "details": "ПДн в артефактах этапа нет"
+    },
+    {
+      "id": "C10_catalog_sqlite_unchanged",
+      "gate": "G7",
+      "status": "PASS",
+      "details": "counts совпадают с backup"
+    },
+    {
+      "id": "C11_superset_unchanged",
+      "gate": "G7",
+      "status": "PASS",
+      "details": "только GET и read-only запросы; изменяющих вызовов Superset нет (POST: login/csrf, sqllab/chart-data — отклонены)"
+    },
+    {
+      "id": "C12_no_migrations",
+      "gate": "G7",
+      "status": "PASS",
+      "details": "миграции не запускались; DDL 1.5 остаётся DRAFT ONLY, файлы миграций не создавались"
+    },
+    {
+      "id": "C13_prev_stages_unchanged",
+      "gate": "G7",
+      "status": "PASS",
+      "details": "tracked-файлы этапов 1.1/1.2/1.4/1.5 не изменены"
+    },
+    {
+      "id": "C14_typescript",
+      "gate": "G7",
+      "status": "PASS",
+      "details": "bunx tsc --noEmit exit 0"
+    },
+    {
+      "id": "C15_tests",
+      "gate": "G7",
+      "status": "PASS",
+      "details": "локальные тесты 1.6 пройдены"
+    },
+    {
+      "id": "C16_query_plan_readonly",
+      "gate": "G3",
+      "status": "PASS",
+      "details": "план: 18 запросов, все read-only и не выполнялись"
+    },
+    {
+      "id": "C17_decision_cards_complete",
+      "gate": "G5",
+      "status": "PASS",
+      "details": "у всех 24 решений есть варианты (>=2) и влияние на архитектуру"
+    }
+  ],
+  "summary": {
+    "pass": 16,
+    "blocked": 2,
+    "fail": 0,
+    "warn": 0
+  },
+  "ddl_changed": false,
+  "catalog_sqlite_modified": false,
+  "superset_modified": false,
+  "migrations_applied": false,
+  "git_committed": false,
+  "git_pushed": false,
+  "typescript_ok": true,
+  "tests_ok": true
+}

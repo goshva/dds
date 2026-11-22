@@ -1,0 +1,2994 @@
+{
+  "generated_at": "2026-11-22T09:54:13.378Z",
+  "total": 332,
+  "dashboards": [
+    {
+      "dashboard_id": 1681,
+      "title": "Остатки партий по рц апк 609",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1680,
+      "title": "Остатки на тт даш апк 609",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 736,
+      "title": "HR Dashboard (Розница)",
+      "published": true,
+      "chart_count": 241,
+      "dataset_count": 23,
+      "native_filters_count": 39,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1637,
+      "title": "Молочка · Выручка, новинки, промо",
+      "published": true,
+      "chart_count": 224,
+      "dataset_count": 35,
+      "native_filters_count": 37,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1288,
+      "title": "М4 Сервис для команды САНПИН",
+      "published": true,
+      "chart_count": 47,
+      "dataset_count": 5,
+      "native_filters_count": 22,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1664,
+      "title": "Наставники 12 группа",
+      "published": true,
+      "chart_count": 20,
+      "dataset_count": 4,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 549,
+      "title": "Выходы новых курьеров",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 3,
+      "native_filters_count": 13,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1493,
+      "title": "Отчет по сервисам на Вайтах",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 3,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 641,
+      "title": "Показатели по проектам",
+      "published": true,
+      "chart_count": 65,
+      "dataset_count": 19,
+      "native_filters_count": 59,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 714,
+      "title": "Доставка: Новости доставки",
+      "published": true,
+      "chart_count": 7,
+      "dataset_count": 3,
+      "native_filters_count": 14,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 666,
+      "title": "Монитор настроек ТТ",
+      "published": true,
+      "chart_count": 32,
+      "dataset_count": 7,
+      "native_filters_count": 29,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1665,
+      "title": "Сегментация по портрету покупателя (GFK)",
+      "published": true,
+      "chart_count": 18,
+      "dataset_count": 5,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 712,
+      "title": "ВВ Партнер",
+      "published": true,
+      "chart_count": 25,
+      "dataset_count": 15,
+      "native_filters_count": 35,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1658,
+      "title": "Графики и выходы",
+      "published": true,
+      "chart_count": 72,
+      "dataset_count": 8,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1588,
+      "title": "Атрибуция источники МП",
+      "published": true,
+      "chart_count": 24,
+      "dataset_count": 2,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1662,
+      "title": "Метрики МП курьеров",
+      "published": true,
+      "chart_count": 22,
+      "dataset_count": 5,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1372,
+      "title": "Метрики сайта",
+      "published": true,
+      "chart_count": 86,
+      "dataset_count": 11,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 885,
+      "title": "Просроченные заказы по часам",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 2,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 687,
+      "title": "Динамика сервиса ДаркКитчен-Сгоряча",
+      "published": true,
+      "chart_count": 215,
+      "dataset_count": 56,
+      "native_filters_count": 165,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1617,
+      "title": "Опрос новичка после первой смены",
+      "published": true,
+      "chart_count": 20,
+      "dataset_count": 5,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1673,
+      "title": "Доставки курьеров по дарксторам",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1675,
+      "title": "PA-16598 Баннер: клиенты теста 4132",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1083,
+      "title": "Статус заказа",
+      "published": true,
+      "chart_count": 44,
+      "dataset_count": 19,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1456,
+      "title": "Версии МП",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1668,
+      "title": "Логи Ассистента покупателя (Зефирка)",
+      "published": true,
+      "chart_count": 44,
+      "dataset_count": 3,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1671,
+      "title": "Алерты лояльности",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 871,
+      "title": "ТМЦ",
+      "published": true,
+      "chart_count": 37,
+      "dataset_count": 10,
+      "native_filters_count": 34,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1659,
+      "title": "Кластеры напитков: XL, L, M",
+      "published": true,
+      "chart_count": 18,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 561,
+      "title": "Отчет по выработке сборщиков в дарксторах",
+      "published": true,
+      "chart_count": 20,
+      "dataset_count": 5,
+      "native_filters_count": 23,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1633,
+      "title": "Дашборд Статистика по ТТ МСК с остатками (эдвайзер - Евгений Лобанов)",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1505,
+      "title": "Состояние конкуренций вайт-дарк",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 2,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1557,
+      "title": "Метрики продукта 6 скидок",
+      "published": true,
+      "chart_count": 24,
+      "dataset_count": 3,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1672,
+      "title": "Обращения курьеров в поддержку",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 4,
+      "native_filters_count": 11,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1648,
+      "title": "Общий дашборд коммуникаций",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 4,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1428,
+      "title": "Воронка пути активного юзера",
+      "published": true,
+      "chart_count": 16,
+      "dataset_count": 3,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1657,
+      "title": "Мясо · Выручка, новинки, промо",
+      "published": true,
+      "chart_count": 246,
+      "dataset_count": 34,
+      "native_filters_count": 35,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1656,
+      "title": "Бакалея · Выручка, новинки, промо",
+      "published": true,
+      "chart_count": 246,
+      "dataset_count": 34,
+      "native_filters_count": 35,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1655,
+      "title": "Сладости · Выручка, новинки, промо",
+      "published": true,
+      "chart_count": 246,
+      "dataset_count": 34,
+      "native_filters_count": 35,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1647,
+      "title": "Рыба · Выручка, новинки, промо",
+      "published": true,
+      "chart_count": 305,
+      "dataset_count": 45,
+      "native_filters_count": 40,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1635,
+      "title": "РНД · Выручка, новинки, промо",
+      "published": true,
+      "chart_count": 250,
+      "dataset_count": 35,
+      "native_filters_count": 27,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1632,
+      "title": "Напитки · Выручка, новинки, промо",
+      "published": true,
+      "chart_count": 302,
+      "dataset_count": 45,
+      "native_filters_count": 40,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 853,
+      "title": "Оформленные курьеры",
+      "published": true,
+      "chart_count": 36,
+      "dataset_count": 9,
+      "native_filters_count": 19,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1597,
+      "title": "Кулинария · Выручка, новинки, промо",
+      "published": true,
+      "chart_count": 220,
+      "dataset_count": 33,
+      "native_filters_count": 25,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1292,
+      "title": "Обучение клиентократии",
+      "published": true,
+      "chart_count": 9,
+      "dataset_count": 2,
+      "native_filters_count": 14,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 867,
+      "title": "HR Dashboard (Офис)",
+      "published": true,
+      "chart_count": 87,
+      "dataset_count": 5,
+      "native_filters_count": 24,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 665,
+      "title": "Онлайн статистика по заказам и курьерам",
+      "published": true,
+      "chart_count": 59,
+      "dataset_count": 4,
+      "native_filters_count": 61,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1553,
+      "title": "Активация МП",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 919,
+      "title": "Потери, в тч по ЗЦ",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 3,
+      "native_filters_count": 13,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1044,
+      "title": "Карта метрик Корзины",
+      "published": true,
+      "chart_count": 29,
+      "dataset_count": 10,
+      "native_filters_count": 17,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1408,
+      "title": "Любимый продукт - Лояльность МП",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 2,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1368,
+      "title": "Метрики лояльности (КПО)",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 6,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1281,
+      "title": "Отчет инаппов",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1571,
+      "title": "Доступность ассортимента в сервисах",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1295,
+      "title": "HR дашборд РЦ",
+      "published": true,
+      "chart_count": 29,
+      "dataset_count": 3,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1666,
+      "title": "Напитки · Выручка, новинки, промо · Месяц",
+      "published": true,
+      "chart_count": 298,
+      "dataset_count": 44,
+      "native_filters_count": 40,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1451,
+      "title": "5-9 мая отключения инета",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 2,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1387,
+      "title": "Рецепты ВВ",
+      "published": true,
+      "chart_count": 9,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1252,
+      "title": "Сберспасибо [отчет для сверки]",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 752,
+      "title": "Несборка по партнерам",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1636,
+      "title": "Развитие пути сборки заказов - отчет по несборке",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 2,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1660,
+      "title": "Алертинг AIrflow УА",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1284,
+      "title": "Заказы и авторизация",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1297,
+      "title": "Метрики авторизации",
+      "published": true,
+      "chart_count": 11,
+      "dataset_count": 3,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1414,
+      "title": "Banners metrics",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1445,
+      "title": "Лиды и оформленные курьеры по amoCRM",
+      "published": true,
+      "chart_count": 41,
+      "dataset_count": 9,
+      "native_filters_count": 33,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1646,
+      "title": "ИИ фотоконтроль начала смены",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 2,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1228,
+      "title": "HR Dashboard Доставка",
+      "published": true,
+      "chart_count": 46,
+      "dataset_count": 4,
+      "native_filters_count": 30,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1590,
+      "title": "Расходы на опоздания",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 11,
+      "native_filters_count": 9,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1641,
+      "title": "БДР лето 25-26 по избранным статьям",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1499,
+      "title": "МЕТРИКИ МАРШРУТИЗАТОРА",
+      "published": true,
+      "chart_count": 59,
+      "dataset_count": 24,
+      "native_filters_count": 28,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1010,
+      "title": "<ФИО>",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 2,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1502,
+      "title": "Media metrics",
+      "published": true,
+      "chart_count": 18,
+      "dataset_count": 5,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1304,
+      "title": "Lost sales test",
+      "published": true,
+      "chart_count": 20,
+      "dataset_count": 1,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1124,
+      "title": "HR верхнеуровневый",
+      "published": true,
+      "chart_count": 147,
+      "dataset_count": 8,
+      "native_filters_count": 18,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1501,
+      "title": "Структура корзины Напитки",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 2,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 872,
+      "title": "Доставка ДаркКитчен [копия на новом источнике]",
+      "published": true,
+      "chart_count": 63,
+      "dataset_count": 8,
+      "native_filters_count": 36,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1604,
+      "title": "ВВ Агент | Курьеры",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1582,
+      "title": "Доступность ДКП",
+      "published": true,
+      "chart_count": 10,
+      "dataset_count": 3,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1644,
+      "title": "Проверка владельцев для растительных масел",
+      "published": true,
+      "chart_count": 13,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 956,
+      "title": "Несборка весовой товар",
+      "published": true,
+      "chart_count": 7,
+      "dataset_count": 3,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1643,
+      "title": "Блокировки кодов маркировки со стороны ОГВ",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1639,
+      "title": "Сгоряча (Дарк Китчен) · Обращения, жалобы, возвраты · МСК и МО · по месяцам",
+      "published": true,
+      "chart_count": 40,
+      "dataset_count": 4,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1599,
+      "title": "Ухудшение условий доставки",
+      "published": true,
+      "chart_count": 24,
+      "dataset_count": 10,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1427,
+      "title": "Отчет по показателям для специалистов ДКП (ППР / Кураторы и т. д.)",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 668,
+      "title": "Статистика по заказам и сборщикам",
+      "published": true,
+      "chart_count": 192,
+      "dataset_count": 12,
+      "native_filters_count": 72,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1146,
+      "title": "Сводный отчет по Автоответам",
+      "published": true,
+      "chart_count": 33,
+      "dataset_count": 6,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1593,
+      "title": "Дашборд контроля A/B",
+      "published": true,
+      "chart_count": 16,
+      "dataset_count": 5,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1448,
+      "title": "HR аналитика",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 10,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1509,
+      "title": "Дашборд продактов",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 3,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1440,
+      "title": "Дашборд трафика и ключевых действий подписки в разбивке по рекламному источнику",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 1,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1145,
+      "title": "Отработка Заданий технологов магазинами",
+      "published": true,
+      "chart_count": 33,
+      "dataset_count": 4,
+      "native_filters_count": 23,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1616,
+      "title": "Потери продукции: списания, ЗЦ, обращения",
+      "published": true,
+      "chart_count": 29,
+      "dataset_count": 3,
+      "native_filters_count": 18,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1574,
+      "title": "Поделиться корзиной v2",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1546,
+      "title": "Привязки способов оплаты",
+      "published": true,
+      "chart_count": 17,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1232,
+      "title": "Селф-сервис (Self-service BI) - Чеки, Товародвижение",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 3,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1615,
+      "title": "Лженовички - мониторинг",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 2,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 619,
+      "title": "Эффективность дарксторов",
+      "published": true,
+      "chart_count": 28,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1565,
+      "title": "Карты для теста Редактирование заказа",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 4,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 971,
+      "title": "Тепловая карта заказов",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 13,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1589,
+      "title": "Отчет по аптекам",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 3,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1624,
+      "title": "Эффект теста: до и после (тест vs контроль)",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 4,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1460,
+      "title": "Чаевые борд",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1375,
+      "title": "Дашборд по логам сервисов в МП клиентов",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 5,
+      "native_filters_count": 15,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 698,
+      "title": "50 товаров ",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 827,
+      "title": "Внутренние аудиты",
+      "published": true,
+      "chart_count": 28,
+      "dataset_count": 2,
+      "native_filters_count": 27,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1092,
+      "title": "Выручка по вайтам нарастающим итогом",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 927,
+      "title": "Обнуление остатков",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 746,
+      "title": "Статистика обращений по корзине",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 1,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1112,
+      "title": "Показатели вайтсторов за вчера",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 3,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 831,
+      "title": "Прогноз составляющих комплектов Дарккитчен на складах",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 3,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 762,
+      "title": "Обращения розница",
+      "published": true,
+      "chart_count": 17,
+      "dataset_count": 3,
+      "native_filters_count": 17,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 753,
+      "title": "Выручка Манго (4, 7, 12, 10214 группа)",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1512,
+      "title": "Обещания ДС и ВС",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 11,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1122,
+      "title": "Заказы поставщикам",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 1,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 568,
+      "title": "Отчет по начислению бонусов",
+      "published": true,
+      "chart_count": 10,
+      "dataset_count": 2,
+      "native_filters_count": 27,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 847,
+      "title": "Несборка продукции сервиса Кафе-Пекарни в слотовом заказе",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 878,
+      "title": "DE: Мониторинг объема данных",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1311,
+      "title": "Аудиты доставки",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 2,
+      "native_filters_count": 18,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1426,
+      "title": "Роботизация фабрик-кухонь",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 1,
+      "native_filters_count": 15,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 728,
+      "title": "Еженедельные отчеты по ТТ",
+      "published": true,
+      "chart_count": 107,
+      "dataset_count": 26,
+      "native_filters_count": 45,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1003,
+      "title": "Остатки товаров на ТТ (текущие)",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1610,
+      "title": "Обращения по оплатам",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1577,
+      "title": "Статистика по доставке по управляющим и кустам",
+      "published": true,
+      "chart_count": 11,
+      "dataset_count": 1,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1612,
+      "title": "Курьеры по дням",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1547,
+      "title": "М4 Сервис для команды СУШИПОИНТ",
+      "published": true,
+      "chart_count": 7,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1199,
+      "title": "М4 Сервис для команды ДКП",
+      "published": true,
+      "chart_count": 66,
+      "dataset_count": 18,
+      "native_filters_count": 44,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1605,
+      "title": "Недопоставки по дням",
+      "published": true,
+      "chart_count": 7,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1090,
+      "title": "ДаркКитчен 2.0",
+      "published": true,
+      "chart_count": 40,
+      "dataset_count": 13,
+      "native_filters_count": 54,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1600,
+      "title": "Андерсон ТД · продажи",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 3,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 952,
+      "title": "Статистика по заказам Лёгкая Миля",
+      "published": true,
+      "chart_count": 21,
+      "dataset_count": 2,
+      "native_filters_count": 45,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1312,
+      "title": "A/B тест Автоассортимент",
+      "published": true,
+      "chart_count": 94,
+      "dataset_count": 4,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1045,
+      "title": "Трудоемкости",
+      "published": true,
+      "chart_count": 10,
+      "dataset_count": 4,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1594,
+      "title": "Отчет для сверок с партнером сторонней доставки",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1556,
+      "title": "Полнота ассортимента по подгруппе на ТТ",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1585,
+      "title": "Выходы курьеров и прогноз заказов",
+      "published": true,
+      "chart_count": 10,
+      "dataset_count": 2,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1067,
+      "title": "Фруткорт",
+      "published": true,
+      "chart_count": 62,
+      "dataset_count": 21,
+      "native_filters_count": 18,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1280,
+      "title": "Проверка владельцев для Антисептиков",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1444,
+      "title": "Проверка владельцев для б/а напитков",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 3,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1536,
+      "title": "[ engine_warehouse ]",
+      "published": true,
+      "chart_count": 27,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1504,
+      "title": "Отчёт по местам выкладки",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 5,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1204,
+      "title": "Проверка владельцев для упакованной воды",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1532,
+      "title": "Проверка владельцев Духи",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 3,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1287,
+      "title": "Проверка владельцев для БАДов",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1442,
+      "title": "Проверка владельцев для пива",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 3,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1531,
+      "title": "Проверка владельцев Морепродукты",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 3,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1443,
+      "title": "Проверка владельцев для б/а пива",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 721,
+      "title": "Отчет по часам",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 5,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1586,
+      "title": "Курьеры новички",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1573,
+      "title": "Маркированные товары в отменённых онлайн-заказах",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 4,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1328,
+      "title": "Wow-витрина",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 3,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 750,
+      "title": "Индийская лавка",
+      "published": true,
+      "chart_count": 24,
+      "dataset_count": 9,
+      "native_filters_count": 16,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 894,
+      "title": "Отчет по партнерским сервисам (рестораны, аптеки, цветы, зоотовары)",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 2,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1276,
+      "title": "Партнерские сервисы (аптеки, рестораны, цветы, зоотовары). Анализ пользователей",
+      "published": true,
+      "chart_count": 16,
+      "dataset_count": 5,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 717,
+      "title": "Показатели проекта Аптеки",
+      "published": true,
+      "chart_count": 72,
+      "dataset_count": 23,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1125,
+      "title": "Индилавка. Товары без движения и Остатки на РЦ",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 3,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 983,
+      "title": "Показатели проекта Рестораны",
+      "published": true,
+      "chart_count": 61,
+      "dataset_count": 20,
+      "native_filters_count": 13,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1088,
+      "title": "Показатели проектов Аптеки, Рестораны, Цветы",
+      "published": true,
+      "chart_count": 69,
+      "dataset_count": 23,
+      "native_filters_count": 26,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 663,
+      "title": "Статистика по заказам и курьерам (ответственные по гео)",
+      "published": true,
+      "chart_count": 96,
+      "dataset_count": 4,
+      "native_filters_count": 38,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 409,
+      "title": "Проигрыш по корзине",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1351,
+      "title": "Отчет по рекрутерам отдела подбора Мили",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 6,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1570,
+      "title": "Авторизация пользователей Щей по месяцам",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1105,
+      "title": "ВСГ (Вторичные сроки годности)",
+      "published": true,
+      "chart_count": 17,
+      "dataset_count": 10,
+      "native_filters_count": 45,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1569,
+      "title": "Поделиться корзиной (устаревший)",
+      "published": true,
+      "chart_count": 7,
+      "dataset_count": 3,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1554,
+      "title": "Перетоки. draft",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1453,
+      "title": "Курьеры Аутсорс",
+      "published": true,
+      "chart_count": 30,
+      "dataset_count": 6,
+      "native_filters_count": 21,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1518,
+      "title": "Перетоки из товара в товар",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 9,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 982,
+      "title": "Выплаты уволенным сотрудникам",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 679,
+      "title": "Рейтинг сборщиков",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 2,
+      "native_filters_count": 11,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 818,
+      "title": "МиниБДР_7гр",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1238,
+      "title": "Не размеченные АО",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1021,
+      "title": "Доп поставки MVP УИ",
+      "published": true,
+      "chart_count": 7,
+      "dataset_count": 7,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 991,
+      "title": "Отчет по продажам Зелени и ДаркСтор ФРОВ",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 951,
+      "title": "Оффлайн точки Сгоряча",
+      "published": true,
+      "chart_count": 35,
+      "dataset_count": 7,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 824,
+      "title": "МП. Магазины",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 3,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 869,
+      "title": "Скорость сборки по товарам в сек",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 19,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 786,
+      "title": "Отчет для проекта Рестораны",
+      "published": true,
+      "chart_count": 23,
+      "dataset_count": 5,
+      "native_filters_count": 18,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 822,
+      "title": "Автоответы на оценки",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 3,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 999,
+      "title": "Автоответы (Расширенная оценка)",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 3,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1030,
+      "title": "Предфасовка товаров ФРОВ",
+      "published": true,
+      "chart_count": 13,
+      "dataset_count": 6,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1330,
+      "title": "Рейтинг магазинов (для Розницы)",
+      "published": true,
+      "chart_count": 93,
+      "dataset_count": 8,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1240,
+      "title": "Отчёт по ФРОВ",
+      "published": true,
+      "chart_count": 20,
+      "dataset_count": 8,
+      "native_filters_count": 31,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 761,
+      "title": "Товары без движения",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1169,
+      "title": "Отчет по штукам",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1361,
+      "title": "Потенциал офлайн спроса",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 779,
+      "title": "ОСЕ ПСЕ ДаркКитчен",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 4,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 708,
+      "title": "Лояльность: Отчет по удержанию новичков",
+      "published": true,
+      "chart_count": 72,
+      "dataset_count": 9,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 850,
+      "title": "Перемещения в РЦ СПБ, Казань, Ростов, Екатеринбург",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 653,
+      "title": "Основные показатели для Baring Vostok (2.0)",
+      "published": true,
+      "chart_count": 9,
+      "dataset_count": 1,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1129,
+      "title": "<ФИО>",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 2,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 745,
+      "title": "DK-user_research",
+      "published": true,
+      "chart_count": 13,
+      "dataset_count": 3,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 701,
+      "title": "План-Факт аутсорс",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 860,
+      "title": "Аптеки - Минимальные остатки",
+      "published": true,
+      "chart_count": 18,
+      "dataset_count": 4,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 554,
+      "title": "Контент в МП (digital)",
+      "published": true,
+      "chart_count": 17,
+      "dataset_count": 11,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 617,
+      "title": "Лояльность: NPS клиента (Oprosso)",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 1,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1013,
+      "title": "Воронка виджета \"Куплю в магазине\"",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 747,
+      "title": "Test_roll_user_research",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 4,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 796,
+      "title": "Проекты: Рестораны",
+      "published": true,
+      "chart_count": 20,
+      "dataset_count": 7,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 578,
+      "title": "Панель показателей логистики – Потери РЦ-ТТ (Помощники)",
+      "published": true,
+      "chart_count": 35,
+      "dataset_count": 2,
+      "native_filters_count": 9,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 584,
+      "title": "Панель Показателей Логистики – Потери РЦ-ТТ (Склады/Перевозчики)",
+      "published": true,
+      "chart_count": 58,
+      "dataset_count": 1,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 815,
+      "title": "МиниБДР_3гр",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 783,
+      "title": "УАГи (Аптеки)",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 3,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 751,
+      "title": "ВВ План: Параметры не собравшихся планов",
+      "published": true,
+      "chart_count": 11,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 667,
+      "title": "Доставка: Заказы с опозданием более чем в 2 раза",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 656,
+      "title": "Лояльность: Отток (sleeping) 27-45 дней (Oprosso)",
+      "published": true,
+      "chart_count": 18,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 660,
+      "title": "Лояльность - CSI (Рейтинги доставки)",
+      "published": true,
+      "chart_count": 48,
+      "dataset_count": 14,
+      "native_filters_count": 11,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 812,
+      "title": "МиниБДР_1гр",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 960,
+      "title": "Выгрузка расходов по ТТ Дарккитчен и Кафе-пекарня",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 15,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1568,
+      "title": "Просрок PSE",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 977,
+      "title": "Статистика по заказам в разрезе сервисов лёгкая версия",
+      "published": true,
+      "chart_count": 23,
+      "dataset_count": 3,
+      "native_filters_count": 57,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1423,
+      "title": "Онлайн оплаты_new",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 2,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1337,
+      "title": "Эквайринг (помесячно)",
+      "published": true,
+      "chart_count": 9,
+      "dataset_count": 2,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1558,
+      "title": "чек",
+      "published": true,
+      "chart_count": 0,
+      "dataset_count": 2,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1564,
+      "title": "Вкусик: основные метрики",
+      "published": true,
+      "chart_count": 9,
+      "dataset_count": 4,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1350,
+      "title": "ИИ-мониторинг проекта ДКП",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1116,
+      "title": "Статистика по маркетплейсам",
+      "published": true,
+      "chart_count": 17,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1545,
+      "title": "Данные для калькулятора закрытия ТТ",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1052,
+      "title": "Широта ассортимента КПО",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 4,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1433,
+      "title": "Доступность оплат на месте(клиентская воронка)",
+      "published": true,
+      "chart_count": 18,
+      "dataset_count": 4,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1405,
+      "title": "Скорость сборки ДКП",
+      "published": true,
+      "chart_count": 7,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1324,
+      "title": "Заблокированные товары (Товар не введён в оборот)",
+      "published": true,
+      "chart_count": 72,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1208,
+      "title": "Зарезервированные товары за вчерашний день",
+      "published": true,
+      "chart_count": 7,
+      "dataset_count": 2,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1200,
+      "title": "Ключевые метрики МС \"Честный Знак\"",
+      "published": true,
+      "chart_count": 17,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1320,
+      "title": "Курьеры без заказов 6 дней",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1431,
+      "title": "HR Dashboard (Розница) [копия]",
+      "published": true,
+      "chart_count": 175,
+      "dataset_count": 24,
+      "native_filters_count": 34,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1392,
+      "title": "Просроченные товары на кассах",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 1,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1363,
+      "title": "Дублирующиеся коды маркировки",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1215,
+      "title": "Пиры ДС (расчет Экономики ДС)",
+      "published": true,
+      "chart_count": 11,
+      "dataset_count": 11,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1455,
+      "title": "Логи Ассистента покупателя",
+      "published": true,
+      "chart_count": 46,
+      "dataset_count": 4,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1441,
+      "title": "М4 Сервис для команды ПР",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1117,
+      "title": "Аналитика для распределения [РЦ]",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 1,
+      "native_filters_count": 9,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1506,
+      "title": "Мониторинг МЛ-метрик",
+      "published": true,
+      "chart_count": 22,
+      "dataset_count": 3,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1454,
+      "title": "Дашборд мэтчинга",
+      "published": true,
+      "chart_count": 9,
+      "dataset_count": 4,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1472,
+      "title": "Метрики маршрутизатора",
+      "published": true,
+      "chart_count": 19,
+      "dataset_count": 2,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1386,
+      "title": "ГЕО/КПО Доступность сервисов",
+      "published": true,
+      "chart_count": 21,
+      "dataset_count": 12,
+      "native_filters_count": 20,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1503,
+      "title": "Несборки товаров весовых",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1229,
+      "title": "Карточка товара",
+      "published": true,
+      "chart_count": 53,
+      "dataset_count": 7,
+      "native_filters_count": 9,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1424,
+      "title": "Дашборд команды онлайн 4 группы",
+      "published": true,
+      "chart_count": 32,
+      "dataset_count": 13,
+      "native_filters_count": 14,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1285,
+      "title": "Брошенные корзины B2B",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1353,
+      "title": "График работы ТТ с проектом Кафе",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 880,
+      "title": "Отчет по проектам для Мили",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 873,
+      "title": "Статистика по сборочным листам",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 2,
+      "native_filters_count": 37,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1254,
+      "title": "Социальная полка 7 и 12 группа",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 3,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1435,
+      "title": "Animation tech",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1449,
+      "title": "Аналитика онлайн-ритейла",
+      "published": true,
+      "chart_count": 17,
+      "dataset_count": 9,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1473,
+      "title": "Диалоги Ассистента покупателя",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 2,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1484,
+      "title": "<ФИО> Вайты 1.3.07",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 2,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 807,
+      "title": "Показатели по товарам",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 14,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 969,
+      "title": "Сборка для Пекарен",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 2,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 970,
+      "title": "Структурные единицы ДаркКитчен",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 713,
+      "title": "Мясная / Рыбная витрина (4 группа)",
+      "published": true,
+      "chart_count": 24,
+      "dataset_count": 8,
+      "native_filters_count": 11,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 845,
+      "title": "Динамика сервиса Кафе - Пекарня",
+      "published": true,
+      "chart_count": 85,
+      "dataset_count": 32,
+      "native_filters_count": 33,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1136,
+      "title": "Отчет для предиктивной аналитики по ДаркСторам",
+      "published": true,
+      "chart_count": 24,
+      "dataset_count": 1,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 722,
+      "title": "Доставка: Вкусвильчик",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 865,
+      "title": "Отчет по изменению весовых товаров при сборке",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1447,
+      "title": "HR Demo",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 8,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1357,
+      "title": "Система мониторинга фин показателей тт",
+      "published": true,
+      "chart_count": 24,
+      "dataset_count": 7,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1429,
+      "title": "Запланированные выходы курьеров",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 3,
+      "native_filters_count": 9,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1459,
+      "title": "Еженедельная выгрузка для Софьи",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1452,
+      "title": "Черновик - Алерты",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 2,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1326,
+      "title": "Статистика по товарам КТ",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 2,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1412,
+      "title": "Изменение сервисов",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1004,
+      "title": "Отчёт по проекторам с рекламой",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1365,
+      "title": "Подарочные карты продажа",
+      "published": true,
+      "chart_count": 15,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1104,
+      "title": "Обращения с ML разметкой",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1331,
+      "title": "Доступность оплат на месте",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1360,
+      "title": "A/B tool - Каталог",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 995,
+      "title": "Рейтинг ДС",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 3,
+      "native_filters_count": 21,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1340,
+      "title": "Дашборд по аномалиям метрик",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 4,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1213,
+      "title": "Справочник нормативов времени сборки/доставки/общего времени заказов",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1007,
+      "title": "Демонстрационный дашборд корзины",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 1,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1193,
+      "title": "CPO задачи",
+      "published": true,
+      "chart_count": 27,
+      "dataset_count": 1,
+      "native_filters_count": 14,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1349,
+      "title": "Фискализация чеков: динамика",
+      "published": true,
+      "chart_count": 18,
+      "dataset_count": 1,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 906,
+      "title": "Открытие новых точек",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 15,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1369,
+      "title": "Переоформленные заказы (состав)",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1233,
+      "title": "A/B тест Автоассортимент",
+      "published": true,
+      "chart_count": 10,
+      "dataset_count": 2,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1111,
+      "title": "Тренды 2025 (ТТ-категория)",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1025,
+      "title": "Статистика доставок курьерами  в разрезе пулов",
+      "published": true,
+      "chart_count": 18,
+      "dataset_count": 4,
+      "native_filters_count": 38,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1210,
+      "title": "Калькулятор курьеры",
+      "published": true,
+      "chart_count": 9,
+      "dataset_count": 6,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1378,
+      "title": "Монитор онлайн-заказов",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1209,
+      "title": "Отчёт для предиктивной аналитики по ВайтСторам",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1393,
+      "title": "Показы шторки попрошайки",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1391,
+      "title": "Отток новичков",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1329,
+      "title": "Тестовый отчет (новая логика по выходам новых курьеров)",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1323,
+      "title": "Метрики Сайта",
+      "published": true,
+      "chart_count": 13,
+      "dataset_count": 1,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1099,
+      "title": "Уникальные покупатели по всем дс",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 950,
+      "title": "Статистика по заказам для Мили",
+      "published": true,
+      "chart_count": 41,
+      "dataset_count": 1,
+      "native_filters_count": 43,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1308,
+      "title": "Метрики раздела рецептов в МП",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1335,
+      "title": "Кусьвилл",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 2,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 835,
+      "title": "Отчет для коммуникации",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 943,
+      "title": "DWH DQ report",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1321,
+      "title": "Сводный отчет по отработке ЗТМ",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1174,
+      "title": "Аномалии каталога",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 2,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1038,
+      "title": "Баги Витрины чеков (GP100)",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 9,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1086,
+      "title": "Наличие проверок Витрины Чеков",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1152,
+      "title": "Сборка и Доставка в разрезе Сервисов",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1362,
+      "title": "PNL Корзины",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1356,
+      "title": "Активность курьеров",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 5,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1352,
+      "title": "Последний доставленный заказ",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1334,
+      "title": "ИСО основные метрик",
+      "published": true,
+      "chart_count": 14,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1318,
+      "title": "mart_mixed__s3_dir_sizes__dashboard",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 3,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1235,
+      "title": "logs_universal_logs_dq_dashboard",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 2,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1315,
+      "title": "[New_парсинг_кк ]",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1244,
+      "title": "7 группа",
+      "published": true,
+      "chart_count": 6,
+      "dataset_count": 2,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1009,
+      "title": "Мониторинг багов и проверок (DWH)",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1047,
+      "title": "Черновик багов по дням",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1026,
+      "title": "Мониторинг охвата проверками слоя dds (GP100)",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1217,
+      "title": "[Рейтинг витрин DWH ]",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1035,
+      "title": "Мониторинг охвата проверками качества витрин (DWH)",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1293,
+      "title": "Матчинг",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1282,
+      "title": "Оценки в сторах",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1262,
+      "title": "Статистика заказов Кафе/Пекарни",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 2,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1258,
+      "title": "Аналитика для распределения [РЦ] [группы товаров]",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 1,
+      "native_filters_count": 10,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1251,
+      "title": "Анализ логов корзины",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 2,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 909,
+      "title": "СберСпасибо",
+      "published": true,
+      "chart_count": 9,
+      "dataset_count": 1,
+      "native_filters_count": 8,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1243,
+      "title": "Аналитика для распределения [ТТ]",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 1,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1227,
+      "title": "Какие проверки на твоей витрине?",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 2,
+      "native_filters_count": 7,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1006,
+      "title": "Фруткорт (по группам)",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1165,
+      "title": "Мониторинг таблиц с сегментациями на 100гп",
+      "published": true,
+      "chart_count": 12,
+      "dataset_count": 6,
+      "native_filters_count": 5,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1114,
+      "title": "Посещения ночных магазинов без продавца",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1153,
+      "title": "Дашборд по РП 4.0 [В работе]",
+      "published": true,
+      "chart_count": 5,
+      "dataset_count": 2,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1121,
+      "title": "Мониторинг бизнес логики Витрины",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 1,
+      "native_filters_count": 4,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1150,
+      "title": "[ Все каналы рекомендаций по чекам ]",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1147,
+      "title": "Динамика объединения бонусных карт клиентов ВВ",
+      "published": true,
+      "chart_count": 2,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1087,
+      "title": "ДаркКитчен сервис левел",
+      "published": true,
+      "chart_count": 11,
+      "dataset_count": 4,
+      "native_filters_count": 12,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1032,
+      "title": "Рекомендательные каналы",
+      "published": true,
+      "chart_count": 11,
+      "dataset_count": 1,
+      "native_filters_count": 3,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1033,
+      "title": "УРЗ",
+      "published": true,
+      "chart_count": 8,
+      "dataset_count": 1,
+      "native_filters_count": 6,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1051,
+      "title": "Неиспользуемые таблицы в Clickhouse 225, 238, 240",
+      "published": true,
+      "chart_count": 3,
+      "dataset_count": 3,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 890,
+      "title": "Отчёт по продажам КСО 834317",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 1012,
+      "title": "Тех. аналитика / Тестовый отчет",
+      "published": true,
+      "chart_count": 1,
+      "dataset_count": 1,
+      "native_filters_count": 1,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 985,
+      "title": "Демонстрация технологии производства товара (Тест 5063)",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 4,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 892,
+      "title": "Отчёт по тесту Led-панелей в магазине 2.0",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 2,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    },
+    {
+      "dashboard_id": 942,
+      "title": "Organic/Development Dataspace growth",
+      "published": true,
+      "chart_count": 4,
+      "dataset_count": 1,
+      "native_filters_count": 0,
+      "access": "METADATA_ONLY"
+    }
+  ]
+}

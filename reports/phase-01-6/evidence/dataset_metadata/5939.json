@@ -1,0 +1,627 @@
+{
+  "dataset_id": 5939,
+  "table_name": "hr_daily_pers_mentors",
+  "kind": "virtual",
+  "schema": "agile_mart_techaudit",
+  "database": {
+    "id": 96,
+    "name": "ch_10.0.112.21",
+    "backend": "clickhousedb"
+  },
+  "description": "Отдельный датасет для вкладки Наставничество->Наставники, создан чтобы не нагружать необходимыми оконными функциями основной датасет",
+  "main_dttm_col": "date",
+  "changed_on": "2026-11-10T07:13:49.022490",
+  "sql_len": 4301,
+  "sql_sha256": "0847318753fa22c03b318e6550a6c1058f801f82ff5d6511313276d3ed67fd01",
+  "sql_redacted": "with \npu_tt AS ( \n SELECT id_tt, pu_name\n FROM (\n SELECT id_tt, pu_name,\n ROW_NUMBER() OVER (PARTITION BY id_tt ORDER BY event_date::date DESC) rn\n FROM \"agile_mart_techaudit\".actual_assistant_tt\n ) act\n WHERE rn = 1)\n\n, cfo_pu as ( \n select pu_code, cfo_name\n from ( select \n pu_code,cfo_name, \n row_number() over (partition by pu_code order by cnt_gr desc) as rn\n from (select pu_code,cfo_name, count(*) cnt_gr\n from \"agile_mart_techaudit\".actual_assistant_tt\n group by pu_code,cfo_name \n )act\n )t where rn = 1) \n\nSELECT \nevent_date\n, \"date\"\n, event_type\n, hdp.person_code as person_code \n, employee_code\n, hdp.fio as fio\n, date_start_work\n, position_name\n, quantity\n, stake\n, date_dismissed\n, uvol\n, days_in_month\n, exp_months\n, exp_days\n, experience_txt\n, exp_years_months\n, hdp.sex as sex\n, age\n, hdp.\"role\" as role\n, fe.fio as pu_name\n, hdp.pu_code as pu_code\n, pu_tt.pu_name as pu_name_for_tt \n, hdp.cfo_name as cfo_name\n, cfo_pu.cfo_name as cfo_name_for_pu\n, direct_name\n, hdp.id_tt\n, tt_name\n, \"num_ТТ\"\n, \"type_ТТ\"\n, region_name\n, city_name\n, status_bir\n, bir_flag\n, progul\n, is_service_position\n, shortterm_flg\n, under18_flag\n, mentorid \n, mentorfio \n, mentorid_at_date \n, mentor_at_date \n, mentor_in_five\n, shift_rn_trainee\n, trainee_shift_in_five\n, trainee_shifts_qty\n, pu_feature_day\n, pu_feature_week\n, pu_feature_month\n, last_shift_date\n, first_shift_date\n, shifts_qty\n, shift_rn\n, second_hire\n, pause_months\n, pause_days\n, no_pause\n, pu_position\n, mentor_same_tt_date\n, tt_cluster\n, count (CASE WHEN shift_rn_trainee IS NOT NULL THEN 1 END) over (partition by hdp.person_code, date_start_work, mentor_at_date) as enough_shifts_for_mentor\n, sum (case WHEN shift_rn_trainee IS NOT null THEN 1 END) \nover (partition by hdp.person_code, date_start_work, mentor_at_date order by date\nrows between unbounded preceding and current row) as shift_rn_trainee_by_mentor\nfrom \"agile_mart_techaudit\".hr_daily_pers hdp\nleft join pu_tt on hdp.id_tt = pu_tt.id_tt \nleft join cfo_pu on hdp.pu_code = cfo_pu.pu_code\nleft join \"stage_outer_sources\".fio_employee fe on hdp.pu_code = fe.person_code \nwhere \ndate_start_work >='2024-05-01'\nand (pause_months is null or pause_months>=2)\nand mentorid_at_date is not null\nand mentor_same_tt_date =1\n\n{% if from_dttm %}\nand date >= toDate('{{ from_dttm }}')\nand date <= toDate('{{ to_dttm }}')\n{% endif %} \n\n{% if (filter_values('pu_name')) %} \nand fe.fio in {{ filter_values('pu_name',remove_filter=True)|where_in }}\n{% endif %}\n\n{% if (filter_values('cfo_name')) %} \nand hdp.cfo_name in {{ filter_values('cfo_name',remove_filter=True)|where_in }}\n{% endif %}\n\n{% if (filter_values('direct_name')) %} \nand direct_name in {{ filter_values('direct_name',remove_filter=True)|where_in }}\n{% endif %}\n\n{% if (filter_values('region_name')) %} \nand region_name in {{ filter_values('region_name',remove_filter=True)|where_in }}\n{% endif %}\n\n{% if (filter_values('position_name')) %} \nand position_name in {{ filter_values('position_name',remove_filter=True)|where_in }}\n{% endif %}\n\n{% for filter in get_filters('prop', remove_filter=True) %}\n {% for val in filter.get('val') %}\n {% if val == 'БИР (декретный отпуск)' %}\n AND bir_flag != 1\n {% elif val == 'Долгие больничные и невыясненные отсутствия' %}\n AND bir_flag != 2 \n {% elif val == 'В учебном отпуске' %}\n AND bir_flag != 3 \n {% elif val == 'Несовершеннолетних' %}\n AND under18_flag = 0\n {% elif val == 'Прогульщиков' %} \n AND progul = 0\n {% elif val == 'Сезонных сотрудников' %} \n AND shortterm_flg = 0\n {% endif %}\n {% endfor %}\n{% endfor %}",
+  "sql_redaction_note": null,
+  "sql_sources_physical": [
+    "agile_mart_techaudit.actual_assistant_tt",
+    "agile_mart_techaudit.hr_daily_pers",
+    "stage_outer_sources.fio_employee"
+  ],
+  "sql_sources_unknown": [
+    "pu_tt"
+  ],
+  "sql_ctes": [
+    "cfo_pu"
+  ],
+  "columns_count": 70,
+  "columns": [
+    {
+      "column_name": "age",
+      "type": "Nullable(Float64)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "age_group",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "bir_flag",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "cfo_name",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "cfo_name_for_pu",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "city_name",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date",
+      "type": "Nullable(Date)",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_dismissed",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_for_mentor",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_start_work",
+      "type": "Nullable(Date)",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "days_in_month",
+      "type": "Nullable(Decimal(76, 32))",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "direct_name",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "employee_code",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "enough_shifts_for_mentor",
+      "type": "UInt64",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "event_date",
+      "type": "Nullable(Date)",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "event_type",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "exp_days",
+      "type": "Nullable(Float64)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "experience_txt",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "exp_months",
+      "type": "Nullable(Float64)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "exp_years_months",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "fio",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "first_shift_date",
+      "type": "Nullable(Date)",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "hdp.id_tt",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "is_service_position",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "last_shift_date",
+      "type": "Nullable(Date)",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "mentor_at_date",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "mentorfio",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "mentorid",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "mentorid_at_date",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "mentor_in_five",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "mentor_same_tt_date",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "no_pause",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "num_ТТ",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pause_days",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pause_groups",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pause_months",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "period_from",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "person_code",
+      "type": "String",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "position_name",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "progul",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "progul_text",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pu_code",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pu_feature_day",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pu_feature_month",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pu_feature_week",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pu_name",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pu_name_for_tt",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pu_position",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "quantity",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "region_name",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "role",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "second_hire",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "sex",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shift_rn",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shift_rn_trainee",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shift_rn_trainee_by_mentor",
+      "type": "Nullable(UInt64)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shifts_qty",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shortterm_flg",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "soon_hire",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "stake",
+      "type": "Nullable(Decimal(22, 6))",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "status_bir",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "trainee_shift_in_five",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "trainee_shifts_qty",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "tt_cluster",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "TTfeature",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "tt_name",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "type_tt_coalesce",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "type_ТТ",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "under18_flag",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "uvol",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    }
+  ],
+  "metrics_count": 31,
+  "metric_names": [
+    "count",
+    "dismissals_qty",
+    "employee_qty_lm",
+    "exp_months_dism",
+    "first_shift_empl",
+    "fisrt_shifts_wo_mentor2",
+    "hiring_result",
+    "hirings_qty",
+    "hirings_qty_all",
+    "mentor_empl",
+    "mentor_empl2",
+    "mentor_empl_dism2m",
+    "mentor_empl_still_working",
+    "return_pers",
+    "returns",
+    "trainees_for_mentors_list",
+    "trainees_share",
+    "trainees_worked_1m",
+    "trainees_worked_1m_share",
+    "Кол-во уволенных",
+    "Коэф оттока за выбранный в грануляции период",
+    "Коэф оттока за период",
+    "Коэф текучести за неделю",
+    "Коэф текучести кадров",
+    "Макс стаж для сортировки фильтра",
+    "ССЧ за выбранный в грануляции период",
+    "ССЧ за любой период",
+    "ССЧ за месяц",
+    "ССЧ за неделю",
+    "ССЧ за период_кд",
+    "Численность штатных сотрудников"
+  ],
+  "owners_present": 1
+}

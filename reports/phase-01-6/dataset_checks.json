@@ -1,0 +1,411 @@
+{
+  "generated_at": "2026-11-21T21:16:42.174Z",
+  "blocker": "BLOCK-1",
+  "datasets": [
+    {
+      "dataset_id": 5939,
+      "name": "hr_daily_pers_mentors",
+      "database": "ch_10.0.112.21",
+      "backend": "clickhousedb",
+      "kind": "virtual",
+      "schema": "agile_mart_techaudit",
+      "columns": 70,
+      "metrics": 31,
+      "sql_len": 4301,
+      "sources": [
+        "agile_mart_techaudit.actual_assistant_tt",
+        "agile_mart_techaudit.hr_daily_pers",
+        "stage_outer_sources.fio_employee"
+      ],
+      "key_columns": [
+        "mentorid",
+        "mentor_at_date",
+        "mentorid_at_date",
+        "mentor_same_tt_date",
+        "enough_shifts_for_mentor",
+        "mentor_in_five",
+        "trainee_shift_in_five",
+        "trainee_shifts_qty",
+        "shift_rn_trainee",
+        "shift_rn_trainee_by_mentor",
+        "first_shift_date",
+        "last_shift_date",
+        "shifts_qty",
+        "progul",
+        "stake",
+        "event_date",
+        "event_type",
+        "person_code",
+        "employee_code",
+        "date",
+        "date_start_work",
+        "date_dismissed",
+        "hdp.id_tt"
+      ],
+      "pii_columns": [
+        "fio",
+        "mentorfio",
+        "cfo_name",
+        "cfo_name_for_pu",
+        "direct_name"
+      ],
+      "unknown_type_columns": [
+        "date_for_mentor",
+        "progul_text",
+        "pause_groups",
+        "period_from",
+        "soon_hire",
+        "TTfeature",
+        "type_tt_coalesce",
+        "age_group"
+      ],
+      "documented_grain": null,
+      "evidence_level": "METADATA",
+      "data_verified": false,
+      "conclusions": [
+        "Наставничество в источнике строится вокруг справочника помощников ТТ (actual_assistant_tt), а не вокруг отдельной сущности «назначение наставника новичку».",
+        "mentorid и mentorfio присутствуют, но mentorfio — ПДн; сопоставление mentorid с id_courier не подтверждено.",
+        "progul (Int32) — числовой признак, не событие; семантика не подтверждена.",
+        "stake (Decimal(22,6)) — денежный скаляр; назначение (ставка/доля) не подтверждено.",
+        "Дата назначения date_for_mentor НЕ формируется SQL датасета (0 вхождений) — устаревшая колонка метаданных; период наставничества по ней строить нельзя."
+      ],
+      "limits": [
+        "Нет фактических данных: доля NULL в mentorid, число уникальных наставников/стажёров, распределение по месяцам не измерены (SQL Lab 403).",
+        "Не установлено, является ли датасет зерном «курьер × день» или «курьер × день × ТТ»."
+      ]
+    },
+    {
+      "dataset_id": 7802,
+      "name": "shift_time_breakdown",
+      "database": "gp_10.0.112.100/dwh",
+      "backend": "postgresql (Greenplum)",
+      "kind": "virtual",
+      "schema": "agile_mart_operational",
+      "columns": 23,
+      "metrics": 1,
+      "sql_len": 10498,
+      "sources": [
+        "agile_mart_operational.shifts",
+        "agile_mart_operational.pools",
+        "agile_mart_operational.courier_queue",
+        "mart_mixed.darkstore_time",
+        "ods.v_couriers",
+        "ods.v_tt",
+        "mart.org_unit_actual"
+      ],
+      "key_columns": [
+        "id_shift",
+        "id_courier",
+        "dt",
+        "shopno",
+        "rn_shift",
+        "rn_shift_tt",
+        "rn_shift_pu",
+        "rn_shift_bush",
+        "rn_shift_region",
+        "rn_shift_tu",
+        "shift_minutes",
+        "assembly_minutes",
+        "delivery_minutes",
+        "wait_minutes",
+        "useless_minutes"
+      ],
+      "pii_columns": [
+        "courier_name"
+      ],
+      "unknown_type_columns": [],
+      "documented_grain": "id_shift × ТТ; rn_shift = 1 — одна строка смены; rn_shift_pu = 1 — одна строка смены внутри ПУ (из комментариев SQL датасета)",
+      "evidence_level": "METADATA_PLUS_DOC",
+      "data_verified": false,
+      "conclusions": [
+        "Зерно задокументировано автором датасета: id_shift × ТТ, минуты повторяются на каждой ТТ; для одной строки на смену используется rn_shift = 1.",
+        "Обнаружены физические таблицы agile_mart_operational.shifts, .pools, .courier_queue — прямые кандидаты в источники courier_shifts, trips и courier_queue_entries.",
+        "id_shift имеет строковый тип, id_courier — целочисленный; связь с id_courier из других систем требует сопоставления.",
+        "wait_minutes — длительность, а не время; не доказывает ожидание в очереди."
+      ],
+      "limits": [
+        "Уникальность id_shift, доля NULL, отрицательные и аномальные значения не измерены (SQL Lab 403).",
+        "Не подтверждено, что agile_mart_operational.shifts — мастер-источник смен, а не аналитическая витрина."
+      ]
+    },
+    {
+      "dataset_id": 7712,
+      "name": "photo_control_shift_bi",
+      "database": "gp_10.0.112.100/dwh",
+      "backend": "postgresql (Greenplum)",
+      "kind": "virtual",
+      "schema": "agile_mart_operational",
+      "columns": 54,
+      "metrics": 1,
+      "sql_len": 6396,
+      "sources": [
+        "agile_mart_operational.photo_control_shift_attempt",
+        "mart_mixed.darkstore_time",
+        "ods.v_tasks_settings",
+        "ods.v_tt",
+        "report.v_org_unit_actual",
+        "ods.v_couriers",
+        "ods.v_couriers_payments_courier_types",
+        "ods.v_courier_job_type"
+      ],
+      "key_columns": [
+        "courier_id",
+        "shopno",
+        "attempt_dt",
+        "attempt_start",
+        "attempt_n",
+        "shift_opened",
+        "shift_open_time",
+        "photo_end",
+        "is_attempt"
+      ],
+      "pii_columns": [
+        "name",
+        "delivery_manager",
+        "leader",
+        "id_name"
+      ],
+      "unknown_type_columns": [],
+      "documented_grain": "факт попытки фотоконтроля начала смены; пишет DAG dag_photo_control_shift_attempt в agile_mart_operational.photo_control_shift_attempt (из комментариев SQL)",
+      "evidence_level": "METADATA_PLUS_DOC",
+      "data_verified": false,
+      "conclusions": [
+        "shift_open_time — фактическое время события фотоконтроля начала смены, а не обязательно операционное начало смены.",
+        "shift_opened — целочисленный признак (0/1), не событие.",
+        "Зерно — попытка фотоконтроля (attempt_n) на курьера и дату; id_shift в датасете отсутствует."
+      ],
+      "limits": [
+        "Нет id_shift → прямая связь с 7802 по ключу смены невозможна; связь только по (courier_id, дата) — слабая.",
+        "Доли заполнения и дубликаты не измерены (SQL Lab 403)."
+      ]
+    },
+    {
+      "dataset_id": 7021,
+      "name": "ds_collectors_prod",
+      "database": "ch_10.0.112.21",
+      "backend": "clickhousedb",
+      "kind": "virtual",
+      "schema": null,
+      "columns": 41,
+      "metrics": 12,
+      "sql_len": 9437,
+      "sources": [
+        "ods.timesheetfact",
+        "mart_mixed.darkstore_time_sheet"
+      ],
+      "key_columns": [
+        "id_order",
+        "id_tt",
+        "shopno",
+        "user_code",
+        "id_sbor",
+        "id_assemblysheet",
+        "qty_collected",
+        "sbor",
+        "shift_type",
+        "is_night_shift",
+        "hours_on_schedule",
+        "has_timesheet",
+        "date_status_10",
+        "time_start",
+        "time_end",
+        "part_start",
+        "part_end"
+      ],
+      "pii_columns": [
+        "user_code"
+      ],
+      "unknown_type_columns": [],
+      "documented_grain": "выработка сборщиков даркстора (из описания датасета)",
+      "evidence_level": "METADATA_PLUS_DOC",
+      "data_verified": false,
+      "conclusions": [
+        "Датасет описывает выработку СБОРЩИКОВ даркстора, а не курьеров: отсутствует id_courier, есть id_sbor/id_assemblysheet/qty_collected.",
+        "shift_type и is_night_shift относятся к сменам сборщиков; использовать их для courier_shifts нельзя.",
+        "Использование 7021 для классификации смен курьеров, заложенное в Этапе 1.5, ПРОТИВОРЕЧИТ содержимому источника.",
+        "date_status_10 присутствует и в 3466, и в 7021 — это сквозной статус заказа, не готовность."
+      ],
+      "limits": [
+        "Распределение значений shift_type и согласованность с is_night_shift не измерены (SQL Lab 403)."
+      ]
+    },
+    {
+      "dataset_id": 3466,
+      "name": "darkstore_time_sheet",
+      "database": "ch_10.0.112.21/default",
+      "backend": "clickhousedb",
+      "kind": "virtual",
+      "schema": "mart_mixed",
+      "columns": 167,
+      "metrics": 243,
+      "sql_len": 38370,
+      "sources": [
+        "mart_mixed.darkstore_time_sheet",
+        "report.v_org_unit_actual"
+      ],
+      "key_columns": [
+        "id_order",
+        "id_general",
+        "shopno",
+        "id_tt",
+        "id_courier",
+        "id_delivery_job",
+        "id_pool",
+        "id_group",
+        "date_order",
+        "date_collect_start",
+        "date_collected",
+        "date_status_10",
+        "date_delivery_start",
+        "date_delivered",
+        "deadline_sbor",
+        "time_ready",
+        "time_ready_plan",
+        "is_canceled",
+        "is_returned_store",
+        "order_status",
+        "geo",
+        "area_tt",
+        "zone_cluster"
+      ],
+      "pii_columns": [
+        "user_inn",
+        "phone",
+        "user_code",
+        "courier",
+        "user_kontr",
+        "id_user_kontr"
+      ],
+      "unknown_type_columns": [
+        "time_ready",
+        "time_ready_plan",
+        "date_of_collected",
+        "time_collect_start",
+        "type_sheet",
+        "vv_week_date_order",
+        "qty_sl_dk_by_TT",
+        "source_name",
+        "time_set_cell_last",
+        "hour_collected",
+        "hour",
+        "date_update_msk",
+        "time_type_collected_dk",
+        "time_status",
+        "time_collect_start_plan",
+        "ph_scheme",
+        "internal_orders_of_DC",
+        "time_give_on_kassa",
+        "collect_time_type",
+        "collection_type",
+        "time_order"
+      ],
+      "documented_grain": "строка = заказ (id_order) в даркстор-таймшите; источник mart_mixed.darkstore_time_sheet",
+      "evidence_level": "METADATA",
+      "data_verified": false,
+      "conclusions": [
+        "**time_ready и time_ready_plan НЕ формируются SQL датасета** (0 вхождений в 35 926 символах SQL) — это устаревшие колонки метаданных Superset, а не источник факта готовности.",
+        "date_status_10 — реальная колонка физической таблицы mart_mixed.darkstore_time_sheet (DateTime64(6)); семантика статуса 10 не подтверждена.",
+        "deadline_sbor и last_sbor_touch — вычисляемые выражения, а не факты.",
+        "Датасет содержит Jinja-параметры (filter_values) — прямое выполнение SQL датасета требует параметров.",
+        "Порядок событий заказа подтверждается наличием полей date_order → date_collect_start → date_collected → date_delivery_start → date_delivered, но их фактическая согласованность не измерена."
+      ],
+      "limits": [
+        "Доля заполнения time_ready/time_ready_plan, случаи time_ready < date_order или time_ready > date_delivered не проверены (SQL Lab 403).",
+        "time_ready_plan и time_ready не объединялись — плановое и фактическое время разделены."
+      ]
+    },
+    {
+      "dataset_id": 2339,
+      "name": "Перенесенные заказы",
+      "database": "Reports",
+      "backend": "mssql",
+      "kind": "virtual",
+      "schema": "dbo",
+      "columns": 107,
+      "metrics": 1,
+      "sql_len": 881,
+      "sources": [
+        "Loyalty_srv03.dbo.Webcall_log_ui_period (табличная функция)",
+        "Reports.dbo.ksa_time_vw (представление)"
+      ],
+      "key_columns": [
+        "object_id",
+        "id_order",
+        "quantity_batch",
+        "orders_assignment",
+        "new_value",
+        "old_value",
+        "date_add",
+        "date_supply",
+        "date_for_wait2",
+        "wait_time",
+        "wait_time2",
+        "status_name",
+        "log_data",
+        "action",
+        "autor",
+        "source",
+        "prop",
+        "type",
+        "id_courier",
+        "shopno"
+      ],
+      "pii_columns": [
+        "autor",
+        "courier",
+        "leader",
+        "senior",
+        "Pom",
+        "user_code",
+        "ОтветственныйГЕО",
+        "Куратор"
+      ],
+      "unknown_type_columns": [
+        "date_supply_con",
+        "date_collect_start_con",
+        "date_delivery_start_con",
+        "date_collected_con",
+        "date_delivered_con",
+        "date_order_con",
+        "order_all",
+        "old_value_conv",
+        "date_add_conv",
+        "date_diff",
+        "Наименование ТТ",
+        "comment",
+        "status_name_",
+        "Куратор",
+        "id_group",
+        "id_assemblysheet_header",
+        "sum_cash_refunded",
+        "sum_paid_disc",
+        "sum_bonus_refunded",
+        "qty_pos_l",
+        "id_cause",
+        "name_service",
+        "refund_reason",
+        "sum_paid",
+        "id_job",
+        "str_orders",
+        "qty_tov",
+        "nkormax",
+        "sbor",
+        "error",
+        "СвойствоПродавца"
+      ],
+      "documented_grain": "строка = запись журнала изменения даты доставки (Webcall_log_ui_period) для заказа за последний месяц",
+      "evidence_level": "METADATA_PLUS_DOC",
+      "data_verified": false,
+      "conclusions": [
+        "Источник — журнал изменений даты доставки за последний месяц (DATEADD(MONTH,-1,GETDATE())), а не система пакетов/ходок.",
+        "quantity_batch и orders_assignment приходят из представления Reports.dbo.ksa_time_vw; их смысл (размер пакета или признак группировки) не подтверждён.",
+        "Уникального идентификатора пакета в датасете нет; состав пакета не восстанавливается.",
+        "Из-за скользящего окна в один месяц история переносов ограничена."
+      ],
+      "limits": [
+        "Связь с конкретными заказами ограничена object_id/id_order и не проверена.",
+        "Суммы sum_paid/sum_paid_disc присутствуют как nullable и не должны использоваться для начислений."
+      ]
+    }
+  ]
+}

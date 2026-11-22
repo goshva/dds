@@ -1,0 +1,378 @@
+{
+  "dataset_id": 7021,
+  "table_name": "ds_collectors_prod",
+  "kind": "virtual",
+  "schema": null,
+  "database": {
+    "id": 96,
+    "name": "ch_10.0.112.21",
+    "backend": "clickhousedb"
+  },
+  "description": null,
+  "main_dttm_col": null,
+  "changed_on": "2026-08-20T14:47:58.140881",
+  "sql_len": 9437,
+  "sql_sha256": "b25665b330ab2715f864be20adce77a9214a75291eebe15b10c341e8c175402e",
+  "sql_redacted": "WITH\r\nparams AS (\r\n SELECT\r\n {% if from_dttm %}\r\n '{{ from_dttm }}' AS date_from,\r\n {% else %}\r\n toDateTime(toStartOfWeek(today(), 1) - INTERVAL 7 DAY) AS date_from,\r\n {% endif %}\r\n\r\n {% if to_dttm %}\r\n '{{ to_dttm }}' AS date_to,\r\n {% else %}\r\n toDateTime(toStartOfWeek(today(), 1)) AS date_to,\r\n {% endif %}\r\n\r\n 40 AS shift_start_grace_min,\r\n 40 AS shift_end_grace_min\r\n),\r\ntimesheet_raw AS (\r\n SELECT\r\n trim(toString(ts.employeeId)) AS id_sbor,\r\n ts.id_tt AS id_tt,\r\n ts.time_start AS time_start,\r\n ts.time_end AS time_end,\r\n\r\n if(\r\n toDate(ts.time_end) > toDate(ts.time_start),\r\n 'Ночной',\r\n 'Дневной'\r\n ) AS shift_type\r\n\r\n FROM ods.timesheetfact AS ts\r\n\r\n WHERE ts.time_end >= (\r\n (SELECT date_from FROM params)\r\n - toIntervalMinute((SELECT shift_start_grace_min FROM params))\r\n )\r\n AND ts.time_start <= (\r\n (SELECT date_to FROM params)\r\n + toIntervalMinute((SELECT shift_end_grace_min FROM params))\r\n )\r\n),\r\ntimesheet_parts AS (\r\n SELECT\r\n id_sbor,\r\n id_tt,\r\n time_start,\r\n time_end,\r\n shift_type,\r\n\r\n toDate(toStartOfDay(time_start) + toIntervalDay(day_num)) AS date_collected,\r\n\r\n greatest(\r\n time_start,\r\n toDateTime(toDate(toStartOfDay(time_start) + toIntervalDay(day_num)))\r\n ) AS part_start,\r\n\r\n least(\r\n time_end,\r\n toDateTime(toDate(toStartOfDay(time_start) + toIntervalDay(day_num))) + INTERVAL 1 DAY\r\n ) AS part_end,\r\n\r\n greatest(\r\n dateDiff(\r\n 'second',\r\n greatest(\r\n time_start,\r\n toDateTime(toDate(toStartOfDay(time_start) + toIntervalDay(day_num)))\r\n ),\r\n least(\r\n time_end,\r\n toDateTime(toDate(toStartOfDay(time_start) + toIntervalDay(day_num))) + INTERVAL 1 DAY\r\n )\r\n ) / 3600.0,\r\n 0\r\n ) AS hours_on_schedule\r\n\r\n FROM timesheet_raw\r\n\r\n ARRAY JOIN range(\r\n toUInt32(dateDiff('day', toDate(time_start), toDate(time_end)) + 1)\r\n ) AS day_num\r\n),\r\nbase AS (\r\n SELECT\r\n row_number() OVER (\r\n ORDER BY\r\n dts.date_collected,\r\n dts.id_order,\r\n dts.id_assemblysheet,\r\n dts.id_sbor,\r\n dts.id_tt,\r\n dts.qty_collected,\r\n dts.collection_time_all,\r\n dts.date_set_cell\r\n ) AS base_row_num,\r\n\r\n dts.date_collected AS date_collected_dt,\r\n toDate(dts.date_collected) AS date_collected,\r\n\r\n dts.sbor AS sbor,\r\n dts.user_code AS user_code,\r\n dts.id_sbor AS id_sbor,\r\n\r\n dts.id_tt AS id_tt,\r\n dts.shopno AS shopno,\r\n dts.name_tt AS name_tt,\r\n dts.region_tt AS region_tt,\r\n dts.pom AS pom,\r\n dts.feature_sbor AS feature_sbor,\r\n\r\n dts.id_order AS id_order,\r\n dts.id_assemblysheet AS id_assemblysheet,\r\n dts.is_collected AS is_collected,\r\n dts.date_set_cell AS date_set_cell,\r\n dts.qty_collected AS qty_collected,\r\n\r\n dts.collection_time_all AS collection_time_all,\r\n dts.collection_time_real_sec_sheet AS collection_time_real_sec_sheet,\r\n dts.slots AS slots,\r\n dts.sla_order_time AS sla_order_time,\r\n \r\n dts.date_order AS date_order,\r\n dts.date_supply AS date_supply,\r\n dts.date_supply_untill AS date_supply_untill,\r\n\r\n dts.order_status AS order_status,\r\n dts.id_service AS id_service,\r\n dts.id_source AS id_source,\r\n dts.order_type AS order_type,\r\n dts.date_status_10 AS date_status_10,\r\n dts.sla_delivery_time_all AS sla_delivery_time_all,\r\n dts.sla_collection_time_all AS sla_collection_time_all,\r\n dts.darkkitchen_closed AS darkkitchen_closed,\r\n dts.date_f_status_3_5 AS date_f_status_3_5,\r\n\r\n if(\r\n dts.order_status = 'Успешно завершен'\r\n AND \r\n (\r\n (\r\n dts.id_service = 3 \r\n AND dts.id_source = 80 \r\n AND dts.order_type = 14\r\n AND dts.date_status_10 > dts.date_supply_untill\r\n )\r\n OR \r\n (\r\n dts.id_service = 3 \r\n AND (dts.id_source <> 80 OR dts.order_type <> 14)\r\n AND dts.date_status_10 > dts.date_supply\r\n )\r\n OR \r\n (\r\n dts.id_service <> 3\r\n AND dts.date_order >= (dts.date_supply_untill - coalesce(dts.sla_delivery_time_all, 0) * 60)\r\n AND dts.collection_time_all > dts.sla_collection_time_all\r\n )\r\n OR \r\n (\r\n dts.id_service <> 3\r\n AND dts.darkkitchen_closed > 0\r\n AND dts.collection_time_all > dts.sla_collection_time_all\r\n )\r\n OR \r\n (\r\n dts.id_service <> 3\r\n AND (dts.darkkitchen_closed = 0 OR dts.darkkitchen_closed IS NULL)\r\n AND dts.date_order < (dts.date_supply_untill - coalesce(dts.sla_delivery_time_all, 0) * 60)\r\n AND coalesce(dts.date_set_cell, dts.date_f_status_3_5) > (dts.date_supply_untill - coalesce(dts.sla_delivery_time_all, 0) * 60)\r\n )\r\n ),\r\n 1,\r\n 0\r\n ) AS is_overdue\r\n\r\n FROM mart_mixed.darkstore_time_sheet AS dts\r\n PREWHERE\r\n dts.date_collected >= (SELECT date_from FROM params)\r\n AND dts.date_collected <= (SELECT date_to FROM params)\r\n\r\n WHERE dts.is_collected = 1\r\n AND dts.feature_tt = 'ДаркСтор'\r\n AND dts.partner IS NULL\r\n and user_code not in ('0', '111111')\r\n)\r\n SELECT\r\n b.base_row_num AS base_row_num,\r\n\r\n b.date_collected AS date_collected,\r\n b.date_collected_dt AS date_collected_dt,\r\n\r\n b.sbor AS sbor,\r\n b.user_code AS user_code,\r\n b.id_sbor AS id_sbor,\r\n\r\n b.id_tt AS id_tt,\r\n b.shopno AS shopno,\r\n b.name_tt AS name_tt,\r\n b.region_tt AS region_tt,\r\n b.pom AS pom,\r\n b.feature_sbor AS feature_sbor,\r\n\r\n b.id_order AS id_order,\r\n b.id_assemblysheet AS id_assemblysheet,\r\n b.is_collected AS is_collected,\r\n b.date_set_cell AS date_set_cell,\r\n b.qty_collected AS qty_collected,\r\n\r\n b.collection_time_all AS collection_time_all,\r\n b.collection_time_real_sec_sheet AS collection_time_real_sec_sheet,\r\n b.slots AS slots,\r\n b.sla_order_time AS sla_order_time,\r\n \r\n b.date_order AS date_order,\r\n b.date_supply AS date_supply,\r\n b.date_supply_untill AS date_supply_untill,\r\n\r\n b.order_status AS order_status,\r\n b.id_service AS id_service,\r\n b.id_source AS id_source,\r\n b.order_type AS order_type,\r\n b.date_status_10 AS date_status_10,\r\n b.sla_delivery_time_all AS sla_delivery_time_all,\r\n b.sla_collection_time_all AS sla_collection_time_all,\r\n b.darkkitchen_closed AS darkkitchen_closed,\r\n b.date_f_status_3_5 AS date_f_status_3_5,\r\n\r\n b.is_overdue AS is_overdue,\r\n\r\n tp.time_start AS time_start,\r\n tp.time_end AS time_end,\r\n tp.part_start AS part_start,\r\n tp.part_end AS part_end,\r\n\r\n if(tp.id_sbor IS NULL, 0, 1) AS has_timesheet,\r\n\r\n tp.shift_type AS shift_type,\r\n\r\n if(\r\n tp.shift_type IS NULL,\r\n NULL,\r\n toUInt8(tp.shift_type = 'Ночной')\r\n ) AS is_night_shi",
+  "sql_redaction_note": null,
+  "sql_sources_physical": [
+    "ods.timesheetfact",
+    "mart_mixed.darkstore_time_sheet"
+  ],
+  "sql_sources_unknown": [
+    "params",
+    "range"
+  ],
+  "sql_ctes": [
+    "timesheet_raw",
+    "timesheet_parts",
+    "base"
+  ],
+  "columns_count": 41,
+  "columns": [
+    {
+      "column_name": "base_row_num",
+      "type": "UInt64",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "collection_time_all",
+      "type": "Nullable(Float64)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "darkkitchen_closed",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_collected",
+      "type": "Nullable(Date)",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_collected_dt",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_f_status_3_5",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_order",
+      "type": "DateTime64(6)",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_set_cell",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_status_10",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_supply",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_supply_untill",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "feature_sbor",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "has_timesheet",
+      "type": "UInt8",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "hours_on_schedule",
+      "type": "Nullable(Float64)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "hours_row_num",
+      "type": "UInt64",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_assemblysheet",
+      "type": "Nullable(Int64)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_order",
+      "type": "Int32",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_sbor",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_service",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_source",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_tt",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "is_collected",
+      "type": "Nullable(Bool)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "is_night_shift",
+      "type": "Nullable(UInt8)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "is_overdue",
+      "type": "UInt8",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "join_row_num",
+      "type": "UInt64",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "name_tt",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "order_status",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "order_type",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "part_end",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "part_start",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pom",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "qty_collected",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "region_tt",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "sbor",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shift_type",
+      "type": "String",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shopno",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "sla_collection_time_all",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "sla_delivery_time_all",
+      "type": "Nullable(Int32)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "time_end",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "time_start",
+      "type": "Nullable(DateTime64(6))",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "user_code",
+      "type": "Nullable(String)",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    }
+  ],
+  "metrics_count": 12,
+  "metric_names": [
+    "avg_real_1_pos_sheet",
+    "hours_worked",
+    "orders_per_hour",
+    "pos_per_hour",
+    "qty_collected_orders",
+    "qty_collected_pos",
+    "qty_not_overdue_pos",
+    "qty_orders_with_cell",
+    "qty_overdue_pos",
+    "share_collection_delay_all",
+    "share_orders_with_cell",
+    "share_overdue_pos"
+  ],
+  "owners_present": 1
+}

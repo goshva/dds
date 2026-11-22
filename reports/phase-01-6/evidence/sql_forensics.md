@@ -1,0 +1,234 @@
+# SQL-форензика (обезличенный SQL датасетов)
+
+Сгенерировано: 2026-11-21T21:07:50.434Z
+
+## Dataset 5939 (SQL 3534 символов, сохранён: да)
+
+### Использование колонок физических источников
+
+- **agile_mart_techaudit.actual_assistant_tt**
+  - alias `actual_assistant_tt`: колонки не найдены
+- **agile_mart_techaudit.hr_daily_pers**
+  - alias `hr_daily_pers`: колонки не найдены
+- **stage_outer_sources.fio_employee**
+  - alias `fio_employee`: колонки не найдены
+
+### Контексты ключевых колонок
+
+- **mentorid**: 
+  - `e_ТТ" , region_name , city_name , status_bir , bir_flag , progul , is_service_position , shortterm_flg , under18_flag , mentorid , mentorfio , mentorid_at_date , mentor_at_date , mentor_in_five , shift_rn_trainee , trainee_shift_in_five , train`
+- **mentorfio**: 
+  - `on_name , city_name , status_bir , bir_flag , progul , is_service_position , shortterm_flg , under18_flag , mentorid , mentorfio , mentorid_at_date , mentor_at_date , mentor_in_five , shift_rn_trainee , trainee_shift_in_five , trainee_shifts_qty`
+- **mentor_at_date**: 
+  - `, bir_flag , progul , is_service_position , shortterm_flg , under18_flag , mentorid , mentorfio , mentorid_at_date , mentor_at_date , mentor_in_five , shift_rn_trainee , trainee_shift_in_five , trainee_shifts_qty , pu_feature_day , pu_feature_week ,`
+  - `luster , count (CASE WHEN shift_rn_trainee IS NOT NULL THEN 1 END) over (partition by hdp.person_code, date_start_work, mentor_at_date) as enough_shifts_for_mentor , sum (case WHEN shift_rn_trainee IS NOT null THEN 1 END) over (partition by hdp.person_c`
+- **mentorid_at_date**: 
+  - `y_name , status_bir , bir_flag , progul , is_service_position , shortterm_flg , under18_flag , mentorid , mentorfio , mentorid_at_date , mentor_at_date , mentor_in_five , shift_rn_trainee , trainee_shift_in_five , trainee_shifts_qty , pu_feature_day ,`
+  - `n hdp.pu_code = fe.person_code where date_start_work >='2024-05-01' and (pause_months is null or pause_months>=2) and mentorid_at_date is not null and mentor_same_tt_date =1 {% if from_dttm %} and date >= toDate('{{ from_dttm }}') and date <= toDate('{{`
+- **mentor_same_tt_date**: 
+  - `ft_date , first_shift_date , shifts_qty , shift_rn , second_hire , pause_months , pause_days , no_pause , pu_position , mentor_same_tt_date , tt_cluster , count (CASE WHEN shift_rn_trainee IS NOT NULL THEN 1 END) over (partition by hdp.person_code, date_start`
+  - `here date_start_work >='2024-05-01' and (pause_months is null or pause_months>=2) and mentorid_at_date is not null and mentor_same_tt_date =1 {% if from_dttm %} and date >= toDate('{{ from_dttm }}') and date <= toDate('{{ to_dttm }}') {% endif %} {% if (f`
+- **enough_shifts_for_mentor**: 
+  - `E WHEN shift_rn_trainee IS NOT NULL THEN 1 END) over (partition by hdp.person_code, date_start_work, mentor_at_date) as enough_shifts_for_mentor , sum (case WHEN shift_rn_trainee IS NOT null THEN 1 END) over (partition by hdp.person_code, date_start_work, mentor_`
+- **mentor_in_five**: 
+  - `l , is_service_position , shortterm_flg , under18_flag , mentorid , mentorfio , mentorid_at_date , mentor_at_date , mentor_in_five , shift_rn_trainee , trainee_shift_in_five , trainee_shifts_qty , pu_feature_day , pu_feature_week , pu_feature_month ,`
+- **trainee_shift_in_five**: 
+  - `flg , under18_flag , mentorid , mentorfio , mentorid_at_date , mentor_at_date , mentor_in_five , shift_rn_trainee , trainee_shift_in_five , trainee_shifts_qty , pu_feature_day , pu_feature_week , pu_feature_month , last_shift_date , first_shift_date , shift`
+- **trainee_shifts_qty**: 
+  - `torid , mentorfio , mentorid_at_date , mentor_at_date , mentor_in_five , shift_rn_trainee , trainee_shift_in_five , trainee_shifts_qty , pu_feature_day , pu_feature_week , pu_feature_month , last_shift_date , first_shift_date , shifts_qty , shift_rn , se`
+- **shift_rn_trainee**: 
+  - `sition , shortterm_flg , under18_flag , mentorid , mentorfio , mentorid_at_date , mentor_at_date , mentor_in_five , shift_rn_trainee , trainee_shift_in_five , trainee_shifts_qty , pu_feature_day , pu_feature_week , pu_feature_month , last_shift_date ,`
+  - `second_hire , pause_months , pause_days , no_pause , pu_position , mentor_same_tt_date , tt_cluster , count (CASE WHEN shift_rn_trainee IS NOT NULL THEN 1 END) over (partition by hdp.person_code, date_start_work, mentor_at_date) as enough_shifts_for_mento`
+- **progul**: 
+  - `e_for_pu , direct_name , hdp.id_tt , tt_name , "num_ТТ" , "type_ТТ" , region_name , city_name , status_bir , bir_flag , progul , is_service_position , shortterm_flg , under18_flag , mentorid , mentorfio , mentorid_at_date , mentor_at_date , m`
+  - `ND bir_flag != 3 {% elif val == 'Несовершеннолетних' %} AND under18_flag = 0 {% elif val == 'Прогульщиков' %} AND progul = 0 {% elif val == 'Сезонных сотрудников' %} AND shortterm_flg = 0 {% endif %} {% endfor %} {% endfor %}`
+- **stake**: 
+  - `_type , hdp.person_code as person_code , employee_code , hdp.fio as fio , date_start_work , position_name , quantity , stake , date_dismissed , uvol , days_in_month , exp_months , exp_days , experience_txt , exp_years_months , hdp.sex as sex ,`
+- **date_for_mentor**: вхождений нет
+- **person_code**: 
+  - `_tt group by pu_code,cfo_name )act )t where rn = 1) SELECT event_date , "date" , event_type , hdp.person_code as person_code , employee_code , hdp.fio as fio , date_start_work , position_name , quantity , stake , date_dismissed , uvol , days_i`
+- **employee_code**: 
+  - `u_code,cfo_name )act )t where rn = 1) SELECT event_date , "date" , event_type , hdp.person_code as person_code , employee_code , hdp.fio as fio , date_start_work , position_name , quantity , stake , date_dismissed , uvol , days_in_month , exp_mon`
+- **event_type**: 
+  - `mart_techaudit".actual_assistant_tt group by pu_code,cfo_name )act )t where rn = 1) SELECT event_date , "date" , event_type , hdp.person_code as person_code , employee_code , hdp.fio as fio , date_start_work , position_name , quantity , stake`
+
+## Dataset 7802 (SQL 8402 символов, сохранён: да)
+
+### Использование колонок физических источников
+
+- **agile_mart_operational.shifts**
+  - alias `s`: id_courier, id_pool, id_shift, shift_finish, shift_start
+- **agile_mart_operational.pools**
+  - alias `p`: id_order, id_pool, pool_finish, pool_start
+- **mart_mixed.darkstore_time**
+  - alias `dt`: date_order, id_general, id_order, shopno
+- **agile_mart_operational.courier_queue**
+  - alias `q`: cluster_id, courier_id, first_delivery_dttm, has_order, id_shift, queue_in_dttm, queue_out_dttm
+- **ods.v_couriers**
+  - alias `vc`: id, name
+- **ods.v_tt**
+  - alias `vt`: id_tt, region_tt
+- **mart.org_unit_actual**
+  - alias `oua`: leader_curators, manager_delivery, org_unit_id, zone_cluster
+
+### Контексты ключевых колонок
+
+- **id_shift**: 
+  - `AND p.pool_start < prm.d_to + INTERVAL '1 day' GROUP BY s.id_shift, s.id_courier, s.id_pool ), shift_dim AS ( SELECT id_shift, id_courier, min(shift_start) AS shift_start, max(shift_finish) AS shift_finish FROM shift_pool GROUP BY id_shift,`
+  - `id_shift, id_courier, min(shift_start) AS shift_start, max(shift_finish) AS shift_finish FROM shift_pool GROUP BY id_shift, id_courier ), shift_shop AS ( SELECT s.id_shift, dt.shopno FROM agile_mart_operational.shifts s JOIN agile_mart_o`
+- **id_courier**: 
+  - `start < prm.d_to + INTERVAL '1 day' GROUP BY s.id_shift, s.id_courier, s.id_pool ), shift_dim AS ( SELECT id_shift, id_courier, min(shift_start) AS shift_start, max(shift_finish) AS shift_finish FROM shift_pool GROUP BY id_shift, id_courier )`
+  - `id_courier, min(shift_start) AS shift_start, max(shift_finish) AS shift_finish FROM shift_pool GROUP BY id_shift, id_courier ), shift_shop AS ( SELECT s.id_shift, dt.shopno FROM agile_mart_operational.shifts s JOIN agile_mart_operational.p`
+- **rn_shift**: 
+  - `inutes, useless_minutes, shift_minutes, row_number() OVER ( PARTITION BY id_shift ORDER BY shopno NULLS LAST ) AS rn_shift, row_number() OVER ( PARTITION BY id_shift, pu ORDER BY shopno NULLS LAST ) AS rn_shift_pu, row_number() OVER ( P`
+- **rn_shift_pu**: 
+  - `BY shopno NULLS LAST ) AS rn_shift, row_number() OVER ( PARTITION BY id_shift, pu ORDER BY shopno NULLS LAST ) AS rn_shift_pu, row_number() OVER ( PARTITION BY id_shift, tu ORDER BY shopno NULLS LAST ) AS rn_shift_tu, row_number() OVER ( P`
+- **shift_minutes**: 
+  - `dttm::date AS shift_date, x.shift_start_dttm, x.shift_finish AS shift_finish_dttm, round(x.shift_raw::numeric, 1) AS shift_minutes, round(x.wait_raw::numeric, 1) AS wait_minutes, round(x.assembly_raw::numeric, 1) AS assembly_minutes, round(x.deliv`
+  - `, tt_name, region, tt_type, bush, tu, pu, wait_minutes, assembly_minutes, delivery_minutes, useless_minutes, shift_minutes, row_number() OVER ( PARTITION BY id_shift ORDER BY shopno NULLS LAST ) AS rn_shift, row_number() OVER ( PARTITIO`
+- **wait_minutes**: 
+  - `.shift_finish AS shift_finish_dttm, round(x.shift_raw::numeric, 1) AS shift_minutes, round(x.wait_raw::numeric, 1) AS wait_minutes, round(x.assembly_raw::numeric, 1) AS assembly_minutes, round(x.delivery_raw::numeric, 1) AS delivery_minutes, round`
+  - `:text AS bar_label, dt, id_shift, id_courier, courier_name, shopno, tt_name, region, tt_type, bush, tu, pu, wait_minutes, assembly_minutes, delivery_minutes, useless_minutes, shift_minutes, row_number() OVER ( PARTITION BY id_shift O`
+- **assembly_minutes**: 
+  - `aw::numeric, 1) AS shift_minutes, round(x.wait_raw::numeric, 1) AS wait_minutes, round(x.assembly_raw::numeric, 1) AS assembly_minutes, round(x.delivery_raw::numeric, 1) AS delivery_minutes, round(x.shift_raw::numeric, 1) - round(x.wait_raw::numeric,`
+  - `bel, dt, id_shift, id_courier, courier_name, shopno, tt_name, region, tt_type, bush, tu, pu, wait_minutes, assembly_minutes, delivery_minutes, useless_minutes, shift_minutes, row_number() OVER ( PARTITION BY id_shift ORDER BY shopno NULL`
+- **delivery_minutes**: 
+  - `eric, 1) AS wait_minutes, round(x.assembly_raw::numeric, 1) AS assembly_minutes, round(x.delivery_raw::numeric, 1) AS delivery_minutes, round(x.shift_raw::numeric, 1) - round(x.wait_raw::numeric, 1) - round(x.assembly_raw::numeric, 1) - round(x.deliv`
+  - `, id_courier, courier_name, shopno, tt_name, region, tt_type, bush, tu, pu, wait_minutes, assembly_minutes, delivery_minutes, useless_minutes, shift_minutes, row_number() OVER ( PARTITION BY id_shift ORDER BY shopno NULLS LAST ) AS rn_shi`
+- **useless_minutes**: 
+  - `meric, 1) - round(x.wait_raw::numeric, 1) - round(x.assembly_raw::numeric, 1) - round(x.delivery_raw::numeric, 1) AS useless_minutes FROM ( SELECT b.id_shift, b.id_courier, b.shift_start_dttm, b.shift_finish, extract(epoch FROM (b.shift_finish -`
+  - `rier_name, shopno, tt_name, region, tt_type, bush, tu, pu, wait_minutes, assembly_minutes, delivery_minutes, useless_minutes, shift_minutes, row_number() OVER ( PARTITION BY id_shift ORDER BY shopno NULLS LAST ) AS rn_shift, row_number()`
+
+## Dataset 7712 (SQL 5079 символов, сохранён: да)
+
+### Использование колонок физических источников
+
+- **mart_mixed.darkstore_time**
+  - alias `dt`: date_delivery_start, id_courier, id_general, id_order, shopno
+- **ods.v_tasks_settings**
+  - alias `vts`: id_courier, id_task
+- **ods.v_tt**
+  - alias `v_tt`: колонки не найдены
+- **report.v_org_unit_actual**
+  - alias `v_org_unit_actual`: колонки не найдены
+- **ods.v_couriers**
+  - alias `vc`: id, id_courier_type, job_type
+- **ods.v_couriers_payments_courier_types**
+  - alias `cot`: id
+- **ods.v_courier_job_type**
+  - alias `cjt`: id, job_type_name
+- **agile_mart_operational.photo_control_shift_attempt**
+  - alias `b`: attempt_dt, attempt_n, attempt_start, courier_id, shift_opened
+
+### Контексты ключевых колонок
+
+- **shift_opened**: 
+  - `AS attempt_start, d.attempt_dt, NULL::timestamp AS photo_end, NULL::timestamp AS shift_open_time, NULL::integer AS shift_opened, NULL::integer AS first_try_pass, NULL::integer AS has_ai, NULL::integer AS later_opened, 0 AS retried, NULL::nume`
+- **shift_open_time**: 
+  - `eger AS attempt_n, NULL::timestamp AS attempt_start, d.attempt_dt, NULL::timestamp AS photo_end, NULL::timestamp AS shift_open_time, NULL::integer AS shift_opened, NULL::integer AS first_try_pass, NULL::integer AS has_ai, NULL::integer AS later_op`
+- **attempt_n**: 
+  - `c.active, c.courier_type_name, c.job_type_name, c.task_124, c.task_164, c.task_292, c.task_378, NULL::integer AS attempt_n, NULL::timestamp AS attempt_start, d.attempt_dt, NULL::timestamp AS photo_end, NULL::timestamp AS shift_open_time,`
+- **attempt_start**: 
+  - `c.job_type_name, c.task_124, c.task_164, c.task_292, c.task_378, NULL::integer AS attempt_n, NULL::timestamp AS attempt_start, d.attempt_dt, NULL::timestamp AS photo_end, NULL::timestamp AS shift_open_time, NULL::integer AS shift_opened, NU`
+- **courier_id**: 
+  - `T * FROM flagged f ), dates AS ( SELECT DISTINCT attempt_dt FROM flagged ) SELECT 1 AS is_attempt, c.id_courier AS courier_id, c.shopno, c.tt_number, c.name_tt, c.region_tt, c.type_tt, c.bush_chern, c.delivery_manager, c.leader, c.name,`
+  - `s FROM attempts a JOIN couriers c ON c.id_courier = a.courier_id UNION ALL SELECT 0 AS is_attempt, c.id_courier AS courier_id, c.shopno, c.tt_number, c.name_tt, c.region_tt, c.type_tt, c.bush_chern, c.delivery_manager, c.leader, c.name,`
+- **is_attempt**: 
+  - `mpt b ), attempts AS ( SELECT * FROM flagged f ), dates AS ( SELECT DISTINCT attempt_dt FROM flagged ) SELECT 1 AS is_attempt, c.id_courier AS courier_id, c.shopno, c.tt_number, c.name_tt, c.region_tt, c.type_tt, c.bush_chern, c.delivery`
+  - `bag_no_ai, a.bag_first_status FROM attempts a JOIN couriers c ON c.id_courier = a.courier_id UNION ALL SELECT 0 AS is_attempt, c.id_courier AS courier_id, c.shopno, c.tt_number, c.name_tt, c.region_tt, c.type_tt, c.bush_chern, c.delivery`
+
+## Dataset 7021 (SQL 6833 символов, сохранён: да)
+
+### Использование колонок физических источников
+
+- **ods.timesheetfact**
+  - alias `ts`: employeeId, id_tt, time_end, time_start
+- **mart_mixed.darkstore_time_sheet**
+  - alias `dts`: collection_time_all, collection_time_real_sec_sheet, darkkitchen_closed, date_collected, date_f_status_3_5, date_order, date_set_cell, date_status_10, date_supply, date_supply_untill, feature_sbor, feature_tt, id_assemblysheet, id_order, id_sbor, id_service, id_source, id_tt, is_collected, name_tt, order_status, order_type, partner, pom, qty_collected, region_tt, sbor, shopno, sla_collection_time_all, sla_delivery_time_all, sla_order_time, slots, user_code
+
+### Контексты ключевых колонок
+
+- **shift_type**: 
+  - `start, ts.time_end AS time_end, if( toDate(ts.time_end) > toDate(ts.time_start), 'Ночной', 'Дневной' ) AS shift_type FROM ods.timesheetfact AS ts WHERE ts.time_end >= ( (SELECT date_from FROM params) - toIntervalMinute((SELE`
+  - `hift_end_grace_min FROM params)) ) ), timesheet_parts AS ( SELECT id_sbor, id_tt, time_start, time_end, shift_type, toDate(toStartOfDay(time_start) + toIntervalDay(day_num)) AS date_collected, greatest( time_start, toDateT`
+- **is_night_shift**: 
+  - `t, tp.shift_type AS shift_type, if( tp.shift_type IS NULL, NULL, toUInt8(tp.shift_type = 'Ночной') ) AS is_night_shift, tp.hours_on_schedule AS hours_on_schedule, row_number() OVER ( PARTITION BY b.base_row_num ORDER BY if(t`
+- **hours_on_schedule**: 
+  - `, toDateTime(toDate(toStartOfDay(time_start) + toIntervalDay(day_num))) + INTERVAL 1 DAY ) ) / 3600.0, 0 ) AS hours_on_schedule FROM timesheet_raw ARRAY JOIN range( toUInt32(dateDiff('day', toDate(time_start), toDate(time_end)) + 1) )`
+  - `tp.shift_type IS NULL, NULL, toUInt8(tp.shift_type = 'Ночной') ) AS is_night_shift, tp.hours_on_schedule AS hours_on_schedule, row_number() OVER ( PARTITION BY b.base_row_num ORDER BY if(tp.id_sbor IS NULL, 1, 0), tp.part_start DESC,`
+- **has_timesheet**: 
+  - `tp.time_end AS time_end, tp.part_start AS part_start, tp.part_end AS part_end, if(tp.id_sbor IS NULL, 0, 1) AS has_timesheet, tp.shift_type AS shift_type, if( tp.shift_type IS NULL, NULL, toUInt8(tp.shift_type = 'Ночной') ) AS i`
+- **date_status_10**: 
+  - `, dts.id_service AS id_service, dts.id_source AS id_source, dts.order_type AS order_type, dts.date_status_10 AS date_status_10, dts.sla_delivery_time_all AS sla_delivery_time_all, dts.sla_collection_time_all AS sla_collection_time_all, dts.`
+  - `r_status, b.id_service AS id_service, b.id_source AS id_source, b.order_type AS order_type, b.date_status_10 AS date_status_10, b.sla_delivery_time_all AS sla_delivery_time_all, b.sla_collection_time_all AS sla_collection_time_all, b.darkki`
+- **user_code**: 
+  - `ollected AS date_collected_dt, toDate(dts.date_collected) AS date_collected, dts.sbor AS sbor, dts.user_code AS user_code, dts.id_sbor AS id_sbor, dts.id_tt AS id_tt, dts.shopno AS shopno, dts.name_tt AS name_tt, dts.region_tt AS`
+  - `T date_to FROM params) WHERE dts.is_collected = 1 AND dts.feature_tt = 'ДаркСтор' AND dts.partner IS NULL and user_code not in ('0', '111111') ) SELECT b.base_row_num AS base_row_num, b.date_collected AS date_collected, b.date_c`
+- **id_order**: 
+  - `_tt AS name_tt, dts.region_tt AS region_tt, dts.pom AS pom, dts.feature_sbor AS feature_sbor, dts.id_order AS id_order, dts.id_assemblysheet AS id_assemblysheet, dts.is_collected AS is_collected, dts.date_set_cell AS date_set_cell,`
+  - `b.name_tt AS name_tt, b.region_tt AS region_tt, b.pom AS pom, b.feature_sbor AS feature_sbor, b.id_order AS id_order, b.id_assemblysheet AS id_assemblysheet, b.is_collected AS is_collected, b.date_set_cell AS date_set_cell, b.qt`
+
+## Dataset 3466 (SQL 35926 символов, сохранён: да)
+
+### Использование колонок физических источников
+
+- **dt.date_supply**
+  - alias `date_supply`: колонки не найдены
+- **mart_mixed.darkstore_time_sheet**
+  - alias `dt`: area_tt, cafebakery_closed, city_tt, collection_time, collection_time_all, collection_time_real_sec, collection_time_real_sec_sheet, courier, dark, darkkitchen_closed, date_check_closed, date_collect_start, date_collect_start_plan, date_collect_start_sheet, date_collected, date_collected_plan, date_collected_sheet, date_delivered, date_delivery_start, date_f_status_3_5, date_order, date_printed, date_set_cell, date_status, date_status_10, date_supply, date_supply_sheet, date_supply_untill, date_supply_untill_sheet, date_update, delivery_time, delivery_time_all, delivery_type, delivery_type_group, device_id, device_type, feature_sbor, feature_tt, final_sheet_type, geo, gettype, head_of_delivery, id_assemblysheet, id_courier, id_delivery_job, id_general, id_group, id_order, id_partner, id_partner_type, id_pay_way, id_pool, id_pse_type, id_sbor, id_service, id_service_type, id_source, id_status, id_tt, id_user_kontr, is_canceled, is_cell_link, is_collected, is_collection_overdue, is_express, is_final_sheet, is_in_dark_area, is_out_of_mkad, is_returned_store, leader, leader_express, name_tt, night, number, order_service, order_source, order_status, order_time, order_type, ose_no, partner, partner_type, pay_time, pay_way, penalty_date, phone, pickup, pom, pse, pse_no, pse_type, qty_collected, qty_collected_goods, qty_collected_services, qty_ordered, region_tt, sbor, senior, senior_express, service_type, set_cell_time, shopno, sla_collection_time_all, sla_delivery_time_all, sla_order_time, slots, sort_order, sort_sheet, sum_mark, sum_order, sum_paid, sum_paid_disc, user_code, user_inn, user_kontr, user_position, vv_week, wait_time, wait_time2, waiting_area_time, weight_sheet
+- **report.v_org_unit_actual**
+  - alias `voua`: org_unit_number, zone_cluster
+
+### Контексты ключевых колонок
+
+- **time_ready**: вхождений нет
+- **time_ready_plan**: вхождений нет
+- **date_status_10**: 
+  - `_supply as date_supply_double, dt.sum_order as sum_order, dt.date_printed as date_printed, dt.date_status_10 as date_status_10, dt.date_f_status_3_5 as date_f_status_3_5, dt.date_set_cell as date_set_cell, dt.sum_paid as sum_paid, dt.`
+- **date_collected**: 
+  - `s_out_of_mkad, dt.is_final_sheet as is_final_sheet, dt.is_in_dark_area as is_in_dark_area, dt.date_collected as date_collected, dt.sbor as sbor, dt.feature_sbor as feature_sbor, dt.id_user_kontr as id_user_kontr, dt.user_kontr as user_kon`
+- **date_order**: 
+  - `rder as id_order, dt.order_type as order_type, dt.gettype as gettype, dt.pickup as pickup, dt.date_order as date_order, dt.date_supply as date_supply, dt.date_supply as date_supply_double, dt.sum_order as sum_order, dt.date_pri`
+  - `{% endif %} {% if (filter_values('vv_week_date_order_f')) %} and intDiv(date_diff('day', toDate('2009-05-11'), date_order), 7) + 1 IN ({{ filter_values('vv_week_date_order_f') }}) {% endif %} {% if filter_values("filter") %} AND caf`
+- **date_delivered**: 
+  - `dt.date_check_closed as date_check_closed, dt.date_delivery_start as date_delivery_start, dt.date_delivered as date_delivered, dt.date_status as date_status, dt.id_courier as id_courier, dt.phone as phone, dt.id_pay_way as id_pay_way`
+- **date_delivery_start**: 
+  - `as user_code, dt.id_source as id_source, dt.date_check_closed as date_check_closed, dt.date_delivery_start as date_delivery_start, dt.date_delivered as date_delivered, dt.date_status as date_status, dt.id_courier as id_courier, dt.phone`
+- **deadline_sbor**: 
+  - `s id_status, dt.id_pse_type as id_pse_type, dt.date_supply_untill - coalesce(dt.sla_delivery_time_all, 0) * 60 as deadline_sbor, coalesce(dt.date_set_cell, dt.date_f_status_3_5) as last_sbor_touch, dt.pse_type as pse_type, dt.date_supply`
+  - `ппа мили" , dt.id_group as "Группа розницы" , dt.date_supply_untill - coalesce(dt.sla_delivery_time_all, 0) * 60 as deadline_sbor , coalesce(dt.date_set_cell, dt.date_f_status_3_5) as last_sbor_touch , dt.darkkitchen_closed as darkkitchen_closed`
+- **is_canceled**: 
+  - `END as dk_or_roll, dt.device_id as device_id, dt.device_type as device_type, dt.is_canceled as is_canceled, dt.is_returned_store as is_returned_store, dt.ose_no as ose_no, dt.user_position as user_position, dt.cafebak`
+- **is_returned_store**: 
+  - `dt.device_id as device_id, dt.device_type as device_type, dt.is_canceled as is_canceled, dt.is_returned_store as is_returned_store, dt.ose_no as ose_no, dt.user_position as user_position, dt.cafebakery_closed , dt.name_tt as "Номер ТТ" , dt`
+- **id_order**: 
+  - `cafebakery_dict[element]) %} {% endfor %} SELECT dt.vv_week as vv_week, dt.shopno as shopno, dt.id_order as id_order, dt.order_type as order_type, dt.gettype as gettype, dt.pickup as pickup, dt.date_order as date_order, d`
+- **id_general**: 
+  - `livery_job, dt.id_partner as id_partner, dt.number as number, dt.id_service as id_service, dt.id_general as id_general, dt.user_code as user_code, dt.id_source as id_source, dt.date_check_closed as date_check_closed, dt.date_d`
+- **id_pool**: 
+  - `tner = 164978 THEN 'Биостория' ELSE NULL END as sub_project, dt.final_sheet_type as final_sheet_type, dt.id_pool as id_pool, CAST(dt.date_supply_untill AS VARCHAR) as time_supply, CASE WHEN dt.pse_type = 'ДаркКитчен' then 'ДаркКитчен' WH`
+- **order_status**: 
+  - `dt.pay_way as pay_way, dt.qty_ordered as qty_ordered, dt.delivery_type as delivery_type, dt.order_status as order_status, dt.date_collected_plan as date_collected_plan, dt.date_collect_start_plan as date_collect_start_plan, dt.orde`
+
+## Dataset 2339 (SQL 816 символов, сохранён: да)
+
+### Использование колонок физических источников
+
+- **Loyalty_srv03.dbo.Webcall_log_ui_period**
+  - alias `Webcall_log_ui_period`: колонки не найдены
+- **Reports.dbo.ksa_time_vw**
+  - alias `ksa_time_vw`: колонки не найдены
+
+### Контексты ключевых колонок
+
+- **quantity_batch**: вхождений нет
+- **orders_assignment**: вхождений нет
+- **object_id**: вхождений нет
+- **new_value**: 
+  - `SELECT *, CAST(new_value AS DATE) new_value_n, status_name_ as status_name FROM Loyalty_srv03.dbo.Webcall_log_ui_period ('Orders_header', NULL,`
+  - `id_order = web.object_id WHERE [type] = 'Изменение даты доставки' AND prop = 'date_supply' AND date_supply_2 = CAST(new_value AS DATE) AND (comment LIKE '%Перенос заказа на следующий день из-за невозможности доставки, комментарий%' OR comment`
+- **old_value**: вхождений нет
+- **date_supply**: 
+  - `ports.dbo.ksa_time_vw (NOLOCK) dt ON dt.id_order = web.object_id WHERE [type] = 'Изменение даты доставки' AND prop = 'date_supply' AND date_supply_2 = CAST(new_value AS DATE) AND (comment LIKE '%Перенос заказа на следующий день из-за невозможност`
+- **status_name**: 
+  - `SELECT *, CAST(new_value AS DATE) new_value_n, status_name_ as status_name FROM Loyalty_srv03.dbo.Webcall_log_ui_period ('Orders_header', NULL, DATEADD(MONTH, -1, CAST(GETDATE() AS DATE)), CAST(`

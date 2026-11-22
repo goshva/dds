@@ -1,0 +1,85 @@
+# Расширенный анализ метаданных
+
+Сгенерировано: 2026-11-21T21:12:26.618Z
+
+## Эффективная схема mart_mixed.darkstore_time_sheet (121 колонок)
+
+`area_tt`, `cafebakery_closed`, `city_tt`, `collection_time`, `collection_time_all`, `collection_time_real_sec`, `collection_time_real_sec_sheet`, `courier`, `dark`, `darkkitchen_closed`, `date_check_closed`, `date_collect_start`, `date_collect_start_plan`, `date_collect_start_sheet`, `date_collected`, `date_collected_plan`, `date_collected_sheet`, `date_delivered`, `date_delivery_start`, `date_f_status_3_5`, `date_order`, `date_printed`, `date_set_cell`, `date_status`, `date_status_10`, `date_supply`, `date_supply_sheet`, `date_supply_untill`, `date_supply_untill_sheet`, `date_update`, `delivery_time`, `delivery_time_all`, `delivery_type`, `delivery_type_group`, `device_id`, `device_type`, `feature_sbor`, `feature_tt`, `final_sheet_type`, `geo`, `gettype`, `head_of_delivery`, `id_assemblysheet`, `id_courier`, `id_delivery_job`, `id_general`, `id_group`, `id_order`, `id_partner`, `id_partner_type`, `id_pay_way`, `id_pool`, `id_pse_type`, `id_sbor`, `id_service`, `id_service_type`, `id_source`, `id_status`, `id_tt`, `id_user_kontr`, `is_canceled`, `is_cell_link`, `is_collected`, `is_collection_overdue`, `is_express`, `is_final_sheet`, `is_in_dark_area`, `is_out_of_mkad`, `is_returned_store`, `leader`, `leader_express`, `name_tt`, `night`, `number`, `order_service`, `order_source`, `order_status`, `order_time`, `order_type`, `ose_no`, `partner`, `partner_type`, `pay_time`, `pay_way`, `penalty_date`, `phone`, `pickup`, `pom`, `pse`, `pse_no`, `pse_type`, `qty_collected`, `qty_collected_goods`, `qty_collected_services`, `qty_ordered`, `region_tt`, `sbor`, `senior`, `senior_express`, `service_type`, `set_cell_time`, `shopno`, `sla_collection_time_all`, `sla_delivery_time_all`, `sla_order_time`, `slots`, `sort_order`, `sort_sheet`, `sum_mark`, `sum_order`, `sum_paid`, `sum_paid_disc`, `user_code`, `user_inn`, `user_kontr`, `user_position`, `vv_week`, `wait_time`, `wait_time2`, `waiting_area_time`, `weight_sheet`
+
+## Кандидаты в 12 утверждённых датасетах
+
+### 4732 — darkstore_ts_partners_new (ch_10.0.15.240/default)
+
+- **readiness**: sla_collection_time_all, date_collected_sheet, date_set_cell, set_cell_time, collection_time_all_sheet, qty_collected_services, collection_time_real_sec_sheet, date_status_10, collection_time, date_set_cell_sheet, qty_collected, date_collect_start_plan, collection_time_real_sec, collection_time_all, date_collect_start_sheet, date_collected_plan, date_printed, is_collected, sbor, feature_sbor, date_collected, qty_collected_goods, id_sbor, date_collect_start
+- **queue**: wait_time2, wait_time, waiting_area_time
+- **pool_trip**: delivery_type_group, id_pool, id_group
+- **assignment**: id_delivery_job, pickup, id_courier
+- **pay**: sum_paid, sum_paid_disc, sum_paid_sheet
+- **zone**: Куст, area_tt
+
+### 5247 — courier_logs_agg_couriers_daily (gp_10.0.112.100/dwh)
+
+- **assignment**: courier_id
+
+### 5399 — courier_logs_agg_couriers_week (gp_10.0.112.100/dwh)
+
+- **assignment**: courier_id
+
+### 5797 — hr_couriers (ch_10.0.15.240/default)
+
+- **pool_trip**: pause_groups
+- **assignment**: id_courier
+- **shift**: 5_shifts_in_14d, enough_shifts_flg, enough_shifts_flg__1, has_5_shifts_in_first_14d, is_5_shifts_in_14d, shifts_in_first_14d
+- **zone**: inactivity_zone, inactivity_zone_ordered, prev_inactivity_zone, zone, zone_ch_, zone_changed, zone_transition_ordered, zone_transition_type
+
+### 7006 — cargo_main2 (gp_10.0.112.100/dwh)
+
+- **readiness**: date_collected, fact_arrival_before_deadline, is_deadline_close, plan_arrival_deadline
+- **queue**: arrival_time, fact_arrival_before_deadline, plan_arrival_deadline
+- **pool_trip**: id_pool, id_pool_calc, is_fact_eq_plan_for_pool, minutes_late_group, pool_size, pool_size_text
+- **assignment**: date_pickuped, id_courier, pickup_minute, pickup_seq, pickup_to_courier_minute, prev_date_pickuped
+- **zone**: cluster_id
+
+### 7024 — cargo_main3 (gp_10.0.112.100/dwh)
+
+- **pool_trip**: id_pool, pool_size
+- **zone**: cluster_id
+
+### 7027 — cargo_main4 (gp_10.0.112.100/dwh)
+
+- **readiness**: date_collected, fact_arrival_before_deadline, flag_is_near_deadline, plan_arrival_before_deadline
+- **queue**: arrival_time, fact_arrival_before_deadline, flag_wait_orders_with_planlate, plan_arrival_before_deadline
+- **pool_trip**: flag_fact_seq_noteq_plan_for_pool, flag_pool_distance_too_long, flag_pool_with_planned_late, group_execution, group_pre_route, group_route, group_systemic, id_pool, is_first_group, late_orders_cnt_in_pool, max_fact_late_in_pool, plan_fact_route_delta_pct, pool_size, sum_fact_late_minutes_in_pool, total_pool_distance
+- **assignment**: date_pickuped, flag_late_first_assignment, id_courier
+- **zone**: cluster_id
+
+### 7119 — cargo_flags (ch_10.0.112.21)
+
+- **readiness**: date_collected, fact_arrival_before_deadline, flag_is_near_deadline, flag_wait_orders_with_near_deadline, plan_arrival_before_deadline
+- **queue**: arrival_time, fact_arrival_before_deadline, flag_wait_orders_with_near_deadline, flag_wait_orders_with_planlate, plan_arrival_before_deadline
+- **pool_trip**: flag_fact_seq_noteq_plan_for_pool, flag_pool_distance_too_long, flag_pool_with_planned_late, flag_route_time_underestimated, group_execution, group_pre_route, group_route, group_systemic, id_pool, late_orders_cnt_in_pool, max_fact_late_in_pool, plan_fact_route_delta_pct, pool_size, sum_fact_late_minutes_in_pool, total_pool_distance
+- **assignment**: date_pickuped, id_courier
+- **zone**: cluster_id
+
+### 7293 — hr_couriers_zone_balance (ch_10.0.15.240/default)
+
+- **zone**: zone, zone_order
+
+### 7465 — hr_couriers_5shifts (ch_10.0.15.240/default)
+
+- **pool_trip**: pause_groups
+- **assignment**: id_courier
+- **shift**: 5_shifts_in_14d, enough_shifts_flg, enough_shifts_flg__1, has_5_shifts_in_first_14d, is_5_shifts_in_14d, shifts_in_first_14d
+- **zone**: inactivity_zone, inactivity_zone_ordered, prev_inactivity_zone, zone, zone_ch_, zone_changed, zone_transition_ordered, zone_transition_type
+
+### 7473 — hr_couriers_five_shifts (ch_10.0.15.240/default)
+
+- **pool_trip**: pause_groups
+- **assignment**: id_courier
+- **pay**: shift_1_profit, shift_2_profit, shift_3_profit, shift_4_profit, shift_5_profit, thresholds_taken_payments
+- **shift**: 5_shifts_in_14d, days_to_fifth_shift, fifth_shift_date, fifth_shift_status, has_5_shifts_in_first_14d, shift_1, shift_1_profit, shift_1_work_minutes, shift_2, shift_2_profit, shift_2_work_minutes, shift_3, shift_3_profit, shift_3_work_minutes, shift_4, shift_4_profit, shift_4_work_minutes, shift_5, shift_5_profit, shift_5_work_minutes, shifts_in_14_days
+- **zone**: inactivity_zone_ordered, zone, zone_ch_, zone_transition_ordered, zone_transition_type
+
+### 7775 — all_couriers_list (ch_10.0.15.240/default)
+
+- **assignment**: id_courier_type

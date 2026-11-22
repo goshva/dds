@@ -1,0 +1,622 @@
+{
+  "generated_at": "2026-11-21T21:16:42.176Z",
+  "blocker": "BLOCK-1",
+  "note": "Ни одно решение не переведено в AGREED; CONFIRMED_BY_DATA отсутствует, т.к. данные не проверены. Варианты взяты из реестра 1.5, влияние на архитектуру добавлено на 1.6.",
+  "decisions": [
+    {
+      "id": "BD-001",
+      "status": "PARTIAL_EVIDENCE",
+      "evidence": "5939 содержит mentorid/mentorfio и справочник actual_assistant_tt, но назначение наставника новичку как факт не подтверждено; ФИО — ПДн.",
+      "datasets": [
+        5939
+      ],
+      "tables": [
+        "mentorship_assignments",
+        "courier_external_ids"
+      ],
+      "events": [
+        "MENTORSHIP_ASSIGNED"
+      ],
+      "question": "Кто назначает новичка куратору и фиксируется ли это отдельным фактом?",
+      "closure": "Согласовать роль и подтвердить, что назначение фиксируется событием, а не выводится из справочника помощников ТТ.",
+      "options": [
+        "Куратор",
+        "Операционный менеджер",
+        "HR",
+        "Автоматически по ТТ"
+      ],
+      "consequences": [
+        "Меняются права и аудит",
+        "Автоназначение требует правил подбора"
+      ],
+      "architecture_impact": "Определяет права на mentorship_assignments.assigned_by и событие MENTORSHIP_ASSIGNED; автоназначение потребует правила подбора наставника.",
+      "responsible_question": "Кто назначает новичка куратору и фиксируется ли это отдельным фактом?"
+    },
+    {
+      "id": "BD-002",
+      "status": "PARTIAL_EVIDENCE",
+      "evidence": "Прямого события «нет подходящего курьера» нет, но 2339 содержит реальные причины переноса даты доставки, включая «Долгий поиск курьера» и «Дежурный не обновил поиск» — это подтверждает существование ситуации, но не процедуру её обработки.",
+      "datasets": [
+        2339,
+        7802
+      ],
+      "tables": [
+        "courier_queue_entries"
+      ],
+      "events": [
+        "ORDER_READY"
+      ],
+      "question": "Что делать, если заказ готов, а подходящего курьера нет?",
+      "closure": "Утвердить процедуру и, при необходимости, новое событие.",
+      "options": [
+        "Ожидание без лимита",
+        "Эскалация менеджеру",
+        "Отмена заказа"
+      ],
+      "consequences": [
+        "Влияет на SLA и очередь",
+        "Может требовать нового события"
+      ],
+      "architecture_impact": "Влияет на очередь и на необходимость события эскалации; может добавить статус/событие к order_readiness.",
+      "responsible_question": "Что делать, если заказ готов, а подходящего курьера нет?"
+    },
+    {
+      "id": "BD-003",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Правило допуска курьера к чужой зоне в источниках не найдено.",
+      "datasets": [],
+      "tables": [
+        "trips",
+        "trip_assignments"
+      ],
+      "events": [],
+      "question": "Допускать ли курьера из другой зоны?",
+      "closure": "Утвердить правило допуска.",
+      "options": [
+        "Только своя зона",
+        "Соседняя зона",
+        "Любая зона ТТ"
+      ],
+      "consequences": [
+        "Влияет на правило одной зоны в ходке"
+      ],
+      "architecture_impact": "Влияет на инвариант «одна зона в ходке» (INV-TRP-01) и на выборку курьеров при формировании ходки.",
+      "responsible_question": "Допускать ли курьера из другой зоны?"
+    },
+    {
+      "id": "BD-004",
+      "status": "PARTIAL_EVIDENCE",
+      "evidence": "Физическая таблица courier_queue содержит queue_in_dttm/queue_out_dttm/has_order/id_shift; в 7006/7027/7119 есть arrival_time, plan_arrival_deadline и fact_arrival_before_deadline — то есть факты прибытия и очереди существуют. Правило возврата пропущенного курьера — бизнес-решение.",
+      "datasets": [
+        7802,
+        7006,
+        7027,
+        7119
+      ],
+      "tables": [
+        "courier_queue_entries"
+      ],
+      "events": [
+        "COURIER_SKIPPED_IN_QUEUE"
+      ],
+      "question": "Возврат курьера: новый FIFO или сохранение приоритета?",
+      "closure": "Утвердить правило приоритета после проверки данных о queue_in/queue_out и arrival_time.",
+      "options": [
+        "Новый FIFO",
+        "Сохранить приоритет",
+        "Гибрид"
+      ],
+      "consequences": [
+        "Влияет на справедливость и нагрузку"
+      ],
+      "architecture_impact": "Меняет правило FIFO; возможно добавление поля приоритета в courier_queue_entries.",
+      "responsible_question": "Возврат курьера: новый FIFO или сохранение приоритета?"
+    },
+    {
+      "id": "BD-005",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Признаков автоматического закрытия ходки в источниках нет.",
+      "datasets": [],
+      "tables": [
+        "trips",
+        "courier_shifts"
+      ],
+      "events": [
+        "TRIP_COMPLETED"
+      ],
+      "question": "Что делать, если курьер не закрыл ходку?",
+      "closure": "Утвердить процедуру.",
+      "options": [
+        "Автозакрытие по таймауту",
+        "Эскалация куратору",
+        "Ручное закрытие"
+      ],
+      "consequences": [
+        "Влияет на начисления и аудит"
+      ],
+      "architecture_impact": "Влияет на автоматическое закрытие trips и на INV-SHF-03 (нельзя закрыть смену с открытой ходкой).",
+      "responsible_question": "Что делать, если курьер не закрыл ходку?"
+    },
+    {
+      "id": "BD-006",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "2339 — журнал изменения даты доставки, а не отмен после выезда.",
+      "datasets": [
+        2339
+      ],
+      "tables": [
+        "trip_orders",
+        "trip_order_membership_history"
+      ],
+      "events": [
+        "TRIP_ORDER_REMOVED"
+      ],
+      "question": "Как поступать с отменой после выезда?",
+      "closure": "Утвердить процедуру и права.",
+      "options": [
+        "Запрет",
+        "Административная корректировка с аудитом"
+      ],
+      "consequences": [
+        "Требует отдельного права и причины"
+      ],
+      "architecture_impact": "Определяет, разрешены ли изменения trip_orders после выезда и нужна ли админ-процедура с аудитом.",
+      "responsible_question": "Как поступать с отменой после выезда?"
+    },
+    {
+      "id": "BD-007",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Возвраты фиксируются флагом is_returned_store (3466), но правило корректировки начисления — бизнес-решение.",
+      "datasets": [
+        3466
+      ],
+      "tables": [
+        "accrual_adjustments"
+      ],
+      "events": [
+        "ACCRUAL_ADJUSTED"
+      ],
+      "question": "Как учитывать возврат после доставки?",
+      "closure": "Утвердить правило сторно/корректировки.",
+      "options": [
+        "Сторно начисления",
+        "Корректировка",
+        "Не менять"
+      ],
+      "consequences": [
+        "Влияет на финансовую историю"
+      ],
+      "architecture_impact": "Определяет необходимость accrual_adjustments и тип сторно; влияет на неизменяемость начислений.",
+      "responsible_question": "Как учитывать возврат после доставки?"
+    },
+    {
+      "id": "BD-008",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Тарифных таблиц в проверенных источниках нет; stake (5939) — скаляр с неясной семантикой; sum_paid — сумма заказа, не доход.",
+      "datasets": [
+        5939,
+        2339
+      ],
+      "tables": [
+        "tariff_versions",
+        "courier_accruals"
+      ],
+      "events": [
+        "TARIFF_APPROVED"
+      ],
+      "question": "Точная формула тарифа по зоне и расстоянию?",
+      "closure": "Утвердить формулу и ставки; без этого начисления остаются DRAFT.",
+      "options": [
+        "Фикс за заказ",
+        "Зона+расстояние",
+        "Комбинированная"
+      ],
+      "consequences": [
+        "Без формулы начисления не создаются"
+      ],
+      "architecture_impact": "Определяет структуру tariff_versions и обязательность tariff_version_id в courier_accruals.",
+      "responsible_question": "Точная формула тарифа по зоне и расстоянию?"
+    },
+    {
+      "id": "BD-009",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Метрик загруженности, влияющих на тариф, в источниках не найдено.",
+      "datasets": [],
+      "tables": [
+        "tariff_versions"
+      ],
+      "events": [],
+      "question": "Учитывать ли загруженность в тарифе?",
+      "closure": "Утвердить метрику или отказаться от надбавки.",
+      "options": [
+        "По числу активных курьеров",
+        "По очереди",
+        "Не учитывать"
+      ],
+      "consequences": [
+        "Может менять тариф динамически"
+      ],
+      "architecture_impact": "Может добавить поля метрики загруженности в tariff_versions или отдельную таблицу коэффициентов.",
+      "responsible_question": "Учитывать ли загруженность в тарифе?"
+    },
+    {
+      "id": "BD-010",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Процесс подтверждения начислений в источниках отсутствует.",
+      "datasets": [],
+      "tables": [
+        "courier_accruals"
+      ],
+      "events": [
+        "COURIER_ACCRUAL_APPROVED"
+      ],
+      "question": "Когда начисление окончательно и кто подтверждает?",
+      "closure": "Утвердить процесс.",
+      "options": [
+        "Автоподтверждение",
+        "Финансы",
+        "Руководитель"
+      ],
+      "consequences": [
+        "Влияет на статусы и выплаты"
+      ],
+      "architecture_impact": "Определяет переходы accrual_status и роли, подтверждающие начисление.",
+      "responsible_question": "Когда начисление окончательно и кто подтверждает?"
+    },
+    {
+      "id": "BD-011",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Роли в источниках не описаны.",
+      "datasets": [],
+      "tables": [
+        "trips",
+        "trip_assignments"
+      ],
+      "events": [],
+      "question": "Какие роли могут отменить/переназначить ходку?",
+      "closure": "Утвердить матрицу прав.",
+      "options": [
+        "Только куратор",
+        "Куратор+менеджер",
+        "Диспетчер (если утверждён)"
+      ],
+      "consequences": [
+        "Влияет на модель прав"
+      ],
+      "architecture_impact": "Определяет матрицу прав и необходимость отдельной миграции ролей/аудита (0009).",
+      "responsible_question": "Какие роли могут отменить/переназначить ходку?"
+    },
+    {
+      "id": "BD-012",
+      "status": "PARTIAL_EVIDENCE",
+      "evidence": "2339 фиксирует причины «Разрушение Пуллинга» и «Долгий поиск курьера» как основания переноса даты; таблица courier_queue содержит queue_in_dttm/queue_out_dttm/has_order. Процедура при запрете отказа — бизнес-решение.",
+      "datasets": [
+        2339,
+        7802
+      ],
+      "tables": [
+        "trip_assignments",
+        "courier_queue_entries"
+      ],
+      "events": [
+        "COURIER_QUEUE_PAUSED"
+      ],
+      "question": "Как фиксировать невозможность принять ходку при запрете отказа?",
+      "closure": "Утвердить процедуру исключения.",
+      "options": [
+        "Пауза очереди",
+        "Пропуск",
+        "Аварийная отмена"
+      ],
+      "consequences": [
+        "Может требовать новых статусов"
+      ],
+      "architecture_impact": "Влияет на статусы trip_assignments и courier_queue_entries (пауза, пропуск, аварийная отмена).",
+      "responsible_question": "Как фиксировать невозможность принять ходку при запрете отказа?"
+    },
+    {
+      "id": "BD-013",
+      "status": "CONTRADICTED",
+      "evidence": "Кандидат time_ready ОПРОВЕРГНУТ: в полном обезличенном SQL датасета 3466 (35 926 символов) нет ни одного вхождения time_ready и time_ready_plan — колонки присутствуют в метаданных Superset, но не формируются датасетом. При этом в 4732 и в физической таблице mart_mixed.darkstore_time_sheet присутствует семейство кандидатов готовности: date_set_cell, date_collected, date_printed, date_status_10, is_collected, set_cell_time, date_f_status_3_5. Ни один из них не подтверждён как факт готовности к выдаче курьеру.",
+      "datasets": [
+        3466,
+        4732,
+        7021
+      ],
+      "tables": [
+        "orders",
+        "order_readiness"
+      ],
+      "events": [
+        "ORDER_READY"
+      ],
+      "question": "Кто и когда фиксирует готовность заказа?",
+      "closure": "Проверить данные по шортлисту (date_set_cell / date_collected / date_status_10) и подтвердить бизнес-смысл; иначе готовность вводится новым событием ORDER_READY.",
+      "options": [
+        "date_set_cell (установка в ячейку)",
+        "date_collected (завершение сборки)",
+        "date_status_10 (статус 10)",
+        "Новое событие ORDER_READY"
+      ],
+      "consequences": [
+        "ready_at остаётся TBD до решения"
+      ],
+      "architecture_impact": "Определяет источник order_readiness.ready_at и событие ORDER_READY; без решения поле остаётся TBD.",
+      "responsible_question": "Кто и когда фиксирует готовность заказа?"
+    },
+    {
+      "id": "BD-014",
+      "status": "PARTIAL_EVIDENCE",
+      "evidence": "order_status присутствует в 3466/4732; date_status_10 — сквозной статус; словаря статусов в источниках нет.",
+      "datasets": [
+        3466,
+        7021
+      ],
+      "tables": [
+        "orders",
+        "order_status_history"
+      ],
+      "events": [
+        "ORDER_STATUS_CORRECTED"
+      ],
+      "question": "Какие точные статусы и переходы заказа действуют?",
+      "closure": "Утвердить словарь статусов и переходов.",
+      "options": [
+        "Проектный перечень",
+        "Статусы источника",
+        "Гибрид"
+      ],
+      "consequences": [
+        "Влияет на историю и отчёты"
+      ],
+      "architecture_impact": "Определяет словарь статусов orders и полноту order_status_history.",
+      "responsible_question": "Какие точные статусы и переходы заказа действуют?"
+    },
+    {
+      "id": "BD-015",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Флаги is_canceled/is_returned_store есть, правило учёта в SLA — бизнес-решение.",
+      "datasets": [
+        3466
+      ],
+      "tables": [
+        "orders"
+      ],
+      "events": [],
+      "question": "Как учитывать отменённые/возвращённые заказы в SLA?",
+      "closure": "Утвердить правило (ответ «не исключать автоматически» уже получен).",
+      "options": [
+        "Включать",
+        "Отдельная группа",
+        "Исключать с оговоркой"
+      ],
+      "consequences": [
+        "Ответ «не исключать автоматически» уже получен"
+      ],
+      "architecture_impact": "Влияет на расчёт SLA и на использование признаков is_canceled/is_returned_store.",
+      "responsible_question": "Как учитывать отменённые/возвращённые заказы в SLA?"
+    },
+    {
+      "id": "BD-016",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "id_order присутствует в 3466 и 2339, id_general — в 3466; мастер-система заказа не определена.",
+      "datasets": [
+        3466,
+        2339
+      ],
+      "tables": [
+        "orders",
+        "order_status_history"
+      ],
+      "events": [
+        "ORDER_IMPORTED"
+      ],
+      "question": "Какой мастер-источник заказа и статуса?",
+      "closure": "Утвердить мастер-систему и направление синхронизации.",
+      "options": [
+        "Текущая система заказов",
+        "Новая ОС",
+        "Гибрид"
+      ],
+      "consequences": [
+        "Определяет направление синхронизации"
+      ],
+      "architecture_impact": "Определяет направление синхронизации orders и обязательность source_system/source_updated_at.",
+      "responsible_question": "Какой мастер-источник заказа и статуса?"
+    },
+    {
+      "id": "BD-017",
+      "status": "PARTIAL_EVIDENCE",
+      "evidence": "Идентификаторы курьера различаются: id_courier (7802/7712), person_code/employee_code/mentorid (5939), user_code (7021/3466); сопоставление не доказано.",
+      "datasets": [
+        7802,
+        7712,
+        5939,
+        7021
+      ],
+      "tables": [
+        "couriers",
+        "courier_external_ids"
+      ],
+      "events": [
+        "COURIER_REGISTERED"
+      ],
+      "question": "Какой мастер-источник идентичности курьера и ТТ?",
+      "closure": "Утвердить мастер-источник и справочник сопоставления внешних ID.",
+      "options": [
+        "HR",
+        "Операционная система",
+        "Superset как read-only"
+      ],
+      "consequences": [
+        "Определяет mapping внешних ID"
+      ],
+      "architecture_impact": "Определяет структуру courier_external_ids и правила сопоставления id_courier/person_code/user_code.",
+      "responsible_question": "Какой мастер-источник идентичности курьера и ТТ?"
+    },
+    {
+      "id": "BD-018",
+      "status": "READY_FOR_BUSINESS_APPROVAL",
+      "evidence": "Технические требования подтверждены моделью 1.5 (транзакции, частичные уникальные индексы, гео, JSON, события); ADR-001 подготовлен; инфраструктура production не проверялась.",
+      "datasets": [],
+      "tables": [],
+      "events": [],
+      "question": "Какая СУБД будет использоваться в production?",
+      "closure": "Утвердить СУБД (рекомендация: PostgreSQL) и зафиксировать ADR.",
+      "options": [
+        "PostgreSQL",
+        "SQLite (прототип)",
+        "Другая"
+      ],
+      "consequences": [
+        "Рекомендация: PostgreSQL; ADR-001"
+      ],
+      "architecture_impact": "Определяет физические типы (geography vs jsonb), частичные уникальные индексы и партиционирование в DDL.",
+      "responsible_question": "Какая СУБД будет использоваться в production?"
+    },
+    {
+      "id": "BD-019",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Текущий API-аккаунт не имеет прав SQL Lab и видит 0 баз — это косвенно показывает, что авторизация централизована, но стек не подтверждён.",
+      "datasets": [],
+      "tables": [],
+      "events": [],
+      "question": "Какой стек backend и механизм авторизации?",
+      "closure": "Утвердить стек; второй механизм паролей не создавать.",
+      "options": [
+        "Существующий identity provider",
+        "Новый"
+      ],
+      "consequences": [
+        "Пароли самостоятельно не создаются"
+      ],
+      "architecture_impact": "Определяет, создаётся ли миграция 0009 (роли) или переиспользуется внешний identity provider.",
+      "responsible_question": "Какой стек backend и механизм авторизации?"
+    },
+    {
+      "id": "BD-020",
+      "status": "READY_FOR_BUSINESS_APPROVAL",
+      "evidence": "В проверенных источниках нет таблиц слотов бронирования; есть таблица смен (agile_mart_operational.shifts).",
+      "datasets": [
+        7802
+      ],
+      "tables": [
+        "work_slots",
+        "courier_shifts"
+      ],
+      "events": [
+        "SHIFT_PLANNED"
+      ],
+      "question": "Нужны ли слоты предварительного бронирования?",
+      "closure": "Подтвердить, что для MVP достаточно отметки прибытия и смены.",
+      "options": [
+        "Только отметка прибытия",
+        "Слоты"
+      ],
+      "consequences": [
+        "work_slots опционален"
+      ],
+      "architecture_impact": "Определяет необходимость таблицы work_slots в MVP.",
+      "responsible_question": "Нужны ли слоты предварительного бронирования?"
+    },
+    {
+      "id": "BD-021",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Результат доставки в источниках представлен флагами/статусами; частичная доставка не обнаружена.",
+      "datasets": [
+        3466
+      ],
+      "tables": [
+        "delivery_attempts",
+        "courier_accruals"
+      ],
+      "events": [
+        "ORDER_DELIVERED"
+      ],
+      "question": "Как обрабатывать частичную доставку?",
+      "closure": "Утвердить перечень результатов доставки.",
+      "options": [
+        "PARTIAL как отдельный результат",
+        "Только DELIVERED/FAILED"
+      ],
+      "consequences": [
+        "Влияет на начисление"
+      ],
+      "architecture_impact": "Определяет перечень значений delivery_attempts.result и влияние результата на начисление.",
+      "responsible_question": "Как обрабатывать частичную доставку?"
+    },
+    {
+      "id": "BD-022",
+      "status": "READY_FOR_BUSINESS_APPROVAL",
+      "evidence": "Справочника зон в источниках нет; zone_cluster/area_tt — не зоны доставки; хранение истории границ — техническое решение с бизнес-влиянием.",
+      "datasets": [
+        3466
+      ],
+      "tables": [
+        "zone_boundary_versions",
+        "delivery_zones"
+      ],
+      "events": [
+        "ZONE_BOUNDARY_CHANGED"
+      ],
+      "question": "Нужно ли хранить историю геозон?",
+      "closure": "Подтвердить необходимость версионности границ.",
+      "options": [
+        "Да",
+        "Только текущая"
+      ],
+      "consequences": [
+        "Влияет на объём и аудит"
+      ],
+      "architecture_impact": "Определяет необходимость zone_boundary_versions и объём хранимой истории границ.",
+      "responsible_question": "Нужно ли хранить историю геозон?"
+    },
+    {
+      "id": "BD-023",
+      "status": "READY_FOR_BUSINESS_APPROVAL",
+      "evidence": "Политики хранения в источниках не найдены; объём событий оценивается только моделью.",
+      "datasets": [],
+      "tables": [
+        "domain_events",
+        "courier_accruals"
+      ],
+      "events": [],
+      "question": "Какой срок хранения событий и финансовых записей?",
+      "closure": "Утвердить сроки и подход к архивированию.",
+      "options": [
+        "1 год",
+        "3 года",
+        "5 лет"
+      ],
+      "consequences": [
+        "Влияет на партиционирование"
+      ],
+      "architecture_impact": "Определяет партиционирование и архивирование domain_events и courier_accruals.",
+      "responsible_question": "Какой срок хранения событий и финансовых записей?"
+    },
+    {
+      "id": "BD-024",
+      "status": "BUSINESS_DECISION_REQUIRED",
+      "evidence": "Тарифных таблиц нет; процесс утверждения тарифов — бизнес-решение.",
+      "datasets": [],
+      "tables": [
+        "tariff_versions"
+      ],
+      "events": [
+        "TARIFF_ACTIVATED"
+      ],
+      "question": "Кто утверждает тарифы и с какой даты они действуют?",
+      "closure": "Утвердить процесс и ответственного.",
+      "options": [
+        "Финансы",
+        "Операционный директор",
+        "Коллегиально"
+      ],
+      "consequences": [
+        "Без утверждения тарифы в DRAFT"
+      ],
+      "architecture_impact": "Определяет процесс approved_by/effective_from для tariff_versions.",
+      "responsible_question": "Кто утверждает тарифы и с какой даты они действуют?"
+    }
+  ]
+}

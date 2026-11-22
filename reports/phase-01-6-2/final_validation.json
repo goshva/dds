@@ -1,0 +1,119 @@
+{
+  "stage": "1.6.2",
+  "generated_at": "2026-11-22T09:55:58.864Z",
+  "started_at": "2026-11-22T09:55:55.011Z",
+  "status": "PASS_WITH_BLOCKERS",
+  "summary": {
+    "pass": 15,
+    "fail": 0,
+    "warn": 0,
+    "skip": 0,
+    "total": 15
+  },
+  "counts": {
+    "datasets_total": 3778,
+    "datasets_detail": 671,
+    "columns_total": 17216,
+    "columns_with_values": 2028,
+    "charts_total": 19928,
+    "dashboards_total": 332,
+    "relationships": 274
+  },
+  "checks": [
+    {
+      "id": "C01",
+      "name": "Обязательные JSON существуют",
+      "status": "PASS",
+      "detail": "все на месте"
+    },
+    {
+      "id": "C02",
+      "name": "JSON корректно парсится",
+      "status": "PASS",
+      "detail": "ошибок нет"
+    },
+    {
+      "id": "C03",
+      "name": "CSV корректны и непусты",
+      "status": "PASS",
+      "detail": "все CSV с заголовком и данными"
+    },
+    {
+      "id": "C04",
+      "name": "PII в артефактах отсутствует",
+      "status": "PASS",
+      "detail": "совпадений нет"
+    },
+    {
+      "id": "C05",
+      "name": "Секреты и токены отсутствуют",
+      "status": "PASS",
+      "detail": "совпадений нет"
+    },
+    {
+      "id": "C06",
+      "name": "У значений есть evidence_ref",
+      "status": "PASS",
+      "detail": "18605 записей с evidence_ref"
+    },
+    {
+      "id": "C07",
+      "name": "У значений указан источник",
+      "status": "PASS",
+      "detail": "источник указан у всех"
+    },
+    {
+      "id": "C08",
+      "name": "У значений указан retrieval_status",
+      "status": "PASS",
+      "detail": "статус указан у всех"
+    },
+    {
+      "id": "C09",
+      "name": "Недоступные значения не заменены нулями",
+      "status": "PASS",
+      "detail": "недоступные значения оставлены null"
+    },
+    {
+      "id": "C10",
+      "name": "Синхронизация метаданных выполнена",
+      "status": "PASS",
+      "detail": "датасеты/чарты/дашборды синхронизированы"
+    },
+    {
+      "id": "C11",
+      "name": "Артефакты предыдущих этапов не изменены",
+      "status": "PASS",
+      "detail": "изменений после старта этапа нет"
+    },
+    {
+      "id": "C12",
+      "name": "catalog.sqlite доступна только для чтения",
+      "status": "PASS",
+      "detail": "quick_check=ok; counts={\"datasets\":null,\"charts\":null,\"dashboards\":null}"
+    },
+    {
+      "id": "C13",
+      "name": "Классификация происхождения заполнена",
+      "status": "PASS",
+      "detail": "5 классов присутствуют"
+    },
+    {
+      "id": "C14",
+      "name": "Лимиты выборок задокументированы",
+      "status": "PASS",
+      "detail": "лимиты 500/100/50 указаны"
+    },
+    {
+      "id": "C15",
+      "name": "Аналитический пакет собран",
+      "status": "PASS",
+      "detail": "все 6 файлов на месте"
+    }
+  ],
+  "limitations": [
+    "Фактические значения из данных не получены: SQL Lab 403, chart data 401.",
+    "Значения из фильтров и SQL-определений не являются фактическими значениями колонок.",
+    "Кардинальность, NULL-доли и покрытие связей не измерены."
+  ]
+}
