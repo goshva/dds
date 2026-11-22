@@ -1,0 +1,74 @@
+flowchart LR
+  subgraph OBSERVED["Observed Source Concepts"]
+    S_ORDER["Order"]
+    S_DARKSTORE["Darkstore"]
+    S_COURIER["Courier"]
+    S_DELIVERY["Delivery"]
+    S_POOL["Pool"]
+    S_QUEUE_ENTRY["QueueEntry"]
+    S_COURIER_SHIFT["CourierShift"]
+    S_ROUTE["Route"]
+    S_ASSEMBLY_EVENT["AssemblyEvent"]
+    S_ORDER_STATUS["OrderStatus"]
+    S_PHOTO_CONTROL["PhotoControlAttempt"]
+    S_COURIER_EVENT["CourierAppEvent"]
+    S_HR_COURIER_STATUS["HrCourierStatus"]
+    S_HR_MENTORSHIP["HrMentorship"]
+    S_SLA_METRIC["SlaMetric"]
+  end
+  subgraph TARGET["Target Logical Model"]
+    T_ORDER["Order"]
+    T_ORDER_ITEM["OrderItem"]
+    T_DARKSTORE["Darkstore"]
+    T_COURIER["Courier"]
+    T_DELIVERY["Delivery"]
+    T_TRIP["Trip"]
+    T_TRIP_ORDER["TripOrder"]
+    T_COURIER_ASSIGNMENT["CourierAssignment"]
+    T_QUEUE_ENTRY["QueueEntry"]
+    T_QUEUE_EVENT["QueueEvent"]
+    T_COURIER_SHIFT["CourierShift"]
+    T_SHIFT_BREAK["ShiftBreak"]
+    T_SHIFT_SLOT["ShiftSlot"]
+    T_ROUTE["Route"]
+    T_READY_EVENT["ReadyEvent"]
+    T_DELIVERY_ZONE["DeliveryZone"]
+    T_ZONE_BOUNDARY["ZoneBoundaryVersion"]
+    T_ADDRESS["Address"]
+    T_ADDRESS_ZONE["AddressToZoneAssignment"]
+    T_MENTORSHIP_ASSESSMENT["MentorshipAssessment"]
+    T_TARIFF["Tariff"]
+    T_COURIER_ACCRUAL["CourierAccrual"]
+    T_ACCRUAL_LINE["AccrualLine"]
+    T_PAYOUT["Payout"]
+    T_PAYOUT_LINE["PayoutLine"]
+    T_BUSINESS_EVENT["BusinessEvent"]
+    T_TRIP_COMPOSITION_CHANGE["TripCompositionChange"]
+    T_SOURCE_SYSTEM["SourceSystem"]
+    T_EVIDENCE_REFERENCE["DataEvidenceReference"]
+    T_TARIFF_VERSION["TariffVersion"]
+    T_TARIFF_RULE["TariffRule"]
+  end
+  S_ORDER ==> T_ORDER
+  S_DARKSTORE ==> T_DARKSTORE
+  S_COURIER ==> T_COURIER
+  S_DELIVERY ==> T_DELIVERY
+  S_QUEUE_ENTRY ==> T_QUEUE_ENTRY
+  S_COURIER_SHIFT ==> T_COURIER_SHIFT
+  S_ROUTE ==> T_ROUTE
+  S_TRIP_ORDER -.->|INFERRED_RELATIONSHIP| T_ORDER
+  S_COURIER_ASSIGNMENT -.->|INFERRED_RELATIONSHIP| T_TRIP
+  S_TRIP -.->|INFERRED_RELATIONSHIP| T_COURIER
+  S_DELIVERY -.->|INFERRED_RELATIONSHIP| T_ORDER
+  S_COURIER -.->|INFERRED_RELATIONSHIP| T_DARKSTORE
+  S_ASSEMBLY_EVENT -.->|INFERRED_RELATIONSHIP| T_ORDER
+  S_ORDER -.->|INFERRED_RELATIONSHIP| T_ADDRESS
+  S_HR_MENTORSHIP -.->|INFERRED_RELATIONSHIP| T_COURIER
+  S_SLA_METRIC -.->|INFERRED_RELATIONSHIP| T_ORDER
+  S_COURIER_ASSIGNMENT -.->|INFERRED_RELATIONSHIP| T_COURIER
+  S_POOL -.->|INFERRED_RELATIONSHIP| T_TRIP
+  S_QUEUE_EVENT -.->|INFERRED_RELATIONSHIP| T_QUEUE_ENTRY
+  S_ROUTE -.->|INFERRED_RELATIONSHIP| T_TRIP
+  S_PHOTO_CONTROL -.->|INFERRED_RELATIONSHIP| T_COURIER_SHIFT
+  S_ORDER_STATUS -.->|INFERRED_RELATIONSHIP| T_ORDER
+  S_HR_COURIER_STATUS -.->|INFERRED_RELATIONSHIP| T_COURIER

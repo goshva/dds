@@ -1,0 +1,630 @@
+[
+  {
+    "id": "REL-001",
+    "from_entity": "ENT-TRIP",
+    "to_entity": "ENT-TRIP-ORDER",
+    "name": "contains",
+    "cardinality": "1:N",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "BUSINESS_RULE",
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "EVD-015",
+      "EVD-016"
+    ],
+    "rationale": "Поездка содержит несколько заказов по бизнес-определению.",
+    "notes": "Физическое соответствие id_pool не подтверждено."
+  },
+  {
+    "id": "REL-002",
+    "from_entity": "ENT-TRIP-ORDER",
+    "to_entity": "ENT-ORDER",
+    "name": "refers_to",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-003"
+    ],
+    "rationale": "id_pool и id_order встречаются в одном SQL; состав не доказан.",
+    "notes": "SQL JOIN не является FK."
+  },
+  {
+    "id": "REL-003",
+    "from_entity": "ENT-COURIER-ASSIGNMENT",
+    "to_entity": "ENT-TRIP",
+    "name": "assigns",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-003"
+    ],
+    "rationale": "courier_id_darkstore и id_pool встречаются в одном SQL.",
+    "notes": "Назначение отдельно от состава; не доказано."
+  },
+  {
+    "id": "REL-004",
+    "from_entity": "ENT-TRIP",
+    "to_entity": "ENT-COURIER",
+    "name": "assigned_courier",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-003"
+    ],
+    "rationale": "Курьер связан с поездкой через назначение.",
+    "notes": "Не объединять с составом."
+  },
+  {
+    "id": "REL-005",
+    "from_entity": "ENT-COURIER-SHIFT",
+    "to_entity": "ENT-COURIER",
+    "name": "worked_by",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "SQL_JOIN",
+    "status": "SQL_JOIN_CANDIDATE",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-002"
+    ],
+    "rationale": "id_courier и id_shift присутствуют в SQL 7802.",
+    "notes": "SQL JOIN не является FK."
+  },
+  {
+    "id": "REL-006",
+    "from_entity": "ENT-QUEUE-ENTRY",
+    "to_entity": "ENT-COURIER",
+    "name": "queued_by",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "SQL_JOIN",
+    "status": "SQL_JOIN_CANDIDATE",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-002"
+    ],
+    "rationale": "courier_id и queue_in_dttm присутствуют в SQL 7802.",
+    "notes": "SQL JOIN не является FK."
+  },
+  {
+    "id": "REL-007",
+    "from_entity": "ENT-DELIVERY",
+    "to_entity": "ENT-ORDER",
+    "name": "delivers",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-001",
+      "EVD-003"
+    ],
+    "rationale": "date_delivered и id_order присутствуют в одном SQL.",
+    "notes": "SQL JOIN не является FK."
+  },
+  {
+    "id": "REL-008",
+    "from_entity": "ENT-ORDER",
+    "to_entity": "ENT-DARKSTORE",
+    "name": "fulfilled_at",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "SQL_JOIN",
+    "status": "SQL_JOIN_CANDIDATE",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-001"
+    ],
+    "rationale": "shopno присутствует в SQL заказов.",
+    "notes": "SQL JOIN не является FK."
+  },
+  {
+    "id": "REL-009",
+    "from_entity": "ENT-COURIER",
+    "to_entity": "ENT-DARKSTORE",
+    "name": "works_at",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-011"
+    ],
+    "rationale": "shopno и id_courier присутствуют в HR-датасете.",
+    "notes": "Трудоустройство не подтверждено."
+  },
+  {
+    "id": "REL-010",
+    "from_entity": "ENT-READY-EVENT",
+    "to_entity": "ENT-ORDER",
+    "name": "ready_for",
+    "cardinality": "1:1",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-001"
+    ],
+    "rationale": "Событие готовности требуется бизнесом, но источник не найден.",
+    "notes": "time_ready отсутствует в SQL 3466."
+  },
+  {
+    "id": "REL-011",
+    "from_entity": "ENT-ASSEMBLY-EVENT",
+    "to_entity": "ENT-ORDER",
+    "name": "assembled_for",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-001"
+    ],
+    "rationale": "date_collect_start и date_collected присутствуют в SQL.",
+    "notes": "Семантика требует подтверждения."
+  },
+  {
+    "id": "REL-012",
+    "from_entity": "ENT-ORDER",
+    "to_entity": "ENT-ADDRESS",
+    "name": "delivered_to",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-032"
+    ],
+    "rationale": "Адрес доставки подразумевается, но мастер-реестр не подтверждён.",
+    "notes": "PII."
+  },
+  {
+    "id": "REL-013",
+    "from_entity": "ENT-ADDRESS",
+    "to_entity": "ENT-DELIVERY-ZONE",
+    "name": "belongs_to",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-009"
+    ],
+    "rationale": "Правило привязки адреса к зоне есть, источник не найден.",
+    "notes": "PII."
+  },
+  {
+    "id": "REL-014",
+    "from_entity": "ENT-DELIVERY-ZONE",
+    "to_entity": "ENT-DARKSTORE",
+    "name": "served_by",
+    "cardinality": "1:1",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "BUSINESS_RULE",
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "EVD-009"
+    ],
+    "rationale": "Одна зона = одна ТТ плюс территория.",
+    "notes": "Мастер-справочник не найден."
+  },
+  {
+    "id": "REL-015",
+    "from_entity": "ENT-TARIFF",
+    "to_entity": "ENT-COURIER-ACCRUAL",
+    "name": "prices",
+    "cardinality": "1:N",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-029"
+    ],
+    "rationale": "Тариф определяет начисление, но источник не найден.",
+    "notes": "shift_N_profit — не тариф."
+  },
+  {
+    "id": "REL-016",
+    "from_entity": "ENT-COURIER-ACCRUAL",
+    "to_entity": "ENT-DELIVERY",
+    "name": "accrued_for",
+    "cardinality": "1:1",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-018"
+    ],
+    "rationale": "Начисление за доставленный заказ; ledger не найден.",
+    "notes": "sum_order/sum_paid — не заработок."
+  },
+  {
+    "id": "REL-017",
+    "from_entity": "ENT-COURIER-ACCRUAL",
+    "to_entity": "ENT-PAYOUT",
+    "name": "paid_in",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-028"
+    ],
+    "rationale": "Начисление и выплата — разные сущности.",
+    "notes": "Источник выплат не найден."
+  },
+  {
+    "id": "REL-018",
+    "from_entity": "ENT-HR-MENTORSHIP",
+    "to_entity": "ENT-COURIER",
+    "name": "mentors",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-006"
+    ],
+    "rationale": "mentorid присутствует в HR-датасете.",
+    "notes": "Курьерская применимость не доказана."
+  },
+  {
+    "id": "REL-019",
+    "from_entity": "ENT-COURIER-EVENT",
+    "to_entity": "ENT-COURIER",
+    "name": "logged_for",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "SQL_JOIN",
+    "status": "SQL_JOIN_CANDIDATE",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-008"
+    ],
+    "rationale": "courier_id присутствует в агрегате событий.",
+    "notes": "Агрегат, не event store."
+  },
+  {
+    "id": "REL-020",
+    "from_entity": "ENT-SLA-METRIC",
+    "to_entity": "ENT-ORDER",
+    "name": "measured_on",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-038"
+    ],
+    "rationale": "SLA-поля присутствуют в SQL заказов.",
+    "notes": "Формула не утверждена."
+  },
+  {
+    "id": "REL-021",
+    "from_entity": "ENT-TRIP-ORDER",
+    "to_entity": "ENT-TRIP",
+    "name": "belongs_to",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "BUSINESS_RULE",
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "EVD-015"
+    ],
+    "rationale": "Состав принадлежит поездке.",
+    "notes": "Физическая связь не подтверждена."
+  },
+  {
+    "id": "REL-022",
+    "from_entity": "ENT-COURIER-ASSIGNMENT",
+    "to_entity": "ENT-COURIER",
+    "name": "assigns_courier",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-003"
+    ],
+    "rationale": "Назначение связывает курьера и поездку.",
+    "notes": "Назначение отдельно от состава."
+  },
+  {
+    "id": "REL-023",
+    "from_entity": "ENT-POOL",
+    "to_entity": "ENT-TRIP",
+    "name": "maps_to",
+    "cardinality": "UNKNOWN",
+    "optionality": "UNKNOWN",
+    "kind": "MAPPING",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-003"
+    ],
+    "rationale": "Pool — наблюдаемое понятие; Trip — бизнес-поездка; равенство не доказано.",
+    "notes": "Не объявлять VERIFIED."
+  },
+  {
+    "id": "REL-024",
+    "from_entity": "ENT-QUEUE-EVENT",
+    "to_entity": "ENT-QUEUE-ENTRY",
+    "name": "event_of",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-033"
+    ],
+    "rationale": "События вызова/пропуска подразумеваются, но event log не найден.",
+    "notes": "Не выдавать за подтверждённое."
+  },
+  {
+    "id": "REL-025",
+    "from_entity": "ENT-SHIFT-BREAK",
+    "to_entity": "ENT-COURIER-SHIFT",
+    "name": "break_of",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-002"
+    ],
+    "rationale": "Перерыв упоминается бизнесом, но отдельная сущность не найдена.",
+    "notes": "Не выдавать за подтверждённое."
+  },
+  {
+    "id": "REL-026",
+    "from_entity": "ENT-SHIFT-SLOT",
+    "to_entity": "ENT-COURIER-SHIFT",
+    "name": "planned_as",
+    "cardinality": "1:1",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-034"
+    ],
+    "rationale": "Слот и смена — разные понятия; процесс не определён.",
+    "notes": "Не смешивать."
+  },
+  {
+    "id": "REL-027",
+    "from_entity": "ENT-ROUTE",
+    "to_entity": "ENT-TRIP",
+    "name": "route_of",
+    "cardinality": "1:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-026"
+    ],
+    "rationale": "Маршрут и поездка связаны, но соответствие не доказано.",
+    "notes": "Не объединять."
+  },
+  {
+    "id": "REL-028",
+    "from_entity": "ENT-PHOTO-CONTROL",
+    "to_entity": "ENT-COURIER-SHIFT",
+    "name": "photo_of",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-012"
+    ],
+    "rationale": "Фото-контроль связан со сменой, но связь не доказана.",
+    "notes": "Отдельный процесс."
+  },
+  {
+    "id": "REL-029",
+    "from_entity": "ENT-ORDER-STATUS",
+    "to_entity": "ENT-ORDER",
+    "name": "status_of",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-014"
+    ],
+    "rationale": "Статус относится к заказу.",
+    "notes": "История переходов не подтверждена."
+  },
+  {
+    "id": "REL-030",
+    "from_entity": "ENT-HR-COURIER-STATUS",
+    "to_entity": "ENT-COURIER",
+    "name": "status_of",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "INFERRED",
+    "status": "INFERRED_RELATIONSHIP",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-011"
+    ],
+    "rationale": "HR-статус относится к курьеру.",
+    "notes": "История не подтверждена."
+  },
+  {
+    "id": "REL-031",
+    "from_entity": "ENT-MENTORSHIP-ASSESSMENT",
+    "to_entity": "ENT-HR-MENTORSHIP",
+    "name": "assesses",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "NOT_VERIFIABLE",
+    "confidence": "NONE",
+    "evidence_ids": [
+      "EVD-019"
+    ],
+    "rationale": "Оценка обучения требуется бизнесом, источник не найден.",
+    "notes": "Критерии не утверждены."
+  },
+  {
+    "id": "REL-032",
+    "from_entity": "ENT-TRIP-COMPOSITION-CHANGE",
+    "to_entity": "ENT-TRIP",
+    "name": "change_of",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "BUSINESS_RULE",
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "EVD-016"
+    ],
+    "rationale": "Изменения состава должны иметь историю.",
+    "notes": "Источник истории не найден."
+  },
+  {
+    "id": "REL-033",
+    "from_entity": "ENT-COURIER-ASSIGNMENT",
+    "to_entity": "ENT-TRIP-ORDER",
+    "name": "assignment_scope",
+    "cardinality": "1:N",
+    "optionality": "UNKNOWN",
+    "kind": "PROPOSED",
+    "status": "PROPOSED",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-015"
+    ],
+    "rationale": "Назначение может относиться к поездке, а не к отдельному заказу.",
+    "notes": "Проектное предложение."
+  },
+  {
+    "id": "REL-034",
+    "from_entity": "ENT-BUSINESS-EVENT",
+    "to_entity": "ENT-SOURCE-SYSTEM",
+    "name": "emitted_by",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "PROPOSED",
+    "status": "PROPOSED",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-037"
+    ],
+    "rationale": "Единая модель событий не обоснована.",
+    "notes": "Не навязывать единый event log."
+  },
+  {
+    "id": "REL-035",
+    "from_entity": "ENT-EVIDENCE-REFERENCE",
+    "to_entity": "ENT-SOURCE-SYSTEM",
+    "name": "references",
+    "cardinality": "N:1",
+    "optionality": "UNKNOWN",
+    "kind": "PROPOSED",
+    "status": "PROPOSED",
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "EVD-021"
+    ],
+    "rationale": "Технический реестр evidence.",
+    "notes": "Не доменная сущность."
+  },
+  {
+    "id": "REL-036",
+    "from_entity": "ENT-TARIFF",
+    "to_entity": "ENT-TARIFF-VERSION",
+    "name": "has_versions",
+    "cardinality": "1:N",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "BUSINESS_RULE",
+    "confidence": "HIGH",
+    "evidence_ids": [
+      "EVD-018",
+      "EVD-029"
+    ],
+    "rationale": "Тарифы должны быть версионируемыми; конкретная модель версий не подтверждена.",
+    "notes": "Источник версий не найден."
+  },
+  {
+    "id": "REL-037",
+    "from_entity": "ENT-TARIFF-VERSION",
+    "to_entity": "ENT-TARIFF-RULE",
+    "name": "contains_rules",
+    "cardinality": "1:N",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "BUSINESS_RULE",
+    "confidence": "MEDIUM",
+    "evidence_ids": [
+      "EVD-018",
+      "EVD-029"
+    ],
+    "rationale": "Правила расчёта входят в версию тарифа; формула не утверждена.",
+    "notes": "Формула — open decision DEC-037."
+  },
+  {
+    "id": "REL-038",
+    "from_entity": "ENT-COURIER-ACCRUAL",
+    "to_entity": "ENT-ACCRUAL-LINE",
+    "name": "has_lines",
+    "cardinality": "1:N",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "PROPOSED",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-018"
+    ],
+    "rationale": "Начисление за доставленный заказ; детализация по строкам — проектное предложение.",
+    "notes": "Ledger не подтверждён."
+  },
+  {
+    "id": "REL-039",
+    "from_entity": "ENT-PAYOUT",
+    "to_entity": "ENT-PAYOUT-LINE",
+    "name": "has_lines",
+    "cardinality": "1:N",
+    "optionality": "UNKNOWN",
+    "kind": "BUSINESS_CONCEPT",
+    "status": "PROPOSED",
+    "confidence": "LOW",
+    "evidence_ids": [
+      "EVD-028"
+    ],
+    "rationale": "Выплата состоит из строк; источник не подтверждён.",
+    "notes": "Источник выплат не найден."
+  }
+]

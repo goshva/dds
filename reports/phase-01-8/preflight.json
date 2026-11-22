@@ -1,0 +1,79 @@
+{
+  "stage": "1.8",
+  "generated_at": "2026-11-22T15:07:15.507Z",
+  "pwd": "C:\\soft\\bun\\dds",
+  "git_root": "C:/soft/bun/dds",
+  "git_branch": "main",
+  "git_head": "374786a6c410b6387f2139182232e8091c5e1bd7",
+  "git_status_short": [
+    "M diff.txt",
+    "?? docs/phase-01-8/",
+    "?? reports/phase-01-8/",
+    "?? src/phase1-7/",
+    "?? src/phase1-8/",
+    "?? \"\\320\\236\\321\\202\\321\\207\\320\\265\\321\\202_\\320\\270\\321\\201\\321\\201\\320\\273\\320\\265\\320\\264\\320\\276\\320\\262\\320\\260\\320\\275\\320\\270\\321\\217_\\320\\255\\321\\202\\320\\260\\320\\277_1.7_Superset.md\"",
+    "?? \"\\320\\242\\320\\227_Claude_Code_\\320\\255\\321\\202\\320\\260\\320\\277_1.7_Business_Domain_Consolidation.md\"",
+    "?? \"\\320\\242\\320\\227_Claude_Code_\\320\\255\\321\\202\\320\\260\\320\\277_1.8_Logical_Data_Model_ERD.md\""
+  ],
+  "catalog_sqlite_exists": true,
+  "catalog_sha256_before": "09e827205ada06b7e395dc3406e49f63eafd33284626269a48fc837529869c0c",
+  "catalog_size_before": 1839284224,
+  "catalog_backup": null,
+  "sources": [
+    {
+      "path": "docs/phase-01-5",
+      "exists": true,
+      "files": 67
+    },
+    {
+      "path": "docs/phase-01-6",
+      "exists": true,
+      "files": 15
+    },
+    {
+      "path": "docs/phase-01-6-2",
+      "exists": true,
+      "files": 5
+    },
+    {
+      "path": "docs/phase-01-7",
+      "exists": false,
+      "files": 0
+    },
+    {
+      "path": "reports/phase-01-6",
+      "exists": true,
+      "files": 39
+    },
+    {
+      "path": "reports/phase-01-6-2",
+      "exists": true,
+      "files": 19
+    },
+    {
+      "path": "reports/phase-01-7",
+      "exists": false,
+      "files": 0
+    },
+    {
+      "path": "analysis_package",
+      "exists": true,
+      "files": 6
+    },
+    {
+      "path": "src/phase1-7",
+      "exists": true,
+      "files": 15
+    },
+    {
+      "path": "src/phase1-8",
+      "exists": true,
+      "files": 6
+    }
+  ],
+  "input_status": "PARTIAL_INPUTS",
+  "notes": [
+    "docs/phase-01-7 отсутствует — использован отчёт 1.7 в корне репозитория",
+    "reports/phase-01-7 отсутствует — этап 1.7 не публиковал отдельный пакет отчётов"
+  ]
+}

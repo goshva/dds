@@ -1,0 +1,192 @@
+{
+  "stage": "1.8",
+  "generated_at": "2026-11-22T15:07:35.199Z",
+  "verdict": "PASS_WITH_BLOCKERS",
+  "summary": {
+    "entities": 39,
+    "attributes": 60,
+    "relationships": 39,
+    "evidence": 40,
+    "decisions": 37,
+    "invariants": 20,
+    "gaps": 20,
+    "documents": 16,
+    "diagrams": 7,
+    "json": 11,
+    "findings_total": 12,
+    "findings_confirmed": 11,
+    "findings_conflicts": 1
+  },
+  "files": [
+    {
+      "path": "docs/phase-01-8/01_logical_model_overview.md",
+      "sha256": "046a80cfb69dacb2884192e5273acd1587ffd06e010f5c6d9cc2eb323a543a4e",
+      "size": 7294
+    },
+    {
+      "path": "docs/phase-01-8/02_entity_catalog.md",
+      "sha256": "9d834b9cdec008326eca2340fc6ff58ef5165d100d68a67b237037757a84a5b3",
+      "size": 15654
+    },
+    {
+      "path": "docs/phase-01-8/03_attribute_catalog.md",
+      "sha256": "749c2214824195ce631127defa6668019a97c88e9fc5b3dbe0f3224c0e74409d",
+      "size": 24394
+    },
+    {
+      "path": "docs/phase-01-8/04_relationship_catalog.md",
+      "sha256": "d4133bfe5296bef7542e1dbfb1ca1da145d4eda8f6351641ce6e24b5e72bcc54",
+      "size": 12674
+    },
+    {
+      "path": "docs/phase-01-8/05_order_lifecycle.md",
+      "sha256": "e9a6cd80c06f6119c4cc583c633f51c30b6e61ddf800b8f4a616302b2a7171df",
+      "size": 5895
+    },
+    {
+      "path": "docs/phase-01-8/06_trip_pool_assignment.md",
+      "sha256": "14a74e7af787dd48e6d336c92da24910eb78e39d5d6dc06eefc8e3d9e3dcac9c",
+      "size": 6036
+    },
+    {
+      "path": "docs/phase-01-8/07_queue_shift_lifecycle.md",
+      "sha256": "b00fb108fe4e893fbb61f2db53ed64c6706ffe71dd606947a9a14ac5c4595c8f",
+      "size": 3949
+    },
+    {
+      "path": "docs/phase-01-8/08_zone_address_model.md",
+      "sha256": "ec9eb21ba4132f51cd24813efb98b5661188cd419f3ac6af721595ca0e05509a",
+      "size": 3915
+    },
+    {
+      "path": "docs/phase-01-8/09_finance_model.md",
+      "sha256": "6553b6cb9b3ee73d863c60475e531470c4be69f94e89188b6e6e36be0d927c6d",
+      "size": 3977
+    },
+    {
+      "path": "docs/phase-01-8/10_mentorship_model.md",
+      "sha256": "0a1af84c5d649c11caa46ef43991c92459d9fc3893fcdcbeea91e11451be4e1e",
+      "size": 3737
+    },
+    {
+      "path": "docs/phase-01-8/11_event_and_audit_model.md",
+      "sha256": "2519eb5a0f0b1e4abf2e3b52d034cfdc65b39b6e6303a051f8411fa0dd6d05c3",
+      "size": 3802
+    },
+    {
+      "path": "docs/phase-01-8/12_open_decisions_and_gaps.md",
+      "sha256": "3de6a571ca783c00042b6f2dc246cbcdd1de05ad58b188dc38decf8beeadcb65",
+      "size": 16899
+    },
+    {
+      "path": "docs/phase-01-8/13_model_validation_report.md",
+      "sha256": "fe07089515923de4f6a11f8a83e2ef460e8927010fd0d63c897fa7346f47d685",
+      "size": 3408
+    },
+    {
+      "path": "docs/phase-01-8/diagrams/01_context_map.mmd",
+      "sha256": "c769a2fd06f5e6df42272c61d7c2a0f10471f9c7890eef05dee25f402dc7e3c7",
+      "size": 3417
+    },
+    {
+      "path": "docs/phase-01-8/diagrams/02_operations_erd.mmd",
+      "sha256": "ea957eddaeed59a48d8c849b94c96085481e8aefaf06f71ba891b25c2e2cdcb4",
+      "size": 1469
+    },
+    {
+      "path": "docs/phase-01-8/diagrams/03_finance_erd.mmd",
+      "sha256": "7b7704071b13db9448217877def32539a60b365f177646fc2abecfa356cdd4db",
+      "size": 615
+    },
+    {
+      "path": "docs/phase-01-8/diagrams/04_hr_mentorship_erd.mmd",
+      "sha256": "bbf88a6921799a8de8e40ee525fca152d844e930126efc430574b060bd078b95",
+      "size": 245
+    },
+    {
+      "path": "docs/phase-01-8/diagrams/05_order_trip_lifecycle.mmd",
+      "sha256": "7ecd5e43098449c01915a3de9f56dc62418ed7e4b3f1bfaeae330c99f6329a90",
+      "size": 622
+    },
+    {
+      "path": "docs/phase-01-8/diagrams/06_queue_shift_lifecycle.mmd",
+      "sha256": "fd1d65b07d8580e27282bd99a237c6b8a394c9ac272f5b6b2468d838ca08caf7",
+      "size": 721
+    },
+    {
+      "path": "docs/phase-01-8/diagrams/07_source_to_target_mapping.mmd",
+      "sha256": "131c2cf186d19cc095ee3b8ca5690e2f9f64f8950761fa74538410674d150076",
+      "size": 2683
+    },
+    {
+      "path": "docs/phase-01-8/README.md",
+      "sha256": "8135e68afe7fe3fbf83d00f4e15addc7ac6f1ab7ed5f6cf88494a7df4773a006",
+      "size": 2736
+    },
+    {
+      "path": "reports/phase-01-8/attributes.json",
+      "sha256": "2969dfc24a64a376e319bb258154efdc7d99b92bcef5744e1b53e9d7184f3ae0",
+      "size": 26666
+    },
+    {
+      "path": "reports/phase-01-8/entities.json",
+      "sha256": "20a31b260af1f91ad599e1feecc25e598c46af722dc1ae33659bb6df161e869d",
+      "size": 43974
+    },
+    {
+      "path": "reports/phase-01-8/evidence_links.json",
+      "sha256": "2281ebbdfa1b004141d8998eada63ebf01edb9ae3baeefd0944fc741c0be1918",
+      "size": 27540
+    },
+    {
+      "path": "reports/phase-01-8/final_validation.json",
+      "sha256": "f61698e56eba332246e1083d219895417f6341097732ea7740520758f50b6a40",
+      "size": 3581
+    },
+    {
+      "path": "reports/phase-01-8/findings_verification.json",
+      "sha256": "2ed761fac748f6a11e87b8d0caee3f43e32172bc3ffd7569b73e78d30c5e7ac4",
+      "size": 10365
+    },
+    {
+      "path": "reports/phase-01-8/logical_model.json",
+      "sha256": "7727915abe940f746179a56306a288b3c5b0ec96a7a5fd96f4519505b3515591",
+      "size": 194538
+    },
+    {
+      "path": "reports/phase-01-8/model_manifest.json",
+      "sha256": "8bdebaeac11cd6d549872ec9bb7a8aa301da98fe86d174588ac5b7bd8e9df775",
+      "size": 870
+    },
+    {
+      "path": "reports/phase-01-8/model_validation.json",
+      "sha256": "f61698e56eba332246e1083d219895417f6341097732ea7740520758f50b6a40",
+      "size": 3581
+    },
+    {
+      "path": "reports/phase-01-8/open_decisions.json",
+      "sha256": "dc4061f8b6323612b1bb7d876cef632257a043b955b4e4abb6bc0b040d4df203",
+      "size": 30627
+    },
+    {
+      "path": "reports/phase-01-8/phase_01_8_summary.md",
+      "sha256": "260fe21aef2ff0d00b098578bb4381980f40ae975fad91a1c959ff5a32cc11e9",
+      "size": 9500
+    },
+    {
+      "path": "reports/phase-01-8/preflight.json",
+      "sha256": "806c0374dba0974e8dd0e1d6e0c6af629630809296d52ed5d5a71d2a7b978b01",
+      "size": 2239
+    },
+    {
+      "path": "reports/phase-01-8/preflight.md",
+      "sha256": "bfff30f8fe56977da5faed83286a7c43a583019efbea944730486a06b3491f0c",
+      "size": 2000
+    },
+    {
+      "path": "reports/phase-01-8/relationships.json",
+      "sha256": "ff3228bec5c7de447be3ea87697c50e43b35af739fa28ebdef5a756581fb5354",
+      "size": 18944
+    }
+  ]
+}

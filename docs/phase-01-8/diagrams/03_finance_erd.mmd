@@ -1,0 +1,27 @@
+erDiagram
+  %% Finance ERD
+  TARIFF {
+    string tariff_id
+    string formula
+  }
+  COURIER_ACCRUAL {
+    string accrual_id
+    decimal amount
+  }
+  ACCRUAL_LINE {
+  }
+  PAYOUT {
+    string payout_id
+  }
+  PAYOUT_LINE {
+  }
+  TARIFF_VERSION {
+  }
+  TARIFF_RULE {
+  }
+  TARIFF ||--o{ COURIER_ACCRUAL : NOT_VERIFIABLE_prices
+  COURIER_ACCRUAL }o--|| PAYOUT : NOT_VERIFIABLE_paid_in
+  TARIFF ||--o{ TARIFF_VERSION : BUSINESS_RULE_has_versions
+  TARIFF_VERSION ||--o{ TARIFF_RULE : BUSINESS_RULE_contains_rules
+  COURIER_ACCRUAL ||--o{ ACCRUAL_LINE : PROPOSED_has_lines
+  PAYOUT ||--o{ PAYOUT_LINE : PROPOSED_has_lines

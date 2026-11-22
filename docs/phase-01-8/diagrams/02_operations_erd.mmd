@@ -1,0 +1,56 @@
+erDiagram
+  %% Operations ERD
+  COURIER {
+    string courier_id
+    enum status
+    date hired_at
+    date dismissed_at
+  }
+  TRIP {
+    string trip_id
+    timestamp departure_at
+  }
+  POOL {
+  }
+  TRIP_ORDER {
+    string trip_id
+    string order_id
+  }
+  COURIER_ASSIGNMENT {
+    string courier_id
+    timestamp assigned_at
+  }
+  QUEUE_ENTRY {
+    timestamp queue_in
+    timestamp queue_out
+    boolean has_order
+  }
+  QUEUE_EVENT {
+  }
+  COURIER_SHIFT {
+    string shift_id
+    timestamp shift_start
+    timestamp shift_finish
+  }
+  SHIFT_BREAK {
+    timestamp break_start
+  }
+  SHIFT_SLOT {
+    string slot_id
+  }
+  TRIP_COMPOSITION_CHANGE {
+    string change_id
+  }
+  TRIP ||--o{ TRIP_ORDER : BUSINESS_RULE_contains
+  COURIER_ASSIGNMENT }o--|| TRIP : INFERRED_RELATIONSHIP_assigns
+  TRIP }o--|| COURIER : INFERRED_RELATIONSHIP_assigned_courier
+  COURIER_SHIFT }o--|| COURIER : SQL_JOIN_CANDIDATE_worked_by
+  QUEUE_ENTRY }o--|| COURIER : SQL_JOIN_CANDIDATE_queued_by
+  TRIP_ORDER }o--|| TRIP : BUSINESS_RULE_belongs_to
+  COURIER_ASSIGNMENT }o--|| COURIER : INFERRED_RELATIONSHIP_assigns_courier
+  POOL ||--o{ TRIP : INFERRED_RELATIONSHIP_maps_to
+  QUEUE_EVENT }o--|| QUEUE_ENTRY : INFERRED_RELATIONSHIP_event_of
+  SHIFT_BREAK }o--|| COURIER_SHIFT : NOT_VERIFIABLE_break_of
+  SHIFT_SLOT ||--|| COURIER_SHIFT : NOT_VERIFIABLE_planned_as
+  TRIP_COMPOSITION_CHANGE }o--|| TRIP : BUSINESS_RULE_change_of
+  COURIER_ASSIGNMENT ||--o{ TRIP_ORDER : PROPOSED_assignment_scope

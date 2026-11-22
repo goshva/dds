@@ -1,0 +1,765 @@
+[
+  {
+    "id": "DEC-001",
+    "title": "Канонический идентификатор заказа",
+    "question": "Что является стабильным ID заказа: id_order, id_general или иной ключ?",
+    "context": "В SQL встречаются оба идентификатора; их семантика не разграничена.",
+    "options": [
+      "id_order",
+      "id_general",
+      "составной ключ",
+      "внешний мастер-ключ"
+    ],
+    "recommendation": "Не выбирать до SELECT-проверки уникальности и покрытия.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Идентичность заказа и связи с поездкой/доставкой.",
+    "blocking": "SQL Lab недоступен; уникальность не проверена.",
+    "evidence_ids": [
+      "EVD-001",
+      "EVD-003",
+      "EVD-021"
+    ],
+    "closes_with": "SELECT-проверка уникальности и покрытия id_order/id_general."
+  },
+  {
+    "id": "DEC-002",
+    "title": "Зерно заказа",
+    "question": "Одна строка на заказ или на строку заказа?",
+    "context": "В SQL заказов встречаются агрегаты и позиции; зерно не подтверждено.",
+    "options": [
+      "заказ",
+      "строка заказа",
+      "смешанное зерно"
+    ],
+    "recommendation": "Зафиксировать как UNKNOWN до проверки.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Все метрики и связи.",
+    "blocking": "Нет доступа к фактическим строкам.",
+    "evidence_ids": [
+      "EVD-001",
+      "EVD-021"
+    ],
+    "closes_with": "SELECT count, distinct по id_order и id_order_item."
+  },
+  {
+    "id": "DEC-003",
+    "title": "Источник строк заказа",
+    "question": "Где хранится OrderItem и как он связан с заказом?",
+    "context": "OrderItem не найден в проверенном охвате.",
+    "options": [
+      "отдельная таблица",
+      "JSON в заказе",
+      "внешняя система"
+    ],
+    "recommendation": "Оставить BUSINESS_REQUIRED_NOT_FOUND.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Детализация заказа и часть метрик.",
+    "blocking": "Источник не найден.",
+    "evidence_ids": [
+      "EVD-030"
+    ],
+    "closes_with": "Найти мастер-источник строк заказа."
+  },
+  {
+    "id": "DEC-004",
+    "title": "Мастер-реестр ТТ",
+    "question": "Какой источник является мастер-реестром торговых точек?",
+    "context": "ТТ встречаются в SQL, но мастер-реестр не подтверждён.",
+    "options": [
+      "справочник в Superset",
+      "внешняя система",
+      "таблица в DWH"
+    ],
+    "recommendation": "Считать кандидатом, не подтверждённым мастером.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "Идентичность ТТ и связи.",
+    "blocking": "Нет подтверждённого мастер-источника.",
+    "evidence_ids": [
+      "EVD-001",
+      "EVD-010"
+    ],
+    "closes_with": "Подтвердить мастер-реестр у владельца."
+  },
+  {
+    "id": "DEC-005",
+    "title": "Мастер-реестр курьеров",
+    "question": "Где мастер-данные курьера и как связаны HR и Operations?",
+    "context": "Курьер встречается в HR- и операционных датасетах.",
+    "options": [
+      "HR-система",
+      "операционная система",
+      "гибрид"
+    ],
+    "recommendation": "Не объединять до подтверждения.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Идентичность курьера и связи.",
+    "blocking": "Нет доступа к мастер-источнику.",
+    "evidence_ids": [
+      "EVD-011",
+      "EVD-022"
+    ],
+    "closes_with": "Согласовать мастер-источник HR + Operations."
+  },
+  {
+    "id": "DEC-006",
+    "title": "Источник факта доставки",
+    "question": "Какое событие считать фактом доставки заказа?",
+    "context": "date_delivered присутствует, но семантика не подтверждена.",
+    "options": [
+      "date_delivered",
+      "событие сканера",
+      "статус заказа"
+    ],
+    "recommendation": "Не выбирать до подтверждения.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "Метрики доставки и SLA.",
+    "blocking": "Семантика не подтверждена.",
+    "evidence_ids": [
+      "EVD-001",
+      "EVD-003"
+    ],
+    "closes_with": "Подтвердить событие доставки у Operations."
+  },
+  {
+    "id": "DEC-007",
+    "title": "Эквивалентность Pool и Trip",
+    "question": "Является ли Pool физической реализацией Trip?",
+    "context": "Pool наблюдается в SQL; Trip — бизнес-концепт.",
+    "options": [
+      "Pool = Trip",
+      "Pool — часть Trip",
+      "Pool — другое понятие"
+    ],
+    "recommendation": "Не объявлять равенство без подтверждения.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Структура поездки и связи.",
+    "blocking": "Семантика Pool не подтверждена.",
+    "evidence_ids": [
+      "EVD-003",
+      "EVD-015"
+    ],
+    "closes_with": "Подтвердить семантику Pool у Operations."
+  },
+  {
+    "id": "DEC-008",
+    "title": "История состава поездки",
+    "question": "Где хранится история добавления/удаления заказов?",
+    "context": "Бизнес требует историю, источник не найден.",
+    "options": [
+      "event log",
+      "audit table",
+      "версионирование"
+    ],
+    "recommendation": "Оставить BUSINESS_REQUIRED_NOT_FOUND.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Аудит и восстановление состава.",
+    "blocking": "Источник не найден.",
+    "evidence_ids": [
+      "EVD-016"
+    ],
+    "closes_with": "Найти или спроектировать источник истории."
+  },
+  {
+    "id": "DEC-009",
+    "title": "Назначение курьера",
+    "question": "Где фиксируется назначение курьера на поездку?",
+    "context": "courier_id_darkstore встречается, но назначение не подтверждено.",
+    "options": [
+      "отдельная таблица",
+      "поле в поездке",
+      "событие"
+    ],
+    "recommendation": "Не объединять с составом.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "Связь курьера и поездки.",
+    "blocking": "Назначение не подтверждено.",
+    "evidence_ids": [
+      "EVD-003"
+    ],
+    "closes_with": "Подтвердить модель назначения."
+  },
+  {
+    "id": "DEC-010",
+    "title": "Модель очереди",
+    "question": "Какие события очереди нужно хранить: вход, вызов, пропуск, возврат?",
+    "context": "QueueEntry наблюдается; полной event model нет.",
+    "options": [
+      "только вход/выход",
+      "полный event log",
+      "гибрид"
+    ],
+    "recommendation": "Начать с входа/выхода, события — отдельным решением.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "FIFO и метрики ожидания.",
+    "blocking": "События вызова/пропуска не подтверждены.",
+    "evidence_ids": [
+      "EVD-002",
+      "EVD-033"
+    ],
+    "closes_with": "Согласовать event model очереди."
+  },
+  {
+    "id": "DEC-011",
+    "title": "События очереди",
+    "question": "Нужны ли отдельные события вызова и пропуска?",
+    "context": "Бизнес описывает FIFO и пропуск, но источник событий не найден.",
+    "options": [
+      "да",
+      "нет",
+      "только вызов"
+    ],
+    "recommendation": "Оставить открытым.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "OPEN",
+    "impact": "Точность метрики ожидания.",
+    "blocking": "Нет источника событий.",
+    "evidence_ids": [
+      "EVD-017",
+      "EVD-033"
+    ],
+    "closes_with": "Решение Operations."
+  },
+  {
+    "id": "DEC-012",
+    "title": "Источник смены курьера",
+    "question": "Является ли agile_mart_operational.shifts источником смены курьера?",
+    "context": "shifts наблюдается в SQL 7802; dataset 7021 — не смены курьера.",
+    "options": [
+      "да",
+      "нет",
+      "частично"
+    ],
+    "recommendation": "Считать кандидатом, требующим проверки.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "Смены и метрики.",
+    "blocking": "Физическое наполнение не проверено.",
+    "evidence_ids": [
+      "EVD-002",
+      "EVD-005"
+    ],
+    "closes_with": "SELECT-проверка shifts."
+  },
+  {
+    "id": "DEC-013",
+    "title": "Перерывы в смене",
+    "question": "Как учитывать перерыв: отдельная сущность или поле смены?",
+    "context": "Бизнес упоминает перерыв, отдельная сущность не найдена.",
+    "options": [
+      "отдельная сущность",
+      "поля смены",
+      "не учитывать"
+    ],
+    "recommendation": "Не создавать сущность без подтверждения.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "OPEN",
+    "impact": "Учёт рабочего времени.",
+    "blocking": "Нет источника.",
+    "evidence_ids": [
+      "EVD-002"
+    ],
+    "closes_with": "Решение Operations."
+  },
+  {
+    "id": "DEC-014",
+    "title": "Слоты и бронирование",
+    "question": "Нужна ли отдельная сущность слота и бронирования?",
+    "context": "Процесс не определён; смена и слот — разные понятия.",
+    "options": [
+      "слот = смена",
+      "отдельный слот",
+      "без слотов"
+    ],
+    "recommendation": "Отложить до определения процесса.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "OPEN",
+    "impact": "Планирование смен.",
+    "blocking": "Процесс не определён.",
+    "evidence_ids": [
+      "EVD-034"
+    ],
+    "closes_with": "Решение Operations."
+  },
+  {
+    "id": "DEC-015",
+    "title": "Маршрут и поездка",
+    "question": "Является ли Route тем же, что Trip?",
+    "context": "Route и Trip связаны, но соответствие не доказано.",
+    "options": [
+      "Route = Trip",
+      "Route — часть Trip",
+      "разные"
+    ],
+    "recommendation": "Не объединять.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "Маршрутизация и связи.",
+    "blocking": "Соответствие не подтверждено.",
+    "evidence_ids": [
+      "EVD-026"
+    ],
+    "closes_with": "Подтвердить у Geo/Operations."
+  },
+  {
+    "id": "DEC-016",
+    "title": "Событие готовности заказа",
+    "question": "Какое событие считать готовностью заказа?",
+    "context": "time_ready отсутствует в SQL 3466; кандидаты не подтверждены.",
+    "options": [
+      "новое событие",
+      "существующее поле",
+      "статус"
+    ],
+    "recommendation": "Не создавать атрибут до подтверждения.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Метрика готовность → доставка.",
+    "blocking": "Источник не найден.",
+    "evidence_ids": [
+      "EVD-001"
+    ],
+    "closes_with": "Найти событие готовности у Darkstore."
+  },
+  {
+    "id": "DEC-017",
+    "title": "Сборка заказа",
+    "question": "Какие события сборки подтверждены?",
+    "context": "date_collect_start/date_collected присутствуют, семантика не подтверждена.",
+    "options": [
+      "начало/окончание",
+      "только окончание",
+      "этапы"
+    ],
+    "recommendation": "Считать кандидатом.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "Метрики сборки.",
+    "blocking": "Семантика не подтверждена.",
+    "evidence_ids": [
+      "EVD-001"
+    ],
+    "closes_with": "Подтвердить у Darkstore."
+  },
+  {
+    "id": "DEC-018",
+    "title": "Справочник зон",
+    "question": "Где хранится справочник зон доставки и их границы?",
+    "context": "Зоны не подтверждены; zone_cluster/inactivity_zone — другие семантики.",
+    "options": [
+      "гео-система",
+      "таблица в DWH",
+      "внешний сервис"
+    ],
+    "recommendation": "Оставить BUSINESS_REQUIRED_NOT_FOUND.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Зоны и адресная привязка.",
+    "blocking": "Источник не найден.",
+    "evidence_ids": [
+      "EVD-009",
+      "EVD-025",
+      "EVD-031"
+    ],
+    "closes_with": "Найти мастер-источник зон."
+  },
+  {
+    "id": "DEC-019",
+    "title": "Версионирование границ зон",
+    "question": "Нужна ли история изменения границ зон?",
+    "context": "Бизнес говорит «технически желательно, но не обязательно».",
+    "options": [
+      "да",
+      "нет",
+      "позже"
+    ],
+    "recommendation": "Считать проектным предложением, не обязательным требованием.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "OPEN",
+    "impact": "Историческая корректность зон.",
+    "blocking": "Нет утверждённого требования.",
+    "evidence_ids": [
+      "EVD-009"
+    ],
+    "closes_with": "Решение Geo."
+  },
+  {
+    "id": "DEC-020",
+    "title": "Привязка адреса к зоне",
+    "question": "Как определяется зона для адреса доставки?",
+    "context": "Правило есть, источник не найден.",
+    "options": [
+      "минимальное время доставки",
+      "полигон",
+      "ручное"
+    ],
+    "recommendation": "Оставить NOT_VERIFIABLE.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Зональная маршрутизация.",
+    "blocking": "Нет источника геометрии.",
+    "evidence_ids": [
+      "EVD-009",
+      "EVD-032"
+    ],
+    "closes_with": "Найти гео-модель."
+  },
+  {
+    "id": "DEC-021",
+    "title": "Мастер-адрес",
+    "question": "Где мастер-данные адресов и координат?",
+    "context": "Адреса — PII; мастер-реестр не подтверждён.",
+    "options": [
+      "гео-система",
+      "клиентская система",
+      "DWH"
+    ],
+    "recommendation": "Не выгружать PII.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Адреса и гео-связи.",
+    "blocking": "PII и отсутствие мастер-реестра.",
+    "evidence_ids": [
+      "EVD-032"
+    ],
+    "closes_with": "Согласовать мастер-адрес и PII-политику."
+  },
+  {
+    "id": "DEC-022",
+    "title": "Статусы заказа",
+    "question": "Какой набор статусов заказа является каноническим?",
+    "context": "Статусы встречаются в SQL, но справочник не подтверждён.",
+    "options": [
+      "существующий справочник",
+      "новый",
+      "гибрид"
+    ],
+    "recommendation": "Собрать статусы из SQL и подтвердить у бизнеса.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "Lifecycle и метрики.",
+    "blocking": "Нет утверждённого справочника.",
+    "evidence_ids": [
+      "EVD-014",
+      "EVD-040"
+    ],
+    "closes_with": "Согласовать справочник статусов."
+  },
+  {
+    "id": "DEC-023",
+    "title": "Фото-контроль",
+    "question": "Является ли PhotoControl частью смены или отдельным процессом?",
+    "context": "PhotoControl наблюдается, связь со сменой не доказана.",
+    "options": [
+      "часть смены",
+      "отдельный процесс",
+      "не включать"
+    ],
+    "recommendation": "Считать отдельным процессом до подтверждения.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "Качество и контроль.",
+    "blocking": "Связь не подтверждена.",
+    "evidence_ids": [
+      "EVD-012"
+    ],
+    "closes_with": "Подтвердить у Operations."
+  },
+  {
+    "id": "DEC-024",
+    "title": "Единый event log",
+    "question": "Нужен ли единый BusinessEvent для всех доменов?",
+    "context": "Единый event log не найден; событийные таблицы разрознены.",
+    "options": [
+      "единый",
+      "по доменам",
+      "без единого"
+    ],
+    "recommendation": "Не навязывать единый event log.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "OPEN",
+    "impact": "Аудит и интеграция.",
+    "blocking": "Нет подтверждённого источника.",
+    "evidence_ids": [
+      "EVD-037"
+    ],
+    "closes_with": "Решение Data/IT."
+  },
+  {
+    "id": "DEC-025",
+    "title": "Начисление и выплата",
+    "question": "Где хранятся начисления и выплаты курьеру?",
+    "context": "sum_order/sum_paid — не заработок; ledger не найден.",
+    "options": [
+      "финансовая система",
+      "DWH",
+      "внешний сервис"
+    ],
+    "recommendation": "Оставить NOT_VERIFIABLE.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Финансовая модель.",
+    "blocking": "Источник не найден.",
+    "evidence_ids": [
+      "EVD-018",
+      "EVD-028",
+      "EVD-035"
+    ],
+    "closes_with": "Найти финансовый источник."
+  },
+  {
+    "id": "DEC-026",
+    "title": "Тариф и формула",
+    "question": "Какая формула тарифа и кто её утверждает?",
+    "context": "Тарифы не найдены; формула не утверждена.",
+    "options": [
+      "фиксированная",
+      "за заказ",
+      "за зону/расстояние"
+    ],
+    "recommendation": "Оставить BUSINESS_DECISION_REQUIRED.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Начисления и метрики.",
+    "blocking": "Нет формулы и владельца.",
+    "evidence_ids": [
+      "EVD-018",
+      "EVD-029"
+    ],
+    "closes_with": "Решение Finance."
+  },
+  {
+    "id": "DEC-027",
+    "title": "Наставничество курьеров",
+    "question": "Как связаны HR-наставничество и курьерское сопровождение?",
+    "context": "HR-атрибуты есть, курьерская применимость не доказана.",
+    "options": [
+      "одна модель",
+      "разные модели",
+      "частично"
+    ],
+    "recommendation": "Разделять HRMentorship и CourierMentorship.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "Обучение и оценка.",
+    "blocking": "Применимость не подтверждена.",
+    "evidence_ids": [
+      "EVD-006",
+      "EVD-023",
+      "EVD-036"
+    ],
+    "closes_with": "Подтвердить у HR/Mentorship."
+  },
+  {
+    "id": "DEC-028",
+    "title": "Оценка обучения",
+    "question": "Какие критерии завершения обучения после двух недель?",
+    "context": "Критерии не утверждены.",
+    "options": [
+      "5 смен",
+      "качество",
+      "комбинированные"
+    ],
+    "recommendation": "Оставить открытым.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "OPEN",
+    "impact": "MentorshipAssessment.",
+    "blocking": "Нет утверждённых критериев.",
+    "evidence_ids": [
+      "EVD-019"
+    ],
+    "closes_with": "Решение HR/Mentorship."
+  },
+  {
+    "id": "DEC-029",
+    "title": "SLA-методика",
+    "question": "Как считать SLA и учитывать отмены/возвраты?",
+    "context": "Метрики есть в BI, но методика не подтверждена.",
+    "options": [
+      "существующая",
+      "новая",
+      "гибрид"
+    ],
+    "recommendation": "Не исключать отмены/возвраты без решения.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "SLA compliance.",
+    "blocking": "Методика не утверждена.",
+    "evidence_ids": [
+      "EVD-038"
+    ],
+    "closes_with": "Решение Analytics/Operations."
+  },
+  {
+    "id": "DEC-030",
+    "title": "MVP-экран заказов",
+    "question": "Какие поля обязательны на первом экране MVP?",
+    "context": "MVP допускает запуск без зон и очереди.",
+    "options": [
+      "минимальный набор",
+      "расширенный",
+      "по согласованию"
+    ],
+    "recommendation": "Зафиксировать минимальный набор и отметить gaps.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "READY_FOR_BUSINESS_APPROVAL",
+    "impact": "Scope MVP.",
+    "blocking": "Нет утверждения бизнеса.",
+    "evidence_ids": [
+      "EVD-015",
+      "EVD-021"
+    ],
+    "closes_with": "Утверждение бизнеса."
+  },
+  {
+    "id": "DEC-031",
+    "title": "Источник выплат курьерам",
+    "question": "Где подтверждённый ledger выплат, отдельный от начислений?",
+    "context": "Модель Payout и PayoutLine — target-сущности без подтверждённого источника.",
+    "options": [
+      "найти ledger",
+      "считать выплатой факт перевода",
+      "отложить"
+    ],
+    "recommendation": "Не объявлять Payout подтверждённой до SELECT и подтверждения Finance.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Финансовая модель и сверка начислений.",
+    "blocking": "Источник выплат не найден.",
+    "evidence_ids": [
+      "EVD-028"
+    ],
+    "closes_with": "Подтверждение ledger выплат у Finance."
+  },
+  {
+    "id": "DEC-032",
+    "title": "Зерно PayoutLine",
+    "question": "Одна строка выплаты — это заказ, период или транш?",
+    "context": "Зерно не установлено; нельзя строить агрегаты.",
+    "options": [
+      "заказ",
+      "период",
+      "транш"
+    ],
+    "recommendation": "Зафиксировать после подтверждения ledger.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Детализация выплат.",
+    "blocking": "Нет подтверждённого источника.",
+    "evidence_ids": [
+      "EVD-028"
+    ],
+    "closes_with": "Ответ Finance по зерну выплаты."
+  },
+  {
+    "id": "DEC-033",
+    "title": "Методика SLA",
+    "question": "Какая формула SLA применяется ко всем заказам, включая отмены и возвраты?",
+    "context": "Датасеты применяют разные фильтры и scope.",
+    "options": [
+      "единая формула",
+      "разные формулы по каналам",
+      "новая методика"
+    ],
+    "recommendation": "Утвердить единую методику и правило учёта отмен/возвратов.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "PARTIAL_EVIDENCE",
+    "impact": "SLA compliance и сравнение периодов.",
+    "blocking": "Методика не утверждена.",
+    "evidence_ids": [
+      "EVD-020",
+      "EVD-038"
+    ],
+    "closes_with": "Решение Analytics/Operations."
+  },
+  {
+    "id": "DEC-034",
+    "title": "Единый event log",
+    "question": "Нужна ли единая модель BusinessEvent или достаточно доменных событий?",
+    "context": "Единый журнал не подтверждён; доменные события разрознены.",
+    "options": [
+      "единый event log",
+      "доменные события",
+      "гибрид"
+    ],
+    "recommendation": "Не навязывать единую модель без подтверждения.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "OPEN",
+    "impact": "Аудит и интеграция.",
+    "blocking": "Нет подтверждённого источника.",
+    "evidence_ids": [
+      "EVD-037"
+    ],
+    "closes_with": "Решение Data/IT по событийной модели."
+  },
+  {
+    "id": "DEC-035",
+    "title": "История состава поездки",
+    "question": "Где хранить историю изменений состава до выезда?",
+    "context": "Изменения состава должны иметь историю; источник не найден.",
+    "options": [
+      "append-only change log",
+      "versioned composition",
+      "event sourcing"
+    ],
+    "recommendation": "Проектировать append-only журнал изменений.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "OPEN",
+    "impact": "Аудит и разбор инцидентов.",
+    "blocking": "Нет подтверждённого источника.",
+    "evidence_ids": [
+      "EVD-016"
+    ],
+    "closes_with": "Согласование с Operations."
+  },
+  {
+    "id": "DEC-036",
+    "title": "Реестр систем-источников",
+    "question": "Какие системы-источники и их владельцы должны быть в SourceSystem?",
+    "context": "SourceSystem — проектная сущность; реестр не подтверждён.",
+    "options": [
+      "минимальный реестр",
+      "полный реестр",
+      "внешний каталог"
+    ],
+    "recommendation": "Начать с минимального реестра и расширять.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "OPEN",
+    "impact": "Трассировка происхождения.",
+    "blocking": "Нет подтверждённого реестра.",
+    "evidence_ids": [
+      "EVD-021"
+    ],
+    "closes_with": "Решение Data/IT."
+  },
+  {
+    "id": "DEC-037",
+    "title": "Формула тарифа и версионирование",
+    "question": "Какую формулу тарифа применять и как версионировать правила?",
+    "context": "Тарифы зависят от зоны и расстояния; возможная зависимость от нагрузки не формализована.",
+    "options": [
+      "фиксированная формула",
+      "формула с нагрузкой",
+      "ручные корректировки"
+    ],
+    "recommendation": "Утвердить формулу и версионирование до физического проектирования.",
+    "owner": "OWNER_UNKNOWN",
+    "status": "BLOCKED",
+    "impact": "Начисления и выплаты.",
+    "blocking": "Формула и владелец не утверждены.",
+    "evidence_ids": [
+      "EVD-018",
+      "EVD-029"
+    ],
+    "closes_with": "Решение Finance."
+  }
+]

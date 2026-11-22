@@ -1,0 +1,619 @@
+[
+  {
+    "id": "EVD-001",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "3466",
+    "dataset_id": 3466,
+    "dataset_name": "darkstore_time_sheet",
+    "field": "date_order, date_collect_start, date_collected, date_delivered",
+    "observation": "SQL датасета 3466 содержит временные поля заказа и сборки; поля time_ready и time_ready_plan отсутствуют.",
+    "limitations": [
+      "Проверено только SQL definition; строки не выбирались",
+      "SQL Lab недоступен"
+    ],
+    "confidence": "HIGH",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#3466"
+  },
+  {
+    "id": "EVD-002",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7802",
+    "dataset_id": 7802,
+    "dataset_name": "shift_time_breakdown",
+    "field": "shifts, pools, courier_queue",
+    "observation": "SQL 7802 ссылается на agile_mart_operational.shifts, .pools и .courier_queue и содержит поля смен, пулов и очереди.",
+    "limitations": [
+      "Три физические таблицы известны только по SQL; доступность и наполнение не проверены"
+    ],
+    "confidence": "HIGH",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7802"
+  },
+  {
+    "id": "EVD-003",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7119",
+    "dataset_id": 7119,
+    "dataset_name": "cargo_flags",
+    "field": "id_order, id_general, id_pool, courier_id_darkstore, arrival_time",
+    "observation": "SQL 7119 содержит id_order, id_general, id_pool и courier_id_darkstore; id_pool используется как группировка заказов.",
+    "limitations": [
+      "Семантика id_general и id_pool не доказана",
+      "SQL JOIN не является FK"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7119"
+  },
+  {
+    "id": "EVD-004",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7006",
+    "dataset_id": 7006,
+    "dataset_name": "cargo_main2",
+    "field": "arrival_time, pool_size, pickup_seq, date_pickuped",
+    "observation": "В SQL 7006 присутствуют arrival_time, pool_size, pickup_seq и date_pickuped как кандидаты времени прибытия, размера пула и порядка получения.",
+    "limitations": [
+      "Кандидаты не подтверждены как бизнес-семантика"
+    ],
+    "confidence": "LOW",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7006"
+  },
+  {
+    "id": "EVD-005",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7021",
+    "dataset_id": 7021,
+    "dataset_name": "ds_collectors_prod",
+    "field": "shift_type, timesheetfact",
+    "observation": "shift_type в 7021 вычисляется из времени смены picker в ods.timesheetfact; id_courier отсутствует.",
+    "limitations": [
+      "Это смена picker, а не курьера"
+    ],
+    "confidence": "HIGH",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7021"
+  },
+  {
+    "id": "EVD-006",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "5939",
+    "dataset_id": 5939,
+    "dataset_name": "hr_daily_pers_mentors",
+    "field": "mentorid, mentor_at_date, date_for_mentor",
+    "observation": "В 5939 есть mentorid и mentor_at_date; date_for_mentor присутствует только в metadata, не в SQL.",
+    "limitations": [
+      "Применимость к курьерскому наставничеству не доказана"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#5939"
+  },
+  {
+    "id": "EVD-007",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7473",
+    "dataset_id": 7473,
+    "dataset_name": "hr_couriers_five_shifts",
+    "field": "shift_N_profit",
+    "observation": "shift_N_profit — аналитический показатель первых пяти смен, не универсальный тариф и не ledger начислений.",
+    "limitations": [
+      "Формула и владелец тарифа не найдены"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7473"
+  },
+  {
+    "id": "EVD-008",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "5247",
+    "dataset_id": 5247,
+    "dataset_name": "courier_logs_agg_couriers_daily",
+    "field": "event_name, events_qty",
+    "observation": "Агрегированные события курьера по дням; это агрегат, а не нормализованный event store.",
+    "limitations": [
+      "Нет полного жизненного цикла события"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#5247"
+  },
+  {
+    "id": "EVD-009",
+    "evidence_type": "METADATA_ONLY",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7293",
+    "dataset_id": 7293,
+    "dataset_name": "hr_couriers_zone_balance",
+    "field": "zone",
+    "observation": "zone в 7293 — HR-зона баланса курьеров, не геометрическая зона доставки.",
+    "limitations": [
+      "Семантика zone не равна DeliveryZone"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7293"
+  },
+  {
+    "id": "EVD-010",
+    "evidence_type": "METADATA_ONLY",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7036",
+    "dataset_id": 7036,
+    "dataset_name": "combintion_of_services_E293790",
+    "field": "region_name, city, district, latitude, longitude",
+    "observation": "В 7036 есть регион, город, район и координаты ТТ; это атрибуты точки, а не полигон зоны.",
+    "limitations": [
+      "Нет границ зоны и версий"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7036"
+  },
+  {
+    "id": "EVD-011",
+    "evidence_type": "METADATA_ONLY",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "5797",
+    "dataset_id": 5797,
+    "dataset_name": "hr_couriers",
+    "field": "id_courier, active, is_blocked, date_dismissed, fio, phone",
+    "observation": "hr_couriers содержит идентификатор курьера, статусы и PII-поля; значения не выгружались.",
+    "limitations": [
+      "Мастер-источник идентичности не доказан",
+      "PII"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#5797"
+  },
+  {
+    "id": "EVD-012",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7712",
+    "dataset_id": 7712,
+    "dataset_name": "photo_control_shift_bi",
+    "field": "attempt_dt, photos_cnt, selfie_ok, bag_ok",
+    "observation": "Фото-контроль смены: попытки, количество фото, статусы selfie и bag.",
+    "limitations": [
+      "Это отдельный процесс, не полный lifecycle смены"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7712"
+  },
+  {
+    "id": "EVD-013",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7713",
+    "dataset_id": 7713,
+    "dataset_name": "photo_control_photo_kind",
+    "field": "photo_kind, n_ok, n_failed",
+    "observation": "Разрез фото-контроля по типу фото.",
+    "limitations": [
+      "Только агрегат по типу"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7713"
+  },
+  {
+    "id": "EVD-014",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "4732",
+    "dataset_id": 4732,
+    "dataset_name": "darkstore_ts",
+    "field": "id_order, status_name, date_order, date_delivered",
+    "observation": "SQL 4732 содержит заказ, статус и временные поля; используется как основа заказов.",
+    "limitations": [
+      "Гранулярность строки не проверена"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#4732"
+  },
+  {
+    "id": "EVD-015",
+    "evidence_type": "BUSINESS_REQUIREMENT",
+    "source_kind": "STAGE_ARTIFACT",
+    "source_id": "1.7",
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": null,
+    "observation": "Бизнес-правила 1.7: Trip — один маршрут курьера с несколькими заказами; Pool — наблюдаемое понятие, не доказано равенство Trip.",
+    "limitations": [
+      "Требование бизнеса, не доказательство источника"
+    ],
+    "confidence": "HIGH",
+    "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+  },
+  {
+    "id": "EVD-016",
+    "evidence_type": "BUSINESS_REQUIREMENT",
+    "source_kind": "STAGE_ARTIFACT",
+    "source_id": "1.7",
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": null,
+    "observation": "Бизнес-правила 1.7: состав поездки меняется только куратором до выезда; после выезда неизменяем; история изменений обязательна.",
+    "limitations": [
+      "Требование бизнеса"
+    ],
+    "confidence": "HIGH",
+    "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+  },
+  {
+    "id": "EVD-017",
+    "evidence_type": "BUSINESS_REQUIREMENT",
+    "source_kind": "STAGE_ARTIFACT",
+    "source_id": "1.7",
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": null,
+    "observation": "Бизнес-правила 1.7: курьер назначается только после прибытия в даркстор и входа в очередь; FIFO; отказ от поездки не допускается.",
+    "limitations": [
+      "Требование бизнеса"
+    ],
+    "confidence": "HIGH",
+    "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+  },
+  {
+    "id": "EVD-018",
+    "evidence_type": "BUSINESS_REQUIREMENT",
+    "source_kind": "STAGE_ARTIFACT",
+    "source_id": "1.7",
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": null,
+    "observation": "Бизнес-правила 1.7: оплата за доставленный заказ; отменённый заказ не оплачивается; ожидание включено в стоимость; штрафов нет.",
+    "limitations": [
+      "Требование бизнеса; формула тарифа не утверждена"
+    ],
+    "confidence": "HIGH",
+    "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+  },
+  {
+    "id": "EVD-019",
+    "evidence_type": "BUSINESS_REQUIREMENT",
+    "source_kind": "STAGE_ARTIFACT",
+    "source_id": "1.7",
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": null,
+    "observation": "Бизнес-правила 1.7: куратор = наставник; сопровождение две недели; оценка по первым пяти сменам, качеству и правилам.",
+    "limitations": [
+      "Требование бизнеса"
+    ],
+    "confidence": "HIGH",
+    "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+  },
+  {
+    "id": "EVD-020",
+    "evidence_type": "BUSINESS_REQUIREMENT",
+    "source_kind": "STAGE_ARTIFACT",
+    "source_id": "1.7",
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": null,
+    "observation": "Бизнес-правила 1.7: SLA — московское время; 1970-01-01 означает отсутствие даты; глобальный +3h не применять; отмены/возвраты не исключать без решения.",
+    "limitations": [
+      "Требование бизнеса"
+    ],
+    "confidence": "HIGH",
+    "location": "Отчет_исследования_Этап_1.7_Business_Domain_Consolidation.md"
+  },
+  {
+    "id": "EVD-021",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "ACCESS_LIMITATION",
+    "source_id": "SQL_LAB",
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": null,
+    "observation": "SQL Lab и chart_data API недоступны (403/401); фактические строки не выбирались, распределения и уникальность не измерены.",
+    "limitations": [
+      "Без read-only доступа к SQL Lab проверка невозможна"
+    ],
+    "confidence": "HIGH",
+    "location": "reports/phase-01-6-2/final_validation.json"
+  },
+  {
+    "id": "EVD-022",
+    "evidence_type": "METADATA_ONLY",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7775",
+    "dataset_id": 7775,
+    "dataset_name": "all_couriers",
+    "field": "id_courier, status, phone",
+    "observation": "Список курьеров со статусами и PII; значения не выгружались.",
+    "limitations": [
+      "Мастер-реестр не подтверждён"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7775"
+  },
+  {
+    "id": "EVD-023",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7771",
+    "dataset_id": 7771,
+    "dataset_name": "trainees_group_12",
+    "field": "fio_trainee, fio_trainer, shifts_qty, completionstatus",
+    "observation": "Стажёры и наставники, количество смен, статус завершения обучения.",
+    "limitations": [
+      "PII; применимость к курьерскому процессу требует подтверждения"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7771"
+  },
+  {
+    "id": "EVD-024",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7864",
+    "dataset_id": 7864,
+    "dataset_name": "mentorship_weekly",
+    "field": "mentor_id, trainee_id, week, assessment",
+    "observation": "Недельная оценка наставничества; связь с курьерским наставничеством не доказана.",
+    "limitations": [
+      "Только метаданные/структура"
+    ],
+    "confidence": "LOW",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7864"
+  },
+  {
+    "id": "EVD-025",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7000",
+    "dataset_id": 7000,
+    "dataset_name": "zone_cluster_f",
+    "field": "zone_cluster",
+    "observation": "zone_cluster — единственное поле; это справочник кластеров, а не геометрия зоны.",
+    "limitations": [
+      "Нет полигонов и версий"
+    ],
+    "confidence": "LOW",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7000"
+  },
+  {
+    "id": "EVD-026",
+    "evidence_type": "SQL_DEFINITION",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": "7024",
+    "dataset_id": 7024,
+    "dataset_name": "routing_agg",
+    "field": "route_id, distance, duration",
+    "observation": "Маршрутные агрегаты: идентификатор маршрута, расстояние, длительность.",
+    "limitations": [
+      "Связь с бизнес-поездкой не доказана"
+    ],
+    "confidence": "MEDIUM",
+    "location": "data/snapshots/phase-01-6-2/datasets.detail.json#7024"
+  },
+  {
+    "id": "EVD-027",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6020 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6020 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-028",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6100 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6100 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-029",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6200 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6200 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-030",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6300 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6300 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-031",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6400 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6400 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-032",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6500 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6500 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-033",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6600 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6600 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-034",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6700 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6700 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-035",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6800 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6800 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-036",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6900 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6900 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-037",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6950 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6950 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-038",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6970 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6970 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-039",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6980 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6980 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  },
+  {
+    "id": "EVD-040",
+    "evidence_type": "NOT_VERIFIABLE",
+    "source_kind": "SUPERSET_DATASET",
+    "source_id": null,
+    "dataset_id": null,
+    "dataset_name": null,
+    "field": "n/a",
+    "observation": "Источник не подтверждён в снимке 1.6.2: указанный dataset id 6990 отсутствует в datasets.list.json или имеет другое назначение. Упоминание сохранено как гипотеза, не как факт.",
+    "limitations": [
+      "dataset id 6990 не подтверждён в снимке 1.6.2",
+      "Значения и схема не проверялись"
+    ],
+    "confidence": "LOW",
+    "location": "n/a (dataset id не найден в снимке 1.6.2)"
+  }
+]
