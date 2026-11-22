@@ -1,0 +1,481 @@
+{
+  "dataset_id": 7712,
+  "table_name": "photo_control_shift_bi",
+  "kind": "virtual",
+  "schema": "agile_mart_operational",
+  "database": {
+    "id": 76,
+    "name": "gp_10.0.112.100/dwh",
+    "backend": "postgresql"
+  },
+  "description": "ИИ фотоконтроль начала смены. Попытки за 28 дней, если фильтр даты не задан.",
+  "main_dttm_col": "attempt_dt",
+  "changed_on": "2026-10-20T14:13:01.643600",
+  "sql_len": 6396,
+  "sql_sha256": "8370a329d323e8f57a65c90e2db34f078e522826ddcb7aeec54dec66e075f8eb",
+  "sql_redacted": "WITH\nlast_dt AS (\n SELECT\n dt.id_courier,\n max(dt.date_delivery_start) AS dt\n FROM mart_mixed.darkstore_time dt\n WHERE dt.id_courier > 999\n AND dt.id_order = dt.id_general\n GROUP BY dt.id_courier\n),\nlast_shop AS (\n SELECT\n dt.id_courier,\n max(dt.shopno) AS shopno\n FROM mart_mixed.darkstore_time dt\n JOIN last_dt x\n ON x.id_courier = dt.id_courier\n AND x.dt = dt.date_delivery_start\n WHERE dt.id_courier > 999\n AND dt.id_order = dt.id_general\n GROUP BY dt.id_courier\n),\ntasks AS (\n SELECT\n vts.id_courier,\n max(CASE WHEN vts.id_task = 124 THEN 1 ELSE 0 END) AS task_124,\n max(CASE WHEN vts.id_task = 164 THEN 1 ELSE 0 END) AS task_164,\n max(CASE WHEN vts.id_task = 292 THEN 1 ELSE 0 END) AS task_292,\n max(CASE WHEN vts.id_task = 378 THEN 1 ELSE 0 END) AS task_378\n FROM ods.v_tasks_settings vts\n WHERE vts.id_task IN (124, 164, 292, 378)\n AND vts.\"active\" IS TRUE\n GROUP BY vts.id_courier\n),\ntt AS (\n SELECT\n \"N\",\n \"name_TT\",\n region_tt,\n \"Тип\"\n FROM ods.v_tt\n where 1=1 and \"N\">99\n),\norg AS (\n SELECT\n org_unit_number,\n zone_cluster,\n manager_delivery,\n leader_curators\n FROM report.v_org_unit_actual\n where 1=1 and org_unit_number>99\n),\ncouriers AS (\n SELECT\n c.id_courier,\n c.shopno,\n vt.\"N\" AS tt_number,\n vt.\"name_TT\" AS name_tt,\n vt.region_tt,\n vt.\"Тип\" AS type_tt,\n ou.zone_cluster AS bush_chern,\n ou.manager_delivery AS delivery_manager,\n ou.leader_curators AS leader,\n vc.\"name\" AS name,\n (vc.id::text || ' | ' || vc.\"name\") AS id_name,\n vc.\"active\" AS active,\n cot.\"name\" AS courier_type_name,\n cjt.job_type_name,\n coalesce(t.task_124, 0) AS task_124,\n coalesce(t.task_164, 0) AS task_164,\n coalesce(t.task_292, 0) AS task_292,\n coalesce(t.task_378, 0) AS task_378\n FROM last_shop c\n JOIN tt vt\n ON vt.\"N\" = c.shopno\n LEFT JOIN org ou\n ON ou.org_unit_number = c.shopno\n JOIN ods.v_couriers vc\n ON vc.id = c.id_courier\n AND vc.\"active\" IS TRUE\n JOIN ods.v_couriers_payments_courier_types cot\n ON cot.id = vc.id_courier_type\n JOIN ods.v_courier_job_type cjt\n ON cjt.id = vc.job_type\n LEFT JOIN tasks t\n ON t.id_courier = vc.id\n),\nflagged AS (\n SELECT\n b.*,\n coalesce(max(b.shift_opened) OVER (\n PARTITION BY b.courier_id\n ORDER BY b.attempt_start, b.attempt_n\n ROWS BETWEEN 1 FOLLOWING AND UNBOUNDED FOLLOWING\n ), 0) AS later_opened,\n CASE\n WHEN max(b.attempt_n) OVER (\n PARTITION BY b.courier_id, b.attempt_dt\n ) > b.attempt_n THEN 1\n ELSE 0\n END AS retried\n FROM agile_mart_operational.photo_control_shift_attempt b\n),\nattempts AS (\n SELECT *\n FROM flagged f\n),\ndates AS (\n SELECT DISTINCT attempt_dt\n FROM flagged\n)\nSELECT\n 1 AS is_attempt,\n c.id_courier AS courier_id,\n c.shopno,\n c.tt_number,\n c.name_tt,\n c.region_tt,\n c.type_tt,\n c.bush_chern,\n c.delivery_manager,\n c.leader,\n c.name,\n c.id_name,\n c.active,\n c.courier_type_name,\n c.job_type_name,\n c.task_124,\n c.task_164,\n c.task_292,\n c.task_378,\n a.attempt_n,\n a.attempt_start,\n a.attempt_dt,\n a.photo_end,\n a.shift_open_time,\n a.shift_opened,\n a.first_try_pass,\n a.has_ai,\n a.later_opened,\n a.retried,\n a.photo_span_sec,\n a.success_sec,\n a.wasted_sec,\n CASE\n WHEN a.shift_opened = 1 THEN a.success_sec / 60.0\n WHEN a.wasted_sec > 0 THEN a.wasted_sec / 60.0\n END AS attempt_min,\n a.photos_cnt,\n a.ai_photos_cnt,\n a.photos_ok,\n a.photos_warning,\n a.photos_failed,\n a.photos_unavailable,\n a.photos_no_ai,\n a.selfie_ok,\n a.selfie_warning,\n a.selfie_failed,\n a.selfie_no_ai,\n a.selfie_first_status,\n a.vehicle_ok,\n a.vehicle_warning,\n a.vehicle_failed,\n a.vehicle_no_ai,\n a.vehicle_first_status,\n a.bag_ok,\n a.bag_warning,\n a.bag_failed,\n a.bag_no_ai,\n a.bag_first_status\nFROM attempts a\nJOIN couriers c\n ON c.id_courier = a.courier_id\n\nUNION ALL\n\nSELECT\n 0 AS is_attempt,\n c.id_courier AS courier_id,\n c.shopno,\n c.tt_number,\n c.name_tt,\n c.region_tt,\n c.type_tt,\n c.bush_chern,\n c.delivery_manager,\n c.leader,\n c.name,\n c.id_name,\n c.active,\n c.courier_type_name,\n c.job_type_name,\n c.task_124,\n c.task_164,\n c.task_292,\n c.task_378,\n NULL::integer AS attempt_n,\n NULL::timestamp AS attempt_start,\n d.attempt_dt,\n NULL::timestamp AS photo_end,\n NULL::timestamp AS shift_open_time,\n NULL::integer AS shift_opened,\n NULL::integer AS first_try_pass,\n NULL::integer AS has_ai,\n NULL::integer AS later_opened,\n 0 AS retried,\n NULL::numeric AS photo_span_sec,\n NULL::numeric AS success_sec,\n NULL::numeric AS wasted_sec,\n NULL::numeric AS attempt_min,\n NULL::integer AS photos_cnt,\n NULL::integer AS ai_photos_cnt,\n NULL::integer AS photos_ok,\n NULL::integer AS photos_warning,\n NULL::integer AS photos_failed,\n NULL::integer AS photos_unavailable,\n NULL::integer AS photos_no_ai,\n NULL::integer AS selfie_ok,\n NULL::integer AS selfie_warning,\n NULL::integer AS selfie_failed,\n NULL::integer AS selfie_no_ai,\n NULL::text AS selfie_first_status,\n NULL::integer AS vehicle_ok,\n NULL::integer AS vehicle_warning,\n NULL::integer AS vehicle_failed,\n NULL::integer AS vehicle_no_ai,\n NULL::text AS vehicle_first_status,\n NULL::integer AS bag_ok,\n NULL::integer AS bag_warning,\n NULL::integer AS bag_failed,\n NULL::integer AS bag_no_ai,\n NULL::text AS bag_first_status\nFROM couriers c\nCROSS JOIN dates d\nWHERE c.task_124 = 1",
+  "sql_redaction_note": null,
+  "sql_sources_physical": [
+    "mart_mixed.darkstore_time",
+    "ods.v_tasks_settings",
+    "ods.v_tt",
+    "report.v_org_unit_actual",
+    "ods.v_couriers",
+    "ods.v_couriers_payments_courier_types",
+    "ods.v_courier_job_type",
+    "agile_mart_operational.photo_control_shift_attempt"
+  ],
+  "sql_sources_unknown": [
+    "last_dt"
+  ],
+  "sql_ctes": [
+    "last_shop",
+    "tasks",
+    "tt",
+    "org",
+    "couriers",
+    "flagged",
+    "attempts",
+    "dates"
+  ],
+  "columns_count": 54,
+  "columns": [
+    {
+      "column_name": "active",
+      "type": "BOOLEAN",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "ai_photos_cnt",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "attempt_dt",
+      "type": "DATE",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "attempt_min",
+      "type": "DECIMAL",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "attempt_n",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "attempt_start",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "bag_failed",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "bag_first_status",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "bag_no_ai",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "bag_ok",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "bag_warning",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "bush_chern",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "courier_id",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "courier_type_name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "delivery_manager",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "first_try_pass",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "has_ai",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "is_attempt",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "job_type_name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "later_opened",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "leader",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "name_tt",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "photo_end",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "photos_cnt",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "photos_failed",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "photos_no_ai",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "photos_ok",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "photo_span_sec",
+      "type": "DECIMAL",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "photos_unavailable",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "photos_warning",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "region_tt",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "selfie_failed",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "selfie_first_status",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "selfie_no_ai",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "selfie_ok",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "selfie_warning",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shift_opened",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shift_open_time",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shopno",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "success_sec",
+      "type": "DECIMAL",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "task_124",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "task_164",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "task_292",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "task_378",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "tt_number",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "type_tt",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "vehicle_failed",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "vehicle_first_status",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "vehicle_no_ai",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "vehicle_ok",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "vehicle_warning",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "wasted_sec",
+      "type": "DECIMAL",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    }
+  ],
+  "metrics_count": 1,
+  "metric_names": [
+    "count"
+  ],
+  "owners_present": 1
+}

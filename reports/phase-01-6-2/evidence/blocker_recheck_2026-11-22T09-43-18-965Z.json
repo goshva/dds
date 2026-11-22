@@ -1,0 +1,86 @@
+{
+  "generated_at": "2026-11-22T09:43:18.965Z",
+  "purpose": "Повторная проверка BLOCK-1: доступность SQL Lab / chart data для учётной записи API.",
+  "probes": [
+    {
+      "label": "database-list",
+      "method": "GET",
+      "path": "/api/v1/database/?q=(page%3A0%2Cpage_size%3A50)",
+      "http_status": 200,
+      "ok": true,
+      "ms": 1180,
+      "body_keys": [
+        "count",
+        "description_columns",
+        "ids",
+        "label_columns",
+        "list_columns",
+        "list_title",
+        "order_columns",
+        "result"
+      ],
+      "preview": "{\"count\":0,\"description_columns\":{},\"ids\":[],\"label_columns\":{\"allow_ctas\":\"Allow Ctas\",\"allow_cvas\":\"Allow Cvas\",\"allow_dml\":\"Allow Dml\",\"allow_file_upload\":\"Allow File Upload\",\"allow_multi_catalog\":\"Allow Multi Catalog\",\"allow_run_async\":\"Allow Run Async\",\"allows_cost_estimate\":\"Allows Cost Estimate\",\"allows_subquery\":\"Allows Subquery\",\"allows_virtual_table_explore\":\"Allows Virtual Table Explore"
+    },
+    {
+      "label": "sqllab-get",
+      "method": "GET",
+      "path": "/api/v1/sqllab/",
+      "http_status": 403,
+      "ok": false,
+      "ms": 845,
+      "body_keys": [
+        "message"
+      ],
+      "preview": "{\"message\":\"Forbidden\"}"
+    },
+    {
+      "label": "sqllab-execute-select1",
+      "method": "POST",
+      "path": "/api/v1/sqllab/execute/",
+      "http_status": 403,
+      "ok": false,
+      "ms": 1006,
+      "body_keys": [
+        "message"
+      ],
+      "preview": "{\"message\":\"Forbidden\"}"
+    },
+    {
+      "label": "sqllab-estimate",
+      "method": "POST",
+      "path": "/api/v1/sqllab/estimate/",
+      "http_status": 403,
+      "ok": false,
+      "ms": 995,
+      "body_keys": [
+        "message"
+      ],
+      "preview": "{\"message\":\"Forbidden\"}"
+    },
+    {
+      "label": "chart-data-7802",
+      "method": "POST",
+      "path": "/api/v1/chart/data",
+      "http_status": 401,
+      "ok": false,
+      "ms": 1167,
+      "body_keys": [
+        "message"
+      ],
+      "preview": "{\"message\":\"Not authorized\"}"
+    }
+  ],
+  "verdict": "SQL_LAB_BLOCKED",
+  "login": "OK",
+  "csrf": {
+    "ok": true,
+    "status": 200
+  },
+  "me": {
+    "status": 401,
+    "roles": null,
+    "user_present": false
+  },
+  "visible_databases": 0,
+  "note": "BLOCK-1 сохраняется: права SQL Lab не выданы."
+}

@@ -1,0 +1,888 @@
+{
+  "dataset_id": 2339,
+  "table_name": "Перенесенные заказы",
+  "kind": "virtual",
+  "schema": "dbo",
+  "database": {
+    "id": 6,
+    "name": "Reports",
+    "backend": "mssql"
+  },
+  "description": null,
+  "main_dttm_col": null,
+  "changed_on": "2022-10-28T09:47:36.321562",
+  "sql_len": 881,
+  "sql_sha256": "02ed220e5eaaaa4d09ef8d4de3cd5a5985a6bf3a225c2eb846ce7e42d8a88a1e",
+  "sql_redacted": "SELECT *, CAST(new_value AS DATE) new_value_n, status_name_ as status_name\nFROM Loyalty_srv03.dbo.Webcall_log_ui_period ('Orders_header', NULL, DATEADD(MONTH, -1, CAST(GETDATE() AS DATE)), CAST(GETDATE() AS DATE)) web\nJOIN Reports.dbo.ksa_time_vw (NOLOCK) dt\nON dt.id_order = web.object_id\nWHERE [type] = 'Изменение даты доставки' \n AND prop = 'date_supply' \n AND date_supply_2 = CAST(new_value AS DATE)\n AND (comment LIKE '%Перенос заказа на следующий день из-за невозможности доставки, комментарий%' \n OR comment LIKE '%***REMOVED*** даты доставки: Долгое ожидание сборки, комментарий%' \n OR comment LIKE '%***REMOVED*** даты доставки: Долгий поиск курьера, комментарий%' \n OR comment LIKE '%***REMOVED*** даты доставки: <ФИО>, комментарий%' \n OR comment LIKE '%***REMOVED*** даты доставки: Дежурный не обновил поиск, комментарий%')",
+  "sql_redaction_note": null,
+  "sql_sources_physical": [
+    "Loyalty_srv03.dbo.Webcall_log_ui_period",
+    "Reports.dbo.ksa_time_vw"
+  ],
+  "sql_sources_unknown": [],
+  "sql_ctes": [],
+  "columns_count": 107,
+  "columns": [
+    {
+      "column_name": "date_supply_con",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_collect_start_con",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_delivery_start_con",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_collected_con",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_delivered_con",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_order_con",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Дата, на которую перенос",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "new_value_cast",
+      "type": null,
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "order_all",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "old_value_conv",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_add_conv",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_diff",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_add_cast",
+      "type": null,
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "old_value_cast",
+      "type": null,
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_supply_cast",
+      "type": null,
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "ОтветственныйГЕО",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Наименование ТТ",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Причина переноса 1",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Скорость переназначения 1",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Причина переноса 2",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Скорость переназначения 2",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Причина переноса 3",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Скорость переназначения 3",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "comment",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "wait_time2",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_collect_start",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_delivery_start",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_collected",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_delivered",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_order",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_supply",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "name_TT",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "status_name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "wait_time",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_courier",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "order_time",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "gettype",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "status_name_",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Кол-во переносов",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Служба 2",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Служба 3",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Искомая служба",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_status",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Pom",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "city_tt",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "delivery_type",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "region_tt",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "leader",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "courier",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "senior",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Район",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "collection_time",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_order",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "delivery_time",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shopno",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "Куратор",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "delivery_type_1",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_for_wait2",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "delivery_type_2",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "delivery_type_3",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "new_value_n",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_add",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "date_update",
+      "type": "DATETIME",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "log_data",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "object_name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "descr_format",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "source_name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "orders_assignment",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "prop_name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "status_tt",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "log_type",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "action",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "autor",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "source",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "type",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "prop",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "amountMinutes",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "collecting_real_sec",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "courier_per_day",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "qty_date_shop",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "quantity_batch",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "qty_date",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "object_id",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "job_type",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "rating",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "rn",
+      "type": "INT",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_group",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "old_value",
+      "type": "STRING",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "new_value",
+      "type": "STRING",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_assemblysheet_header",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "sum_cash_refunded",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "sum_paid_disc",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "sum_bonus_refunded",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "qty_pos_l",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_cause",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "name_service",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "refund_reason",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "sum_paid",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_job",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "user_code",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "str_orders",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "qty_tov",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "nkormax",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "sbor",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "error",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "СвойствоПродавца",
+      "type": null,
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    }
+  ],
+  "metrics_count": 1,
+  "metric_names": [
+    "Кол-во заказов"
+  ],
+  "owners_present": 1
+}

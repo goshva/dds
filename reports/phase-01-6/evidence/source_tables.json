@@ -1,0 +1,462 @@
+{
+  "generated_at": "2026-11-21T21:03:33.726Z",
+  "datasets": [
+    {
+      "dataset_id": 5939,
+      "table_name": "hr_daily_pers_mentors",
+      "database": {
+        "id": 96,
+        "name": "ch_10.0.112.21",
+        "backend": "clickhousedb"
+      },
+      "sql_available": true,
+      "sql_len": 4301,
+      "ctes": [
+        "cfo_pu"
+      ],
+      "physical_sources": [
+        {
+          "name": "agile_mart_techaudit.actual_assistant_tt",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "agile_mart_techaudit.hr_daily_pers",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "stage_outer_sources.fio_employee",
+          "count": 0,
+          "kind": "physical"
+        }
+      ],
+      "unknown_refs": [
+        {
+          "name": "pu_tt",
+          "count": 0,
+          "kind": "unknown"
+        }
+      ]
+    },
+    {
+      "dataset_id": 7802,
+      "table_name": "shift_time_breakdown",
+      "database": {
+        "id": 76,
+        "name": "gp_10.0.112.100/dwh",
+        "backend": "postgresql"
+      },
+      "sql_available": true,
+      "sql_len": 10498,
+      "ctes": [
+        "shift_pool",
+        "shift_dim",
+        "shift_shop",
+        "qualified",
+        "queue_on_shift",
+        "bounds",
+        "wait_iv",
+        "assembly_iv",
+        "pool_queue",
+        "delivery_iv",
+        "intervals",
+        "points",
+        "sweep",
+        "assigned",
+        "covered",
+        "shift_time",
+        "detail",
+        "filtered"
+      ],
+      "physical_sources": [
+        {
+          "name": "agile_mart_operational.shifts",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "agile_mart_operational.pools",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "mart_mixed.darkstore_time",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "agile_mart_operational.courier_queue",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "ods.v_couriers",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "ods.v_tt",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "mart.org_unit_actual",
+          "count": 0,
+          "kind": "physical"
+        }
+      ],
+      "unknown_refs": [
+        {
+          "name": "params",
+          "count": 0,
+          "kind": "unknown"
+        }
+      ]
+    },
+    {
+      "dataset_id": 7712,
+      "table_name": "photo_control_shift_bi",
+      "database": {
+        "id": 76,
+        "name": "gp_10.0.112.100/dwh",
+        "backend": "postgresql"
+      },
+      "sql_available": true,
+      "sql_len": 6396,
+      "ctes": [
+        "last_shop",
+        "tasks",
+        "tt",
+        "org",
+        "couriers",
+        "flagged",
+        "attempts",
+        "dates"
+      ],
+      "physical_sources": [
+        {
+          "name": "mart_mixed.darkstore_time",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "ods.v_tasks_settings",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "ods.v_tt",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "report.v_org_unit_actual",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "ods.v_couriers",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "ods.v_couriers_payments_courier_types",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "ods.v_courier_job_type",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "agile_mart_operational.photo_control_shift_attempt",
+          "count": 0,
+          "kind": "physical"
+        }
+      ],
+      "unknown_refs": [
+        {
+          "name": "last_dt",
+          "count": 0,
+          "kind": "unknown"
+        }
+      ]
+    },
+    {
+      "dataset_id": 7021,
+      "table_name": "ds_collectors_prod",
+      "database": {
+        "id": 96,
+        "name": "ch_10.0.112.21",
+        "backend": "clickhousedb"
+      },
+      "sql_available": true,
+      "sql_len": 9437,
+      "ctes": [
+        "timesheet_raw",
+        "timesheet_parts",
+        "base"
+      ],
+      "physical_sources": [
+        {
+          "name": "ods.timesheetfact",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "mart_mixed.darkstore_time_sheet",
+          "count": 0,
+          "kind": "physical"
+        }
+      ],
+      "unknown_refs": [
+        {
+          "name": "params",
+          "count": 0,
+          "kind": "unknown"
+        },
+        {
+          "name": "range",
+          "count": 0,
+          "kind": "unknown"
+        }
+      ]
+    },
+    {
+      "dataset_id": 3466,
+      "table_name": "darkstore_time_sheet",
+      "database": {
+        "id": 92,
+        "name": "ch_10.0.112.21/default",
+        "backend": "clickhousedb"
+      },
+      "sql_available": true,
+      "sql_len": 38370,
+      "ctes": [],
+      "physical_sources": [
+        {
+          "name": "dt.date_supply",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "mart_mixed.darkstore_time_sheet",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "report.v_org_unit_actual",
+          "count": 0,
+          "kind": "physical"
+        }
+      ],
+      "unknown_refs": [
+        {
+          "name": "VALUES",
+          "count": 0,
+          "kind": "unknown"
+        }
+      ]
+    },
+    {
+      "dataset_id": 2339,
+      "table_name": "Перенесенные заказы",
+      "database": {
+        "id": 6,
+        "name": "Reports",
+        "backend": "mssql"
+      },
+      "sql_available": true,
+      "sql_len": 881,
+      "ctes": [],
+      "physical_sources": [
+        {
+          "name": "Loyalty_srv03.dbo.Webcall_log_ui_period",
+          "count": 0,
+          "kind": "physical"
+        },
+        {
+          "name": "Reports.dbo.ksa_time_vw",
+          "count": 0,
+          "kind": "physical"
+        }
+      ],
+      "unknown_refs": []
+    }
+  ],
+  "query_history": [
+    {
+      "id": 25611146,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-11-18T15:08:34.801035",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 20309330,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-11-06T07:21:04.688683",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 20309317,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-11-06T07:21:04.488354",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 19561246,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-11-04T11:17:18.758367",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 14803903,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-10-24T04:12:53.013832",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 13182010,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-10-20T06:39:59.920654",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 13174203,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-10-20T06:14:12.176047",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 10696878,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-10-14T03:50:38.095664",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 8409521,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-10-08T14:00:12.907960",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 7809919,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-10-07T03:44:12.893139",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 7767338,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-10-07T00:13:16.665383",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 7330379,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-10-05T20:19:10.673883",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 5482982,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-10-01T05:14:01.463702",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 4906165,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-09-29T17:01:58.564234",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 4405885,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-09-28T12:01:44.874184",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 3452534,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-09-26T00:20:52.154899",
+      "sql_len": 0,
+      "sql_redacted": ""
+    },
+    {
+      "id": 2332080,
+      "status": "pending",
+      "rows": null,
+      "database_id": null,
+      "schema": null,
+      "executed_on": "2026-09-22T19:03:24.173696",
+      "sql_len": 0,
+      "sql_redacted": ""
+    }
+  ],
+  "errors": []
+}

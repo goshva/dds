@@ -1,0 +1,242 @@
+{
+  "dataset_id": 7802,
+  "table_name": "shift_time_breakdown",
+  "kind": "virtual",
+  "schema": "agile_mart_operational",
+  "database": {
+    "id": 76,
+    "name": "gp_10.0.112.100/dwh",
+    "backend": "postgresql"
+  },
+  "description": "Расшифровка времени смены: ожидание сборки, сборка, бесполезное время. Зерно id_shift x ТТ, метрики без задвоения через rn_shift / rn_shift_pu.",
+  "main_dttm_col": "dt",
+  "changed_on": "2026-11-18T20:29:03.847685",
+  "sql_len": 10498,
+  "sql_sha256": "5e46161613a58b5afba18c513b32a0cebf84a906ad30e1c1084e5696a4672751",
+  "sql_redacted": "{% if from_dttm is defined and from_dttm %}\nWITH params AS (\n SELECT\n '{{ from_dttm }}'::timestamp AS d_from,\n ('{{ to_dttm }}'::timestamp::date + 1)::timestamp AS d_to\n)\n{% else %}\nWITH params AS (\n SELECT\n TIMESTAMP '2026-11-01 00:00:00' AS d_from,\n TIMESTAMP '2026-11-02 00:00:00' AS d_to\n)\n{% endif %}\n,\nshift_pool AS (\n SELECT\n s.id_shift,\n s.id_courier,\n s.id_pool,\n min(s.shift_start) AS shift_start,\n max(s.shift_finish) AS shift_finish,\n min(p.pool_start) AS pool_start,\n max(p.pool_finish) AS pool_finish\n FROM agile_mart_operational.shifts s\n JOIN agile_mart_operational.pools p\n ON p.id_pool = s.id_pool\n CROSS JOIN params prm\n WHERE s.shift_start >= prm.d_from\n AND s.shift_start < prm.d_to\n AND p.pool_start >= prm.d_from - INTERVAL '1 day'\n AND p.pool_start < prm.d_to + INTERVAL '1 day'\n GROUP BY s.id_shift, s.id_courier, s.id_pool\n),\nshift_dim AS (\n SELECT\n id_shift,\n id_courier,\n min(shift_start) AS shift_start,\n max(shift_finish) AS shift_finish\n FROM shift_pool\n GROUP BY id_shift, id_courier\n),\nshift_shop AS (\n SELECT\n s.id_shift,\n dt.shopno\n FROM agile_mart_operational.shifts s\n JOIN agile_mart_operational.pools p\n ON p.id_pool = s.id_pool\n JOIN mart_mixed.darkstore_time dt\n ON dt.id_order = p.id_order\n AND dt.id_general = dt.id_order\n CROSS JOIN params prm\n WHERE s.shift_start >= prm.d_from\n AND s.shift_start < prm.d_to\n AND p.pool_start >= prm.d_from - INTERVAL '1 day'\n AND p.pool_start < prm.d_to + INTERVAL '1 day'\n AND dt.date_order >= prm.d_from - INTERVAL '14 days'\n AND dt.date_order < prm.d_to + INTERVAL '2 days'\n AND dt.shopno IS NOT NULL\n GROUP BY s.id_shift, dt.shopno\n),\nqualified AS (\n SELECT\n q.courier_id,\n q.cluster_id,\n q.queue_in_dttm,\n q.queue_out_dttm,\n q.first_delivery_dttm\n FROM agile_mart_operational.courier_queue q\n CROSS JOIN params prm\n WHERE q.has_order = 1\n AND q.queue_in_dttm >= prm.d_from - INTERVAL '1 day'\n AND q.queue_in_dttm < prm.d_to + INTERVAL '1 day'\n AND q.courier_id IN (SELECT id_courier FROM shift_dim)\n),\nqueue_on_shift AS (\n SELECT\n sd.id_shift,\n q.queue_in_dttm,\n q.queue_out_dttm,\n q.first_delivery_dttm\n FROM shift_dim sd\n JOIN qualified q\n ON q.courier_id = sd.id_courier\n AND q.queue_in_dttm <= sd.shift_finish\n AND q.queue_out_dttm >= sd.shift_start\n),\nbounds AS (\n SELECT\n sd.id_shift,\n sd.id_courier,\n sd.shift_finish,\n least(COALESCE(min(q.queue_in_dttm), sd.shift_start), sd.shift_start) AS shift_start_dttm\n FROM shift_dim sd\n LEFT JOIN queue_on_shift q\n ON q.id_shift = sd.id_shift\n GROUP BY sd.id_shift, sd.id_courier, sd.shift_start, sd.shift_finish\n),\nwait_iv AS (\n SELECT\n b.id_shift,\n greatest(q.queue_in_dttm, b.shift_start_dttm) AS t0,\n least(q.first_delivery_dttm, b.shift_finish) AS t1\n FROM queue_on_shift q\n JOIN bounds b ON b.id_shift = q.id_shift\n),\nassembly_iv AS (\n SELECT\n b.id_shift,\n greatest(q.first_delivery_dttm, b.shift_start_dttm) AS t0,\n least(q.queue_out_dttm, b.shift_finish) AS t1\n FROM queue_on_shift q\n JOIN bounds b ON b.id_shift = q.id_shift\n),\npool_queue AS (\n SELECT\n sp.id_shift,\n sp.id_pool,\n sp.pool_finish,\n min(q.queue_out_dttm) AS queue_out_dttm\n FROM shift_pool sp\n JOIN queue_on_shift q\n ON q.id_shift = sp.id_shift\n AND sp.pool_start >= q.queue_in_dttm\n AND sp.pool_start <= q.queue_out_dttm\n GROUP BY sp.id_shift, sp.id_pool, sp.pool_finish\n),\ndelivery_iv AS (\n SELECT\n b.id_shift,\n greatest(COALESCE(pq.queue_out_dttm, sp.pool_start), b.shift_start_dttm) AS t0,\n least(sp.pool_finish, b.shift_finish) AS t1\n FROM shift_pool sp\n JOIN bounds b ON b.id_shift = sp.id_shift\n LEFT JOIN pool_queue pq\n ON pq.id_shift = sp.id_shift\n AND pq.id_pool = sp.id_pool\n),\nintervals AS (\n SELECT id_shift, t0, t1, 'wait'::text AS kind FROM wait_iv WHERE t1 > t0\n UNION ALL\n SELECT id_shift, t0, t1, 'assembly' FROM assembly_iv WHERE t1 > t0\n UNION ALL\n SELECT id_shift, t0, t1, 'delivery' FROM delivery_iv WHERE t1 > t0\n),\npoints AS (\n SELECT\n id_shift,\n ts,\n sum(CASE WHEN kind = 'wait' THEN delta ELSE 0 END) AS wait_delta,\n sum(CASE WHEN kind = 'assembly' THEN delta ELSE 0 END) AS assembly_delta,\n sum(CASE WHEN kind = 'delivery' THEN delta ELSE 0 END) AS delivery_delta\n FROM (\n SELECT id_shift, t0 AS ts, kind, 1 AS delta FROM intervals\n UNION ALL\n SELECT id_shift, t1 AS ts, kind, -1 AS delta FROM intervals\n ) x\n GROUP BY id_shift, ts\n),\nsweep AS (\n SELECT\n id_shift,\n ts,\n sum(wait_delta) OVER (PARTITION BY id_shift ORDER BY ts) AS wait_active,\n sum(assembly_delta) OVER (PARTITION BY id_shift ORDER BY ts) AS assembly_active,\n sum(delivery_delta) OVER (PARTITION BY id_shift ORDER BY ts) AS delivery_active,\n lead(ts) OVER (PARTITION BY id_shift ORDER BY ts) AS next_ts\n FROM points\n),\nassigned AS (\n SELECT\n id_shift,\n CASE\n WHEN delivery_active > 0 THEN 'delivery'\n WHEN assembly_active > 0 THEN 'assembly'\n WHEN wait_active > 0 THEN 'wait'\n END AS kind,\n extract(epoch FROM (next_ts - ts)) / 60.0 AS minutes\n FROM sweep\n WHERE next_ts IS NOT NULL\n AND (delivery_active > 0 OR assembly_active > 0 OR wait_active > 0)\n),\ncovered AS (\n SELECT\n id_shift,\n kind,\n sum(minutes) AS minutes\n FROM assigned\n GROUP BY id_shift, kind\n),\nshift_time AS (\n SELECT\n x.id_shift,\n x.id_courier,\n x.shift_start_dttm::date AS shift_date,\n x.shift_start_dttm,\n x.shift_finish AS shift_finish_dttm,\n round(x.shift_raw::numeric, 1) AS shift_minutes,\n round(x.wait_raw::numeric, 1) AS wait_minutes,\n round(x.assembly_raw::numeric, 1) AS assembly_minutes,\n round(x.delivery_raw::numeric, 1) AS delivery_minutes,\n round(x.shift_raw::numeric, 1)\n - round(x.wait_raw::numeric, 1)\n - round(x.assembly_raw::numeric, 1)\n - round(x.delivery_raw::numeric, 1) AS useless_minutes\n FROM (\n SELECT\n b.id_shift,\n b.id_courier,\n b.shift_start_dttm,\n b.shift_finish,\n extract(epoch FROM (b.shift_finish - b.shift_start_dttm)) / 60.0 AS shift_raw,\n COALESCE(w.minutes, 0) AS wait_raw,\n COALESCE(a.minutes, 0) AS assembly_raw,\n COALESCE(d.minutes, 0) AS delivery_raw\n FROM bounds b\n LEFT JOIN covered w\n ON w.id_shift = b.id_shift AND w.kind = 'wait'\n LEFT JOIN covered a\n ON a.id_shift = b.id_shift AND a",
+  "sql_redaction_note": null,
+  "sql_sources_physical": [
+    "agile_mart_operational.shifts",
+    "agile_mart_operational.pools",
+    "mart_mixed.darkstore_time",
+    "agile_mart_operational.courier_queue",
+    "ods.v_couriers",
+    "ods.v_tt",
+    "mart.org_unit_actual"
+  ],
+  "sql_sources_unknown": [
+    "params"
+  ],
+  "sql_ctes": [
+    "shift_pool",
+    "shift_dim",
+    "shift_shop",
+    "qualified",
+    "queue_on_shift",
+    "bounds",
+    "wait_iv",
+    "assembly_iv",
+    "pool_queue",
+    "delivery_iv",
+    "intervals",
+    "points",
+    "sweep",
+    "assigned",
+    "covered",
+    "shift_time",
+    "detail",
+    "filtered"
+  ],
+  "columns_count": 23,
+  "columns": [
+    {
+      "column_name": "assembly_minutes",
+      "type": "DECIMAL",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "bar_label",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "bush",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "courier_name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "delivery_minutes",
+      "type": "DECIMAL",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "dt",
+      "type": "DATE",
+      "is_dttm": true,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_courier",
+      "type": "LONGINTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "id_shift",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "pu",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "region",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "rn_shift",
+      "type": "LONGINTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "rn_shift_bush",
+      "type": "LONGINTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "rn_shift_pu",
+      "type": "LONGINTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "rn_shift_region",
+      "type": "LONGINTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "rn_shift_tt",
+      "type": "LONGINTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "rn_shift_tu",
+      "type": "LONGINTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shift_minutes",
+      "type": "DECIMAL",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "shopno",
+      "type": "INTEGER",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "tt_name",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "tt_type",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "tu",
+      "type": "STRING",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "useless_minutes",
+      "type": "DECIMAL",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    },
+    {
+      "column_name": "wait_minutes",
+      "type": "DECIMAL",
+      "is_dttm": false,
+      "filterable": true,
+      "groupby": true,
+      "is_active": true
+    }
+  ],
+  "metrics_count": 1,
+  "metric_names": [
+    "count"
+  ],
+  "owners_present": 1
+}

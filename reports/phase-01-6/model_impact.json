@@ -1,0 +1,281 @@
+{
+  "generated_at": "2026-11-21T21:16:42.176Z",
+  "ddl_changed": false,
+  "tables": [
+    {
+      "table": "shops",
+      "necessity": "ПОДТВЕРЖДЕНА",
+      "grain": "не проверено данными",
+      "keys": "shopno/id_tt (имена подтверждены)",
+      "relations": "используется во всех источниках",
+      "changes": "нет",
+      "tbd": "code vs external_source_id",
+      "remove": "нет",
+      "events": "—"
+    },
+    {
+      "table": "addresses",
+      "necessity": "ЧАСТИЧНО",
+      "grain": "не проверено",
+      "keys": "нет подтверждённого адресного ключа",
+      "relations": "geo — строка, не разобрана",
+      "changes": "добавить geo_source",
+      "tbd": "парсинг geo, PII",
+      "remove": "нет",
+      "events": "—"
+    },
+    {
+      "table": "couriers",
+      "necessity": "ПОДТВЕРЖДЕНА",
+      "grain": "не проверено",
+      "keys": "id_courier подтверждён как имя, но не как единый ключ",
+      "relations": "разные идентификаторы в 5939/7021/3466",
+      "changes": "усилить courier_external_ids",
+      "tbd": "мастер-источник (BD-017)",
+      "remove": "нет",
+      "events": "COURIER_REGISTERED"
+    },
+    {
+      "table": "courier_external_ids",
+      "necessity": "ПОДТВЕРЖДЕНА",
+      "grain": "не проверено",
+      "keys": "требуется справочник",
+      "relations": "MISMATCH типов между источниками",
+      "changes": "добавить namespace/source_type",
+      "tbd": "правила сопоставления",
+      "remove": "нет",
+      "events": "—"
+    },
+    {
+      "table": "delivery_zones",
+      "necessity": "НЕ ПОДТВЕРЖДЕНА ИСТОЧНИКОМ",
+      "grain": "—",
+      "keys": "—",
+      "relations": "нет источника",
+      "changes": "остаётся новым справочником",
+      "tbd": "границы, утверждение",
+      "remove": "нет",
+      "events": "ZONE_CREATED"
+    },
+    {
+      "table": "zone_boundary_versions",
+      "necessity": "ПОД ВОПРОСОМ (BD-022)",
+      "grain": "—",
+      "keys": "—",
+      "relations": "нет источника",
+      "changes": "возможно отложить",
+      "tbd": "нужна ли версионность",
+      "remove": "возможен перенос на поздний этап",
+      "events": "ZONE_BOUNDARY_CHANGED"
+    },
+    {
+      "table": "orders",
+      "necessity": "ПОДТВЕРЖДЕНА",
+      "grain": "id_order (подтверждено именами, не данными)",
+      "keys": "id_order + id_general",
+      "relations": "3466/2339 key-compatible",
+      "changes": "уточнить статусы и ready_at",
+      "tbd": "order_status словарь (BD-014), ready_at (BD-013)",
+      "remove": "нет",
+      "events": "ORDER_IMPORTED/ORDER_READY"
+    },
+    {
+      "table": "order_amount_snapshots",
+      "necessity": "ПОДТВЕРЖДЕНА",
+      "grain": "сумма на снимок",
+      "keys": "order_id",
+      "relations": "sum_paid/sum_order есть в 3466",
+      "changes": "нет",
+      "tbd": "—",
+      "remove": "нет",
+      "events": "—"
+    },
+    {
+      "table": "order_status_history",
+      "necessity": "ПОДТВЕРЖДЕНА",
+      "grain": "переход",
+      "keys": "order_id",
+      "relations": "date_status_10 в 3466/7021",
+      "changes": "уточнить источник переходов",
+      "tbd": "словарь статусов",
+      "remove": "нет",
+      "events": "ORDER_STATUS_CORRECTED"
+    },
+    {
+      "table": "order_readiness",
+      "necessity": "ПОДТВЕРЖДЕНА КАК ПОТРЕБНОСТЬ",
+      "grain": "попытка готовности",
+      "keys": "order_id + attempt_no",
+      "relations": "кандидат time_ready ОПРОВЕРГНУТ (нет в SQL датасета)",
+      "changes": "ready_source обязателен; готовность вводится новым событием",
+      "tbd": "источник готовности (BD-013 = CONTRADICTED)",
+      "remove": "нет",
+      "events": "ORDER_READY"
+    },
+    {
+      "table": "work_slots",
+      "necessity": "НЕ ПОДТВЕРЖДЕНА",
+      "grain": "—",
+      "keys": "—",
+      "relations": "нет источника слотов",
+      "changes": "вероятно не нужна для MVP",
+      "tbd": "BD-020",
+      "remove": "возможен перенос",
+      "events": "SHIFT_PLANNED"
+    },
+    {
+      "table": "courier_shifts",
+      "necessity": "ПОДТВЕРЖДЕНА",
+      "grain": "ПОДТВЕРЖДЕНО: одна строка на id_shift (rn_shift=1); физическая таблица shifts",
+      "keys": "external_shift_id = id_shift; физические поля id_courier, id_pool, shift_start, shift_finish",
+      "relations": "источник agile_mart_operational.shifts; связь с 7712 по ключу отсутствует",
+      "changes": "добавить shift_start/shift_finish и разбивку минут (wait/assembly/delivery/useless)",
+      "tbd": "shift_type из 7021 использовать НЕЛЬЗЯ (вычисляется из табеля сборщиков)",
+      "remove": "shift_type (из 7021) — исключить",
+      "events": "SHIFT_STARTED/SHIFT_ENDED"
+    },
+    {
+      "table": "courier_queue_entries",
+      "necessity": "ПОДТВЕРЖДЕНА ФИЗИЧЕСКОЙ ТАБЛИЦЕЙ",
+      "grain": "вход курьера в очередь (queue_in/queue_out)",
+      "keys": "courier_queue: courier_id, id_shift, queue_in_dttm, queue_out_dttm, has_order; arrival_time (7006/7027/7119) — кандидат в arrived_at",
+      "relations": "источник agile_mart_operational.courier_queue; arrival_time в 7006/7027/7119",
+      "changes": "queue_in_dttm/queue_out_dttm вместо arrived_at/closed_at; has_order как признак",
+      "tbd": "правило возврата (BD-004)",
+      "remove": "нет",
+      "events": "COURIER_JOINED_QUEUE"
+    },
+    {
+      "table": "trips",
+      "necessity": "ПОДТВЕРЖДЕНА СХЕМОЙ pools",
+      "grain": "пул (id_pool) с pool_start/pool_finish",
+      "keys": "id_pool; shifts.id_pool; id_pool_calc (7006) — вычисляемый; pool_size (7006/7024/7027/7119)",
+      "relations": "pools(id_pool,id_order,pool_start,pool_finish) — физическая связь пул↔заказ",
+      "changes": "pool_start/pool_finish вместо formed_at/departed_at; pool_size для контроля 3–5 заказов",
+      "tbd": "соответствие pool ↔ trip (проверка данных)",
+      "remove": "нет",
+      "events": "TRIP_FORMED"
+    },
+    {
+      "table": "trip_orders",
+      "necessity": "ПОДТВЕРЖДЕНА СХЕМОЙ pools",
+      "grain": "заказ в пуле (id_pool × id_order)",
+      "keys": "id_pool + id_order; pickup_seq (7006/7027/7119) — кандидат в sequence_no",
+      "relations": "pools.id_order подтверждает состав пула на уровне схемы",
+      "changes": "pickup_seq как кандидат порядка; quantity_batch не использовать",
+      "tbd": "порядок заказов (sequence_no) не подтверждён",
+      "remove": "нет",
+      "events": "TRIP_ORDER_ADDED"
+    },
+    {
+      "table": "trip_order_membership_history",
+      "necessity": "ПОДТВЕРЖДЕНА КАК ПОТРЕБНОСТЬ",
+      "grain": "действие",
+      "keys": "trip_id+order_id",
+      "relations": "источника нет",
+      "changes": "нет",
+      "tbd": "—",
+      "remove": "нет",
+      "events": "TRIP_ORDER_REMOVED"
+    },
+    {
+      "table": "trip_assignments",
+      "necessity": "ПОДТВЕРЖДЕНА КАК ПОТРЕБНОСТЬ",
+      "grain": "назначение",
+      "keys": "trip_id+courier_id; date_pickuped (7006/7027/7119) — кандидат в assigned_at; pickup_to_courier_minute",
+      "relations": "id_courier + date_pickuped в 7006/7027/7119; события назначения в источниках нет",
+      "changes": "не менять до проверки данных",
+      "tbd": "аварийная отмена (BD-011/012)",
+      "remove": "нет",
+      "events": "TRIP_ASSIGNED"
+    },
+    {
+      "table": "delivery_attempts",
+      "necessity": "ПОДТВЕРЖДЕНА",
+      "grain": "попытка",
+      "keys": "order_id+attempt_no",
+      "relations": "date_delivered/date_delivery_start в 3466",
+      "changes": "уточнить result",
+      "tbd": "частичная доставка (BD-021)",
+      "remove": "нет",
+      "events": "ORDER_DELIVERED"
+    },
+    {
+      "table": "courier_events",
+      "necessity": "ПОДТВЕРЖДЕНА",
+      "grain": "событие",
+      "keys": "idempotency_key",
+      "relations": "источники: photo_control_shift_attempt, courier_queue; словаря событий нет",
+      "changes": "добавить event_type dictionary",
+      "tbd": "словарь событий",
+      "remove": "нет",
+      "events": "SHIFT_STARTED/BREAK_STARTED"
+    },
+    {
+      "table": "domain_events",
+      "necessity": "ПОДТВЕРЖДЕНА КАК АРХИТЕКТУРА",
+      "grain": "событие",
+      "keys": "idempotency_key",
+      "relations": "источника нет (новый журнал)",
+      "changes": "нет",
+      "tbd": "срок хранения (BD-023)",
+      "remove": "нет",
+      "events": "все"
+    },
+    {
+      "table": "tariff_versions",
+      "necessity": "НЕ ПОДТВЕРЖДЕНА ИСТОЧНИКОМ",
+      "grain": "версия",
+      "keys": "—",
+      "relations": "нет тарифных таблиц",
+      "changes": "остаётся новым справочником",
+      "tbd": "формула (BD-008)",
+      "remove": "нет",
+      "events": "TARIFF_APPROVED"
+    },
+    {
+      "table": "courier_accruals",
+      "necessity": "ПОДТВЕРЖДЕНА КАК ПОТРЕБНОСТЬ",
+      "grain": "начисление на попытку",
+      "keys": "delivery_attempt_id",
+      "relations": "источника выплат нет; stake не использовать",
+      "changes": "нет",
+      "tbd": "формула и подтверждение (BD-008/010)",
+      "remove": "нет",
+      "events": "COURIER_ACCRUAL_CREATED"
+    },
+    {
+      "table": "accrual_adjustments",
+      "necessity": "ПОДТВЕРЖДЕНА КАК ПОТРЕБНОСТЬ",
+      "grain": "корректировка",
+      "keys": "accrual_id",
+      "relations": "источника нет",
+      "changes": "нет",
+      "tbd": "правило возврата (BD-007)",
+      "remove": "нет",
+      "events": "ACCRUAL_ADJUSTED"
+    },
+    {
+      "table": "mentorship_assignments",
+      "necessity": "ТРЕБУЕТ УТОЧНЕНИЯ",
+      "grain": "возможно ТТ × период, а не новичок",
+      "keys": "mentorid — строка; фильтр mentor_same_tt_date = 1",
+      "relations": "источник actual_assistant_tt (справочник помощников ТТ); date_for_mentor НЕ формируется SQL",
+      "changes": "пересмотреть зерно: возможно (mentor, TT, period); убрать date_for_mentor",
+      "tbd": "кто назначает (BD-001)",
+      "remove": "date_for_mentor (нет в SQL); возможно разделить на mentor_assignment и trainee_program",
+      "events": "MENTORSHIP_ASSIGNED"
+    },
+    {
+      "table": "mentorship_shift_reviews",
+      "necessity": "НЕ ПОДТВЕРЖДЕНА",
+      "grain": "оценка смены",
+      "keys": "assignment+shift",
+      "relations": "шкал оценок в источниках нет",
+      "changes": "нет",
+      "tbd": "шкала и формула",
+      "remove": "нет",
+      "events": "MENTORSHIP_SHIFT_REVIEWED"
+    }
+  ]
+}

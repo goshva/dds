@@ -1,0 +1,300 @@
+{
+  "generated_at": "2026-11-21T21:16:42.183Z",
+  "note": "Планируемые read-only проверки. Ни один запрос не выполнялся: SQL Lab недоступен (BLOCK-1). Каждый запрос прошёл assertReadOnly.",
+  "count": 18,
+  "guard_failures": [],
+  "queries": [
+    {
+      "id": "P-016-001",
+      "dataset_id": 3466,
+      "database_id": 92,
+      "dbms": "clickhouse",
+      "purpose": "Заполняемость кандидатов готовности (BD-013)",
+      "sql": "SELECT count(*) AS rows, count(date_status_10) AS status10_filled, count(date_set_cell) AS set_cell_filled, count(date_collected) AS collected_filled, count(date_delivered) AS delivered_filled FROM mart_mixed.darkstore_time_sheet",
+      "expected": "Доли заполнения кандидатов; выбрать наиболее полный и стабильный",
+      "related_bd": [
+        "BD-013",
+        "BD-014"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-002",
+      "dataset_id": 3466,
+      "database_id": 92,
+      "dbms": "clickhouse",
+      "purpose": "Невозможный порядок дат заказа",
+      "sql": "SELECT count(*) AS bad_rows FROM mart_mixed.darkstore_time_sheet WHERE (date_set_cell IS NOT NULL AND date_order IS NOT NULL AND date_set_cell < date_order) OR (date_delivered IS NOT NULL AND date_set_cell IS NOT NULL AND date_delivered < date_set_cell)",
+      "expected": "0 или объяснимые исключения",
+      "related_bd": [
+        "BD-013",
+        "BD-014"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-003",
+      "dataset_id": 3466,
+      "database_id": 92,
+      "dbms": "clickhouse",
+      "purpose": "Словарь статусов заказа (BD-014)",
+      "sql": "SELECT order_status, count(*) AS cnt FROM mart_mixed.darkstore_time_sheet GROUP BY order_status ORDER BY cnt DESC LIMIT 50",
+      "expected": "Перечень статусов и частот для словаря",
+      "related_bd": [
+        "BD-014"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-004",
+      "dataset_id": 3466,
+      "database_id": 92,
+      "dbms": "clickhouse",
+      "purpose": "Дубликаты заказа в таймшите",
+      "sql": "SELECT count(*) AS rows, count(DISTINCT id_order) AS orders, count(DISTINCT id_general) AS generals FROM mart_mixed.darkstore_time_sheet",
+      "expected": "Определить зерно: заказ или подзаказ",
+      "related_bd": [
+        "BD-016"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-005",
+      "dataset_id": 7802,
+      "database_id": 76,
+      "dbms": "postgresql",
+      "purpose": "Зерно смен: id_shift уникален?",
+      "sql": "SELECT count(*) AS rows, count(DISTINCT id_shift) AS shifts, count(DISTINCT id_courier) AS couriers, min(shift_start) AS min_start, max(shift_finish) AS max_finish FROM agile_mart_operational.shifts",
+      "expected": "rows ≈ shifts (одна строка на смену)",
+      "related_bd": [
+        "BD-017"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-006",
+      "dataset_id": 7802,
+      "database_id": 76,
+      "dbms": "postgresql",
+      "purpose": "NULL и отрицательные длительности смены",
+      "sql": "SELECT count(*) AS rows, count(shift_start) AS started, count(shift_finish) AS finished, sum(CASE WHEN shift_finish < shift_start THEN 1 ELSE 0 END) AS negative FROM agile_mart_operational.shifts",
+      "expected": "Отрицательных нет или они объяснены",
+      "related_bd": [
+        "BD-017"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-007",
+      "dataset_id": 7802,
+      "database_id": 76,
+      "dbms": "postgresql",
+      "purpose": "Структура пула: заказов на пул",
+      "sql": "SELECT count(*) AS rows, count(DISTINCT id_pool) AS pools, count(DISTINCT id_order) AS orders FROM agile_mart_operational.pools",
+      "expected": "***REMOVED***ов больше пулов; размеры 2–5",
+      "related_bd": [
+        "BD-003"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-008",
+      "dataset_id": 7802,
+      "database_id": 76,
+      "dbms": "postgresql",
+      "purpose": "***REMOVED***: заполняемость и порядок времён",
+      "sql": "SELECT count(*) AS rows, count(queue_in_dttm) AS queued_in, count(queue_out_dttm) AS queued_out, sum(CASE WHEN has_order THEN 1 ELSE 0 END) AS with_order FROM agile_mart_operational.courier_queue",
+      "expected": "queue_in заполнен; queue_out частично",
+      "related_bd": [
+        "BD-004",
+        "BD-002"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-009",
+      "dataset_id": 7802,
+      "database_id": 76,
+      "dbms": "postgresql",
+      "purpose": "Покрытие связи shifts.id_pool ↔ pools.id_pool",
+      "sql": "SELECT count(*) AS shift_rows, count(p.id_pool) AS matched FROM agile_mart_operational.shifts s LEFT JOIN agile_mart_operational.pools p ON p.id_pool = s.id_pool",
+      "expected": "Доля сопоставленных смен с пулом",
+      "related_bd": [
+        "BD-003"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-010",
+      "dataset_id": 7712,
+      "database_id": 76,
+      "dbms": "postgresql",
+      "purpose": "Фотоконтроль: попытки на курьера и день",
+      "sql": "SELECT count(*) AS rows, count(DISTINCT courier_id) AS couriers, count(DISTINCT attempt_dt) AS days, max(attempt_n) AS max_attempt FROM agile_mart_operational.photo_control_shift_attempt",
+      "expected": "Несколько попыток на курьера; max_attempt > 1",
+      "related_bd": [
+        "BD-013"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-011",
+      "dataset_id": 7712,
+      "database_id": 76,
+      "dbms": "postgresql",
+      "purpose": "Покрытие связи attempt.courier_id ↔ shifts.id_courier по дню",
+      "sql": "SELECT count(*) AS attempt_rows, count(s.id_shift) AS matched_shifts FROM agile_mart_operational.photo_control_shift_attempt a LEFT JOIN agile_mart_operational.shifts s ON s.id_courier = a.courier_id AND s.shift_start::date = a.attempt_dt",
+      "expected": "Доля попыток, сопоставленных со сменой",
+      "related_bd": [
+        "BD-017"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-012",
+      "dataset_id": 5939,
+      "database_id": 96,
+      "dbms": "clickhouse",
+      "purpose": "Наставничество: заполняемость mentorid и progul",
+      "sql": "SELECT count(*) AS rows, count(mentorid) AS mentor_filled, count(DISTINCT mentorid) AS mentors, count(DISTINCT person_code) AS persons, sum(progul) AS progul_sum FROM \"agile_mart_techaudit\".hr_daily_pers",
+      "expected": "Доля NULL в mentorid; смысл progul",
+      "related_bd": [
+        "BD-001"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-013",
+      "dataset_id": 5939,
+      "database_id": 96,
+      "dbms": "clickhouse",
+      "purpose": "Справочник помощников ТТ: зерно и периоды",
+      "sql": "SELECT count(*) AS rows, count(DISTINCT id_tt) AS tts, count(DISTINCT pu_code) AS pus, min(event_date) AS min_date, max(event_date) AS max_date FROM \"agile_mart_techaudit\".actual_assistant_tt",
+      "expected": "Определить, является ли это назначением на ТТ, а не на новичка",
+      "related_bd": [
+        "BD-001"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-014",
+      "dataset_id": 7021,
+      "database_id": 96,
+      "dbms": "clickhouse",
+      "purpose": "Табель: корректность интервалов",
+      "sql": "SELECT count(*) AS rows, count(time_start) AS started, count(time_end) AS finished, sum(CASE WHEN time_end < time_start THEN 1 ELSE 0 END) AS negative, count(DISTINCT id_sbor) AS sbors FROM ods.timesheetfact",
+      "expected": "Интервалы корректны; подтвердить, что это сборщики",
+      "related_bd": [
+        "BD-020"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-015",
+      "dataset_id": 2339,
+      "database_id": null,
+      "dbms": "mssql",
+      "purpose": "Смысл quantity_batch и orders_assignment",
+      "sql": "SELECT TOP 50 quantity_batch, count(*) AS cnt FROM Reports.dbo.ksa_time_vw GROUP BY quantity_batch ORDER BY cnt DESC",
+      "expected": "Распределение размеров пакета; уточнить смысл orders_assignment",
+      "related_bd": [
+        "BD-003",
+        "BD-006"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-016",
+      "dataset_id": 3466,
+      "database_id": 92,
+      "dbms": "clickhouse",
+      "purpose": "Покрытие связи таймшит ↔ заказы по id_order",
+      "sql": "SELECT count(*) AS sheet_rows, count(dt.id_order) AS matched FROM mart_mixed.darkstore_time_sheet s LEFT JOIN mart_mixed.darkstore_time dt ON dt.id_order = s.id_order",
+      "expected": "Доля сопоставленных заказов",
+      "related_bd": [
+        "BD-016"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-017",
+      "dataset_id": 3466,
+      "database_id": 92,
+      "dbms": "clickhouse",
+      "purpose": "Соотношение id_general и id_order (подзаказы)",
+      "sql": "SELECT count(*) AS rows, count(DISTINCT id_order) AS orders, count(DISTINCT id_general) AS generals, count(DISTINCT concat(toString(id_general), '-', toString(id_order))) AS pairs FROM mart_mixed.darkstore_time_sheet",
+      "expected": "Определить, является ли id_order подзаказом",
+      "related_bd": [
+        "BD-016"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    },
+    {
+      "id": "P-016-018",
+      "dataset_id": 7802,
+      "database_id": 76,
+      "dbms": "postgresql",
+      "purpose": "Проверка формулы разбивки минут",
+      "sql": "SELECT count(*) AS rows FROM agile_mart_operational.shifts s JOIN agile_mart_operational.pools p ON p.id_pool = s.id_pool WHERE s.shift_finish < s.shift_start",
+      "expected": "0 — базовая проверка корректности данных",
+      "related_bd": [
+        "BD-017"
+      ],
+      "status": "PLANNED_NOT_EXECUTED",
+      "reason": "BLOCK-1: SQL Lab недоступен (HTTP 403)",
+      "guard": "OK",
+      "guard_ok": true
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "generated_at": "2026-11-21T21:16:42.175Z",
+  "level": "METADATA",
+  "data_level": "NOT_VERIFIABLE",
+  "blocker": "BLOCK-1",
+  "datasets": [
+    {
+      "dataset_id": 5939,
+      "checks": [
+        "SQL содержит ПДн в комментариях (обезличено)",
+        "8 колонок с неопределённым типом",
+        "5 колонок с ПДн",
+        "date_for_mentor не формируется SQL (устаревшая колонка)"
+      ],
+      "data_level": "NOT_VERIFIABLE"
+    },
+    {
+      "dataset_id": 7802,
+      "checks": [
+        "зерно задокументировано в SQL",
+        "1 колонка с ПДн (courier_name)",
+        "нет колонок с неопределённым типом"
+      ],
+      "data_level": "NOT_VERIFIABLE"
+    },
+    {
+      "dataset_id": 7712,
+      "checks": [
+        "4 колонки с ПДн",
+        "факт пишется DAG",
+        "нет id_shift"
+      ],
+      "data_level": "NOT_VERIFIABLE"
+    },
+    {
+      "dataset_id": 7021,
+      "checks": [
+        "датасет про сборщиков, не курьеров",
+        "1 колонка с ПДн (user_code)",
+        "Jinja-параметры в SQL"
+      ],
+      "data_level": "NOT_VERIFIABLE"
+    },
+    {
+      "dataset_id": 3466,
+      "checks": [
+        "167 колонок, 243 метрики",
+        "19 колонок с неопределённым типом, включая time_ready/time_ready_plan",
+        "time_ready и time_ready_plan НЕ формируются SQL датасета (0 вхождений)",
+        "6+ колонок с ПДн (user_inn, phone)",
+        "Jinja filter_values",
+        "deadline_sbor/last_sbor_touch — вычисляемые"
+      ],
+      "data_level": "NOT_VERIFIABLE"
+    },
+    {
+      "dataset_id": 2339,
+      "checks": [
+        "скользящее окно 1 месяц",
+        "29 колонок с неопределённым типом",
+        "8+ колонок с ПДн",
+        "суммы sum_paid/sum_paid_disc присутствуют"
+      ],
+      "data_level": "NOT_VERIFIABLE"
+    }
+  ],
+  "sql_forensics": {
+    "stale_metadata_columns": [
+      {
+        "dataset_id": 3466,
+        "column": "time_ready",
+        "occurrences_in_sql": 0,
+        "sql_len": 35926,
+        "verdict": "Колонка есть в метаданных Superset (тип не определён), но НЕ формируется SQL датасета. Кандидат на источник готовности опровергнут."
+      },
+      {
+        "dataset_id": 3466,
+        "column": "time_ready_plan",
+        "occurrences_in_sql": 0,
+        "sql_len": 35926,
+        "verdict": "Не формируется SQL датасета; как плановое время готовности использоваться не может."
+      },
+      {
+        "dataset_id": 5939,
+        "column": "date_for_mentor",
+        "occurrences_in_sql": 0,
+        "sql_len": 4301,
+        "verdict": "Не формируется SQL датасета; период наставничества по ней строить нельзя."
+      }
+    ],
+    "physical_schemas": [
+      {
+        "table": "agile_mart_operational.shifts",
+        "columns": [
+          "id_shift",
+          "id_courier",
+          "id_pool",
+          "shift_start",
+          "shift_finish"
+        ],
+        "used_by": [
+          7802
+        ],
+        "note": "физическая таблица смен с началом и окончанием"
+      },
+      {
+        "table": "agile_mart_operational.pools",
+        "columns": [
+          "id_pool",
+          "id_order",
+          "pool_start",
+          "pool_finish"
+        ],
+        "used_by": [
+          7802
+        ],
+        "note": "структура пула и его заказов — кандидат в trips/trip_orders"
+      },
+      {
+        "table": "agile_mart_operational.courier_queue",
+        "columns": [
+          "courier_id",
+          "id_shift",
+          "queue_in_dttm",
+          "queue_out_dttm",
+          "has_order",
+          "first_delivery_dttm",
+          "cluster_id"
+        ],
+        "used_by": [
+          7802
+        ],
+        "note": "физическая очередь курьеров со временем входа/выхода"
+      },
+      {
+        "table": "agile_mart_operational.photo_control_shift_attempt",
+        "columns": [
+          "courier_id",
+          "attempt_dt",
+          "attempt_n",
+          "attempt_start",
+          "shift_opened"
+        ],
+        "used_by": [
+          7712
+        ],
+        "note": "факты фотоконтроля начала смены"
+      },
+      {
+        "table": "mart_mixed.darkstore_time",
+        "columns": [
+          "id_order",
+          "id_general",
+          "shopno",
+          "date_order"
+        ],
+        "used_by": [
+          7802
+        ],
+        "note": "основной заказный источник даркстора"
+      },
+      {
+        "table": "mart_mixed.darkstore_time_sheet",
+        "columns_count": 121,
+        "used_by": [
+          3466,
+          7021
+        ],
+        "note": "основная витрина таймшита; 121 колонка используется датасетом 3466"
+      },
+      {
+        "table": "ods.timesheetfact",
+        "columns": [
+          "id_sbor",
+          "time_start",
+          "time_end",
+          "id_tt"
+        ],
+        "used_by": [
+          7021
+        ],
+        "note": "факты табеля сборщиков"
+      },
+      {
+        "table": "ods.v_couriers",
+        "columns": [
+          "id",
+          "name"
+        ],
+        "used_by": [
+          7802,
+          7712
+        ],
+        "note": "справочник курьеров"
+      },
+      {
+        "table": "ods.v_tt",
+        "columns": [
+          "id_tt",
+          "region_tt"
+        ],
+        "used_by": [
+          7802,
+          7712
+        ],
+        "note": "справочник торговых точек"
+      },
+      {
+        "table": "mart.org_unit_actual",
+        "columns": [
+          "org_unit_id",
+          "zone_cluster",
+          "leader_curators",
+          "manager_delivery"
+        ],
+        "used_by": [
+          7802,
+          7712,
+          3466
+        ],
+        "note": "оргструктура и кластеры"
+      }
+    ],
+    "derived_expressions": [
+      {
+        "dataset_id": 7802,
+        "column": "rn_shift",
+        "expression": "row_number() OVER (PARTITION BY id_shift ORDER BY shopno NULLS LAST)",
+        "meaning": "нумерация строк внутри смены; rn_shift = 1 даёт одну строку на смену"
+      },
+      {
+        "dataset_id": 7802,
+        "column": "useless_minutes",
+        "expression": "round(shift_raw) - round(wait_raw) - round(assembly_raw) - round(delivery_raw)",
+        "meaning": "простой вычисляется как остаток; shift = wait + assembly + delivery + useless"
+      },
+      {
+        "dataset_id": 7802,
+        "column": "shift_minutes",
+        "expression": "round(x.shift_raw::numeric, 1)",
+        "meaning": "длительность смены в минутах, вычисляется из shift_start/shift_finish"
+      },
+      {
+        "dataset_id": 3466,
+        "column": "deadline_sbor",
+        "expression": "date_supply_untill - coalesce(sla_delivery_time_all, 0) * 60",
+        "meaning": "дедлайн сборки — вычисляемое значение, не факт"
+      },
+      {
+        "dataset_id": 3466,
+        "column": "last_sbor_touch",
+        "expression": "coalesce(date_set_cell, date_f_status_3_5)",
+        "meaning": "последнее касание сборки — вычисляемое"
+      },
+      {
+        "dataset_id": 7021,
+        "column": "shift_type",
+        "expression": "if(toDate(time_end) > toDate(time_start), 'Ночной', 'Дневной')",
+        "meaning": "тип смены СБОРЩИКА вычисляется из табеля ods.timesheetfact"
+      },
+      {
+        "dataset_id": 7021,
+        "column": "is_night_shift",
+        "expression": "if(shift_type IS NULL, NULL, toUInt8(shift_type = 'Ночной'))",
+        "meaning": "полностью производное от shift_type"
+      },
+      {
+        "dataset_id": 7021,
+        "column": "has_timesheet",
+        "expression": "if(id_sbor IS NULL, 0, 1)",
+        "meaning": "признак наличия табеля"
+      },
+      {
+        "dataset_id": 5939,
+        "column": "enough_shifts_for_mentor",
+        "expression": "count(CASE WHEN shift_rn_trainee IS NOT NULL THEN 1 END) OVER (PARTITION BY person_code, date_start_work, mentor_at_date)",
+        "meaning": "оконный агрегат, не хранимый факт"
+      },
+      {
+        "dataset_id": 7712,
+        "column": "shift_open_time",
+        "expression": "NULL::timestamp в ветке курьеров без попытки",
+        "meaning": "для курьеров без фотоконтроля поле намеренно NULL"
+      }
+    ],
+    "transfer_reasons_2339": [
+      "Перенос заказа на следующий день из-за невозможности доставки",
+      "***REMOVED*** даты доставки: Долгое ожидание сборки",
+      "***REMOVED*** даты доставки: Долгий поиск курьера",
+      "***REMOVED*** даты доставки: <ФИО>",
+      "***REMOVED*** даты доставки: Дежурный не обновил поиск"
+    ]
+  }
+}

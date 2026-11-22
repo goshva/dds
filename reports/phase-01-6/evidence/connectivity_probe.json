@@ -1,0 +1,129 @@
+{
+  "generated_at": "2026-11-21T21:16:33.054Z",
+  "base_url_host": "superset.svc.vkusvill.ru",
+  "steps": {
+    "login": {
+      "ok": true,
+      "auth_mode": "username-password"
+    },
+    "csrf": {
+      "ok": true,
+      "http_status": 200
+    },
+    "databases": {
+      "ok": true,
+      "count": 0,
+      "list": []
+    }
+  },
+  "datasets": [
+    {
+      "dataset_id": 5939,
+      "ok": true,
+      "table_name": "hr_daily_pers_mentors",
+      "kind": "virtual",
+      "schema": "agile_mart_techaudit",
+      "database": {
+        "id": 96,
+        "name": "ch_10.0.112.21",
+        "backend": "clickhousedb"
+      },
+      "columns_count": 70,
+      "metrics_count": 31,
+      "sql_len": 4301,
+      "sql_redacted_present": true
+    },
+    {
+      "dataset_id": 7802,
+      "ok": true,
+      "table_name": "shift_time_breakdown",
+      "kind": "virtual",
+      "schema": "agile_mart_operational",
+      "database": {
+        "id": 76,
+        "name": "gp_10.0.112.100/dwh",
+        "backend": "postgresql"
+      },
+      "columns_count": 23,
+      "metrics_count": 1,
+      "sql_len": 10498,
+      "sql_redacted_present": true
+    },
+    {
+      "dataset_id": 7712,
+      "ok": true,
+      "table_name": "photo_control_shift_bi",
+      "kind": "virtual",
+      "schema": "agile_mart_operational",
+      "database": {
+        "id": 76,
+        "name": "gp_10.0.112.100/dwh",
+        "backend": "postgresql"
+      },
+      "columns_count": 54,
+      "metrics_count": 1,
+      "sql_len": 6396,
+      "sql_redacted_present": true
+    },
+    {
+      "dataset_id": 7021,
+      "ok": true,
+      "table_name": "ds_collectors_prod",
+      "kind": "virtual",
+      "schema": null,
+      "database": {
+        "id": 96,
+        "name": "ch_10.0.112.21",
+        "backend": "clickhousedb"
+      },
+      "columns_count": 41,
+      "metrics_count": 12,
+      "sql_len": 9437,
+      "sql_redacted_present": true
+    },
+    {
+      "dataset_id": 3466,
+      "ok": true,
+      "table_name": "darkstore_time_sheet",
+      "kind": "virtual",
+      "schema": "mart_mixed",
+      "database": {
+        "id": 92,
+        "name": "ch_10.0.112.21/default",
+        "backend": "clickhousedb"
+      },
+      "columns_count": 167,
+      "metrics_count": 243,
+      "sql_len": 38370,
+      "sql_redacted_present": true
+    },
+    {
+      "dataset_id": 2339,
+      "ok": true,
+      "table_name": "Перенесенные заказы",
+      "kind": "virtual",
+      "schema": "dbo",
+      "database": {
+        "id": 6,
+        "name": "Reports",
+        "backend": "mssql"
+      },
+      "columns_count": 107,
+      "metrics_count": 1,
+      "sql_len": 881,
+      "sql_redacted_present": true
+    }
+  ],
+  "probe": {
+    "database_id": 92,
+    "status": "error",
+    "row_count": 0,
+    "columns": [],
+    "errors": [],
+    "duration_ms": 575
+  },
+  "errors": [
+    "SQL Lab probe: error "
+  ],
+  "total_duration_ms": 9036
+}

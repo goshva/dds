@@ -1,0 +1,173 @@
+{
+  "generated_at": "2026-11-22T09:32:02.423Z",
+  "probes": [
+    {
+      "label": "openapi-swagger",
+      "path": "/swagger/v1/swagger.json",
+      "status": 404,
+      "ok": false,
+      "ms": 978,
+      "preview": "{\"errors\":[{\"message\":\"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\"error_type\":\"GENERIC_BACKEND_ERROR\",\"level\":\"error\",\"extra\":{\"issue_codes\":[{\"code\":1011,\"message\":\"Issue 1011 - Произошла неизвестная ошибка.\"}]}}]}"
+    },
+    {
+      "label": "openapi-json",
+      "path": "/api/v1/openapi.json",
+      "status": 404,
+      "ok": false,
+      "ms": 996,
+      "preview": "{\"errors\":[{\"message\":\"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\"error_type\":\"GENERIC_BACKEND_ERROR\",\"level\":\"error\",\"extra\":{\"issue_codes\":[{\"code\":1011,\"message\":\"Issue 1011 - Произошла неизвестная ошибка.\"}]}}]}"
+    },
+    {
+      "label": "dataset-list",
+      "path": "/api/v1/dataset/?q=(page%3A0%2Cpage_size%3A1)",
+      "status": 200,
+      "ok": true,
+      "ms": 1074,
+      "preview": "{\"count\":3778,\"description_columns\":{},\"ids\":[78],\"label_columns\":{\"catalog\":\"Каталог\",\"changed_by.first_name\":\"Changed By First Name\",\"changed_by.id\":\"Changed By Id\",\"changed_by.last_name\":\"Changed By Last Name\",\"changed_by_name\":\"Changed By Name\",\"changed_on_delta_humanized\":\"Changed On Delta Humanized\",\"changed_on_utc\":\"Changed On Utc\",\"configure_cache_dataset\":\"Configure Cache Dataset\",\"database.database_name\":\"Database Database Name\",\"database.id\":\"Database Id\",\"database.uuid\":\"Database Uui"
+    },
+    {
+      "label": "chart-list",
+      "path": "/api/v1/chart/?q=(page%3A0%2Cpage_size%3A1)",
+      "status": 200,
+      "ok": true,
+      "ms": 1092,
+      "preview": "{\"count\":19928,\"description_columns\":{},\"ids\":[32585],\"label_columns\":{\"cache_timeout\":\"Cache Timeout\",\"certification_details\":\"Certification Details\",\"certified_by\":\"Согласовано\",\"changed_by.first_name\":\"Changed By First Name\",\"changed_by.id\":\"Changed By Id\",\"changed_by.last_name\":\"Changed By Last Name\",\"changed_by_name\":\"Changed By Name\",\"changed_on_delta_humanized\":\"Changed On Delta Humanized\",\"changed_on_dttm\":\"Changed On Dttm\",\"changed_on_utc\":\"Changed On Utc\",\"created_by.first_name\":\"Creat"
+    },
+    {
+      "label": "dashboard-list",
+      "path": "/api/v1/dashboard/?q=(page%3A0%2Cpage_size%3A1)",
+      "status": 200,
+      "ok": true,
+      "ms": 1650,
+      "preview": "{\"count\":332,\"description_columns\":{},\"ids\":[1681],\"label_columns\":{\"certification_details\":\"Certification Details\",\"certified_by\":\"Согласовано\",\"changed_by.first_name\":\"Changed By First Name\",\"changed_by.id\":\"Changed By Id\",\"changed_by.last_name\":\"Changed By Last Name\",\"changed_by_name\":\"Changed By Name\",\"changed_on_delta_humanized\":\"Changed On Delta Humanized\",\"changed_on_utc\":\"Changed On Utc\",\"created_by.first_name\":\"Created By First Name\",\"created_by.id\":\"Created By Id\",\"created_by.last_name"
+    },
+    {
+      "label": "dataset-3466",
+      "path": "/api/v1/dataset/3466",
+      "status": 200,
+      "ok": true,
+      "ms": 786,
+      "preview": "{\"id\":3466,\"result\":{\"always_filter_main_dttm\":false,\"cache_timeout\":null,\"catalog\":null,\"changed_by\":{\"first_name\":\"Юлия\",\"last_name\":\"Селукова\"},\"changed_on\":\"2026-11-06T07:17:28.360473\",\"changed_on_humanized\":\"16 дней назад\",\"column_formats\":{\"apt_coll_>20m_share\":\",.2%\",\"avg_col_time_without_wait\":\".1f\",\"avg_collection\":\",.2f\",\"avg_orders_col_real\":\",.2f\",\"avg_pay2cell\":\"d\",\"avg_qty_collected_ord\":\"d\",\"avg_qty_collected_per_1_sbor\":\"d\",\"avg_qty_collected_sheet\":\"d\",\"avg_qty_delivered_per_1_c"
+    },
+    {
+      "label": "dataset-7802",
+      "path": "/api/v1/dataset/7802",
+      "status": 200,
+      "ok": true,
+      "ms": 594,
+      "preview": "{\"id\":7802,\"result\":{\"always_filter_main_dttm\":false,\"cache_timeout\":null,\"catalog\":\"dwh\",\"changed_by\":{\"first_name\":\"Дмитрий\",\"last_name\":\"Усов\"},\"changed_on\":\"2026-11-18T20:29:03.847685\",\"changed_on_humanized\":\"3 дня назад\",\"column_formats\":{},\"columns\":[{\"advanced_data_type\":null,\"changed_on\":\"2026-11-03T12:48:42.421807\",\"column_name\":\"assembly_minutes\",\"created_on\":\"2026-11-03T10:50:23.016139\",\"description\":null,\"expression\":\"\",\"extra\":null,\"filterable\":true,\"groupby\":true,\"id\":119755,\"is_ac"
+    },
+    {
+      "label": "chart-32584",
+      "path": "/api/v1/chart/32584",
+      "status": 200,
+      "ok": true,
+      "ms": 10956,
+      "preview": "{\"result\":{\"cache_timeout\":null,\"certification_details\":null,\"certified_by\":null,\"changed_on_delta_humanized\":\"22 часа назад\",\"dashboards\":[],\"datasource_id\":5542,\"datasource_name_text\":\"mart_mixed.ost_group_ch41\",\"datasource_type\":\"table\",\"datasource_url\":\"/explore/?datasource_type=table&datasource_id=5542\",\"datasource_uuid\":\"88de5996-df6c-46e0-b502-9f771a43a34a\",\"description\":null,\"id\":32584,\"is_managed_externally\":false,\"owners\":[{\"first_name\":\"Даниил\",\"id\":4977,\"last_name\":\"Глушков\"}],\"param"
+    },
+    {
+      "label": "dashboard-1680",
+      "path": "/api/v1/dashboard/1680",
+      "status": 200,
+      "ok": true,
+      "ms": 290,
+      "preview": "{\"result\":{\"certification_details\":\"\",\"certified_by\":\"\",\"changed_by\":{\"first_name\":\"Ольга\",\"id\":4317,\"last_name\":\"Пьяных\"},\"changed_by_name\":\"<ФИО>\",\"changed_on\":\"2026-11-20T19:36:51.993442\",\"changed_on_delta_humanized\":\"день назад\",\"changed_on_locale_zone\":\"2026-11-20T19:36:51.993442+0000\",\"charts\":[\"Остатки партии по ТТ чарт апк 609\"],\"created_by\":{\"first_name\":\"Ольга\",\"id\":4317,\"last_name\":\"Пьяных\"},\"created_on_delta_humanized\":\"день назад\",\"css\":\"/* Controls */ /* dashboard */ /* tile"
+    },
+    {
+      "label": "dashboard-1680-filter-state",
+      "path": "/api/v1/dashboard/1680/filter_state",
+      "status": 405,
+      "ok": false,
+      "ms": 723,
+      "preview": "{\"errors\":[{\"message\":\"405 Method Not Allowed: The method is not allowed for the requested URL.\",\"error_type\":\"GENERIC_BACKEND_ERROR\",\"level\":\"error\",\"extra\":{\"issue_codes\":[{\"code\":1011,\"message\":\"Issue 1011 - Произошла неизвестная ошибка.\"}]}}]}"
+    },
+    {
+      "label": "dashboard-1680-filters",
+      "path": "/api/v1/dashboard/1680/filters",
+      "status": 405,
+      "ok": false,
+      "ms": 1003,
+      "preview": "{\"errors\":[{\"message\":\"405 Method Not Allowed: The method is not allowed for the requested URL.\",\"error_type\":\"GENERIC_BACKEND_ERROR\",\"level\":\"error\",\"extra\":{\"issue_codes\":[{\"code\":1011,\"message\":\"Issue 1011 - Произошла неизвестная ошибка.\"}]}}]}"
+    },
+    {
+      "label": "dashboard-1680-charts",
+      "path": "/api/v1/dashboard/1680/charts",
+      "status": 200,
+      "ok": true,
+      "ms": 1328,
+      "preview": "{\"result\":[{\"cache_timeout\":null,\"certification_details\":null,\"certified_by\":null,\"changed_by\":{\"first_name\":\"Ольга\",\"id\":4317,\"last_name\":\"Пьяных\"},\"changed_on\":\"2026-11-20T18:00:15.892796\",\"created_by\":{\"first_name\":\"Ольга\",\"id\":4317,\"last_name\":\"Пьяных\"},\"description\":null,\"description_markeddown\":\"\",\"form_data\":{\"adhoc_filters\":[{\"clause\":\"WHERE\",\"comparator\":\"No filter\",\"expressionType\":\"SIMPLE\",\"operator\":\"TEMPORAL_RANGE\",\"subject\":\"report_date\"}],\"all_columns\":[\"Товар\",\"Дата производства\""
+    },
+    {
+      "label": "dataset-3466-related",
+      "path": "/api/v1/dataset/3466/related_objects",
+      "status": 200,
+      "ok": true,
+      "ms": 1803,
+      "preview": "{\"charts\":{\"count\":395,\"result\":[{\"id\":32439,\"slice_name\":\"1.2.06 | Сборка | Общая статистика\",\"viz_type\":\"table\"},{\"id\":21266,\"slice_name\":\"Кол-во сборочных листов со временем сборки > 15 мин. (ДК)\",\"viz_type\":\"table\"},{\"id\":32497,\"slice_name\":\"Итоги по дням 5848,7450,6571 Сборка\",\"viz_type\":\"table\"},{\"id\":32517,\"slice_name\":\"Итоговая таблица по дням BI-1000004530\",\"viz_type\":\"table\"},{\"id\":32518,\"slice_name\":\"Итоговая таблица по магазинам по дням BI-1000004530\",\"viz_type\":\"table\"},{\"id\":32583,"
+    },
+    {
+      "label": "dataset-3466-col-values",
+      "path": "/api/v1/dataset/3466/column/date_order/values",
+      "status": 404,
+      "ok": false,
+      "ms": 14,
+      "preview": "{\"errors\":[{\"message\":\"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\"error_type\":\"GENERIC_BACKEND_ERROR\",\"level\":\"error\",\"extra\":{\"issue_codes\":[{\"code\":1011,\"message\":\"Issue 1011 - Произошла неизвестная ошибка.\"}]}}]}"
+    },
+    {
+      "label": "datasource-table-3466-col-values",
+      "path": "/api/v1/datasource/table/3466/column/date_order/values",
+      "status": 403,
+      "ok": false,
+      "ms": 1040,
+      "preview": "{\"message\":\"Forbidden\"}"
+    },
+    {
+      "label": "datasource-table-3466-col-values-slash",
+      "path": "/api/v1/datasource/table/3466/column/date_order/values/",
+      "status": 403,
+      "ok": false,
+      "ms": 977,
+      "preview": "{\"message\":\"Forbidden\"}"
+    },
+    {
+      "label": "table-3466-col-values",
+      "path": "/api/v1/table/3466/column/date_order/values",
+      "status": 404,
+      "ok": false,
+      "ms": 983,
+      "preview": "{\"errors\":[{\"message\":\"404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.\",\"error_type\":\"GENERIC_BACKEND_ERROR\",\"level\":\"error\",\"extra\":{\"issue_codes\":[{\"code\":1011,\"message\":\"Issue 1011 - Произошла неизвестная ошибка.\"}]}}]}"
+    },
+    {
+      "label": "query-list",
+      "path": "/api/v1/query/?q=(page%3A0%2Cpage_size%3A1)",
+      "status": 200,
+      "ok": true,
+      "ms": 1068,
+      "preview": "{\"count\":17,\"description_columns\":{},\"ids\":[25611146],\"label_columns\":{\"changed_on\":\"Changed On\",\"client_id\":\"Client Id\",\"database.database_name\":\"Database Database Name\",\"database.id\":\"Database Id\",\"end_time\":\"Дата конца\",\"error_message\":\"Error Message\",\"executed_sql\":\"Executed Sql\",\"id\":\"id\",\"limit\":\"ЛИМИТ\",\"limiting_factor\":\"Limiting Factor\",\"progress\":\"Прогресс\",\"results_key\":\"Results Key\",\"rows\":\"Строки\",\"schema\":\"Схема\",\"select_as_cta\":\"Select As Cta\",\"sql\":\"Sql\",\"sql_editor_id\":\"Sql Edito"
+    },
+    {
+      "label": "database-92",
+      "path": "/api/v1/database/92",
+      "status": 404,
+      "ok": false,
+      "ms": 1012,
+      "preview": "{\"message\":\"Not found\"}"
+    },
+    {
+      "label": "database-76",
+      "path": "/api/v1/database/76",
+      "status": 404,
+      "ok": false,
+      "ms": 1012,
+      "preview": "{\"message\":\"Not found\"}"
+    },
+    {
+      "label": "me",
+      "path": "/api/v1/me/",
+      "status": 401,
+      "ok": false,
+      "ms": 910,
+      "preview": "{\"message\":\"Not authorized\"}"
+    }
+  ]
+}
