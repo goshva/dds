@@ -1,0 +1,47 @@
+{
+  "datasource": {
+    "id": 3035,
+    "type": "table"
+  },
+  "force": false,
+  "queries": [
+    {
+      "result_type": "timegrains",
+      "columns": [],
+      "metrics": [],
+      "orderby": []
+    }
+  ],
+  "form_data": {
+    "availableTimeGrains": [
+      "P1D",
+      "P1W",
+      "P1M"
+    ],
+    "isTimeGrainsRestricted": true,
+    "enableEmptyFilter": true,
+    "datasource": "3035__table",
+    "adhoc_filters": [],
+    "extra_filters": [],
+    "extra_form_data": {},
+    "metrics": [
+      "count"
+    ],
+    "row_limit": 2000,
+    "showSearch": true,
+    "defaultValue": [
+      "P1D"
+    ],
+    "url_params": {},
+    "inView": true,
+    "viz_type": "filter_timegrain",
+    "type": "NATIVE_FILTER",
+    "dashboardId": 977,
+    "native_filter_id": "NATIVE_FILTER-r2GJE3I0A",
+    "force": false,
+    "result_format": "json",
+    "result_type": "full"
+  },
+  "result_format": "json",
+  "result_type": "full"
+}

@@ -1,0 +1,2474 @@
+{
+ "count": 57,
+ "byStatus": {
+  "200": 56,
+  "202": 1
+ },
+ "byDatasource": {
+  "5979__table": 2,
+  "3035__table": 14,
+  "7000__table": 1,
+  "3100__table": 1,
+  "2694__table": 1,
+  "2693__table": 2,
+  "3101__table": 1,
+  "2698__table": 1,
+  "2709__table": 1,
+  "2710__table": 1,
+  "3495__table": 1,
+  "3102__table": 1,
+  "3103__table": 1,
+  "2675__table": 1,
+  "3104__table": 1,
+  "3499__table": 1,
+  "2293__table": 2,
+  "2679__table": 2,
+  "2685__table": 1,
+  "2848__table": 1,
+  "3106__table": 1,
+  "2712__table": 1,
+  "2667__table": 1,
+  "2687__table": 1,
+  "2323__table": 1,
+  "2324__table": 1,
+  "5874__table": 1,
+  "3108__table": 1,
+  "2690__table": 1,
+  "2701__table": 1,
+  "2318__table": 1,
+  "3109__table": 1,
+  "4730__table": 1,
+  "2674__table": 1,
+  "3110__table": 1,
+  "2692__table": 1,
+  "2735__table": 1,
+  "7008__table": 1,
+  "5428__table": 1,
+  "none": 1
+ },
+ "byVizType": {
+  "table": 4,
+  "echarts_area": 4,
+  "pivot_table_v2": 4,
+  "filter_timecolumn": 1,
+  "filter_timegrain": 1,
+  "filter_select": 42,
+  "null": 1
+ },
+ "byResultType": {
+  "full": 56,
+  "null": 1
+ },
+ "rows": [
+  {
+   "n": 1,
+   "method": "POST",
+   "status": 200,
+   "ms": 287,
+   "started": "2026-11-22T17:58:49.118Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20161}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 5979,
+    "type": "table"
+   },
+   "viz_type": "table",
+   "slice_id": 20161,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "date_update"
+   ],
+   "metrics": [
+    {
+     "aggregate": null,
+     "column": null,
+     "datasourceWarning": false,
+     "expressionType": "SQL",
+     "hasCustomLabel": true,
+     "label": "Последнее обновление данных",
+     "optionName": "metric_iieiq8l9izs_56lqyhovdoj",
+     "sqlExpression": "date_update + interval '3 hour'"
+    }
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    },
+    {
+     "col": "date_update",
+     "op": "TEMPORAL_RANGE",
+     "val": "No filter"
+    }
+   ],
+   "adhoc_filters": [
+    {
+     "col": "date_update",
+     "comparator": "No filter",
+     "expressionType": "SIMPLE"
+    }
+   ],
+   "row_limit": 1,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": null,
+   "groupby": []
+  },
+  {
+   "n": 2,
+   "method": "POST",
+   "status": 200,
+   "ms": 1852,
+   "started": "2026-11-22T17:58:49.124Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20403}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "table",
+   "slice_id": 20403,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 2,
+   "columns": [
+    "night_and_others"
+   ],
+   "metrics": [
+    "qty_orders_delivered",
+    "qty_orders_declined",
+    "qty_orders_in_work",
+    "share_orders_delivered",
+    "share_delivered_taxi",
+    "qty_not_in_slot_all",
+    "share_not_in_slot_all",
+    "share_not_in_slot_under_all",
+    "share_not_in_slot_above_all",
+    "sum_without_bonuses",
+    "sum_with_bonuses"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    },
+    {
+     "col": "date_supply",
+     "op": "TEMPORAL_RANGE",
+     "val": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+    }
+   ],
+   "adhoc_filters": [
+    {
+     "col": null,
+     "comparator": null,
+     "expressionType": "SQL"
+    },
+    {
+     "col": "date_supply",
+     "comparator": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+     "expressionType": "SIMPLE"
+    }
+   ],
+   "row_limit": 100,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": "(gettype NOT IN (6))"
+   },
+   "native_filter_id": null,
+   "groupby": [
+    "night_and_others"
+   ]
+  },
+  {
+   "n": 3,
+   "method": "POST",
+   "status": 200,
+   "ms": 891,
+   "started": "2026-11-22T17:58:49.125Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20623}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "echarts_area",
+   "slice_id": 20623,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "name_service"
+   ],
+   "metrics": [
+    "qty_orders_delivered"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    }
+   ],
+   "adhoc_filters": [],
+   "row_limit": 10000,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": null,
+   "groupby": [
+    "name_service"
+   ]
+  },
+  {
+   "n": 4,
+   "method": "POST",
+   "status": 200,
+   "ms": 4748,
+   "started": "2026-11-22T17:58:49.127Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20624}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "echarts_area",
+   "slice_id": 20624,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "name_tt"
+   ],
+   "metrics": [
+    "qty_orders_delivered"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    }
+   ],
+   "adhoc_filters": [],
+   "row_limit": 10000,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": null,
+   "groupby": [
+    "name_tt"
+   ]
+  },
+  {
+   "n": 5,
+   "method": "POST",
+   "status": 200,
+   "ms": 935,
+   "started": "2026-11-22T17:58:49.128Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20404}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "pivot_table_v2",
+   "slice_id": 20404,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "head_of_delivery",
+    "night_and_others"
+   ],
+   "metrics": [
+    "qty_orders_delivered",
+    "share_delivered_taxi",
+    "qty_not_in_slot_all",
+    "share_not_in_slot_all",
+    "share_not_in_slot_above_all"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    }
+   ],
+   "adhoc_filters": [
+    {
+     "col": null,
+     "comparator": null,
+     "expressionType": "SQL"
+    }
+   ],
+   "row_limit": 100,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": "(gettype NOT IN (6))"
+   },
+   "native_filter_id": null,
+   "groupby": null
+  },
+  {
+   "n": 6,
+   "method": "POST",
+   "status": 200,
+   "ms": 1079,
+   "started": "2026-11-22T17:58:49.130Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20405}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "pivot_table_v2",
+   "slice_id": 20405,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "night_and_others",
+    "Слот / динамическая"
+   ],
+   "metrics": [
+    "qty_orders_delivered",
+    "qty_orders_declined",
+    "qty_orders_in_work",
+    "share_orders_delivered",
+    "share_delivered_taxi",
+    "qty_not_in_slot_all",
+    "share_not_in_slot_all",
+    "share_not_in_slot_under_all",
+    "share_not_in_slot_above_all",
+    "sum_with_bonuses",
+    "sum_without_bonuses"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    }
+   ],
+   "adhoc_filters": [
+    {
+     "col": null,
+     "comparator": null,
+     "expressionType": "SQL"
+    }
+   ],
+   "row_limit": 100,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": "(gettype NOT IN (6))"
+   },
+   "native_filter_id": null,
+   "groupby": null
+  },
+  {
+   "n": 7,
+   "method": "POST",
+   "status": 200,
+   "ms": 159,
+   "started": "2026-11-22T17:58:50.644Z",
+   "qs": {},
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "filter_timecolumn",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": null,
+   "native_filter_id": "NATIVE_FILTER-CbBXkIUJh",
+   "groupby": null
+  },
+  {
+   "n": 8,
+   "method": "POST",
+   "status": 200,
+   "ms": 105,
+   "started": "2026-11-22T17:58:50.646Z",
+   "qs": {},
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "filter_timegrain",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": null,
+   "native_filter_id": "NATIVE_FILTER-r2GJE3I0A",
+   "groupby": null
+  },
+  {
+   "n": 9,
+   "method": "POST",
+   "status": 200,
+   "ms": 329,
+   "started": "2026-11-22T17:58:50.649Z",
+   "qs": {},
+   "datasource": {
+    "id": 7000,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "zone_cluster"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-DlKAqz-JayIroaGrCftKG",
+   "groupby": [
+    "zone_cluster"
+   ]
+  },
+  {
+   "n": 10,
+   "method": "POST",
+   "status": 200,
+   "ms": 211,
+   "started": "2026-11-22T17:58:50.650Z",
+   "qs": {},
+   "datasource": {
+    "id": 3100,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "head_of_delivery"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-3nbaRVKfX",
+   "groupby": [
+    "head_of_delivery"
+   ]
+  },
+  {
+   "n": 11,
+   "method": "POST",
+   "status": 200,
+   "ms": 149,
+   "started": "2026-11-22T17:58:50.652Z",
+   "qs": {},
+   "datasource": {
+    "id": 2694,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "leader"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-xlVj4C9dy",
+   "groupby": [
+    "leader"
+   ]
+  },
+  {
+   "n": 12,
+   "method": "POST",
+   "status": 200,
+   "ms": 284,
+   "started": "2026-11-22T17:58:50.653Z",
+   "qs": {},
+   "datasource": {
+    "id": 2693,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "senior"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-6vljMpWnE",
+   "groupby": [
+    "senior"
+   ]
+  },
+  {
+   "n": 13,
+   "method": "POST",
+   "status": 200,
+   "ms": 174,
+   "started": "2026-11-22T17:58:50.655Z",
+   "qs": {},
+   "datasource": {
+    "id": 2693,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "senior"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-gatz_jDPm",
+   "groupby": [
+    "senior"
+   ]
+  },
+  {
+   "n": 14,
+   "method": "POST",
+   "status": 200,
+   "ms": 148,
+   "started": "2026-11-22T17:58:50.657Z",
+   "qs": {},
+   "datasource": {
+    "id": 3101,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "leader_express"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-XXy8xOi91",
+   "groupby": [
+    "leader_express"
+   ]
+  },
+  {
+   "n": 15,
+   "method": "POST",
+   "status": 200,
+   "ms": 206,
+   "started": "2026-11-22T17:58:50.658Z",
+   "qs": {},
+   "datasource": {
+    "id": 2698,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "senior_express"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-z1-mWlm3y",
+   "groupby": [
+    "senior_express"
+   ]
+  },
+  {
+   "n": 16,
+   "method": "POST",
+   "status": 200,
+   "ms": 242,
+   "started": "2026-11-22T17:58:50.659Z",
+   "qs": {},
+   "datasource": {
+    "id": 2709,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "courier"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-pJcK9zDVK",
+   "groupby": [
+    "courier"
+   ]
+  },
+  {
+   "n": 17,
+   "method": "POST",
+   "status": 200,
+   "ms": 176,
+   "started": "2026-11-22T17:58:50.660Z",
+   "qs": {},
+   "datasource": {
+    "id": 2710,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "id_courier"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-npsejQJM-",
+   "groupby": [
+    "id_courier"
+   ]
+  },
+  {
+   "n": 18,
+   "method": "POST",
+   "status": 200,
+   "ms": 178,
+   "started": "2026-11-22T17:58:50.661Z",
+   "qs": {},
+   "datasource": {
+    "id": 3495,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "courier_type"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-k_iv6Sgti",
+   "groupby": [
+    "courier_type"
+   ]
+  },
+  {
+   "n": 19,
+   "method": "POST",
+   "status": 200,
+   "ms": 228,
+   "started": "2026-11-22T17:58:50.663Z",
+   "qs": {},
+   "datasource": {
+    "id": 3102,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "senior_of_courier"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-hRGGlQCAi",
+   "groupby": [
+    "senior_of_courier"
+   ]
+  },
+  {
+   "n": 20,
+   "method": "POST",
+   "status": 200,
+   "ms": 219,
+   "started": "2026-11-22T17:58:50.664Z",
+   "qs": {},
+   "datasource": {
+    "id": 3103,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "geo"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-67tISJ6ZO",
+   "groupby": [
+    "geo"
+   ]
+  },
+  {
+   "n": 21,
+   "method": "POST",
+   "status": 200,
+   "ms": 243,
+   "started": "2026-11-22T17:58:50.665Z",
+   "qs": {},
+   "datasource": {
+    "id": 2675,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "id_group"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-UGHy82Pfu",
+   "groupby": [
+    "id_group"
+   ]
+  },
+  {
+   "n": 22,
+   "method": "POST",
+   "status": 200,
+   "ms": 287,
+   "started": "2026-11-22T17:58:50.665Z",
+   "qs": {},
+   "datasource": {
+    "id": 3104,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "pom"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-BEEaC8Lf5",
+   "groupby": [
+    "pom"
+   ]
+  },
+  {
+   "n": 23,
+   "method": "POST",
+   "status": 200,
+   "ms": 255,
+   "started": "2026-11-22T17:58:50.666Z",
+   "qs": {},
+   "datasource": {
+    "id": 3499,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "pom_now"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-se8ZYyxyp",
+   "groupby": [
+    "pom_now"
+   ]
+  },
+  {
+   "n": 24,
+   "method": "POST",
+   "status": 200,
+   "ms": 162,
+   "started": "2026-11-22T17:58:50.667Z",
+   "qs": {},
+   "datasource": {
+    "id": 2293,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "shopno"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-xY1pKYb8B",
+   "groupby": [
+    "shopno"
+   ]
+  },
+  {
+   "n": 25,
+   "method": "POST",
+   "status": 200,
+   "ms": 234,
+   "started": "2026-11-22T17:58:50.669Z",
+   "qs": {},
+   "datasource": {
+    "id": 2293,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "shopno"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-R1ghs4mqE",
+   "groupby": [
+    "shopno"
+   ]
+  },
+  {
+   "n": 26,
+   "method": "POST",
+   "status": 200,
+   "ms": 236,
+   "started": "2026-11-22T17:58:50.670Z",
+   "qs": {},
+   "datasource": {
+    "id": 2679,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "region_tt"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-VRXzIxA6G",
+   "groupby": [
+    "region_tt"
+   ]
+  },
+  {
+   "n": 27,
+   "method": "POST",
+   "status": 200,
+   "ms": 228,
+   "started": "2026-11-22T17:58:50.671Z",
+   "qs": {},
+   "datasource": {
+    "id": 2679,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "region_tt"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-L6BXBZT_2",
+   "groupby": [
+    "region_tt"
+   ]
+  },
+  {
+   "n": 28,
+   "method": "POST",
+   "status": 200,
+   "ms": 359,
+   "started": "2026-11-22T17:58:50.673Z",
+   "qs": {},
+   "datasource": {
+    "id": 2685,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "area_tt"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-3n4TScFj5",
+   "groupby": [
+    "area_tt"
+   ]
+  },
+  {
+   "n": 29,
+   "method": "POST",
+   "status": 200,
+   "ms": 239,
+   "started": "2026-11-22T17:58:50.675Z",
+   "qs": {},
+   "datasource": {
+    "id": 2848,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "feature_tt"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-7BpfA7IZq",
+   "groupby": [
+    "feature_tt"
+   ]
+  },
+  {
+   "n": 30,
+   "method": "POST",
+   "status": 200,
+   "ms": 243,
+   "started": "2026-11-22T17:58:50.676Z",
+   "qs": {},
+   "datasource": {
+    "id": 3106,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "out_of_mkad"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-B4_FPofcG",
+   "groupby": [
+    "out_of_mkad"
+   ]
+  },
+  {
+   "n": 31,
+   "method": "POST",
+   "status": 200,
+   "ms": 235,
+   "started": "2026-11-22T17:58:50.677Z",
+   "qs": {},
+   "datasource": {
+    "id": 2712,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "in_dark_area"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-KdgYQaPnk",
+   "groupby": [
+    "in_dark_area"
+   ]
+  },
+  {
+   "n": 32,
+   "method": "POST",
+   "status": 200,
+   "ms": 245,
+   "started": "2026-11-22T17:58:50.678Z",
+   "qs": {},
+   "datasource": {
+    "id": 2667,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "dark"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-5tyXLb8va",
+   "groupby": [
+    "dark"
+   ]
+  },
+  {
+   "n": 33,
+   "method": "POST",
+   "status": 200,
+   "ms": 294,
+   "started": "2026-11-22T17:58:50.679Z",
+   "qs": {},
+   "datasource": {
+    "id": 2687,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "name_service"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-cfAYRec_z",
+   "groupby": [
+    "name_service"
+   ]
+  },
+  {
+   "n": 34,
+   "method": "POST",
+   "status": 200,
+   "ms": 182,
+   "started": "2026-11-22T17:58:50.680Z",
+   "qs": {},
+   "datasource": {
+    "id": 2323,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "night"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-GpNbUH5FK",
+   "groupby": [
+    "night"
+   ]
+  },
+  {
+   "n": 35,
+   "method": "POST",
+   "status": 200,
+   "ms": 228,
+   "started": "2026-11-22T17:58:50.681Z",
+   "qs": {},
+   "datasource": {
+    "id": 2324,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "slots"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-Y15ZQLgnX",
+   "groupby": [
+    "slots"
+   ]
+  },
+  {
+   "n": 36,
+   "method": "POST",
+   "status": 200,
+   "ms": 281,
+   "started": "2026-11-22T17:58:50.683Z",
+   "qs": {},
+   "datasource": {
+    "id": 5874,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "dk_flag"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-f_O8GRO5PP",
+   "groupby": [
+    "dk_flag"
+   ]
+  },
+  {
+   "n": 37,
+   "method": "POST",
+   "status": 200,
+   "ms": 231,
+   "started": "2026-11-22T17:58:50.684Z",
+   "qs": {},
+   "datasource": {
+    "id": 3108,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "delivery_type_group"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-5tUZHPL2W",
+   "groupby": [
+    "delivery_type_group"
+   ]
+  },
+  {
+   "n": 38,
+   "method": "POST",
+   "status": 200,
+   "ms": 269,
+   "started": "2026-11-22T17:58:50.686Z",
+   "qs": {},
+   "datasource": {
+    "id": 2690,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "delivery_type"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-0t5GHtUT8",
+   "groupby": [
+    "delivery_type"
+   ]
+  },
+  {
+   "n": 39,
+   "method": "POST",
+   "status": 200,
+   "ms": 275,
+   "started": "2026-11-22T17:58:50.691Z",
+   "qs": {},
+   "datasource": {
+    "id": 2701,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "id_general"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-OdYt6B3Ro",
+   "groupby": [
+    "id_general"
+   ]
+  },
+  {
+   "n": 40,
+   "method": "POST",
+   "status": 200,
+   "ms": 265,
+   "started": "2026-11-22T17:58:50.693Z",
+   "qs": {},
+   "datasource": {
+    "id": 2318,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "id_order"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-PWs1LTCNm",
+   "groupby": [
+    "id_order"
+   ]
+  },
+  {
+   "n": 41,
+   "method": "POST",
+   "status": 200,
+   "ms": 267,
+   "started": "2026-11-22T17:58:50.695Z",
+   "qs": {},
+   "datasource": {
+    "id": 3109,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "name_partner"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-iTDG1ffag",
+   "groupby": [
+    "name_partner"
+   ]
+  },
+  {
+   "n": 42,
+   "method": "POST",
+   "status": 200,
+   "ms": 214,
+   "started": "2026-11-22T17:58:50.697Z",
+   "qs": {},
+   "datasource": {
+    "id": 4730,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "name_partner_type"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-Gp0QYZHOif",
+   "groupby": [
+    "name_partner_type"
+   ]
+  },
+  {
+   "n": 43,
+   "method": "POST",
+   "status": 200,
+   "ms": 270,
+   "started": "2026-11-22T17:58:50.698Z",
+   "qs": {},
+   "datasource": {
+    "id": 2674,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "name_pay_way"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-OT42hfINU",
+   "groupby": [
+    "name_pay_way"
+   ]
+  },
+  {
+   "n": 44,
+   "method": "POST",
+   "status": 200,
+   "ms": 256,
+   "started": "2026-11-22T17:58:50.700Z",
+   "qs": {},
+   "datasource": {
+    "id": 3110,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "status_name"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-zbMRIvVG6",
+   "groupby": [
+    "status_name"
+   ]
+  },
+  {
+   "n": 45,
+   "method": "POST",
+   "status": 200,
+   "ms": 259,
+   "started": "2026-11-22T17:58:50.702Z",
+   "qs": {},
+   "datasource": {
+    "id": 2692,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "source_name"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-WL3pY-QUI",
+   "groupby": [
+    "source_name"
+   ]
+  },
+  {
+   "n": 46,
+   "method": "POST",
+   "status": 200,
+   "ms": 256,
+   "started": "2026-11-22T17:58:50.703Z",
+   "qs": {},
+   "datasource": {
+    "id": 2735,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "luck_or_fall"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-fgVT3SVpz",
+   "groupby": [
+    "luck_or_fall"
+   ]
+  },
+  {
+   "n": 47,
+   "method": "POST",
+   "status": 200,
+   "ms": 641,
+   "started": "2026-11-22T17:58:50.705Z",
+   "qs": {},
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "dk_flag"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER--OC9K6dLYWEUY4k-7RQEG",
+   "groupby": [
+    "dk_flag"
+   ]
+  },
+  {
+   "n": 48,
+   "method": "POST",
+   "status": 200,
+   "ms": 263,
+   "started": "2026-11-22T17:58:50.707Z",
+   "qs": {},
+   "datasource": {
+    "id": 7008,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "cafebakery_shopno"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-TEFBB_Ae4cOUelP2LR54k",
+   "groupby": [
+    "cafebakery_shopno"
+   ]
+  },
+  {
+   "n": 49,
+   "method": "POST",
+   "status": 200,
+   "ms": 692,
+   "started": "2026-11-22T17:58:50.708Z",
+   "qs": {},
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "is_returned_store"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-S8k3NK1fAF",
+   "groupby": [
+    "is_returned_store"
+   ]
+  },
+  {
+   "n": 50,
+   "method": "POST",
+   "status": 200,
+   "ms": 258,
+   "started": "2026-11-22T17:58:50.710Z",
+   "qs": {},
+   "datasource": {
+    "id": 5428,
+    "type": "table"
+   },
+   "viz_type": "filter_select",
+   "slice_id": null,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "return_due_to_customer_fault"
+   ],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": 2000,
+   "time_range": null,
+   "granularity": null,
+   "extras": {
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": "NATIVE_FILTER-uV3-lPC6bM",
+   "groupby": [
+    "return_due_to_customer_fault"
+   ]
+  },
+  {
+   "n": 51,
+   "method": "POST",
+   "status": 202,
+   "ms": 1368,
+   "started": "2026-11-22T18:00:15.612Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20161}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 5979,
+    "type": "table"
+   },
+   "viz_type": "table",
+   "slice_id": 20161,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "date_update"
+   ],
+   "metrics": [
+    {
+     "aggregate": null,
+     "column": null,
+     "datasourceWarning": false,
+     "expressionType": "SQL",
+     "hasCustomLabel": true,
+     "label": "Последнее обновление данных",
+     "optionName": "metric_iieiq8l9izs_56lqyhovdoj",
+     "sqlExpression": "date_update + interval '3 hour'"
+    }
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "IN",
+     "val": [
+      "7745"
+     ]
+    },
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "feature_tt",
+     "op": "IN",
+     "val": [
+      "ДаркСтор"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    },
+    {
+     "col": "date_update",
+     "op": "TEMPORAL_RANGE",
+     "val": "No filter"
+    }
+   ],
+   "adhoc_filters": [
+    {
+     "col": "date_update",
+     "comparator": "No filter",
+     "expressionType": "SIMPLE"
+    }
+   ],
+   "row_limit": 1,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": null,
+   "groupby": []
+  },
+  {
+   "n": 52,
+   "method": "POST",
+   "status": 200,
+   "ms": 9177,
+   "started": "2026-11-22T18:00:15.613Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20403}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "table",
+   "slice_id": 20403,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 2,
+   "columns": [
+    "night_and_others"
+   ],
+   "metrics": [
+    "qty_orders_delivered",
+    "qty_orders_declined",
+    "qty_orders_in_work",
+    "share_orders_delivered",
+    "share_delivered_taxi",
+    "qty_not_in_slot_all",
+    "share_not_in_slot_all",
+    "share_not_in_slot_under_all",
+    "share_not_in_slot_above_all",
+    "sum_without_bonuses",
+    "sum_with_bonuses"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "IN",
+     "val": [
+      "7745"
+     ]
+    },
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "feature_tt",
+     "op": "IN",
+     "val": [
+      "ДаркСтор"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    },
+    {
+     "col": "date_supply",
+     "op": "TEMPORAL_RANGE",
+     "val": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)"
+    }
+   ],
+   "adhoc_filters": [
+    {
+     "col": null,
+     "comparator": null,
+     "expressionType": "SQL"
+    },
+    {
+     "col": "date_supply",
+     "comparator": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+     "expressionType": "SIMPLE"
+    }
+   ],
+   "row_limit": 100,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": "(gettype NOT IN (6))"
+   },
+   "native_filter_id": null,
+   "groupby": [
+    "night_and_others"
+   ]
+  },
+  {
+   "n": 53,
+   "method": "POST",
+   "status": 200,
+   "ms": 2771,
+   "started": "2026-11-22T18:00:15.614Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20623}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "echarts_area",
+   "slice_id": 20623,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "name_service"
+   ],
+   "metrics": [
+    "qty_orders_delivered"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "IN",
+     "val": [
+      "7745"
+     ]
+    },
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "feature_tt",
+     "op": "IN",
+     "val": [
+      "ДаркСтор"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    }
+   ],
+   "adhoc_filters": [],
+   "row_limit": 10000,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": null,
+   "groupby": [
+    "name_service"
+   ]
+  },
+  {
+   "n": 54,
+   "method": "POST",
+   "status": 200,
+   "ms": 3611,
+   "started": "2026-11-22T18:00:15.615Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20624}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "echarts_area",
+   "slice_id": 20624,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "name_tt"
+   ],
+   "metrics": [
+    "qty_orders_delivered"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "IN",
+     "val": [
+      "7745"
+     ]
+    },
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "feature_tt",
+     "op": "IN",
+     "val": [
+      "ДаркСтор"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    }
+   ],
+   "adhoc_filters": [],
+   "row_limit": 10000,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": ""
+   },
+   "native_filter_id": null,
+   "groupby": [
+    "name_tt"
+   ]
+  },
+  {
+   "n": 55,
+   "method": "POST",
+   "status": 200,
+   "ms": 2830,
+   "started": "2026-11-22T18:00:15.616Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20404}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "pivot_table_v2",
+   "slice_id": 20404,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "head_of_delivery",
+    "night_and_others"
+   ],
+   "metrics": [
+    "qty_orders_delivered",
+    "share_delivered_taxi",
+    "qty_not_in_slot_all",
+    "share_not_in_slot_all",
+    "share_not_in_slot_above_all"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "IN",
+     "val": [
+      "7745"
+     ]
+    },
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "feature_tt",
+     "op": "IN",
+     "val": [
+      "ДаркСтор"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    }
+   ],
+   "adhoc_filters": [
+    {
+     "col": null,
+     "comparator": null,
+     "expressionType": "SQL"
+    }
+   ],
+   "row_limit": 100,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": "(gettype NOT IN (6))"
+   },
+   "native_filter_id": null,
+   "groupby": null
+  },
+  {
+   "n": 56,
+   "method": "POST",
+   "status": 200,
+   "ms": 2218,
+   "started": "2026-11-22T18:00:15.617Z",
+   "qs": {
+    "form_data": "{\"slice_id\":20405}",
+    "dashboard_id": "977"
+   },
+   "datasource": {
+    "id": 3035,
+    "type": "table"
+   },
+   "viz_type": "pivot_table_v2",
+   "slice_id": 20405,
+   "result_type": "full",
+   "result_format": "json",
+   "queries_count": 1,
+   "columns": [
+    "night_and_others",
+    "Слот / динамическая"
+   ],
+   "metrics": [
+    "qty_orders_delivered",
+    "qty_orders_declined",
+    "qty_orders_in_work",
+    "share_orders_delivered",
+    "share_delivered_taxi",
+    "qty_not_in_slot_all",
+    "share_not_in_slot_all",
+    "share_not_in_slot_under_all",
+    "share_not_in_slot_above_all",
+    "sum_with_bonuses",
+    "sum_without_bonuses"
+   ],
+   "filters": [
+    {
+     "col": "shopno",
+     "op": "IN",
+     "val": [
+      "7745"
+     ]
+    },
+    {
+     "col": "shopno",
+     "op": "NOT IN",
+     "val": [
+      "99888",
+      "8519"
+     ]
+    },
+    {
+     "col": "feature_tt",
+     "op": "IN",
+     "val": [
+      "ДаркСтор"
+     ]
+    },
+    {
+     "col": "delivery_type_group",
+     "op": "IN",
+     "val": [
+      "Курьеры",
+      "Такси"
+     ]
+    }
+   ],
+   "adhoc_filters": [
+    {
+     "col": null,
+     "comparator": null,
+     "expressionType": "SQL"
+    }
+   ],
+   "row_limit": 100,
+   "time_range": "DATETIME(\"today\") : DATEADD(DATETIME(\"tomorrow\"), -1, second)",
+   "granularity": "date_supply",
+   "extras": {
+    "time_grain_sqla": "P1D",
+    "having": "",
+    "where": "(gettype NOT IN (6))"
+   },
+   "native_filter_id": null,
+   "groupby": null
+  },
+  {
+   "n": 57,
+   "method": "GET",
+   "status": 200,
+   "ms": 253,
+   "started": "2026-11-22T18:00:18.124Z",
+   "qs": {},
+   "datasource": null,
+   "viz_type": null,
+   "slice_id": null,
+   "result_type": null,
+   "result_format": null,
+   "queries_count": 0,
+   "columns": [],
+   "metrics": [],
+   "filters": [],
+   "adhoc_filters": [],
+   "row_limit": null,
+   "time_range": null,
+   "granularity": null,
+   "extras": null,
+   "native_filter_id": null,
+   "groupby": null
+  }
+ ]
+}
