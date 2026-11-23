@@ -341,11 +341,16 @@ function columnNamesOf(body: Json): string[] {
     const n = fieldName(c);
     if (n && !out.includes(n)) out.push(n);
   }
-  const fd = body?.form_data ?? {};
-  for (const g of [fd.groupby, fd.groupbyRows, fd.groupbyColumns]) {
-    for (const c of Array.isArray(g) ? g : []) {
-      const n = fieldName(c);
-      if (n && !out.includes(n)) out.push(n);
+  // form_data.groupby* is a fallback only when the query does not state its own grain at all.
+  // An explicit `columns: []` (e.g. the totals query of slice 20403) means "no grouping" and must
+  // not inherit the chart-level groupby, otherwise the totals row looks like a missing dimension.
+  if (out.length === 0 && q.columns === undefined) {
+    const fd = body?.form_data ?? {};
+    for (const g of [fd.groupby, fd.groupbyRows, fd.groupbyColumns]) {
+      for (const c of Array.isArray(g) ? g : []) {
+        const n = fieldName(c);
+        if (n && !out.includes(n)) out.push(n);
+      }
     }
   }
   return out;
@@ -1455,10 +1460,11 @@ export function extractObservations(
     }
 
     const colnames = Array.isArray(item?.colnames) ? item.colnames.map(String) : [];
-    // dimensions are checked only when the response keeps them as plain columns:
-    // pivots/series with post_processing turn dimension values into column names by design.
-    const dimensionsCheckable = !isSeries && !meta.postProcessing;
-    const missingDimensions = dimensionsCheckable
+    // column names are only checkable when the response keeps the query shape:
+    // pivots/series with post_processing turn metric and dimension values into column names by design.
+    const shapeCheckable = !isSeries && !meta.postProcessing;
+    const missingMetrics = shapeCheckable ? meta.metricNames.filter((m) => !colnames.includes(m)) : [];
+    const missingDimensions = shapeCheckable
       ? meta.dimensionColumns.filter((d) => d !== meta.temporalChosen && !colnames.includes(d))
       : [];
     const rowLimit = meta.rowLimit;
@@ -1471,7 +1477,7 @@ export function extractObservations(
       dimension_columns: meta.dimensionColumns,
       temporal_chosen: meta.temporalChosen,
       temporal_candidates: meta.temporalColumns,
-      missing_metrics: meta.metricNames.filter((m) => !colnames.includes(m)),
+      missing_metrics: missingMetrics,
       missing_dimensions: missingDimensions,
       row_limit: rowLimit,
       truncated: rowLimit != null && rowLimit > 0 && rowCount >= rowLimit,
