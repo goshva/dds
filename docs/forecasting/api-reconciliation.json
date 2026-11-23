@@ -1,0 +1,487 @@
+{
+  "generated_at": "2026-11-23T14:38:11.953Z",
+  "status": "IDENTICAL",
+  "suitability": "Набор пригоден для импорта; допустимо импортировать любую из версий, рекомендуется сохранить обе как отдельные источники с провенансом.",
+  "collection": {
+    "command": "bun tools/fetch-darkstore-aggregates.ts --live --yes --files 101,102,103,104,105 --shopno 7745 --from 2026-10-13 --to 2026-11-23 --weeks 6 --raw-artifacts --out data/extraction/superset/7745-api-refresh",
+    "strategy": "per-slice (по одному срезу за запрос, с паузами)",
+    "incident": "первый залп из 5 запросов: 2 среза упали (HTTP 500, внутри ответ ClickHouse 429 — лимит движка, не отказ доступа); повторный залп: 4 среза упали; итог собран поштучно — по одному срезу за запрос с паузой 15 с, все пять по 200/full."
+  },
+  "authorization": "Авторизация: успешный вход по логину/паролю из `.env` (значения не читаются в отчёт), CSRF-токен получен. Логины, пароли и токены в отчёте, артефактах и логах задачи не сохраняются.",
+  "old": {
+    "dir": "C:\\soft\\bun\\dds\\data\\extraction\\superset\\7745-6w",
+    "shop_no": "7745",
+    "period": {
+      "from": "2026-10-13",
+      "to": "2026-11-23",
+      "time_range": "2026-10-13 : 2026-11-23",
+      "weeks": 6
+    },
+    "rows": 6892,
+    "sources": [
+      {
+        "slice_id": 20403,
+        "dataset_id": 3035,
+        "request_sha256": "a78687a0590482afa3cc2f3b24f16294c0b8dda1fef53c705efcd073737fcc5a",
+        "file": "tools\\har-out\\101_POST__api_v1_chart_data.request.json"
+      },
+      {
+        "slice_id": 20623,
+        "dataset_id": 3035,
+        "request_sha256": "c25b4ab2df221c9e2edd3756bb1014dc21a99c8076140b576ec31cd237db421d",
+        "file": "tools\\har-out\\102_POST__api_v1_chart_data.request.json"
+      },
+      {
+        "slice_id": 20624,
+        "dataset_id": 3035,
+        "request_sha256": "2a087e4e5703117b33626fdbdc30c050fc888cce84fddeb1e653142154d42ea8",
+        "file": "tools\\har-out\\103_POST__api_v1_chart_data.request.json"
+      },
+      {
+        "slice_id": 20404,
+        "dataset_id": 3035,
+        "request_sha256": "c708defa626d6828089e5c1a2141bb574156657e1429572a3b5ed2c8e1c83aa7",
+        "file": "tools\\har-out\\104_POST__api_v1_chart_data.request.json"
+      },
+      {
+        "slice_id": 20405,
+        "dataset_id": 3035,
+        "request_sha256": "b8139f90dc814a707db029ec4b6b997e5637f755470f090be9a60b304a92e29a",
+        "file": "tools\\har-out\\105_POST__api_v1_chart_data.request.json"
+      }
+    ]
+  },
+  "new": {
+    "dir": "C:\\soft\\bun\\dds\\data\\extraction\\superset\\7745-api-refresh",
+    "shop_no": "7745",
+    "period": {
+      "from": "2026-10-13",
+      "to": "2026-11-23",
+      "time_range": "2026-10-13 : 2026-11-23",
+      "weeks": 6
+    },
+    "rows": 6892,
+    "sources": [
+      {
+        "slice_id": 20403,
+        "dataset_id": 3035,
+        "request_sha256": "a78687a0590482afa3cc2f3b24f16294c0b8dda1fef53c705efcd073737fcc5a",
+        "file": "tools\\har-out\\101_POST__api_v1_chart_data.request.json"
+      },
+      {
+        "slice_id": 20404,
+        "dataset_id": 3035,
+        "request_sha256": "c708defa626d6828089e5c1a2141bb574156657e1429572a3b5ed2c8e1c83aa7",
+        "file": "tools\\har-out\\104_POST__api_v1_chart_data.request.json"
+      },
+      {
+        "slice_id": 20405,
+        "dataset_id": 3035,
+        "request_sha256": "b8139f90dc814a707db029ec4b6b997e5637f755470f090be9a60b304a92e29a",
+        "file": "tools\\har-out\\105_POST__api_v1_chart_data.request.json"
+      },
+      {
+        "slice_id": 20623,
+        "dataset_id": 3035,
+        "request_sha256": "c25b4ab2df221c9e2edd3756bb1014dc21a99c8076140b576ec31cd237db421d",
+        "file": "tools\\har-out\\102_POST__api_v1_chart_data.request.json"
+      },
+      {
+        "slice_id": 20624,
+        "dataset_id": 3035,
+        "request_sha256": "2a087e4e5703117b33626fdbdc30c050fc888cce84fddeb1e653142154d42ea8",
+        "file": "tools\\har-out\\103_POST__api_v1_chart_data.request.json"
+      }
+    ]
+  },
+  "result": {
+    "old_dir": "C:\\soft\\bun\\dds\\data\\extraction\\superset\\7745-6w",
+    "new_dir": "C:\\soft\\bun\\dds\\data\\extraction\\superset\\7745-api-refresh",
+    "generated_at": "2026-11-23T14:38:11.953Z",
+    "tolerance": {
+      "abs": 0,
+      "rel": 0
+    },
+    "period_mismatch": false,
+    "access_changed": false,
+    "scaffold_changed": false,
+    "slices": {
+      "old": [
+        20403,
+        20404,
+        20405,
+        20623,
+        20624
+      ],
+      "new": [
+        20403,
+        20404,
+        20405,
+        20623,
+        20624
+      ],
+      "missing_in_new": [],
+      "new_in_old": []
+    },
+    "counts": {
+      "compared": 6892,
+      "identical": 6892,
+      "value_changed": 0,
+      "new_rows": 0,
+      "missing_rows": 0,
+      "daily_identical": 6881,
+      "totals_identical": 11,
+      "duplicates_old": 0,
+      "duplicates_new": 0
+    },
+    "per_slice": [
+      {
+        "slice_id": 20403,
+        "old_rows": 2189,
+        "new_rows": 2189,
+        "identical": 2200,
+        "value_changed": 0,
+        "added": 0,
+        "missing": 0,
+        "totals_rows_old": 11,
+        "totals_rows_new": 11,
+        "total_old": 62739,
+        "total_new": 62739,
+        "metric_set_changed": false
+      },
+      {
+        "slice_id": 20404,
+        "old_rows": 995,
+        "new_rows": 995,
+        "identical": 995,
+        "value_changed": 0,
+        "added": 0,
+        "missing": 0,
+        "totals_rows_old": 0,
+        "totals_rows_new": 0,
+        "total_old": 62739,
+        "total_new": 62739,
+        "metric_set_changed": false
+      },
+      {
+        "slice_id": 20405,
+        "old_rows": 3498,
+        "new_rows": 3498,
+        "identical": 3498,
+        "value_changed": 0,
+        "added": 0,
+        "missing": 0,
+        "totals_rows_old": 0,
+        "totals_rows_new": 0,
+        "total_old": 62739,
+        "total_new": 62739,
+        "metric_set_changed": false
+      },
+      {
+        "slice_id": 20623,
+        "old_rows": 158,
+        "new_rows": 158,
+        "identical": 158,
+        "value_changed": 0,
+        "added": 0,
+        "missing": 0,
+        "totals_rows_old": 0,
+        "totals_rows_new": 0,
+        "total_old": 62739,
+        "total_new": 62739,
+        "metric_set_changed": false
+      },
+      {
+        "slice_id": 20624,
+        "old_rows": 41,
+        "new_rows": 41,
+        "identical": 41,
+        "value_changed": 0,
+        "added": 0,
+        "missing": 0,
+        "totals_rows_old": 0,
+        "totals_rows_new": 0,
+        "total_old": 62739,
+        "total_new": 62739,
+        "metric_set_changed": false
+      }
+    ],
+    "diffs": [],
+    "quality_changes": [],
+    "quality_improvements": [],
+    "masking": {
+      "masked_rows_old": 995,
+      "masked_rows_new": 995,
+      "hidden_dimension_differences": 995
+    },
+    "aggregates": [
+      {
+        "slice_id": 20403,
+        "metric": "qty_not_in_slot_all",
+        "old_total": 11996,
+        "new_total": 11996,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "qty_orders_declined",
+        "old_total": 1392,
+        "new_total": 1392,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "qty_orders_delivered",
+        "old_total": 62739,
+        "new_total": 62739,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "qty_orders_in_work",
+        "old_total": 0,
+        "new_total": 0,
+        "abs_delta": 0,
+        "rel_delta": null,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "share_delivered_taxi",
+        "old_total": 1.4493630000000002,
+        "new_total": 1.4493630000000002,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "share_not_in_slot_above_all",
+        "old_total": 40.78995699999998,
+        "new_total": 40.78995699999998,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "share_not_in_slot_all",
+        "old_total": 41.45865699999999,
+        "new_total": 41.45865699999999,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "share_not_in_slot_under_all",
+        "old_total": 0.6687,
+        "new_total": 0.6687,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "share_orders_delivered",
+        "old_total": 199,
+        "new_total": 199,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "sum_with_bonuses",
+        "old_total": 98073619.14,
+        "new_total": 98073619.14,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20403,
+        "metric": "sum_without_bonuses",
+        "old_total": 99166039.03000003,
+        "new_total": 99166039.03000003,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20404,
+        "metric": "qty_not_in_slot_all",
+        "old_total": 11996,
+        "new_total": 11996,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20404,
+        "metric": "qty_orders_delivered",
+        "old_total": 62739,
+        "new_total": 62739,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20404,
+        "metric": "share_delivered_taxi",
+        "old_total": 1.4493630000000002,
+        "new_total": 1.4493630000000002,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20404,
+        "metric": "share_not_in_slot_above_all",
+        "old_total": 40.78995699999998,
+        "new_total": 40.78995699999998,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20404,
+        "metric": "share_not_in_slot_all",
+        "old_total": 41.45865699999999,
+        "new_total": 41.45865699999999,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "qty_not_in_slot_all",
+        "old_total": 11996,
+        "new_total": 11996,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "qty_orders_declined",
+        "old_total": 1392,
+        "new_total": 1392,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "qty_orders_delivered",
+        "old_total": 62739,
+        "new_total": 62739,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "qty_orders_in_work",
+        "old_total": 0,
+        "new_total": 0,
+        "abs_delta": 0,
+        "rel_delta": null,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "share_delivered_taxi",
+        "old_total": 2.348848,
+        "new_total": 2.348848,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "share_not_in_slot_above_all",
+        "old_total": 53.873593,
+        "new_total": 53.873593,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "share_not_in_slot_all",
+        "old_total": 61.85172199999999,
+        "new_total": 61.85172199999999,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "share_not_in_slot_under_all",
+        "old_total": 7.978139000000004,
+        "new_total": 7.978139000000004,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "share_orders_delivered",
+        "old_total": 318,
+        "new_total": 318,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "sum_with_bonuses",
+        "old_total": 98073619.14000005,
+        "new_total": 98073619.14000005,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20405,
+        "metric": "sum_without_bonuses",
+        "old_total": 99166039.02999999,
+        "new_total": 99166039.02999999,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20623,
+        "metric": "qty_orders_delivered",
+        "old_total": 62739,
+        "new_total": 62739,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      },
+      {
+        "slice_id": 20624,
+        "metric": "qty_orders_delivered",
+        "old_total": 62739,
+        "new_total": 62739,
+        "abs_delta": 0,
+        "rel_delta": 0,
+        "changed": false
+      }
+    ],
+    "status": "IDENTICAL",
+    "notes": [
+      "Сравнение выполнено по нормализованным наблюдениям; время генерации, порядок строк и служебные поля игнорируются.",
+      "Допуск не задан: сравнение значений строго точное (abs=0, rel=0).",
+      "Маскирование скрыло 995 различий в исходном тексте измерений: значения совпали после приведения к маскированному виду (старая выгрузка хранится замаскированной)."
+    ]
+  }
+}

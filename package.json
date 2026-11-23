@@ -29,7 +29,9 @@
     "dataset:access": "bun tools/probe-dataset-access.ts",
     "pii:redact": "bun tools/redact-pii.ts",
     "pii:test": "bun test tools/redact-pii.test.ts",
-    "pii:inventory": "bun tools/pii-tracked-inventory.ts"
+    "pii:inventory": "bun tools/pii-tracked-inventory.ts",
+    "forecast:db": "bun src/forecasting/cli/db.ts",
+    "forecast:test": "bun test tests/forecasting"
   },
   "devDependencies": {
     "@types/bun": "latest"

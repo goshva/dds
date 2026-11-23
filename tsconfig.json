@@ -8,6 +8,6 @@
     "types": ["bun-types"],
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "tests/**/*.ts"],
   "exclude": ["tools/**/*", "node_modules/**/*"]
 }
