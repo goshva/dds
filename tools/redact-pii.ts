@@ -54,13 +54,23 @@ export function isPersonIdKey(key: string): boolean {
 /** Regex source for the identifier keys, shared by the text rule and key-aware masking. */
 const PERSON_ID_KEY_SOURCE = PERSON_ID_KEYS.join("|");
 
+/** Auth scheme words: they follow the key but are never the secret themselves. */
+const AUTH_SCHEME_WORDS = new Set(["bearer", "basic", "token", "digest", "negotiate", "oauth", "apikey", "api_key"]);
+
+/** Words that follow "bearer/token" in prose and must not be mistaken for a credential. */
+const BEARER_PROSE = new Set([
+  "acquired", "provided", "value", "values", "here", "below", "above", "missing", "invalid",
+  "expired", "set", "not", "and", "the", "a", "an", "is", "was", "will", "must", "should",
+  "authentication", "authorization", "based", "only", "access", "refresh", "string", "jwt",
+]);
+
 /** Latin pairs that are not personal names. */
 const LATIN_STOPWORDS = new Set([
   "dark store", "test user", "hello world", "select from", "order by", "group by",
   "union all", "inner join", "left join", "create table", "values values",
 ]);
 
-const RULES: Array<{ rule: PiiRule; re: RegExp; guard?: (match: string) => boolean }> = [
+const RULES: Array<{ rule: PiiRule; re: RegExp; guard?: (match: string) => boolean; mode?: "bearer" }> = [
   // «<ФИО>» / «<ФИО>» — JS \b is ASCII-only, so Cyrillic uses lookarounds.
   // A maximal run of 2-3 capitalised Cyrillic words is masked (e.g. «<ФИО>»).
   {
@@ -82,6 +92,14 @@ const RULES: Array<{ rule: PiiRule; re: RegExp; guard?: (match: string) => boole
   { rule: "phone", re: /(?:\+7|8)[\s(-]?\d{3}[\s)-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}\b/g },
   {
     rule: "secret",
+    // Authorization / bearer / basic / token + the credential itself.
+    // MUST run before the generic `key=value` rule: otherwise only the scheme word ("Bearer")
+    // is treated as the value and the actual token stays in the text.
+    mode: "bearer",
+    re: /\b(authorization\s*[=:]\s*)?(bearer|basic|token)\s+([A-Za-z0-9._~+/=-]{8,})/gi,
+  },
+  {
+    rule: "secret",
     // (?!<) keeps the placeholders stable: masking twice is idempotent
     re: /\b(session|csrf[_-]?token|x-csrftoken|access[_-]?token|refresh[_-]?token|token|password|authorization|bearer|cookie)\b"?\s*[=:]\s*("?)(?!<)([^\s",;]{4,})\2/gi,
   },
@@ -97,9 +115,26 @@ export function redactText(input: string): RedactResult {
   const counts: Record<PiiRule, number> = { person_name: 0, email: 0, phone: 0, secret: 0, person_code: 0 };
   let text = input;
 
-  for (const { rule, re, guard } of RULES) {
+  for (const { rule, re, guard, mode } of RULES) {
     text = text.replace(re, (match, ...groups) => {
       if (guard && !guard(match)) return match;
+      if (mode === "bearer") {
+        // groups: 0 = optional "Authorization:" prefix, 1 = scheme, 2 = credential
+        const prefix = String(groups[0] ?? "");
+        const scheme = String(groups[1] ?? "").toLowerCase();
+        const credential = String(groups[2] ?? "");
+        if (!credential || credential === MASK.secret) return match;
+        // prose guard: "bearer token acquired", "--token --username", "token value here" are not secrets
+        if (BEARER_PROSE.has(credential.toLowerCase())) return match;
+        if (credential.startsWith("-")) return match;
+        const looksLikeCredential =
+          credential.length >= 20 ||
+          /\d/.test(credential) ||
+          (scheme === "basic" && credential.length >= 8);
+        if (!looksLikeCredential) return match;
+        counts.secret++;
+        return `${prefix}${MASK.secret}`;
+      }
       if (rule === "person_code") {
         // value sits in group 3 (1 = key, 2 = quote); skip empties, JSON nulls and our own placeholder
         const value = String(groups[2] ?? "");
@@ -107,13 +142,17 @@ export function redactText(input: string): RedactResult {
         counts.person_code++;
         return match.replace(/([=:]\s*"?)[^\s",;}]+("?)$/, `$1${PERSON_ID_PLACEHOLDER}$2`);
       }
-      counts[rule]++;
       if (rule === "secret") {
-        // keep the key, mask only the value
-        const key = String(groups[0]).toLowerCase();
-        const mask = key.includes("authorization") || key.includes("bearer") || key.includes("cookie") ? MASK.secret : MASK.secret;
-        return match.replace(/([=:]\s*"?)[^\s",;]{4,}("?)$/, `$1${mask}$2`);
+        // generic key=value rule: groups 0 = key, 1 = quote, 2 = value
+        const value = String(groups[2] ?? "");
+        const quote = String(groups[1] ?? "");
+        // scheme words ("Authorization: Bearer") and our own placeholders are not secrets
+        if (!value || value.startsWith("<") || AUTH_SCHEME_WORDS.has(value.toLowerCase())) return match;
+        counts.secret++;
+        const prefix = match.slice(0, match.length - value.length - quote.length);
+        return `${prefix}${MASK.secret}${quote}`;
       }
+      counts[rule]++;
       return MASK[rule];
     });
   }

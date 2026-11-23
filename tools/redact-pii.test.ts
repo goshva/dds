@@ -54,6 +54,53 @@ describe("redactText", () => {
     expect(text).not.toContain("hunter2secret");
   });
 
+  test("masks the whole Authorization/Bearer pair, not just the scheme word", () => {
+    const TOKEN = ["abcdef", "123456"].join("");
+    const cases = [
+      `Authorization: Bearer ${TOKEN}`,
+      `authorization=Bearer ${TOKEN}`,
+      `Authorization: bearer ${TOKEN}`,
+      `Authorization: Basic ${TOKEN}`,
+      `Bearer ${TOKEN}`,
+      `token ${TOKEN}`,
+    ];
+    for (const input of cases) {
+      const { text, counts } = redactText(input);
+      expect(counts.secret, input).toBeGreaterThanOrEqual(1);
+      expect(text, `token must not survive in: ${input}`).not.toContain(TOKEN);
+      expect(text).toContain("<СЕКРЕТ>");
+    }
+  });
+
+  test("does not mistake prose or CLI flags for credentials", () => {
+    const prose = [
+      'this.log.push("auth: login ok, bearer token acquired");',
+      'this.log.push("auth: bearer token provided");',
+      "--token <jwt> Authorization: Bearer token --username",
+      "the bearer token value is set in .env",
+      "token authentication is required",
+    ];
+    for (const input of prose) {
+      const { counts } = redactText(input);
+      expect(counts.secret, `must not mask prose: ${input}`).toBe(0);
+    }
+  });
+
+  test("keeps the header name while dropping the credential", () => {
+    const TOKEN = ["zzz", "999888777"].join("-");
+    const { text } = redactText(`Authorization: Bearer ${TOKEN}`);
+    expect(text).toBe("Authorization: <СЕКРЕТ>");
+  });
+
+  test("bearer masking is idempotent", () => {
+    const TOKEN = ["tok", "123456789"].join("");
+    const first = redactText(`Authorization: Bearer ${TOKEN}; Bearer ${TOKEN}`);
+    expect(first.counts.secret).toBe(2);
+    const second = redactText(first.text);
+    expect(second.counts.secret).toBe(0);
+    expect(second.text).toBe(first.text);
+  });
+
   test("masks labelled personnel ids", () => {
     const { text, counts } = redactText('{"person_code": "1234567", "id_courier": 9876543}');
     expect(counts.person_code).toBe(2);
@@ -168,8 +215,7 @@ describe("redactJson", () => {
     expect(twice.value).toEqual(once.value);
   });
 
-  test("walks nested structures and reports totals", () => {
-    const input = {
+  test("walks nested structures and reports totals", () => {    const input = {
       meta: { author: NAME3, contact: EMAIL },
       rows: [{ courier: SURNAME1, phone: PHONE_COMPACT }],
       safe: { dataset_id: 3035, shopno: "7745" },
@@ -191,5 +237,45 @@ describe("redactJson", () => {
     expect(value.a[1]).toBeNull();
     expect(value.a[2]).toBe("<ФИО>");
     expect(value.b.c).toBe(3);
+  });
+});
+
+// End-to-end proof that the gate really blocks the two classes the review flagged:
+// numeric personnel ids inside a JSON object and a Bearer token inside a text file.
+describe("publish gate (end-to-end, real files)", () => {
+  const CLI = join(import.meta.dir, "redact-pii.ts");
+  const REPO = join(import.meta.dir, "..");
+  const run = (args: string[]) =>
+    Bun.spawnSync({ cmd: ["bun", CLI, ...args], cwd: REPO, stdout: "pipe", stderr: "pipe" });
+
+  test("gate fails on numeric JSON ids and Bearer tokens, then passes on the masked copies", async () => {
+    const COURIER_ID = ["123", "456"].join("");
+    const PERSON_CODE = ["abc", "123"].join("-");
+    const TOKEN = ["ghp", "abcdef1234567890"].join("_");
+
+    const src = await mkdtemp(join(tmpdir(), "dds-gate-src-"));
+    await Bun.write(
+      join(src, "sample.json"),
+      `${JSON.stringify({ id_courier: Number(COURIER_ID), person_code: PERSON_CODE, note: "ok" }, null, 2)}\n`,
+    );
+    await Bun.write(join(src, "sample.md"), `# access\n\nAuthorization: Bearer ${TOKEN}\n`);
+
+    // 1) raw content must be blocked
+    expect(run(["--in", src, "--gate"]).exitCode).toBe(1);
+
+    // 2) masking produces clean copies
+    const out = await mkdtemp(join(tmpdir(), "dds-gate-out-"));
+    expect(run(["--in", src, "--out", out]).exitCode).toBe(0);
+
+    const maskedJson = await Bun.file(join(out, "sample.json")).text();
+    const maskedMd = await Bun.file(join(out, "sample.md")).text();
+    expect(maskedJson).not.toContain(COURIER_ID);
+    expect(maskedJson).not.toContain(PERSON_CODE);
+    expect(maskedMd).not.toContain(TOKEN);
+    expect(maskedJson).toContain("<ID-СОТРУДНИКА>");
+    expect(maskedMd).toContain("<СЕКРЕТ>");
+
+    // 3) the published copy passes the same gate
+    expect(run(["--in", out, "--gate"]).exitCode).toBe(0);
   });
 });
