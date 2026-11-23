@@ -70,7 +70,10 @@ const FRESHNESS_SLICE = 20161;
 const PERIOD_KEYS = new Set(["date_supply", "__timestamp", "date_update", "date"]);
 const RATIO_RE = /^share_|доля|percent|%/i;
 const METRIC_RE = /^(share_|qty_|sum_|avg_|count|min_|max_|доля)/i;
-const TEMPORAL_LABEL_RE = /date|дата|день|day|week|недел|месяц|month|timestamp|слот|hour|час/i;
+// Date-like dimension names. `слот`/`slot` is deliberately absent: a delivery slot is a business
+// dimension, and treating it as temporal suppressed the real date column (12 rows instead of a
+// daily grid for slice 20405).
+const TEMPORAL_LABEL_RE = /date|дата|день|day|week|недел|месяц|month|timestamp|hour|час/i;
 const WEIGHT_METRIC = "qty_orders_delivered";
 const MSK = "Europe/Moscow";
 
