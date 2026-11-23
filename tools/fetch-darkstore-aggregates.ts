@@ -25,8 +25,10 @@
  * Modes:
  *   dry-run (default) — no network at all; writes the transformed request bodies,
  *                       the metric-kind map and an empty aggregate with headers.
- *   live (--live)     — requires a session cookie, an access token or
- *                       username+password; see `--help`.
+ *   live (--live --yes) — requires an explicit confirmation flag plus
+ *                       a session cookie, an access token or username+password.
+ *                       `--live` alone is refused (exit 3) and only prints the plan,
+ *                       so credentials found in `.env` can never trigger traffic by accident.
  *
  * Safety: the tool only ever calls
  *   POST /api/v1/security/login
@@ -84,6 +86,7 @@ type Json = any;
 
 export interface CliArgs {
   live: boolean;
+  confirm: boolean;
   baseUrl: string;
   bodiesDir: string;
   outDir: string;
@@ -141,6 +144,8 @@ interface GroupAcc {
   dimension1: string;
   dimension2: string;
   rows: number;
+  /** metrics actually observed in this group (absent metrics must stay empty, not 0) */
+  seen: Set<string>;
   additive: Map<string, number>;
   /** metric -> sum(value * weight) and sum(weight) for weighted ratio aggregation */
   ratioWsum: Map<string, number>;
@@ -250,6 +255,7 @@ function usage(): string {
 Modes
   --dry-run                 build and validate requests only, no network (default)
   --live                    send requests to Superset (requires auth)
+  --yes                     required together with --live; without it --live only prints the plan
 
 Selection
   --shopno <n>              darkstore number, rewrites shopno IN (...) (default ${DEFAULT_SHOPNO})
@@ -283,6 +289,7 @@ Network
 function parseArgs(argv: string[]): CliArgs {
   const args: CliArgs = {
     live: false,
+    confirm: false,
     baseUrl: (Bun.env.SUPERSET_URL ?? DEFAULT_BASE_URL).replace(/\/+$/, ""),
     bodiesDir: DEFAULT_BODIES_DIR,
     outDir: DEFAULT_OUT_DIR,
@@ -314,6 +321,7 @@ function parseArgs(argv: string[]): CliArgs {
     };
     switch (a) {
       case "--live": args.live = true; break;
+      case "--yes": case "--confirm-live": args.confirm = true; break;
       case "--dry-run": args.live = false; break;
       case "--help": case "-h": args.help = true; break;
       case "--keep-columns": args.addDateSupply = false; break;
@@ -735,11 +743,15 @@ function validateChartResponse(json: Json | null, expectedColumns: string[], lab
 
 function expectedColumns(plan: RequestPlan): string[] {
   const q = plan.body?.queries?.[0] ?? {};
+  if (q.is_timeseries === true || plan.vizType === "echarts_area") {
+    // post_processing (pivot/rename/flatten) rewrites colnames: only the period column is stable.
+    return [];
+  }
   const cols = new Set<string>();
   for (const c of Array.isArray(q.columns) ? q.columns : []) if (typeof c === "string") cols.add(c);
   for (const m of Array.isArray(q.metrics) ? q.metrics : []) {
+    // ad-hoc metrics with a custom label are not returned as colnames; only real metric names are.
     if (typeof m === "string") cols.add(m);
-    else if (m && typeof m === "object" && typeof m.label === "string") cols.add(m.label);
   }
   return [...cols];
 }
@@ -860,6 +872,7 @@ function newGroup(
     dimension1: d1,
     dimension2: d2,
     rows: 0,
+    seen: new Set<string>(),
     additive: new Map(),
     ratioWsum: new Map(),
     ratioW: new Map(),
@@ -901,6 +914,7 @@ export function aggregate(observations: Observation[], declared: Map<string, Met
       groups.set(key, group);
     }
     group.rows++;
+    group.seen.add(o.metric);
     if (o.kind === "additive") {
       bump(group.additive, o.metric, o.value);
     } else {
@@ -928,6 +942,7 @@ export function aggregate(observations: Observation[], declared: Map<string, Met
       collapsed.set(key, target);
     }
     target.rows += group.rows;
+    for (const m of group.seen) target.seen.add(m);
     for (const [m, v] of group.additive) bump(target.additive, m, v);
     for (const [m, v] of group.ratioWsum) bump(target.ratioWsum, m, v);
     for (const [m, v] of group.ratioW) bump(target.ratioW, m, v);
@@ -945,19 +960,27 @@ export function aggregate(observations: Observation[], declared: Map<string, Met
   });
 
   const rows: Array<Record<string, string | number>> = [];
+  const seen = new Set<string>();
   for (const g of orderedGroups) {
+    const isTotal = g.date === "";
+    const date = isTotal ? "__TOTAL__" : g.date;
+    const dimension1 = isTotal && g.dimension1 === "" ? "__ALL__" : g.dimension1;
+    const dedupeKey = [date, g.sliceId, dimension1, g.dimension2].join("|");
+    if (seen.has(dedupeKey)) continue;
+    seen.add(dedupeKey);
     const row: Record<string, string | number> = {
-      date: g.date,
+      date,
       slice_id: g.sliceId ?? "",
       dataset_id: g.datasourceId ?? "",
       viz_type: g.vizType,
-      dimension_1: g.dimension1,
+      dimension_1: dimension1,
       dimension_2: g.dimension2,
       source_rows: g.rows,
     };
-    for (const m of additiveMetrics) row[m] = g.additive.get(m) ?? 0;
+    for (const m of additiveMetrics) row[m] = g.seen.has(m) ? g.additive.get(m) ?? 0 : "";
     let weighting = "";
     for (const m of ratioMetrics) {
+      if (!g.seen.has(m)) continue;
       const wsum = g.ratioWsum.get(m) ?? 0;
       const w = g.ratioW.get(m) ?? 0;
       const n = g.ratioRows.get(m) ?? 0;
@@ -1014,8 +1037,12 @@ async function main(): Promise<number> {
   const expectedBySlice: Record<string, string[]> = {};
   let freshness: Record<string, unknown> | null = null;
 
+  const live = args.live && args.confirm;
+
   let client: ReadOnlySuperset | null = null;
-  if (args.live) {
+  if (live) {
+    console.log(`[live] endpoint: POST ${args.baseUrl}/api/v1/chart/data`);
+    console.log(`[live] requests: ${plans.length}, period: ${period.expression}, shopno: ${args.shopno}`);
     client = new ReadOnlySuperset(args);
     try {
       await client.authenticate();
@@ -1025,7 +1052,11 @@ async function main(): Promise<number> {
     }
     for (const line of client.log) console.log(`[auth] ${line}`);
   } else {
-    console.log("[mode] dry-run: no network calls; pass --live to fetch");
+    console.log(
+      args.live
+        ? "[mode] --live without --yes: refusing to send requests; writing the plan only (exit 3)"
+        : "[mode] dry-run: no network calls; pass --live --yes to fetch",
+    );
   }
 
   for (const [i, plan] of plans.entries()) {
@@ -1048,7 +1079,7 @@ async function main(): Promise<number> {
       sliceId: plan.sliceId,
       url: plan.url,
       status: null,
-      mode: args.live ? "error" : "dry-run",
+      mode: live ? "error" : "dry-run",
       pollKey: null,
       attempts: 0,
       rowCount: null,
@@ -1059,7 +1090,7 @@ async function main(): Promise<number> {
       responseFile: null,
     };
 
-    if (!args.live || !client) {
+    if (!live || !client) {
       results.push(result);
       continue;
     }
@@ -1187,10 +1218,30 @@ async function main(): Promise<number> {
     );
   }
   notes.push("sum_with_bonuses / sum_without_bonuses: verbose_name противоречит выражению метрики; доверять SQL-выражению.");
+  notes.push(
+    "Границы окна: Superset трактует конец интервала как исключающую границу суток — при --to 2026-11-23 последний день в данных 2026-11-22. " +
+      "Чтобы включить сегодняшний день, задайте --to = завтра.",
+  );
+
+  const qualityDates = [...new Set(allObservations.map((o) => o.date).filter((d) => d && d !== "__TOTAL__"))].sort();
+  const allZeroMetrics = [...new Set(allObservations.map((o) => o.metric))]
+    .filter((m) => !allObservations.some((o) => o.metric === m && o.value !== 0))
+    .sort();
+  if (allZeroMetrics.length) {
+    notes.push(`Метрики, у которых все значения = 0: ${allZeroMetrics.join(", ")} — проверить применимость фильтров/периода.`);
+  }
+  const quality = {
+    days: qualityDates.length,
+    date_min: qualityDates[0] ?? null,
+    date_max: qualityDates[qualityDates.length - 1] ?? null,
+    all_zero_metrics: allZeroMetrics,
+  };
 
   const manifest = {
     generated_at: nowIso(),
-    mode: args.live ? "live" : "dry-run",
+    mode: live ? "live" : "dry-run",
+    live_requested: args.live,
+    live_confirmed: live,
     base_url: args.baseUrl,
     shopno: args.shopno,
     dashboard_id: 977,
@@ -1202,6 +1253,7 @@ async function main(): Promise<number> {
     ratio_metrics: aggregateResult.ratioMetrics,
     ratio_weight_metric: WEIGHT_METRIC,
     data_freshness: freshness,
+    quality,
     observations: allObservations.length,
     aggregate_rows: aggregateResult.rows.length,
     requests: results,
@@ -1253,7 +1305,11 @@ async function main(): Promise<number> {
   console.log(`[summary] ratio=[${aggregateResult.ratioMetrics.join(", ")}]`);
   console.log(`[summary] output: ${outDir}`);
 
-  if (args.live && validation.summary.failed > 0) return 1;
+  if (args.live && !args.confirm) {
+    console.error("[blocked] --live requires --yes: no requests were sent.");
+    return 3;
+  }
+  if (live && validation.summary.failed > 0) return 1;
   return 0;
 }
 

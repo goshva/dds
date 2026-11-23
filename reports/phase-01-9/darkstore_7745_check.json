@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-11-23T08:09:16.040Z",
+  "darkstore": 7745,
+  "superset_url": "https://superset.svc.vkusvill.ru",
+  "auth_mode": "username-password",
+  "steps": [
+    {
+      "step": "login",
+      "client": "SupersetClient",
+      "status": "OK"
+    },
+    {
+      "step": "dataset_detail",
+      "dataset_id": 3035,
+      "table_name": "darkstore_time_click",
+      "schema": "mart_mixed",
+      "database": "ch_10.0.112.21/default",
+      "database_id": 92,
+      "kind": "virtual",
+      "columns_count": 165,
+      "has_sql": true
+    },
+    {
+      "step": "dataset_detail",
+      "dataset_id": 5454,
+      "table_name": "Предфасовка 7745",
+      "schema": "Report",
+      "database": "Reports",
+      "database_id": 6,
+      "kind": "virtual",
+      "columns_count": 10,
+      "has_sql": true
+    }
+  ],
+  "verdict": "DATA_ACCESSIBLE",
+  "probes": [
+    {
+      "label": "chart/data ds=3035 shopno=7745",
+      "method": "POST",
+      "endpoint": "/api/v1/chart/data",
+      "ok": true,
+      "http_status": 200,
+      "preview": "{\"count\":1,\"sample\":[{\"name_tt\":\"7745ДС_Мосфильмовская74\",\"orders\":12283}]}"
+    },
+    {
+      "label": "sqllab execute db=92 shopno=7745",
+      "method": "POST",
+      "endpoint": "/api/v1/sqllab/execute/",
+      "ok": false,
+      "preview": "{\"status\":\"error\",\"rows\":0,\"errors\":[]}"
+    }
+  ]
+}

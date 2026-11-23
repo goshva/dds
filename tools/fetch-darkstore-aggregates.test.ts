@@ -13,6 +13,7 @@ import {
 
 const baseArgs: CliArgs = {
   live: false,
+  confirm: false,
   baseUrl: "https://example.test",
   bodiesDir: "tools/har-out",
   outDir: "data/extraction/superset/7745",
@@ -186,6 +187,22 @@ describe("aggregate", () => {
 
     expect(Number(row?.share_delivered_taxi)).toBeCloseTo(0.5, 9);
     expect(row?.ratio_weighting).toBe("unweighted");
+  });
+
+  test("leaves metrics that a slice never returned empty instead of zero", () => {
+    const observations: Observation[] = [
+      observation({ metric: "qty_orders_delivered", kind: "additive", value: 10 }),
+    ];
+    const declared = new Map<string, "additive" | "ratio">([
+      ["qty_orders_delivered", "additive"],
+      ["sum_with_bonuses", "additive"],
+    ]);
+
+    const result = aggregate(observations, declared);
+    const row = result.rows.find((r) => r.dimension_1 === "ДаркСтор");
+
+    expect(row?.qty_orders_delivered).toBe(10);
+    expect(row?.sum_with_bonuses).toBe("");
   });
 
   test("pre-populates metric kinds even without observations (dry-run header)", () => {
