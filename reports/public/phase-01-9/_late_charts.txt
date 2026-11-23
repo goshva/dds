@@ -1,0 +1,13 @@
+chart 32575 [pivot_table_v2] ds=7696 metrics=8 groupby=0 filters=4 dash=666 :: Кол-во опозданий по регионам Бесплатный
+chart 32574 [pivot_table_v2] ds=7696 metrics=8 groupby=0 filters=4 dash=666 :: Доля опозданий по регионам Бесплатный
+chart 31745 [pivot_table_v2] ds=7696 metrics=8 groupby=0 filters=4 dash=666 :: Кол-во опозданий Бесплатный вайтсторы
+chart 31744 [pivot_table_v2] ds=7696 metrics=8 groupby=0 filters=4 dash=666 :: Доля опозданий Бесплатный вайтсторы
+chart 31513 [pivot_table_v2] ds=7696 metrics=8 groupby=0 filters=4 dash=666 :: Кол-во опозданий Бесплатный
+chart 31512 [pivot_table_v2] ds=7696 metrics=8 groupby=0 filters=4 dash=666 :: Доля опозданий Бесплатный
+chart 31501 [pivot_table_v2] ds=7696 metrics=5 groupby=0 filters=2 dash=666 :: Кол-во глубины опоздания за день
+chart 31500 [pivot_table_v2] ds=7696 metrics=5 groupby=0 filters=2 dash=666 :: Доля глубины опоздания за день
+chart 31493 [pivot_table_v2] ds=7696 metrics=6 groupby=0 filters=2 dash= :: Доля опозданий заказа Экспресс глубина
+chart 31491 [pivot_table_v2] ds=7696 metrics=2 groupby=0 filters=1 dash= :: Доля опозданий заказа Дарксторы
+chart 31492 [pivot_table_v2] ds=7696 metrics=2 groupby=0 filters=2 dash= :: Доля опозданий заказа Вайтсторы
+chart 28134 [echarts_timeseries_bar] ds=7006 metrics=1 groupby=0 filters=2 dash=1472 :: Распределение запланированных опозданий по минутам
+chart 28114 [pie] ds=7006 metrics=0 groupby=1 filters=2 dash=1472 :: Распределение опозданий по бакетам

@@ -24,7 +24,11 @@
     "extractor:report": "bun tools/superset-extractor/src/cli/index.ts report",
     "extractor:test": "bun test tools/superset-extractor/tests",
     "aggregates:fetch": "bun tools/fetch-darkstore-aggregates.ts",
-    "aggregates:test": "bun test tools/fetch-darkstore-aggregates.test.ts"
+    "aggregates:test": "bun test tools/fetch-darkstore-aggregates.test.ts tools/fetch-darkstore-aggregates.charts.test.ts tools/fetch-darkstore-aggregates.shopno.test.ts tools/fetch-darkstore-aggregates.edge.test.ts tools/fetch-darkstore-aggregates.security.test.ts",
+    "aggregates:test:live": "SUPERSET_LIVE_TESTS=1 bun test tools/fetch-darkstore-aggregates.live.test.ts",
+    "dataset:access": "bun tools/probe-dataset-access.ts",
+    "pii:redact": "bun tools/redact-pii.ts",
+    "pii:test": "bun test tools/redact-pii.test.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"

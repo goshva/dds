@@ -1,0 +1,5409 @@
+{
+  "generated_at": "2026-11-23T09:16:18.677Z",
+  "report": {
+    "file": "data/extraction/superset/7745/aggregate_7745.csv",
+    "rows": 1508,
+    "period": "2026-09-30 : 2026-11-24",
+    "days": 55,
+    "all_zero_metrics": [],
+    "slices": [
+      {
+        "slice_id": "20403",
+        "viz_type": "table",
+        "dataset_id": "3035",
+        "metrics": [
+          "qty_not_in_slot_all",
+          "qty_orders_declined",
+          "qty_orders_delivered",
+          "qty_orders_in_work",
+          "sum_with_bonuses",
+          "sum_without_bonuses",
+          "share_delivered_taxi",
+          "share_not_in_slot_above_all",
+          "share_not_in_slot_all",
+          "share_not_in_slot_under_all",
+          "share_orders_delivered"
+        ],
+        "dimension_1": {
+          "distinct": 7,
+          "values": [
+            "Больше продуктов за 1 час                         ",
+            "ВкусВильчик                                       ",
+            "Доставка за 30 минут                              ",
+            "Ночная доставка",
+            "Экспресс за 20 минут                              ",
+            "Доставка за 45 минут                              ",
+            "Больше продуктов за 2 часа                        "
+          ]
+        },
+        "dimension_2": {
+          "distinct": 0,
+          "values": []
+        },
+        "dates": 55
+      },
+      {
+        "slice_id": "20404",
+        "viz_type": "pivot_table_v2",
+        "dataset_id": "3035",
+        "metrics": [
+          "qty_not_in_slot_all",
+          "qty_orders_delivered",
+          "share_delivered_taxi",
+          "share_not_in_slot_above_all",
+          "share_not_in_slot_all"
+        ],
+        "dimension_1": {
+          "distinct": 1,
+          "values": [
+            "<ФИО>"
+          ]
+        },
+        "dimension_2": {
+          "distinct": 7,
+          "values": [
+            "Больше продуктов за 1 час                         ",
+            "ВкусВильчик                                       ",
+            "Доставка за 30 минут                              ",
+            "Ночная доставка",
+            "Экспресс за 20 минут                              ",
+            "Доставка за 45 минут                              ",
+            "Больше продуктов за 2 часа                        "
+          ]
+        },
+        "dates": 55
+      },
+      {
+        "slice_id": "20405",
+        "viz_type": "pivot_table_v2",
+        "dataset_id": "3035",
+        "metrics": [
+          "qty_not_in_slot_all",
+          "qty_orders_declined",
+          "qty_orders_delivered",
+          "qty_orders_in_work",
+          "sum_with_bonuses",
+          "sum_without_bonuses",
+          "share_delivered_taxi",
+          "share_not_in_slot_above_all",
+          "share_not_in_slot_all",
+          "share_not_in_slot_under_all",
+          "share_orders_delivered"
+        ],
+        "dimension_1": {
+          "distinct": 7,
+          "values": [
+            "Больше продуктов за 1 час                         ",
+            "ВкусВильчик                                       ",
+            "Доставка за 30 минут                              ",
+            "Ночная доставка",
+            "Экспресс за 20 минут                              ",
+            "Доставка за 45 минут                              ",
+            "Больше продуктов за 2 часа                        "
+          ]
+        },
+        "dimension_2": {
+          "distinct": 2,
+          "values": [
+            "Динамическая доставка",
+            "Доставка по слотам"
+          ]
+        },
+        "dates": 55
+      },
+      {
+        "slice_id": "20623",
+        "viz_type": "echarts_area",
+        "dataset_id": "3035",
+        "metrics": [
+          "qty_orders_delivered"
+        ],
+        "dimension_1": {
+          "distinct": 6,
+          "values": [
+            "Больше продуктов за 1 час                         ",
+            "ВкусВильчик                                       ",
+            "Доставка за 30 минут                              ",
+            "Экспресс за 20 минут                              ",
+            "Доставка за 45 минут                              ",
+            "Больше продуктов за 2 часа                        "
+          ]
+        },
+        "dimension_2": {
+          "distinct": 0,
+          "values": []
+        },
+        "dates": 55
+      },
+      {
+        "slice_id": "20624",
+        "viz_type": "echarts_area",
+        "dataset_id": "3035",
+        "metrics": [
+          "qty_orders_delivered"
+        ],
+        "dimension_1": {
+          "distinct": 1,
+          "values": [
+            "7745ДС_Мосфильмовская74"
+          ]
+        },
+        "dimension_2": {
+          "distinct": 0,
+          "values": []
+        },
+        "dates": 55
+      }
+    ]
+  },
+  "blocks": [
+    {
+      "block": "ТМЦ (закупка)",
+      "need": "заявки, сроки поставки <=5 р.д., наличие критичных позиций",
+      "columns_hits": [
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_supply_sheet"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_supply"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_supply_untill"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_supply_untill_sheet"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "date_supply_until"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "date_supply_until"
+        },
+        {
+          "dataset_id": "7119",
+          "dataset_name": "cargo_flags",
+          "field": "date_supply_until"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "date_supply_double"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "date_supply"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "date_supply_until"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "date_supply_date"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "time_supply"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "hour_supply"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "date_supply"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "date_supply_double"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "date_supply_untill"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "time_supply"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "date_supply_sheet"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "date_supply_untill_sheet"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "supply_hour"
+        },
+        {
+          "dataset_id": "5799",
+          "dataset_name": "darkstore_time_sheet_by_date_collected",
+          "field": "date_supply"
+        },
+        {
+          "dataset_id": "5799",
+          "dataset_name": "darkstore_time_sheet_by_date_collected",
+          "field": "date_supply_untill"
+        },
+        {
+          "dataset_id": "5799",
+          "dataset_name": "darkstore_time_sheet_by_date_collected",
+          "field": "hour_supply"
+        },
+        {
+          "dataset_id": "5799",
+          "dataset_name": "darkstore_time_sheet_by_date_collected",
+          "field": "date_supply_sheet"
+        },
+        {
+          "dataset_id": "5799",
+          "dataset_name": "darkstore_time_sheet_by_date_collected",
+          "field": "date_supply_untill_sheet"
+        }
+      ],
+      "metrics_hits": [
+        {
+          "dataset_id": "3871",
+          "dataset_name": "tmz_per_courier",
+          "field": "act_curiers_tmz_share",
+          "verbose": "Доля активных курьеров с ТМЦ"
+        },
+        {
+          "dataset_id": "3871",
+          "dataset_name": "tmz_per_courier",
+          "field": "cnt_act_curiers_tmz",
+          "verbose": "Кол-во активных курьеров с ТМЦ"
+        },
+        {
+          "dataset_id": "3871",
+          "dataset_name": "tmz_per_courier",
+          "field": "cnt_curier_tmz",
+          "verbose": "Кол-во курьеров, обеспеченных ТМЦ"
+        },
+        {
+          "dataset_id": "3871",
+          "dataset_name": "tmz_per_courier",
+          "field": "cnt_cur_net_TMZ",
+          "verbose": "Кол-во курьеров без ТМЦ"
+        },
+        {
+          "dataset_id": "3871",
+          "dataset_name": "tmz_per_courier",
+          "field": "cnt_cur_s_TMZ",
+          "verbose": "Кол-во курьеров, которым выданы ТМЦ"
+        },
+        {
+          "dataset_id": "3871",
+          "dataset_name": "tmz_per_courier",
+          "field": "qty_avg",
+          "verbose": "Кол-во ТМЦ"
+        },
+        {
+          "dataset_id": "3871",
+          "dataset_name": "tmz_per_courier",
+          "field": "tmz_spisok",
+          "verbose": "ТМЦ"
+        },
+        {
+          "dataset_id": "2101",
+          "dataset_name": "Поставки_продажи_списания_ЗЦ",
+          "field": "Поставки",
+          "verbose": ""
+        },
+        {
+          "dataset_id": "7052",
+          "dataset_name": "tmz_per_courier_today",
+          "field": "act_curiers_tmz_share",
+          "verbose": "Доля активных курьеров с ТМЦ"
+        },
+        {
+          "dataset_id": "7052",
+          "dataset_name": "tmz_per_courier_today",
+          "field": "a_quantity_t",
+          "verbose": "Кол-во ТМЦ"
+        },
+        {
+          "dataset_id": "7052",
+          "dataset_name": "tmz_per_courier_today",
+          "field": "cnt_act_curiers_tmz",
+          "verbose": "Кол-во активных курьеров с ТМЦ"
+        },
+        {
+          "dataset_id": "7052",
+          "dataset_name": "tmz_per_courier_today",
+          "field": "cnt_curier_tmz",
+          "verbose": "Кол-во курьеров, обеспеченных ТМЦ"
+        },
+        {
+          "dataset_id": "7052",
+          "dataset_name": "tmz_per_courier_today",
+          "field": "cnt_cur_net_TMZ",
+          "verbose": "Кол-во курьеров без ТМЦ"
+        },
+        {
+          "dataset_id": "7052",
+          "dataset_name": "tmz_per_courier_today",
+          "field": "cnt_cur_s_TMZ",
+          "verbose": "Кол-во курьеров, которым выданы ТМЦ"
+        },
+        {
+          "dataset_id": "7052",
+          "dataset_name": "tmz_per_courier_today",
+          "field": "cnt_not_act_curiers_tmz",
+          "verbose": "Кол-во неактивных курьеров с ТМЦ"
+        },
+        {
+          "dataset_id": "7052",
+          "dataset_name": "tmz_per_courier_today",
+          "field": "qt_tmz",
+          "verbose": "Кол-во ТМЦ"
+        },
+        {
+          "dataset_id": "7052",
+          "dataset_name": "tmz_per_courier_today",
+          "field": "tmz_quant",
+          "verbose": "Кол-во ТМЦ"
+        },
+        {
+          "dataset_id": "3778",
+          "dataset_name": "Поставки, остатки и продажи",
+          "field": "postavka",
+          "verbose": "Объем поставки"
+        },
+        {
+          "dataset_id": "3371",
+          "dataset_name": "zc losses",
+          "field": "post_qty",
+          "verbose": "Поставка, кол-во"
+        },
+        {
+          "dataset_id": "3857",
+          "dataset_name": "dtt_test",
+          "field": "avg_seb",
+          "verbose": "Ср. закупочная цена по проданным товарам (без НДС)"
+        },
+        {
+          "dataset_id": "3897",
+          "dataset_name": "TMZ_per_cur_no_TT",
+          "field": "act_curiers_tmz_share",
+          "verbose": "Доля активных курьеров с ТМЦ"
+        },
+        {
+          "dataset_id": "3897",
+          "dataset_name": "TMZ_per_cur_no_TT",
+          "field": "cnt_act_curiers_tmz",
+          "verbose": "Кол-во активных курьеров с ТМЦ"
+        },
+        {
+          "dataset_id": "3897",
+          "dataset_name": "TMZ_per_cur_no_TT",
+          "field": "cnt_curiers_tmz",
+          "verbose": "Кол-во курьеров с ТМЦ"
+        },
+        {
+          "dataset_id": "3897",
+          "dataset_name": "TMZ_per_cur_no_TT",
+          "field": "cnt_noact_curiers_tmz",
+          "verbose": "Кол-во неактивных курьеров с ТМЦ"
+        },
+        {
+          "dataset_id": "3897",
+          "dataset_name": "TMZ_per_cur_no_TT",
+          "field": "cnt_tmz",
+          "verbose": "Кол-во ТМЦ"
+        }
+      ],
+      "dataset_hits": [
+        {
+          "dataset_id": 3035,
+          "name": "darkstore_time_click",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 2483
+        },
+        {
+          "dataset_id": 2295,
+          "name": "ksa_time_vw",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 474
+        },
+        {
+          "dataset_id": 3466,
+          "name": "darkstore_time_sheet",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 395
+        },
+        {
+          "dataset_id": 7615,
+          "name": "Категория · Витрина чеков + рынок и формат ТТ",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 218
+        },
+        {
+          "dataset_id": 5888,
+          "name": "Причины не сборки 41 click",
+          "priority": "P1",
+          "domain": "fulfillment",
+          "charts": 124
+        },
+        {
+          "dataset_id": 5441,
+          "name": "darkstore_time_click_pharmacy_rest_flowers",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 101
+        },
+        {
+          "dataset_id": 2450,
+          "name": "dk_stat(test)",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 85
+        },
+        {
+          "dataset_id": 5438,
+          "name": "darkstore_time_click_[id=977]",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 71
+        },
+        {
+          "dataset_id": 2865,
+          "name": "test_dk_delivery",
+          "priority": "P1",
+          "domain": "delivery",
+          "charts": 69
+        },
+        {
+          "dataset_id": 1623,
+          "name": "Активность когорт курьеров",
+          "priority": "P1",
+          "domain": "courier",
+          "charts": 68
+        },
+        {
+          "dataset_id": 5666,
+          "name": "Витрина чеков покупателей",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 65
+        },
+        {
+          "dataset_id": 7532,
+          "name": "Кулинария · Витрина чеков + рынок и формат ТТ",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 57
+        }
+      ],
+      "chart_hits": [
+        {
+          "chart_id": 32585,
+          "name": "Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32583,
+          "name": "1.2.01 | Сборка | Общая статистика",
+          "viz_type": "table",
+          "dataset_id": 3466,
+          "dashboards": []
+        },
+        {
+          "chart_id": 29790,
+          "name": "Статистика по ТТ Спб (эдвайзер <ФИО>)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6270,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32579,
+          "name": "Витрина товародвижения и остатков (для рассылки <ФИО>)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6270,
+          "dashboards": []
+        },
+        {
+          "chart_id": 31776,
+          "name": "Каналы: офлайн vs онлайн (отчётный период)",
+          "viz_type": "table",
+          "dataset_id": 7615,
+          "dashboards": [
+            1679,
+            1637
+          ]
+        },
+        {
+          "chart_id": 32531,
+          "name": "Таблица нагрузки на регионах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27914,
+          "name": "Таблица нагрузки на ДаркСторах доставка_доли (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27915,
+          "name": "Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32530,
+          "name": "Нагрузка на регионах (доставка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32529,
+          "name": "Нагрузка на регионах (сборка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31743,
+          "name": "Таблица нагрузки на вайтсторах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31742,
+          "name": "Таблица нагрузки на вайтсторах доставка_доли (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31741,
+          "name": "Нагрузка на вайтсторах (доставка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31740,
+          "name": "Нагрузка на вайтсторах (сборка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27913,
+          "name": "Нагрузка на дарксторах (доставка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27912,
+          "name": "Нагрузка на дарксторах (сборка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32518,
+          "name": "Итоговая таблица по магазинам по дням BI-1000004530",
+          "viz_type": "table",
+          "dataset_id": 3466,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32517,
+          "name": "Итоговая таблица по дням BI-1000004530",
+          "viz_type": "table",
+          "dataset_id": 3466,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32510,
+          "name": "тест рассылки 11.15",
+          "viz_type": "table",
+          "dataset_id": 3035,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32509,
+          "name": "Итоговая таблица за день по сервисам Успешно завершен",
+          "viz_type": "table",
+          "dataset_id": 3035,
+          "dashboards": []
+        }
+      ],
+      "dashboard_hits": [
+        {
+          "dashboard_id": 1637,
+          "title": "Молочка · Выручка, новинки, промо",
+          "charts": 224
+        },
+        {
+          "dashboard_id": 666,
+          "title": "Монитор настроек ТТ",
+          "charts": 32
+        },
+        {
+          "dashboard_id": 712,
+          "title": "ВВ Партнер",
+          "charts": 25
+        },
+        {
+          "dashboard_id": 687,
+          "title": "Динамика сервиса ДаркКитчен-Сгоряча",
+          "charts": 215
+        },
+        {
+          "dashboard_id": 871,
+          "title": "ТМЦ",
+          "charts": 37
+        },
+        {
+          "dashboard_id": 561,
+          "title": "Отчет по выработке сборщиков в дарксторах",
+          "charts": 20
+        },
+        {
+          "dashboard_id": 1657,
+          "title": "Мясо · Выручка, новинки, промо",
+          "charts": 246
+        },
+        {
+          "dashboard_id": 1656,
+          "title": "Бакалея · Выручка, новинки, промо",
+          "charts": 246
+        },
+        {
+          "dashboard_id": 1655,
+          "title": "Сладости · Выручка, новинки, промо",
+          "charts": 246
+        },
+        {
+          "dashboard_id": 1647,
+          "title": "Рыба · Выручка, новинки, промо",
+          "charts": 305
+        }
+      ]
+    },
+    {
+      "block": "Вайты = развитие ЗИЗ",
+      "need": "карта «вайт → зона», зона 180-300, данные за 2 недели",
+      "columns_hits": [
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "wait_time2"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "wait_time"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "waiting_area_time"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "flag_wait_orders_with_planlate"
+        },
+        {
+          "dataset_id": "7119",
+          "dataset_name": "cargo_flags",
+          "field": "flag_wait_orders_with_near_deadline"
+        },
+        {
+          "dataset_id": "7119",
+          "dataset_name": "cargo_flags",
+          "field": "flag_wait_orders_with_planlate"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "wait_time"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "wait_time2"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "avg_wait_min_dost"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "wait_min_taxi"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "wait_time2"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "waiting_area_time"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "wait_time"
+        },
+        {
+          "dataset_id": "5799",
+          "dataset_name": "darkstore_time_sheet_by_date_collected",
+          "field": "wait_time"
+        },
+        {
+          "dataset_id": "5799",
+          "dataset_name": "darkstore_time_sheet_by_date_collected",
+          "field": "wait_time2"
+        },
+        {
+          "dataset_id": "5799",
+          "dataset_name": "darkstore_time_sheet_by_date_collected",
+          "field": "waiting_area_time"
+        },
+        {
+          "dataset_id": "7802",
+          "dataset_name": "shift_time_breakdown",
+          "field": "wait_minutes"
+        },
+        {
+          "dataset_id": "1583",
+          "dataset_name": "Графики курьеров",
+          "field": "ziz_orders"
+        },
+        {
+          "dataset_id": "1583",
+          "dataset_name": "Графики курьеров",
+          "field": "ziz_orders_all"
+        },
+        {
+          "dataset_id": "1583",
+          "dataset_name": "Графики курьеров",
+          "field": "Ср кол-во заказов доставлено ЗиЗ (5 дней)"
+        },
+        {
+          "dataset_id": "1583",
+          "dataset_name": "Графики курьеров",
+          "field": "Ср кол-во заказов дост ЗиЗ всего (5 дней)"
+        },
+        {
+          "dataset_id": "1583",
+          "dataset_name": "Графики курьеров",
+          "field": "Ср кол-во заказов, упавших на ЗиЗ (5 дней)"
+        },
+        {
+          "dataset_id": "4240",
+          "dataset_name": "wait_list_bakery",
+          "field": "date_wait"
+        },
+        {
+          "dataset_id": "4240",
+          "dataset_name": "wait_list_bakery",
+          "field": "flag_wait"
+        },
+        {
+          "dataset_id": "4240",
+          "dataset_name": "wait_list_bakery",
+          "field": "wait_time"
+        }
+      ],
+      "metrics_hits": [
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "w_qty_2h/slot",
+          "verbose": "Кол-во заказов (ВайтСтор, Доставка 1.5 ч. и 2 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "avg_wait_min_dost",
+          "verbose": "Время ожидания доставки (Выигравшая служба)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "avg_wait",
+          "verbose": "Ср. время ожид. сборки (собранные)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "sum_paid_100",
+          "verbose": "Доля заказов с суммой < 100 руб. (ЗиЗ, УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "avg_wait_min_taxi",
+          "verbose": "Время ожидания доставки (Все службы по заказу)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "d/w_share_del_180/210_pos",
+          "verbose": "Доля заказов общее время доставки  > 3 ч. (вайт) / 3,5 ч. (дарк) (Доставка 4 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "d/w_qty_col_30/60_120/pos",
+          "verbose": "Кол-во заказов общее время сборки > 30 мин. (дарк) / 1 ч. (вайт) (Доставка 1.5 ч., 2 ч. и 4 ч., собранные)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "d/w_share_del_60/90_120/slot",
+          "verbose": "Доля заказов общее время доставки > 1.5 ч. (дарк) / 1 ч. (вайт) (Доставка 1.5 ч. и 2 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "d/w_share_col_30/60_120/pos/slot",
+          "verbose": "Доля заказов общее время сборки > 30 мин. (дарк) / 1 ч. (вайт) (Доставка 1.5 ч., 2 ч. и 4 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "w_qty_pos",
+          "verbose": "Кол-во заказов (ВайтСтор, Доставка 4 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "avg_wait2",
+          "verbose": "Ср. время ожид. дост. (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "d/w_qty_del_180/210_pos",
+          "verbose": "Кол-во заказов общее время доставки > 3 ч. (вайт) / 3,5 ч. (дарк) (Доставка 4 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "d/w_share_sol_30/60_120/pos",
+          "verbose": "Доля заказов общее время сборки > 30 мин. (дарк) / 1 ч. (вайт) (Доставка 1.5 ч., 2 ч. и 4 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_del_180/210_240",
+          "verbose": "Кол-во заказов общее время доставки > 3 ч. (вайт) / 3,5 ч. (дарк) (Доставка 4 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_del_180/210_240",
+          "verbose": "Доля заказов общее время доставки  > 3 ч. (вайт) / 3,5 ч. (дарк) (Доставка 4 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_col_30_120/pos_collected",
+          "verbose": "Доля заказов общее время сборки > 30 мин. (дарк) / 1 ч. (вайт) (Доставка 1.5 ч., 2 ч. и 4 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_col_30_120/pos_collected",
+          "verbose": "Кол-во заказов общее время сборки > 30 мин. (дарк) / 1 ч. (вайт) (Доставка 1.5 ч., 2 ч. и 4 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "w_qty_ex",
+          "verbose": "Кол-во заказов (ВайтСтор, Экспресс 15 мин., 30 мин., 45 мин. и 59 мин., УЗ)"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "qty_sheet_with_wait&collect_9min_dk_express",
+          "verbose": "Кол-во сборочных листов со временем ожидания+сборки > 9 мин. (ДК, Экспресс)"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "qty_wait_10_ex",
+          "verbose": "Кол-во заказов ожид. сборки > 10 мин. (Экспресс 15 мин., 30 мин., 45 мин. и 59 мин., УЗ)"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "share_collection_wait_<8",
+          "verbose": "Доля ожидание + сборка < 8 мин"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "share_delivery_collection__wait>165",
+          "verbose": "Доля заказов доставка + сборка + ожидание > 2ч 45м"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "share_sheet_with_wait&collect_8min_dk_express",
+          "verbose": "Доля сборочных листов со временем ожидания+сборки > 8 мин. (ДК, Экспресс)"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "ind_share_sheet_with_wait&collect_13min_dk_w/o_expres",
+          "verbose": "IND Доля сборочных листов со временем ожидания+сборки > 13 мин. (ДК, НЕ Экспресс)"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "share_sheet_with_wait&collect_14min_dk_w/o_express",
+          "verbose": "Доля сборочных листов со временем ожидания+сборки > 14 мин. (ДК, НЕ Экспресс)"
+        }
+      ],
+      "dataset_hits": [
+        {
+          "dataset_id": 3035,
+          "name": "darkstore_time_click",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 2483
+        },
+        {
+          "dataset_id": 2295,
+          "name": "ksa_time_vw",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 474
+        },
+        {
+          "dataset_id": 3466,
+          "name": "darkstore_time_sheet",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 395
+        },
+        {
+          "dataset_id": 5441,
+          "name": "darkstore_time_click_pharmacy_rest_flowers",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 101
+        },
+        {
+          "dataset_id": 2865,
+          "name": "test_dk_delivery",
+          "priority": "P1",
+          "domain": "delivery",
+          "charts": 69
+        },
+        {
+          "dataset_id": 7173,
+          "name": "darkstore_time_sheet_ch21_light",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 39
+        },
+        {
+          "dataset_id": 2292,
+          "name": "Assembl_lists",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 30
+        },
+        {
+          "dataset_id": 5205,
+          "name": "hr_daily_pers_rc",
+          "priority": "P1",
+          "domain": "courier",
+          "charts": 24
+        },
+        {
+          "dataset_id": 6266,
+          "name": "end_to_end_rating_day_old",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 20
+        },
+        {
+          "dataset_id": 6960,
+          "name": "ds_half_hour",
+          "priority": "P1",
+          "domain": "delivery",
+          "charts": 14
+        },
+        {
+          "dataset_id": 4732,
+          "name": "darkstore_ts_partners_new",
+          "priority": "P0",
+          "domain": "shop",
+          "charts": 13
+        },
+        {
+          "dataset_id": 5964,
+          "name": "darkstore_time_sheet_st_pr_sl",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 13
+        }
+      ],
+      "chart_hits": [
+        {
+          "chart_id": 32585,
+          "name": "Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32583,
+          "name": "1.2.01 | Сборка | Общая статистика",
+          "viz_type": "table",
+          "dataset_id": 3466,
+          "dashboards": []
+        },
+        {
+          "chart_id": 17632,
+          "name": "Уволенные сотрудники",
+          "viz_type": "table",
+          "dataset_id": 4379,
+          "dashboards": [
+            1431,
+            736
+          ]
+        },
+        {
+          "chart_id": 32531,
+          "name": "Таблица нагрузки на регионах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27914,
+          "name": "Таблица нагрузки на ДаркСторах доставка_доли (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27915,
+          "name": "Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32393,
+          "name": "Время смены по курьерам",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32389,
+          "name": "Время смены по региону",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32388,
+          "name": "Время смены по кусту",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32387,
+          "name": "Время смены по ТТ",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32386,
+          "name": "Время смены по ТУ",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32385,
+          "name": "Динамика времени смены по дням, среднее по сменам",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32384,
+          "name": "Время смены, среднее по сменам",
+          "viz_type": "echarts_timeseries_bar",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32380,
+          "name": "Время смены по ПУ",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32379,
+          "name": "Динамика времени смены по дням",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32378,
+          "name": "Время смены, накопление",
+          "viz_type": "echarts_timeseries_bar",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32530,
+          "name": "Нагрузка на регионах (доставка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32529,
+          "name": "Нагрузка на регионах (сборка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31743,
+          "name": "Таблица нагрузки на вайтсторах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31742,
+          "name": "Таблица нагрузки на вайтсторах доставка_доли (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        }
+      ],
+      "dashboard_hits": [
+        {
+          "dashboard_id": 736,
+          "title": "HR Dashboard (Розница)",
+          "charts": 241
+        },
+        {
+          "dashboard_id": 666,
+          "title": "Монитор настроек ТТ",
+          "charts": 32
+        },
+        {
+          "dashboard_id": 1658,
+          "title": "Графики и выходы",
+          "charts": 72
+        },
+        {
+          "dashboard_id": 687,
+          "title": "Динамика сервиса ДаркКитчен-Сгоряча",
+          "charts": 215
+        },
+        {
+          "dashboard_id": 871,
+          "title": "ТМЦ",
+          "charts": 37
+        },
+        {
+          "dashboard_id": 561,
+          "title": "Отчет по выработке сборщиков в дарксторах",
+          "charts": 20
+        },
+        {
+          "dashboard_id": 665,
+          "title": "Онлайн статистика по заказам и курьерам",
+          "charts": 59
+        },
+        {
+          "dashboard_id": 1499,
+          "title": "МЕТРИКИ МАРШРУТИЗАТОРА",
+          "charts": 59
+        },
+        {
+          "dashboard_id": 1010,
+          "title": "<ФИО>",
+          "charts": 3
+        },
+        {
+          "dashboard_id": 1124,
+          "title": "HR верхнеуровневый",
+          "charts": 147
+        }
+      ]
+    },
+    {
+      "block": "Коммуникация с розницей (сборка)",
+      "need": "проблемы сборки и их решения, ежедневная планёрка",
+      "columns_hits": [
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "sla_collection_time_all"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_collected_sheet"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "collection_time_all_sheet"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "qty_collected_services"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "collection_time_real_sec_sheet"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "collection_time"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "pickup"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "id_assemblysheet"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "qty_collected"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_collect_start_plan"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "collection_time_real_sec"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "collection_time_all"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_collect_start_sheet"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_collected_plan"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "is_collected"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_collected"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "qty_collected_goods"
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "date_collect_start"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "date_collected"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "date_pickuped"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "pickup_minute"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "pickup_seq"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "pickup_to_courier_minute"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "prev_date_pickuped"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "date_collected"
+        }
+      ],
+      "metrics_hits": [
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "apt_collected>20m_qty",
+          "verbose": "Кол-во УЗ ген.заказов Аптеки, собранных > чем за 20 мин."
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "apt_collected_>20m_share",
+          "verbose": "Доля УЗ ген.заказов Аптеки, собранных >чем за 20 мин."
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "apt_collected>30m_qty",
+          "verbose": "Кол-во УЗ ген.заказов Аптеки, собранных > чем за 30 мин."
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "apt_collected>30m_qty2",
+          "verbose": ""
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "apt_collected_>30m_share",
+          "verbose": "Доля УЗ ген.заказов Аптеки, собранных > чем за 30 мин."
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "flowers_collected>20m_qty",
+          "verbose": "Кол-во УЗ ген.заказов Цветы, собранных > чем за 20 мин."
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "flowers_collected_>20m_share",
+          "verbose": "Доля УЗ ген.заказов Цветы, собранных >чем за 20 мин."
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "rest_collected>20m_qty",
+          "verbose": "Кол-во УЗ ген.заказов, собранных > чем за 20 мин."
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "rest_collected_>20m_share",
+          "verbose": "Доля УЗ ген.заказов, собранных > чем за 20 мин."
+        },
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "share_collection_delay_all",
+          "verbose": "Доля УЗ ген.заказов, просроченных по сборке"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_col_5_all",
+          "verbose": "Доля заказов общее время сборки > 5 мин. (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_col_10_all",
+          "verbose": "Доля заказов общее время сборки > 10 мин. (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_col_30_all",
+          "verbose": "Кол-во заказов общее время сборки > 30 мин. (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_col_15_sla",
+          "verbose": "Кол-во заказов с просрочкой общего времени сборки более 15 мин (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_col_5_sla",
+          "verbose": "Доля заказов с просрочкой общего времени сборки более 5 мин (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_col_10_sla",
+          "verbose": "Доля заказов с просрочкой общего времени сборки более 10 мин (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_col_10_ex20",
+          "verbose": "Доля заказов общее время сборки > 10 мин. (Экспресс 20 мин. УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "collected>20m_qty",
+          "verbose": "Кол-во УЗ 20 мин по collection time"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "collectors_qty",
+          "verbose": "Факт. кол-во сборщиков"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_orders_collected_no_slots",
+          "verbose": "В статусе Готов (без слотовых)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_col_30_sla",
+          "verbose": "Кол-во заказов с просрочкой общего времени сборки более 30 мин (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_col_10_ex_collected",
+          "verbose": "Кол-во заказов общее время сборки > 10 мин. (Экспресс 15 мин., 30 мин., 45 мин. и 59 мин., собранные)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_collection_order_delay_all",
+          "verbose": "Кол-во корневого просрока по сборке"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "avg_wait",
+          "verbose": "Ср. время ожид. сборки (собранные)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_col_15_all",
+          "verbose": "Доля заказов общее время сборки > 15 мин. (УЗ)"
+        }
+      ],
+      "dataset_hits": [
+        {
+          "dataset_id": 3035,
+          "name": "darkstore_time_click",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 2483
+        },
+        {
+          "dataset_id": 2295,
+          "name": "ksa_time_vw",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 474
+        },
+        {
+          "dataset_id": 3466,
+          "name": "darkstore_time_sheet",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 395
+        },
+        {
+          "dataset_id": 5542,
+          "name": "ost_group_ch41",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 277
+        },
+        {
+          "dataset_id": 5553,
+          "name": "ost_group_rozn_ch41",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 245
+        },
+        {
+          "dataset_id": 5888,
+          "name": "Причины не сборки 41 click",
+          "priority": "P1",
+          "domain": "fulfillment",
+          "charts": 124
+        },
+        {
+          "dataset_id": 5441,
+          "name": "darkstore_time_click_pharmacy_rest_flowers",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 101
+        },
+        {
+          "dataset_id": 5438,
+          "name": "darkstore_time_click_[id=977]",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 71
+        },
+        {
+          "dataset_id": 2865,
+          "name": "test_dk_delivery",
+          "priority": "P1",
+          "domain": "delivery",
+          "charts": 69
+        },
+        {
+          "dataset_id": 2492,
+          "name": "dk_order_types",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 53
+        },
+        {
+          "dataset_id": 2366,
+          "name": "Причины не сборки",
+          "priority": "P1",
+          "domain": "fulfillment",
+          "charts": 46
+        },
+        {
+          "dataset_id": 6484,
+          "name": "assembly_time_ch240",
+          "priority": "P1",
+          "domain": "fulfillment",
+          "charts": 45
+        }
+      ],
+      "chart_hits": [
+        {
+          "chart_id": 32585,
+          "name": "Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32584,
+          "name": "1.2.06 | Сборка | Несобранные",
+          "viz_type": "table",
+          "dataset_id": 5542,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32417,
+          "name": "1.2.01 | Сборка | Несобранные",
+          "viz_type": "table",
+          "dataset_id": 5542,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32583,
+          "name": "1.2.01 | Сборка | Общая статистика",
+          "viz_type": "table",
+          "dataset_id": 3466,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32531,
+          "name": "Таблица нагрузки на регионах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27914,
+          "name": "Таблица нагрузки на ДаркСторах доставка_доли (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27915,
+          "name": "Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32393,
+          "name": "Время смены по курьерам",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32389,
+          "name": "Время смены по региону",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32388,
+          "name": "Время смены по кусту",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32387,
+          "name": "Время смены по ТТ",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32386,
+          "name": "Время смены по ТУ",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32385,
+          "name": "Динамика времени смены по дням, среднее по сменам",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32384,
+          "name": "Время смены, среднее по сменам",
+          "viz_type": "echarts_timeseries_bar",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32380,
+          "name": "Время смены по ПУ",
+          "viz_type": "table",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32379,
+          "name": "Динамика времени смены по дням",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32378,
+          "name": "Время смены, накопление",
+          "viz_type": "echarts_timeseries_bar",
+          "dataset_id": 7802,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32530,
+          "name": "Нагрузка на регионах (доставка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32529,
+          "name": "Нагрузка на регионах (сборка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31743,
+          "name": "Таблица нагрузки на вайтсторах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        }
+      ],
+      "dashboard_hits": [
+        {
+          "dashboard_id": 641,
+          "title": "Показатели по проектам",
+          "charts": 65
+        },
+        {
+          "dashboard_id": 666,
+          "title": "Монитор настроек ТТ",
+          "charts": 32
+        },
+        {
+          "dashboard_id": 712,
+          "title": "ВВ Партнер",
+          "charts": 25
+        },
+        {
+          "dashboard_id": 1658,
+          "title": "Графики и выходы",
+          "charts": 72
+        },
+        {
+          "dashboard_id": 687,
+          "title": "Динамика сервиса ДаркКитчен-Сгоряча",
+          "charts": 215
+        },
+        {
+          "dashboard_id": 871,
+          "title": "ТМЦ",
+          "charts": 37
+        },
+        {
+          "dashboard_id": 561,
+          "title": "Отчет по выработке сборщиков в дарксторах",
+          "charts": 20
+        },
+        {
+          "dashboard_id": 665,
+          "title": "Онлайн статистика по заказам и курьерам",
+          "charts": 59
+        },
+        {
+          "dashboard_id": 1636,
+          "title": "Развитие пути сборки заказов - отчет по несборке",
+          "charts": 14
+        },
+        {
+          "dashboard_id": 1499,
+          "title": "МЕТРИКИ МАРШРУТИЗАТОРА",
+          "charts": 59
+        }
+      ]
+    },
+    {
+      "block": "AI-бот (опоздания)",
+      "need": "статистика опозданий по запросу, динамика",
+      "columns_hits": [
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "is_late"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "late_orders_cnt"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "minutes_late"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "minutes_late_group"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "plan_late_bucket"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "plan_late_bucket_order"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "plan_late_minute"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "planned_late"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "fact_minutes_late"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "fact_minutes_late_bucket"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "flag_late_first_assignment"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "flag_late_release_to_delivery"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "flag_planned_late"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "flag_pool_with_planned_late"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "flag_previous_order_late"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "flag_wait_orders_with_planlate"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "is_late"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "late_orders_cnt_in_pool"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "max_fact_late_in_pool"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "plan_late_minute"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "planned_late"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "sum_fact_late_minutes_in_pool"
+        },
+        {
+          "dataset_id": "7119",
+          "dataset_name": "cargo_flags",
+          "field": "fact_minutes_late"
+        },
+        {
+          "dataset_id": "7119",
+          "dataset_name": "cargo_flags",
+          "field": "fact_minutes_late_bucket"
+        },
+        {
+          "dataset_id": "7119",
+          "dataset_name": "cargo_flags",
+          "field": "flag_late_release_to_delivery"
+        }
+      ],
+      "metrics_hits": [
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_orders_in_work",
+          "verbose": "Кол-во заказов в работе"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "cnt_not_col_goods_before_work_slot",
+          "verbose": "Кол-во несобранных товаров, сборка которых закончилась до начала работы сервиса (слотовые заказы)"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "cnt_not_col_ord_before_work_slot",
+          "verbose": "Кол-во несобранных слотовых заказов, сборка которых закончилась до начала работы сервиса"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "lost_sum_slot",
+          "verbose": "Сумма потерь по слотовым заказам, сборка которых закончилась до начала работы сервиса, руб."
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "share_not_col_before_serv_from_not_col_slot",
+          "verbose": "Доля товаров по слотовым заказам, несобранных до начала работы сервиса, от общего кол-ва несобранных товаров (слотовые заказы)"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "share_not_col_ord_before_work",
+          "verbose": "Доля слотовых заказов, не собранных до начала работы сервиса, от общего кол-ва несобранных заказов"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "share_not_col_ord_slot_from_slot",
+          "verbose": "Доля слотовых заказов с несборкой, собранных до начала работы сервиса, от всех слотовых заказов"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "share_slot_from_not_collected_goods",
+          "verbose": "Доля товаров по слотовым заказам, несобранных до начала работы сервиса, от общего кол-ва несобранных товаров"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "shar_not_col_before_from_not_col_all",
+          "verbose": "Доля несобранных до нач работы сервиса слотовых заказов от всех несобранных заказов"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "shar_not_col_before_from_not_col_slot",
+          "verbose": "Доля несобранных до нач работы сервиса слотовых заказов от всех несобранных слотовых заказов"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_delivery_not_unique_pool",
+          "verbose": "Доля просроч. заказов при 2 и более заказах в пуле"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_delivery_unique_pool",
+          "verbose": "Доля просроч. заказов при 1 заказе в пуле"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_ord_1tt_in_pool",
+          "verbose": "Доля просроч. заказов с 1 ТТ в пуле"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_orders_with_other",
+          "verbose": "Доля просроч. заказов, которые в пуле с другими партнерами"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_orders_with_pharm",
+          "verbose": "Доля просроч. заказов, которые в пуле с аптеками"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_orders_with_rest",
+          "verbose": "Доля просроч. заказов, которые в пуле с ресторанами"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_ordinary_orders",
+          "verbose": "Доля просроч. заказов, которые в пуле с обычными заказами"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_ordinary_ord_more_2tt",
+          "verbose": "Доля просроч. заказов, которые в пуле с обычными заказами (2TT)"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_ord_more_2tt_in_pool",
+          "verbose": "Доля просроч. заказов с 2 и более ТТ в пуле"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_ord_with_other_more_2tt",
+          "verbose": "Доля просроч. заказов, которые в пуле с другими точками (2TT)"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_ord_with_pharm_more_2tt",
+          "verbose": "Доля просроч. заказов, которые в пуле с аптеками (2TT)"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "share_late_ord_with_rest_more_2tt",
+          "verbose": "Доля просроч. заказов, которые в пуле с ресторанами (2TT)"
+        },
+        {
+          "dataset_id": "4766",
+          "dataset_name": "couriers_on_week_dst",
+          "field": "count_days",
+          "verbose": "Кол-во отработанных дней"
+        },
+        {
+          "dataset_id": "5372",
+          "dataset_name": "dataset_tasks_of_technologists",
+          "field": "not_otrab_qnt_zt",
+          "verbose": "Кол-во неотработанных ЗТ"
+        },
+        {
+          "dataset_id": "5372",
+          "dataset_name": "dataset_tasks_of_technologists",
+          "field": "otrab_qnt_zt_all",
+          "verbose": "Кол-во отработанных ЗТ"
+        }
+      ],
+      "dataset_hits": [
+        {
+          "dataset_id": 3035,
+          "name": "darkstore_time_click",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 2483
+        },
+        {
+          "dataset_id": 2295,
+          "name": "ksa_time_vw",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 474
+        },
+        {
+          "dataset_id": 5815,
+          "name": "1850_Loses_ch240",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 309
+        },
+        {
+          "dataset_id": 3664,
+          "name": "hr_daily_pers_office",
+          "priority": "P1",
+          "domain": "courier",
+          "charts": 87
+        },
+        {
+          "dataset_id": 7283,
+          "name": "hr_daily_pers_office_click",
+          "priority": "P1",
+          "domain": "delivery",
+          "charts": 82
+        },
+        {
+          "dataset_id": 4038,
+          "name": "hr_daily_pers",
+          "priority": "P1",
+          "domain": "courier",
+          "charts": 71
+        },
+        {
+          "dataset_id": 5372,
+          "name": "dataset_tasks_of_technologists",
+          "priority": "P1",
+          "domain": "events",
+          "charts": 41
+        },
+        {
+          "dataset_id": 7421,
+          "name": "hr_daily_pers_click",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 40
+        },
+        {
+          "dataset_id": 7765,
+          "name": "pkdata_1464_courier_exits",
+          "priority": "P1",
+          "domain": "courier",
+          "charts": 36
+        },
+        {
+          "dataset_id": 3982,
+          "name": "ta_internal:kaiten",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 31
+        },
+        {
+          "dataset_id": 5680,
+          "name": "m4_tasks_dkp",
+          "priority": "P1",
+          "domain": "geo",
+          "charts": 28
+        },
+        {
+          "dataset_id": 7592,
+          "name": "hr_daily_pers_turnover_dynamic_click",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 25
+        }
+      ],
+      "chart_hits": [
+        {
+          "chart_id": 32577,
+          "name": "Click-to-eat Бесплатный за день по регионам",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7696,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32575,
+          "name": "Кол-во опозданий по регионам Бесплатный",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7696,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32574,
+          "name": "Доля опозданий по регионам Бесплатный",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7696,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32573,
+          "name": "Список курьеров и данные по рассылкам тест",
+          "viz_type": "table",
+          "dataset_id": 7915,
+          "dashboards": []
+        },
+        {
+          "chart_id": 24164,
+          "name": "<ФИО> 2.0 по товарам-составляющим",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 5815,
+          "dashboards": [
+            1380,
+            687
+          ]
+        },
+        {
+          "chart_id": 32369,
+          "name": "Плановые курьер-часы",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32368,
+          "name": "Выходы по дням",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32367,
+          "name": "Записи по дням абсолют",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32358,
+          "name": "Выходы по дням %",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 32357,
+          "name": "Записи по дням % limits",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 31864,
+          "name": "Позже и раньше",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 31862,
+          "name": "Часы на курьера по дням",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 31860,
+          "name": "Люди без записи",
+          "viz_type": "table",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 31859,
+          "name": "Записи дня",
+          "viz_type": "table",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 31854,
+          "name": "Точки",
+          "viz_type": "table",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 31844,
+          "name": "% вышел по плану",
+          "viz_type": "big_number_total",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 31838,
+          "name": "Записей",
+          "viz_type": "big_number_total",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 31915,
+          "name": "Дней в периоде",
+          "viz_type": "big_number_total",
+          "dataset_id": 7765,
+          "dashboards": [
+            1658
+          ]
+        },
+        {
+          "chart_id": 31748,
+          "name": "Click-to-eat Бесплатный за день вайтсторы",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7696,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31745,
+          "name": "Кол-во опозданий Бесплатный вайтсторы",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7696,
+          "dashboards": [
+            666
+          ]
+        }
+      ],
+      "dashboard_hits": [
+        {
+          "dashboard_id": 736,
+          "title": "HR Dashboard (Розница)",
+          "charts": 241
+        },
+        {
+          "dashboard_id": 666,
+          "title": "Монитор настроек ТТ",
+          "charts": 32
+        },
+        {
+          "dashboard_id": 1658,
+          "title": "Графики и выходы",
+          "charts": 72
+        },
+        {
+          "dashboard_id": 687,
+          "title": "Динамика сервиса ДаркКитчен-Сгоряча",
+          "charts": 215
+        },
+        {
+          "dashboard_id": 1083,
+          "title": "Статус заказа",
+          "charts": 44
+        },
+        {
+          "dashboard_id": 871,
+          "title": "ТМЦ",
+          "charts": 37
+        },
+        {
+          "dashboard_id": 561,
+          "title": "Отчет по выработке сборщиков в дарксторах",
+          "charts": 20
+        },
+        {
+          "dashboard_id": 1672,
+          "title": "Обращения курьеров в поддержку",
+          "charts": 14
+        },
+        {
+          "dashboard_id": 853,
+          "title": "Оформленные курьеры",
+          "charts": 36
+        },
+        {
+          "dashboard_id": 867,
+          "title": "HR Dashboard (Офис)",
+          "charts": 87
+        }
+      ]
+    },
+    {
+      "block": "Управление слотами",
+      "need": "покрытие слотов, перестановки, провалы",
+      "columns_hits": [
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "7119",
+          "dataset_name": "cargo_flags",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "order_delay_slot_coef"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "order_slot"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "Слот / динамическая"
+        },
+        {
+          "dataset_id": "3466",
+          "dataset_name": "darkstore_time_sheet",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "5799",
+          "dataset_name": "darkstore_time_sheet_by_date_collected",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "5438",
+          "dataset_name": "darkstore_time_click_[id=977]",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "5888",
+          "dataset_name": "Причины не сборки 41 click",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "not_collected_before_work_slot"
+        },
+        {
+          "dataset_id": "3406",
+          "dataset_name": "not_collected_kafe_pek",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "4547",
+          "dataset_name": "dts_for_late_delivery",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "4778",
+          "dataset_name": "curier_profit_new",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "5232",
+          "dataset_name": "darkstore_time_sheet_[id=23150]",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "5964",
+          "dataset_name": "darkstore_time_sheet_st_pr_sl",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "6757",
+          "dataset_name": "darkstore_time_sheet_for_1000002697",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "6836",
+          "dataset_name": "darkstore_time_sheet_21CH",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "7173",
+          "dataset_name": "darkstore_time_sheet_ch21_light",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "7174",
+          "dataset_name": "darkstore_time_sheet_test_21ch_light",
+          "field": "slots"
+        },
+        {
+          "dataset_id": "7397",
+          "dataset_name": "new_logs_dataset",
+          "field": "count_no_slot_generals_240_delay"
+        },
+        {
+          "dataset_id": "7397",
+          "dataset_name": "new_logs_dataset",
+          "field": "count_no_slot_generals_300_360_delay"
+        },
+        {
+          "dataset_id": "7397",
+          "dataset_name": "new_logs_dataset",
+          "field": "count_no_slot_generals_delay"
+        }
+      ],
+      "metrics_hits": [
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "qty_not_in_slot_above_all",
+          "verbose": "Кол-во заказов, просроч. по времени (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_31_60",
+          "verbose": "Доля заказов, просроч. по времени 31-60 мин. (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_not_in_slot_all_offline",
+          "verbose": "Кол-во заказов, не попавших в слот (УЗ, оффлайн)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_orders_collected_no_slots",
+          "verbose": "В статусе Готов (без слотовых)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "w_qty_2h/slot",
+          "verbose": "Кол-во заказов (ВайтСтор, Доставка 1.5 ч. и 2 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_service_32_47",
+          "verbose": "Доля просроч. от общего числа заказов, просроч. по  времени (1 ч.)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_all_90_120/slot",
+          "verbose": "Доля заказов с общим временем > 1.5 ч. (Доставка 1.5 ч. и 2 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_service_49_52_53",
+          "verbose": "Доля просроч. от общего числа заказов, просроч. по  времени (Экспресс 15, 45, 59 мин.)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_180_",
+          "verbose": "Доля заказов, просроч. по времени > 180 мин. (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_0_15",
+          "verbose": "Доля заказов, просроч. по времени 0-15 мин. (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_all_offline",
+          "verbose": "Доля заказов, не попавших в слот (УЗ, оффлайн)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_service_48_60",
+          "verbose": "Доля просроч. от общего числа заказов, просроч. по  времени (2 ч. )"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "qty_not_in_slot_above_apt_share",
+          "verbose": "Доля просроченных УЗ ген.заказов Аптеки от общего по ТТ"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_service_72",
+          "verbose": "Доля просроч. от общего числа заказов, просроч. по времени (4 ч. (Город), 72 сервис)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_from_prosrok_tt",
+          "verbose": "Процент заказов, просроч. по времени, от общего просрока на ТТ"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_all_120_120/slot",
+          "verbose": "Доля заказов с общим временем > 2 ч. (Доставка 1.5 ч. и 2 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "d_qty_2h/slot",
+          "verbose": "Кол-во заказов (ДаркСтор, Доставка 1.5 ч. и 2 ч., УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_all_offline",
+          "verbose": "Доля заказов, просроч. по времени (УЗ, оффлайн)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_151_180",
+          "verbose": "Доля заказов, просроч. по времени 151-180 мин. (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_under_all",
+          "verbose": "Доля заказов, получ. преждевременно (УЗ)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_service_72_only",
+          "verbose": "Доля заказов, просроч. по времени (Только по 4 ч. (Город), 72 сервис)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_service_32_47_only",
+          "verbose": "Доля заказов, просроч. по  времени (Только по 1 ч.) "
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_service_51",
+          "verbose": "Доля просроч. от общего числа заказов, просроч. по  времени (3 ч., город)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_service_51_only",
+          "verbose": "Доля заказов, просроч. по  времени (Только по 3 ч., город)"
+        },
+        {
+          "dataset_id": "3035",
+          "dataset_name": "darkstore_time_click",
+          "field": "share_not_in_slot_above_service_55_57_only",
+          "verbose": "Доля заказов, просроч. по  времени (Только по 3 ч., поселки)"
+        }
+      ],
+      "dataset_hits": [
+        {
+          "dataset_id": 3035,
+          "name": "darkstore_time_click",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 2483
+        },
+        {
+          "dataset_id": 2295,
+          "name": "ksa_time_vw",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 474
+        },
+        {
+          "dataset_id": 3466,
+          "name": "darkstore_time_sheet",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 395
+        },
+        {
+          "dataset_id": 5888,
+          "name": "Причины не сборки 41 click",
+          "priority": "P1",
+          "domain": "fulfillment",
+          "charts": 124
+        },
+        {
+          "dataset_id": 5441,
+          "name": "darkstore_time_click_pharmacy_rest_flowers",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 101
+        },
+        {
+          "dataset_id": 5438,
+          "name": "darkstore_time_click_[id=977]",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 71
+        },
+        {
+          "dataset_id": 2865,
+          "name": "test_dk_delivery",
+          "priority": "P1",
+          "domain": "delivery",
+          "charts": 69
+        },
+        {
+          "dataset_id": 2492,
+          "name": "dk_order_types",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 53
+        },
+        {
+          "dataset_id": 2366,
+          "name": "Причины не сборки",
+          "priority": "P1",
+          "domain": "fulfillment",
+          "charts": 46
+        },
+        {
+          "dataset_id": 2545,
+          "name": "dk_orders_yesterday",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 42
+        },
+        {
+          "dataset_id": 7173,
+          "name": "darkstore_time_sheet_ch21_light",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 39
+        },
+        {
+          "dataset_id": 7397,
+          "name": "new_logs_dataset",
+          "priority": "P1",
+          "domain": "events",
+          "charts": 20
+        }
+      ],
+      "chart_hits": [
+        {
+          "chart_id": 32585,
+          "name": "Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32583,
+          "name": "1.2.01 | Сборка | Общая статистика",
+          "viz_type": "table",
+          "dataset_id": 3466,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32531,
+          "name": "Таблица нагрузки на регионах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27914,
+          "name": "Таблица нагрузки на ДаркСторах доставка_доли (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27915,
+          "name": "Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32530,
+          "name": "Нагрузка на регионах (доставка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32529,
+          "name": "Нагрузка на регионах (сборка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31743,
+          "name": "Таблица нагрузки на вайтсторах доставка_кол-во (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31742,
+          "name": "Таблица нагрузки на вайтсторах доставка_доли (глубина опозданий по сервисам)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31741,
+          "name": "Нагрузка на вайтсторах (доставка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 31740,
+          "name": "Нагрузка на вайтсторах (сборка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27913,
+          "name": "Нагрузка на дарксторах (доставка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 27912,
+          "name": "Нагрузка на дарксторах (сборка)",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32518,
+          "name": "Итоговая таблица по магазинам по дням BI-1000004530",
+          "viz_type": "table",
+          "dataset_id": 3466,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32517,
+          "name": "Итоговая таблица по дням BI-1000004530",
+          "viz_type": "table",
+          "dataset_id": 3466,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32510,
+          "name": "тест рассылки 11.15",
+          "viz_type": "table",
+          "dataset_id": 3035,
+          "dashboards": []
+        },
+        {
+          "chart_id": 27454,
+          "name": "Сочетания сервисов корректные по часам (доставка сейчас)",
+          "viz_type": "table",
+          "dataset_id": 6830,
+          "dashboards": [
+            1375
+          ]
+        },
+        {
+          "chart_id": 27453,
+          "name": "Сочетания сервисов корректные по неделям (доставка сейчас)",
+          "viz_type": "table",
+          "dataset_id": 6830,
+          "dashboards": [
+            1375
+          ]
+        },
+        {
+          "chart_id": 32509,
+          "name": "Итоговая таблица за день по сервисам Успешно завершен",
+          "viz_type": "table",
+          "dataset_id": 3035,
+          "dashboards": []
+        },
+        {
+          "chart_id": 30509,
+          "name": "По кустам",
+          "viz_type": "table",
+          "dataset_id": 7397,
+          "dashboards": [
+            1577
+          ]
+        }
+      ],
+      "dashboard_hits": [
+        {
+          "dashboard_id": 666,
+          "title": "Монитор настроек ТТ",
+          "charts": 32
+        },
+        {
+          "dashboard_id": 712,
+          "title": "ВВ Партнер",
+          "charts": 25
+        },
+        {
+          "dashboard_id": 687,
+          "title": "Динамика сервиса ДаркКитчен-Сгоряча",
+          "charts": 215
+        },
+        {
+          "dashboard_id": 871,
+          "title": "ТМЦ",
+          "charts": 37
+        },
+        {
+          "dashboard_id": 561,
+          "title": "Отчет по выработке сборщиков в дарксторах",
+          "charts": 20
+        },
+        {
+          "dashboard_id": 665,
+          "title": "Онлайн статистика по заказам и курьерам",
+          "charts": 59
+        },
+        {
+          "dashboard_id": 1499,
+          "title": "МЕТРИКИ МАРШРУТИЗАТОРА",
+          "charts": 59
+        },
+        {
+          "dashboard_id": 1010,
+          "title": "<ФИО>",
+          "charts": 3
+        },
+        {
+          "dashboard_id": 872,
+          "title": "Доставка ДаркКитчен [копия на новом источнике]",
+          "charts": 63
+        },
+        {
+          "dashboard_id": 668,
+          "title": "Статистика по заказам и сборщикам",
+          "charts": 192
+        }
+      ]
+    },
+    {
+      "block": "Матрёшка → Курьер под ключ",
+      "need": "3 смены наставничества, опросник/квалификация, допуск к слотам, удержание новичков",
+      "columns_hits": [
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "5_shifts_in_14d"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "has_5_shifts_in_first_14d"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "5_shifts_in_14d"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "has_5_shifts_in_first_14d"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "is_5_shifts_in_14d"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "5_shifts_in_14d"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "has_5_shifts_in_first_14d"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "is_5_shifts_in_14d"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "date_for_mentor"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "enough_shifts_for_mentor"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "mentor_at_date"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "mentorfio"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "mentorid"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "mentorid_at_date"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "mentor_in_five"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "mentor_same_tt_date"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "shift_rn_trainee_by_mentor"
+        },
+        {
+          "dataset_id": "4038",
+          "dataset_name": "hr_daily_pers",
+          "field": "date_for_mentor"
+        },
+        {
+          "dataset_id": "4038",
+          "dataset_name": "hr_daily_pers",
+          "field": "mentor_at_date"
+        },
+        {
+          "dataset_id": "4038",
+          "dataset_name": "hr_daily_pers",
+          "field": "mentorfio"
+        },
+        {
+          "dataset_id": "4038",
+          "dataset_name": "hr_daily_pers",
+          "field": "mentorid"
+        },
+        {
+          "dataset_id": "4038",
+          "dataset_name": "hr_daily_pers",
+          "field": "mentor_in_five"
+        },
+        {
+          "dataset_id": "4038",
+          "dataset_name": "hr_daily_pers",
+          "field": "mentor_same_tt_date"
+        },
+        {
+          "dataset_id": "7394",
+          "dataset_name": "couriers_newsletters_status",
+          "field": "5_shifts_in_14d"
+        },
+        {
+          "dataset_id": "7394",
+          "dataset_name": "couriers_newsletters_status",
+          "field": "has_5_shifts_in_first_14d"
+        }
+      ],
+      "metrics_hits": [
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "newcomers",
+          "verbose": "Вышло новичков"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "attrition_newcomers_new",
+          "verbose": "% оттока "
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "attrition_newcomers",
+          "verbose": "% оттока новичков"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "attrition",
+          "verbose": "Коэффициент текучести"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "turnover_by_year",
+          "verbose": "Текучесть за год"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "turnover",
+          "verbose": "Коэф. текучести кадров"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "cnt_new_couriers",
+          "verbose": "Кол-во курьеров-новичков"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "turnover",
+          "verbose": "Коэф. текучести кадров"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "cnt_new_couriers",
+          "verbose": "Кол-во курьеров-новичков"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "newcomers",
+          "verbose": "Вышло новичков"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "attrition",
+          "verbose": "Коэффициент текучести"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "turnover_by_year",
+          "verbose": "Текучесть за год"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "attrition_newcomers_new",
+          "verbose": "% оттока "
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "attrition_newcomers",
+          "verbose": "% оттока новичков"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "turnover_by_year",
+          "verbose": "Текучесть за год"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "cnt_new_couriers",
+          "verbose": "Кол-во курьеров-новичков"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "turnover",
+          "verbose": "Коэф. текучести кадров"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "attrition",
+          "verbose": "Коэффициент текучести"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "attrition_newcomers",
+          "verbose": "% оттока новичков"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "attrition_newcomers_new",
+          "verbose": "% оттока "
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "newcomers",
+          "verbose": "Вышло новичков"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "fisrt_shifts_wo_mentor2",
+          "verbose": "Нет ментора или флага стажера в 1-ю смену"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "mentor_empl",
+          "verbose": "Кол-во стажеров"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "mentor_empl2",
+          "verbose": "Есть ментор и флаг стажера в 1-ю смену"
+        },
+        {
+          "dataset_id": "5939",
+          "dataset_name": "hr_daily_pers_mentors",
+          "field": "mentor_empl_dism2m",
+          "verbose": "Стажеры, уволенные со 2го по 3й месяц"
+        }
+      ],
+      "dataset_hits": [
+        {
+          "dataset_id": 3664,
+          "name": "hr_daily_pers_office",
+          "priority": "P1",
+          "domain": "courier",
+          "charts": 87
+        },
+        {
+          "dataset_id": 7283,
+          "name": "hr_daily_pers_office_click",
+          "priority": "P1",
+          "domain": "delivery",
+          "charts": 82
+        },
+        {
+          "dataset_id": 4038,
+          "name": "hr_daily_pers",
+          "priority": "P1",
+          "domain": "courier",
+          "charts": 71
+        },
+        {
+          "dataset_id": 2865,
+          "name": "test_dk_delivery",
+          "priority": "P1",
+          "domain": "delivery",
+          "charts": 69
+        },
+        {
+          "dataset_id": 5797,
+          "name": "hr_couriers",
+          "priority": "P0",
+          "domain": "courier",
+          "charts": 54
+        },
+        {
+          "dataset_id": 7421,
+          "name": "hr_daily_pers_click",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 40
+        },
+        {
+          "dataset_id": 7592,
+          "name": "hr_daily_pers_turnover_dynamic_click",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 25
+        },
+        {
+          "dataset_id": 5205,
+          "name": "hr_daily_pers_rc",
+          "priority": "P1",
+          "domain": "courier",
+          "charts": 24
+        },
+        {
+          "dataset_id": 7911,
+          "name": "hr_daily_pers_total_click",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 18
+        },
+        {
+          "dataset_id": 6622,
+          "name": "milay_roznica_month_osn_1",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 17
+        },
+        {
+          "dataset_id": 6496,
+          "name": "milay_roznica_month_osn",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 16
+        },
+        {
+          "dataset_id": 6543,
+          "name": "milay_roznica_week_osn",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 16
+        }
+      ],
+      "chart_hits": [
+        {
+          "chart_id": 23046,
+          "name": "HR розница - основные показатели - новички hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23038,
+          "name": "Коэффициент текучести кадров по месяцам для основных показателей",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23438,
+          "name": "HR розница - основные показатели - предыдущий месяц",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23435,
+          "name": "HR розница - основные показатели - отчетный месяц",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23035,
+          "name": "HR розница - основные показатели - численность hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23060,
+          "name": "HR розница - основные показатели - прирост hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23059,
+          "name": "HR розница - основные показатели - уволено hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23037,
+          "name": "HR розница - основные показатели - принято hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23039,
+          "name": "HR розница - основные показатели - текучесть hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23036,
+          "name": "Численность штатных сотрудников для основных показателей",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 32573,
+          "name": "Список курьеров и данные по рассылкам тест",
+          "viz_type": "table",
+          "dataset_id": 7915,
+          "dashboards": []
+        },
+        {
+          "chart_id": 21009,
+          "name": "Уволенные сотрудники - штат + СМЗ + ГПХ",
+          "viz_type": "table",
+          "dataset_id": 7911,
+          "dashboards": [
+            1431,
+            736
+          ]
+        },
+        {
+          "chart_id": 20917,
+          "name": "Отток внештатных сотрудников - СМЗ+ГПХ - увольнения",
+          "viz_type": "table",
+          "dataset_id": 7876,
+          "dashboards": [
+            736,
+            1431
+          ]
+        },
+        {
+          "chart_id": 17632,
+          "name": "Уволенные сотрудники",
+          "viz_type": "table",
+          "dataset_id": 4379,
+          "dashboards": [
+            1431,
+            736
+          ]
+        },
+        {
+          "chart_id": 32564,
+          "name": "Количество уволенных по стажу общая",
+          "viz_type": "echarts_timeseries_bar",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 20985,
+          "name": "Коэффициент текучести кадров по месяцам и по стажу барчарт - штат + СМЗ + ГПХ",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7911,
+          "dashboards": [
+            1431,
+            736
+          ]
+        },
+        {
+          "chart_id": 22075,
+          "name": "Средний стаж уволенного по месяцам - штат + СМЗ + ГПХ",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7911,
+          "dashboards": [
+            736,
+            1431
+          ]
+        },
+        {
+          "chart_id": 20983,
+          "name": "Коэффициент текучести кадров по месяцам - штат + СМЗ + ГПХ",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7911,
+          "dashboards": [
+            1431,
+            736
+          ]
+        },
+        {
+          "chart_id": 20937,
+          "name": "Общая численность сотрудников на дату детализация - штат+СМЗ+ГПХ",
+          "viz_type": "table",
+          "dataset_id": 7911,
+          "dashboards": [
+            736,
+            1431
+          ]
+        },
+        {
+          "chart_id": 20941,
+          "name": "Численность сотрудников на дату kpi - штат + СМЗ + ГПХ",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            1431,
+            736
+          ]
+        }
+      ],
+      "dashboard_hits": [
+        {
+          "dashboard_id": 736,
+          "title": "HR Dashboard (Розница)",
+          "charts": 241
+        },
+        {
+          "dashboard_id": 1617,
+          "title": "Опрос новичка после первой смены",
+          "charts": 20
+        },
+        {
+          "dashboard_id": 867,
+          "title": "HR Dashboard (Офис)",
+          "charts": 87
+        },
+        {
+          "dashboard_id": 1228,
+          "title": "HR Dashboard Доставка",
+          "charts": 46
+        },
+        {
+          "dashboard_id": 1124,
+          "title": "HR верхнеуровневый",
+          "charts": 147
+        },
+        {
+          "dashboard_id": 872,
+          "title": "Доставка ДаркКитчен [копия на новом источнике]",
+          "charts": 63
+        },
+        {
+          "dashboard_id": 1199,
+          "title": "М4 Сервис для команды ДКП",
+          "charts": 66
+        },
+        {
+          "dashboard_id": 783,
+          "title": "УАГи (Аптеки)",
+          "charts": 2
+        },
+        {
+          "dashboard_id": 1431,
+          "title": "HR Dashboard (Розница) [копия]",
+          "charts": 175
+        },
+        {
+          "dashboard_id": 1386,
+          "title": "ГЕО/КПО Доступность сервисов",
+          "charts": 21
+        }
+      ]
+    },
+    {
+      "block": "Аудит зоны выдачи",
+      "need": "чек-лист/фото зоны выдачи, список fixes",
+      "columns_hits": [
+        {
+          "dataset_id": "7712",
+          "dataset_name": "photo_control_shift_bi",
+          "field": "ai_photos_cnt"
+        },
+        {
+          "dataset_id": "7712",
+          "dataset_name": "photo_control_shift_bi",
+          "field": "photo_end"
+        },
+        {
+          "dataset_id": "7712",
+          "dataset_name": "photo_control_shift_bi",
+          "field": "photos_cnt"
+        },
+        {
+          "dataset_id": "7712",
+          "dataset_name": "photo_control_shift_bi",
+          "field": "photos_failed"
+        },
+        {
+          "dataset_id": "7712",
+          "dataset_name": "photo_control_shift_bi",
+          "field": "photos_no_ai"
+        },
+        {
+          "dataset_id": "7712",
+          "dataset_name": "photo_control_shift_bi",
+          "field": "photos_ok"
+        },
+        {
+          "dataset_id": "7712",
+          "dataset_name": "photo_control_shift_bi",
+          "field": "photo_span_sec"
+        },
+        {
+          "dataset_id": "7712",
+          "dataset_name": "photo_control_shift_bi",
+          "field": "photos_unavailable"
+        },
+        {
+          "dataset_id": "7712",
+          "dataset_name": "photo_control_shift_bi",
+          "field": "photos_warning"
+        },
+        {
+          "dataset_id": "7713",
+          "dataset_name": "photo_control_photo_kind",
+          "field": "photo_kind"
+        },
+        {
+          "dataset_id": "7607",
+          "dataset_name": "photo_control_shift_draft",
+          "field": "ai_photos_cnt"
+        },
+        {
+          "dataset_id": "7607",
+          "dataset_name": "photo_control_shift_draft",
+          "field": "photo_end"
+        },
+        {
+          "dataset_id": "7607",
+          "dataset_name": "photo_control_shift_draft",
+          "field": "photos_cnt"
+        },
+        {
+          "dataset_id": "7607",
+          "dataset_name": "photo_control_shift_draft",
+          "field": "photos_failed"
+        },
+        {
+          "dataset_id": "7607",
+          "dataset_name": "photo_control_shift_draft",
+          "field": "photos_no_ai"
+        },
+        {
+          "dataset_id": "7607",
+          "dataset_name": "photo_control_shift_draft",
+          "field": "photos_ok"
+        },
+        {
+          "dataset_id": "7607",
+          "dataset_name": "photo_control_shift_draft",
+          "field": "photo_span_sec"
+        },
+        {
+          "dataset_id": "7607",
+          "dataset_name": "photo_control_shift_draft",
+          "field": "photos_unavailable"
+        },
+        {
+          "dataset_id": "7607",
+          "dataset_name": "photo_control_shift_draft",
+          "field": "photos_warning"
+        },
+        {
+          "dataset_id": "6310",
+          "dataset_name": "audit_delivery_ds",
+          "field": "auditor_code"
+        },
+        {
+          "dataset_id": "6310",
+          "dataset_name": "audit_delivery_ds",
+          "field": "auditor_fio"
+        },
+        {
+          "dataset_id": "3306",
+          "dataset_name": "tmz_darkstore",
+          "field": "NeedPhotoForOpeartions"
+        },
+        {
+          "dataset_id": "6524",
+          "dataset_name": "roznica_daily_rating_metrics",
+          "field": "audits"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "audit_error_category"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "audit_error_descr"
+        }
+      ],
+      "metrics_hits": [
+        {
+          "dataset_id": "6310",
+          "dataset_name": "audit_delivery_ds",
+          "field": "cnt_au",
+          "verbose": "Кол-во аудитов"
+        },
+        {
+          "dataset_id": "6310",
+          "dataset_name": "audit_delivery_ds",
+          "field": "cnt_viol_last_au",
+          "verbose": "Кол-во нарушений последний аудит"
+        },
+        {
+          "dataset_id": "6310",
+          "dataset_name": "audit_delivery_ds",
+          "field": "cnt_viol_prev_au",
+          "verbose": "Кол-во нарушений предыдущий аудит"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "audit_id_cnt",
+          "verbose": "Кол-во проведенных аудитов"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "avg_qty_audit_err_aud",
+          "verbose": "Ср кол-во нарушений на аудит"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "avg_qty_audit_errors",
+          "verbose": "Ср кол-во нарушений на ТТ"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "avg_qty_audit_errors_per_aud",
+          "verbose": "Ср кол-во нарушений по проектам, которое приходится на одну проверку"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "avg_qty_audit_errors_per_gr",
+          "verbose": "Среднее кол-во нарушений на аудит в разрезе групп ТТ"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "avg_qty_audit_errors_per_proj",
+          "verbose": "Ср кол-во нарушений по проектам, которое приходится на ТТ"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "qty_audit_errors",
+          "verbose": "Кол-во нарушений"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "qty_audit_errors_1",
+          "verbose": "Кол-во нарушений (последний аудит)"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "qty_audit_errors_1_vs_2_dif",
+          "verbose": "Динамика кол-ва нарушений (последний аудит к предыдущему)"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "qty_audit_errors_2",
+          "verbose": "Кол-во нарушений (предыдущий аудит)"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "qty_audit_errors_all",
+          "verbose": "Кол-во нарушений / Замечаний нет"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "qty_audit_errors_pr_11",
+          "verbose": "Кол-во нарушений (последняя проверка проекта)"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "qty_audit_errors_pr_1_vs_2",
+          "verbose": "Динамика кол-ва нарушений (последняя проверка к предыдущей)"
+        },
+        {
+          "dataset_id": "3268",
+          "dataset_name": "internal_audits",
+          "field": "qty_audit_errors_pr_22",
+          "verbose": "Кол-во нарушений (предыдущая проверка проекта)"
+        }
+      ],
+      "dataset_hits": [
+        {
+          "dataset_id": 6303,
+          "name": "m4_sanpin_torgovii_zal",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 40
+        },
+        {
+          "dataset_id": 3268,
+          "name": "internal_audits",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 38
+        },
+        {
+          "dataset_id": 6266,
+          "name": "end_to_end_rating_day_old",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 20
+        },
+        {
+          "dataset_id": 7607,
+          "name": "photo_control_shift_draft",
+          "priority": "P1",
+          "domain": "shift",
+          "charts": 18
+        },
+        {
+          "dataset_id": 7712,
+          "name": "photo_control_shift_bi",
+          "priority": "P1",
+          "domain": "shift",
+          "charts": 14
+        },
+        {
+          "dataset_id": 6310,
+          "name": "audit_delivery_ds",
+          "priority": "P1",
+          "domain": "delivery",
+          "charts": 4
+        },
+        {
+          "dataset_id": 5807,
+          "name": "m4_stageri",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 3
+        },
+        {
+          "dataset_id": 7713,
+          "name": "photo_control_photo_kind",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 2
+        },
+        {
+          "dataset_id": 3306,
+          "name": "tmz_darkstore",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 0
+        },
+        {
+          "dataset_id": 6524,
+          "name": "roznica_daily_rating_metrics",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 0
+        }
+      ],
+      "chart_hits": [
+        {
+          "chart_id": 31601,
+          "name": "Детализация попыток",
+          "viz_type": "table",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31608,
+          "name": "Исход смены за период",
+          "viz_type": "pie",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31610,
+          "name": "Статусы фото за период",
+          "viz_type": "handlebars",
+          "dataset_id": 7713,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31607,
+          "name": "Доля: ок, спорные, не ок",
+          "viz_type": "echarts_timeseries_bar",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31606,
+          "name": "Динамика: ок, спорные, не ок",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31599,
+          "name": "Динамика числа фото",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31605,
+          "name": "Общие метрики - ТТ",
+          "viz_type": "table",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31604,
+          "name": "Общие метрики - ПУ",
+          "viz_type": "table",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31603,
+          "name": "Общие метрики - Куст",
+          "viz_type": "table",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31602,
+          "name": "Общие метрики - ТУ",
+          "viz_type": "table",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31704,
+          "name": "Когорты попыток: числа",
+          "viz_type": "table",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31703,
+          "name": "Когорты попыток за период",
+          "viz_type": "handlebars",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31609,
+          "name": "Исход смены: числа",
+          "viz_type": "table",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31611,
+          "name": "Статусы фото: числа",
+          "viz_type": "table",
+          "dataset_id": 7713,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31600,
+          "name": "Доля фото",
+          "viz_type": "echarts_timeseries_bar",
+          "dataset_id": 7712,
+          "dashboards": [
+            1646
+          ]
+        },
+        {
+          "chart_id": 31598,
+          "name": "Общие метрики",
+          "viz_type": "table",
+          "dataset_id": 7712,
+          "dashboards": []
+        },
+        {
+          "chart_id": 30942,
+          "name": "% с первого раза — все",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7607,
+          "dashboards": [
+            1631
+          ]
+        },
+        {
+          "chart_id": 30952,
+          "name": "Транспорт: ok / warning / failed",
+          "viz_type": "echarts_timeseries_bar",
+          "dataset_id": 7607,
+          "dashboards": [
+            1631
+          ]
+        },
+        {
+          "chart_id": 30959,
+          "name": "Попытки",
+          "viz_type": "table",
+          "dataset_id": 7607,
+          "dashboards": [
+            1631
+          ]
+        },
+        {
+          "chart_id": 30958,
+          "name": "Сводка по фильтру",
+          "viz_type": "table",
+          "dataset_id": 7607,
+          "dashboards": [
+            1631
+          ]
+        }
+      ],
+      "dashboard_hits": [
+        {
+          "dashboard_id": 1288,
+          "title": "М4 Сервис для команды САНПИН",
+          "charts": 47
+        },
+        {
+          "dashboard_id": 1646,
+          "title": "ИИ фотоконтроль начала смены",
+          "charts": 15
+        },
+        {
+          "dashboard_id": 827,
+          "title": "Внутренние аудиты",
+          "charts": 28
+        },
+        {
+          "dashboard_id": 1311,
+          "title": "Аудиты доставки",
+          "charts": 5
+        },
+        {
+          "dashboard_id": 1199,
+          "title": "М4 Сервис для команды ДКП",
+          "charts": 66
+        }
+      ]
+    },
+    {
+      "block": "Карта покрытия / кластер",
+      "need": "актуальность карты ЗИЗ 180-300, границы кластеров",
+      "columns_hits": [
+        {
+          "dataset_id": "4732",
+          "dataset_name": "darkstore_ts_partners_new",
+          "field": "geo"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "inactivity_zone_ordered"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "zone"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "zone_ch_"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "zone_transition_ordered"
+        },
+        {
+          "dataset_id": "7473",
+          "dataset_name": "hr_couriers_five_shifts",
+          "field": "zone_transition_type"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "inactivity_zone"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "inactivity_zone_ordered"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "prev_inactivity_zone"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "zone"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "zone_ch_"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "zone_changed"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "zone_transition_ordered"
+        },
+        {
+          "dataset_id": "5797",
+          "dataset_name": "hr_couriers",
+          "field": "zone_transition_type"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "inactivity_zone"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "inactivity_zone_ordered"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "prev_inactivity_zone"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "zone"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "zone_ch_"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "zone_changed"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "zone_transition_ordered"
+        },
+        {
+          "dataset_id": "7465",
+          "dataset_name": "hr_couriers_5shifts",
+          "field": "zone_transition_type"
+        },
+        {
+          "dataset_id": "7006",
+          "dataset_name": "cargo_main2",
+          "field": "cluster_id"
+        },
+        {
+          "dataset_id": "7024",
+          "dataset_name": "cargo_main3",
+          "field": "cluster_id"
+        },
+        {
+          "dataset_id": "7027",
+          "dataset_name": "cargo_main4",
+          "field": "cluster_id"
+        }
+      ],
+      "metrics_hits": [
+        {
+          "dataset_id": "7560",
+          "dataset_name": "draft_usov_forecast_quality_v1",
+          "field": "coverage_predict1",
+          "verbose": "Доля часов с Predict 1"
+        }
+      ],
+      "dataset_hits": [
+        {
+          "dataset_id": 3035,
+          "name": "darkstore_time_click",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 2483
+        },
+        {
+          "dataset_id": 2295,
+          "name": "ksa_time_vw",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 474
+        },
+        {
+          "dataset_id": 3466,
+          "name": "darkstore_time_sheet",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 395
+        },
+        {
+          "dataset_id": 5542,
+          "name": "ost_group_ch41",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 277
+        },
+        {
+          "dataset_id": 5553,
+          "name": "ost_group_rozn_ch41",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 245
+        },
+        {
+          "dataset_id": 5888,
+          "name": "Причины не сборки 41 click",
+          "priority": "P1",
+          "domain": "fulfillment",
+          "charts": 124
+        },
+        {
+          "dataset_id": 5441,
+          "name": "darkstore_time_click_pharmacy_rest_flowers",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 101
+        },
+        {
+          "dataset_id": 5438,
+          "name": "darkstore_time_click_[id=977]",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 71
+        },
+        {
+          "dataset_id": 4038,
+          "name": "hr_daily_pers",
+          "priority": "P1",
+          "domain": "courier",
+          "charts": 71
+        },
+        {
+          "dataset_id": 5797,
+          "name": "hr_couriers",
+          "priority": "P0",
+          "domain": "courier",
+          "charts": 54
+        },
+        {
+          "dataset_id": 3857,
+          "name": "dtt_test",
+          "priority": "P1",
+          "domain": "orders",
+          "charts": 44
+        },
+        {
+          "dataset_id": 3746,
+          "name": "tmz_darkstore",
+          "priority": "P1",
+          "domain": "shop",
+          "charts": 41
+        }
+      ],
+      "chart_hits": [
+        {
+          "chart_id": 32585,
+          "name": "Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 6960,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32584,
+          "name": "1.2.06 | Сборка | Несобранные",
+          "viz_type": "table",
+          "dataset_id": 5542,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32417,
+          "name": "1.2.01 | Сборка | Несобранные",
+          "viz_type": "table",
+          "dataset_id": 5542,
+          "dashboards": []
+        },
+        {
+          "chart_id": 32583,
+          "name": "1.2.01 | Сборка | Общая статистика",
+          "viz_type": "table",
+          "dataset_id": 3466,
+          "dashboards": []
+        },
+        {
+          "chart_id": 23046,
+          "name": "HR розница - основные показатели - новички hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23038,
+          "name": "Коэффициент текучести кадров по месяцам для основных показателей",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23438,
+          "name": "HR розница - основные показатели - предыдущий месяц",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23435,
+          "name": "HR розница - основные показатели - отчетный месяц",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23035,
+          "name": "HR розница - основные показатели - численность hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23060,
+          "name": "HR розница - основные показатели - прирост hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23059,
+          "name": "HR розница - основные показатели - уволено hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23037,
+          "name": "HR розница - основные показатели - принято hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23039,
+          "name": "HR розница - основные показатели - текучесть hb",
+          "viz_type": "handlebars",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 23036,
+          "name": "Численность штатных сотрудников для основных показателей",
+          "viz_type": "echarts_timeseries_line",
+          "dataset_id": 7911,
+          "dashboards": [
+            736
+          ]
+        },
+        {
+          "chart_id": 32577,
+          "name": "Click-to-eat Бесплатный за день по регионам",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7696,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32576,
+          "name": "Доступность сервисов по регионам",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7741,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32575,
+          "name": "Кол-во опозданий по регионам Бесплатный",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7696,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32574,
+          "name": "Доля опозданий по регионам Бесплатный",
+          "viz_type": "pivot_table_v2",
+          "dataset_id": 7696,
+          "dashboards": [
+            666
+          ]
+        },
+        {
+          "chart_id": 32573,
+          "name": "Список курьеров и данные по рассылкам тест",
+          "viz_type": "table",
+          "dataset_id": 7915,
+          "dashboards": []
+        },
+        {
+          "chart_id": 21009,
+          "name": "Уволенные сотрудники - штат + СМЗ + ГПХ",
+          "viz_type": "table",
+          "dataset_id": 7911,
+          "dashboards": [
+            1431,
+            736
+          ]
+        }
+      ],
+      "dashboard_hits": [
+        {
+          "dashboard_id": 736,
+          "title": "HR Dashboard (Розница)",
+          "charts": 241
+        },
+        {
+          "dashboard_id": 1288,
+          "title": "М4 Сервис для команды САНПИН",
+          "charts": 47
+        },
+        {
+          "dashboard_id": 666,
+          "title": "Монитор настроек ТТ",
+          "charts": 32
+        },
+        {
+          "dashboard_id": 687,
+          "title": "Динамика сервиса ДаркКитчен-Сгоряча",
+          "charts": 215
+        },
+        {
+          "dashboard_id": 871,
+          "title": "ТМЦ",
+          "charts": 37
+        },
+        {
+          "dashboard_id": 561,
+          "title": "Отчет по выработке сборщиков в дарксторах",
+          "charts": 20
+        },
+        {
+          "dashboard_id": 665,
+          "title": "Онлайн статистика по заказам и курьерам",
+          "charts": 59
+        },
+        {
+          "dashboard_id": 1451,
+          "title": "5-9 мая отключения инета",
+          "charts": 8
+        },
+        {
+          "dashboard_id": 1636,
+          "title": "Развитие пути сборки заказов - отчет по несборке",
+          "charts": 14
+        },
+        {
+          "dashboard_id": 1445,
+          "title": "Лиды и оформленные курьеры по amoCRM",
+          "charts": 41
+        }
+      ]
+    }
+  ],
+  "digest": [
+    {
+      "item": "торговые точки / открытые магазины / ВВ мини / дарксторы / города",
+      "columns": 437,
+      "metrics": 185,
+      "datasets": 204,
+      "dataset_examples": [
+        {
+          "id": "4732",
+          "name": "darkstore_ts_partners_new",
+          "priority": "P0"
+        },
+        {
+          "id": "5247",
+          "name": "courier_logs_agg_couriers_daily",
+          "priority": "P0"
+        },
+        {
+          "id": "5399",
+          "name": "courier_logs_agg_couriers_week",
+          "priority": "P0"
+        },
+        {
+          "id": "3035",
+          "name": "darkstore_time_click",
+          "priority": "P1"
+        },
+        {
+          "id": "3466",
+          "name": "darkstore_time_sheet",
+          "priority": "P1"
+        },
+        {
+          "id": "5799",
+          "name": "darkstore_time_sheet_by_date_collected",
+          "priority": "P1"
+        }
+      ],
+      "metric_examples": [
+        {
+          "dataset_id": "4732",
+          "field": "tt_qty"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "d_qty_ex"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "Order_shopno_delivery"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "share_order_time_above_30_city"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "share_not_in_slot_above_service_72"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "d_qty_2h/slot"
+        }
+      ]
+    },
+    {
+      "item": "онлайн-заказы (месяц/неделя/вчера), заказы на дарксторы",
+      "columns": 1187,
+      "metrics": 4047,
+      "datasets": 327,
+      "dataset_examples": [
+        {
+          "id": "4732",
+          "name": "darkstore_ts_partners_new",
+          "priority": "P0"
+        },
+        {
+          "id": "7473",
+          "name": "hr_couriers_five_shifts",
+          "priority": "P0"
+        },
+        {
+          "id": "5797",
+          "name": "hr_couriers",
+          "priority": "P0"
+        },
+        {
+          "id": "7465",
+          "name": "hr_couriers_5shifts",
+          "priority": "P0"
+        },
+        {
+          "id": "7006",
+          "name": "cargo_main2",
+          "priority": "P0"
+        },
+        {
+          "id": "7027",
+          "name": "cargo_main4",
+          "priority": "P0"
+        }
+      ],
+      "metric_examples": [
+        {
+          "dataset_id": "4732",
+          "field": "apt_collected>20m_qty"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "apt_collected_>20m_share"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "apt_collected>30m_qty"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "apt_collected_>30m_share"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "flowers_collected>20m_qty"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "flowers_collected_>20m_share"
+        }
+      ]
+    },
+    {
+      "item": "новые и вернувшиеся покупатели",
+      "columns": 46,
+      "metrics": 66,
+      "datasets": 45,
+      "dataset_examples": [
+        {
+          "id": "3035",
+          "name": "darkstore_time_click",
+          "priority": "P1"
+        },
+        {
+          "id": "1835",
+          "name": "Отчет по бонусам (ручное начисление)",
+          "priority": "P1"
+        },
+        {
+          "id": "5441",
+          "name": "darkstore_time_click_pharmacy_rest_flowers",
+          "priority": "P1"
+        },
+        {
+          "id": "1677",
+          "name": "Ручное начисление бонусов",
+          "priority": "P1"
+        },
+        {
+          "id": "7013",
+          "name": "geo_hex_ratio_hour2",
+          "priority": "P1"
+        },
+        {
+          "id": "5067",
+          "name": "darkstore_time",
+          "priority": "P1"
+        }
+      ],
+      "metric_examples": [
+        {
+          "dataset_id": "3035",
+          "field": "1_ord_per_customer_share"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "2_ord_per_customer"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "3_more_ord_per_customer"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "ratio_new_cl"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "2_more_ord_per_customer"
+        },
+        {
+          "dataset_id": "3035",
+          "field": "3_more_ord_per_customer_share"
+        }
+      ]
+    },
+    {
+      "item": "форматы: вендинг/микромаркет/кафе/пекарни/аптеки/рестораны/дарккитчен",
+      "columns": 87,
+      "metrics": 174,
+      "datasets": 44,
+      "dataset_examples": [
+        {
+          "id": "3035",
+          "name": "darkstore_time_click",
+          "priority": "P1"
+        },
+        {
+          "id": "3466",
+          "name": "darkstore_time_sheet",
+          "priority": "P1"
+        },
+        {
+          "id": "5438",
+          "name": "darkstore_time_click_[id=977]",
+          "priority": "P1"
+        },
+        {
+          "id": "5888",
+          "name": "Причины не сборки 41 click",
+          "priority": "P1"
+        },
+        {
+          "id": "5232",
+          "name": "darkstore_time_sheet_[id=23150]",
+          "priority": "P1"
+        },
+        {
+          "id": "5964",
+          "name": "darkstore_time_sheet_st_pr_sl",
+          "priority": "P1"
+        }
+      ],
+      "metric_examples": [
+        {
+          "dataset_id": "4732",
+          "field": "apt_collected>20m_qty"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "apt_collected_>20m_share"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "apt_collected>30m_qty"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "apt_collected_>30m_share"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "qty_apt_suborders"
+        },
+        {
+          "dataset_id": "4732",
+          "field": "qty_restaurant_suborders"
+        }
+      ]
+    },
+    {
+      "item": "товары, поставщики, средняя оценка товара",
+      "columns": 143,
+      "metrics": 233,
+      "datasets": 84,
+      "dataset_examples": [
+        {
+          "id": "6757",
+          "name": "darkstore_time_sheet_for_1000002697",
+          "priority": "P1"
+        },
+        {
+          "id": "7694",
+          "name": "Сгоряча МСК+МО · жалобы: недовес, температура, внешний вид",
+          "priority": "P1"
+        },
+        {
+          "id": "2396",
+          "name": "collector_report_day",
+          "priority": "P1"
+        },
+        {
+          "id": "7499",
+          "name": "Кулинария · Недопоставки",
+          "priority": "P1"
+        },
+        {
+          "id": "7623",
+          "name": "Категория · Недопоставки",
+          "priority": "P1"
+        },
+        {
+          "id": "7724",
+          "name": "<ФИО> · Недопоставки + «в т.ч. не приняли»",
+          "priority": "P1"
+        }
+      ],
+      "metric_examples": [
+        {
+          "dataset_id": "3466",
+          "field": "qty_ordered_DK_>13"
+        },
+        {
+          "dataset_id": "3466",
+          "field": "qty_goods_collected"
+        },
+        {
+          "dataset_id": "3466",
+          "field": "qty_ordered_DK"
+        },
+        {
+          "dataset_id": "3466",
+          "field": "qty_ordered_DK_>14"
+        },
+        {
+          "dataset_id": "3466",
+          "field": "tov_DK_>_15_min_share"
+        },
+        {
+          "dataset_id": "5799",
+          "field": "qty_goods_collected"
+        }
+      ]
+    },
+    {
+      "item": "обращения на горячую линию",
+      "columns": 27,
+      "metrics": 80,
+      "datasets": 36,
+      "dataset_examples": [
+        {
+          "id": "7694",
+          "name": "Сгоряча МСК+МО · жалобы: недовес, температура, внешний вид",
+          "priority": "P1"
+        },
+        {
+          "id": "3702",
+          "name": "complaints_sbor",
+          "priority": "P1"
+        },
+        {
+          "id": "5088",
+          "name": "orders_modificators_ds",
+          "priority": "P1"
+        },
+        {
+          "id": "5315",
+          "name": "complaints_sbor_gp100",
+          "priority": "P1"
+        },
+        {
+          "id": "4817",
+          "name": "unpaid_canceled_orders",
+          "priority": "P1"
+        },
+        {
+          "id": "5200",
+          "name": "orders_modif_complaints",
+          "priority": "P1"
+        }
+      ],
+      "metric_examples": [
+        {
+          "dataset_id": "7694",
+          "field": "Обращений"
+        },
+        {
+          "dataset_id": "1870",
+          "field": "obr_all"
+        },
+        {
+          "dataset_id": "1870",
+          "field": "share_obr_to_orders"
+        },
+        {
+          "dataset_id": "1870",
+          "field": "share_obr_to_sales"
+        },
+        {
+          "dataset_id": "1870",
+          "field": "share_obr_to_sales_pics"
+        },
+        {
+          "dataset_id": "1870",
+          "field": "Количество обращений"
+        }
+      ]
+    }
+  ],
+  "pii": {
+    "columns": [
+      {
+        "dataset_id": "7473",
+        "dataset_name": "hr_couriers_five_shifts",
+        "field": "name_courier"
+      },
+      {
+        "dataset_id": "5797",
+        "dataset_name": "hr_couriers",
+        "field": "fio"
+      },
+      {
+        "dataset_id": "7465",
+        "dataset_name": "hr_couriers_5shifts",
+        "field": "fio"
+      },
+      {
+        "dataset_id": "2329",
+        "dataset_name": "Отмена заказов куратором",
+        "field": "FIO"
+      },
+      {
+        "dataset_id": "5939",
+        "dataset_name": "hr_daily_pers_mentors",
+        "field": "fio"
+      },
+      {
+        "dataset_id": "5939",
+        "dataset_name": "hr_daily_pers_mentors",
+        "field": "mentorfio"
+      },
+      {
+        "dataset_id": "5939",
+        "dataset_name": "hr_daily_pers_mentors",
+        "field": "person_code"
+      },
+      {
+        "dataset_id": "7519",
+        "dataset_name": "couriers_and_orders_by_amo",
+        "field": "ФИО"
+      },
+      {
+        "dataset_id": "7771",
+        "dataset_name": "trainees_group_12",
+        "field": "fio"
+      },
+      {
+        "dataset_id": "7771",
+        "dataset_name": "trainees_group_12",
+        "field": "fio_trainee"
+      },
+      {
+        "dataset_id": "7771",
+        "dataset_name": "trainees_group_12",
+        "field": "fio_trainer"
+      },
+      {
+        "dataset_id": "7771",
+        "dataset_name": "trainees_group_12",
+        "field": "person_code"
+      },
+      {
+        "dataset_id": "2639",
+        "dataset_name": "not_collected_details (gp_100)",
+        "field": "collect_person"
+      },
+      {
+        "dataset_id": "2762",
+        "dataset_name": "hr_daily_pers_dynamics",
+        "field": "fio"
+      },
+      {
+        "dataset_id": "2762",
+        "dataset_name": "hr_daily_pers_dynamics",
+        "field": "person_code"
+      },
+      {
+        "dataset_id": "3871",
+        "dataset_name": "tmz_per_courier",
+        "field": "name_courier"
+      },
+      {
+        "dataset_id": "4038",
+        "dataset_name": "hr_daily_pers",
+        "field": "fio"
+      },
+      {
+        "dataset_id": "4038",
+        "dataset_name": "hr_daily_pers",
+        "field": "mentorfio"
+      },
+      {
+        "dataset_id": "4038",
+        "dataset_name": "hr_daily_pers",
+        "field": "person_code"
+      },
+      {
+        "dataset_id": "5205",
+        "dataset_name": "hr_daily_pers_rc",
+        "field": "fio"
+      },
+      {
+        "dataset_id": "5205",
+        "dataset_name": "hr_daily_pers_rc",
+        "field": "person_code"
+      },
+      {
+        "dataset_id": "7153",
+        "dataset_name": "delivery_promises",
+        "field": "pom_main_fio"
+      },
+      {
+        "dataset_id": "4023",
+        "dataset_name": "Запрос для еженедельного рейтинга курьеров",
+        "field": "ФИО_курьера"
+      },
+      {
+        "dataset_id": "4379",
+        "dataset_name": "hr_daily_pers_dismissal_reasons_comments",
+        "field": "fio"
+      },
+      {
+        "dataset_id": "4379",
+        "dataset_name": "hr_daily_pers_dismissal_reasons_comments",
+        "field": "person_code"
+      },
+      {
+        "dataset_id": "5774",
+        "dataset_name": "hr_daily_pers_office_both_forms",
+        "field": "fio"
+      },
+      {
+        "dataset_id": "5774",
+        "dataset_name": "hr_daily_pers_office_both_forms",
+        "field": "next_person_state"
+      },
+      {
+        "dataset_id": "5774",
+        "dataset_name": "hr_daily_pers_office_both_forms",
+        "field": "person_code"
+      },
+      {
+        "dataset_id": "5774",
+        "dataset_name": "hr_daily_pers_office_both_forms",
+        "field": "prev_person_state"
+      },
+      {
+        "dataset_id": "7394",
+        "dataset_name": "couriers_newsletters_status",
+        "field": "fio"
+      }
+    ],
+    "metrics": [
+      {
+        "dataset_id": "5939",
+        "field": "employee_qty_lm",
+        "verbose": "Численность сотрудников на конец предыдущего месяца"
+      },
+      {
+        "dataset_id": "5939",
+        "field": "ССЧ за выбранный в грануляции период",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "5939",
+        "field": "ССЧ за любой период",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "5939",
+        "field": "ССЧ за месяц",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "5939",
+        "field": "ССЧ за неделю",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "5939",
+        "field": "Численность штатных сотрудников",
+        "verbose": "Численность штатных сотрудников"
+      },
+      {
+        "dataset_id": "2762",
+        "field": "Принято сотрудников",
+        "verbose": "Принято сотрудников"
+      },
+      {
+        "dataset_id": "4038",
+        "field": "employee_qty_lm",
+        "verbose": "Численность сотрудников на конец предыдущего месяца"
+      },
+      {
+        "dataset_id": "4038",
+        "field": "ССЧ за выбранный в грануляции период",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "4038",
+        "field": "ССЧ за любой период",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "4038",
+        "field": "ССЧ за месяц",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "4038",
+        "field": "ССЧ за неделю",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "4038",
+        "field": "Численность штатных сотрудников",
+        "verbose": "Численность штатных сотрудников"
+      },
+      {
+        "dataset_id": "5205",
+        "field": "employees_qty",
+        "verbose": "Кол-во сотрудников"
+      },
+      {
+        "dataset_id": "5774",
+        "field": "Численность штатных сотрудников",
+        "verbose": "Кол-во сотрудников"
+      },
+      {
+        "dataset_id": "4414",
+        "field": "ССЧ за выбранный в грануляции период",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "4414",
+        "field": "ССЧ за любой период",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "4414",
+        "field": "ССЧ за месяц",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "4414",
+        "field": "Численность сотрудников",
+        "verbose": "Численность сотрудников"
+      },
+      {
+        "dataset_id": "6054",
+        "field": "employee_qty_lm",
+        "verbose": "Численность сотрудников на конец предыдущего месяца"
+      },
+      {
+        "dataset_id": "6054",
+        "field": "ССЧ за выбранный в грануляции период",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "6054",
+        "field": "ССЧ за любой период",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "6054",
+        "field": "ССЧ за месяц",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "6054",
+        "field": "ССЧ за неделю",
+        "verbose": "Среднее кол-во сотрудников"
+      },
+      {
+        "dataset_id": "6054",
+        "field": "Численность штатных сотрудников",
+        "verbose": "Численность штатных сотрудников"
+      },
+      {
+        "dataset_id": "7875",
+        "field": "emp_qty",
+        "verbose": "Кол-во сотрудников"
+      },
+      {
+        "dataset_id": "3664",
+        "field": "employees_qty",
+        "verbose": "Кол-во сотрудников"
+      },
+      {
+        "dataset_id": "3664",
+        "field": "Численность сотрудников",
+        "verbose": "Кол-во сотрудников"
+      },
+      {
+        "dataset_id": "4622",
+        "field": "emp_qty",
+        "verbose": "Кол-во сотрудников"
+      },
+      {
+        "dataset_id": "6056",
+        "field": "employee_qty_lm",
+        "verbose": "Численность сотрудников на конец предыдущего месяца"
+      }
+    ]
+  },
+  "catalog": {
+    "columns": 17216,
+    "metrics": 9472,
+    "datasets": 3778,
+    "charts": 19928,
+    "dashboards": 332
+  }
+}

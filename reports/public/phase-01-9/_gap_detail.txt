@@ -1,0 +1,136 @@
+### dataset 1583 · Графики курьеров · dbo · P1 · courier · cols=35 metrics=1 charts=3
+  columns(10): courier_orders | orders | ziz_orders | ziz_orders_all | Ср кол-во заказов (5 дней) | Ср кол-во заказов (5 дней) курьер | Ср кол-во заказов (5 дней) курьер всего | Ср кол-во заказов доставлено ЗиЗ (5 дней) | Ср кол-во заказов дост ЗиЗ всего (5 дней) | Ср кол-во заказов, упавших на ЗиЗ (5 дней)
+  metrics(0): -
+
+### dataset 3268 · internal_audits · null · P1 · orders · cols=48 metrics=19 charts=38
+  columns(7): audit_error_category | audit_error_descr | audit_format | audit_id | auditor_name | audit_project_name | last_audit_format
+  metrics(14): audit_id_cnt | avg_qty_audit_err_aud | avg_qty_audit_errors | avg_qty_audit_errors_per_aud | avg_qty_audit_errors_per_gr | avg_qty_audit_errors_per_proj | qty_audit_errors | qty_audit_errors_1 | qty_audit_errors_1_vs_2_dif | qty_audit_errors_2 | qty_audit_errors_all | qty_audit_errors_pr_11 | qty_audit_errors_pr_1_vs_2 | qty_audit_errors_pr_22
+
+### dataset 3466 · darkstore_time_sheet · mart_mixed · P1 · shop · cols=167 metrics=243 charts=395
+  columns(52): date_of_collected | wait_time2 | collection_time_real_sec | time_collect_start | date_collected_sheet | collection_time_real_sec_sheet | id_order | date_order | delivery_time_all | order_source | sort_order | waiting_area_time | sla_collection_time_all | vv_week_date_order | time_ready_plan | qty_collected | time_supply | is_collected | collection_time_all | sum_order | time_set_cell_last | date_collected_plan | date_collect_start_plan | wait_time | hour_collected | order_type | date_collect_start | date_collected
+  metrics(225): qty_sheet_with_wait&collect_9min_dk_express | qty_ordered_DK_>13 | avg_real_col_per_1_pos | share_not_in_slot_above_service_48_60_only | qty_genorders_collection | mom_cnt_orders_tt | qty_wait_10_ex | qty_goods_collected | qty_orders_out_of_slot | qty_deliv_delay | share_collection_wait_<8 | share_collection_delay_all | qty_col_15_60 | qty_vkusvillchik | share_delivery_collection__wait>165 | тест_количество заказов>165 | qty_col_>15_all_collected | mom_cnt_orders | share_deliv_delay | share_delivery_collection_>30
+
+### dataset 3871 · tmz_per_courier · null · P1 · courier · cols=39 metrics=9 charts=22
+  columns(4): id_equipment | name_equip_full | name_equipment | rn_tmz
+  metrics(8): act_curiers_tmz_share | cnt_act_curiers | cnt_act_curiers_tmz | cnt_curier_tmz | cnt_cur_net_TMZ | cnt_cur_s_TMZ | qty_avg | tmz_spisok
+
+### dataset 5542 · ost_group_ch41 · mart_mixed · P1 · orders · cols=40 metrics=42 charts=277
+  columns(10): date_collected_cast | qty_ln | qty_ln_not_vv_source | qty_mp | qty_mp_not_vv_source | qty_off | qty_off_green | qty_off_not_green | qty_off_not_vv_source | qty_other
+  metrics(21): share_qty_mp_vv | share_qty_vv | qty_off_nd | share_qty_off_nd_all | qty_ord_not_vv | qty_qty_not_vv | qty_ord_vv | qty_ord_mp_not_vv | Кол-во несобранных строк - Некорректный остаток в приложении | qty_qty_vv | qty_qty_mp_not_vv | share_qty_not_vv | qty_qty_mp_vv | share_qty_mp_not_vv | share_qty_off_nd | Доля заказов с несобранными строками - Некорректный остаток в приложении | qty_ord_mp_vv | Кол-во заказов с несобранными строками - Некорректный остаток в приложении | share_ord_mp_not_vv | Доля несобранных строк - Некорректный остаток в приложении
+
+### dataset 5888 · Причины не сборки 41 click · mart_mixed · P1 · fulfillment · cols=46 metrics=4 charts=124
+  columns(1): time_collected
+  metrics(0): -
+
+### dataset 5939 · hr_daily_pers_mentors · agile_mart_techaudit · P1 · mentor · cols=70 metrics=31 charts=2
+  columns(18): date_for_mentor | enough_shifts_for_mentor | fio | first_shift_date | last_shift_date | mentor_at_date | mentorfio | mentorid | mentorid_at_date | mentor_in_five | mentor_same_tt_date | person_code | shift_rn | shift_rn_trainee | shift_rn_trainee_by_mentor | shifts_qty | trainee_shift_in_five | trainee_shifts_qty
+  metrics(12): first_shift_empl | fisrt_shifts_wo_mentor2 | mentor_empl | mentor_empl2 | mentor_empl_dism2m | mentor_empl_still_working | trainees_for_mentors_list | trainees_share | Коэф оттока за выбранный в грануляции период | Коэф оттока за период | Коэф текучести за неделю | Коэф текучести кадров
+
+### dataset 6310 · audit_delivery_ds · null · P1 · delivery · cols=58 metrics=7 charts=4
+  columns(6): auditor_code | auditor_fio | ds_lead | ds_lead_code | ds_lead_fio | mistake_use_ds
+  metrics(3): cnt_au | cnt_viol_last_au | cnt_viol_prev_au
+
+### dataset 6786 · change_order_time_map · agile_mart_techaudit · P1 · orders · cols=6 metrics=1 charts=3
+  columns(2): latitude | longitude
+  metrics(0): -
+
+### dataset 6964 · geo_service_logs_hour_msk2 · agile_mart_online_ccg · P1 · geo · cols=52 metrics=1 charts=9
+  columns(6): geo10_arr | geo9_arr | geo_arr | hex_id | latitude | longitude
+  metrics(0): -
+
+### dataset 7473 · hr_couriers_five_shifts · agile_mart_techaudit · P0 · courier · cols=54 metrics=38 charts=15
+  columns(26): 5_shifts_in_14d | days_to_fifth_shift | fifth_shift_date | fifth_shift_status | has_5_shifts_in_first_14d | inactivity_zone_ordered | shift_1 | shift_1_profit | shift_1_work_minutes | shift_2 | shift_2_profit | shift_2_work_minutes | shift_3 | shift_3_profit | shift_3_work_minutes | shift_4 | shift_4_profit | shift_4_work_minutes | shift_5 | shift_5_profit | shift_5_work_minutes | shifts_in_14_days | zone | zone_ch_ | zone_transition_ordered | zone_transition_type
+  metrics(8): newcomers | attrition_newcomers_new | attrition_newcomers | attrition | turnover_by_year | turnover | ret_14_d | cnt_new_couriers
+
+### dataset 7510 · recovery_rate_geo · null · P1 · geo · cols=10 metrics=1 charts=1
+  columns(1): recovery_bucket
+  metrics(0): -
+
+### dataset 7696 · count_delay_generals · mart_mixed · P1 · orders · cols=36 metrics=14 charts=17
+  columns(1): region_tt
+  metrics(9): count_delayed_orders | count_delayed_orders_accumulative | share_delayed10_orders | share_delayed15_orders | share_delayed30_orders | share_delayed5_orders | share_delayed_orders | share_delayed_orders_accumulative | share_delayed_over30_orders
+
+### dataset 7712 · photo_control_shift_bi · agile_mart_operational · P1 · shift · cols=54 metrics=1 charts=14
+  columns(21): ai_photos_cnt | bag_failed | bag_no_ai | bag_ok | has_ai | photo_end | photos_cnt | photos_failed | photos_no_ai | photos_ok | photo_span_sec | photos_unavailable | photos_warning | selfie_failed | selfie_no_ai | selfie_ok | shift_opened | shift_open_time | vehicle_failed | vehicle_no_ai | vehicle_ok
+  metrics(0): -
+
+### dataset 7733 · oprosso_courier_first_shift_tt_pu · null · P1 · courier · cols=41 metrics=1 charts=3
+  columns(3): first_shift_dt | survey_id | survey_name
+  metrics(0): -
+
+### dataset 7740 · oprosso_first_shift_am · null · P1 · shift · cols=48 metrics=1 charts=12
+  columns(6): am_courier_first_shift | am_first_shift_detail | am_tt_first_shift | first_shift_dt | survey_id | survey_name
+  metrics(0): -
+
+### SEARCH радиус/зона/ЗИЗ/180-300 → columns=143 metrics=121
+  col ex: 7473:hr_couriers_five_shifts.inactivity_zone_ordered | 7473:hr_couriers_five_shifts.zone | 7473:hr_couriers_five_shifts.zone_ch_ | 7473:hr_couriers_five_shifts.zone_transition_ordered | 7473:hr_couriers_five_shifts.zone_transition_type | 5797:hr_couriers.inactivity_zone | 5797:hr_couriers.inactivity_zone_ordered | 5797:hr_couriers.prev_inactivity_zone | 5797:hr_couriers.zone | 5797:hr_couriers.zone_ch_ | 5797:hr_couriers.zone_changed | 5797:hr_couriers.zone_transition_ordered | 5797:hr_couriers.zone_transition_type | 7465:hr_couriers_5shifts.inactivity_zone | 7465:hr_couriers_5shifts.inactivity_zone_ordered | 7465:hr_couriers_5shifts.prev_inactivity_zone | 7465:hr_couriers_5shifts.zone | 7465:hr_couriers_5shifts.zone_ch_ | 7465:hr_couriers_5shifts.zone_changed | 7465:hr_couriers_5shifts.zone_transition_ordered
+  met ex: 3035:darkstore_time_click.qty_all_180_pos | 3035:darkstore_time_click.d/w_share_del_180/210_pos | 3035:darkstore_time_click.share_not_in_slot_above_180_ | 3035:darkstore_time_click.share_not_in_slot_above_151_180 | 3035:darkstore_time_click.share_all_180_pos | 3035:darkstore_time_click.d/w_qty_del_180/210_pos | 3035:darkstore_time_click.qty_all_300_5h | 3035:darkstore_time_click.share_all_300_5h | 3035:darkstore_time_click.qty_all_300 | 3035:darkstore_time_click.share_all_300 | 3035:darkstore_time_click.qty_del_180/210_240 | 3035:darkstore_time_click.share_del_180/210_240 | 3035:darkstore_time_click.share_all_180_all | 3035:darkstore_time_click.qty_all_180_all | 3466:darkstore_time_sheet.share_delivery_collection__wait>180
+
+### SEARCH опоздания сотрудников/смен (не заказов) → columns=2 metrics=0
+  col ex: 7124:cargo6.late_cnt | 7124:cargo6.late_cnt_not_route
+  met ex: -
+
+### SEARCH покрытие слотов/смен планом → columns=13 metrics=1
+  col ex: 7510:recovery_rate_geo.recovery_bucket | 5810:product_card_dashboard_action_after_pc_in_order.adds_kg_covers | 5810:product_card_dashboard_action_after_pc_in_order.adds_sht_covers | 5810:product_card_dashboard_action_after_pc_in_order.add_taps_covers | 3113:Аптеки гео по ТТ.CoverageZoneArreaPartnerOn15 | 3113:Аптеки гео по ТТ.PrcCoverageZoneByPartnerDelivery | 4644:Рестораны гео по ТТ для отчета Показатели проекта Рестораны.CoverageZoneArreaPartnerOn15 | 4644:Рестораны гео по ТТ для отчета Показатели проекта Рестораны.PrcCoverageZoneByPartnerDelivery | 4760:Цветы гео по ТТ для отчета Показатели проекта Цветы.CoverageZoneArreaPartnerOn15 | 4760:Цветы гео по ТТ для отчета Показатели проекта Цветы.PrcCoverageZoneByPartnerDelivery | 4983:Гео по ТТ для отчета Показатели проектов Аптеки, Рестораны, Цветы.CoverageZoneArreaPartnerOn15 | 4983:Гео по ТТ для отчета Показатели проектов Аптеки, Рестораны, Цветы.PrcCoverageZoneByPartnerDelivery | 7443:vkusvill_availability_superset_extended.collection_coverage
+  met ex: 7560:draft_usov_forecast_quality_v1.coverage_predict1
+
+### SEARCH кластер/гео даркстора → columns=151 metrics=0
+  col ex: 7006:cargo_main2.cluster_id | 7024:cargo_main3.cluster_id | 7027:cargo_main4.cluster_id | 7119:cargo_flags.cluster_id | 3035:darkstore_time_click.zone_cluster | 3466:darkstore_time_sheet.zone_cluster | 7348:courier_leads_events.name_cluster | 7348:courier_leads_events.tt_cluster | 5438:darkstore_time_click_[id=977].zone_cluster | 5888:Причины не сборки 41 click.zone_cluster | 1583:Графики курьеров.Кластер | 1583:Графики курьеров.Привязка к кластеру | 5939:hr_daily_pers_mentors.tt_cluster | 6786:change_order_time_map.latitude | 6786:change_order_time_map.longitude | 6836:darkstore_time_sheet_21CH.cluster_name | 6964:geo_service_logs_hour_msk2.geo_arr | 6964:geo_service_logs_hour_msk2.hex_id | 6964:geo_service_logs_hour_msk2.latitude | 6964:geo_service_logs_hour_msk2.longitude
+  met ex: -
+
+### SEARCH ТМЦ/закупка/поставка в ДС → columns=17 metrics=37
+  col ex: 7623:Категория · Недопоставки.Прямая поставка | 7724:<ФИО> · Недопоставки + «в т.ч. не приняли».Прямая поставка | 4857:Повторные покупки клиентов по диапазонам.purchase_range | 7670:BACKUP 09.10.2026 · Категория · Недопоставки (MSSQL).Прямая поставка | 7828:РНД · Недопоставки.Прямая поставка | 7895:bak_7623 недопоставки до 18.11 вечер.Прямая поставка | 7897:bak_7724 недопоставки до 18.11 вечер.Прямая поставка | 7662:Параметр · Справочник ТТ и типа покупки (фильтры).purchase_type | 5666:Витрина чеков покупателей.purchase_type | 5666:Витрина чеков покупателей.товар.Дата первой поставки | 7137:fact_frutcort_sales (new).first_purchase_date | 7532:Кулинария · Витрина чеков + рынок и формат ТТ.is_first_purchase | 7532:Кулинария · Витрина чеков + рынок и формат ТТ.товар.Дата первой поставки | 7532:Кулинария · Витрина чеков + рынок и формат ТТ.purchase_type | 7615:Категория · Витрина чеков + рынок и формат ТТ.is_first_purchase | 7615:Категория · Витрина чеков + рынок и формат ТТ.товар.Дата первой поставки | 7615:Категория · Витрина чеков + рынок и формат ТТ.purchase_type
+  met ex: 3871:tmz_per_courier.act_curiers_tmz_share | 3871:tmz_per_courier.cnt_act_curiers_tmz | 3871:tmz_per_courier.cnt_curier_tmz | 3871:tmz_per_courier.cnt_cur_net_TMZ | 3871:tmz_per_courier.cnt_cur_s_TMZ | 3871:tmz_per_courier.qty_avg | 3871:tmz_per_courier.tmz_spisok | 2101:Поставки_продажи_списания_ЗЦ.Поставки | 7052:tmz_per_courier_today.act_curiers_tmz_share | 7052:tmz_per_courier_today.a_quantity_t | 7052:tmz_per_courier_today.cnt_act_curiers_tmz | 7052:tmz_per_courier_today.cnt_curier_tmz | 7052:tmz_per_courier_today.cnt_cur_net_TMZ | 7052:tmz_per_courier_today.cnt_cur_s_TMZ | 7052:tmz_per_courier_today.cnt_not_act_curiers_tmz
+
+### dashboards hosting key datasets (51)
+  dashboard 1010 · <ФИО> · charts=3 · key_ds=[3466]
+  dashboard 1031 · ? · charts=3 · key_ds=[3466]
+  dashboard 1054 · ? · charts=58 · key_ds=[4732]
+  dashboard 1124 · HR верхнеуровневый · charts=147 · key_ds=[5797]
+  dashboard 1129 · <ФИО> · charts=3 · key_ds=[5542]
+  dashboard 1134 · ? · charts=50 · key_ds=[3466,3871]
+  dashboard 1228 · HR Dashboard Доставка · charts=46 · key_ds=[5797,7473]
+  dashboard 1244 · 7 группа · charts=6 · key_ds=[3466,5542]
+  dashboard 1256 · ? · charts=8 · key_ds=[5542]
+  dashboard 1311 · Аудиты доставки · charts=5 · key_ds=[6310]
+  dashboard 1330 · Рейтинг магазинов (для Розницы) · charts=93 · key_ds=[5888]
+  dashboard 1344 · ? · charts=61 · key_ds=[5542]
+  dashboard 1380 · ? · charts=215 · key_ds=[3466]
+  dashboard 1386 · ГЕО/КПО Доступность сервисов · charts=21 · key_ds=[6964]
+  dashboard 1404 · ? · charts=1 · key_ds=[3466]
+  dashboard 1412 · Изменение сервисов · charts=2 · key_ds=[6786]
+  dashboard 1424 · Дашборд команды онлайн 4 группы · charts=32 · key_ds=[3466,5542]
+  dashboard 1431 · HR Dashboard (Розница) [копия] · charts=175 · key_ds=[5939]
+  dashboard 1472 · Метрики маршрутизатора · charts=19 · key_ds=[7006]
+  dashboard 1484 · <ФИО> Вайты 1.3.07 · charts=3 · key_ds=[3466]
+  dashboard 1491 · ? · charts=34 · key_ds=[3871]
+  dashboard 1494 · ? · charts=34 · key_ds=[3871]
+  dashboard 1519 · ? · charts=192 · key_ds=[3466,5888,5542]
+  dashboard 1520 · ? · charts=192 · key_ds=[3466,5888,5542]
+  dashboard 1537 · ? · charts=192 · key_ds=[3466,5888,5542]
+  dashboard 1538 · ? · charts=11 · key_ds=[3466]
+  dashboard 1539 · ? · charts=192 · key_ds=[3466,5888,5542]
+  dashboard 1544 · ? · charts=34 · key_ds=[3871]
+  dashboard 1549 · ? · charts=190 · key_ds=[3466,5888,5542]
+  dashboard 1560 · ? · charts=2 · key_ds=[3466]
+  dashboard 1568 · Просрок PSE · charts=2 · key_ds=[3466]
+  dashboard 1631 · ? · charts=16 · key_ds=[7607]
+  dashboard 1636 · Развитие пути сборки заказов - отчет по несборке · charts=14 · key_ds=[5542]
+  dashboard 1646 · ИИ фотоконтроль начала смены · charts=15 · key_ds=[7712,7713]
+  dashboard 561 · Отчет по выработке сборщиков в дарксторах · charts=20 · key_ds=[3466]
+  dashboard 666 · Монитор настроек ТТ · charts=32 · key_ds=[7696]
+  dashboard 668 · Статистика по заказам и сборщикам · charts=192 · key_ds=[3466,5888,5542]
+  dashboard 687 · Динамика сервиса ДаркКитчен-Сгоряча · charts=215 · key_ds=[3466]
+  dashboard 697 · ? · charts=549 · key_ds=[3466]
+  dashboard 717 · Показатели проекта Аптеки · charts=72 · key_ds=[4732]
+  dashboard 728 · Еженедельные отчеты по ТТ · charts=107 · key_ds=[3466,5888]
+  dashboard 736 · HR Dashboard (Розница) · charts=241 · key_ds=[5939]
+  dashboard 755 · ? · charts=147 · key_ds=[3466,5888,5542]
+  dashboard 765 · ? · charts=54 · key_ds=[3466]
+  dashboard 827 · Внутренние аудиты · charts=28 · key_ds=[3268]
+  dashboard 871 · ТМЦ · charts=37 · key_ds=[3871]
+  dashboard 872 · Доставка ДаркКитчен [копия на новом источнике] · charts=63 · key_ds=[3466]
+  dashboard 873 · Статистика по сборочным листам · charts=14 · key_ds=[3466]
+  dashboard 880 · Отчет по проектам для Мили · charts=2 · key_ds=[3466]
+  dashboard 983 · Показатели проекта Рестораны · charts=61 · key_ds=[4732]
+  dashboard 988 · ? · charts=57 · key_ds=[3466]

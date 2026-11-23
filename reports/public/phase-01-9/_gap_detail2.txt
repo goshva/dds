@@ -1,0 +1,57 @@
+### 1583 · Графики курьеров · columns=35 metrics=1
+  COLUMNS: conn | courier_orders | date_graf | geo | hou_w | id | job_type_name | leader | name | name_cl | name_TT | ord_cou | orders | ord_sho | region_tt | senior | shopno | TTfeature | work_day | ziz_orders | ziz_orders_all | Дата | Кластер | Куратор | Курьер | Привязка к кластеру | Район | Ср кол-во заказов (5 дней) | Ср кол-во заказов (5 дней) курьер | Ср кол-во заказов (5 дней) курьер всего | Ср кол-во заказов доставлено ЗиЗ (5 дней) | Ср кол-во заказов дост ЗиЗ всего (5 дней) | Ср кол-во заказов, упавших на ЗиЗ (5 дней) | Тип занятости | ТТ
+  METRICS: work_day
+
+### 3871 · tmz_per_courier (ТМЦ/ТМЗ по курьерам) · columns=39 metrics=9
+  COLUMNS: act | active | city_tt | cnt_work_days_14 | courier_type | Date | DirectionId | head_of_delivery | id_courier | id_courier_type | id_equipment | job_type | job_type_name | last_date_diff | last_work_date | leader | name_analytics | name_courier | name_curator | name_equip_full | name_equipment | name_TT | new_cour | obtain_date | over_use | phone | Quantity | rn_shop | rn_tmz | rn_tt | Sebestoimost | Sebestoimost1 | Sebestoimost_nds | Sebestoimost_nds1 | shopno | shopno_max | Srok_ekspl | zone_cluster | Статус
+  METRICS: act_curiers_tmz_share | cnt_act_curiers | cnt_act_curiers_tmz | cnt_curier_tmz | cnt_cur_net_TMZ | cnt_cur_s_TMZ | count | qty_avg | tmz_spisok
+
+### 5888 · Причины не сборки 41 click · columns=46 metrics=4
+  COLUMNS: area_tt | assembly_dttm | city_tt | darkkitchen_21_9_flag | darkkitchen_4h_flag | darkkitchen_closed | darkkitchen_flag | darkkitchen_ordered | date_order | date_supply | feature_tt | green | green_word | group_tov_name | id_group | id_order | id_row | id_service | id_tov | internal_orders_of_DC | N | name_tov | name_tt | order_service | order_type | pom | rea_cach | rea_mon | region_tt | sbor | shopno | slots | source_id | source_name | sub_group_tov_name | td_ost_begin | time_collected | time_order | time_order_str | week_no | zone_cluster | ***REMOVED***ано | НапечатаноЗЦ_НаМомент***REMOVED***а | Ост***REMOVED***Лог_БезЗЦ | Ост***REMOVED***Лог_ЗЦ_грин | Собрано
+  METRICS: count_row | qty_off_green | qty_off_not_green | qty_order
+
+### 7696 · count_delay_generals (опоздания по регионам) · columns=36 metrics=14
+  COLUMNS: city_tt | count_delay10_general | count_delay10_general_accumulative | count_delay20_general | count_delay20_general_accumulative | count_delay30_general | count_delay30_general_accumulative | count_delay5_general | count_delay5_general_accumulative | count_delay_general | count_delay_general_accumulative | count_delay_general_no_partner | count_delay_general_no_partner_accumulative | count_general | count_general_accumulative | count_pay_back | count_pay_back_accumulative | date_time | geo | head_of_delivery | id_group | id_service | is_outside_mkad | leader | mkad | name_service | name_tt | order_seconds | order_seconds_accumulative | pom | region_tt | service_length | shopno | store_format | type_service | zone_cluster
+  METRICS: click_to_eat | click_to_eat_accumulative | count | count_delayed_orders | count_delayed_orders_accumulative | share_delayed10_orders | share_delayed15_orders | share_delayed30_orders | share_delayed5_orders | share_delayed_orders | share_delayed_orders_accumulative | share_delayed_over30_orders | share_pay_back_orders | share_pay_back_orders_accumulative
+
+### 7733 · oprosso_courier_first_shift_tt_pu · columns=41 metrics=1
+  COLUMNS: answer_result | answer_result_numeric | available_from | bonuscard | card_b2b | check_uid | courier_id | date_gmt | date_moscow | date_unix | device_type | finished_at | first_shift_dt | free_answer | is_finished | is_skipped | link | link_name | os_name | pu_name | question_id | question_name | question_type | question_type_text | respondent_comment | respondent_email | respondent_id | respondent_name | respondent_phone | started_at | status_result_text | subquestion_id | subquestion_name | survey_id | survey_name | tt_label | tt_name | tt_number | tt_region | unknown_answer | user_info
+  METRICS: count
+
+### 7740 · oprosso_first_shift_am · columns=48 metrics=1
+  COLUMNS: am_courier_first_shift | am_first_shift_detail | am_routes_courier_count | am_routes_tt_count | am_tt_first_shift | answer_result | answer_result_numeric | available_from | bonuscard | card_b2b | check_uid | courier_id | courier_mode | courier_type | date_gmt | date_moscow | date_unix | device_type | finished_at | first_shift_dt | free_answer | is_finished | is_skipped | link | link_name | os_name | pu_name | question_id | question_name | question_type | question_type_text | respondent_comment | respondent_email | respondent_id | respondent_name | respondent_phone | started_at | status_result_text | subquestion_id | subquestion_name | survey_id | survey_name | tt_label | tt_name | tt_number | tt_region | unknown_answer | user_info
+  METRICS: count
+
+### SEARCH поставщик/supplier → columns=10 metrics=0
+  col ex: 7499:Кулинария · Недопоставки.Поставщик | 7623:Категория · Недопоставки.Поставщик | 7623:Категория · Недопоставки.Поставщик / производитель | 7724:<ФИО> · Недопоставки + «в т.ч. не приняли».Поставщик | 7898:Молочка · Недопоставки как Power BI.Поставщик | 7670:BACKUP 09.10.2026 · Категория · Недопоставки (MSSQL).Поставщик | 7828:РНД · Недопоставки.Поставщик | 7895:bak_7623 недопоставки до 18.11 вечер.Поставщик | 7895:bak_7623 недопоставки до 18.11 вечер.Поставщик / производитель | 7897:bak_7724 недопоставки до 18.11 вечер.Поставщик
+  met ex: -
+
+### SEARCH оценка/рейтинг товара → columns=38 metrics=14
+  col ex: 2396:collector_report_day.rating | 7742:oprosso_first_shift_pu_problems.shift_rating | 1724:Рейтинги_магазины_v1.avg_rating | 1724:Рейтинги_магазины_v1.rating | 2339:Перенесенные заказы.rating | 2403:collector_report_period.rating | 4023:Запрос для еженедельного рейтинга курьеров.Рейтинг | 6939:couriers_raiting.Оценка_дроб | 6939:couriers_raiting.Рейтинг | 2517:collector_report_period_2.rating | 2532:collector_report_period_3.rating | 2382:collector_rating_3.rating
+  met ex: 2396:collector_report_day.rank_avg_coll_speed_1_pos | 2396:collector_report_day.rank_avg_pos_per_hour_work_time | 2396:collector_report_day.rank_complaint | 1710:sbor_rate_v02.avg_rate | 2403:collector_report_period.rating | 2517:collector_report_period_2.rating | 2532:collector_report_period_3.rating | 2905:HRRatingDsGoldCart_dynamic.avg_rating_collection_delay_all | 2905:HRRatingDsGoldCart_dynamic.avg_rating_complaints_1_mil | 2905:HRRatingDsGoldCart_dynamic.avg_rating_ord_off | 2905:HRRatingDsGoldCart_dynamic.avg_total_points_rating | 2905:HRRatingDsGoldCart_dynamic.avg_total_rating
+
+### SEARCH справочник ТТ/тип покупки/формат → columns=12 metrics=0
+  col ex: 5666:Витрина чеков покупателей.сегмент.Сегмент недельный тип покупки | 5666:Витрина чеков покупателей.сегмент.Сегмент недельный тип покупки прошлый | 5666:Витрина чеков покупателей.сегмент.Сегмент тип покупки | 5666:Витрина чеков покупателей.сегмент.Сегмент тип покупки прошлый | 7532:Кулинария · Витрина чеков + рынок и формат ТТ.сегмент.Сегмент тип покупки | 7532:Кулинария · Витрина чеков + рынок и формат ТТ.сегмент.Сегмент тип покупки прошлый | 7532:Кулинария · Витрина чеков + рынок и формат ТТ.сегмент.Сегмент недельный тип покупки | 7532:Кулинария · Витрина чеков + рынок и формат ТТ.сегмент.Сегмент недельный тип покупки прошлый | 7615:Категория · Витрина чеков + рынок и формат ТТ.сегмент.Сегмент тип покупки | 7615:Категория · Витрина чеков + рынок и формат ТТ.сегмент.Сегмент тип покупки прошлый | 7615:Категория · Витрина чеков + рынок и формат ТТ.сегмент.Сегмент недельный тип покупки | 7615:Категория · Витрина чеков + рынок и формат ТТ.сегмент.Сегмент недельный тип покупки прошлый
+  met ex: -
+
+### datasets with TT/shop registry in the name
+  5987 · darkstore_time_sheet_date_update · P1 · cols=1 metrics=1
+  2293 · shopno_f · P1 · cols=4 metrics=1
+  2647 · shopno_vkusvillchik_f · P1 · cols=1 metrics=1
+  6831 · darkstore_time_sheet_with_hor · P1 · cols=156 metrics=243
+  6836 · darkstore_time_sheet_21CH · P1 · cols=171 metrics=254
+  6863 · tt_geographical_zone · P1 · cols=23 metrics=1
+  6917 · darkstore_outsource_couriers · P1 · cols=13 metrics=0
+  3281 · complect_shopno_f · P1 · cols=2 metrics=1
+  3306 · tmz_darkstore · P1 · cols=50 metrics=1
+  3352 · shopno_dk · P1 · cols=1 metrics=1
+  3897 · TMZ_per_cur_no_TT · P1 · cols=14 metrics=8
+  4369 · darkstore_time_sheet_TEST_j_join · P1 · cols=136 metrics=212
+  4518 · geo_tt_and_service · P1 · cols=8 metrics=2
+  4529 · delivery_and_tt_zone · P1 · cols=7 metrics=2
+  4551 · geo_tt_and_service_3 · P1 · cols=9 metrics=2
+  4997 · darkstore_time_sheet_test · P1 · cols=153 metrics=224
+  3746 · tmz_darkstore · P1 · cols=36 metrics=10
+  6757 · darkstore_time_sheet_for_1000002697 · P1 · cols=135 metrics=25
+  7173 · darkstore_time_sheet_ch21_light · P1 · cols=166 metrics=245
+  7174 · darkstore_time_sheet_test_21ch_light · P1 · cols=153 metrics=225

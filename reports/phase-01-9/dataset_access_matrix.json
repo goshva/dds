@@ -1,0 +1,74 @@
+{
+  "generated_at": "2026-11-23T09:42:32.960Z",
+  "base_url": "https://superset.svc.vkusvill.ru",
+  "probe": "POST /api/v1/chart/data, COUNT(<local column>), time_range \"No filter\", row_limit 1",
+  "summary": {
+    "total": 5,
+    "allowed": 1,
+    "not_authorized": 4,
+    "errors": 0
+  },
+  "allowed_datasets": [
+    3035
+  ],
+  "not_authorized_datasets": [
+    3466,
+    5888,
+    7696,
+    7712
+  ],
+  "results": [
+    {
+      "dataset_id": 3035,
+      "label": "darkstore_time_click (заказы/слоты, контроль)",
+      "metric": "COUNT(restr_taking_time)",
+      "status": 200,
+      "verdict": "ALLOWED",
+      "message": null,
+      "rows": 1,
+      "colnames": [
+        "cnt"
+      ]
+    },
+    {
+      "dataset_id": 3466,
+      "label": "darkstore_time_sheet (сборка/вайты)",
+      "metric": "COUNT(date_of_collected)",
+      "status": 401,
+      "verdict": "NOT_AUTHORIZED",
+      "message": "{\"message\":\"Not authorized\"}\n",
+      "rows": null,
+      "colnames": []
+    },
+    {
+      "dataset_id": 5888,
+      "label": "Причины не сборки 41 click",
+      "metric": "COUNT(area_tt)",
+      "status": 401,
+      "verdict": "NOT_AUTHORIZED",
+      "message": "{\"message\":\"Not authorized\"}\n",
+      "rows": null,
+      "colnames": []
+    },
+    {
+      "dataset_id": 7696,
+      "label": "count_delay_generals (опоздания)",
+      "metric": "COUNT(city_tt)",
+      "status": 401,
+      "verdict": "NOT_AUTHORIZED",
+      "message": "{\"message\":\"Not authorized\"}\n",
+      "rows": null,
+      "colnames": []
+    },
+    {
+      "dataset_id": 7712,
+      "label": "photo_control_shift_bi (фото)",
+      "metric": "COUNT(active)",
+      "status": 401,
+      "verdict": "NOT_AUTHORIZED",
+      "message": "{\"message\":\"Not authorized\"}\n",
+      "rows": null,
+      "colnames": []
+    }
+  ]
+}

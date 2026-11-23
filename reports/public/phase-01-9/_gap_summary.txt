@@ -1,0 +1,108 @@
+catalog: columns=17216 metrics=9472 datasets=3778 charts=19928 dashboards=332
+report: rows=1508 period=2026-09-30 : 2026-11-24 days=55 all_zero=
+
+== SLICES IN aggregate_7745.csv ==
+slice 20403 ds=3035 table dates=55
+   metrics(11): qty_not_in_slot_all, qty_orders_declined, qty_orders_delivered, qty_orders_in_work, sum_with_bonuses, sum_without_bonuses, share_delivered_taxi, share_not_in_slot_above_all, share_not_in_slot_all, share_not_in_slot_under_all, share_orders_delivered
+   dim1(7): Больше продуктов за 1 час                          | ВкусВильчик                                        | Доставка за 30 минут                               | Ночная доставка | Экспресс за 20 минут                               | Доставка за 45 минут                               | Больше продуктов за 2 часа                        
+slice 20404 ds=3035 pivot_table_v2 dates=55
+   metrics(5): qty_not_in_slot_all, qty_orders_delivered, share_delivered_taxi, share_not_in_slot_above_all, share_not_in_slot_all
+   dim1(1): <ФИО>
+   dim2(7): Больше продуктов за 1 час                          | ВкусВильчик                                        | Доставка за 30 минут                               | Ночная доставка | Экспресс за 20 минут                               | Доставка за 45 минут                               | Больше продуктов за 2 часа                        
+slice 20405 ds=3035 pivot_table_v2 dates=55
+   metrics(11): qty_not_in_slot_all, qty_orders_declined, qty_orders_delivered, qty_orders_in_work, sum_with_bonuses, sum_without_bonuses, share_delivered_taxi, share_not_in_slot_above_all, share_not_in_slot_all, share_not_in_slot_under_all, share_orders_delivered
+   dim1(7): Больше продуктов за 1 час                          | ВкусВильчик                                        | Доставка за 30 минут                               | Ночная доставка | Экспресс за 20 минут                               | Доставка за 45 минут                               | Больше продуктов за 2 часа                        
+   dim2(2): Динамическая доставка | Доставка по слотам
+slice 20623 ds=3035 echarts_area dates=55
+   metrics(1): qty_orders_delivered
+   dim1(6): Больше продуктов за 1 час                          | ВкусВильчик                                        | Доставка за 30 минут                               | Экспресс за 20 минут                               | Доставка за 45 минут                               | Больше продуктов за 2 часа                        
+slice 20624 ds=3035 echarts_area dates=55
+   metrics(1): qty_orders_delivered
+   dim1(1): 7745ДС_Мосфильмовская74
+
+== PROCESS BLOCKS ==
+### ТМЦ (закупка)
+  need: заявки, сроки поставки <=5 р.д., наличие критичных позиций
+  columns=25 metrics=25
+  datasets: 3035:darkstore_time_click(P1,charts=2483) | 2295:ksa_time_vw(P1,charts=474) | 3466:darkstore_time_sheet(P1,charts=395) | 7615:Категория · Витрина чеков + рынок и формат ТТ(P1,charts=218) | 5888:Причины не сборки 41 click(P1,charts=124) | 5441:darkstore_time_click_pharmacy_rest_flowers(P1,charts=101)
+  charts: 32585:Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия [pivot_table_v2] ds=6960 dash=[] || 32583:1.2.01 | Сборка | Общая статистика [table] ds=3466 dash=[] || 29790:Статистика по ТТ Спб (эдвайзер <ФИО>) [pivot_table_v2] ds=6270 dash=[] || 32579:Витрина товародвижения и остатков (для рассылки <ФИО>) [pivot_table_v2] ds=6270 dash=[] || 31776:Каналы: офлайн vs онлайн (отчётный период) [table] ds=7615 dash=[1679,1637]
+  fields: 4732:date_supply_sheet | 4732:date_supply | 4732:date_supply_untill | 4732:date_supply_untill_sheet | 7006:date_supply_until | 7027:date_supply_until | 7119:date_supply_until | 3035:date_supply_double
+
+### Вайты = развитие ЗИЗ
+  need: карта «вайт → зона», зона 180-300, данные за 2 недели
+  columns=25 metrics=25
+  datasets: 3035:darkstore_time_click(P1,charts=2483) | 2295:ksa_time_vw(P1,charts=474) | 3466:darkstore_time_sheet(P1,charts=395) | 5441:darkstore_time_click_pharmacy_rest_flowers(P1,charts=101) | 2865:test_dk_delivery(P1,charts=69) | 7173:darkstore_time_sheet_ch21_light(P1,charts=39)
+  charts: 32585:Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия [pivot_table_v2] ds=6960 dash=[] || 32583:1.2.01 | Сборка | Общая статистика [table] ds=3466 dash=[] || 17632:Уволенные сотрудники [table] ds=4379 dash=[1431,736] || 32531:Таблица нагрузки на регионах доставка_кол-во (глубина опозданий по сервисам) [pivot_table_v2] ds=6960 dash=[666] || 27914:Таблица нагрузки на ДаркСторах доставка_доли (глубина опозданий по сервисам) [pivot_table_v2] ds=6960 dash=[666]
+  fields: 4732:wait_time2 | 4732:wait_time | 4732:waiting_area_time | 7027:flag_wait_orders_with_planlate | 7119:flag_wait_orders_with_near_deadline | 7119:flag_wait_orders_with_planlate | 3035:wait_time | 3035:wait_time2
+
+### Коммуникация с розницей (сборка)
+  need: проблемы сборки и их решения, ежедневная планёрка
+  columns=25 metrics=25
+  datasets: 3035:darkstore_time_click(P1,charts=2483) | 2295:ksa_time_vw(P1,charts=474) | 3466:darkstore_time_sheet(P1,charts=395) | 5542:ost_group_ch41(P1,charts=277) | 5553:ost_group_rozn_ch41(P1,charts=245) | 5888:Причины не сборки 41 click(P1,charts=124)
+  charts: 32585:Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия [pivot_table_v2] ds=6960 dash=[] || 32584:1.2.06 | Сборка | Несобранные [table] ds=5542 dash=[] || 32417:1.2.01 | Сборка | Несобранные [table] ds=5542 dash=[] || 32583:1.2.01 | Сборка | Общая статистика [table] ds=3466 dash=[] || 32531:Таблица нагрузки на регионах доставка_кол-во (глубина опозданий по сервисам) [pivot_table_v2] ds=6960 dash=[666]
+  fields: 4732:sla_collection_time_all | 4732:date_collected_sheet | 4732:collection_time_all_sheet | 4732:qty_collected_services | 4732:collection_time_real_sec_sheet | 4732:collection_time | 4732:pickup | 4732:id_assemblysheet
+
+### AI-бот (опоздания)
+  need: статистика опозданий по запросу, динамика
+  columns=25 metrics=25
+  datasets: 3035:darkstore_time_click(P1,charts=2483) | 2295:ksa_time_vw(P1,charts=474) | 5815:1850_Loses_ch240(P1,charts=309) | 3664:hr_daily_pers_office(P1,charts=87) | 7283:hr_daily_pers_office_click(P1,charts=82) | 4038:hr_daily_pers(P1,charts=71)
+  charts: 32577:Click-to-eat Бесплатный за день по регионам [pivot_table_v2] ds=7696 dash=[666] || 32575:Кол-во опозданий по регионам Бесплатный [pivot_table_v2] ds=7696 dash=[666] || 32574:Доля опозданий по регионам Бесплатный [pivot_table_v2] ds=7696 dash=[666] || 32573:Список курьеров и данные по рассылкам тест [table] ds=7915 dash=[] || 24164:<ФИО> 2.0 по товарам-составляющим [pivot_table_v2] ds=5815 dash=[1380,687]
+  fields: 7006:is_late | 7006:late_orders_cnt | 7006:minutes_late | 7006:minutes_late_group | 7006:plan_late_bucket | 7006:plan_late_bucket_order | 7006:plan_late_minute | 7006:planned_late
+
+### Управление слотами
+  need: покрытие слотов, перестановки, провалы
+  columns=25 metrics=25
+  datasets: 3035:darkstore_time_click(P1,charts=2483) | 2295:ksa_time_vw(P1,charts=474) | 3466:darkstore_time_sheet(P1,charts=395) | 5888:Причины не сборки 41 click(P1,charts=124) | 5441:darkstore_time_click_pharmacy_rest_flowers(P1,charts=101) | 5438:darkstore_time_click_[id=977](P1,charts=71)
+  charts: 32585:Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия [pivot_table_v2] ds=6960 dash=[] || 32583:1.2.01 | Сборка | Общая статистика [table] ds=3466 dash=[] || 32531:Таблица нагрузки на регионах доставка_кол-во (глубина опозданий по сервисам) [pivot_table_v2] ds=6960 dash=[666] || 27914:Таблица нагрузки на ДаркСторах доставка_доли (глубина опозданий по сервисам) [pivot_table_v2] ds=6960 dash=[666] || 27915:Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) [pivot_table_v2] ds=6960 dash=[666]
+  fields: 4732:slots | 7006:slots | 7027:slots | 7119:slots | 3035:slots | 3035:order_delay_slot_coef | 3035:order_slot | 3035:Слот / динамическая
+
+### Матрёшка → Курьер под ключ
+  need: 3 смены наставничества, опросник/квалификация, допуск к слотам, удержание новичков
+  columns=25 metrics=25
+  datasets: 3664:hr_daily_pers_office(P1,charts=87) | 7283:hr_daily_pers_office_click(P1,charts=82) | 4038:hr_daily_pers(P1,charts=71) | 2865:test_dk_delivery(P1,charts=69) | 5797:hr_couriers(P0,charts=54) | 7421:hr_daily_pers_click(P1,charts=40)
+  charts: 23046:HR розница - основные показатели - новички hb [handlebars] ds=7911 dash=[736] || 23038:Коэффициент текучести кадров по месяцам для основных показателей [echarts_timeseries_line] ds=7911 dash=[736] || 23438:HR розница - основные показатели - предыдущий месяц [handlebars] ds=7911 dash=[736] || 23435:HR розница - основные показатели - отчетный месяц [handlebars] ds=7911 dash=[736] || 23035:HR розница - основные показатели - численность hb [handlebars] ds=7911 dash=[736]
+  fields: 7473:5_shifts_in_14d | 7473:has_5_shifts_in_first_14d | 5797:5_shifts_in_14d | 5797:has_5_shifts_in_first_14d | 5797:is_5_shifts_in_14d | 7465:5_shifts_in_14d | 7465:has_5_shifts_in_first_14d | 7465:is_5_shifts_in_14d
+
+### Аудит зоны выдачи
+  need: чек-лист/фото зоны выдачи, список fixes
+  columns=25 metrics=17
+  datasets: 6303:m4_sanpin_torgovii_zal(P1,charts=40) | 3268:internal_audits(P1,charts=38) | 6266:end_to_end_rating_day_old(P1,charts=20) | 7607:photo_control_shift_draft(P1,charts=18) | 7712:photo_control_shift_bi(P1,charts=14) | 6310:audit_delivery_ds(P1,charts=4)
+  charts: 31601:Детализация попыток [table] ds=7712 dash=[1646] || 31608:Исход смены за период [pie] ds=7712 dash=[1646] || 31610:Статусы фото за период [handlebars] ds=7713 dash=[1646] || 31607:Доля: ок, спорные, не ок [echarts_timeseries_bar] ds=7712 dash=[1646] || 31606:Динамика: ок, спорные, не ок [echarts_timeseries_line] ds=7712 dash=[1646]
+  fields: 7712:ai_photos_cnt | 7712:photo_end | 7712:photos_cnt | 7712:photos_failed | 7712:photos_no_ai | 7712:photos_ok | 7712:photo_span_sec | 7712:photos_unavailable
+
+### Карта покрытия / кластер
+  need: актуальность карты ЗИЗ 180-300, границы кластеров
+  columns=25 metrics=1
+  datasets: 3035:darkstore_time_click(P1,charts=2483) | 2295:ksa_time_vw(P1,charts=474) | 3466:darkstore_time_sheet(P1,charts=395) | 5542:ost_group_ch41(P1,charts=277) | 5553:ost_group_rozn_ch41(P1,charts=245) | 5888:Причины не сборки 41 click(P1,charts=124)
+  charts: 32585:Таблица нагрузки на ДаркСторах доставка_кол-во (глубина опозданий по сервисам) копия [pivot_table_v2] ds=6960 dash=[] || 32584:1.2.06 | Сборка | Несобранные [table] ds=5542 dash=[] || 32417:1.2.01 | Сборка | Несобранные [table] ds=5542 dash=[] || 32583:1.2.01 | Сборка | Общая статистика [table] ds=3466 dash=[] || 23046:HR розница - основные показатели - новички hb [handlebars] ds=7911 dash=[736]
+  fields: 4732:geo | 7473:inactivity_zone_ordered | 7473:zone | 7473:zone_ch_ | 7473:zone_transition_ordered | 7473:zone_transition_type | 5797:inactivity_zone | 5797:inactivity_zone_ordered
+
+== WEEKLY DIGEST ITEMS ==
+### торговые точки / открытые магазины / ВВ мини / дарксторы / города
+  columns=437 metrics=185 datasets=204
+  ds ex: 4732:darkstore_ts_partners_new(P0) | 5247:courier_logs_agg_couriers_daily(P0) | 5399:courier_logs_agg_couriers_week(P0) | 3035:darkstore_time_click(P1) | 3466:darkstore_time_sheet(P1) | 5799:darkstore_time_sheet_by_date_collected(P1)
+  metric ex: 4732.tt_qty | 3035.d_qty_ex | 3035.Order_shopno_delivery | 3035.share_order_time_above_30_city | 3035.share_not_in_slot_above_service_72 | 3035.d_qty_2h/slot
+### онлайн-заказы (месяц/неделя/вчера), заказы на дарксторы
+  columns=1187 metrics=4047 datasets=327
+  ds ex: 4732:darkstore_ts_partners_new(P0) | 7473:hr_couriers_five_shifts(P0) | 5797:hr_couriers(P0) | 7465:hr_couriers_5shifts(P0) | 7006:cargo_main2(P0) | 7027:cargo_main4(P0)
+  metric ex: 4732.apt_collected>20m_qty | 4732.apt_collected_>20m_share | 4732.apt_collected>30m_qty | 4732.apt_collected_>30m_share | 4732.flowers_collected>20m_qty | 4732.flowers_collected_>20m_share
+### новые и вернувшиеся покупатели
+  columns=46 metrics=66 datasets=45
+  ds ex: 3035:darkstore_time_click(P1) | 1835:Отчет по бонусам (ручное начисление)(P1) | 5441:darkstore_time_click_pharmacy_rest_flowers(P1) | 1677:Ручное начисление бонусов(P1) | 7013:geo_hex_ratio_hour2(P1) | 5067:darkstore_time(P1)
+  metric ex: 3035.1_ord_per_customer_share | 3035.2_ord_per_customer | 3035.3_more_ord_per_customer | 3035.ratio_new_cl | 3035.2_more_ord_per_customer | 3035.3_more_ord_per_customer_share
+### форматы: вендинг/микромаркет/кафе/пекарни/аптеки/рестораны/дарккитчен
+  columns=87 metrics=174 datasets=44
+  ds ex: 3035:darkstore_time_click(P1) | 3466:darkstore_time_sheet(P1) | 5438:darkstore_time_click_[id=977](P1) | 5888:Причины не сборки 41 click(P1) | 5232:darkstore_time_sheet_[id=23150](P1) | 5964:darkstore_time_sheet_st_pr_sl(P1)
+  metric ex: 4732.apt_collected>20m_qty | 4732.apt_collected_>20m_share | 4732.apt_collected>30m_qty | 4732.apt_collected_>30m_share | 4732.qty_apt_suborders | 4732.qty_restaurant_suborders
+### товары, поставщики, средняя оценка товара
+  columns=143 metrics=233 datasets=84
+  ds ex: 6757:darkstore_time_sheet_for_1000002697(P1) | 7694:Сгоряча МСК+МО · жалобы: недовес, температура, внешний вид(P1) | 2396:collector_report_day(P1) | 7499:Кулинария · Недопоставки(P1) | 7623:Категория · Недопоставки(P1) | 7724:<ФИО> · Недопоставки + «в т.ч. не приняли»(P1)
+  metric ex: 3466.qty_ordered_DK_>13 | 3466.qty_goods_collected | 3466.qty_ordered_DK | 3466.qty_ordered_DK_>14 | 3466.tov_DK_>_15_min_share | 5799.qty_goods_collected
+### обращения на горячую линию
+  columns=27 metrics=80 datasets=36
+  ds ex: 7694:Сгоряча МСК+МО · жалобы: недовес, температура, внешний вид(P1) | 3702:complaints_sbor(P1) | 5088:orders_modificators_ds(P1) | 5315:complaints_sbor_gp100(P1) | 4817:unpaid_canceled_orders(P1) | 5200:orders_modif_complaints(P1)
+  metric ex: 7694.Обращений | 1870.obr_all | 1870.share_obr_to_orders | 1870.share_obr_to_sales | 1870.share_obr_to_sales_pics | 1870.Количество обращений
+
+== PII FIELDS (names only) ==
+columns: 7473.name_courier | 5797.fio | 7465.fio | 2329.FIO | 5939.fio | 5939.mentorfio | 5939.person_code | 7519.ФИО | 7771.fio | 7771.fio_trainee | 7771.fio_trainer | 7771.person_code | 2639.collect_person | 2762.fio | 2762.person_code | 3871.name_courier | 4038.fio | 4038.mentorfio | 4038.person_code | 5205.fio | 5205.person_code | 7153.pom_main_fio | 4023.ФИО_курьера | 4379.fio | 4379.person_code | 5774.fio | 5774.next_person_state | 5774.person_code | 5774.prev_person_state | 7394.fio
+metrics: 5939.employee_qty_lm | 5939.ССЧ за выбранный в грануляции период | 5939.ССЧ за любой период | 5939.ССЧ за месяц | 5939.ССЧ за неделю | 5939.Численность штатных сотрудников | 2762.Принято сотрудников | 4038.employee_qty_lm | 4038.ССЧ за выбранный в грануляции период | 4038.ССЧ за любой период | 4038.ССЧ за месяц | 4038.ССЧ за неделю | 4038.Численность штатных сотрудников | 5205.employees_qty | 5774.Численность штатных сотрудников | 4414.ССЧ за выбранный в грануляции период | 4414.ССЧ за любой период | 4414.ССЧ за месяц | 4414.Численность сотрудников | 6054.employee_qty_lm | 6054.ССЧ за выбранный в грануляции период | 6054.ССЧ за любой период | 6054.ССЧ за месяц | 6054.ССЧ за неделю | 6054.Численность штатных сотрудников | 7875.emp_qty | 3664.employees_qty | 3664.Численность сотрудников | 4622.emp_qty | 6056.employee_qty_lm

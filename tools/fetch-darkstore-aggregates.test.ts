@@ -26,6 +26,8 @@ const baseArgs: CliArgs = {
   timeoutMs: 1000,
   pollTimeoutMs: 1000,
   addDateSupply: true,
+  injectShopno: false,
+  forceShopno: false,
   session: "",
   csrf: "",
   token: "",
@@ -33,6 +35,10 @@ const baseArgs: CliArgs = {
   password: "",
   provider: "db",
   files: [101],
+  fromCharts: [],
+  chartDetailsDir: "output/chart_details",
+  offlineCharts: false,
+  rawArtifacts: false,
   help: false,
 };
 
@@ -150,7 +156,7 @@ describe("aggregate", () => {
     sliceId: 20403,
     datasourceId: 3035,
     vizType: "table",
-    dimension1: "ДаркСтор",
+    dimension1: "Р”Р°СЂРєРЎС‚РѕСЂ",
     dimension2: "",
     ...over,
   });
@@ -165,7 +171,7 @@ describe("aggregate", () => {
 
     const result: AggregateResult = aggregate(observations, new Map());
 
-    const detail = result.rows.find((r) => r.dimension_1 === "ДаркСтор");
+    const detail = result.rows.find((r) => r.dimension_1 === "Р”Р°СЂРєРЎС‚РѕСЂ");
     expect(detail?.source_rows).toBe(4);
     expect(detail?.qty_orders_delivered).toBe(400);
     expect(Number(detail?.share_not_in_slot_all)).toBeCloseTo(0.175, 9);
@@ -199,7 +205,7 @@ describe("aggregate", () => {
     ]);
 
     const result = aggregate(observations, declared);
-    const row = result.rows.find((r) => r.dimension_1 === "ДаркСтор");
+    const row = result.rows.find((r) => r.dimension_1 === "Р”Р°СЂРєРЎС‚РѕСЂ");
 
     expect(row?.qty_orders_delivered).toBe(10);
     expect(row?.sum_with_bonuses).toBe("");
@@ -216,5 +222,62 @@ describe("aggregate", () => {
     expect(result.additiveMetrics).toEqual(["qty_orders_delivered"]);
     expect(result.ratioMetrics).toEqual(["share_not_in_slot_all"]);
     expect(result.rows).toEqual([]);
+  });
+});
+
+// These tests pin the CURRENT key semantics as a specification
+// (see reports/code-review/final-live-aggregator-acceptance.md, section 2).
+// They document theoretical edge cases, not observed production data:
+// no real Superset response was seen carrying "|" in a dimension value,
+// and plan -> (slice_id, datasource_id) is bijective in practice.
+describe("dedup keys (defect documentation)", () => {
+  const observation = (
+    over: Partial<Observation> & Pick<Observation, "metric" | "kind" | "value">,
+  ): Observation => ({
+    date: "2026-11-01",
+    sliceId: 20403,
+    datasourceId: 3035,
+    vizType: "table",
+    dimension1: "A",
+    dimension2: "",
+    ...over,
+  });
+
+  test("regression: '|' inside a dimension value no longer aliases two groups", () => {
+    // ["x", "y|z"] and ["x|y", "z"] used to join to the same key "…|x|y|z" and merge.
+    const observations: Observation[] = [
+      observation({ dimension1: "x", dimension2: "y|z", metric: "qty_orders_delivered", kind: "additive", value: 10 }),
+      observation({ dimension1: "x|y", dimension2: "z", metric: "qty_orders_delivered", kind: "additive", value: 20 }),
+    ];
+
+    const result = aggregate(observations, new Map());
+    const detail = result.rows.filter(
+      (r) => r.date === "2026-11-01" && r.slice_id === 20403 && r.dimension_1 !== "__ALL__",
+    );
+
+    // both groups survive with their own sums; nothing is merged
+    expect(detail.length).toBe(2);
+    expect(detail.map((r) => Number(r.qty_orders_delivered)).sort((a, b) => a - b)).toEqual([10, 20]);
+    expect(detail.every((r) => r.source_rows === 1)).toBe(true);
+
+    const collapsed = result.rows.find((r) => r.date === "2026-11-01" && r.dimension_1 === "__ALL__");
+    expect(collapsed?.qty_orders_delivered).toBe(30);
+  });
+
+  test("regression: different datasource_id is never merged into one group", () => {
+    const observations: Observation[] = [
+      observation({ datasourceId: 3035, dimension1: "A", metric: "qty_orders_delivered", kind: "additive", value: 10 }),
+      observation({ datasourceId: 3466, dimension1: "B", metric: "qty_orders_delivered", kind: "additive", value: 5 }),
+    ];
+
+    const result = aggregate(observations, new Map());
+    const detail = result.rows.filter((r) => r.dimension_1 !== "__ALL__");
+    const collapsed = result.rows.filter((r) => r.dimension_1 === "__ALL__");
+
+    // details stay separate and so do the per-(date,datasource,slice) collapses
+    expect(detail.length).toBe(2);
+    expect(collapsed.length).toBe(2);
+    expect(collapsed.map((r) => r.dataset_id).sort()).toEqual([3035, 3466]);
+    expect(collapsed.map((r) => Number(r.qty_orders_delivered)).sort((a, b) => a - b)).toEqual([5, 10]);
   });
 });
