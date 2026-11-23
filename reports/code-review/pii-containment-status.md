@@ -1,49 +1,58 @@
-# Срочно: PII в публикации и в истории Git — что уже сделано и что требует решения
+# PII: containment и очистка истории — выполнено
 
-**Дата:** 2026-11-23 ~15:05 · **Статус:** containment выполнен; удаление из истории **не выполнено** (требует подтверждения)
+**Дата:** 2026-11-23 · **Статус:** выполнено (Tier 1 + Tier 2 + force-push) · **Автор:** DSH-агент по прямому указанию владельца
 
-## 1. Факты
+## 1. Что было обнаружено
 
 | Факт | Значение |
 |---|---|
-| `HEAD` = `origin/main` | `4730108` «for check» (14:51) — параллельная сессия **уже запушила** коммит |
-| PII-файлов в tracked-дереве | **129** (все 129 уже в `origin/main`) |
-| Суммарно срабатываний | `person_name=14 020`, `phone=20`, `email=6`, `person_code=5` |
-| Сырые PII-отчёты, попавшие в историю | `reports/phase-01-9/darkstore_7745_gap_findings.json`, `_gap_summary.txt`, `_chart_candidates.txt` (коммит `4730108`) |
-| Крупнейшие носители (каталог метаданных) | `analysis_package/metrics_catalog.csv` (3 646), `reports/phase-01-6-2/chart_metrics.csv` (3 405), `charts_inventory.json` (1 050), `reports/phase-01-6/evidence/sql_full/3466.sql` (791) |
-| Реальные жёсткие сигналы | `phone=2` в `reports/phase-01-4/05_sql_inventory.csv`, `phone=2` в `reports/phase-01-6-2/datasets_inventory.json`, `phone=8` в `tools/har-out/manifest.json` (похоже на HTTP-метаданные), фикстуры `docs/phase-01-5/fixtures/*` (синтетика) |
+| `HEAD` до работ | `4730108` «for check» = `origin/main` (PII **уже была опубликована** на GitHub) |
+| PII-файлов в tracked-дереве | 129 из 522 текстовых (все — в `origin/main`) |
+| Срабатываний до очистки | `person_name=14 020`, `phone=20`, `email=6`, `person_code=5` |
+| Сырые PII-отчёты в истории | `reports/phase-01-9/darkstore_7745_gap_findings.json`, `_gap_summary.txt`, `_chart_candidates.txt` (и intermediates `_gap_detail*.txt`, `_late_charts.txt`) |
+| Крупнейшие носители | `analysis_package/metrics_catalog.csv`, `reports/phase-01-6-2/chart_metrics.csv`, `charts_inventory.json`, `reports/phase-01-6/evidence/sql_full/3466.sql` — ФИО сотрудников в названиях объектов Superset |
 
-Полный перечень: `reports/code-review/pii-tracked-inventory.json`.
+## 2. Containment (до перезаписи истории)
 
-## 2. Что уже сделано (обратимо, без перезаписи истории)
+1. **Publish-gate:** `bun tools/redact-pii.ts --in <dir> --gate` — exit 1 при остаточных совпадениях; тестовые/фикстурные файлы исключены; маскирование стало **идемпотентным** (исправлено самосовпадение плейсхолдеров и ложное срабатывание на `git@github.com`).
+2. **Публикуемые копии очищены:** `reports/public/**` и `reports/code-review/**` проходят gate чисто (`person_name=0 … secret=0`).
+3. **Сырые отчёты сняты с публикации:** `.gitignore` + удаление из индекса (`reports/phase-01-9/_*.txt`, `reports/phase-01-9/*_findings.json`).
 
-1. **Publish-gate:** `bun tools/redact-pii.ts --in <dir> --gate` — падает (exit 1), если в публикуемых путях остались PII-совпадения; тестовые/фикстурные файлы исключены. Маскирование стало **идемпотентным** (повторный прогон даёт 0 совпадений).
-2. **Опубликованные копии очищены:** `reports/public/**` проходит gate (`person_name=0 … secret=0`). ***REMOVED*** `reports/code-review/from-chart-production-readiness.md` и `final-live-aggregator-acceptance.md` вычищены от примеров-совпадений.
-3. **Сырые отчёты сняты с публикации:** `git rm --cached` для трёх файлов (файлы остались на диске) + правила в `.gitignore`:
-   `reports/phase-01-9/_*.txt`, `reports/phase-01-9/*_findings.json`. Эти удаления **застейджены, но не закоммичены**.
-4. **Подготовлен скрипт очистки истории:** [purge-pii-history.ps1](../../tools/purge-pii-history.ps1) (dry-run по умолчанию).
-   * Tier 1 — удалить сырые PII-отчёты из всех коммитов (`git filter-repo --invert-paths`, 3 пути + 2 glob).
-   * Tier 2 — замаскировать ФИО/телефоны/почты **внутри** артефактов каталога во всей истории (`--replace-text`, 523 правила; правила лежат вне репозитория: `C:\Temp\pii-replacements.txt`).
-   * `git filter-repo` установлен (`python -m pip install git-filter-repo`), проверен в dry-run.
+## 3. Очистка истории (выполнено)
 
-## 3. Что не сделано и почему
+Инструмент: `git filter-repo` (установлен через `python -m pip install git-filter-repo`), скрипт [purge-pii-history.ps1](../../tools/purge-pii-history.ps1).
 
-Перезапись истории (**`filter-repo` + `git push --force`**) не выполнена, потому что:
+| Шаг | Команда | Результат |
+|---|---|---|
+| Бэкап | `git bundle create C:\Temp\dds-backup-20261123-150742.bundle --all` | 11.6 МБ (содержит старую историю с PII — хранить ограниченно) |
+| Tier 1 | `git filter-repo --force --invert-paths --path <3 файла> --path-glob 'reports/phase-01-9/_*.txt' --path-glob 'reports/phase-01-9/*_findings.json'` | сырые отчёты удалены из **всех** коммитов |
+| Tier 2 (проход 1) | `git filter-repo --force --replace-text C:\Temp\pii-replacements.txt` | 523 правила: 504 ФИО + 16 телефонов + 3 почты |
+| Tier 2 (проход 2) | повторный `--replace-text` по остаткам | добит последний остаток: одно ФИО, 12 вхождений (значение вырезано из этого отчёта) |
+| Публикация | `git remote add origin …; git fetch origin; git push --force-with-lease origin main` | `+ 4730108...51d4162 main -> main (forced update)` |
+| Локальная чистка | `git reflog expire --expire=now --all; git gc --prune=now` | старые объекты удалены локально (`4730108` недоступен) |
 
-* она ломает все существующие клоны и **активную параллельную сессию**, которая коммитит в этот же репозиторий;
-* push переписывает общую ветку `main` на GitHub — действие необратимое без бэкапа (скрипт делает bundle в `C:\Temp`);
-* GitHub ещё какое-то время хранит недостижимые объекты: гарантированная очистка — только через GitHub Support или пересоздание репозитория.
+**История переписана:** 15 коммитов, вершина `51d4162`.
 
-## 4. ***REMOVED*** (после остановки других писателей)
+## 4. Проверка после очистки
 
-```powershell
-# 1) зафиксировать containment (иначе filter-repo откажется работать на грязном дереве)
-git add -A && git commit -m "pii: stop publishing raw reports, add publish gate"
-# 2) Tier 1 (сырые отчёты) — затем при необходимости Tier 2 (маскирование каталогов в истории)
-& tools/purge-pii-history.ps1                 # dry-run
-& tools/purge-pii-history.ps1 -Execute
-& tools/purge-pii-history.ps1 -Tier1And2 -Execute
-# 3) опубликовать переписанную историю
-git remote add origin git@github.com:goshva/dds.git
-git push --force-with-lease origin main
-```
+| Проверка | Результат |
+|---|---|
+| `git ls-remote origin main` | `51d4162…` (совпадает с локальным) |
+| Сырые PII-отчёты в `origin/main` | **отсутствуют** (все три) |
+| ФИО в `origin/main` (выборочная проверка) | 0 файлов |
+| Маски в каталоге | `chart_metrics.csv` в `origin/main`: **7 524** `<ФИО>` |
+| Остаточные телефон/почта в tracked-дереве | **0 / 0** |
+| Остаточные кириллические «ФИО»-прогоны | 1: должность курьера ×31 — не персональные данные (в стоп-листе, значение вырезано) |
+| `person_name` в tracked-дереве (правило включает латиницу) | 1 018 — это латинские деловые/технические фразы (UA, названия отчётов), персональных данных нет |
+| `person_code=5` | только синтетические фикстуры и тесты |
+| Publish-gate на публикуемых путях | **PASS** |
+
+Отчёт-инвентарь: [pii-tracked-inventory.json](pii-tracked-inventory.json).
+
+## 5. Остаточные риски и обязательные действия
+
+1. **GitHub хранит недостижимые объекты** (старые блобы/коммиты) ещё какое-то время. Гарантированная очистка — только через **GitHub Support** или **пересоздание репозитория**. Force-push убирает объекты из ветки, но не обязательно из хранилища GitHub немедленно.
+2. **Все существующие клоны содержат старую историю с PII.** Их нужно переклонировать (`git clone`) либо `git fetch origin && git reset --hard origin/main`. Иначе следующий push из такого клона вернёт PII.
+3. **Параллельная сессия** (агент, коммитивший в 14:51) должна остановиться и сделать `git reset --hard origin/main`; её незакоммиченные правки нужно перенести вручную.
+4. **Бэкап** `C:\Temp\dds-backup-20261123-150742.bundle` содержит PII. Рекомендуется удалить после подтверждения, что новая история в порядке: `Remove-Item C:\Temp\dds-backup-*.bundle`.
+5. В отчётах, ссылавшихся на удалённые intermediates (`_gap_detail.txt` и т.п.), ссылки больше не разрешаются — это ожидаемо: файлы убраны из репозитория и истории.
