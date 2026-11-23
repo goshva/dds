@@ -1,30 +1,27 @@
 {
-  "generated_at": "2026-11-23T11:49:04.416Z",
+  "generated_at": "2026-11-23T12:05:03.677Z",
   "dry_run": false,
   "inputs": [
     "reports/code-review"
   ],
   "out_dir": "reports/public/code-review",
-  "files_scanned": 4,
-  "files_written": 3,
+  "files_scanned": 5,
+  "files_written": 4,
   "totals": {
-    "person_name": 9,
+    "person_name": 0,
     "email": 0,
     "phone": 0,
-    "secret": 6,
+    "secret": 0,
     "person_code": 0
   },
-  "files_with_pii": [
-    "C:\\soft\\bun\\dds\\reports\\code-review\\final-live-aggregator-acceptance.md",
-    "C:\\soft\\bun\\dds\\reports\\code-review\\from-chart-production-readiness.md"
-  ],
+  "files_with_pii": [],
   "reports": [
     {
       "source": "C:\\soft\\bun\\dds\\reports\\code-review\\final-live-aggregator-acceptance.md",
       "target": "C:\\soft\\bun\\dds\\reports\\public\\code-review\\final-live-aggregator-acceptance.md",
-      "bytes": 25868,
+      "bytes": 25847,
       "counts": {
-        "person_name": 1,
+        "person_name": 0,
         "email": 0,
         "phone": 0,
         "secret": 0,
@@ -59,12 +56,24 @@
     {
       "source": "C:\\soft\\bun\\dds\\reports\\code-review\\from-chart-production-readiness.md",
       "target": "C:\\soft\\bun\\dds\\reports\\public\\code-review\\from-chart-production-readiness.md",
-      "bytes": 29518,
+      "bytes": 29487,
       "counts": {
-        "person_name": 8,
+        "person_name": 0,
         "email": 0,
         "phone": 0,
-        "secret": 6,
+        "secret": 0,
+        "person_code": 0
+      }
+    },
+    {
+      "source": "C:\\soft\\bun\\dds\\reports\\code-review\\pii-tracked-inventory.json",
+      "target": "C:\\soft\\bun\\dds\\reports\\public\\code-review\\pii-tracked-inventory.json",
+      "bytes": 34524,
+      "counts": {
+        "person_name": 0,
+        "email": 0,
+        "phone": 0,
+        "secret": 0,
         "person_code": 0
       }
     }

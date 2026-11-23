@@ -16,7 +16,7 @@
 | `id_order` | `analysis_package/metrics_catalog.csv` (ds 4732/3035) | Идентификатор **подзаказа** витрины. Метрики `qty_apt_suborders`, `qty_flowers_suborders` считают `COUNT(DISTINCT ... id_order)` и описаны как «Кол-во УЧ (под)заказов» | VERIFIED по SQL-формулам |
 | `COALESCE(id_general, id_order)` | metrics_catalog.csv (`qty_orders_all`, `apt_collected>20m_qty`, `share_del_10_sla` и др.) | Единица «генерализованный заказ»: `id_general` объединяет подзаказы одного крупного заказа | VERIFIED по формулам; бизнес-термин AGREED в глоссарии |
 | `id_delivery_job` | `docs/ANALYSIS_FROM_FIRST_RUN.md:35` (ds 4732 ключи: `id_courier, date_supply, date_delivery_start, date_delivered, id_delivery_job`) | Идентификатор **job доставки**, отдельный от заказа | VERIFIED как join-ключ (docs/phase-01-8 relationships) |
-| Глоссарий ***REMOVED*** | `docs/phase-01-5/03_domain_glossary.md:5` | «В Superset id_order может быть подзаказом; id_general объединяет» — статус термина AGREED | документировано |
+| <ФИО> | `docs/phase-01-5/03_domain_glossary.md:5` | «В Superset id_order может быть подзаказом; id_general объединяет» — статус термина AGREED | документировано |
 | ***REMOVED*** | тот же глоссарий | «одна поездка курьера с несколькими заказами одной зоны»; **«В Superset соответствие НЕ ПОДТВЕРЖДЕНО»** | OPEN |
 
 ### Live-факты (зафиксированы ранее в `reports/phase-01-9/darkstore_7745_check.json`, повторных запросов не выполнялось)

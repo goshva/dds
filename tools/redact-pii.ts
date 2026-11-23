@@ -56,11 +56,17 @@ const RULES: Array<{ rule: PiiRule; re: RegExp; guard?: (match: string) => boole
     re: /\b[A-Z][a-z]{1,}(?:-[A-Z][a-z]{1,})?(?:\s+[A-Z][a-z]{1,}(?:-[A-Z][a-z]{1,})?){1,2}\b/g,
     guard: (m) => !LATIN_STOPWORDS.has(m.toLowerCase()),
   },
-  { rule: "email", re: /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g },
+  {
+    rule: "email",
+    re: /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g,
+    // VCS SSH endpoints (git@github.com:org/repo.git) are not personal data
+    guard: (m) => !/^git@/i.test(m) && !/^[a-z]+@[a-z0-9.-]+\.(git|local)$/i.test(m),
+  },
   { rule: "phone", re: /(?:\+7|8)[\s(-]?\d{3}[\s)-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}\b/g },
   {
     rule: "secret",
-    re: /\b(session|csrf[_-]?token|x-csrftoken|access[_-]?token|refresh[_-]?token|token|password|authorization|bearer|cookie)\b"?\s*[=:]\s*("?)([^\s",;]{4,})\2/gi,
+    // (?!<) keeps the placeholders stable: masking twice is idempotent
+    re: /\b(session|csrf[_-]?token|x-csrftoken|access[_-]?token|refresh[_-]?token|token|password|authorization|bearer|cookie)\b"?\s*[=:]\s*("?)(?!<)([^\s",;]{4,})\2/gi,
   },
   { rule: "person_code", re: /\b(person_code|id_courier|courier_id|employee_id)\b"?\s*[=:]\s*"?(\d{4,})"?/gi },
 ];
@@ -135,13 +141,19 @@ interface CliOptions {
   outDir: string | null;
   reportPath: string | null;
   dryRun: boolean;
+  /** exit non-zero when any rule still matches (publish gate) */
+  gate: boolean;
 }
+
+/** Files whose PII-like content is synthetic by design and must not fail the gate. */
+const GATE_EXEMPT = /(\.test\.ts$|\.spec\.ts$|[\\/]tests?[\\/]|docs[\\/]phase-01-5[\\/]fixtures[\\/]|tools[\\/]redact-pii\.ts$)/;
 
 function parseArgs(argv: string[]): CliOptions {
   const inputs: string[] = [];
   let outDir: string | null = null;
   let reportPath: string | null = null;
   let dryRun = false;
+  let gate = false;
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i]!;
     const next = () => {
@@ -154,16 +166,17 @@ function parseArgs(argv: string[]): CliOptions {
       case "--out": outDir = next(); break;
       case "--report": reportPath = next(); break;
       case "--dry-run": dryRun = true; break;
+      case "--gate": gate = true; break;
       case "--help": case "-h":
-        console.log("usage: bun tools/redact-pii.ts --in <file|dir> [--in ...] [--out <dir>] [--report <file>] [--dry-run]");
+        console.log("usage: bun tools/redact-pii.ts --in <file|dir> [--in ...] [--out <dir>] [--report <file>] [--dry-run] [--gate]");
         process.exit(0);
       default:
         throw new Error(`unknown option: ${a}`);
     }
   }
   if (!inputs.length) throw new Error("--in is required");
-  if (!dryRun && !outDir) throw new Error("--out is required unless --dry-run");
-  return { inputs, outDir, reportPath, dryRun };
+  if (!dryRun && !gate && !outDir) throw new Error("--out is required unless --dry-run/--gate");
+  return { inputs, outDir, reportPath, dryRun, gate };
 }
 
 if (import.meta.main) {
@@ -246,5 +259,18 @@ if (import.meta.main) {
   for (const r of reports.filter((x) => Object.values(x.counts).some((n) => n > 0))) {
     console.log(`  ${r.source}: ${Object.entries(r.counts).filter(([, v]) => v > 0).map(([k, v]) => `${k}=${v}`).join(", ")}`);
   }
-  if (!opts.dryRun) console.log(`output: ${resolve(opts.outDir!)}`);
+  if (!opts.dryRun && opts.outDir) console.log(`output: ${resolve(opts.outDir)}`);
+
+  if (opts.gate) {
+    const offenders = reports.filter(
+      (r) => Object.values(r.counts).some((n) => n > 0) && !GATE_EXEMPT.test(r.source),
+    );
+    if (offenders.length) {
+      console.error(`[GATE FAIL] ${offenders.length} file(s) still contain PII-like values — publication blocked:`);
+      for (const r of offenders) console.error(`  - ${r.source}`);
+      process.exitCode = 1;
+    } else {
+      console.log(`[GATE PASS] no PII-like values outside exempt test/fixture files`);
+    }
+  }
 }

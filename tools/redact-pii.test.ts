@@ -51,6 +51,17 @@ describe("redactText", () => {
     expect(text).not.toContain("9876543");
   });
 
+  test("masking is idempotent: a second pass finds nothing", () => {
+    const first = redactText(
+      'session="abc123def456"; password=hunter2secret; Authorization: Bearer eyJhbGciOi; token=verylongtoken; csrf_token=abcdef123456',
+    );
+    expect(Object.values(first.counts).some((n) => n > 0)).toBe(true);
+
+    const second = redactText(first.text);
+    expect(second.counts).toEqual({ person_name: 0, email: 0, phone: 0, secret: 0, person_code: 0 });
+    expect(second.text).toBe(first.text);
+  });
+
   test("keeps business identifiers, metric names and darkstore names intact", () => {
     const sample = "7745ДС_Мосфильмовская74 | Доставка по слотам | share_not_in_slot_all | 2026-11-10 | dataset_id=3035";
     const { text, counts } = redactText(sample);

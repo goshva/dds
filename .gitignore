@@ -120,3 +120,10 @@ desktop.ini
 npm-debug.log*
 yarn-debug.log*
 bun-debug.log*
+
+# --- PII containment (see reports/code-review/pii-tracked-inventory.json) ---
+# raw report intermediates carry employee names from Superset object titles;
+# only masked copies under reports/public/** may be published
+reports/phase-01-9/_*.txt
+reports/phase-01-9/*_findings.json
+reports/public/**/*.raw.md
