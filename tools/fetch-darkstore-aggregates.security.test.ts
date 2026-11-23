@@ -264,8 +264,10 @@ describe("secret handling", () => {  test("artifacts never contain the session c
 });
 
 describe("multi-query correspondence and PII-safe artifacts (mocked fetch)", () => {
-  const PII_NAME = "<ФИО>";
-  const PII_EMAIL = "<EMAIL>";
+  // assembled at runtime: a future history-masking pass must not rewrite the fixtures into
+  // the very placeholders this test asserts must be absent
+  const PII_NAME = ["Иванов", "Иван"].join(" ");
+  const PII_EMAIL = ["ivan.petrov", "example.com"].join("@");
 
   /** Two queries in the chart; the response may deliberately return a different number of results. */
   const chartDetail = (id: number) => ({
@@ -306,7 +308,8 @@ describe("multi-query correspondence and PII-safe artifacts (mocked fetch)", () 
     expect(quality.requests[0].completeness).not.toBe("full");
   });
 
-  test("chart titles and filter values are masked in manifest/quality/CSV by default", async () => {
+  test("chart titles, filter values and personnel ids are masked in manifest/quality/CSV by default", async () => {
+    const COURIER_ID = "9876543";
     mockFetch((call) => {
       if (call.url.includes("csrf_token")) return { status: 200, body: { result: "csrf" } };
       if (call.url.match(/\/api\/v1\/chart\/\d+$/)) return { status: 200, body: chartDetail(9201) };
@@ -314,7 +317,7 @@ describe("multi-query correspondence and PII-safe artifacts (mocked fetch)", () 
         status: 200,
         body: {
           result: [
-            { error: null, rowcount: 1, colnames: ["date_supply", "night_and_others", "qty_orders_delivered"], data: [{ date_supply: "2026-11-10", night_and_others: "ДаркСтор", qty_orders_delivered: 5 }] },
+            { error: null, rowcount: 1, colnames: ["date_supply", "night_and_others", "courier_id", "qty_orders_delivered"], data: [{ date_supply: "2026-11-10", night_and_others: "ДаркСтор", courier_id: Number(COURIER_ID), qty_orders_delivered: 5 }] },
             { error: null, rowcount: 1, colnames: ["date_supply", "night_and_others", "qty_couriers"], data: [{ date_supply: "2026-11-10", night_and_others: "ДаркСтор", qty_couriers: 2 }] },
           ],
         },
@@ -328,7 +331,11 @@ describe("multi-query correspondence and PII-safe artifacts (mocked fetch)", () 
       const text = await Bun.file(join(outDir, file)).text();
       expect(text, `${file} must not contain the person name`).not.toContain(PII_NAME);
       expect(text, `${file} must not contain the email`).not.toContain(PII_EMAIL);
+      expect(text, `${file} must not contain the courier id`).not.toContain(COURIER_ID);
     }
+    // the key itself stays visible, only the value is masked
+    const observations = await Bun.file(join(outDir, "observations_7745.csv")).text();
+    expect(observations).toContain("<ID-СОТРУДНИКА>");
   });
 
   test("--raw-artifacts keeps the original values for debugging", async () => {

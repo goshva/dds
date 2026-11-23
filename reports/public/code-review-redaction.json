@@ -1,31 +1,31 @@
 {
-  "generated_at": "2026-11-23T12:05:03.677Z",
+  "generated_at": "2026-11-23T12:27:29.101Z",
   "dry_run": false,
   "inputs": [
     "reports/code-review"
   ],
   "out_dir": "reports/public/code-review",
-  "files_scanned": 5,
-  "files_written": 4,
+  "files_scanned": 6,
+  "files_written": 5,
   "totals": {
-    "person_name": 0,
-    "email": 0,
-    "phone": 0,
-    "secret": 0,
-    "person_code": 0
+    "person_name_hits": 0,
+    "email_hits": 0,
+    "phone_hits": 0,
+    "secret_hits": 0,
+    "person_code_hits": 0
   },
   "files_with_pii": [],
   "reports": [
     {
       "source": "C:\\soft\\bun\\dds\\reports\\code-review\\final-live-aggregator-acceptance.md",
       "target": "C:\\soft\\bun\\dds\\reports\\public\\code-review\\final-live-aggregator-acceptance.md",
-      "bytes": 25847,
+      "bytes": 25998,
       "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 0,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     },
     {
@@ -33,11 +33,11 @@
       "target": null,
       "bytes": 169536,
       "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 0,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       },
       "skipped": "not a text extension (.diff)"
     },
@@ -46,35 +46,47 @@
       "target": "C:\\soft\\bun\\dds\\reports\\public\\code-review\\from-chart-fixes.new-files.txt",
       "bytes": 4872,
       "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 0,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     },
     {
       "source": "C:\\soft\\bun\\dds\\reports\\code-review\\from-chart-production-readiness.md",
       "target": "C:\\soft\\bun\\dds\\reports\\public\\code-review\\from-chart-production-readiness.md",
-      "bytes": 29487,
+      "bytes": 29726,
       "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 0,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
+      }
+    },
+    {
+      "source": "C:\\soft\\bun\\dds\\reports\\code-review\\pii-containment-status.md",
+      "target": "C:\\soft\\bun\\dds\\reports\\public\\code-review\\pii-containment-status.md",
+      "bytes": 7013,
+      "counts": {
+        "person_name_hits": 0,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     },
     {
       "source": "C:\\soft\\bun\\dds\\reports\\code-review\\pii-tracked-inventory.json",
       "target": "C:\\soft\\bun\\dds\\reports\\public\\code-review\\pii-tracked-inventory.json",
-      "bytes": 34524,
+      "bytes": 31426,
       "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 0,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     }
   ]

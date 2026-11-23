@@ -96,7 +96,7 @@ slice 20624 ds=3035 echarts_area dates=55
   metric ex: 4732.apt_collected>20m_qty | 4732.apt_collected_>20m_share | 4732.apt_collected>30m_qty | 4732.apt_collected_>30m_share | 4732.qty_apt_suborders | 4732.qty_restaurant_suborders
 ### товары, поставщики, средняя оценка товара
   columns=143 metrics=233 datasets=84
-  ds ex: 6757:darkstore_time_sheet_for_1000002697(P1) | 7694:Сгоряча МСК+МО · жалобы: недовес, температура, внешний вид(P1) | 2396:collector_report_day(P1) | 7499:Кулинария · Недопоставки(P1) | 7623:Категория · Недопоставки(P1) | 7724:<ФИО> · Недопоставки + «в т.ч. не приняли»(P1)
+  ds ex: 6757:darkstore_time_sheet_for_1000002697(P1) | 7694:Сгоряча МСК+МО · жалобы: недовес, температура, внешний вид(P1) | 2396:collector_report_day(P1) | 7499:Кулинария · Недопоставки(P1) | 7623:Категория · Недопоставки(P1) | 7724:Путь · Недопоставки + «в т.ч. не приняли»(P1)
   metric ex: 3466.qty_ordered_DK_>13 | 3466.qty_goods_collected | 3466.qty_ordered_DK | 3466.qty_ordered_DK_>14 | 3466.tov_DK_>_15_min_share | 5799.qty_goods_collected
 ### обращения на горячую линию
   columns=27 metrics=80 datasets=36

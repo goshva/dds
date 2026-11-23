@@ -3,11 +3,13 @@ import { GRAIN_OVERRIDES, priority, safeDatasetMetadata, scanPii } from "../lib"
 
 describe("redaction and PII", () => {
   test("safeDatasetMetadata excludes owners/changed_by/contacts", () => {
+    // assembled at runtime so a history-masking pass cannot rewrite the fixture into a placeholder
+    const ownerEmail = ["ivan.petrov", "example.com"].join("@");
     const raw = {
       id: 1,
       table_name: "t",
       sql: "select 1",
-      owners: [{ first_name: "Ivan", last_name: "Petrov", email: "<EMAIL>" }],
+      owners: [{ first_name: "Ivan", last_name: "Petrov", email: ownerEmail }],
       changed_by: { first_name: "Ivan" },
       columns: [{ column_name: "phone", type: "STRING", description: null }],
       metrics: [],
@@ -21,8 +23,10 @@ describe("redaction and PII", () => {
   });
 
   test("scanPii detects phone/email and passes clean text", () => {
+    // assembled at runtime so a history-masking pass cannot rewrite the fixture into a placeholder
+    const email = ["test.user", "example.com"].join("@");
     expect(scanPii("contact +7 (999) 123-45-67").some((h) => h.name === "phone")).toBe(true);
-    expect(scanPii("mail: <EMAIL>").some((h) => h.name === "email")).toBe(true);
+    expect(scanPii(`mail: ${email}`).some((h) => h.name === "email")).toBe(true);
     expect(scanPii("только имена полей: phone, inn, name_courier").length).toBe(0);
   });
 });

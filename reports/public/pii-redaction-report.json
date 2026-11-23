@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-11-23T10:44:00.423Z",
+  "generated_at": "2026-11-23T12:27:13.316Z",
   "dry_run": false,
   "inputs": [
     "reports/phase-01-9"
   ],
   "out_dir": "reports/public/phase-01-9",
-  "files_scanned": 9,
-  "files_written": 9,
+  "files_scanned": 6,
+  "files_written": 6,
   "totals": {
-    "person_name": 7,
-    "email": 0,
-    "phone": 0,
-    "secret": 0,
-    "person_code": 0
+    "person_name_hits": 7,
+    "email_hits": 0,
+    "phone_hits": 0,
+    "secret_hits": 0,
+    "person_code_hits": 0
   },
   "files_with_pii": [
     "C:\\soft\\bun\\dds\\reports\\phase-01-9\\darkstore_7745_gap_findings.json",
@@ -25,11 +25,11 @@
       "target": "C:\\soft\\bun\\dds\\reports\\public\\phase-01-9\\darkstore_7745_check.json",
       "bytes": 1391,
       "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 0,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     },
     {
@@ -37,23 +37,23 @@
       "target": "C:\\soft\\bun\\dds\\reports\\public\\phase-01-9\\darkstore_7745_gap_findings.json",
       "bytes": 167074,
       "counts": {
-        "person_name": 3,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 3,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     },
     {
       "source": "C:\\soft\\bun\\dds\\reports\\phase-01-9\\darkstore_7745_requirements_gap.md",
       "target": "C:\\soft\\bun\\dds\\reports\\public\\phase-01-9\\darkstore_7745_requirements_gap.md",
-      "bytes": 21021,
+      "bytes": 21188,
       "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 0,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     },
     {
@@ -61,11 +61,11 @@
       "target": "C:\\soft\\bun\\dds\\reports\\public\\phase-01-9\\dataset_access_matrix.json",
       "bytes": 1869,
       "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 0,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     },
     {
@@ -73,35 +73,11 @@
       "target": "C:\\soft\\bun\\dds\\reports\\public\\phase-01-9\\_chart_candidates.txt",
       "bytes": 6796,
       "counts": {
-        "person_name": 1,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
-      }
-    },
-    {
-      "source": "C:\\soft\\bun\\dds\\reports\\phase-01-9\\_gap_detail.txt",
-      "target": "C:\\soft\\bun\\dds\\reports\\public\\phase-01-9\\_gap_detail.txt",
-      "bytes": 18308,
-      "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
-      }
-    },
-    {
-      "source": "C:\\soft\\bun\\dds\\reports\\phase-01-9\\_gap_detail2.txt",
-      "target": "C:\\soft\\bun\\dds\\reports\\public\\phase-01-9\\_gap_detail2.txt",
-      "bytes": 10635,
-      "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 1,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     },
     {
@@ -109,23 +85,11 @@
       "target": "C:\\soft\\bun\\dds\\reports\\public\\phase-01-9\\_gap_summary.txt",
       "bytes": 18956,
       "counts": {
-        "person_name": 3,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
-      }
-    },
-    {
-      "source": "C:\\soft\\bun\\dds\\reports\\phase-01-9\\_late_charts.txt",
-      "target": "C:\\soft\\bun\\dds\\reports\\public\\phase-01-9\\_late_charts.txt",
-      "bytes": 1875,
-      "counts": {
-        "person_name": 0,
-        "email": 0,
-        "phone": 0,
-        "secret": 0,
-        "person_code": 0
+        "person_name_hits": 3,
+        "email_hits": 0,
+        "phone_hits": 0,
+        "secret_hits": 0,
+        "person_code_hits": 0
       }
     }
   ]

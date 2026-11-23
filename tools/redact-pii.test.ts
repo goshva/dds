@@ -6,16 +6,26 @@ import { join } from "node:path";
 
 import { redactJson, redactText } from "./redact-pii";
 
+// Fixtures are assembled at runtime on purpose: the source file then contains no PII-looking
+// literals, so a future history-masking pass (git filter-repo --replace-text) cannot corrupt
+// the tests themselves.
+const NAME3 = ["Иванов", "Иван", "Иванович"].join(" ");
+const NAME2 = ["Куратор", "Петрова", "Анна"].join(" ");
+const SURNAME1 = ["Сидоров", "Семён"].join(" ");
+const EMAIL = ["ivan.petrov", "example.com"].join("@");
+const PHONE = ["+7", "916", "123", "45", "67"].join(" ");
+const PHONE_COMPACT = ["+7", "916", "1234567"].join("");
+
 describe("redactText", () => {
   test("masks Cyrillic full names", () => {
-    const { text, counts } = redactText("Руководитель доставки: <ФИО> (срез 20404)");
+    const { text, counts } = redactText(`Руководитель доставки: ${NAME3} (срез 20404)`);
     expect(counts.person_name).toBe(1);
     expect(text).toContain("<ФИО>");
     expect(text).not.toMatch(/Иванов/);
   });
 
   test("masks two-word Cyrillic names", () => {
-    const { text, counts } = redactText("<ФИО> ведёт смену");
+    const { text, counts } = redactText(`${NAME2} ведёт смену`);
     expect(counts.person_name).toBe(1);
     expect(text).not.toMatch(/Петрова/);
   });
@@ -29,7 +39,7 @@ describe("redactText", () => {
   });
 
   test("masks emails and phones", () => {
-    const { text, counts } = redactText("пиши на <EMAIL> или <ТЕЛЕФОН>");
+    const { text, counts } = redactText(`пиши на ${EMAIL} или ${PHONE}`);
     expect(counts.email).toBe(1);
     expect(counts.phone).toBe(1);
     expect(text).toContain("<EMAIL>");
@@ -77,10 +87,91 @@ describe("redactText", () => {
 });
 
 describe("redactJson", () => {
+  test("masks numeric identifiers under personnel keys", () => {
+    const { value, counts } = redactJson<any>({
+      person_code: 1234567,
+      id_courier: 42,
+      courier_id: 0,
+      employee_id: 9999999999,
+    });
+
+    expect(counts.person_code).toBe(4);
+    expect(value).toEqual({
+      person_code: "<ID-СОТРУДНИКА>",
+      id_courier: "<ID-СОТРУДНИКА>",
+      courier_id: "<ID-СОТРУДНИКА>",
+      employee_id: "<ID-СОТРУДНИКА>",
+    });
+  });
+
+  test("masks string identifiers, including short and opaque ones", () => {
+    const { value, counts } = redactJson({
+      person_code: "abc-123",
+      courier_id: "7",
+      id_courier: "0000000123",
+      employee_id: "EMP-77/X",
+    });
+
+    expect(counts.person_code).toBe(4);
+    expect(Object.values(value as any)).toEqual([
+      "<ID-СОТРУДНИКА>",
+      "<ID-СОТРУДНИКА>",
+      "<ID-СОТРУДНИКА>",
+      "<ID-СОТРУДНИКА>",
+    ]);
+  });
+
+  test("key matching is case- and separator-insensitive and keys are preserved", () => {
+    const { value, counts } = redactJson({ Person_Code: 1, "ID-Courier": 2, "employee id": 3, EMPLOYEE_ID: "x" });
+
+    expect(counts.person_code).toBe(4);
+    expect(Object.keys(value as any)).toEqual(["Person_Code", "ID-Courier", "employee id", "EMPLOYEE_ID"]);
+    expect(Object.values(value as any).every((v) => v === "<ID-СОТРУДНИКА>")).toBe(true);
+  });
+
+  test("handles identifiers nested in objects and arrays", () => {
+    const { value, counts } = redactJson<any>({
+      rows: [{ courier_id: 1, name: "ok" }, { courier_id: 2, nested: { person_code: "X9" } }],
+      person_code: [1, 2, "3"],
+      employee_id: { legacy: 424242 },
+    });
+
+    expect(counts.person_code).toBe(7);
+    expect(value.rows[0].courier_id).toBe("<ID-СОТРУДНИКА>");
+    expect(value.rows[0].name).toBe("ok");
+    expect(value.rows[1].nested.person_code).toBe("<ID-СОТРУДНИКА>");
+    expect(value.person_code).toEqual(["<ID-СОТРУДНИКА>", "<ID-СОТРУДНИКА>", "<ID-СОТРУДНИКА>"]);
+    expect(value.employee_id).toEqual({ legacy: "<ID-СОТРУДНИКА>" });
+  });
+
+  test("does not touch business numbers, other ids or empty values", () => {
+    const input = {
+      dataset_id: 3035,
+      shopno: "7745",
+      qty_orders_delivered: 1234567,
+      chart_id: 20209,
+      person_code: null,
+      courier_id: "",
+      employee_id: undefined,
+    };
+    const { value, counts } = redactJson(input);
+
+    expect(counts.person_code).toBe(0);
+    expect(value).toEqual(input);
+  });
+
+  test("is idempotent for identifiers", () => {
+    const once = redactJson<any>({ person_code: 1234567, rows: [{ courier_id: "7" }] });
+    const twice = redactJson(once.value);
+
+    expect(twice.counts.person_code).toBe(0);
+    expect(twice.value).toEqual(once.value);
+  });
+
   test("walks nested structures and reports totals", () => {
     const input = {
-      meta: { author: "<ФИО>", contact: "<EMAIL>" },
-      rows: [{ courier: "<ФИО>", phone: "<ТЕЛЕФОН>" }],
+      meta: { author: NAME3, contact: EMAIL },
+      rows: [{ courier: SURNAME1, phone: PHONE_COMPACT }],
       safe: { dataset_id: 3035, shopno: "7745" },
     };
 
@@ -90,12 +181,12 @@ describe("redactJson", () => {
     expect(counts.email).toBe(1);
     expect(counts.phone).toBe(1);
     expect(JSON.stringify(value)).not.toContain("Иванов");
-    expect(JSON.stringify(value)).not.toContain("Петров");
+    expect(JSON.stringify(value)).not.toContain("Сидоров");
     expect(value.safe).toEqual({ dataset_id: 3035, shopno: "7745" });
   });
 
   test("handles arrays, numbers and nulls", () => {
-    const { value } = redactJson({ a: [1, null, "<ФИО>"], b: { c: 3 } });
+    const { value } = redactJson({ a: [1, null, SURNAME1], b: { c: 3 } });
     expect(value.a[0]).toBe(1);
     expect(value.a[1]).toBeNull();
     expect(value.a[2]).toBe("<ФИО>");

@@ -8,7 +8,7 @@
 |---|---|
 | `HEAD` до работ | `4730108` «for check» = `origin/main` (PII **уже была опубликована** на GitHub) |
 | PII-файлов в tracked-дереве | 129 из 522 текстовых (все — в `origin/main`) |
-| Срабатываний до очистки | `person_name=14 020`, `phone=20`, `email=6`, `person_code=5` |
+| Срабатываний до очистки | имён 14 020, телефонов 20, почт 6, идентификаторов сотрудников 5 |
 | Сырые PII-отчёты в истории | `reports/phase-01-9/darkstore_7745_gap_findings.json`, `_gap_summary.txt`, `_chart_candidates.txt` (и intermediates `_gap_detail*.txt`, `_late_charts.txt`) |
 | Крупнейшие носители | `analysis_package/metrics_catalog.csv`, `reports/phase-01-6-2/chart_metrics.csv`, `charts_inventory.json`, `reports/phase-01-6/evidence/sql_full/3466.sql` — ФИО сотрудников в названиях объектов Superset |
 

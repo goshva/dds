@@ -37,6 +37,23 @@ const MASK: Record<PiiRule, string> = {
   person_code: "<ID-СОТРУДНИКА>",
 };
 
+/** Keys whose values are personnel identifiers: always masked, numeric or string. */
+export const PERSON_ID_KEYS = ["person_code", "id_courier", "courier_id", "employee_id"] as const;
+export const PERSON_ID_PLACEHOLDER = MASK.person_code;
+
+/** Key normalisation: case-insensitive, `id-courier` / `ID Courier` / `id_courier` are the same key. */
+function normalizeKey(key: string): string {
+  return key.trim().toLowerCase().replace(/[\s-]+/g, "_");
+}
+
+/** Is this object key a personnel identifier? */
+export function isPersonIdKey(key: string): boolean {
+  return (PERSON_ID_KEYS as readonly string[]).includes(normalizeKey(key));
+}
+
+/** Regex source for the identifier keys, shared by the text rule and key-aware masking. */
+const PERSON_ID_KEY_SOURCE = PERSON_ID_KEYS.join("|");
+
 /** Latin pairs that are not personal names. */
 const LATIN_STOPWORDS = new Set([
   "dark store", "test user", "hello world", "select from", "order by", "group by",
@@ -68,7 +85,11 @@ const RULES: Array<{ rule: PiiRule; re: RegExp; guard?: (match: string) => boole
     // (?!<) keeps the placeholders stable: masking twice is idempotent
     re: /\b(session|csrf[_-]?token|x-csrftoken|access[_-]?token|refresh[_-]?token|token|password|authorization|bearer|cookie)\b"?\s*[=:]\s*("?)(?!<)([^\s",;]{4,})\2/gi,
   },
-  { rule: "person_code", re: /\b(person_code|id_courier|courier_id|employee_id)\b"?\s*[=:]\s*"?(\d{4,})"?/gi },
+  {
+    rule: "person_code",
+    // masks the value after an identifier key, whatever its shape: 1234567, "abc-123", person_code=42
+    re: new RegExp(`\\b(${PERSON_ID_KEY_SOURCE})\\b"?\\s*[=:]\\s*("?)([^\\s",;}]+)\\2`, "gi"),
+  },
 ];
 
 /** Mask PII in a text blob and report how many hits each rule produced. */
@@ -79,15 +100,19 @@ export function redactText(input: string): RedactResult {
   for (const { rule, re, guard } of RULES) {
     text = text.replace(re, (match, ...groups) => {
       if (guard && !guard(match)) return match;
+      if (rule === "person_code") {
+        // value sits in group 3 (1 = key, 2 = quote); skip empties, JSON nulls and our own placeholder
+        const value = String(groups[2] ?? "");
+        if (!value || value === PERSON_ID_PLACEHOLDER || /^(null|true|false)$/i.test(value)) return match;
+        counts.person_code++;
+        return match.replace(/([=:]\s*"?)[^\s",;}]+("?)$/, `$1${PERSON_ID_PLACEHOLDER}$2`);
+      }
       counts[rule]++;
       if (rule === "secret") {
         // keep the key, mask only the value
         const key = String(groups[0]).toLowerCase();
         const mask = key.includes("authorization") || key.includes("bearer") || key.includes("cookie") ? MASK.secret : MASK.secret;
         return match.replace(/([=:]\s*"?)[^\s",;]{4,}("?)$/, `$1${mask}$2`);
-      }
-      if (rule === "person_code") {
-        return match.replace(/\d{4,}/, MASK.person_code);
       }
       return MASK[rule];
     });
@@ -96,23 +121,57 @@ export function redactText(input: string): RedactResult {
   return { text, counts };
 }
 
-/** Recursively mask string values inside a JSON structure (keys are preserved). */
+/**
+ * Recursively mask a JSON structure.
+ *
+ * Two mechanisms work together:
+ *  - **key-aware**: values under `person_code` / `id_courier` / `courier_id` / `employee_id`
+ *    (case- and separator-insensitive) are always replaced by `<ID-СОТРУДНИКА>`, whether they are
+ *    numbers, numeric strings or opaque string ids; arrays and nested objects are handled.
+ *  - **content-aware**: every remaining string goes through {@link redactText}.
+ *
+ * Keys themselves are preserved, and the function is idempotent.
+ */
 export function redactJson<T>(value: T): { value: T; counts: Record<PiiRule, number> } {
   const counts: Record<PiiRule, number> = { person_name: 0, email: 0, phone: 0, secret: 0, person_code: 0 };
-  const walk = (node: any): any => {
+
+  /** Mask an identifier value of any shape (primitive, array, nested object). */
+  const maskIdValue = (node: any): any => {
+    if (node === null || node === undefined) return node;
+    if (typeof node === "string") {
+      if (node === "" || node === PERSON_ID_PLACEHOLDER) return node;
+      counts.person_code++;
+      return PERSON_ID_PLACEHOLDER;
+    }
+    if (typeof node === "number" || typeof node === "bigint") {
+      counts.person_code++;
+      return PERSON_ID_PLACEHOLDER;
+    }
+    if (Array.isArray(node)) return node.map(maskIdValue);
+    if (typeof node === "object") {
+      const out: Record<string, any> = {};
+      for (const [k, v] of Object.entries(node)) out[k] = maskIdValue(v);
+      return out;
+    }
+    return node; // booleans are not identifiers
+  };
+
+  const walk = (node: any, key?: string): any => {
+    if (key !== undefined && isPersonIdKey(key)) return maskIdValue(node);
     if (typeof node === "string") {
       const r = redactText(node);
       for (const k of Object.keys(r.counts) as PiiRule[]) counts[k] += r.counts[k];
       return r.text;
     }
-    if (Array.isArray(node)) return node.map(walk);
+    if (Array.isArray(node)) return node.map((item) => walk(item));
     if (node && typeof node === "object") {
       const out: Record<string, any> = {};
-      for (const [k, v] of Object.entries(node)) out[k] = walk(v);
+      for (const [k, v] of Object.entries(node)) out[k] = walk(v, k);
       return out;
     }
     return node;
   };
+
   return { value: walk(value) as T, counts };
 }
 
@@ -236,6 +295,11 @@ if (import.meta.main) {
     reports.push({ source: file, target, bytes, counts });
   }
 
+  // Serialised reports use `<rule>_hits` keys on purpose: a bare `person_code` key would itself
+  // look like a personnel-identifier field to the very rule set this tool implements.
+  const safeCounts = (c: Record<PiiRule, number>): Record<string, number> =>
+    Object.fromEntries(Object.entries(c).map(([k, v]) => [`${k}_hits`, v]));
+
   const summary = {
     generated_at: new Date().toISOString(),
     dry_run: opts.dryRun,
@@ -243,9 +307,9 @@ if (import.meta.main) {
     out_dir: opts.outDir,
     files_scanned: files.length,
     files_written: reports.filter((r) => r.target).length,
-    totals,
+    totals: safeCounts(totals),
     files_with_pii: reports.filter((r) => Object.values(r.counts).some((n) => n > 0)).map((r) => r.source),
-    reports,
+    reports: reports.map((r) => ({ ...r, counts: safeCounts(r.counts) })),
   };
 
   if (opts.reportPath) {

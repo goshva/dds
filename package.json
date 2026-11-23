@@ -28,7 +28,8 @@
     "aggregates:test:live": "SUPERSET_LIVE_TESTS=1 bun test tools/fetch-darkstore-aggregates.live.test.ts",
     "dataset:access": "bun tools/probe-dataset-access.ts",
     "pii:redact": "bun tools/redact-pii.ts",
-    "pii:test": "bun test tools/redact-pii.test.ts"
+    "pii:test": "bun test tools/redact-pii.test.ts",
+    "pii:inventory": "bun tools/pii-tracked-inventory.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"

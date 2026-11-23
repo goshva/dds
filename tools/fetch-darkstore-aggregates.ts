@@ -46,7 +46,7 @@
 import { mkdir } from "node:fs/promises";
 import { basename, dirname, join, resolve } from "node:path";
 
-import { redactJson, redactText } from "./redact-pii";
+import { PERSON_ID_PLACEHOLDER, isPersonIdKey, redactJson, redactText } from "./redact-pii";
 
 // ---------------------------------------------------------------------------
 // constants
@@ -546,6 +546,20 @@ async function writeText(path: string, text: string): Promise<void> {
 /** Mask PII in artifact text (chart titles, dimension values, filter values) unless --raw-artifacts. */
 function piiSafe(value: string, args: CliArgs): string {
   return args.rawArtifacts ? value : redactText(value).text;
+}
+
+/**
+ * Mask one CSV cell. The column header carries the semantics, so a value under
+ * `courier_id` / `id_courier` / `person_code` / `employee_id` is masked even when it is a bare number
+ * (redactText alone cannot see the key there).
+ */
+function piiSafeCell(header: string, value: unknown, args: CliArgs): unknown {
+  if (args.rawArtifacts) return value;
+  if (isPersonIdKey(header)) {
+    if (value === "" || value === null || value === undefined) return value;
+    return PERSON_ID_PLACEHOLDER;
+  }
+  return typeof value === "string" ? redactText(value).text : value;
 }
 
 /** Serialise an artifact with PII masked by default; returns the payload and the hit counts. */
@@ -1391,7 +1405,7 @@ export function extractObservations(
             sliceId: plan.sliceId,
             datasourceId: plan.datasourceId,
             vizType: plan.vizType,
-            dimension1: key,
+            dimension1: isPersonIdKey(key) ? PERSON_ID_PLACEHOLDER : key,
             dimension2: "",
             metric: seriesMetric,
             kind: "additive",
@@ -1410,6 +1424,13 @@ export function extractObservations(
       const dimensionKeys = keys.filter(
         (k) => k !== periodKey && !metricKeys.includes(k) && (declaredDimensions.has(k) || !METRIC_RE.test(k)),
       );
+      // a dimension that IS a personnel identifier keeps its meaning but never its value
+      const dimValue = (key: string | undefined): string => {
+        if (!key) return "";
+        const raw = row[key];
+        if (raw === null || raw === undefined || raw === "") return "";
+        return isPersonIdKey(key) ? PERSON_ID_PLACEHOLDER : String(raw);
+      };
 
       for (const metric of metricKeys) {
         const value = numeric(row[metric]);
@@ -1422,8 +1443,8 @@ export function extractObservations(
           sliceId: plan.sliceId,
           datasourceId: plan.datasourceId,
           vizType: plan.vizType,
-          dimension1: dimensionKeys[0] ? String(row[dimensionKeys[0]]) : "",
-          dimension2: dimensionKeys[1] ? String(row[dimensionKeys[1]]) : "",
+          dimension1: dimValue(dimensionKeys[0]),
+          dimension2: dimValue(dimensionKeys[1]),
           metric,
           kind: metricKind(metric),
           value,
@@ -2154,7 +2175,7 @@ export async function runPipeline(args: CliArgs): Promise<number> {
     .slice()
     .sort((a, b) => (a.date === b.date ? a.metric.localeCompare(b.metric) : a.date < b.date ? -1 : 1))
     .map((o) => [o.date, o.sliceId, o.datasourceId, o.vizType, o.dimension1, o.dimension2, o.metric, o.kind, fmtNumber(o.value)])
-    .map((row) => row.map((cell) => (typeof cell === "string" ? piiSafe(cell, args) : cell)));
+    .map((row) => row.map((cell, index) => piiSafeCell(longHeader[index] ?? "", cell, args)));
   await writeText(join(outDir, "observations_7745.csv"), toCsv(longHeader, longRows));
 
   const aggregateHeader = [
@@ -2169,12 +2190,7 @@ export async function runPipeline(args: CliArgs): Promise<number> {
     ...aggregateResult.ratioMetrics,
     "ratio_weighting",
   ];
-  const aggregateRows = aggregateResult.rows.map((row) =>
-    aggregateHeader.map((h) => {
-      const cell = row[h] ?? "";
-      return typeof cell === "string" ? piiSafe(cell, args) : cell;
-    }),
-  );
+  const aggregateRows = aggregateResult.rows.map((row) => aggregateHeader.map((h) => piiSafeCell(h, row[h] ?? "", args)));
   await writeText(join(outDir, "aggregate_7745.csv"), toCsv(aggregateHeader, aggregateRows));
 
   const notes: string[] = [];
