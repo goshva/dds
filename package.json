@@ -18,7 +18,13 @@
     "phase1-4:model": "bun run src/phase1-4/cli.ts model",
     "phase1-4:quality": "bun run src/phase1-4/cli.ts quality",
     "phase1-4:validate": "bun run src/phase1-4/cli.ts validate",
-    "phase1-4:all": "bun run src/phase1-4/cli.ts all"
+    "phase1-4:all": "bun run src/phase1-4/cli.ts all",
+    "extractor:inspect": "bun tools/superset-extractor/src/cli/index.ts inspect",
+    "extractor:parse": "bun tools/superset-extractor/src/cli/index.ts parse",
+    "extractor:report": "bun tools/superset-extractor/src/cli/index.ts report",
+    "extractor:test": "bun test tools/superset-extractor/tests",
+    "aggregates:fetch": "bun tools/fetch-darkstore-aggregates.ts",
+    "aggregates:test": "bun test tools/fetch-darkstore-aggregates.test.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"

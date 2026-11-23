@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-21T06:52:15.866Z",
+  "generated_at": "2026-11-23T06:35:25.365Z",
   "verdict": "PASS_WITH_BLOCKER",
   "statuses": {
     "LOCAL_VALIDATION": "PASS",
@@ -566,7 +566,7 @@
       "status": "PASS",
       "details": "секреты и PII-значения не найдены",
       "metrics": {
-        "scanned_files": 17,
+        "scanned_files": 18,
         "hits": []
       }
     },
