@@ -1,0 +1,43 @@
+{
+  "status": "MATCH_WITH_EXTENSIONS",
+  "counts": {
+    "IDENTICAL": 41,
+    "VALUE_CHANGED": 0,
+    "NEW": 864,
+    "MISSING": 0,
+    "DUPLICATE": 0,
+    "SCHEMA_CHANGED": 0,
+    "SOURCE_CHANGED": 0,
+    "INCOMPLETE": 0
+  },
+  "compared_dates": 41,
+  "new_dates": 864,
+  "notes": [
+    "новых дат по сравнению с предыдущей версией: 864",
+    "все прежние значения воспроизведены без изменений"
+  ],
+  "interval_checksums": [
+    {
+      "label": "h3",
+      "files": {
+        "manifest.json": "62bdb7de4f2be00472b760a837488b4db61abcdc75f642f21ff23d96c5c28da9",
+        "observations_7745.csv": "a28d6d78d429e217330b254a61b2d5db69353d15cc3e6efb422cc5cc9d048ace"
+      }
+    },
+    {
+      "label": "h2",
+      "files": {
+        "manifest.json": "1e04b497310315a3374070032441b2a95f531e99b50455c437e4590267365d38",
+        "observations_7745.csv": "d34e578a77534319e23cf98a2b2a9cfd65787e9f894276a23bac6905ed9f405f"
+      }
+    },
+    {
+      "label": "h1",
+      "files": {
+        "manifest.json": "a6f7a26d6c7fca5b3120b2fdc77f5edcdc03f11d6cff242fc0cc4e602873f5aa",
+        "observations_7745.csv": "2d271dbf8cd88f5619b79428149d9861d7bef4a661e901fb5010f994ad25e41c"
+      }
+    }
+  ],
+  "history_checksum": "d413286e3835653d30d4990a7aad14008119e2d9b46c8731110db70eba84231a"
+}

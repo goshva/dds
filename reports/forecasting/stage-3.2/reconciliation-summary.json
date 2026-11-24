@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "counts": {
+    "sourceRowsForMetric": 915,
+    "sourceDailyRows": 41,
+    "sourceTotalsRows": 0,
+    "canonicalRows": 41,
+    "dates": 41,
+    "excludedTotals": 0,
+    "rejectedRows": 0,
+    "conflicts": 0
+  },
+  "period": {
+    "from": "2026-10-13",
+    "to": "2026-11-22",
+    "days": 41,
+    "expectedFrom": "2026-10-13",
+    "expectedTo": "2026-11-22",
+    "matches": true
+  },
+  "totals": {
+    "sourceTotal": 62739,
+    "canonicalTotal": 62739,
+    "equal": true,
+    "expectedTotal": 62739,
+    "matchesExpected": true
+  },
+  "cross_slice_mismatches": 0,
+  "determinism": {
+    "runs": 2,
+    "identical": true,
+    "checksum": "233a86fcad91656991c8b5176e4d9c8fe7fcb7944c580f4b9eb064e0797834bf"
+  },
+  "checks": [
+    {
+      "code": "daily_values_match_source",
+      "passed": true,
+      "detail": "все 41 дневных значений совпадают с исходным срезом 20624"
+    },
+    {
+      "code": "period_matches_expected",
+      "passed": true,
+      "detail": "фактический период: 2026-10-13 … 2026-11-22 (41 дней); ожидаемый: 2026-10-13 … 2026-11-22 (41 дней)"
+    },
+    {
+      "code": "totals_match_source",
+      "passed": true,
+      "detail": "сумма исходного среза 20624: 62739; сумма канонического ряда: 62739"
+    },
+    {
+      "code": "total_matches_control_value",
+      "passed": true,
+      "detail": "каноническая сумма 62739 против контрольной 62739"
+    },
+    {
+      "code": "cross_slice_agreement",
+      "passed": true,
+      "detail": "дневные суммы всех 5 срезов совпадают на всех 41 датах"
+    },
+    {
+      "code": "no_other_slice_rows_in_dataset",
+      "passed": true,
+      "detail": "в наборе использован только срез 20624; контрольные срезы: 20403, 20404, 20405, 20623"
+    },
+    {
+      "code": "deterministic_build",
+      "passed": true,
+      "detail": "2 независимых построения дали идентичный результат (checksum 233a86fcad916569…)"
+    },
+    {
+      "code": "no_duplicate_dates",
+      "passed": true,
+      "detail": "дат 41 при 41 записях"
+    },
+    {
+      "code": "no_lost_rows",
+      "passed": true,
+      "detail": "строк исходного среза на дату: 1"
+    }
+  ],
+  "issues": []
+}

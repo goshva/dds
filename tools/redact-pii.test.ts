@@ -38,6 +38,17 @@ describe("redactText", () => {
     expect(sql.text).toContain("GROUP BY");
   });
 
+  test("не маскирует числовые артефакты: дробные значения не превращаются в телефон", () => {
+    for (const input of ["-5.142857142857143", "1299.857142857143", "98.142857142857", "8123.45678901", "2024-06-08"]) {
+      const { text, counts } = redactText(input);
+      expect(counts.phone, input).toBe(0);
+      expect(text, input).toBe(input);
+    }
+    for (const input of ["+7 916 123 45 67", "8 916 123-45-67", "+79161234567", "8(916)1234567"]) {
+      expect(redactText(input).counts.phone, input).toBe(1);
+    }
+  });
+
   test("masks emails and phones", () => {
     const { text, counts } = redactText(`пиши на ${EMAIL} или ${PHONE}`);
     expect(counts.email).toBe(1);

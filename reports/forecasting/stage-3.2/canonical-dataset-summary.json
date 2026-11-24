@@ -1,0 +1,130 @@
+{
+  "shop_no": "7745",
+  "metric": "qty_orders_delivered",
+  "business_name": "delivered_orders_daily",
+  "source_slice_id": 20624,
+  "period": {
+    "from": "2026-10-13",
+    "to": "2026-11-22",
+    "days": 41
+  },
+  "rows": 41,
+  "total_delivered": 62739,
+  "excluded_totals_rows": 0,
+  "quality_status": "full",
+  "provenance": {
+    "sourceFile": "daily_metrics#slice=20624&metric=qty_orders_delivered",
+    "extractionRunIds": [
+      2
+    ],
+    "extractionRunNotes": [],
+    "transformVersions": [
+      "v1"
+    ],
+    "sourceSliceId": 20624,
+    "sourceDatasetId": 3035,
+    "evidenceStatuses": [
+      "actual"
+    ],
+    "dataStatuses": [
+      "full"
+    ],
+    "generatedAt": "2026-11-23T19:07:41.255Z",
+    "checksum": "233a86fcad91656991c8b5176e4d9c8fe7fcb7944c580f4b9eb064e0797834bf"
+  },
+  "validation": {
+    "ok": true,
+    "checks": [
+      {
+        "code": "single_source",
+        "passed": true,
+        "detail": "источник: срез 20624"
+      },
+      {
+        "code": "single_shop",
+        "passed": true,
+        "detail": "магазин: 7745"
+      },
+      {
+        "code": "single_metric",
+        "passed": true,
+        "detail": "метрика: qty_orders_delivered"
+      },
+      {
+        "code": "non_empty_dataset",
+        "passed": true,
+        "detail": "записей: 41"
+      },
+      {
+        "code": "one_record_per_date",
+        "passed": true,
+        "detail": "дат: 41, записей: 41"
+      },
+      {
+        "code": "dates_sorted",
+        "passed": true,
+        "detail": "даты упорядочены по возрастанию"
+      },
+      {
+        "code": "no_nulls",
+        "passed": true,
+        "detail": "все значения числовые"
+      },
+      {
+        "code": "no_negative",
+        "passed": true,
+        "detail": "отрицательных значений нет"
+      },
+      {
+        "code": "provenance_present",
+        "passed": true,
+        "detail": "провенанс: daily_metrics#slice=20624&metric=qty_orders_delivered"
+      },
+      {
+        "code": "calendar_continuous",
+        "passed": true,
+        "detail": "календарь непрерывен"
+      },
+      {
+        "code": "days_match_period",
+        "passed": true,
+        "detail": "дней в наборе: 41, в календаре периода: 41"
+      },
+      {
+        "code": "period_matches_expected",
+        "passed": true,
+        "detail": "фактический период: 2026-10-13 … 2026-11-22; ожидаемый: 2026-10-13 … 2026-11-22"
+      },
+      {
+        "code": "exclusive_boundary",
+        "passed": true,
+        "detail": "верхняя граница трактуется как исключающая"
+      }
+    ],
+    "issues": []
+  },
+  "reconciliation": {
+    "status": "PASS",
+    "counts": {
+      "sourceRowsForMetric": 915,
+      "sourceDailyRows": 41,
+      "sourceTotalsRows": 0,
+      "canonicalRows": 41,
+      "dates": 41,
+      "excludedTotals": 0,
+      "rejectedRows": 0,
+      "conflicts": 0
+    },
+    "totals": {
+      "sourceTotal": 62739,
+      "canonicalTotal": 62739,
+      "equal": true,
+      "expectedTotal": 62739,
+      "matchesExpected": true
+    }
+  },
+  "selection": {
+    "status": "CONFIRMED",
+    "slice_id": 20624
+  }
+}

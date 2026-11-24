@@ -31,6 +31,17 @@
     "pii:test": "bun test tools/redact-pii.test.ts",
     "pii:inventory": "bun tools/pii-tracked-inventory.ts",
     "forecast:db": "bun src/forecasting/cli/db.ts",
+    "forecast:profile": "bun src/forecasting/cli/profile.ts",
+    "forecast:canonical": "bun src/forecasting/cli/canonical.ts",
+    "forecast:history": "bun src/forecasting/cli/history.ts",
+    "forecast:backtest": "bun src/forecasting/cli/backtest.ts",
+    "forecast:refresh": "bun src/forecasting/cli/refresh.ts",
+    "forecast:semantics": "bun src/forecasting/cli/semantics.ts",
+    "forecast:calendar": "bun src/forecasting/cli/calendar.ts",
+    "forecast:calendar-backtest": "bun src/forecasting/cli/calendar-backtest.ts",
+    "forecast:error-diagnostics": "bun src/forecasting/cli/error-diagnostics.ts",
+    "forecast:error-validation": "bun src/forecasting/cli/error-validation.ts",
+    "forecast:diagnostics": "bun src/forecasting/cli/diagnostics.ts",
     "forecast:test": "bun test tests/forecasting"
   },
   "devDependencies": {

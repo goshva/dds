@@ -1,0 +1,19 @@
+field,unique_values,empty_values,cardinality,masking_placeholder_values,value,rows,share,rank,special_value,masked_placeholder
+dimension_1,9,0,low,995,Больше продуктов за 1 час                         ,1394,0.202587,1,false,false
+dimension_1,9,0,low,995,Ночная доставка,1353,0.196628,2,false,false
+dimension_1,9,0,low,995,Доставка за 30 минут                              ,1237,0.17977,3,false,false
+dimension_1,9,0,low,995,<ФИО>,995,0.144601,4,false,true
+dimension_1,9,0,low,995,ВкусВильчик                                       ,943,0.137044,5,false,false
+dimension_1,9,0,low,995,Экспресс за 20 минут                              ,713,0.103619,6,false,false
+dimension_1,9,0,low,995,Доставка за 45 минут                              ,103,0.014969,7,false,false
+dimension_1,9,0,low,995,Больше продуктов за 2 часа                        ,102,0.014823,8,false,false
+dimension_1,9,0,low,995,7745ДС_Мосфильмовская74,41,0.005958,9,false,false
+dimension_2,9,2388,low,0,Динамическая доставка,2156,0.479858,1,false,false
+dimension_2,9,2388,low,0,Доставка по слотам,1342,0.298687,2,false,false
+dimension_2,9,2388,low,0,Больше продуктов за 1 час                         ,205,0.045627,3,false,false
+dimension_2,9,2388,low,0,ВкусВильчик                                       ,205,0.045627,4,false,false
+dimension_2,9,2388,low,0,Ночная доставка,205,0.045627,5,false,false
+dimension_2,9,2388,low,0,Доставка за 30 минут                              ,190,0.042288,6,false,false
+dimension_2,9,2388,low,0,Экспресс за 20 минут                              ,155,0.034498,7,false,false
+dimension_2,9,2388,low,0,Доставка за 45 минут                              ,20,0.004451,8,false,false
+dimension_2,9,2388,low,0,Больше продуктов за 2 часа                        ,15,0.003339,9,false,false

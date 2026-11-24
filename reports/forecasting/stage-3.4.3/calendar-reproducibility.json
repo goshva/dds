@@ -1,0 +1,15 @@
+{
+  "dataset_checksum": "d413286e3835653d30d4990a7aad14008119e2d9b46c8731110db70eba84231a",
+  "records_checksum_first_run": "7b40e670c61b55b00228d0fa2940f4798d9ba9dddf2a003c7021f979d3f5561a",
+  "records_checksum_second_run": "7b40e670c61b55b00228d0fa2940f4798d9ba9dddf2a003c7021f979d3f5561a",
+  "identical": true,
+  "metrics_recalculation_ok": true,
+  "mismatches": 0,
+  "models": [
+    "naive_yesterday",
+    "rolling_7_day_mean",
+    "weekly_seasonal_naive",
+    "calendar_weekday_seasonal_mean"
+  ],
+  "generated_at": "2026-11-23T21:01:16.066Z"
+}

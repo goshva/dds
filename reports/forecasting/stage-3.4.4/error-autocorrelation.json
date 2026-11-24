@@ -1,0 +1,114 @@
+{
+  "dataset_checksum": "d413286e3835653d30d4990a7aad14008119e2d9b46c8731110db70eba84231a",
+  "generated_at": "2026-11-24T05:44:00.589Z",
+  "structures": [
+    {
+      "horizon": 1,
+      "model": "naive_yesterday",
+      "n": 864,
+      "autocorrelation": {
+        "lag1": -0.2072,
+        "lag7": 0.236
+      }
+    },
+    {
+      "horizon": 1,
+      "model": "rolling_7_day_mean",
+      "n": 864,
+      "autocorrelation": {
+        "lag1": 0.4647,
+        "lag7": 0.1047
+      }
+    },
+    {
+      "horizon": 1,
+      "model": "weekly_seasonal_naive",
+      "n": 864,
+      "autocorrelation": {
+        "lag1": 0.5873,
+        "lag7": -0.2309
+      }
+    },
+    {
+      "horizon": 3,
+      "model": "naive_yesterday",
+      "n": 2592,
+      "autocorrelation": {
+        "lag1": 0.5867,
+        "lag7": -0.3095
+      }
+    },
+    {
+      "horizon": 3,
+      "model": "rolling_7_day_mean",
+      "n": 2592,
+      "autocorrelation": {
+        "lag1": 0.8496,
+        "lag7": 0.2194
+      }
+    },
+    {
+      "horizon": 3,
+      "model": "weekly_seasonal_naive",
+      "n": 2592,
+      "autocorrelation": {
+        "lag1": 0.8623,
+        "lag7": 0.3902
+      }
+    },
+    {
+      "horizon": 7,
+      "model": "naive_yesterday",
+      "n": 6048,
+      "autocorrelation": {
+        "lag1": 0.6581,
+        "lag7": 0.3932
+      }
+    },
+    {
+      "horizon": 7,
+      "model": "rolling_7_day_mean",
+      "n": 6048,
+      "autocorrelation": {
+        "lag1": 0.9201,
+        "lag7": 0.6587
+      }
+    },
+    {
+      "horizon": 7,
+      "model": "weekly_seasonal_naive",
+      "n": 6048,
+      "autocorrelation": {
+        "lag1": 0.9408,
+        "lag7": 0.5867
+      }
+    },
+    {
+      "horizon": 14,
+      "model": "naive_yesterday",
+      "n": 12096,
+      "autocorrelation": {
+        "lag1": 0.742,
+        "lag7": 0.4707
+      }
+    },
+    {
+      "horizon": 14,
+      "model": "rolling_7_day_mean",
+      "n": 12096,
+      "autocorrelation": {
+        "lag1": 0.9468,
+        "lag7": 0.6848
+      }
+    },
+    {
+      "horizon": 14,
+      "model": "weekly_seasonal_naive",
+      "n": 6048,
+      "autocorrelation": {
+        "lag1": 0.9408,
+        "lag7": 0.5867
+      }
+    }
+  ]
+}

@@ -70,7 +70,13 @@ const LATIN_STOPWORDS = new Set([
   "union all", "inner join", "left join", "create table", "values values",
 ]);
 
-const RULES: Array<{ rule: PiiRule; re: RegExp; guard?: (match: string) => boolean; mode?: "bearer" }> = [
+const RULES: Array<{
+  rule: PiiRule;
+  re: RegExp;
+  /** guard получает совпадение, его позицию и исходный текст — для проверки контекста. */
+  guard?: (match: string, index: number, source: string) => boolean;
+  mode?: "bearer";
+}> = [
   // «<ФИО>» / «<ФИО>» — JS \b is ASCII-only, so Cyrillic uses lookarounds.
   // A maximal run of 2-3 capitalised Cyrillic words is masked (e.g. «<ФИО>»).
   {
@@ -89,7 +95,19 @@ const RULES: Array<{ rule: PiiRule; re: RegExp; guard?: (match: string) => boole
     // VCS SSH endpoints (git@github.com:org/repo.git) are not personal data
     guard: (m) => !/^git@/i.test(m) && !/^[a-z]+@[a-z0-9.-]+\.(git|local)$/i.test(m),
   },
-  { rule: "phone", re: /(?:\+7|8)[\s(-]?\d{3}[\s)-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}\b/g },
+  {
+    rule: "phone",
+    re: /(?:\+7|8)[\s(-]?\d{3}[\s)-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}\b/g,
+    // не маскировать числовую последовательность внутри большего числа или дробного значения
+    // (иначе «-5.142857142857143» превращается в «-5.142<ТЕЛЕФОН>»)
+    guard: (match, index, source) => {
+      const before = index > 0 ? source[index - 1]! : "";
+      const after = source[index + match.length] ?? "";
+      if (/[\d.,]/.test(before)) return false;
+      if (/[\d.,]/.test(after)) return false;
+      return true;
+    },
+  },
   {
     rule: "secret",
     // Authorization / bearer / basic / token + the credential itself.
@@ -117,12 +135,16 @@ export function redactText(input: string): RedactResult {
 
   for (const { rule, re, guard, mode } of RULES) {
     text = text.replace(re, (match, ...groups) => {
-      if (guard && !guard(match)) return match;
+      // последние два аргумента replace — позиция совпадения и исходный текст
+      const offset = Number(groups[groups.length - 2] ?? 0);
+      const source = String(groups[groups.length - 1] ?? "");
+      const captures = groups.slice(0, -2);
+      if (guard && !guard(match, offset, source)) return match;
       if (mode === "bearer") {
-        // groups: 0 = optional "Authorization:" prefix, 1 = scheme, 2 = credential
-        const prefix = String(groups[0] ?? "");
-        const scheme = String(groups[1] ?? "").toLowerCase();
-        const credential = String(groups[2] ?? "");
+        // captures: 0 = optional "Authorization:" prefix, 1 = scheme, 2 = credential
+        const prefix = String(captures[0] ?? "");
+        const scheme = String(captures[1] ?? "").toLowerCase();
+        const credential = String(captures[2] ?? "");
         if (!credential || credential === MASK.secret) return match;
         // prose guard: "bearer token acquired", "--token --username", "token value here" are not secrets
         if (BEARER_PROSE.has(credential.toLowerCase())) return match;
@@ -136,16 +158,16 @@ export function redactText(input: string): RedactResult {
         return `${prefix}${MASK.secret}`;
       }
       if (rule === "person_code") {
-        // value sits in group 3 (1 = key, 2 = quote); skip empties, JSON nulls and our own placeholder
-        const value = String(groups[2] ?? "");
+        // value sits in captures[2] (0 = key, 1 = quote); skip empties, JSON nulls and our own placeholder
+        const value = String(captures[2] ?? "");
         if (!value || value === PERSON_ID_PLACEHOLDER || /^(null|true|false)$/i.test(value)) return match;
         counts.person_code++;
         return match.replace(/([=:]\s*"?)[^\s",;}]+("?)$/, `$1${PERSON_ID_PLACEHOLDER}$2`);
       }
       if (rule === "secret") {
-        // generic key=value rule: groups 0 = key, 1 = quote, 2 = value
-        const value = String(groups[2] ?? "");
-        const quote = String(groups[1] ?? "");
+        // generic key=value rule: captures 0 = key, 1 = quote, 2 = value
+        const value = String(captures[2] ?? "");
+        const quote = String(captures[1] ?? "");
         // scheme words ("Authorization: Bearer") and our own placeholders are not secrets
         if (!value || value.startsWith("<") || AUTH_SCHEME_WORDS.has(value.toLowerCase())) return match;
         counts.secret++;

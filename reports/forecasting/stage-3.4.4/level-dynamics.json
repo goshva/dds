@@ -1,0 +1,70 @@
+{
+  "dataset_checksum": "d413286e3835653d30d4990a7aad14008119e2d9b46c8731110db70eba84231a",
+  "generated_at": "2026-11-24T05:42:39.777Z",
+  "overall": {
+    "mean": 1747.97,
+    "median": 1730,
+    "stdev": 387.19,
+    "cv": 0.2215,
+    "min": 637,
+    "max": 2744
+  },
+  "stability": [
+    {
+      "window": 7,
+      "meanOfWindowMeans": 1749.38,
+      "stdevOfWindowMeans": 369.64,
+      "cv": 0.2113,
+      "worstChangePercent": 12.52
+    },
+    {
+      "window": 14,
+      "meanOfWindowMeans": 1750.73,
+      "stdevOfWindowMeans": 364.6,
+      "cv": 0.2083,
+      "worstChangePercent": 6.34
+    },
+    {
+      "window": 28,
+      "meanOfWindowMeans": 1754.32,
+      "stdevOfWindowMeans": 357.12,
+      "cv": 0.2036,
+      "worstChangePercent": 3.04
+    }
+  ],
+  "regime_summary": {
+    "up": 67,
+    "down": 78,
+    "flat": 2521,
+    "flatThresholdPercent": 2
+  },
+  "snapshot": [
+    {
+      "window": 7,
+      "lastMean": 1585.43,
+      "lastTrendPercent": -13.02,
+      "lastR2": 0.7539,
+      "lastChangePercent": 0.06
+    },
+    {
+      "window": 14,
+      "lastMean": 1601.93,
+      "lastTrendPercent": -8.56,
+      "lastR2": 0.2996,
+      "lastChangePercent": -0.38
+    },
+    {
+      "window": 28,
+      "lastMean": 1562.79,
+      "lastTrendPercent": 6.25,
+      "lastR2": 0.0901,
+      "lastChangePercent": 0.4
+    }
+  ],
+  "notes": [
+    "окна: 7, 14, 28 дней; скользящие средние и МНК-тренды",
+    "порог «плоского» изменения среднего: 2% за день",
+    "выбросы не удалялись, пропуски не заполнялись",
+    "анализ описывает ряд; причинность не устанавливается"
+  ]
+}

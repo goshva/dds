@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-11-23T19:07:41.255Z",
+  "ok": true,
+  "errors": [],
+  "metrics": 11,
+  "target_metric": {
+    "metric_key": "qty_orders_delivered",
+    "present": true,
+    "blocked": false,
+    "confidence": "conditional"
+  },
+  "blocked_metrics": [
+    "qty_orders_in_work",
+    "share_orders_delivered"
+  ],
+  "unconfirmed_metrics": [
+    "qty_orders_in_work",
+    "share_not_in_slot_above_all",
+    "share_not_in_slot_under_all",
+    "share_delivered_taxi",
+    "share_orders_delivered",
+    "sum_without_bonuses",
+    "sum_with_bonuses"
+  ],
+  "contradictions": [
+    "sum_without_bonuses: имя метрики не соответствует каталожному описанию «Сумма (ДС + баллы)» при выражении SUM(sum_paid)",
+    "sum_with_bonuses: имя метрики не соответствует каталожному описанию «Сумма (только ДС)» при выражении SUM(sum_paid - sum_paid_disc)",
+    "денежные метрики: единица измерения (рубли или копейки) не подтверждена",
+    "ratio-метрики share_not_in_slot_above_all/under_all/share_delivered_taxi: числители в наборе отсутствуют",
+    "share_orders_delivered: знаменатель — все заказы УЗ, в наборе отсутствует; значения постоянны (1.0)",
+    "qty_orders_in_work: все значения равны нулю"
+  ]
+}

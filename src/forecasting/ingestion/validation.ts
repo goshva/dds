@@ -5,6 +5,9 @@
  * Валидатор и импортёр используют одну и ту же функцию статуса среза
  * ({@link sliceStatusFromQuality}), поэтому ситуация «валидатор дал warning,
  * а importer записал full/actual» невозможна по построению.
+ *
+ * Неизвестное или отсутствующее значение поля качества НЕ считается успешной проверкой:
+ * это безопасный отказ (fail-closed).
  */
 
 import type { DataStatus, EvidenceStatus } from "../storage/interfaces/types";
@@ -32,6 +35,8 @@ export interface ValidationResult {
   slices_with_rows: number[];
   slices_missing_quality: number[];
   duplicate_slice_ids: number[];
+  /** slice_id, которые повторяются в quality.requests */
+  duplicate_quality_slice_ids: number[];
   rows_without_date: number;
   duplicate_keys: number;
   /** Поля natural key наблюдения — в точности как в SQLite */
@@ -52,11 +57,45 @@ export const NATURAL_KEY_FIELDS = [
   "transform_version",
 ] as const;
 
+/** Ожидаемый даркстор MVP. Импорт другого магазина возможен только с явным указанием. */
+export const DEFAULT_EXPECTED_SHOP_NO = "7745";
+
+/** Допустимые значения полноты ответа Superset. */
+export const COMPLETENESS_VALUES = ["full", "partial", "truncated", "none"] as const;
+
 export interface ValidateOptions {
   /** Версия преобразования, с которой выполняется импорт (инвариант файла). */
   transformVersion?: string;
-  /** Ожидаемый даркстор; если задан и не совпал с манифестом — ошибка. */
+  /**
+   * Ожидаемый даркстор. Если не задан — используется {@link DEFAULT_EXPECTED_SHOP_NO}.
+   * Чтобы импортировать другой магазин, его нужно передать здесь явно.
+   */
   expectedShopNo?: string;
+  /** Явный список разрешённых магазинов — задел для мультимагазинного режима. */
+  allowedShopNos?: readonly string[];
+}
+
+function hasOwn(value: unknown, key: string): boolean {
+  return value != null && typeof value === "object" && Object.prototype.hasOwnProperty.call(value, key);
+}
+
+/** Читает обязательное поле-массив строк. Возвращает пустой массив и пишет причину при дефекте. */
+function readStringArray(request: any, field: string, reasons: string[]): string[] {
+  if (!hasOwn(request, field)) {
+    reasons.push(`отсутствует поле ${field}`);
+    return [];
+  }
+  const value = request[field];
+  if (!Array.isArray(value)) {
+    reasons.push(`некорректный ${field}: ожидался массив, получено ${JSON.stringify(value)}`);
+    return [];
+  }
+  const notStrings = value.filter((item) => typeof item !== "string");
+  if (notStrings.length > 0) {
+    reasons.push(`некорректный ${field}: элементы должны быть строками (${JSON.stringify(notStrings.slice(0, 3))})`);
+    return value.filter((item) => typeof item === "string").map(String);
+  }
+  return value.map(String);
 }
 
 /**
@@ -66,42 +105,84 @@ export interface ValidateOptions {
  * HTTP 200, полнота full, нет отсутствующих метрик и измерений, нет дублей, нет обрезанных
  * запросов и несовпадения числа ответов. В любом другом случае срез неполный,
  * а достоверность понижается до `unknown` (неполные данные не являются фактом).
+ *
+ * Все семь полей обязательны и проверяются по типу: отсутствие или неверный тип —
+ * такой же отказ, как и отрицательный результат проверки.
  */
 export function sliceStatusFromQuality(request: any, sliceIdFallback?: number): SliceQualityStatus {
   const sliceId = Number(request?.slice_id ?? sliceIdFallback ?? Number.NaN);
   const reasons: string[] = [];
 
-  const httpStatus = request?.http_status == null ? null : Number(request.http_status);
-  if (httpStatus !== 200) reasons.push(`HTTP ${httpStatus ?? "—"} (ожидался 200)`);
+  // --- 1. http_status: обязательное целое число --------------------------------
+  let httpStatus: number | null = null;
+  if (!hasOwn(request, "http_status")) {
+    reasons.push("отсутствует поле http_status");
+  } else if (typeof request.http_status !== "number" || !Number.isInteger(request.http_status)) {
+    reasons.push(`некорректный http_status: ${JSON.stringify(request.http_status)}`);
+  } else {
+    httpStatus = request.http_status;
+  }
+  if (httpStatus !== null && httpStatus !== 200) reasons.push(`HTTP ${httpStatus} (ожидался 200)`);
 
-  const completeness = String(request?.completeness ?? "none");
-  if (completeness !== "full") reasons.push(`полнота «${completeness}» (ожидалась full)`);
+  // --- 2. completeness: обязательная строка из известного набора ---------------
+  let completeness = "none";
+  if (!hasOwn(request, "completeness")) {
+    reasons.push("отсутствует поле completeness");
+  } else if (typeof request.completeness !== "string" || !(COMPLETENESS_VALUES as readonly string[]).includes(request.completeness)) {
+    reasons.push(`некорректный completeness: ${JSON.stringify(request.completeness)}`);
+  } else {
+    completeness = request.completeness;
+    // любое корректное значение, кроме full, — это неполный набор
+    if (completeness !== "full") reasons.push(`полнота «${completeness}» (ожидалась full)`);
+  }
 
-  const missingMetrics = Array.isArray(request?.missing_metrics) ? request.missing_metrics.map(String) : [];
+  // --- 3-4. missing_metrics / missing_dimensions: обязательные массивы строк ----
+  const missingMetrics = readStringArray(request, "missing_metrics", reasons);
   if (missingMetrics.length > 0) reasons.push(`отсутствуют метрики: ${missingMetrics.join(", ")}`);
 
-  const missingDimensions = Array.isArray(request?.missing_dimensions) ? request.missing_dimensions.map(String) : [];
+  const missingDimensions = readStringArray(request, "missing_dimensions", reasons);
   if (missingDimensions.length > 0) reasons.push(`отсутствуют измерения: ${missingDimensions.join(", ")}`);
 
-  const duplicateRows = Number(request?.duplicate_rows ?? 0);
-  if (duplicateRows > 0) reasons.push(`дубли строк: ${duplicateRows}`);
+  // --- 5. duplicate_rows: обязательное неотрицательное число -------------------
+  let duplicateRows = 0;
+  if (!hasOwn(request, "duplicate_rows")) {
+    reasons.push("отсутствует поле duplicate_rows");
+  } else if (typeof request.duplicate_rows !== "number" || !Number.isFinite(request.duplicate_rows) || request.duplicate_rows < 0) {
+    reasons.push(`некорректный duplicate_rows: ${JSON.stringify(request.duplicate_rows)}`);
+  } else {
+    duplicateRows = request.duplicate_rows;
+    if (duplicateRows > 0) reasons.push(`дубли строк: ${duplicateRows}`);
+  }
 
-  const truncatedQueries = Array.isArray(request?.truncated_queries) ? request.truncated_queries : [];
-  if (truncatedQueries.length > 0) reasons.push(`обрезанные запросы: ${truncatedQueries.length}`);
+  // --- 6. truncated_queries: обязательный массив -------------------------------
+  let truncatedCount = 0;
+  if (!hasOwn(request, "truncated_queries")) {
+    reasons.push("отсутствует поле truncated_queries");
+  } else if (!Array.isArray(request.truncated_queries)) {
+    reasons.push(`некорректный truncated_queries: ожидался массив, получено ${JSON.stringify(request.truncated_queries)}`);
+  } else {
+    truncatedCount = request.truncated_queries.length;
+    if (truncatedCount > 0) reasons.push(`обрезанные запросы: ${truncatedCount}`);
+  }
 
-  if (request?.query_count_mismatch === true) reasons.push("число ответов не совпало с числом запросов");
+  // --- 7. query_count_mismatch: обязательный boolean ---------------------------
+  if (!hasOwn(request, "query_count_mismatch")) {
+    reasons.push("отсутствует поле query_count_mismatch");
+  } else if (typeof request.query_count_mismatch !== "boolean") {
+    reasons.push(`некорректный query_count_mismatch: ${JSON.stringify(request.query_count_mismatch)}`);
+  } else if (request.query_count_mismatch === true) {
+    reasons.push("число ответов не совпало с числом запросов");
+  }
 
   const importableAsFull = reasons.length === 0;
 
   // data_status не может быть выше фактической полноты ответа
   let dataStatus: DataStatus;
   if (httpStatus !== 200) dataStatus = "none";
-  else if (completeness === "full" || completeness === "partial" || completeness === "truncated" || completeness === "none") {
+  else {
     dataStatus = completeness as DataStatus;
     // «full» от источника при найденных дефектах понижается до partial
     if (dataStatus === "full" && !importableAsFull) dataStatus = "partial";
-  } else {
-    dataStatus = "none";
   }
 
   return {
@@ -121,14 +202,24 @@ export function validateArtifacts(artifacts: RunArtifacts, options: ValidateOpti
   // поэтому natural key внутри файла эквивалентен SQLite-ключу
   // (shop_no, date, slice_id, dimension_1, dimension_2, metric, transform_version).
   const shopNo = String(artifacts.manifest?.shopno ?? "").trim();
+  // Явный список разрешённых магазинов: приоритет у allowedShopNos, затем expectedShopNo,
+  // затем значение по умолчанию MVP. Импорт другого магазина требует явного указания.
+  const allowedShopNos =
+    options.allowedShopNos && options.allowedShopNos.length > 0
+      ? [...options.allowedShopNos]
+      : [options.expectedShopNo ?? DEFAULT_EXPECTED_SHOP_NO];
+
   if (!shopNo) {
     findings.push({ severity: "error", message: "в манифесте не указан shopno — инвариант natural key не определён" });
-  } else if (options.expectedShopNo && shopNo !== options.expectedShopNo) {
+  } else if (!allowedShopNos.includes(shopNo)) {
     findings.push({
       severity: "error",
-      message: `shopno манифеста «${shopNo}» не совпадает с ожидаемым «${options.expectedShopNo}»`,
+      message:
+        `shopno манифеста «${shopNo}» не разрешён (ожидался один из [${allowedShopNos.join(", ")}]). ` +
+        "Для импорта другого магазина передайте его явно в expectedShopNo/allowedShopNos",
     });
   }
+
   const transformVersion = String(options.transformVersion ?? "v1");
   if (!transformVersion.trim()) {
     findings.push({ severity: "error", message: "не задана версия преобразования (transform_version) — инвариант natural key не определён" });
@@ -174,13 +265,31 @@ export function validateArtifacts(artifacts: RunArtifacts, options: ValidateOpti
     }
   }
 
-  // --- качество каждого ожидаемого среза ---------------------------------------
+  // --- качество: уникальность записей quality.json ------------------------------
+  // Повтор slice_id в quality.requests означает, что две разные записи претендуют на один срез.
+  // Молчаливая перезапись в Map запрещена: сохраняем первую запись, а дубли фиксируем как ошибку.
   const qualityBySlice = new Map<number, any>();
+  const duplicateQualitySliceIds: number[] = [];
   for (const request of artifacts.quality?.requests ?? []) {
     const sliceId = Number(request?.slice_id);
-    if (Number.isFinite(sliceId)) qualityBySlice.set(sliceId, request);
+    if (!Number.isFinite(sliceId)) {
+      findings.push({ severity: "error", message: `в quality.json запись без корректного slice_id: ${JSON.stringify(request?.slice_id)}` });
+      continue;
+    }
+    if (qualityBySlice.has(sliceId)) {
+      if (!duplicateQualitySliceIds.includes(sliceId)) duplicateQualitySliceIds.push(sliceId);
+      continue; // НЕ перезаписываем уже сохранённую запись
+    }
+    qualityBySlice.set(sliceId, request);
+  }
+  if (duplicateQualitySliceIds.length) {
+    findings.push({
+      severity: "error",
+      message: `в quality.json повторяются slice_id: ${duplicateQualitySliceIds.join(", ")} — какая запись достоверна, не определено`,
+    });
   }
 
+  // --- качество каждого ожидаемого среза ---------------------------------------
   const slicesMissingQuality: number[] = [];
   const sliceStatuses: SliceQualityStatus[] = [];
   for (const slice of slicesInManifest) {
@@ -257,6 +366,7 @@ export function validateArtifacts(artifacts: RunArtifacts, options: ValidateOpti
     slices_with_rows: slicesWithRows,
     slices_missing_quality: slicesMissingQuality,
     duplicate_slice_ids: duplicateSliceIds,
+    duplicate_quality_slice_ids: duplicateQualitySliceIds,
     rows_without_date: rowsWithoutDate,
     duplicate_keys: duplicates,
     natural_key_fields: [...NATURAL_KEY_FIELDS],

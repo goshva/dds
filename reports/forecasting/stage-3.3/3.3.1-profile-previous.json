@@ -1,0 +1,124 @@
+{
+  "observations": 41,
+  "firstDate": "2026-10-13",
+  "lastDate": "2026-11-22",
+  "calendarDays": 41,
+  "missingDates": 0,
+  "duplicates": 0,
+  "nulls": 0,
+  "min": 1314,
+  "max": 1709,
+  "mean": 1530.219512,
+  "median": 1519,
+  "stdev": 110.712129,
+  "q1": 1467,
+  "q3": 1629,
+  "iqr": 162,
+  "mad": 84,
+  "percentiles": {
+    "p05": 1347,
+    "p25": 1467,
+    "p50": 1519,
+    "p75": 1629,
+    "p95": 1687
+  },
+  "zeros": 0,
+  "negatives": 0,
+  "outlierCountIqr": 0,
+  "outlierCountMad": 0,
+  "weekdayMeans": [
+    {
+      "dow": 1,
+      "label": "понедельник",
+      "observations": 5,
+      "mean": 1610.2,
+      "median": 1587
+    },
+    {
+      "dow": 2,
+      "label": "вторник",
+      "observations": 6,
+      "mean": 1570.833333,
+      "median": 1632.5
+    },
+    {
+      "dow": 3,
+      "label": "среда",
+      "observations": 6,
+      "mean": 1576.166667,
+      "median": 1595
+    },
+    {
+      "dow": 4,
+      "label": "четверг",
+      "observations": 6,
+      "mean": 1550.166667,
+      "median": 1537.5
+    },
+    {
+      "dow": 5,
+      "label": "пятница",
+      "observations": 6,
+      "mean": 1522.666667,
+      "median": 1502
+    },
+    {
+      "dow": 6,
+      "label": "суббота",
+      "observations": 6,
+      "mean": 1416.166667,
+      "median": 1410.5
+    },
+    {
+      "dow": 7,
+      "label": "воскресенье",
+      "observations": 6,
+      "mean": 1478.666667,
+      "median": 1511
+    }
+  ],
+  "weeklyAggregates": [
+    {
+      "weekStart": "2026-10-12",
+      "days": 6,
+      "total": 8564,
+      "mean": 1427.333333
+    },
+    {
+      "weekStart": "2026-10-19",
+      "days": 7,
+      "total": 10417,
+      "mean": 1488.142857
+    },
+    {
+      "weekStart": "2026-10-26",
+      "days": 7,
+      "total": 10359,
+      "mean": 1479.857143
+    },
+    {
+      "weekStart": "2026-11-02",
+      "days": 7,
+      "total": 10972,
+      "mean": 1567.428571
+    },
+    {
+      "weekStart": "2026-11-09",
+      "days": 7,
+      "total": 11329,
+      "mean": 1618.428571
+    },
+    {
+      "weekStart": "2026-11-16",
+      "days": 7,
+      "total": 11098,
+      "mean": 1585.428571
+    }
+  ],
+  "longestGrowthStreak": 3,
+  "longestDeclineStreak": 3,
+  "largestDayOverDayChange": {
+    "date": "2026-10-17",
+    "delta": -269
+  }
+}

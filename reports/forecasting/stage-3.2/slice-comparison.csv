@@ -1,0 +1,6 @@
+slice_id,rows,daily_rows,totals_rows,dates,rows_per_day_min,rows_per_day_max,rows_per_day_avg,dimension_combinations,dimension1_values,dimension2_values,empty_dim1,empty_dim2,masked_dim1,masked_dim2,nulls,zeros,negatives,fractional,min,max,daily_total,duplicate_keys,dataset_id,run_id,single_row_per_date,calendar_complete
+20403,199,199,0,41,4,6,4.8537,7,7,0,0,199,0,0,0,0,0,0,1,1494,62739,0,3035,2,false,true
+20404,199,199,0,41,4,6,4.8537,7,1,7,0,0,199,0,0,0,0,0,1,1494,62739,0,3035,2,false,true
+20405,318,318,0,41,6,10,7.7561,12,7,2,0,0,0,0,0,0,0,0,1,1375,62739,0,3035,2,false,true
+20623,158,158,0,41,3,5,3.8537,6,6,0,0,158,0,0,0,0,0,0,1,1626,62739,0,3035,2,false,true
+20624,41,41,0,41,1,1,1,1,1,0,0,41,0,0,0,0,0,0,1314,1709,62739,0,3035,2,true,true

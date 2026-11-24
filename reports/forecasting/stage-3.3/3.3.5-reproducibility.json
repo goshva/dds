@@ -1,0 +1,12 @@
+{
+  "dataset_checksum": "d413286e3835653d30d4990a7aad14008119e2d9b46c8731110db70eba84231a",
+  "records_checksum_first_run": "6ee7640a4a2c11c15c009ab36ef7368370ea3a17e22160fbb21c45d4df87324a",
+  "records_checksum_second_run": "6ee7640a4a2c11c15c009ab36ef7368370ea3a17e22160fbb21c45d4df87324a",
+  "identical": true,
+  "metrics_recalculated_from_records": {
+    "ok": true,
+    "mismatches": []
+  },
+  "formula_source": "metrics.ts (единая реализация MAE/RMSE/WAPE/Bias)",
+  "generated_at": "2026-11-23T20:32:39.783Z"
+}

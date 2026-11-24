@@ -1,0 +1,38 @@
+{
+  "unchanged": true,
+  "before": {
+    "sha256": "eadc3763926e142a574e5493495ee83584bd21f77d71bbbf6ae42cc0c7c65619",
+    "size": 6840320,
+    "lastWriteTime": "2026-11-23T14:36:59.278Z",
+    "counts": {
+      "daily_metrics": 6881,
+      "domain_events": 43,
+      "extraction_runs": 2,
+      "raw_extractions": 8
+    },
+    "integrity": "ok",
+    "foreignKeyViolations": 0,
+    "queryOnly": 1,
+    "writeBlocked": true
+  },
+  "after": {
+    "sha256": "eadc3763926e142a574e5493495ee83584bd21f77d71bbbf6ae42cc0c7c65619",
+    "size": 6840320,
+    "lastWriteTime": "2026-11-23T14:36:59.278Z",
+    "counts": {
+      "daily_metrics": 6881,
+      "domain_events": 43,
+      "extraction_runs": 2,
+      "raw_extractions": 8
+    },
+    "integrity": "ok",
+    "foreignKeyViolations": 0,
+    "queryOnly": 1,
+    "writeBlocked": true
+  },
+  "notes": [
+    "доступ только для чтения: readonly: true и PRAGMA query_only = 1",
+    "пробная запись отклоняется драйвером (write_blocked = true)",
+    "WAL-файлы не изменялись вручную"
+  ]
+}

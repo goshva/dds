@@ -15,6 +15,11 @@ export interface ImportOptions {
   sourceLabel: string;
   /** версия преобразования, попадающая в natural key наблюдения */
   transformVersion: string;
+  /**
+   * Ожидаемый даркстор. Если не задан — валидатор использует значение по умолчанию MVP (7745).
+   * Импорт другого магазина возможен только при явной передаче его здесь.
+   */
+  shopNo?: string;
   /** режим запуска, записываемый в extraction_runs.mode */
   mode?: string;
 }

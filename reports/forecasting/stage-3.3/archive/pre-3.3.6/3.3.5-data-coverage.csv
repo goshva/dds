@@ -1,0 +1,3 @@
+min_train_days,origins_total,origins_evaluated,forecasts_expected,forecasts_generated,forecasts_missing,actuals_missing,common_evaluation_count
+28,864,864,36288,30240,6048,0,15552
+21,871,871,36582,30485,6097,0,15678
