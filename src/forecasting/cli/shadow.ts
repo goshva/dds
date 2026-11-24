@@ -31,7 +31,8 @@ import {
 import { readCanonicalCsv } from "../analytics/expansion/history-builder";
 
 const DATASET = "data/processed/forecasting/7745/canonical_daily_delivered_orders.csv";
-const EXPECTED_CHECKSUM = "d413286e3835653d30d4990a7aad14008119e2d9b46c8731110db70eba84231a";
+// контрольная сумма canonical CSV: обновлена при штатном расширении истории (Stage 3.4.9)
+const EXPECTED_CHECKSUM = "8f2b1818da001a42fad3125ba85a600f71c4443316e868181c49fa35708d3d16";
 // минимальная тестовая параметризация: при отсутствии переменной поведение прежнее
 const STORE_DIR = process.env.DSH_SHADOW_STORE ?? "data/shadow/7745";
 

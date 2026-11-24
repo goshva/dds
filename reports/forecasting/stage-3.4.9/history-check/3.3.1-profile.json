@@ -1,0 +1,874 @@
+{
+  "observations": 906,
+  "firstDate": "2024-06-01",
+  "lastDate": "2026-11-23",
+  "calendarDays": 906,
+  "missingDates": 0,
+  "duplicates": 0,
+  "nulls": 0,
+  "min": 637,
+  "max": 2744,
+  "mean": 1747.747241,
+  "median": 1729,
+  "stdev": 387.032888,
+  "q1": 1428.5,
+  "q3": 2004.75,
+  "iqr": 576.25,
+  "mad": 291,
+  "percentiles": {
+    "p05": 1196,
+    "p25": 1428.5,
+    "p50": 1729,
+    "p75": 2004.75,
+    "p95": 2453.25
+  },
+  "zeros": 0,
+  "negatives": 0,
+  "outlierCountIqr": 0,
+  "outlierCountMad": 0,
+  "weekdayMeans": [
+    {
+      "dow": 1,
+      "label": "понедельник",
+      "observations": 130,
+      "mean": 1829.461538,
+      "median": 1791.5
+    },
+    {
+      "dow": 2,
+      "label": "вторник",
+      "observations": 129,
+      "mean": 1784.410853,
+      "median": 1761
+    },
+    {
+      "dow": 3,
+      "label": "среда",
+      "observations": 129,
+      "mean": 1780.155039,
+      "median": 1759
+    },
+    {
+      "dow": 4,
+      "label": "четверг",
+      "observations": 129,
+      "mean": 1769.511628,
+      "median": 1754
+    },
+    {
+      "dow": 5,
+      "label": "пятница",
+      "observations": 129,
+      "mean": 1733.821705,
+      "median": 1704
+    },
+    {
+      "dow": 6,
+      "label": "суббота",
+      "observations": 130,
+      "mean": 1625.584615,
+      "median": 1609
+    },
+    {
+      "dow": 7,
+      "label": "воскресенье",
+      "observations": 130,
+      "mean": 1711.876923,
+      "median": 1687.5
+    }
+  ],
+  "weeklyAggregates": [
+    {
+      "weekStart": "2024-05-27",
+      "days": 2,
+      "total": 2880,
+      "mean": 1440
+    },
+    {
+      "weekStart": "2024-06-03",
+      "days": 7,
+      "total": 10827,
+      "mean": 1546.714286
+    },
+    {
+      "weekStart": "2024-06-10",
+      "days": 7,
+      "total": 10489,
+      "mean": 1498.428571
+    },
+    {
+      "weekStart": "2024-06-17",
+      "days": 7,
+      "total": 9697,
+      "mean": 1385.285714
+    },
+    {
+      "weekStart": "2024-06-24",
+      "days": 7,
+      "total": 9134,
+      "mean": 1304.857143
+    },
+    {
+      "weekStart": "2024-07-01",
+      "days": 7,
+      "total": 9168,
+      "mean": 1309.714286
+    },
+    {
+      "weekStart": "2024-07-08",
+      "days": 7,
+      "total": 8983,
+      "mean": 1283.285714
+    },
+    {
+      "weekStart": "2024-07-15",
+      "days": 7,
+      "total": 8766,
+      "mean": 1252.285714
+    },
+    {
+      "weekStart": "2024-07-22",
+      "days": 7,
+      "total": 8512,
+      "mean": 1216
+    },
+    {
+      "weekStart": "2024-07-29",
+      "days": 7,
+      "total": 8931,
+      "mean": 1275.857143
+    },
+    {
+      "weekStart": "2024-08-05",
+      "days": 7,
+      "total": 9003,
+      "mean": 1286.142857
+    },
+    {
+      "weekStart": "2024-08-12",
+      "days": 7,
+      "total": 8992,
+      "mean": 1284.571429
+    },
+    {
+      "weekStart": "2024-08-19",
+      "days": 7,
+      "total": 9230,
+      "mean": 1318.571429
+    },
+    {
+      "weekStart": "2024-08-26",
+      "days": 7,
+      "total": 10141,
+      "mean": 1448.714286
+    },
+    {
+      "weekStart": "2024-09-02",
+      "days": 7,
+      "total": 10802,
+      "mean": 1543.142857
+    },
+    {
+      "weekStart": "2024-09-09",
+      "days": 7,
+      "total": 11628,
+      "mean": 1661.142857
+    },
+    {
+      "weekStart": "2024-09-16",
+      "days": 7,
+      "total": 11903,
+      "mean": 1700.428571
+    },
+    {
+      "weekStart": "2024-09-23",
+      "days": 7,
+      "total": 12412,
+      "mean": 1773.142857
+    },
+    {
+      "weekStart": "2024-09-30",
+      "days": 7,
+      "total": 12399,
+      "mean": 1771.285714
+    },
+    {
+      "weekStart": "2024-10-07",
+      "days": 7,
+      "total": 12514,
+      "mean": 1787.714286
+    },
+    {
+      "weekStart": "2024-10-14",
+      "days": 7,
+      "total": 12171,
+      "mean": 1738.714286
+    },
+    {
+      "weekStart": "2024-10-21",
+      "days": 7,
+      "total": 11535,
+      "mean": 1647.857143
+    },
+    {
+      "weekStart": "2024-10-28",
+      "days": 7,
+      "total": 11130,
+      "mean": 1590
+    },
+    {
+      "weekStart": "2024-11-04",
+      "days": 7,
+      "total": 11720,
+      "mean": 1674.285714
+    },
+    {
+      "weekStart": "2024-11-11",
+      "days": 7,
+      "total": 11860,
+      "mean": 1694.285714
+    },
+    {
+      "weekStart": "2024-11-18",
+      "days": 7,
+      "total": 12246,
+      "mean": 1749.428571
+    },
+    {
+      "weekStart": "2024-11-25",
+      "days": 7,
+      "total": 12649,
+      "mean": 1807
+    },
+    {
+      "weekStart": "2024-12-02",
+      "days": 7,
+      "total": 12707,
+      "mean": 1815.285714
+    },
+    {
+      "weekStart": "2024-12-09",
+      "days": 7,
+      "total": 12260,
+      "mean": 1751.428571
+    },
+    {
+      "weekStart": "2024-12-16",
+      "days": 7,
+      "total": 12503,
+      "mean": 1786.142857
+    },
+    {
+      "weekStart": "2024-12-23",
+      "days": 7,
+      "total": 12107,
+      "mean": 1729.571429
+    },
+    {
+      "weekStart": "2024-12-30",
+      "days": 7,
+      "total": 8501,
+      "mean": 1214.428571
+    },
+    {
+      "weekStart": "2025-01-06",
+      "days": 7,
+      "total": 11189,
+      "mean": 1598.428571
+    },
+    {
+      "weekStart": "2025-01-13",
+      "days": 7,
+      "total": 12698,
+      "mean": 1814
+    },
+    {
+      "weekStart": "2025-01-20",
+      "days": 7,
+      "total": 13018,
+      "mean": 1859.714286
+    },
+    {
+      "weekStart": "2025-01-27",
+      "days": 7,
+      "total": 12832,
+      "mean": 1833.142857
+    },
+    {
+      "weekStart": "2025-02-03",
+      "days": 7,
+      "total": 13245,
+      "mean": 1892.142857
+    },
+    {
+      "weekStart": "2025-02-10",
+      "days": 7,
+      "total": 13692,
+      "mean": 1956
+    },
+    {
+      "weekStart": "2025-02-17",
+      "days": 7,
+      "total": 13293,
+      "mean": 1899
+    },
+    {
+      "weekStart": "2025-02-24",
+      "days": 7,
+      "total": 13833,
+      "mean": 1976.142857
+    },
+    {
+      "weekStart": "2025-03-03",
+      "days": 7,
+      "total": 13897,
+      "mean": 1985.285714
+    },
+    {
+      "weekStart": "2025-03-10",
+      "days": 7,
+      "total": 14276,
+      "mean": 2039.428571
+    },
+    {
+      "weekStart": "2025-03-17",
+      "days": 7,
+      "total": 14337,
+      "mean": 2048.142857
+    },
+    {
+      "weekStart": "2025-03-24",
+      "days": 7,
+      "total": 14138,
+      "mean": 2019.714286
+    },
+    {
+      "weekStart": "2025-03-31",
+      "days": 7,
+      "total": 13974,
+      "mean": 1996.285714
+    },
+    {
+      "weekStart": "2025-04-07",
+      "days": 7,
+      "total": 14194,
+      "mean": 2027.714286
+    },
+    {
+      "weekStart": "2025-04-14",
+      "days": 7,
+      "total": 14186,
+      "mean": 2026.571429
+    },
+    {
+      "weekStart": "2025-04-21",
+      "days": 7,
+      "total": 13826,
+      "mean": 1975.142857
+    },
+    {
+      "weekStart": "2025-04-28",
+      "days": 7,
+      "total": 12609,
+      "mean": 1801.285714
+    },
+    {
+      "weekStart": "2025-05-05",
+      "days": 7,
+      "total": 12301,
+      "mean": 1757.285714
+    },
+    {
+      "weekStart": "2025-05-12",
+      "days": 7,
+      "total": 14523,
+      "mean": 2074.714286
+    },
+    {
+      "weekStart": "2025-05-19",
+      "days": 7,
+      "total": 14109,
+      "mean": 2015.571429
+    },
+    {
+      "weekStart": "2025-05-26",
+      "days": 7,
+      "total": 14057,
+      "mean": 2008.142857
+    },
+    {
+      "weekStart": "2025-06-02",
+      "days": 7,
+      "total": 13623,
+      "mean": 1946.142857
+    },
+    {
+      "weekStart": "2025-06-09",
+      "days": 7,
+      "total": 12671,
+      "mean": 1810.142857
+    },
+    {
+      "weekStart": "2025-06-16",
+      "days": 7,
+      "total": 13391,
+      "mean": 1913
+    },
+    {
+      "weekStart": "2025-06-23",
+      "days": 7,
+      "total": 13154,
+      "mean": 1879.142857
+    },
+    {
+      "weekStart": "2025-06-30",
+      "days": 7,
+      "total": 12695,
+      "mean": 1813.571429
+    },
+    {
+      "weekStart": "2025-07-07",
+      "days": 7,
+      "total": 12322,
+      "mean": 1760.285714
+    },
+    {
+      "weekStart": "2025-07-14",
+      "days": 7,
+      "total": 12417,
+      "mean": 1773.857143
+    },
+    {
+      "weekStart": "2025-07-21",
+      "days": 7,
+      "total": 11945,
+      "mean": 1706.428571
+    },
+    {
+      "weekStart": "2025-07-28",
+      "days": 7,
+      "total": 11751,
+      "mean": 1678.714286
+    },
+    {
+      "weekStart": "2025-08-04",
+      "days": 7,
+      "total": 12099,
+      "mean": 1728.428571
+    },
+    {
+      "weekStart": "2025-08-11",
+      "days": 7,
+      "total": 12351,
+      "mean": 1764.428571
+    },
+    {
+      "weekStart": "2025-08-18",
+      "days": 7,
+      "total": 12446,
+      "mean": 1778
+    },
+    {
+      "weekStart": "2025-08-25",
+      "days": 7,
+      "total": 13675,
+      "mean": 1953.571429
+    },
+    {
+      "weekStart": "2025-09-01",
+      "days": 7,
+      "total": 14965,
+      "mean": 2137.857143
+    },
+    {
+      "weekStart": "2025-09-08",
+      "days": 7,
+      "total": 15197,
+      "mean": 2171
+    },
+    {
+      "weekStart": "2025-09-15",
+      "days": 7,
+      "total": 15769,
+      "mean": 2252.714286
+    },
+    {
+      "weekStart": "2025-09-22",
+      "days": 7,
+      "total": 16556,
+      "mean": 2365.142857
+    },
+    {
+      "weekStart": "2025-09-29",
+      "days": 7,
+      "total": 16178,
+      "mean": 2311.142857
+    },
+    {
+      "weekStart": "2025-10-06",
+      "days": 7,
+      "total": 16579,
+      "mean": 2368.428571
+    },
+    {
+      "weekStart": "2025-10-13",
+      "days": 7,
+      "total": 16884,
+      "mean": 2412
+    },
+    {
+      "weekStart": "2025-10-20",
+      "days": 7,
+      "total": 16505,
+      "mean": 2357.857143
+    },
+    {
+      "weekStart": "2025-10-27",
+      "days": 7,
+      "total": 16287,
+      "mean": 2326.714286
+    },
+    {
+      "weekStart": "2025-11-03",
+      "days": 7,
+      "total": 16573,
+      "mean": 2367.571429
+    },
+    {
+      "weekStart": "2025-11-10",
+      "days": 7,
+      "total": 17553,
+      "mean": 2507.571429
+    },
+    {
+      "weekStart": "2025-11-17",
+      "days": 7,
+      "total": 17639,
+      "mean": 2519.857143
+    },
+    {
+      "weekStart": "2025-11-24",
+      "days": 7,
+      "total": 17460,
+      "mean": 2494.285714
+    },
+    {
+      "weekStart": "2025-12-01",
+      "days": 7,
+      "total": 17216,
+      "mean": 2459.428571
+    },
+    {
+      "weekStart": "2025-12-08",
+      "days": 7,
+      "total": 17817,
+      "mean": 2545.285714
+    },
+    {
+      "weekStart": "2025-12-15",
+      "days": 7,
+      "total": 17277,
+      "mean": 2468.142857
+    },
+    {
+      "weekStart": "2025-12-22",
+      "days": 7,
+      "total": 17180,
+      "mean": 2454.285714
+    },
+    {
+      "weekStart": "2025-12-29",
+      "days": 7,
+      "total": 12113,
+      "mean": 1730.428571
+    },
+    {
+      "weekStart": "2026-01-05",
+      "days": 7,
+      "total": 11506,
+      "mean": 1643.714286
+    },
+    {
+      "weekStart": "2026-01-12",
+      "days": 7,
+      "total": 14773,
+      "mean": 2110.428571
+    },
+    {
+      "weekStart": "2026-01-19",
+      "days": 7,
+      "total": 15982,
+      "mean": 2283.142857
+    },
+    {
+      "weekStart": "2026-01-26",
+      "days": 7,
+      "total": 14899,
+      "mean": 2128.428571
+    },
+    {
+      "weekStart": "2026-02-02",
+      "days": 7,
+      "total": 15326,
+      "mean": 2189.428571
+    },
+    {
+      "weekStart": "2026-02-09",
+      "days": 7,
+      "total": 16405,
+      "mean": 2343.571429
+    },
+    {
+      "weekStart": "2026-02-16",
+      "days": 7,
+      "total": 13910,
+      "mean": 1987.142857
+    },
+    {
+      "weekStart": "2026-02-23",
+      "days": 7,
+      "total": 15780,
+      "mean": 2254.285714
+    },
+    {
+      "weekStart": "2026-03-02",
+      "days": 7,
+      "total": 15326,
+      "mean": 2189.428571
+    },
+    {
+      "weekStart": "2026-03-09",
+      "days": 7,
+      "total": 13601,
+      "mean": 1943
+    },
+    {
+      "weekStart": "2026-03-16",
+      "days": 7,
+      "total": 11140,
+      "mean": 1591.428571
+    },
+    {
+      "weekStart": "2026-03-23",
+      "days": 7,
+      "total": 11170,
+      "mean": 1595.714286
+    },
+    {
+      "weekStart": "2026-03-30",
+      "days": 7,
+      "total": 10571,
+      "mean": 1510.142857
+    },
+    {
+      "weekStart": "2026-04-06",
+      "days": 7,
+      "total": 10935,
+      "mean": 1562.142857
+    },
+    {
+      "weekStart": "2026-04-13",
+      "days": 7,
+      "total": 10298,
+      "mean": 1471.142857
+    },
+    {
+      "weekStart": "2026-04-20",
+      "days": 7,
+      "total": 9624,
+      "mean": 1374.857143
+    },
+    {
+      "weekStart": "2026-04-27",
+      "days": 7,
+      "total": 9336,
+      "mean": 1333.714286
+    },
+    {
+      "weekStart": "2026-05-04",
+      "days": 7,
+      "total": 8526,
+      "mean": 1218
+    },
+    {
+      "weekStart": "2026-05-11",
+      "days": 7,
+      "total": 8491,
+      "mean": 1213
+    },
+    {
+      "weekStart": "2026-05-18",
+      "days": 7,
+      "total": 8845,
+      "mean": 1263.571429
+    },
+    {
+      "weekStart": "2026-05-25",
+      "days": 7,
+      "total": 10023,
+      "mean": 1431.857143
+    },
+    {
+      "weekStart": "2026-06-01",
+      "days": 7,
+      "total": 9404,
+      "mean": 1343.428571
+    },
+    {
+      "weekStart": "2026-06-08",
+      "days": 7,
+      "total": 9629,
+      "mean": 1375.571429
+    },
+    {
+      "weekStart": "2026-06-15",
+      "days": 7,
+      "total": 10005,
+      "mean": 1429.285714
+    },
+    {
+      "weekStart": "2026-06-22",
+      "days": 7,
+      "total": 9964,
+      "mean": 1423.428571
+    },
+    {
+      "weekStart": "2026-06-29",
+      "days": 7,
+      "total": 9705,
+      "mean": 1386.428571
+    },
+    {
+      "weekStart": "2026-07-06",
+      "days": 7,
+      "total": 9492,
+      "mean": 1356
+    },
+    {
+      "weekStart": "2026-07-13",
+      "days": 7,
+      "total": 8869,
+      "mean": 1267
+    },
+    {
+      "weekStart": "2026-07-20",
+      "days": 7,
+      "total": 8849,
+      "mean": 1264.142857
+    },
+    {
+      "weekStart": "2026-07-27",
+      "days": 7,
+      "total": 8601,
+      "mean": 1228.714286
+    },
+    {
+      "weekStart": "2026-08-03",
+      "days": 7,
+      "total": 8526,
+      "mean": 1218
+    },
+    {
+      "weekStart": "2026-08-10",
+      "days": 7,
+      "total": 8924,
+      "mean": 1274.857143
+    },
+    {
+      "weekStart": "2026-08-17",
+      "days": 7,
+      "total": 9007,
+      "mean": 1286.714286
+    },
+    {
+      "weekStart": "2026-08-24",
+      "days": 7,
+      "total": 9598,
+      "mean": 1371.142857
+    },
+    {
+      "weekStart": "2026-08-31",
+      "days": 7,
+      "total": 10078,
+      "mean": 1439.714286
+    },
+    {
+      "weekStart": "2026-09-07",
+      "days": 7,
+      "total": 9977,
+      "mean": 1425.285714
+    },
+    {
+      "weekStart": "2026-09-14",
+      "days": 7,
+      "total": 9711,
+      "mean": 1387.285714
+    },
+    {
+      "weekStart": "2026-09-21",
+      "days": 7,
+      "total": 9959,
+      "mean": 1422.714286
+    },
+    {
+      "weekStart": "2026-09-28",
+      "days": 7,
+      "total": 9389,
+      "mean": 1341.285714
+    },
+    {
+      "weekStart": "2026-10-05",
+      "days": 7,
+      "total": 9349,
+      "mean": 1335.571429
+    },
+    {
+      "weekStart": "2026-10-12",
+      "days": 7,
+      "total": 9921,
+      "mean": 1417.285714
+    },
+    {
+      "weekStart": "2026-10-19",
+      "days": 7,
+      "total": 10417,
+      "mean": 1488.142857
+    },
+    {
+      "weekStart": "2026-10-26",
+      "days": 7,
+      "total": 10359,
+      "mean": 1479.857143
+    },
+    {
+      "weekStart": "2026-11-02",
+      "days": 7,
+      "total": 10972,
+      "mean": 1567.428571
+    },
+    {
+      "weekStart": "2026-11-09",
+      "days": 7,
+      "total": 11329,
+      "mean": 1618.428571
+    },
+    {
+      "weekStart": "2026-11-16",
+      "days": 7,
+      "total": 11098,
+      "mean": 1585.428571
+    },
+    {
+      "weekStart": "2026-11-23",
+      "days": 1,
+      "total": 1545,
+      "mean": 1545
+    }
+  ],
+  "longestGrowthStreak": 6,
+  "longestDeclineStreak": 6,
+  "largestDayOverDayChange": {
+    "date": "2026-01-09",
+    "delta": -1172
+  }
+}
