@@ -1,0 +1,1250 @@
+diff --git a/docs/ui/api-contract.md b/docs/ui/api-contract.md
+new file mode 100644
+index 0000000..bf90f33
+--- /dev/null
++++ b/docs/ui/api-contract.md
+@@ -0,0 +1,53 @@
++# UI-2 — контракт API
++
++## 1. Формат ответов
++
++Успех: `{ "status": "ok", "data": {...}, "meta": { "generatedAt", "source", "readOnly": true, "checksum?" } }`
++Нет данных: `{ "status": "not_available", "data": null, "meta": { ..., "reason": "CODE" } }`
++Ошибка: `{ "status": "error", "error": { "code": "...", "message": "..." } }`
++
++## 2. Endpoints и источники полей
++
++| Endpoint | Поля | Источник |
++|---|---|---|
++| `/api/health` | service, readOnly, version | процесс |
++| `/api/v1/overview` | shopNo, timezone, metric, sliceId, semantics, history{days,firstDate,lastDate,lastValue,checksum,completeness}, shadow{snapshots,shadow,replay,pending,reconciled,errors,candidate,baseline,horizons,available} | canonical CSV + shadow JSONL |
++| `/api/v1/history` | points[{date,value}], from, to, totalPoints, returnedPoints | canonical CSV |
++| `/api/v1/history/coverage` | firstDate, lastDate, days, gaps, duplicateDates, nullValues, completeness | canonical CSV |
++| `/api/v1/shadow/forecasts` | totals{...}, horizons, models, modes, manifest, checksums, items[{snapshotId,mode,modelId,modelVersion,variant,horizon,originDate,targetDate,forecastValue,status,inputDataVersion,generatedAt}] | shadow JSONL + manifest |
++| `/api/v1/shadow/reconciliations` | total, items[{snapshotId,modelId,horizon,targetDate,forecastValue,actual,absoluteError,signedError}] | shadow JSONL |
++| `/api/v1/shadow/monitor` | forecasts, reconciled, pending_future, missing_actual, errors, status_counts, metrics[], comparison[] | shadow JSONL (существующий read-only `monitor()`) |
++
++## 3. Query-параметры (allowlist)
++
++| Параметр | Правило | Ошибка |
++|---|---|---|
++| `limit` | целое 1…1000 | `400 INVALID_QUERY` |
++| `from`, `to` | `YYYY-MM-DD`; `from <= to` | `400 INVALID_QUERY` |
++| `horizon` | `1` или `3` | `400 INVALID_QUERY` |
++| `mode` | `shadow` (по умолчанию) или `replay` | `400 INVALID_QUERY` |
++
++## 4. Семантика
++
++- **UI-2.2:** `/api/v1/shadow/forecasts` по умолчанию возвращает только `mode=shadow`; историческая диагностика (`mode=replay`) запрашивается явно и отображается отдельным блоком с пометкой «историческая диагностика».
++- **UI-2.2.1:** агрегаты `shadow` и `replay` никогда не суммируются: `shadow/forecasts` возвращает `totals` только для выбранного режима (по умолчанию `shadow`) и `modeTotals.{shadow,replay}` раздельно; `overview` содержит отдельные `data.shadow` и `data.replay`; `shadow/reconciliations` фильтруются по `mode` и возвращают поле `mode`.
++- **UI-2.2.1:** любая ошибка API (включая ошибки маршрутов) возвращает `error.eventId` — идентификатор события для корреляции с серверным логом; сырые сообщения, пути и SQL в лог не пишутся.
++- **UI-2.2.1:** `coverage.nullPolicy = "REJECTED_AS_CORRUPTED"` — нечисловое/`NULL` значение в canonical CSV трактуется как повреждение источника (ошибка), а не как пропуск полноты; поэтому `nullValues` при нормальной работе равен 0.
++- **UI-2.2.1:** `manifest` валидируется строго: версия из allowlist (`shadow-mode/v1`, `shadow-mode/v1.1`), `dataset_checksum` — 64 hex (SHA-256), горизонты ⊆ {1, 3}, корректные `created_at`, `alpha`, `limit_percent`, `min_train_days`.
++- **UI-2.2:** `overview.data.provenance` содержит `fileChecksum` (исходный CSV), `normalizedChecksum` (нормализованные точки), `manifestDatasetChecksum`, `manifestStatus` и `freshness` (`MATCH` / `STALE` / `NOT_CONFIRMED`). `meta.checksum` — всегда checksum исходного файла.
++- **UI-2.2:** `Origin` разбирается через `URL`, сравнивается целиком; `null`, мусор, иные схемы и порты → `403`. Same-origin допускается только при точном совпадении с `Host`.
++
++- `forecastValue: null` означает отсутствие значения; ноль не подставляется.
++- `not_available` возвращается, когда источник пуст или диапазон не содержит наблюдений.
++- `semantics: "PROVISIONAL"` — бизнес-семантика целевой метрики не подтверждена.
++- Режимы `shadow` и `replay` в снапшотах не смешиваются.
++
++## 5. Безопасность
++
++- Клиенту не отдаются: абсолютные пути, stack trace, SQL, `dimension_1`/`dimension_2`, PII.
++- Только GET; POST/PUT/PATCH/DELETE → 405.
++- CORS не открывается: предполагается same-origin через Vite proxy.
++- Ответы с `Cache-Control: no-store`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: no-referrer`.
++- Заголовок bind: `127.0.0.1` (проверено фактически).
++- **Host allowlist (UI-2.1):** `127.0.0.1`, `localhost`, `[::1]`, `::1` (с портом или без) — защита от DNS rebinding; иное → `403 HOST_NOT_ALLOWED`.
++- **Origin allowlist (UI-2.1):** `http://127.0.0.1:5173`, `http://localhost:5173`, loopback-источники; посторонние → `403 ORIGIN_NOT_ALLOWED`. Запросы без `Origin` (curl, серверные вызовы) разрешены.
+\ No newline at end of file
+diff --git a/src/server/api.ts b/src/server/api.ts
+new file mode 100644
+index 0000000..5565dbf
+--- /dev/null
++++ b/src/server/api.ts
+@@ -0,0 +1,53 @@
++/** UI-2: единый контракт API DSS (read-only). */
++export interface ApiMeta {
++  generatedAt: string;
++  source: string;
++  readOnly: true;
++  checksum?: string;
++  reason?: string;
++  note?: string;
++}
++export interface ApiOk<T> { status: "ok"; data: T; meta: ApiMeta }
++export interface ApiNotAvailable { status: "not_available"; data: null; meta: ApiMeta }
++export interface ApiError { status: "error"; error: { code: string; message: string } }
++export type ApiResponse<T> = ApiOk<T> | ApiNotAvailable | ApiError;
++
++export const SEMANTICS_STATUS = "PROVISIONAL" as const;
++
++export class SourceError extends Error {
++  readonly code: string;
++  readonly httpStatus: number;
++  constructor(code: string, message: string, httpStatus = 503) {
++    super(message);
++    this.name = "SourceError";
++    this.code = code;
++    this.httpStatus = httpStatus;
++  }
++}
++
++export function meta(source: string, extra: Partial<ApiMeta> = {}): ApiMeta {
++  return { generatedAt: new Date().toISOString(), source, readOnly: true, ...extra };
++}
++export function ok<T>(data: T, source: string, extra: Partial<ApiMeta> = {}): ApiOk<T> {
++  return { status: "ok", data, meta: meta(source, extra) };
++}
++export function notAvailable(reason: string, source: string): ApiNotAvailable {
++  return { status: "not_available", data: null, meta: meta(source, { reason }) };
++}
++/** Клиенту — код и общее сообщение; без stack trace, путей и SQL. */
++export function toErrorResponse(error: unknown): { body: ApiError; status: number } {
++  if (error instanceof SourceError) {
++    return { body: { status: "error", error: { code: error.code, message: error.message } }, status: error.httpStatus };
++  }
++  return { body: { status: "error", error: { code: "INTERNAL_ERROR", message: "Internal server error" } }, status: 500 };
++}
++/**
++ * R6 (UI-2.2.1): единая точка формирования ошибки API.
++ * Сырое сообщение не логируется: в лог идёт только код и идентификатор события.
++ */
++export function fail(context: { json: (body: unknown, status: number) => Response }, error: unknown): Response {
++  const response = toErrorResponse(error);
++  const eventId = crypto.randomUUID();
++  console.error(`[dss-api] code=${response.body.error.code} event=${eventId}`);
++  return context.json({ status: "error", error: { code: response.body.error.code, message: response.body.error.message, eventId } }, response.status);
++}
+\ No newline at end of file
+diff --git a/src/server/routes.ts b/src/server/routes.ts
+new file mode 100644
+index 0000000..f55ff87
+--- /dev/null
++++ b/src/server/routes.ts
+@@ -0,0 +1,80 @@
++/** UI-2: маршруты API. Только GET; бизнес-записи отсутствуют. */
++import { Hono } from "hono";
++
++import { fail, notAvailable, ok } from "./api";
++import { coverageModel, historyModel, monitorModel, overviewModel, reconciliationsModel, shadowForecastsModel } from "./services/read-models";
++
++export const apiRoutes = new Hono();
++
++apiRoutes.get("/api/health", (context) =>
++  context.json(ok({ service: "dss-api", readOnly: true, version: "ui-2" }, "process")),
++);
++
++apiRoutes.get("/api/v1/overview", async (context) => {
++  try {
++    const model = await overviewModel();
++    // R5: meta.checksum — checksum исходного CSV; нормализованный — в data.provenance
++    return context.json(ok(model, "canonical_csv+shadow_jsonl", { checksum: model.provenance.fileChecksum, note: `freshness=${model.provenance.freshness}` }));
++  } catch (error) {
++    return fail(context, error);
++  }
++});
++
++apiRoutes.get("/api/v1/history", async (context) => {
++  try {
++    const query = context.req.query();
++    const { model, checksum, fileChecksum } = await historyModel(query);
++    if (!model.returnedPoints) return context.json(notAvailable("NO_POINTS_IN_RANGE", "canonical_csv"));
++    // R5: checksum исходного файла и нормализованных точек различаются явно
++    return context.json(ok(model, "canonical_csv", { checksum: fileChecksum, note: `normalized=${checksum}` }));
++  } catch (error) {
++    return fail(context, error);
++  }
++});
++
++apiRoutes.get("/api/v1/history/coverage", async (context) => {
++  try {
++    const model = await coverageModel();
++    if (!model.days) return context.json(notAvailable("SOURCE_EMPTY", "canonical_csv"));
++    return context.json(ok(model, "canonical_csv"));
++  } catch (error) {
++    return fail(context, error);
++  }
++});
++
++apiRoutes.get("/api/v1/shadow/forecasts", async (context) => {
++  try {
++    const model = await shadowForecastsModel(context.req.query());
++    if (!model.totals.snapshots) return context.json(notAvailable("SHADOW_STORE_EMPTY", "shadow_jsonl"));
++    return context.json(ok(model, "shadow_jsonl", { checksum: model.checksums.forecasts ?? "NOT_AVAILABLE" }));
++  } catch (error) {
++    return fail(context, error);
++  }
++});
++
++apiRoutes.get("/api/v1/shadow/reconciliations", async (context) => {
++  try {
++    const model = await reconciliationsModel(context.req.query());
++    if (!model.total) return context.json(notAvailable("NO_RECONCILIATIONS", `shadow_jsonl:${model.mode}`));
++    return context.json(ok(model, "shadow_jsonl"));
++  } catch (error) {
++    return fail(context, error);
++  }
++});
++
++apiRoutes.get("/api/v1/shadow/monitor", async (context) => {
++  try {
++    const model = await monitorModel();
++    if (!model.forecasts) return context.json(notAvailable("SHADOW_STORE_EMPTY", "shadow_jsonl"));
++    return context.json(ok(model, "shadow_jsonl"));
++  } catch (error) {
++    return fail(context, error);
++  }
++});
++
++/** Любые изменяющие методы для бизнес-ресурсов запрещены. */
++for (const method of ["post", "put", "patch", "delete"] as const) {
++  apiRoutes[method]("/api/*", (context) =>
++    context.json({ status: "error", error: { code: "METHOD_NOT_ALLOWED", message: "Only GET is supported" } }, 405),
++  );
++}
+\ No newline at end of file
+diff --git a/src/server/services/read-models.ts b/src/server/services/read-models.ts
+new file mode 100644
+index 0000000..739ecd0
+--- /dev/null
++++ b/src/server/services/read-models.ts
+@@ -0,0 +1,296 @@
++/** UI-2: read-only read-models. Бизнес-логика прогнозирования не дублируется. */
++import { resolve } from "node:path";
++
++import { monitor, type MonitorReport } from "../../forecasting/shadow/pipeline";
++import { storePaths } from "../../forecasting/shadow/store";
++import { SourceError } from "../api";
++import {
++  readHistory,
++  readManifest,
++  readReconciliations,
++  readShadowErrors,
++  readSnapshots,
++  shadowFileChecksums,
++  SHADOW_DIR,
++  SHOP_NO,
++  SLICE_ID,
++  TARGET_METRIC,
++  TIMEZONE,
++  type HistoryPoint,
++} from "../sources";
++
++const MAX_LIMIT = 1000;
++const DEFAULT_LIMIT = 120;
++
++export function parseLimit(raw: string | undefined, fallback = DEFAULT_LIMIT): number {
++  if (raw === undefined) return fallback;
++  const value = Number(raw);
++  if (!Number.isInteger(value) || value < 1 || value > MAX_LIMIT) {
++    throw new SourceError("INVALID_QUERY", `limit must be an integer between 1 and ${MAX_LIMIT}`, 400);
++  }
++  return value;
++}
++
++export function parseDate(raw: string | undefined, field: string): string | null {
++  if (raw === undefined) return null;
++  if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) throw new SourceError("INVALID_QUERY", `${field} must be YYYY-MM-DD`, 400);
++  // R4: проверка реальности календарной даты (2026-02-30 и 2026-99-99 отклоняются)
++  const [year, month, day] = raw.split("-").map(Number) as [number, number, number];
++  const parsed = new Date(Date.UTC(year, month - 1, day));
++  if (parsed.getUTCFullYear() !== year || parsed.getUTCMonth() !== month - 1 || parsed.getUTCDate() !== day) {
++    throw new SourceError("INVALID_QUERY", `${field} is not a real calendar date`, 400);
++  }
++  return raw;
++}
++
++export interface HistoryModel {
++  shopNo: string;
++  metric: string;
++  sliceId: number;
++  timezone: string;
++  totalPoints: number;
++  returnedPoints: number;
++  from: string | null;
++  to: string | null;
++  points: HistoryPoint[];
++  semantics: "PROVISIONAL";
++}
++
++export async function historyModel(query: { from?: string; to?: string; limit?: string }): Promise<{ model: HistoryModel; checksum: string; fileChecksum: string }> {
++  const from = parseDate(query.from, "from");
++  const to = parseDate(query.to, "to");
++  if (from && to && from > to) throw new SourceError("INVALID_QUERY", "from must not exceed to", 400);
++  const limit = parseLimit(query.limit, DEFAULT_LIMIT);
++  const { points, fileChecksum, normalizedChecksum } = await readHistory();
++  const filtered = points.filter((point) => (!from || point.date >= from) && (!to || point.date <= to));
++  const slice = filtered.slice(-limit);
++  return {
++    model: {
++      shopNo: SHOP_NO,
++      metric: TARGET_METRIC,
++      sliceId: SLICE_ID,
++      timezone: TIMEZONE,
++      totalPoints: points.length,
++      returnedPoints: slice.length,
++      from: slice[0]?.date ?? null,
++      to: slice.at(-1)?.date ?? null,
++      points: slice,
++      semantics: "PROVISIONAL",
++    },
++    checksum: normalizedChecksum,
++    fileChecksum,
++  };
++}
++
++export interface CoverageModel {
++  firstDate: string | null;
++  lastDate: string | null;
++  days: number;
++  gaps: number;
++  duplicateDates: number;
++  nullValues: number;
++  nullPolicy: "REJECTED_AS_CORRUPTED";
++  completeness: "COMPLETE" | "PARTIAL" | "UNKNOWN";
++}
++
++function daysBetween(from: string, to: string): number {
++  const start = Date.parse(`${from}T00:00:00Z`);
++  const end = Date.parse(`${to}T00:00:00Z`);
++  return Math.round((end - start) / 86_400_000) + 1;
++}
++
++export async function coverageModel(): Promise<CoverageModel> {
++  const { points } = await readHistory();
++  if (!points.length) {
++    return { firstDate: null, lastDate: null, days: 0, gaps: 0, duplicateDates: 0, nullValues: 0, nullPolicy: "REJECTED_AS_CORRUPTED", completeness: "UNKNOWN" };
++  }
++  const first = points[0]!.date;
++  const last = points.at(-1)!.date;
++  const unique = new Set(points.map((point) => point.date));
++  const gaps = Math.max(daysBetween(first, last) - unique.size, 0);
++  // R8: nullValues — только точки, где значение не является конечным числом (отсутствие данных не превращается в 0)
++  const nullValues = points.filter((point) => point.value === null || point.value === undefined || !Number.isFinite(point.value)).length;
++  return {
++    firstDate: first,
++    lastDate: last,
++    days: unique.size,
++    gaps,
++    duplicateDates: points.length - unique.size,
++    nullValues,
++    // R8: NULL/нечисловое значение в canonical CSV отклоняется как повреждение источника,
++    // поэтому nullValues при нормальной работе всегда 0 — это политика, а не пропуск полноты.
++    nullPolicy: "REJECTED_AS_CORRUPTED",
++    completeness: gaps === 0 && nullValues === 0 ? "COMPLETE" : "PARTIAL",
++  };
++}
++
++export interface ShadowModeTotals { snapshots: number; pending: number; reconciled: number; fallbacks: number; invalids: number }
++
++export interface ShadowForecastsModel {
++  /** Агрегаты только для выбранного режима (по умолчанию shadow). */
++  totals: ShadowModeTotals;
++  /** Раздельные агрегаты по режимам: shadow и replay никогда не суммируются. */
++  modeTotals: { shadow: ShadowModeTotals; replay: ShadowModeTotals };
++  errors: number;
++  conflicts: number;
++  horizons: number[];
++  models: string[];
++  modes: string[];
++  manifest: { version: string; datasetChecksum: string; horizons: number[] } | null;
++  checksums: Record<string, string>;
++  items: Array<{ snapshotId: string; mode: string; modelId: string; modelVersion: string; variant: string | null; horizon: number; originDate: string; targetDate: string; forecastValue: number | null; status: string; inputDataVersion: string; generatedAt: string }>;
++}
++
++export async function shadowForecastsModel(query: { horizon?: string; mode?: string; limit?: string }): Promise<ShadowForecastsModel> {
++  const limit = parseLimit(query.limit, 60);
++  const snapshots = await readSnapshots();
++  const reconciliations = await readReconciliations();
++  const errors = await readShadowErrors();
++  const manifestResult = await readManifest();
++  const checksums = await shadowFileChecksums();
++  const horizon = query.horizon === undefined ? null : Number(query.horizon);
++  if (horizon !== null && ![1, 3].includes(horizon)) throw new SourceError("INVALID_QUERY", "horizon must be 1 or 3", 400);
++  // R3: по умолчанию только реальные shadow-наблюдения; replay — отдельное представление
++  const mode = query.mode ?? "shadow";
++  if (!["shadow", "replay"].includes(mode)) throw new SourceError("INVALID_QUERY", "mode must be shadow or replay", 400);
++  const reconciledIds = new Set(reconciliations.map((record) => record.snapshot_id));
++  const filtered = snapshots.filter((snapshot) => (horizon === null || snapshot.horizon === horizon) && snapshot.mode === mode);
++  const items = filtered.slice(-limit).map((snapshot) => ({
++    snapshotId: snapshot.snapshot_id,
++    mode: snapshot.mode,
++    modelId: snapshot.model_id,
++    modelVersion: snapshot.model_version,
++    variant: snapshot.variant,
++    horizon: snapshot.horizon,
++    originDate: snapshot.origin_date,
++    targetDate: snapshot.target_date,
++    forecastValue: snapshot.forecast_value,
++    status: snapshot.status,
++    inputDataVersion: snapshot.input_data_version,
++    generatedAt: snapshot.generated_at,
++  }));
++  const totalsFor = (modeName: "shadow" | "replay"): ShadowModeTotals => {
++    const subset = snapshots.filter((snapshot) => snapshot.mode === modeName);
++    return {
++      snapshots: subset.length,
++      pending: subset.filter((snapshot) => !reconciledIds.has(snapshot.snapshot_id)).length,
++      reconciled: subset.filter((snapshot) => reconciledIds.has(snapshot.snapshot_id)).length,
++      fallbacks: subset.filter((snapshot) => snapshot.status === "FALLBACK").length,
++      invalids: subset.filter((snapshot) => snapshot.status === "INVALID").length,
++    };
++  };
++  return {
++    totals: totalsFor(mode as "shadow" | "replay"),
++    modeTotals: { shadow: totalsFor("shadow"), replay: totalsFor("replay") },
++    errors: errors.length,
++    conflicts: errors.filter((error) => error.code === "SNAPSHOT_CONFLICT").length,
++    horizons: [1, 3],
++    models: ["rolling_7_day_mean", "adaptive_baseline"],
++    modes: ["shadow", "replay"],
++    manifest: manifestResult.manifest ? { version: manifestResult.manifest.version, datasetChecksum: manifestResult.manifest.dataset_checksum, horizons: manifestResult.manifest.horizons } : null,
++    checksums,
++    items,
++  };
++}
++
++export interface ReconciliationModel {
++  total: number;
++  items: Array<{ snapshotId: string; modelId: string; horizon: number; targetDate: string; forecastValue: number | null; actual: number; absoluteError: number; signedError: number }>;
++}
++
++export async function reconciliationsModel(query: { limit?: string; horizon?: string; mode?: string }): Promise<ReconciliationModel & { mode: "shadow" | "replay" }> {
++  const limit = parseLimit(query.limit, 60);
++  const horizon = query.horizon === undefined ? null : Number(query.horizon);
++  if (horizon !== null && ![1, 3].includes(horizon)) throw new SourceError("INVALID_QUERY", "horizon must be 1 or 3", 400);
++  const mode = query.mode ?? "shadow";
++  if (!["shadow", "replay"].includes(mode)) throw new SourceError("INVALID_QUERY", "mode must be shadow or replay", 400);
++  const snapshots = await readSnapshots();
++  const modeBySnapshot = new Map(snapshots.map((snapshot) => [snapshot.snapshot_id, snapshot.mode]));
++  const records = await readReconciliations();
++  const filtered = records.filter((record) => (horizon === null || record.horizon === horizon) && (modeBySnapshot.get(record.snapshot_id) ?? "shadow") === mode);
++  return {
++    mode: mode as "shadow" | "replay",
++    total: filtered.length,
++    items: filtered.slice(-limit).map((record) => ({
++      snapshotId: record.snapshot_id,
++      modelId: record.model_id,
++      horizon: record.horizon,
++      targetDate: record.target_date,
++      forecastValue: record.forecast_value,
++      actual: record.actual,
++      absoluteError: record.absolute_error,
++      signedError: record.signed_error,
++    })),
++  };
++}
++
++/** Диагностика считается существующим read-only monitor(); запись не выполняется. */
++export async function monitorModel(): Promise<MonitorReport> {
++  const { points } = await readHistory();
++  return monitor(points, storePaths(resolve(SHADOW_DIR)), new Date().toISOString());
++}
++
++export interface OverviewModel {
++  shopNo: string;
++  timezone: string;
++  metric: string;
++  sliceId: number;
++  semantics: "PROVISIONAL";
++  history: { days: number; firstDate: string | null; lastDate: string | null; lastValue: number | null; checksum: string; fileChecksum: string; completeness: string };
++  provenance: { normalizedChecksum: string; fileChecksum: string; manifestDatasetChecksum: string | null; manifestStatus: string; freshness: "MATCH" | "STALE" | "NOT_CONFIRMED" };
++  shadow: ShadowModeTotals & { candidate: string; baseline: string; horizons: number[]; available: boolean };
++  replay: ShadowModeTotals & { available: boolean };
++}
++
++export async function overviewModel(): Promise<OverviewModel> {
++  const { points, fileChecksum, normalizedChecksum } = await readHistory();
++  const coverage = await coverageModel();
++  const snapshots = await readSnapshots();
++  const reconciliations = await readReconciliations();
++  const errors = await readShadowErrors();
++  const reconciledIds = new Set(reconciliations.map((record) => record.snapshot_id));
++  const manifestResult = await readManifest();
++  const modeTotalsFor = (modeName: "shadow" | "replay"): ShadowModeTotals => {
++    const subset = snapshots.filter((snapshot) => snapshot.mode === modeName);
++    return {
++      snapshots: subset.length,
++      pending: subset.filter((snapshot) => !reconciledIds.has(snapshot.snapshot_id)).length,
++      reconciled: subset.filter((snapshot) => reconciledIds.has(snapshot.snapshot_id)).length,
++      fallbacks: subset.filter((snapshot) => snapshot.status === "FALLBACK").length,
++      invalids: subset.filter((snapshot) => snapshot.status === "INVALID").length,
++    };
++  };
++  const last = points.at(-1) ?? null;
++  // R12: соответствие фактов и manifest не объявляется автоматически актуальным
++  const freshness: "MATCH" | "STALE" | "NOT_CONFIRMED" =
++    manifestResult.status !== "OK" || !manifestResult.manifest
++      ? "NOT_CONFIRMED"
++      : manifestResult.manifest.dataset_checksum === normalizedChecksum
++        ? "MATCH"
++        : "STALE";
++  return {
++    shopNo: SHOP_NO,
++    timezone: TIMEZONE,
++    metric: TARGET_METRIC,
++    sliceId: SLICE_ID,
++    semantics: "PROVISIONAL",
++    history: {
++      days: coverage.days,
++      firstDate: coverage.firstDate,
++      lastDate: coverage.lastDate,
++      lastValue: last ? last.value : null,
++      checksum: normalizedChecksum,
++      fileChecksum,
++      completeness: coverage.completeness,
++    },
++    provenance: {
++      normalizedChecksum,
++      fileChecksum,
++      manifestDatasetChecksum: manifestResult.manifest?.dataset_checksum ?? null,
++      manifestStatus: manifestResult.status,
++      freshness,
++    },
++    shadow: { ...modeTotalsFor("shadow"), candidate: "adaptive_baseline/v1+variantB", baseline: "rolling-7-day-mean/v1", horizons: [1, 3], available: modeTotalsFor("shadow").snapshots > 0 },
++    replay: { ...modeTotalsFor("replay"), available: modeTotalsFor("replay").snapshots > 0 },
++  };
++}
+\ No newline at end of file
+diff --git a/src/server/sources.ts b/src/server/sources.ts
+new file mode 100644
+index 0000000..a8799ca
+--- /dev/null
++++ b/src/server/sources.ts
+@@ -0,0 +1,164 @@
++/** UI-2/2.2: read-only доступ к источникам DSS. Записи не выполняются. */
++import { readFile } from "node:fs/promises";
++import { resolve } from "node:path";
++
++import { readCanonicalCsv } from "../forecasting/analytics/expansion/history-builder";
++import {
++  isReconciliationRecord,
++  isShadowErrorRecord,
++  isSnapshotRecord,
++  readJsonl,
++  storePaths,
++  type ReconciliationRecord,
++  type ShadowError,
++  type ShadowManifest,
++  type ShadowSnapshot,
++} from "../forecasting/shadow/store";
++import { SourceError } from "./api";
++
++/** R11: рабочая директория источников определяется от расположения модуля, а не от cwd. */
++export const PROJECT_ROOT = resolve(import.meta.dir, "../..");
++export const CANONICAL_CSV = resolve(PROJECT_ROOT, "data/processed/forecasting/7745/canonical_daily_delivered_orders.csv");
++export const SHADOW_DIR = resolve(PROJECT_ROOT, "data/shadow/7745");
++export const SHOP_NO = "7745";
++export const SLICE_ID = 20624;
++export const TARGET_METRIC = "qty_orders_delivered";
++export const TIMEZONE = "Europe/Moscow";
++
++export interface HistoryPoint { date: string; value: number }
++
++function sha256(text: string): string {
++  return new Bun.CryptoHasher("sha256").update(text).digest("hex");
++}
++function shadowPaths() {
++  return storePaths(SHADOW_DIR);
++}
++
++export interface HistoryReadResult {
++  points: HistoryPoint[];
++  /** R5: checksum исходного файла как есть (байты). */
++  fileChecksum: string;
++  /** R5: checksum нормализованных точек (date\tvalue) — не равен fileChecksum. */
++  normalizedChecksum: string;
++}
++
++export async function readHistory(): Promise<HistoryReadResult> {
++  let text: string;
++  try {
++    text = await readFile(CANONICAL_CSV, "utf8");
++  } catch (error) {
++    if ((error as NodeJS.ErrnoException).code === "ENOENT") throw new SourceError("SOURCE_NOT_AVAILABLE", "Canonical dataset is not available");
++    throw new SourceError("SOURCE_READ_FAILED", "Canonical dataset cannot be read");
++  }
++  const lines = text.trim().split(/\r?\n/);
++  if (lines.length < 2) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset is empty");
++  const header = lines[0]!.split(",");
++  for (const column of ["date", "shop_no", "metric", "value"]) {
++    if (!header.includes(column)) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset header is invalid");
++  }
++  let points: HistoryPoint[];
++  try {
++    points = await readCanonicalCsv(CANONICAL_CSV);
++  } catch {
++    throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset cannot be parsed");
++  }
++  let previous = "";
++  for (const point of points) {
++    if (!/^\d{4}-\d{2}-\d{2}$/.test(point.date)) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset contains an invalid date");
++    if (typeof point.value !== "number" || !Number.isFinite(point.value)) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset contains a non-finite value");
++    if (point.date <= previous) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset chronology is violated");
++    previous = point.date;
++  }
++  return {
++    points,
++    fileChecksum: sha256(text),
++    normalizedChecksum: sha256(points.map((point) => `${point.date}\t${point.value}`).join("\n")),
++  };
++}
++
++export async function readSnapshots(): Promise<ShadowSnapshot[]> {
++  try {
++    return await readJsonl<ShadowSnapshot>(shadowPaths().forecasts, isSnapshotRecord);
++  } catch {
++    throw new SourceError("DATA_SOURCE_CORRUPTED", "Shadow forecasts storage is corrupted");
++  }
++}
++export async function readReconciliations(): Promise<ReconciliationRecord[]> {
++  try {
++    return await readJsonl<ReconciliationRecord>(shadowPaths().reconciliations, isReconciliationRecord);
++  } catch {
++    throw new SourceError("DATA_SOURCE_CORRUPTED", "Shadow reconciliation storage is corrupted");
++  }
++}
++export async function readShadowErrors(): Promise<ShadowError[]> {
++  try {
++    return await readJsonl<ShadowError>(shadowPaths().errors, isShadowErrorRecord);
++  } catch {
++    throw new SourceError("DATA_SOURCE_CORRUPTED", "Shadow error storage is corrupted");
++  }
++}
++
++/** R1 (UI-2.2.1): допустимые версии, горизонты и формат контрольной суммы. */
++export const ALLOWED_MANIFEST_VERSIONS = new Set(["shadow-mode/v1", "shadow-mode/v1.1"]);
++export const ALLOWED_MANIFEST_HORIZONS = new Set([1, 3]);
++const SHA256_HEX = /^[0-9a-f]{64}$/;
++
++export function isManifest(value: unknown): value is ShadowManifest {
++  if (typeof value !== "object" || value === null) return false;
++  const record = value as Record<string, unknown>;
++  if (typeof record.version !== "string" || !ALLOWED_MANIFEST_VERSIONS.has(record.version)) return false;
++  if (typeof record.dataset_checksum !== "string" || !SHA256_HEX.test(record.dataset_checksum)) return false;
++  if (typeof record.created_at !== "string" || Number.isNaN(Date.parse(record.created_at))) return false;
++  if (!Array.isArray(record.horizons) || record.horizons.length === 0) return false;
++  if (!record.horizons.every((horizon) => typeof horizon === "number" && ALLOWED_MANIFEST_HORIZONS.has(horizon))) return false;
++  if (typeof record.alpha !== "number" || !Number.isFinite(record.alpha)) return false;
++  if (typeof record.limit_percent !== "number" || !Number.isFinite(record.limit_percent)) return false;
++  if (typeof record.min_train_days !== "number" || !Number.isFinite(record.min_train_days)) return false;
++  return true;
++}
++
++export interface ManifestReadResult {
++  manifest: ShadowManifest | null;
++  status: "OK" | "NOT_AVAILABLE" | "CORRUPTED";
++}
++
++/** R1: ENOENT → NOT_AVAILABLE; ошибка чтения/парсинга/структуры → CORRUPTED (fail-closed). */
++export async function readManifest(dir: string = SHADOW_DIR): Promise<ManifestReadResult> {
++  const manifestPath = storePaths(dir).manifest;
++  let text: string;
++  try {
++    text = await readFile(manifestPath, "utf8");
++  } catch (error) {
++    if ((error as NodeJS.ErrnoException).code === "ENOENT") return { manifest: null, status: "NOT_AVAILABLE" };
++    return { manifest: null, status: "CORRUPTED" };
++  }
++  let parsed: unknown;
++  try {
++    parsed = JSON.parse(text);
++  } catch {
++    return { manifest: null, status: "CORRUPTED" };
++  }
++  if (!isManifest(parsed)) return { manifest: null, status: "CORRUPTED" };
++  return { manifest: parsed, status: "OK" };
++}
++
++/** R1: строгий вариант для операций, которым manifest обязателен. */
++export async function requireManifest(): Promise<ShadowManifest> {
++  const result = await readManifest();
++  if (result.status === "CORRUPTED") throw new SourceError("DATA_SOURCE_CORRUPTED", "Shadow manifest is corrupted");
++  if (result.status === "NOT_AVAILABLE" || !result.manifest) throw new SourceError("SOURCE_NOT_AVAILABLE", "Shadow manifest is not available");
++  return result.manifest;
++}
++
++export async function shadowFileChecksums(): Promise<Record<string, string>> {
++  const paths = shadowPaths();
++  const result: Record<string, string> = {};
++  for (const [name, path] of [["forecasts", paths.forecasts], ["reconciliations", paths.reconciliations], ["manifest", paths.manifest]] as const) {
++    try {
++      result[name] = sha256(await readFile(path, "utf8"));
++    } catch {
++      result[name] = "NOT_AVAILABLE";
++    }
++  }
++  return result;
++}
+\ No newline at end of file
+diff --git a/src/web/api/client.ts b/src/web/api/client.ts
+new file mode 100644
+index 0000000..3d4af90
+--- /dev/null
++++ b/src/web/api/client.ts
+@@ -0,0 +1,86 @@
++/** UI-2: типизированный API-клиент DSS. Без demo-подстановок и без автоповторов. */
++export type ApiStatus = "ok" | "not_available" | "error";
++
++export interface ApiMeta { generatedAt: string; source: string; readOnly: true; checksum?: string; reason?: string; note?: string }
++export interface ApiOk<T> { status: "ok"; data: T; meta: ApiMeta }
++export interface ApiNotAvailable { status: "not_available"; data: null; meta: ApiMeta }
++export interface ApiErrorBody { status: "error"; error: { code: string; message: string } }
++export type ApiResult<T> = ApiOk<T> | ApiNotAvailable | ApiErrorBody;
++
++export class ApiClientError extends Error {
++  readonly code: string;
++  constructor(code: string, message: string) {
++    super(message);
++    this.name = "ApiClientError";
++    this.code = code;
++  }
++}
++
++export interface ClientOptions { baseUrl?: string; timeoutMs?: number }
++
++export class ApiClient {
++  private readonly baseUrl: string;
++  private readonly timeoutMs: number;
++  constructor(options: ClientOptions = {}) {
++    this.baseUrl = options.baseUrl ?? "";
++    this.timeoutMs = options.timeoutMs ?? 8000;
++  }
++
++  async get<T>(path: string, params: Record<string, string | number | undefined> = {}): Promise<ApiResult<T>> {
++    const search = new URLSearchParams();
++    for (const [key, value] of Object.entries(params)) {
++      if (value !== undefined && value !== "") search.set(key, String(value));
++    }
++    const query = search.toString();
++    const controller = new AbortController();
++    const timer = setTimeout(() => controller.abort(), this.timeoutMs);
++    try {
++      const response = await fetch(`${this.baseUrl}${path}${query ? `?${query}` : ""}`, { signal: controller.signal, headers: { Accept: "application/json" } });
++      // R7: сначала HTTP-статус, затем тело
++      if (!response.ok) throw new ApiClientError(`HTTP_${response.status}`, `API вернул статус ${response.status}`);
++      const text = await response.text();
++      let parsed: unknown;
++      try {
++        parsed = JSON.parse(text);
++      } catch {
++        throw new ApiClientError("INVALID_JSON", "Сервер вернул некорректный JSON");
++      }
++      const validated = validateResult<T>(parsed);
++      if (!validated) throw new ApiClientError("INVALID_RESPONSE", "Неожиданный формат ответа");
++      return validated;
++    } catch (error) {
++      if (error instanceof ApiClientError) throw error;
++      if ((error as Error).name === "AbortError") throw new ApiClientError("TIMEOUT", "Превышено время ожидания ответа");
++      throw new ApiClientError("NETWORK_ERROR", "Не удалось связаться с API");
++    } finally {
++      clearTimeout(timer);
++    }
++  }
++}
++
++/** R7: проверка структуры ApiOk / ApiNotAvailable / ApiError. */
++export function validateResult<T>(value: unknown): ApiResult<T> | null {
++  if (typeof value !== "object" || value === null) return null;
++  const record = value as Record<string, unknown>;
++  if (record.status === "ok") {
++    if (!("data" in record) || typeof record.meta !== "object" || record.meta === null) return null;
++    const meta = record.meta as Record<string, unknown>;
++    if (meta.readOnly !== true || typeof meta.generatedAt !== "string" || typeof meta.source !== "string") return null;
++    return record as unknown as ApiOk<T>;
++  }
++  if (record.status === "not_available") {
++    // R7: обязательные поля meta проверяются так же строго, как для ok
++    if (record.data !== null || typeof record.meta !== "object" || record.meta === null) return null;
++    const meta = record.meta as Record<string, unknown>;
++    if (meta.readOnly !== true || typeof meta.generatedAt !== "string" || typeof meta.source !== "string") return null;
++    return record as unknown as ApiNotAvailable;
++  }
++  if (record.status === "error") {
++    const error = record.error as Record<string, unknown> | undefined;
++    if (!error || typeof error.code !== "string" || typeof error.message !== "string") return null;
++    return record as unknown as ApiErrorBody;
++  }
++  return null;
++}
++
++export const api = new ApiClient();
+\ No newline at end of file
+diff --git a/src/web/main.ts b/src/web/main.ts
+new file mode 100644
+index 0000000..8f9741e
+--- /dev/null
++++ b/src/web/main.ts
+@@ -0,0 +1,153 @@
++/** UI-2: локальная оболочка DSS. Данные — только через HTTP API; fixtures не используются. */
++import {
++  appShell,
++  card,
++  chartCard,
++  completenessCalendar,
++  dataTable,
++  emptyState,
++  errorState,
++  formatDate,
++  formatNumber,
++  kpiGrid,
++  lineChart,
++  loadingState,
++  pageHeader,
++  provenanceDrawer,
++  sidebar,
++  statusBadge,
++  topbar,
++  trusted,
++  type TrustedHtml,
++} from "./components";
++import { api, ApiClientError, type ApiResult } from "./api/client";
++
++interface Overview {
++  shopNo: string;
++  timezone: string;
++  metric: string;
++  sliceId: number;
++  semantics: string;
++  history: { days: number; firstDate: string | null; lastDate: string | null; lastValue: number | null; checksum: string; fileChecksum: string; completeness: string };
++  provenance?: { normalizedChecksum: string; fileChecksum: string; manifestDatasetChecksum: string | null; manifestStatus: string; freshness: "MATCH" | "STALE" | "NOT_CONFIRMED" };
++  shadow: { snapshots: number; pending: number; reconciled: number; fallbacks: number; invalids: number; candidate: string; baseline: string; horizons: number[]; available: boolean };
++  replay: { snapshots: number; pending: number; reconciled: number; fallbacks: number; invalids: number; available: boolean };
++}
++interface History { points: Array<{ date: string; value: number }>; from: string | null; to: string | null; totalPoints: number; returnedPoints: number }
++interface ShadowForecasts { totals: { snapshots: number; pending: number; reconciled: number; fallbacks: number; invalids: number }; modeTotals: { shadow: { snapshots: number }; replay: { snapshots: number } }; errors: number; conflicts: number; items: Array<{ snapshotId: string; mode: string; modelId: string; horizon: number; originDate: string; targetDate: string; forecastValue: number | null; status: string }> }
++
++const root = document.getElementById("app")!;
++
++function stateBlock(result: ApiResult<unknown>, render: () => string): string {
++  if (result.status === "not_available") return emptyState({ title: "Данные недоступны", detail: `причина: ${result.meta.reason ?? "UNKNOWN"}` });
++  if (result.status === "error") return errorState({ title: "Ошибка источника", detail: result.error.message, code: result.error.code });
++  return render();
++}
++
++function shell(content: string, updatedAt: string | null, sourceStatus: "OK" | "PARTIAL" | "NOT_AVAILABLE"): string {
++  return appShell({
++    sidebar: sidebar({
++      brandName: "DSS",
++      brandSub: "прогнозирование заказов",
++      sections: [
++        { title: "Обзор", items: [{ href: "#overview", label: "Overview", current: true }] },
++        { title: "Данные", items: [{ href: "#history", label: "История" }, { href: "#shadow", label: "Теневой режим" }] },
++      ],
++    }),
++    topbar: topbar({ title: "DSS · панель прогнозирования", shopNo: "7745", lastUpdated: updatedAt, sourceStatus }),
++    content: trusted(content),
++  });
++}
++
++/** R9: независимая обработка ошибок разделов — падение одного не ломает остальные. */
++async function loadResult<T>(promise: Promise<ApiResult<T>>): Promise<ApiResult<T>> {
++  try {
++    return await promise;
++  } catch (error) {
++    const clientError = error as ApiClientError;
++    return { status: "error", error: { code: clientError.code ?? "UNKNOWN", message: clientError.message ?? "Неизвестная ошибка" } };
++  }
++}
++
++function shadowTable(data: ShadowForecasts, emptyText: string): TrustedHtml {
++  return dataTable({
++    columns: [{ key: "model", label: "Модель" }, { key: "horizon", label: "h", numeric: true }, { key: "origin", label: "origin" }, { key: "target", label: "target" }, { key: "value", label: "Прогноз", numeric: true }, { key: "status", label: "Статус" }],
++    rows: data.items.slice(-10).map((item) => ({ model: item.modelId, horizon: item.horizon, origin: formatDate(item.originDate), target: formatDate(item.targetDate), value: item.forecastValue === null ? "NOT_AVAILABLE" : formatNumber(item.forecastValue), status: item.status })),
++    emptyText,
++  });
++}
++
++async function render(): Promise<void> {
++  root.innerHTML = shell(loadingState({ rows: 6 }), null, "NOT_AVAILABLE");
++  const [overview, history, shadowOnly, replayOnly] = await Promise.all([
++    loadResult(api.get<Overview>("/api/v1/overview")),
++    loadResult(api.get<History>("/api/v1/history", { limit: 120 })),
++    loadResult(api.get<ShadowForecasts>("/api/v1/shadow/forecasts", { limit: 40 })),
++    loadResult(api.get<ShadowForecasts>("/api/v1/shadow/forecasts", { mode: "replay", limit: 20 })),
++  ]);
++
++  const overviewBlock = stateBlock(overview, () => {
++    const data = (overview as { data: Overview }).data;
++    const freshness = data.provenance?.freshness ?? "NOT_CONFIRMED";
++    const freshnessStatus = freshness === "MATCH" ? "OK" : freshness === "STALE" ? "CONFLICT" : "NOT_AVAILABLE";
++    return `
++${pageHeader({ title: "Обзор", subtitle: `магазин ${data.shopNo} · ${data.timezone} · метрика ${data.metric} · slice ${data.sliceId}`, right: statusBadge({ status: "PROVISIONAL" }) })}
++<div class="ds-grid ds-grid--cards">
++  ${card({ title: "История", body: kpiGrid([
++    { label: "Дней", value: formatNumber(data.history.days), note: `${formatDate(data.history.firstDate)} — ${formatDate(data.history.lastDate)}`, status: data.history.completeness === "COMPLETE" ? "OK" : "PENDING" },
++    { label: "Последний факт", value: formatNumber(data.history.lastValue), note: formatDate(data.history.lastDate), status: "OK" },
++  ]) })}
++  ${card({ title: "Теневой режим", body: kpiGrid([
++    { label: "Shadow-снапшотов", value: formatNumber(data.shadow.snapshots), note: `replay отдельно: ${data.replay?.snapshots ?? "NOT_AVAILABLE"}`, status: data.shadow.available ? "OK" : "NOT_AVAILABLE" },
++    { label: "Ожидают факта", value: formatNumber(data.shadow.pending), note: `сверено ${data.shadow.reconciled}`, status: "PENDING" },
++  ]) })}
++</div>
++${card({ title: "Происхождение и актуальность", body: trusted(`
++  <div class="ds-row">${statusBadge({ status: freshnessStatus, text: `соответствие manifest: ${freshness}` })}${statusBadge({ status: "PROVISIONAL" })}</div>
++  ${provenanceDrawer({ source: "canonical CSV (read-only)", checksum: `file ${data.provenance?.fileChecksum ?? "NOT_AVAILABLE"}`, version: `normalized ${data.provenance?.normalizedChecksum ?? "NOT_AVAILABLE"}`, note: `manifest: ${data.provenance?.manifestStatus ?? "NOT_AVAILABLE"} · ${data.provenance?.manifestDatasetChecksum ?? "NOT_AVAILABLE"}` })}`) })}
++`;
++  });
++
++  const historyBlock = stateBlock(history, () => {
++    const data = (history as { data: History }).data;
++    const chart = lineChart([{ name: "actual", className: "actual", points: data.points.map((point) => ({ date: point.date, value: point.value })) }]);
++    const calendar = completenessCalendar(data.points.slice(-28).map((point) => ({ date: point.date, status: Number.isFinite(point.value) ? "full" as const : "missing" as const })));
++    return `
++${card({ title: "История фактов", subtitle: `показано ${data.returnedPoints} из ${data.totalPoints} наблюдений`, body: chart })}
++<div class="ds-grid ds-grid--middle">
++  ${card({ title: "Полнота (последние 28 дней)", body: calendar })}
++  ${card({ title: "Таблица", body: dataTable({ columns: [{ key: "date", label: "Дата" }, { key: "value", label: "Заказы", numeric: true }], rows: data.points.slice(-12).map((point) => ({ date: formatDate(point.date), value: formatNumber(point.value) })) }) })}
++</div>`;
++  });
++
++  const shadowBlock = stateBlock(shadowOnly, () => {
++    const data = (shadowOnly as { data: ShadowForecasts }).data;
++    return `
++${card({ title: "Теневой режим: реальные наблюдения", subtitle: "только mode=shadow — реальные прогнозы, ожидающие факта или сверенные", body: shadowTable(data, "Реальных shadow-прогнозов пока нет") })}
++${card({ title: "Сводка теневого режима", body: kpiGrid([
++      { label: "Снапшотов (shadow)", value: formatNumber(data.totals.snapshots), status: "OK" },
++      { label: "Сверено", value: formatNumber(data.totals.reconciled), status: "OK" },
++      { label: "Ожидают", value: formatNumber(data.totals.pending), status: "PENDING" },
++      { label: "Ошибки", value: formatNumber(data.errors), status: data.errors ? "CONFLICT" : "OK" },
++    ]) })}`;
++  });
++
++  const replayBlock = stateBlock(replayOnly, () => {
++    const data = (replayOnly as { data: ShadowForecasts }).data;
++    return card({
++      title: "Историческая диагностика (replay)",
++      subtitle: "historical replay — воспроизведение на прошлых периодах; НЕ доказательство работы реального теневого режима",
++      right: statusBadge({ status: "NOT_AVAILABLE", text: "историческая диагностика" }),
++      body: shadowTable(data, "Исторических replay-записей нет"),
++    });
++  });
++
++  const sourceStatus = overview.status === "ok" ? "OK" : overview.status === "not_available" ? "NOT_AVAILABLE" : "PARTIAL";
++  const updatedAt = overview.status === "ok" ? overview.meta.generatedAt : null;
++  root.innerHTML = shell(`${overviewBlock}${historyBlock}${shadowBlock}${replayBlock}`, updatedAt, sourceStatus);
++}
++
++document.querySelector("[data-ds-menu]")?.addEventListener("click", () => {
++  document.querySelector("[data-ds-sidebar]")?.classList.toggle("is-open");
++});
++void render();
+\ No newline at end of file
+diff --git a/tests/server/api.test.ts b/tests/server/api.test.ts
+new file mode 100644
+index 0000000..85fa063
+--- /dev/null
++++ b/tests/server/api.test.ts
+@@ -0,0 +1,115 @@
++// UI-2: контрактные тесты read-only API (app.request, без сети).
++import { describe, expect, test } from "bun:test";
++import { app } from "../../src/server/app";
++
++async function get(path: string) {
++  const response = await app.request(`http://127.0.0.1${path}`);
++  return { status: response.status, body: (await response.json()) as any };
++}
++
++describe("health и методы", () => {
++  test("health: ok, readOnly, generatedAt", async () => {
++    const { status, body } = await get("/api/health");
++    expect(status).toBe(200);
++    expect(body.status).toBe("ok");
++    expect(body.meta.readOnly).toBe(true);
++    expect(typeof body.meta.generatedAt).toBe("string");
++  });
++  test("404 без stack trace и без путей", async () => {
++    const { status, body } = await get("/api/v1/unknown");
++    expect(status).toBe(404);
++    expect(body.error.code).toBe("NOT_FOUND");
++    expect(JSON.stringify(body)).not.toContain("at ");
++  });
++  test("POST/PUT/PATCH/DELETE запрещены", async () => {
++    for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
++      const response = await app.request("http://127.0.0.1/api/v1/history", { method });
++      expect(response.status, method).toBe(405);
++    }
++  });
++});
++
++describe("источники (read-only)", () => {
++  test("overview: реальные данные, без PII/путей/SQL", async () => {
++    const { status, body } = await get("/api/v1/overview");
++    expect(status).toBe(200);
++    expect(body.data.shopNo).toBe("7745");
++    expect(body.data.timezone).toBe("Europe/Moscow");
++    expect(body.data.metric).toBe("qty_orders_delivered");
++    expect(body.data.sliceId).toBe(20624);
++    expect(body.data.semantics).toBe("PROVISIONAL");
++    expect(body.data.history.days).toBeGreaterThan(900);
++    expect(body.data.history.lastValue).toBeGreaterThan(0);
++    const raw = JSON.stringify(body);
++    expect(raw).not.toContain("dimension_1");
++    expect(raw).not.toContain("SELECT");
++    expect(raw).not.toContain("forecasting.sqlite");
++    expect(raw).not.toMatch(/[A-Za-z]:\\\\/);
++  });
++  test("history: limit, отсутствие нулей, пустой диапазон → not_available", async () => {
++    const { body } = await get("/api/v1/history?limit=5");
++    expect(body.data.returnedPoints).toBe(5);
++    expect(body.data.points.every((point: any) => Number.isFinite(point.value))).toBe(true);
++    const empty = await get("/api/v1/history?from=2030-01-01&to=2030-01-02");
++    expect(empty.body.status).toBe("not_available");
++    expect(empty.body.data).toBeNull();
++    expect(empty.body.meta.reason).toBe("NO_POINTS_IN_RANGE");
++  });
++  test("history: некорректные параметры → 400 INVALID_QUERY", async () => {
++    for (const query of ["limit=0", "limit=99999", "limit=abc", "from=24-11-2026", "from=2026-11-24&to=2026-01-01"]) {
++      const { status, body } = await get(`/api/v1/history?${query}`);
++      expect(status, query).toBe(400);
++      expect(body.error.code).toBe("INVALID_QUERY");
++    }
++  });
++  test("coverage: полнота без фиктивных значений", async () => {
++    const { body } = await get("/api/v1/history/coverage");
++    expect(body.data.gaps).toBe(0);
++    expect(body.data.duplicateDates).toBe(0);
++    expect(body.data.completeness).toBe("COMPLETE");
++  });
++  test("shadow forecasts: replay/shadow разделены, horizon валидируется", async () => {
++    const { body } = await get("/api/v1/shadow/forecasts?limit=10");
++    expect(body.data.totals.snapshots).toBeGreaterThan(0);
++    expect(body.data.modeTotals.replay.snapshots).toBeGreaterThan(0);
++    expect(body.data.items.every((item: any) => item.mode === "shadow")).toBe(true);
++    expect(body.data.horizons).toEqual([1, 3]);
++    expect((await get("/api/v1/shadow/forecasts?horizon=7")).status).toBe(400);
++  });
++  test("reconciliations и monitor читаются", async () => {
++    const reconciliations = await get("/api/v1/shadow/reconciliations?limit=5");
++    expect(reconciliations.status).toBe(200);
++    expect(reconciliations.body.data.items.length).toBeGreaterThan(0);
++    const monitor = await get("/api/v1/shadow/monitor");
++    expect(monitor.status).toBe(200);
++    expect(monitor.body.data.forecasts).toBeGreaterThan(0);
++    expect(Array.isArray(monitor.body.data.metrics)).toBe(true);
++  });
++});
++describe("UI-2.1: Host и Origin (DNS rebinding, посторонние страницы)", () => {
++  test("чужой Host отклоняется (403)", async () => {
++    const response = await app.request("http://127.0.0.1/api/health", { headers: { Host: "evil.example.com" } });
++    expect(response.status).toBe(403);
++    const body = (await response.json()) as any;
++    expect(body.error.code).toBe("HOST_NOT_ALLOWED");
++  });
++
++  test("Host без порта и с портом разрешён", async () => {
++    for (const host of ["127.0.0.1", "127.0.0.1:8787", "localhost:8787"]) {
++      const response = await app.request("http://127.0.0.1/api/health", { headers: { Host: host } });
++      expect(response.status, host).toBe(200);
++    }
++  });
++
++  test("посторонний Origin отклоняется, Vite origin разрешён", async () => {
++    const blocked = await app.request("http://127.0.0.1/api/health", { headers: { Host: "127.0.0.1:8787", Origin: "https://evil.example.com" } });
++    expect(blocked.status).toBe(403);
++    const allowed = await app.request("http://127.0.0.1/api/health", { headers: { Host: "127.0.0.1:8787", Origin: "http://127.0.0.1:5173" } });
++    expect(allowed.status).toBe(200);
++  });
++
++  test("запрос без Origin (curl/тесты) разрешён", async () => {
++    const response = await app.request("http://127.0.0.1/api/v1/overview", { headers: { Host: "127.0.0.1:8787" } });
++    expect(response.status).toBe(200);
++  });
++});
+\ No newline at end of file
+diff --git a/tests/server/hardening.test.ts b/tests/server/hardening.test.ts
+new file mode 100644
+index 0000000..8909ea5
+--- /dev/null
++++ b/tests/server/hardening.test.ts
+@@ -0,0 +1,187 @@
++// UI-2.2: негативные тесты hardening (R1, R2, R3, R4, R5, R7).
++import { describe, expect, test } from "bun:test";
++import { mkdtemp, writeFile } from "node:fs/promises";
++import { tmpdir } from "node:os";
++import { join } from "node:path";
++
++import { app } from "../../src/server/app";
++import { readManifest } from "../../src/server/sources";
++import { validateResult } from "../../src/web/api/client";
++
++async function get(path: string, headers: Record<string, string> = { Host: "127.0.0.1:8787" }) {
++  const response = await app.request(`http://127.0.0.1${path}`, { headers });
++  return { status: response.status, body: (await response.json()) as any };
++}
++
++describe("R1 manifest fail-closed", () => {
++  test("отсутствующий manifest → NOT_AVAILABLE", async () => {
++    const dir = await mkdtemp(join(tmpdir(), "dss-manifest-"));
++    const result = await readManifest(dir);
++    expect(result.status).toBe("NOT_AVAILABLE");
++    expect(result.manifest).toBeNull();
++  });
++  test("повреждённый JSON → CORRUPTED", async () => {
++    const dir = await mkdtemp(join(tmpdir(), "dss-manifest-"));
++    await writeFile(join(dir, "manifest.json"), "{broken");
++    const result = await readManifest(dir);
++    expect(result.status).toBe("CORRUPTED");
++    expect(result.manifest).toBeNull();
++  });
++  test("неверная структура → CORRUPTED, валидная → OK", async () => {
++    const dir = await mkdtemp(join(tmpdir(), "dss-manifest-"));
++    await writeFile(join(dir, "manifest.json"), JSON.stringify({ version: "v1", dataset_checksum: 123, horizons: "1,3" }));
++    expect((await readManifest(dir)).status).toBe("CORRUPTED");
++    const hex = "a".repeat(64);
++    // checksum обязан быть SHA-256 (64 hex)
++    await writeFile(join(dir, "manifest.json"), JSON.stringify({ version: "shadow-mode/v1", created_at: "2026-11-24T00:00:00.000Z", dataset_checksum: "abc", horizons: [1, 3], models: {}, alpha: 1, limit_percent: 0.1, min_train_days: 28, note: "x" }));
++    expect((await readManifest(dir)).status).toBe("CORRUPTED");
++    // недопустимая версия
++    await writeFile(join(dir, "manifest.json"), JSON.stringify({ version: "shadow-mode/v9", created_at: "2026-11-24T00:00:00.000Z", dataset_checksum: hex, horizons: [1, 3], alpha: 1, limit_percent: 0.1, min_train_days: 28 }));
++    expect((await readManifest(dir)).status).toBe("CORRUPTED");
++    // недопустимый горизонт
++    await writeFile(join(dir, "manifest.json"), JSON.stringify({ version: "shadow-mode/v1", created_at: "2026-11-24T00:00:00.000Z", dataset_checksum: hex, horizons: [7], alpha: 1, limit_percent: 0.1, min_train_days: 28 }));
++    expect((await readManifest(dir)).status).toBe("CORRUPTED");
++    // корректный manifest
++    await writeFile(join(dir, "manifest.json"), JSON.stringify({ version: "shadow-mode/v1", created_at: "2026-11-24T00:00:00.000Z", dataset_checksum: hex, horizons: [1, 3], models: {}, alpha: 1, limit_percent: 0.1, min_train_days: 28, note: "x" }));
++    expect((await readManifest(dir)).status).toBe("OK");
++  });
++});
++
++describe("R2 точная проверка Origin", () => {
++  test("Origin: null и мусор отклоняются", async () => {
++    expect((await get("/api/health", { Host: "127.0.0.1:8787", Origin: "null" })).status).toBe(403);
++    expect((await get("/api/health", { Host: "127.0.0.1:8787", Origin: "not a url" })).status).toBe(403);
++  });
++  test("посторонние схемы, хосты и порты отклоняются", async () => {
++    for (const origin of ["https://evil.example.com", "http://evil.example.com:5173", "file:///etc/passwd", "http://127.0.0.1:9999"]) {
++      expect((await get("/api/health", { Host: "127.0.0.1:8787", Origin: origin })).status, origin).toBe(403);
++    }
++  });
++  test("разрешены Vite origin и точный same-origin", async () => {
++    expect((await get("/api/health", { Host: "127.0.0.1:8787", Origin: "http://127.0.0.1:5173" })).status).toBe(200);
++    expect((await get("/api/health", { Host: "127.0.0.1:8787", Origin: "http://127.0.0.1:8787" })).status).toBe(200);
++    expect((await get("/api/health", { Host: "localhost:8787", Origin: "http://localhost:8787" })).status).toBe(200);
++  });
++});
++
++describe("R3 replay и shadow разделены", () => {
++  test("по умолчанию только mode=shadow", async () => {
++    const { body } = await get("/api/v1/shadow/forecasts?limit=50");
++    expect(body.status).toBe("ok");
++    expect(body.data.items.length).toBeGreaterThan(0);
++    expect(body.data.items.every((item: any) => item.mode === "shadow")).toBe(true);
++  });
++  test("replay доступен только явно", async () => {
++    const { body } = await get("/api/v1/shadow/forecasts?mode=replay&limit=5");
++    expect(body.data.items.every((item: any) => item.mode === "replay")).toBe(true);
++  });
++});
++
++describe("R4 проверка календарных дат", () => {
++  test("нереальные даты отклоняются", async () => {
++    for (const query of ["from=2026-99-99", "to=2026-02-30", "from=2026-13-01", "to=2026-00-10"]) {
++      const { status, body } = await get(`/api/v1/history?${query}`);
++      expect(status, query).toBe(400);
++      expect(body.error.code).toBe("INVALID_QUERY");
++    }
++  });
++  test("корректные граничные даты принимаются (2024-02-29)", async () => {
++    const leap = await get("/api/v1/history?from=2024-02-29&to=2024-02-29");
++    expect(leap.status).toBe(200);
++    const notLeap = await get("/api/v1/history?from=2025-02-29&to=2025-02-29");
++    expect(notLeap.status).toBe(400);
++  });
++});
++
++describe("R5 provenance checksums", () => {
++  test("checksum файла и нормализованный различаются и оба присутствуют", async () => {
++    const { body } = await get("/api/v1/overview");
++    const provenance = body.data.provenance;
++    expect(typeof provenance.fileChecksum).toBe("string");
++    expect(typeof provenance.normalizedChecksum).toBe("string");
++    expect(provenance.fileChecksum).not.toBe(provenance.normalizedChecksum);
++    expect(["MATCH", "STALE", "NOT_CONFIRMED"]).toContain(provenance.freshness);
++    expect(body.meta.checksum).toBe(provenance.fileChecksum);
++  });
++});
++
++describe("R7 runtime validation ответов", () => {
++  test("некорректные структуры отклоняются", () => {
++    expect(validateResult(null)).toBeNull();
++    expect(validateResult({})).toBeNull();
++    expect(validateResult({ status: "ok" })).toBeNull();
++    expect(validateResult({ status: "ok", data: {}, meta: { readOnly: false } })).toBeNull();
++    expect(validateResult({ status: "not_available", data: 0, meta: {} })).toBeNull();
++    expect(validateResult({ status: "error", error: { code: 1 } })).toBeNull();
++    expect(validateResult({ status: "unknown" })).toBeNull();
++  });
++  test("корректные структуры принимаются", () => {
++    expect(validateResult({ status: "ok", data: { a: 1 }, meta: { readOnly: true, generatedAt: "x", source: "s" } })).not.toBeNull();
++    expect(validateResult({ status: "not_available", data: null, meta: { readOnly: true, generatedAt: "x", source: "s" } })).not.toBeNull();
++    expect(validateResult({ status: "error", error: { code: "E", message: "m" } })).not.toBeNull();
++  });
++  test("неожиданный HTTP-статус даёт ошибку", async () => {
++    const realFetch = globalThis.fetch;
++    globalThis.fetch = (async () => new Response("boom", { status: 500 })) as unknown as typeof fetch;
++    try {
++      const { ApiClient } = await import("../../src/web/api/client");
++      await expect(new ApiClient().get("/api/v1/overview")).rejects.toMatchObject({ code: "HTTP_500" });
++    } finally {
++      globalThis.fetch = realFetch;
++    }
++  });
++});
++describe("UI-2.2.1: разделение агрегатов shadow и replay", () => {
++  test("shadow forecasts: totals только для shadow, modeTotals раздельны", async () => {
++    const { body } = await get("/api/v1/shadow/forecasts?limit=5");
++    expect(body.data.items.every((item: any) => item.mode === "shadow")).toBe(true);
++    expect(body.data.totals.snapshots).toBe(body.data.modeTotals.shadow.snapshots);
++    expect(body.data.totals.snapshots).not.toBe(body.data.modeTotals.replay.snapshots + body.data.modeTotals.shadow.snapshots);
++    expect(body.data.modeTotals.replay.snapshots).toBeGreaterThan(0);
++    expect(body.data.totals.snapshots).toBeLessThan(body.data.modeTotals.shadow.snapshots + body.data.modeTotals.replay.snapshots);
++  });
++
++  test("replay запрашивается отдельно и его totals не смешиваются с shadow", async () => {
++    const { body } = await get("/api/v1/shadow/forecasts?mode=replay&limit=5");
++    expect(body.data.items.every((item: any) => item.mode === "replay")).toBe(true);
++    expect(body.data.totals.snapshots).toBe(body.data.modeTotals.replay.snapshots);
++  });
++
++  test("overview: shadow и replay раздельны", async () => {
++    const { body } = await get("/api/v1/overview");
++    expect(body.data.shadow.snapshots).toBeGreaterThan(0);
++    expect(body.data.replay.snapshots).toBeGreaterThan(0);
++    expect(body.data.shadow.snapshots).not.toBe(body.data.shadow.snapshots + body.data.replay.snapshots);
++  });
++
++  test("reconciliations фильтруются по режиму", async () => {
++    const shadow = await get("/api/v1/shadow/reconciliations?limit=5");
++    expect(shadow.body.data.mode).toBe("shadow");
++    const replay = await get("/api/v1/shadow/reconciliations?mode=replay&limit=5");
++    expect(replay.body.data.mode).toBe("replay");
++    expect(replay.body.data.total).not.toBe(shadow.body.data.total + replay.body.data.total);
++    const invalid = await get("/api/v1/shadow/reconciliations?mode=all");
++    expect(invalid.status).toBe(400);
++  });
++
++  test("coverage: nullPolicy объявлена явно", async () => {
++    const { body } = await get("/api/v1/history/coverage");
++    expect(body.data.nullPolicy).toBe("REJECTED_AS_CORRUPTED");
++    expect(body.data.nullValues).toBe(0);
++  });
++});
++
++describe("UI-2.2.1: контракт ошибок и метаданных", () => {
++  test("ошибки маршрутов содержат eventId", async () => {
++    const { status, body } = await get("/api/v1/history?limit=0");
++    expect(status).toBe(400);
++    expect(body.error.code).toBe("INVALID_QUERY");
++    expect(typeof body.error.eventId).toBe("string");
++    expect(body.error.eventId.length).toBeGreaterThan(10);
++  });
++
++  test("not_available без обязательных meta отклоняется клиентом", () => {
++    expect(validateResult({ status: "not_available", data: null, meta: {} })).toBeNull();
++    expect(validateResult({ status: "not_available", data: null, meta: { readOnly: true, generatedAt: "x", source: "s" } })).not.toBeNull();
++  });
++});
+\ No newline at end of file

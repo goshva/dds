@@ -1,0 +1,176 @@
+/** UI-3: оболочка DSS с навигацией (overview / history / quality / provenance). Данные — только через API. */
+import {
+  appShell,
+  card,
+  chartCard,
+  completenessCalendar,
+  dataTable,
+  emptyState,
+  errorState,
+  formatDate,
+  formatNumber,
+  kpiGrid,
+  lineChart,
+  loadingState,
+  pageHeader,
+  provenanceDrawer,
+  sidebar,
+  statusBadge,
+  topbar,
+  trusted,
+  type TrustedHtml,
+} from "./components";
+import { api, ApiClientError, type ApiResult } from "./api/client";
+import { dataQualityPage } from "./pages/data-quality";
+import { historyEmpty, historyPage, RANGES, type CoverageDto, type HistoryDto } from "./pages/history";
+import { provenancePage, type OverviewForProvenance } from "./pages/provenance";
+
+interface Overview extends OverviewForProvenance {
+  shadow: { snapshots: number; pending: number; reconciled: number; fallbacks: number; invalids: number; candidate: string; baseline: string; horizons: number[]; available: boolean };
+  replay: { snapshots: number; available: boolean };
+}
+interface ShadowForecasts { totals: { snapshots: number; pending: number; reconciled: number }; errorsByMode: { shadow: number; replay: number; unknown: number }; manifestStatus: string; items: Array<{ mode: string; modelId: string; horizon: number; originDate: string; targetDate: string; forecastValue: number | null; status: string }> }
+
+const root = document.getElementById("app")!;
+const PAGES = [
+  { key: "overview", label: "Обзор" },
+  { key: "history", label: "История" },
+  { key: "quality", label: "Качество данных" },
+  { key: "provenance", label: "Происхождение" },
+] as const;
+type PageKey = (typeof PAGES)[number]["key"];
+
+function parseHash(): { page: PageKey; range: string; from: string; to: string } {
+  const raw = window.location.hash.replace(/^#/, "");
+  const [pageRaw, rangeRaw, fromRaw, toRaw] = raw.split("/");
+  const page = (PAGES.find((item) => item.key === pageRaw)?.key ?? "history") as PageKey;
+  return { page, range: rangeRaw || "all", from: fromRaw || "", to: toRaw || "" };
+}
+
+async function loadResult<T>(promise: Promise<ApiResult<T>>): Promise<ApiResult<T>> {
+  try {
+    return await promise;
+  } catch (error) {
+    const clientError = error as ApiClientError;
+    return { status: "error", error: { code: clientError.code ?? "UNKNOWN", message: clientError.message ?? "Неизвестная ошибка", eventId: `client-${crypto.randomUUID()}` } };
+  }
+}
+
+function nav(current: PageKey): TrustedHtml {
+  return sidebar({
+    brandName: "DSS",
+    brandSub: "прогнозирование заказов",
+    sections: [{ title: "Аналитика", items: PAGES.map((page) => ({ href: `#${page.key}`, label: page.label, current: page.key === current })) }],
+  });
+}
+
+function shell(content: TrustedHtml, updatedAt: string | null, sourceStatus: "OK" | "PARTIAL" | "NOT_AVAILABLE", page: PageKey): TrustedHtml {
+  return appShell({
+    sidebar: nav(page),
+    topbar: topbar({ title: "DSS · история и аналитика", shopNo: "7745", lastUpdated: updatedAt, sourceStatus }),
+    content,
+  });
+}
+
+function block(result: ApiResult<unknown>, render: () => TrustedHtml): TrustedHtml {
+  if (result.status === "not_available") return emptyState({ title: "Данные недоступны", detail: `причина: ${result.meta.reason ?? "UNKNOWN"}` });
+  if (result.status === "error") return errorState({ title: "Ошибка источника", detail: result.error.message, code: `${result.error.code} · ${result.error.eventId.slice(0, 8)}` });
+  return render();
+}
+
+/** Диапазон запроса: вычисляется на клиенте из уже выбранного периода; сервер фильтрует по датам. */
+function rangeToQuery(range: string, from: string, to: string, lastDate: string | null): { from?: string; to?: string; error?: string } {
+  if (from || to) {
+    if (from && !/^\d{4}-\d{2}-\d{2}$/.test(from)) return { error: "Некорректная дата начала" };
+    if (to && !/^\d{4}-\d{2}-\d{2}$/.test(to)) return { error: "Некорректная дата окончания" };
+    if (from && to && from > to) return { error: "Дата начала позже даты окончания" };
+    return { from: from || undefined, to: to || undefined };
+  }
+  const days = RANGES.find((item) => item.key === range)?.days ?? null;
+  if (!days || !lastDate) return {};
+  const end = Date.parse(`${lastDate}T00:00:00Z`);
+  const start = new Date(end - (days - 1) * 86_400_000).toISOString().slice(0, 10);
+  return { from: start, to: lastDate };
+}
+
+async function render(): Promise<void> {
+  const { page, range, from, to } = parseHash();
+  root.innerHTML = shell(loadingState({ rows: 6 }), null, "NOT_AVAILABLE", page);
+
+  const overview = await loadResult(api.get<Overview>("/api/v1/overview"));
+  const lastDate = overview.status === "ok" ? overview.data.history.lastDate : null;
+  const query = rangeToQuery(range, from, to, lastDate);
+  if (query.error) {
+    root.innerHTML = shell(errorState({ title: "Некорректный диапазон", detail: query.error, code: "INVALID_RANGE" }), null, "PARTIAL", page);
+    return;
+  }
+
+  const [history, coverage, fullHistory, forecasts] = await Promise.all([
+    loadResult(api.get<HistoryDto>("/api/v1/history", { limit: 1000, from: query.from, to: query.to })),
+    loadResult(api.get<CoverageDto>("/api/v1/history/coverage")),
+    loadResult(api.get<HistoryDto>("/api/v1/history", { limit: 1000 })),
+    loadResult(api.get<ShadowForecasts>("/api/v1/shadow/forecasts", { limit: 20 })),
+  ]);
+
+  const updatedAt = overview.status === "ok" ? overview.meta.generatedAt : null;
+  const sourceStatus = overview.status === "ok" ? "OK" : overview.status === "not_available" ? "NOT_AVAILABLE" : "PARTIAL";
+  let content: TrustedHtml;
+
+  if (page === "history") {
+    content = block(history, () => {
+      const data = (history as { data: HistoryDto }).data;
+      if (!data.returnedPoints) return historyEmpty();
+      const cov = coverage.status === "ok" ? (coverage as { data: CoverageDto }).data : ({ firstDate: data.from, lastDate: data.to, days: data.returnedPoints, gaps: 0, duplicateDates: 0, nullValues: 0, nullPolicy: "REJECTED_AS_CORRUPTED", completeness: "UNKNOWN", missingDates: [], gapIntervals: [], maxGapLength: 0, fillRatio: 0, fillRatioFormula: "observationDays / calendarDays" } as CoverageDto);
+      return historyPage({ history: data, coverage: cov, activeRange: range, from, to });
+    });
+  } else if (page === "quality") {
+    content = block(coverage, () => {
+      const cov = (coverage as { data: CoverageDto }).data;
+      // UI-3.1: календарь качества строится по полному ряду, а не по выбранному диапазону
+      const points = fullHistory.status === "ok" ? (fullHistory as { data: HistoryDto }).data.points : [];
+      return dataQualityPage({ coverage: cov, points });
+    });
+  } else if (page === "provenance") {
+    content = block(overview, () => provenancePage((overview as { data: Overview }).data));
+  } else {
+    content = block(overview, () => {
+      const data = (overview as { data: Overview }).data;
+      const freshnessStatus = data.provenance.freshness === "MATCH" ? "OK" : data.provenance.freshness === "STALE" ? "PENDING" : "NOT_AVAILABLE";
+      return trusted(`
+${pageHeader({ title: "Обзор", subtitle: `магазин ${data.shopNo} · ${data.timezone} · метрика ${data.metric} · slice ${data.sliceId}`, right: statusBadge({ status: "PROVISIONAL" }) })}
+<div class="ds-grid ds-grid--cards">
+  ${card({ title: "История", body: kpiGrid([
+        { label: "Дней", value: formatNumber(data.history.days), note: `${formatDate(data.history.firstDate)} — ${formatDate(data.history.lastDate)}`, status: data.history.completeness === "COMPLETE" ? "OK" : "PENDING" },
+        { label: "Последний факт", value: data.history.lastValue === null ? "[Н/Д]" : formatNumber(data.history.lastValue), note: formatDate(data.history.lastDate), status: "OK" },
+      ]) })}
+  ${card({ title: "Теневой режим", body: kpiGrid([
+        { label: "Shadow-снапшотов", value: formatNumber(data.shadow.snapshots), note: `replay отдельно: ${data.replay?.snapshots ?? "[Н/Д]"}`, status: data.shadow.available ? "OK" : "NOT_AVAILABLE" },
+        { label: "Ожидают факта", value: formatNumber(data.shadow.pending), note: `сверено ${data.shadow.reconciled}`, status: "PENDING" },
+      ]) })}
+</div>
+${card({ title: "Актуальность источника", body: trusted(`<div class="ds-row">${statusBadge({ status: freshnessStatus, text: `freshness: ${data.provenance.freshness}` })}${statusBadge({ status: data.provenance.manifestStatus === "OK" ? "OK" : "NOT_AVAILABLE", text: `manifest: ${data.provenance.manifestStatus}` })}</div>${provenanceDrawer({ source: "canonical CSV (read-only)", checksum: `file ${data.provenance.fileChecksum}`, version: `normalized ${data.provenance.normalizedChecksum}`, note: "семантика PROVISIONAL" })}`) })}
+${chartCard({ title: "История фактов", hint: "линия разрывается на отсутствующих наблюдениях", chart: lineChart([{ name: "actual", className: "actual", points: history.status === "ok" ? (history as { data: HistoryDto }).data.points.map((point) => ({ date: point.date, value: Number.isFinite(point.value) ? point.value : null })) : [] }]) })}
+${card({ title: "Теневой режим: реальные наблюдения", subtitle: "только mode=shadow", body: dataTable({ columns: [{ key: "model", label: "Модель" }, { key: "h", label: "h", numeric: true }, { key: "target", label: "target" }, { key: "value", label: "Прогноз", numeric: true }], rows: forecasts.status === "ok" ? (forecasts as { data: ShadowForecasts }).data.items.slice(-6).map((item) => ({ model: item.modelId, h: item.horizon, target: formatDate(item.targetDate), value: item.forecastValue === null ? "[Н/Д]" : formatNumber(item.forecastValue) })) : [], emptyText: "Реальных shadow-прогнозов нет" }) })}
+${card({ title: "Полнота (последние 28 дней)", body: completenessCalendar(history.status === "ok" ? (history as { data: HistoryDto }).data.points.slice(-28).map((point) => ({ date: point.date, status: Number.isFinite(point.value) ? "full" as const : "missing" as const })) : []) })}
+`);
+    });
+  }
+  root.innerHTML = shell(content, updatedAt, sourceStatus, page);
+}
+
+function applyCustomRange(): void {
+  const from = (document.getElementById("ds-from") as HTMLInputElement | null)?.value ?? "";
+  const to = (document.getElementById("ds-to") as HTMLInputElement | null)?.value ?? "";
+  window.location.hash = `#history/custom/${from}/${to}`;
+}
+
+document.addEventListener("click", (event) => {
+  const target = event.target as HTMLElement;
+  if (target.id === "ds-apply") applyCustomRange();
+  if (target.id === "ds-reset") window.location.hash = "#history/all";
+});
+document.querySelector("[data-ds-menu]")?.addEventListener("click", () => {
+  document.querySelector("[data-ds-sidebar]")?.classList.toggle("is-open");
+});
+window.addEventListener("hashchange", () => void render());
+void render();

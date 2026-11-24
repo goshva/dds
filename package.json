@@ -42,9 +42,17 @@
     "forecast:error-diagnostics": "bun src/forecasting/cli/error-diagnostics.ts",
     "forecast:error-validation": "bun src/forecasting/cli/error-validation.ts",
     "forecast:diagnostics": "bun src/forecasting/cli/diagnostics.ts",
-    "forecast:test": "bun test tests/forecasting"
+    "forecast:test": "bun test tests/forecasting",
+    "api:start": "bun src/server/index.ts",
+    "ui:dev": "vite",
+    "ui:build": "vite build",
+    "ui:test": "bun test tests/web tests/server"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "vite": "^8.3.8"
+  },
+  "dependencies": {
+    "hono": "^4.13.21"
   }
 }

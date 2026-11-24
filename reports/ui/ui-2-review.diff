@@ -1,0 +1,1020 @@
+﻿diff --git a/src/server/api.ts b/src/server/api.ts
+new file mode 100644
+index 0000000..15c52cb
+--- /dev/null
++++ b/src/server/api.ts
+@@ -0,0 +1,43 @@
++/** UI-2: единый контракт API DSS (read-only). */
++export interface ApiMeta {
++  generatedAt: string;
++  source: string;
++  readOnly: true;
++  checksum?: string;
++  reason?: string;
++  note?: string;
++}
++export interface ApiOk<T> { status: "ok"; data: T; meta: ApiMeta }
++export interface ApiNotAvailable { status: "not_available"; data: null; meta: ApiMeta }
++export interface ApiError { status: "error"; error: { code: string; message: string } }
++export type ApiResponse<T> = ApiOk<T> | ApiNotAvailable | ApiError;
++
++export const SEMANTICS_STATUS = "PROVISIONAL" as const;
++
++export class SourceError extends Error {
++  readonly code: string;
++  readonly httpStatus: number;
++  constructor(code: string, message: string, httpStatus = 503) {
++    super(message);
++    this.name = "SourceError";
++    this.code = code;
++    this.httpStatus = httpStatus;
++  }
++}
++
++export function meta(source: string, extra: Partial<ApiMeta> = {}): ApiMeta {
++  return { generatedAt: new Date().toISOString(), source, readOnly: true, ...extra };
++}
++export function ok<T>(data: T, source: string, extra: Partial<ApiMeta> = {}): ApiOk<T> {
++  return { status: "ok", data, meta: meta(source, extra) };
++}
++export function notAvailable(reason: string, source: string): ApiNotAvailable {
++  return { status: "not_available", data: null, meta: meta(source, { reason }) };
++}
++/** Клиенту — код и общее сообщение; без stack trace, путей и SQL. */
++export function toErrorResponse(error: unknown): { body: ApiError; status: number } {
++  if (error instanceof SourceError) {
++    return { body: { status: "error", error: { code: error.code, message: error.message } }, status: error.httpStatus };
++  }
++  return { body: { status: "error", error: { code: "INTERNAL_ERROR", message: "Internal server error" } }, status: 500 };
++}
+\ No newline at end of file
+diff --git a/src/server/sources.ts b/src/server/sources.ts
+new file mode 100644
+index 0000000..5ae879a
+--- /dev/null
++++ b/src/server/sources.ts
+@@ -0,0 +1,105 @@
++/** UI-2: read-only доступ к источникам DSS (CSV/JSONL); записи не выполняются. */
++import { readFile } from "node:fs/promises";
++import { resolve } from "node:path";
++
++import { readCanonicalCsv } from "../forecasting/analytics/expansion/history-builder";
++import {
++  isReconciliationRecord,
++  isShadowErrorRecord,
++  isSnapshotRecord,
++  readJsonl,
++  storePaths,
++  type ReconciliationRecord,
++  type ShadowError,
++  type ShadowManifest,
++  type ShadowSnapshot,
++} from "../forecasting/shadow/store";
++import { SourceError } from "./api";
++
++export const CANONICAL_CSV = "data/processed/forecasting/7745/canonical_daily_delivered_orders.csv";
++export const SHADOW_DIR = "data/shadow/7745";
++export const SHOP_NO = "7745";
++export const SLICE_ID = 20624;
++export const TARGET_METRIC = "qty_orders_delivered";
++export const TIMEZONE = "Europe/Moscow";
++
++export interface HistoryPoint { date: string; value: number }
++const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
++
++function checksum(text: string): string {
++  return new Bun.CryptoHasher("sha256").update(text).digest("hex");
++}
++function shadowPaths() {
++  return storePaths(resolve(SHADOW_DIR));
++}
++
++export async function readHistory(): Promise<{ points: HistoryPoint[]; checksum: string }> {
++  const path = resolve(CANONICAL_CSV);
++  let text: string;
++  try {
++    text = await readFile(path, "utf8");
++  } catch {
++    throw new SourceError("SOURCE_NOT_AVAILABLE", "Canonical dataset is not available");
++  }
++  const lines = text.trim().split(/\r?\n/);
++  if (lines.length < 2) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset is empty");
++  const header = lines[0]!.split(",");
++  for (const column of ["date", "shop_no", "metric", "value"]) {
++    if (!header.includes(column)) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset header is invalid");
++  }
++  let points: HistoryPoint[];
++  try {
++    points = await readCanonicalCsv(path);
++  } catch {
++    throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset cannot be parsed");
++  }
++  let previous = "";
++  for (const point of points) {
++    if (!ISO_DATE.test(point.date)) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset contains an invalid date");
++    if (typeof point.value !== "number" || !Number.isFinite(point.value)) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset contains a non-finite value");
++    if (point.date <= previous) throw new SourceError("DATA_SOURCE_CORRUPTED", "Canonical dataset chronology is violated");
++    previous = point.date;
++  }
++  return { points, checksum: checksum(points.map((point) => `${point.date}\t${point.value}`).join("\n")) };
++}
++
++export async function readSnapshots(): Promise<ShadowSnapshot[]> {
++  try {
++    return await readJsonl<ShadowSnapshot>(shadowPaths().forecasts, isSnapshotRecord);
++  } catch {
++    throw new SourceError("DATA_SOURCE_CORRUPTED", "Shadow forecasts storage is corrupted");
++  }
++}
++export async function readReconciliations(): Promise<ReconciliationRecord[]> {
++  try {
++    return await readJsonl<ReconciliationRecord>(shadowPaths().reconciliations, isReconciliationRecord);
++  } catch {
++    throw new SourceError("DATA_SOURCE_CORRUPTED", "Shadow reconciliation storage is corrupted");
++  }
++}
++export async function readShadowErrors(): Promise<ShadowError[]> {
++  try {
++    return await readJsonl<ShadowError>(shadowPaths().errors, isShadowErrorRecord);
++  } catch {
++    throw new SourceError("DATA_SOURCE_CORRUPTED", "Shadow error storage is corrupted");
++  }
++}
++export async function readManifest(): Promise<ShadowManifest | null> {
++  try {
++    return JSON.parse(await readFile(shadowPaths().manifest, "utf8")) as ShadowManifest;
++  } catch {
++    return null;
++  }
++}
++export async function shadowFileChecksums(): Promise<Record<string, string>> {
++  const paths = shadowPaths();
++  const result: Record<string, string> = {};
++  for (const [name, path] of [["forecasts", paths.forecasts], ["reconciliations", paths.reconciliations], ["manifest", paths.manifest]] as const) {
++    try {
++      result[name] = checksum(await readFile(path, "utf8"));
++    } catch {
++      result[name] = "NOT_AVAILABLE";
++    }
++  }
++  return result;
++}
+\ No newline at end of file
+diff --git a/src/server/services/read-models.ts b/src/server/services/read-models.ts
+new file mode 100644
+index 0000000..c44e711
+--- /dev/null
++++ b/src/server/services/read-models.ts
+@@ -0,0 +1,250 @@
++/** UI-2: read-only read-models. Бизнес-логика прогнозирования не дублируется. */
++import { resolve } from "node:path";
++
++import { monitor, type MonitorReport } from "../../forecasting/shadow/pipeline";
++import { storePaths } from "../../forecasting/shadow/store";
++import { SourceError } from "../api";
++import {
++  readHistory,
++  readManifest,
++  readReconciliations,
++  readShadowErrors,
++  readSnapshots,
++  shadowFileChecksums,
++  SHADOW_DIR,
++  SHOP_NO,
++  SLICE_ID,
++  TARGET_METRIC,
++  TIMEZONE,
++  type HistoryPoint,
++} from "../sources";
++
++const MAX_LIMIT = 1000;
++const DEFAULT_LIMIT = 120;
++
++export function parseLimit(raw: string | undefined, fallback = DEFAULT_LIMIT): number {
++  if (raw === undefined) return fallback;
++  const value = Number(raw);
++  if (!Number.isInteger(value) || value < 1 || value > MAX_LIMIT) {
++    throw new SourceError("INVALID_QUERY", `limit must be an integer between 1 and ${MAX_LIMIT}`, 400);
++  }
++  return value;
++}
++
++export function parseDate(raw: string | undefined, field: string): string | null {
++  if (raw === undefined) return null;
++  if (!/^\d{4}-\d{2}-\d{2}$/.test(raw)) throw new SourceError("INVALID_QUERY", `${field} must be YYYY-MM-DD`, 400);
++  return raw;
++}
++
++export interface HistoryModel {
++  shopNo: string;
++  metric: string;
++  sliceId: number;
++  timezone: string;
++  totalPoints: number;
++  returnedPoints: number;
++  from: string | null;
++  to: string | null;
++  points: HistoryPoint[];
++  semantics: "PROVISIONAL";
++}
++
++export async function historyModel(query: { from?: string; to?: string; limit?: string }): Promise<{ model: HistoryModel; checksum: string }> {
++  const from = parseDate(query.from, "from");
++  const to = parseDate(query.to, "to");
++  if (from && to && from > to) throw new SourceError("INVALID_QUERY", "from must not exceed to", 400);
++  const limit = parseLimit(query.limit, DEFAULT_LIMIT);
++  const { points, checksum } = await readHistory();
++  const filtered = points.filter((point) => (!from || point.date >= from) && (!to || point.date <= to));
++  const slice = filtered.slice(-limit);
++  return {
++    model: {
++      shopNo: SHOP_NO,
++      metric: TARGET_METRIC,
++      sliceId: SLICE_ID,
++      timezone: TIMEZONE,
++      totalPoints: points.length,
++      returnedPoints: slice.length,
++      from: slice[0]?.date ?? null,
++      to: slice.at(-1)?.date ?? null,
++      points: slice,
++      semantics: "PROVISIONAL",
++    },
++    checksum,
++  };
++}
++
++export interface CoverageModel {
++  firstDate: string | null;
++  lastDate: string | null;
++  days: number;
++  gaps: number;
++  duplicateDates: number;
++  nullValues: number;
++  completeness: "COMPLETE" | "PARTIAL" | "UNKNOWN";
++}
++
++function daysBetween(from: string, to: string): number {
++  const start = Date.parse(`${from}T00:00:00Z`);
++  const end = Date.parse(`${to}T00:00:00Z`);
++  return Math.round((end - start) / 86_400_000) + 1;
++}
++
++export async function coverageModel(): Promise<CoverageModel> {
++  const { points } = await readHistory();
++  if (!points.length) {
++    return { firstDate: null, lastDate: null, days: 0, gaps: 0, duplicateDates: 0, nullValues: 0, completeness: "UNKNOWN" };
++  }
++  const first = points[0]!.date;
++  const last = points.at(-1)!.date;
++  const unique = new Set(points.map((point) => point.date));
++  const gaps = Math.max(daysBetween(first, last) - unique.size, 0);
++  const nullValues = points.filter((point) => !Number.isFinite(point.value)).length;
++  return {
++    firstDate: first,
++    lastDate: last,
++    days: unique.size,
++    gaps,
++    duplicateDates: points.length - unique.size,
++    nullValues,
++    completeness: gaps === 0 && nullValues === 0 ? "COMPLETE" : "PARTIAL",
++  };
++}
++
++export interface ShadowForecastsModel {
++  totals: { snapshots: number; shadow: number; replay: number; pending: number; reconciled: number; errors: number; fallbacks: number; invalids: number; conflicts: number };
++  horizons: number[];
++  models: string[];
++  modes: string[];
++  manifest: { version: string; datasetChecksum: string; horizons: number[] } | null;
++  checksums: Record<string, string>;
++  items: Array<{ snapshotId: string; mode: string; modelId: string; modelVersion: string; variant: string | null; horizon: number; originDate: string; targetDate: string; forecastValue: number | null; status: string; inputDataVersion: string; generatedAt: string }>;
++}
++
++export async function shadowForecastsModel(query: { horizon?: string; mode?: string; limit?: string }): Promise<ShadowForecastsModel> {
++  const limit = parseLimit(query.limit, 60);
++  const snapshots = await readSnapshots();
++  const reconciliations = await readReconciliations();
++  const errors = await readShadowErrors();
++  const manifest = await readManifest();
++  const checksums = await shadowFileChecksums();
++  const horizon = query.horizon === undefined ? null : Number(query.horizon);
++  if (horizon !== null && ![1, 3].includes(horizon)) throw new SourceError("INVALID_QUERY", "horizon must be 1 or 3", 400);
++  const mode = query.mode ?? null;
++  if (mode !== null && !["shadow", "replay"].includes(mode)) throw new SourceError("INVALID_QUERY", "mode must be shadow or replay", 400);
++  const reconciledIds = new Set(reconciliations.map((record) => record.snapshot_id));
++  const filtered = snapshots.filter((snapshot) => (horizon === null || snapshot.horizon === horizon) && (mode === null || snapshot.mode === mode));
++  const items = filtered.slice(-limit).map((snapshot) => ({
++    snapshotId: snapshot.snapshot_id,
++    mode: snapshot.mode,
++    modelId: snapshot.model_id,
++    modelVersion: snapshot.model_version,
++    variant: snapshot.variant,
++    horizon: snapshot.horizon,
++    originDate: snapshot.origin_date,
++    targetDate: snapshot.target_date,
++    forecastValue: snapshot.forecast_value,
++    status: snapshot.status,
++    inputDataVersion: snapshot.input_data_version,
++    generatedAt: snapshot.generated_at,
++  }));
++  return {
++    totals: {
++      snapshots: snapshots.length,
++      shadow: snapshots.filter((snapshot) => snapshot.mode === "shadow").length,
++      replay: snapshots.filter((snapshot) => snapshot.mode === "replay").length,
++      pending: snapshots.filter((snapshot) => !reconciledIds.has(snapshot.snapshot_id)).length,
++      reconciled: snapshots.filter((snapshot) => reconciledIds.has(snapshot.snapshot_id)).length,
++      errors: errors.length,
++      fallbacks: snapshots.filter((snapshot) => snapshot.status === "FALLBACK").length,
++      invalids: snapshots.filter((snapshot) => snapshot.status === "INVALID").length,
++      conflicts: errors.filter((error) => error.code === "SNAPSHOT_CONFLICT").length,
++    },
++    horizons: [1, 3],
++    models: ["rolling_7_day_mean", "adaptive_baseline"],
++    modes: ["shadow", "replay"],
++    manifest: manifest ? { version: manifest.version, datasetChecksum: manifest.dataset_checksum, horizons: manifest.horizons } : null,
++    checksums,
++    items,
++  };
++}
++
++export interface ReconciliationModel {
++  total: number;
++  items: Array<{ snapshotId: string; modelId: string; horizon: number; targetDate: string; forecastValue: number | null; actual: number; absoluteError: number; signedError: number }>;
++}
++
++export async function reconciliationsModel(query: { limit?: string; horizon?: string }): Promise<ReconciliationModel> {
++  const limit = parseLimit(query.limit, 60);
++  const horizon = query.horizon === undefined ? null : Number(query.horizon);
++  if (horizon !== null && ![1, 3].includes(horizon)) throw new SourceError("INVALID_QUERY", "horizon must be 1 or 3", 400);
++  const records = await readReconciliations();
++  const filtered = records.filter((record) => horizon === null || record.horizon === horizon);
++  return {
++    total: records.length,
++    items: filtered.slice(-limit).map((record) => ({
++      snapshotId: record.snapshot_id,
++      modelId: record.model_id,
++      horizon: record.horizon,
++      targetDate: record.target_date,
++      forecastValue: record.forecast_value,
++      actual: record.actual,
++      absoluteError: record.absolute_error,
++      signedError: record.signed_error,
++    })),
++  };
++}
++
++/** Диагностика считается существующим read-only monitor(); запись не выполняется. */
++export async function monitorModel(): Promise<MonitorReport> {
++  const { points } = await readHistory();
++  return monitor(points, storePaths(resolve(SHADOW_DIR)), new Date().toISOString());
++}
++
++export interface OverviewModel {
++  shopNo: string;
++  timezone: string;
++  metric: string;
++  sliceId: number;
++  semantics: "PROVISIONAL";
++  history: { days: number; firstDate: string | null; lastDate: string | null; lastValue: number | null; checksum: string; completeness: string };
++  shadow: { snapshots: number; shadow: number; replay: number; pending: number; reconciled: number; errors: number; candidate: string; baseline: string; horizons: number[]; available: boolean };
++}
++
++export async function overviewModel(): Promise<OverviewModel> {
++  const { points, checksum } = await readHistory();
++  const coverage = await coverageModel();
++  const snapshots = await readSnapshots();
++  const reconciliations = await readReconciliations();
++  const errors = await readShadowErrors();
++  const reconciledIds = new Set(reconciliations.map((record) => record.snapshot_id));
++  const last = points.at(-1) ?? null;
++  return {
++    shopNo: SHOP_NO,
++    timezone: TIMEZONE,
++    metric: TARGET_METRIC,
++    sliceId: SLICE_ID,
++    semantics: "PROVISIONAL",
++    history: {
++      days: coverage.days,
++      firstDate: coverage.firstDate,
++      lastDate: coverage.lastDate,
++      lastValue: last ? last.value : null,
++      checksum,
++      completeness: coverage.completeness,
++    },
++    shadow: {
++      snapshots: snapshots.length,
++      shadow: snapshots.filter((snapshot) => snapshot.mode === "shadow").length,
++      replay: snapshots.filter((snapshot) => snapshot.mode === "replay").length,
++      pending: snapshots.filter((snapshot) => !reconciledIds.has(snapshot.snapshot_id)).length,
++      reconciled: snapshots.filter((snapshot) => reconciledIds.has(snapshot.snapshot_id)).length,
++      errors: errors.length,
++      candidate: "adaptive_baseline/v1+variantB",
++      baseline: "rolling-7-day-mean/v1",
++      horizons: [1, 3],
++      available: snapshots.length > 0,
++    },
++  };
++}
+\ No newline at end of file
+diff --git a/src/server/routes.ts b/src/server/routes.ts
+new file mode 100644
+index 0000000..70c5b16
+--- /dev/null
++++ b/src/server/routes.ts
+@@ -0,0 +1,84 @@
++/** UI-2: маршруты API. Только GET; бизнес-записи отсутствуют. */
++import { Hono } from "hono";
++
++import { notAvailable, ok, toErrorResponse } from "./api";
++import { coverageModel, historyModel, monitorModel, overviewModel, reconciliationsModel, shadowForecastsModel } from "./services/read-models";
++
++export const apiRoutes = new Hono();
++
++apiRoutes.get("/api/health", (context) =>
++  context.json(ok({ service: "dss-api", readOnly: true, version: "ui-2" }, "process")),
++);
++
++apiRoutes.get("/api/v1/overview", async (context) => {
++  try {
++    const model = await overviewModel();
++    return context.json(ok(model, "canonical_csv+shadow_jsonl", { checksum: model.history.checksum }));
++  } catch (error) {
++    const response = toErrorResponse(error);
++    return context.json(response.body, response.status as 500);
++  }
++});
++
++apiRoutes.get("/api/v1/history", async (context) => {
++  try {
++    const query = context.req.query();
++    const { model, checksum } = await historyModel(query);
++    if (!model.returnedPoints) return context.json(notAvailable("NO_POINTS_IN_RANGE", "canonical_csv"));
++    return context.json(ok(model, "canonical_csv", { checksum }));
++  } catch (error) {
++    const response = toErrorResponse(error);
++    return context.json(response.body, response.status as 400);
++  }
++});
++
++apiRoutes.get("/api/v1/history/coverage", async (context) => {
++  try {
++    const model = await coverageModel();
++    if (!model.days) return context.json(notAvailable("SOURCE_EMPTY", "canonical_csv"));
++    return context.json(ok(model, "canonical_csv"));
++  } catch (error) {
++    const response = toErrorResponse(error);
++    return context.json(response.body, response.status as 500);
++  }
++});
++
++apiRoutes.get("/api/v1/shadow/forecasts", async (context) => {
++  try {
++    const model = await shadowForecastsModel(context.req.query());
++    if (!model.totals.snapshots) return context.json(notAvailable("SHADOW_STORE_EMPTY", "shadow_jsonl"));
++    return context.json(ok(model, "shadow_jsonl", { checksum: model.checksums.forecasts ?? "NOT_AVAILABLE" }));
++  } catch (error) {
++    const response = toErrorResponse(error);
++    return context.json(response.body, response.status as 500);
++  }
++});
++
++apiRoutes.get("/api/v1/shadow/reconciliations", async (context) => {
++  try {
++    const model = await reconciliationsModel(context.req.query());
++    if (!model.total) return context.json(notAvailable("NO_RECONCILIATIONS", "shadow_jsonl"));
++    return context.json(ok(model, "shadow_jsonl"));
++  } catch (error) {
++    const response = toErrorResponse(error);
++    return context.json(response.body, response.status as 500);
++  }
++});
++
++apiRoutes.get("/api/v1/shadow/monitor", async (context) => {
++  try {
++    const model = await monitorModel();
++    if (!model.forecasts) return context.json(notAvailable("SHADOW_STORE_EMPTY", "shadow_jsonl"));
++    return context.json(ok(model, "shadow_jsonl"));
++  } catch (error) {
++    const response = toErrorResponse(error);
++    return context.json(response.body, response.status as 500);
++  }
++});
++
++/** Любые изменяющие методы для бизнес-ресурсов запрещены. */
++for (const method of ["post", "put", "patch", "delete"] as const) {
++  apiRoutes[method]("/api/*", (context) =>
++    context.json({ status: "error", error: { code: "METHOD_NOT_ALLOWED", message: "Only GET is supported" } }, 405),
++  );
++}
+\ No newline at end of file
+diff --git a/src/server/app.ts b/src/server/app.ts
+new file mode 100644
+index 0000000..dacf00a
+--- /dev/null
++++ b/src/server/app.ts
+@@ -0,0 +1,57 @@
++/** UI-2: Hono-приложение DSS (read-only API, локальный bind). */
++import { Hono } from "hono";
++
++import { toErrorResponse } from "./api";
++import { apiRoutes } from "./routes";
++
++/**
++ * UI-2.1: защита локального API без авторизации.
++ *  - Host allowlist: отсекает DNS rebinding и обращения по чужому имени;
++ *  - Origin allowlist: разрешает same-origin и Vite dev server, отклоняет посторонние страницы.
++ */
++const ALLOWED_HOSTS = new Set(["127.0.0.1", "localhost", "[::1]", "::1"]);
++const ALLOWED_ORIGINS = new Set(["http://127.0.0.1:5173", "http://localhost:5173"]);
++
++function hostAllowed(rawHost: string | undefined): boolean {
++  // Реальный HTTP/1.1 всегда передаёт Host; отсутствие заголовка возможно только
++  // при внутреннем вызове app.request() (тесты), поэтому не блокируем его.
++  if (!rawHost) return true;
++  const host = rawHost.trim().toLowerCase();
++  const name = host.startsWith("[") ? host.slice(0, host.indexOf("]") + 1) : host.split(":")[0]!;
++  return ALLOWED_HOSTS.has(name);
++}
++
++function originAllowed(rawOrigin: string | undefined): boolean {
++  if (!rawOrigin) return true;
++  const origin = rawOrigin.trim().replace(/\/$/, "").toLowerCase();
++  if (ALLOWED_ORIGINS.has(origin)) return true;
++  return ALLOWED_HOSTS.has(new URL(origin.startsWith("http") ? origin : `http://${origin}`).hostname);
++}
++export function createApp() {
++  const app = new Hono();
++  app.use("*", async (context, next) => {
++    await next();
++    context.header("Cache-Control", "no-store");
++    context.header("X-Content-Type-Options", "nosniff");
++    context.header("Referrer-Policy", "no-referrer");
++  });
++  app.use("/api/*", async (context, next) => {
++    if (!hostAllowed(context.req.header("host"))) {
++      return context.json({ status: "error", error: { code: "HOST_NOT_ALLOWED", message: "Host is not allowed" } }, 403);
++    }
++    if (!originAllowed(context.req.header("origin"))) {
++      return context.json({ status: "error", error: { code: "ORIGIN_NOT_ALLOWED", message: "Origin is not allowed" } }, 403);
++    }
++    await next();
++  });
++  app.route("/", apiRoutes);
++  app.notFound((context) => context.json({ status: "error", error: { code: "NOT_FOUND", message: "Endpoint not found" } }, 404));
++  app.onError((error, context) => {
++    const response = toErrorResponse(error);
++    console.error(`[dss-api] ${response.body.error.code}: ${error instanceof Error ? error.message : "unknown"}`);
++    return context.json(response.body, response.status as 500);
++  });
++  return app;
++}
++
++export const app = createApp();
+\ No newline at end of file
+diff --git a/src/server/index.ts b/src/server/index.ts
+new file mode 100644
+index 0000000..f1ccbe0
+--- /dev/null
++++ b/src/server/index.ts
+@@ -0,0 +1,14 @@
++/** UI-2: локальный HTTP-сервер DSS. Слушает только 127.0.0.1. */
++import { app } from "./app";
++
++const HOST = "127.0.0.1";
++const PORT = Number(process.env.DSS_API_PORT ?? 8787);
++
++const server = Bun.serve({ hostname: HOST, port: PORT, fetch: app.fetch });
++
++console.log(`[dss-api] read-only API on http://${server.hostname}:${server.port}`);
++if (server.hostname !== HOST) {
++  console.error(`[dss-api] ОСТАНОВКА: неожиданный bind ${server.hostname}`);
++  server.stop(true);
++  process.exit(1);
++}
+\ No newline at end of file
+diff --git a/src/web/api/client.ts b/src/web/api/client.ts
+new file mode 100644
+index 0000000..e37bbcf
+--- /dev/null
++++ b/src/web/api/client.ts
+@@ -0,0 +1,58 @@
++/** UI-2: типизированный API-клиент DSS. Без demo-подстановок и без автоповторов. */
++export type ApiStatus = "ok" | "not_available" | "error";
++
++export interface ApiMeta { generatedAt: string; source: string; readOnly: true; checksum?: string; reason?: string; note?: string }
++export interface ApiOk<T> { status: "ok"; data: T; meta: ApiMeta }
++export interface ApiNotAvailable { status: "not_available"; data: null; meta: ApiMeta }
++export interface ApiErrorBody { status: "error"; error: { code: string; message: string } }
++export type ApiResult<T> = ApiOk<T> | ApiNotAvailable | ApiErrorBody;
++
++export class ApiClientError extends Error {
++  readonly code: string;
++  constructor(code: string, message: string) {
++    super(message);
++    this.name = "ApiClientError";
++    this.code = code;
++  }
++}
++
++export interface ClientOptions { baseUrl?: string; timeoutMs?: number }
++
++export class ApiClient {
++  private readonly baseUrl: string;
++  private readonly timeoutMs: number;
++  constructor(options: ClientOptions = {}) {
++    this.baseUrl = options.baseUrl ?? "";
++    this.timeoutMs = options.timeoutMs ?? 8000;
++  }
++
++  async get<T>(path: string, params: Record<string, string | number | undefined> = {}): Promise<ApiResult<T>> {
++    const search = new URLSearchParams();
++    for (const [key, value] of Object.entries(params)) {
++      if (value !== undefined && value !== "") search.set(key, String(value));
++    }
++    const query = search.toString();
++    const controller = new AbortController();
++    const timer = setTimeout(() => controller.abort(), this.timeoutMs);
++    try {
++      const response = await fetch(`${this.baseUrl}${path}${query ? `?${query}` : ""}`, { signal: controller.signal, headers: { Accept: "application/json" } });
++      const text = await response.text();
++      let parsed: unknown;
++      try {
++        parsed = JSON.parse(text);
++      } catch {
++        throw new ApiClientError("INVALID_JSON", "Сервер вернул некорректный JSON");
++      }
++      if (parsed && typeof parsed === "object" && "status" in parsed) return parsed as ApiResult<T>;
++      throw new ApiClientError("INVALID_RESPONSE", "Неожиданный формат ответа");
++    } catch (error) {
++      if (error instanceof ApiClientError) throw error;
++      if ((error as Error).name === "AbortError") throw new ApiClientError("TIMEOUT", "Превышено время ожидания ответа");
++      throw new ApiClientError("NETWORK_ERROR", "Не удалось связаться с API");
++    } finally {
++      clearTimeout(timer);
++    }
++  }
++}
++
++export const api = new ApiClient();
+\ No newline at end of file
+diff --git a/src/web/main.ts b/src/web/main.ts
+new file mode 100644
+index 0000000..b32e970
+--- /dev/null
++++ b/src/web/main.ts
+@@ -0,0 +1,125 @@
++/** UI-2: локальная оболочка DSS. Данные — только через HTTP API; fixtures не используются. */
++import {
++  appShell,
++  card,
++  chartCard,
++  completenessCalendar,
++  dataTable,
++  emptyState,
++  errorState,
++  formatDate,
++  formatNumber,
++  kpiGrid,
++  lineChart,
++  loadingState,
++  pageHeader,
++  provenanceDrawer,
++  sidebar,
++  statusBadge,
++  topbar,
++  trusted,
++} from "./components";
++import { api, ApiClientError, type ApiResult } from "./api/client";
++
++interface Overview {
++  shopNo: string;
++  timezone: string;
++  metric: string;
++  sliceId: number;
++  semantics: string;
++  history: { days: number; firstDate: string | null; lastDate: string | null; lastValue: number | null; checksum: string; completeness: string };
++  shadow: { snapshots: number; shadow: number; replay: number; pending: number; reconciled: number; errors: number; candidate: string; baseline: string; horizons: number[]; available: boolean };
++}
++interface History { points: Array<{ date: string; value: number }>; from: string | null; to: string | null; totalPoints: number; returnedPoints: number }
++interface ShadowForecasts { totals: { snapshots: number; shadow: number; replay: number; pending: number; reconciled: number; errors: number; fallbacks: number; invalids: number; conflicts: number }; items: Array<{ snapshotId: string; mode: string; modelId: string; horizon: number; originDate: string; targetDate: string; forecastValue: number | null; status: string }> }
++
++const root = document.getElementById("app")!;
++
++function stateBlock(result: ApiResult<unknown>, render: () => string): string {
++  if (result.status === "not_available") return emptyState({ title: "Данные недоступны", detail: `причина: ${result.meta.reason ?? "UNKNOWN"}` });
++  if (result.status === "error") return errorState({ title: "Ошибка источника", detail: result.error.message, code: result.error.code });
++  return render();
++}
++
++function shell(content: string, updatedAt: string | null, sourceStatus: "OK" | "PARTIAL" | "NOT_AVAILABLE"): string {
++  return appShell({
++    sidebar: sidebar({
++      brandName: "DSS",
++      brandSub: "прогнозирование заказов",
++      sections: [
++        { title: "Обзор", items: [{ href: "#overview", label: "Overview", current: true }] },
++        { title: "Данные", items: [{ href: "#history", label: "История" }, { href: "#shadow", label: "Теневой режим" }] },
++      ],
++    }),
++    topbar: topbar({ title: "DSS · панель прогнозирования", shopNo: "7745", lastUpdated: updatedAt, sourceStatus }),
++    content: trusted(content),
++  });
++}
++
++async function render(): Promise<void> {
++  root.innerHTML = shell(loadingState({ rows: 6 }), null, "NOT_AVAILABLE");
++  try {
++    const [overview, history, forecasts] = await Promise.all([
++      api.get<Overview>("/api/v1/overview"),
++      api.get<History>("/api/v1/history", { limit: 120 }),
++      api.get<ShadowForecasts>("/api/v1/shadow/forecasts", { limit: 40 }),
++    ]);
++
++    const overviewBlock = stateBlock(overview, () => {
++      const data = (overview as { data: Overview }).data;
++      return `
++${pageHeader({ title: "Обзор", subtitle: `магазин ${data.shopNo} · ${data.timezone} · метрика ${data.metric} · slice ${data.sliceId}`, right: statusBadge({ status: "PROVISIONAL" }) })}
++<div class="ds-grid ds-grid--cards">
++  ${card({ title: "История", body: kpiGrid([
++    { label: "Дней", value: formatNumber(data.history.days), note: `${formatDate(data.history.firstDate)} — ${formatDate(data.history.lastDate)}`, status: data.history.completeness === "COMPLETE" ? "OK" : "PENDING" },
++    { label: "Последний факт", value: formatNumber(data.history.lastValue), note: formatDate(data.history.lastDate), status: "OK" },
++  ]) })}
++  ${card({ title: "Теневой режим", body: kpiGrid([
++    { label: "Снапшотов", value: formatNumber(data.shadow.snapshots), note: `shadow ${data.shadow.shadow} · replay ${data.shadow.replay}`, status: data.shadow.available ? "OK" : "NOT_AVAILABLE" },
++    { label: "Ожидают факта", value: formatNumber(data.shadow.pending), note: `сверено ${data.shadow.reconciled}`, status: "PENDING" },
++  ]) })}
++</div>
++${card({ title: "Происхождение", body: provenanceDrawer({ source: "canonical CSV (read-only)", checksum: data.history.checksum, version: data.semantics, note: "семантика PROVISIONAL; baseline " + data.shadow.baseline }) })}
++`;
++    });
++
++    const historyBlock = stateBlock(history, () => {
++      const data = (history as { data: History }).data;
++      const chart = lineChart([{ name: "actual", className: "actual", points: data.points.map((point) => ({ date: point.date, value: point.value })) }]);
++      const calendar = completenessCalendar(data.points.slice(-28).map((point) => ({ date: point.date, status: Number.isFinite(point.value) ? "full" as const : "missing" as const })));
++      return `
++${card({ title: "История фактов", subtitle: `показано ${data.returnedPoints} из ${data.totalPoints} наблюдений`, body: chart })}
++<div class="ds-grid ds-grid--middle">
++  ${card({ title: "Полнота (последние 28 дней)", body: calendar })}
++  ${card({ title: "Таблица", body: dataTable({ columns: [{ key: "date", label: "Дата" }, { key: "value", label: "Заказы", numeric: true }], rows: data.points.slice(-12).map((point) => ({ date: formatDate(point.date), value: formatNumber(point.value) })) }) })}
++</div>`;
++    });
++
++    const shadowBlock = stateBlock(forecasts, () => {
++      const data = (forecasts as { data: ShadowForecasts }).data;
++      return `
++${card({ title: "Теневой режим: прогнозы", subtitle: "источник — shadow JSONL (read-only); replay и shadow не смешиваются", body: dataTable({
++        columns: [{ key: "mode", label: "Режим" }, { key: "model", label: "Модель" }, { key: "horizon", label: "h", numeric: true }, { key: "origin", label: "origin" }, { key: "target", label: "target" }, { key: "value", label: "Прогноз", numeric: true }, { key: "status", label: "Статус" }],
++        rows: data.items.slice(-12).map((item) => ({ mode: item.mode, model: item.modelId, horizon: item.horizon, origin: formatDate(item.originDate), target: formatDate(item.targetDate), value: item.forecastValue === null ? "NOT_AVAILABLE" : formatNumber(item.forecastValue), status: item.status })),
++      }) })}
++${card({ title: "Сводка теневого режима", body: kpiGrid([
++        { label: "Снапшотов", value: formatNumber(data.totals.snapshots), status: "OK" },
++        { label: "Сверено", value: formatNumber(data.totals.reconciled), status: "OK" },
++        { label: "Ожидают", value: formatNumber(data.totals.pending), status: "PENDING" },
++        { label: "Ошибки", value: formatNumber(data.totals.errors), status: data.totals.errors ? "CONFLICT" : "OK" },
++      ]) })}`;
++    });
++
++    const sourceStatus = overview.status === "ok" ? "OK" : overview.status === "not_available" ? "NOT_AVAILABLE" : "PARTIAL";
++    const updatedAt = overview.status === "ok" ? overview.meta.generatedAt : null;
++    root.innerHTML = shell(`${overviewBlock}${historyBlock}${shadowBlock}`, updatedAt, sourceStatus);
++  } catch (error) {
++    const message = error instanceof ApiClientError ? `${error.code}: ${error.message}` : "Неизвестная ошибка";
++    root.innerHTML = shell(errorState({ title: "API недоступен", detail: message, code: "API_UNAVAILABLE" }), null, "NOT_AVAILABLE");
++  }
++}
++
++document.querySelector("[data-ds-menu]")?.addEventListener("click", () => {
++  document.querySelector("[data-ds-sidebar]")?.classList.toggle("is-open");
++});
++void render();
+\ No newline at end of file
+diff --git a/src/web/index.html b/src/web/index.html
+new file mode 100644
+index 0000000..162a8ca
+--- /dev/null
++++ b/src/web/index.html
+@@ -0,0 +1,17 @@
++<!doctype html>
++<html lang="ru">
++<head>
++  <meta charset="utf-8" />
++  <meta name="viewport" content="width=device-width, initial-scale=1" />
++  <title>DSS — панель прогнозирования</title>
++  <link rel="stylesheet" href="./styles/tokens.css" />
++  <link rel="stylesheet" href="./styles/layout.css" />
++  <link rel="stylesheet" href="./styles/components.css" />
++  <link rel="stylesheet" href="./styles/charts.css" />
++  <link rel="stylesheet" href="./styles/responsive.css" />
++</head>
++<body>
++  <div id="app"></div>
++  <script type="module" src="./main.ts"></script>
++</body>
++</html>
+\ No newline at end of file
+diff --git a/vite.config.ts b/vite.config.ts
+new file mode 100644
+index 0000000..ba13031
+--- /dev/null
++++ b/vite.config.ts
+@@ -0,0 +1,20 @@
++import { defineConfig } from "vite";
++
++/** UI-2: Vite обслуживает frontend и проксирует /api на локальный Hono (127.0.0.1). */
++export default defineConfig({
++  root: "src/web",
++  publicDir: false,
++  server: {
++    host: "127.0.0.1",
++    port: 5173,
++    strictPort: true,
++    proxy: {
++      "/api": { target: "http://127.0.0.1:8787", changeOrigin: false },
++    },
++  },
++  build: {
++    outDir: "../../dist/web",
++    emptyOutDir: true,
++    sourcemap: false,
++  },
++});
+\ No newline at end of file
+diff --git a/tests/server/api.test.ts b/tests/server/api.test.ts
+new file mode 100644
+index 0000000..75e80f0
+--- /dev/null
++++ b/tests/server/api.test.ts
+@@ -0,0 +1,114 @@
++// UI-2: контрактные тесты read-only API (app.request, без сети).
++import { describe, expect, test } from "bun:test";
++import { app } from "../../src/server/app";
++
++async function get(path: string) {
++  const response = await app.request(`http://127.0.0.1${path}`);
++  return { status: response.status, body: (await response.json()) as any };
++}
++
++describe("health и методы", () => {
++  test("health: ok, readOnly, generatedAt", async () => {
++    const { status, body } = await get("/api/health");
++    expect(status).toBe(200);
++    expect(body.status).toBe("ok");
++    expect(body.meta.readOnly).toBe(true);
++    expect(typeof body.meta.generatedAt).toBe("string");
++  });
++  test("404 без stack trace и без путей", async () => {
++    const { status, body } = await get("/api/v1/unknown");
++    expect(status).toBe(404);
++    expect(body.error.code).toBe("NOT_FOUND");
++    expect(JSON.stringify(body)).not.toContain("at ");
++  });
++  test("POST/PUT/PATCH/DELETE запрещены", async () => {
++    for (const method of ["POST", "PUT", "PATCH", "DELETE"]) {
++      const response = await app.request("http://127.0.0.1/api/v1/history", { method });
++      expect(response.status, method).toBe(405);
++    }
++  });
++});
++
++describe("источники (read-only)", () => {
++  test("overview: реальные данные, без PII/путей/SQL", async () => {
++    const { status, body } = await get("/api/v1/overview");
++    expect(status).toBe(200);
++    expect(body.data.shopNo).toBe("7745");
++    expect(body.data.timezone).toBe("Europe/Moscow");
++    expect(body.data.metric).toBe("qty_orders_delivered");
++    expect(body.data.sliceId).toBe(20624);
++    expect(body.data.semantics).toBe("PROVISIONAL");
++    expect(body.data.history.days).toBeGreaterThan(900);
++    expect(body.data.history.lastValue).toBeGreaterThan(0);
++    const raw = JSON.stringify(body);
++    expect(raw).not.toContain("dimension_1");
++    expect(raw).not.toContain("SELECT");
++    expect(raw).not.toContain("forecasting.sqlite");
++    expect(raw).not.toMatch(/[A-Za-z]:\\\\/);
++  });
++  test("history: limit, отсутствие нулей, пустой диапазон → not_available", async () => {
++    const { body } = await get("/api/v1/history?limit=5");
++    expect(body.data.returnedPoints).toBe(5);
++    expect(body.data.points.every((point: any) => Number.isFinite(point.value))).toBe(true);
++    const empty = await get("/api/v1/history?from=2030-01-01&to=2030-01-02");
++    expect(empty.body.status).toBe("not_available");
++    expect(empty.body.data).toBeNull();
++    expect(empty.body.meta.reason).toBe("NO_POINTS_IN_RANGE");
++  });
++  test("history: некорректные параметры → 400 INVALID_QUERY", async () => {
++    for (const query of ["limit=0", "limit=99999", "limit=abc", "from=24-11-2026", "from=2026-11-24&to=2026-01-01"]) {
++      const { status, body } = await get(`/api/v1/history?${query}`);
++      expect(status, query).toBe(400);
++      expect(body.error.code).toBe("INVALID_QUERY");
++    }
++  });
++  test("coverage: полнота без фиктивных значений", async () => {
++    const { body } = await get("/api/v1/history/coverage");
++    expect(body.data.gaps).toBe(0);
++    expect(body.data.duplicateDates).toBe(0);
++    expect(body.data.completeness).toBe("COMPLETE");
++  });
++  test("shadow forecasts: replay/shadow разделены, horizon валидируется", async () => {
++    const { body } = await get("/api/v1/shadow/forecasts?limit=10");
++    expect(body.data.totals.snapshots).toBeGreaterThan(0);
++    expect(body.data.totals.replay).toBeGreaterThan(0);
++    expect(body.data.horizons).toEqual([1, 3]);
++    expect((await get("/api/v1/shadow/forecasts?horizon=7")).status).toBe(400);
++  });
++  test("reconciliations и monitor читаются", async () => {
++    const reconciliations = await get("/api/v1/shadow/reconciliations?limit=5");
++    expect(reconciliations.status).toBe(200);
++    expect(reconciliations.body.data.items.length).toBeGreaterThan(0);
++    const monitor = await get("/api/v1/shadow/monitor");
++    expect(monitor.status).toBe(200);
++    expect(monitor.body.data.forecasts).toBeGreaterThan(0);
++    expect(Array.isArray(monitor.body.data.metrics)).toBe(true);
++  });
++});
++describe("UI-2.1: Host и Origin (DNS rebinding, посторонние страницы)", () => {
++  test("чужой Host отклоняется (403)", async () => {
++    const response = await app.request("http://127.0.0.1/api/health", { headers: { Host: "evil.example.com" } });
++    expect(response.status).toBe(403);
++    const body = (await response.json()) as any;
++    expect(body.error.code).toBe("HOST_NOT_ALLOWED");
++  });
++
++  test("Host без порта и с портом разрешён", async () => {
++    for (const host of ["127.0.0.1", "127.0.0.1:8787", "localhost:8787"]) {
++      const response = await app.request("http://127.0.0.1/api/health", { headers: { Host: host } });
++      expect(response.status, host).toBe(200);
++    }
++  });
++
++  test("посторонний Origin отклоняется, Vite origin разрешён", async () => {
++    const blocked = await app.request("http://127.0.0.1/api/health", { headers: { Host: "127.0.0.1:8787", Origin: "https://evil.example.com" } });
++    expect(blocked.status).toBe(403);
++    const allowed = await app.request("http://127.0.0.1/api/health", { headers: { Host: "127.0.0.1:8787", Origin: "http://127.0.0.1:5173" } });
++    expect(allowed.status).toBe(200);
++  });
++
++  test("запрос без Origin (curl/тесты) разрешён", async () => {
++    const response = await app.request("http://127.0.0.1/api/v1/overview", { headers: { Host: "127.0.0.1:8787" } });
++    expect(response.status).toBe(200);
++  });
++});
+\ No newline at end of file
+diff --git a/tests/web/api-client.test.ts b/tests/web/api-client.test.ts
+new file mode 100644
+index 0000000..72e40e9
+--- /dev/null
++++ b/tests/web/api-client.test.ts
+@@ -0,0 +1,49 @@
++// UI-2: тесты API-клиента (без подстановки demo-данных).
++import { describe, expect, test } from "bun:test";
++
++import { ApiClient, ApiClientError } from "../../src/web/api/client";
++
++const realFetch = globalThis.fetch;
++
++describe("API-клиент", () => {
++  test("успешный ответ возвращается как есть", async () => {
++    globalThis.fetch = (async () => new Response(JSON.stringify({ status: "ok", data: { days: 906 }, meta: { generatedAt: "2026-11-24T00:00:00.000Z", source: "canonical_csv", readOnly: true } }), { status: 200 })) as unknown as typeof fetch;
++    const client = new ApiClient();
++    const result = await client.get<{ days: number }>("/api/v1/overview");
++    expect(result.status).toBe("ok");
++    if (result.status === "ok") expect(result.data.days).toBe(906);
++    globalThis.fetch = realFetch;
++  });
++
++  test("not_available не подменяется данными", async () => {
++    globalThis.fetch = (async () => new Response(JSON.stringify({ status: "not_available", data: null, meta: { generatedAt: "x", source: "shadow_jsonl", readOnly: true, reason: "SHADOW_STORE_EMPTY" } }), { status: 200 })) as unknown as typeof fetch;
++    const result = await new ApiClient().get("/api/v1/shadow/forecasts");
++    expect(result.status).toBe("not_available");
++    if (result.status === "not_available") expect(result.data).toBeNull();
++    globalThis.fetch = realFetch;
++  });
++
++  test("некорректный JSON → INVALID_JSON", async () => {
++    globalThis.fetch = (async () => new Response("<html>error</html>", { status: 200 })) as unknown as typeof fetch;
++    await expect(new ApiClient().get("/api/v1/history")).rejects.toThrow(ApiClientError);
++    globalThis.fetch = realFetch;
++  });
++
++  test("сетевая ошибка → NETWORK_ERROR, timeout → TIMEOUT", async () => {
++    globalThis.fetch = (async () => { throw new Error("network down"); }) as unknown as typeof fetch;
++    await expect(new ApiClient().get("/api/v1/history")).rejects.toMatchObject({ code: "NETWORK_ERROR" });
++    globalThis.fetch = (async () => { const error = new Error("aborted"); error.name = "AbortError"; throw error; }) as unknown as typeof fetch;
++    await expect(new ApiClient().get("/api/v1/history")).rejects.toMatchObject({ code: "TIMEOUT" });
++    globalThis.fetch = realFetch;
++  });
++
++  test("параметры кодируются, пустые не отправляются", async () => {
++    let called = "";
++    globalThis.fetch = (async (input: string) => { called = String(input); return new Response(JSON.stringify({ status: "ok", data: {}, meta: { generatedAt: "x", source: "s", readOnly: true } })); }) as unknown as unknown as typeof fetch;
++    await new ApiClient({ baseUrl: "http://127.0.0.1:8787" }).get("/api/v1/history", { limit: 10, from: undefined, to: "2026-11-23" });
++    expect(called).toContain("limit=10");
++    expect(called).toContain("to=2026-11-23");
++    expect(called).not.toContain("from=");
++    globalThis.fetch = realFetch;
++  });
++});
+\ No newline at end of file

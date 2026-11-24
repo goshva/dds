@@ -1,0 +1,20 @@
+/* Раскладка: sidebar + topbar + content (darkStore-паттерн). */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--ds-bg); color: var(--ds-ink); }
+body { font-family: var(--ds-font); font-size: var(--ds-fs-base); line-height: 1.45; }
+h1 { font-size: var(--ds-fs-h1); letter-spacing: -0.6px; margin: 0; font-weight: 780; }
+h2 { font-size: var(--ds-fs-h2); font-weight: 760; letter-spacing: -0.25px; margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+
+.ds-app { min-height: 100vh; }
+.ds-main { margin-left: var(--ds-sidebar); min-height: 100vh; display: flex; flex-direction: column; }
+.ds-content { padding: var(--ds-space-4) var(--ds-space-5); display: grid; gap: var(--ds-space-4); flex: 1; }
+.ds-grid { display: grid; gap: var(--ds-space-4); min-width: 0; }
+.ds-grid--overview { grid-template-columns: 1fr 1.16fr; }
+.ds-grid--middle { grid-template-columns: 1.12fr 1fr; }
+.ds-grid--matrix { grid-template-columns: 1.58fr 0.92fr; }
+.ds-grid--cards { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.ds-stack { display: grid; gap: var(--ds-space-3); }
+.ds-row { display: flex; align-items: center; gap: var(--ds-space-2); flex-wrap: wrap; }
+.ds-spacer { flex: 1; }
