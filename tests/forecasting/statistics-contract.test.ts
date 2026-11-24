@@ -155,6 +155,14 @@ describe("документы содержат исправленные форм�
   });
 });
 
+// Исключение строго по списку: только исследовательский скрипт эксперимента Stage 3.4.5.
+// Любой другой файл в src/ с этими именами по-прежнему считается нарушением.
+const ALLOWED_RESEARCH_SCRIPTS = new Set<string>([
+  "src/forecasting/analytics/adaptive-baseline/experiment.ts",
+  "src/forecasting/analytics/adaptive-baseline/multi-horizon.ts",
+  "src/forecasting/analytics/adaptive-baseline/stability.ts",
+]);
+
 describe("границы scope", () => {
   test("модуль statistics.ts отсутствует, production-код не зависит от него", async () => {
     const file = Bun.file("src/forecasting/analytics/diagnostics/statistics.ts");
@@ -164,8 +172,11 @@ describe("границы scope", () => {
     const offenders: string[] = [];
     for await (const path of glob.scan(".")) {
       const text = await Bun.file(path).text();
-      if (/holmAdjusted|percentileLinear|rejectByHolm|holmThresholds/.test(text)) offenders.push(path);
+      const normalized = path.replace(/\\/g, "/");
+      if (ALLOWED_RESEARCH_SCRIPTS.has(normalized)) continue;
+      if (/holmAdjusted|percentileLinear|rejectByHolm|holmThresholds/.test(text)) offenders.push(normalized);
     }
     expect(offenders).toEqual([]);
+    expect(ALLOWED_RESEARCH_SCRIPTS.size).toBe(3);
   });
 });

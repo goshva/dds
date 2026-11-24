@@ -1,0 +1,5 @@
+{
+  "passed": true,
+  "violations": 0,
+  "rule": "targetDate > originDate; baseline и actual конечны"
+}

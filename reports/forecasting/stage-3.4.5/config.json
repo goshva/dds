@@ -1,0 +1,27 @@
+{
+  "baseline": "rolling_7_day_mean",
+  "variants": [
+    "A",
+    "B"
+  ],
+  "mainHorizon": 7,
+  "minTrainPrimary": 28,
+  "minTrainSensitivity": 21,
+  "originSplitPercent": 50,
+  "alpha": 1,
+  "limitPercent": 0.1,
+  "holmAlpha": 0.05,
+  "hacLag": 7,
+  "bootstrap": {
+    "replicates": 10000,
+    "blockLength": 7,
+    "seed": 20261124
+  },
+  "noise": {
+    "seeds": 100,
+    "seedFrom": 1
+  },
+  "datasetChecksum": "d413286e3835653d30d4990a7aad14008119e2d9b46c8731110db70eba84231a",
+  "frozenAt": "2026-11-24T10:15:00.000Z",
+  "frozenAmplitude": 102.31790027269187
+}

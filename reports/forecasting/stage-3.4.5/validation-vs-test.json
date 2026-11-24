@@ -1,0 +1,11 @@
+{
+  "total_pairs": 871,
+  "validation_pairs": 435,
+  "test_pairs": 436,
+  "split_percent": 50,
+  "validation_from": "2024-06-28",
+  "validation_to": "2025-09-05",
+  "test_from": "2025-09-06",
+  "test_to": "2026-11-15",
+  "frozen_amplitude": 102.31790027269187
+}
