@@ -1,0 +1,6 @@
+<!-- bar-chart.html -->
+<div class="ds-chart-wrap">
+  <svg class="ds-chart" viewBox="0 0 {{width}} {{height}}" role="img" aria-label="bar chart">
+    {{#bars}}<rect class="ds-chart-bar" x="{{x}}" y="{{y}}" width="{{barWidth}}" height="{{barHeight}}" rx="2"><title>{{label}}: {{value}}</title></rect>{{/bars}}
+  </svg>
+</div>

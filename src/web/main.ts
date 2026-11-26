@@ -24,6 +24,7 @@ import { api, ApiClientError, type ApiResult } from "./api/client";
 import { dataQualityPage } from "./pages/data-quality";
 import { historyEmpty, historyPage, RANGES, type CoverageDto, type HistoryDto } from "./pages/history";
 import { provenancePage, type OverviewForProvenance } from "./pages/provenance";
+import { forecastQualityPage, type QualityDto } from "./pages/forecast-quality";
 
 interface Overview extends OverviewForProvenance {
   shadow: { snapshots: number; pending: number; reconciled: number; fallbacks: number; invalids: number; candidate: string; baseline: string; horizons: number[]; available: boolean };
@@ -37,14 +38,40 @@ const PAGES = [
   { key: "history", label: "История" },
   { key: "quality", label: "Качество данных" },
   { key: "provenance", label: "Происхождение" },
+  { key: "forecast-quality", label: "Прогнозы и качество" },
 ] as const;
 type PageKey = (typeof PAGES)[number]["key"];
 
-function parseHash(): { page: PageKey; range: string; from: string; to: string } {
+/**
+ * UI-7.0.1 (D-001): разбор маршрута отделён от разбора диапазона дат.
+ * Для страницы forecast-quality сегменты хеша — это mode/horizon, а не from/to.
+ * Валидатор дат (rangeToQuery) получает параметры только для страниц с диапазоном.
+ */
+interface Route {
+  page: PageKey;
+  /** Ключ диапазона истории ("all"/"30"/.../"custom"). Для forecast-quality — mode. */
+  range: string;
+  /** Начало диапазона (YYYY-MM-DD). Для forecast-quality — horizon ("1"/"3"). */
+  from: string;
+  /** Конец диапазона (YYYY-MM-DD). Для forecast-quality не используется. */
+  to: string;
+  /** true — параметры from/to интерпретируются как mode/horizon, валидация дат неприменима. */
+  isForecast: boolean;
+}
+
+function parseHash(): Route {
   const raw = window.location.hash.replace(/^#/, "");
   const [pageRaw, rangeRaw, fromRaw, toRaw] = raw.split("/");
   const page = (PAGES.find((item) => item.key === pageRaw)?.key ?? "history") as PageKey;
-  return { page, range: rangeRaw || "all", from: fromRaw || "", to: toRaw || "" };
+  const isForecast = page === "forecast-quality";
+  return { page, range: rangeRaw || "all", from: fromRaw || "", to: toRaw || "", isForecast };
+}
+
+/** Параметры прогнозной страницы: mode ∈ {shadow, replay}, horizon ∈ {1, 3}; иначе значения по умолчанию. */
+function forecastParams(route: Route): { mode: "shadow" | "replay"; horizon: 1 | 3 } {
+  const mode = route.range === "replay" ? "replay" : "shadow";
+  const horizon = route.from === "3" ? 3 : 1;
+  return { mode, horizon };
 }
 
 async function loadResult<T>(promise: Promise<ApiResult<T>>): Promise<ApiResult<T>> {
@@ -94,10 +121,24 @@ function rangeToQuery(range: string, from: string, to: string, lastDate: string 
 }
 
 async function render(): Promise<void> {
-  const { page, range, from, to } = parseHash();
+  const route = parseHash();
+  const { page, range, from, to } = route;
   root.innerHTML = shell(loadingState({ rows: 6 }), null, "NOT_AVAILABLE", page);
 
   const overview = await loadResult(api.get<Overview>("/api/v1/overview"));
+  const updatedAt = overview.status === "ok" ? overview.meta.generatedAt : null;
+  const sourceStatus = overview.status === "ok" ? "OK" : overview.status === "not_available" ? "NOT_AVAILABLE" : "PARTIAL";
+
+  // UI-7.0.1 (D-001): forecast-quality не использует диапазон дат — mode/horizon разбираются отдельно,
+  // валидатор дат к ним не применяется.
+  if (page === "forecast-quality") {
+    const { mode, horizon } = forecastParams(route);
+    const quality = await loadResult(api.get<QualityDto>("/api/v1/forecasts/quality", { mode, horizon }));
+    const content = block(quality, () => forecastQualityPage({ data: (quality as { data: QualityDto }).data, mode, horizon }));
+    root.innerHTML = shell(content, updatedAt, sourceStatus, page);
+    return;
+  }
+
   const lastDate = overview.status === "ok" ? overview.data.history.lastDate : null;
   const query = rangeToQuery(range, from, to, lastDate);
   if (query.error) {
@@ -112,8 +153,6 @@ async function render(): Promise<void> {
     loadResult(api.get<ShadowForecasts>("/api/v1/shadow/forecasts", { limit: 20 })),
   ]);
 
-  const updatedAt = overview.status === "ok" ? overview.meta.generatedAt : null;
-  const sourceStatus = overview.status === "ok" ? "OK" : overview.status === "not_available" ? "NOT_AVAILABLE" : "PARTIAL";
   let content: TrustedHtml;
 
   if (page === "history") {

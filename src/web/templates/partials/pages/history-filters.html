@@ -1,0 +1,10 @@
+<!-- history-filters.html -->
+<div class="ds-row" data-ds-history-filters>
+  {{#ranges}}<a class="ds-badge {{badgeClass}}" href="#history/{{key}}">{{label}}</a>{{/ranges}}
+  <span class="ds-sub">произвольный диапазон:</span>
+  <input type="date" id="ds-from" value="{{from}}" aria-label="Дата начала" />
+  <input type="date" id="ds-to" value="{{to}}" aria-label="Дата окончания" />
+  <button class="ds-badge ds-badge--provisional" id="ds-apply" type="button">Применить</button>
+  <button class="ds-badge ds-badge--na" id="ds-reset" type="button">Сбросить</button>
+  <span class="ds-sub" id="ds-range-error" role="status"></span>
+</div>

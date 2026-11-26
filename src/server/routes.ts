@@ -1,8 +1,9 @@
 /** UI-2: маршруты API. Только GET; бизнес-записи отсутствуют. */
 import { Hono } from "hono";
 
-import { fail, notAvailable, ok } from "./api";
+import { fail, notAvailable, ok, SourceError } from "./api";
 import { coverageModel, historyModel, monitorModel, overviewModel, reconciliationsModel, shadowForecastsModel } from "./services/read-models";
+import { forecastErrorsModel, forecastsListModel, forecastsQualityModel, parseEvaluationHorizon, parseEvaluationMode, parseOptionalBoolean, parseOptionalModel } from "./services/forecasting-read-models";
 
 export const apiRoutes = new Hono();
 
@@ -72,6 +73,50 @@ apiRoutes.get("/api/v1/shadow/monitor", async (context) => {
   }
 });
 
+apiRoutes.get("/api/v1/forecasts/quality", async (context) => {
+  try {
+    const query = context.req.query();
+    const mode = parseEvaluationMode(query.mode);
+    const horizon = parseEvaluationHorizon(query.horizon);
+    const paired = parseOptionalBoolean(query.paired, "paired");
+    const model = await forecastsQualityModel({ mode, horizon, paired });
+    if (!model.availability.available) return context.json(notAvailable(model.availability.reason ?? "NOT_AVAILABLE", `shadow_jsonl:${mode}:h${horizon}`));
+    return context.json(ok(model, "shadow_jsonl+canonical_csv", { checksum: model.provenance.shadowFileChecksums.forecasts ?? "NOT_AVAILABLE", note: `interpretability=${model.interpretabilityStatus}` }));
+  } catch (error) {
+    return fail(context, error);
+  }
+});
+
+apiRoutes.get("/api/v1/forecasts", async (context) => {
+  try {
+    const query = context.req.query();
+    const mode = parseEvaluationMode(query.mode);
+    const horizon = parseEvaluationHorizon(query.horizon);
+    const model = parseOptionalModel(query.model);
+    const limit = query.limit === undefined ? undefined : Number(query.limit);
+    if (limit !== undefined && (!Number.isInteger(limit) || limit < 1 || limit > 1000)) throw new SourceError("INVALID_QUERY", "limit must be an integer between 1 and 1000", 400);
+    const result = await forecastsListModel({ mode, horizon, model, limit });
+    if (!result.total) return context.json(notAvailable("NO_RECORDS_FOR_MODE_AND_HORIZON", `shadow_jsonl:${mode}:h${horizon}`));
+    return context.json(ok(result, "shadow_jsonl", { checksum: result.provenance.shadowFileChecksums.forecasts ?? "NOT_AVAILABLE" }));
+  } catch (error) {
+    return fail(context, error);
+  }
+});
+
+apiRoutes.get("/api/v1/forecasts/errors", async (context) => {
+  try {
+    const query = context.req.query();
+    const mode = parseEvaluationMode(query.mode);
+    const limit = query.limit === undefined ? undefined : Number(query.limit);
+    if (limit !== undefined && (!Number.isInteger(limit) || limit < 1 || limit > 1000)) throw new SourceError("INVALID_QUERY", "limit must be an integer between 1 and 1000", 400);
+    const result = await forecastErrorsModel({ mode, code: query.code, limit });
+    // errors.jsonl отсутствует: отсутствие файла не означает отсутствие ошибок
+    if (!result.total) return context.json(notAvailable("NO_DETECTED_DIAGNOSTICS", `shadow_jsonl:${mode}`));
+    return context.json(ok(result, "shadow_jsonl", { note: "persisted errors unavailable; detected diagnostics only" }));
+  } catch (error) {
+    return fail(context, error);
+  }
+});
 /** Любые изменяющие методы для бизнес-ресурсов запрещены. */
 for (const method of ["post", "put", "patch", "delete"] as const) {
   apiRoutes[method]("/api/*", (context) => {

@@ -1,0 +1,6 @@
+<!-- forecast-mode-switcher.html -->
+<div class="ds-row">
+  {{#modes}}<a class="ds-badge {{badgeClass}}" href="#forecast-quality/{{mode}}/{{horizon}}">{{label}}</a>{{/modes}}
+  <span class="ds-sub">|</span>
+  {{#horizons}}<a class="ds-badge {{badgeClass}}" href="#forecast-quality/{{mode}}/{{horizon}}">h{{horizon}}</a>{{/horizons}}
+</div>
