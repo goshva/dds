@@ -25,7 +25,8 @@ import { dataQualityPage } from "./pages/data-quality";
 import { historyEmpty, historyPage, type CoverageDto, type HistoryDto } from "./pages/history";
 import { provenancePage, type OverviewForProvenance } from "./pages/provenance";
 import { forecastQualityPage, type QualityDto } from "./pages/forecast-quality";
-import { forecastParams, PAGES, parseHash, rangeToQuery, type PageKey } from "./routing";
+import { forecastDiagnosticsInvalid, forecastDiagnosticsLoading, forecastDiagnosticsPage, type ForecastErrorsDto } from "./pages/forecast-diagnostics";
+import { diagnosticsParams, forecastParams, PAGES, parseHash, rangeToQuery, type PageKey } from "./routing";
 
 interface Overview extends OverviewForProvenance {
   shadow: { snapshots: number; pending: number; reconciled: number; fallbacks: number; invalids: number; candidate: string; baseline: string; horizons: number[]; available: boolean };
@@ -82,6 +83,32 @@ async function render(): Promise<void> {
     const { mode, horizon } = forecastParams(route);
     const quality = await loadResult(api.get<QualityDto>("/api/v1/forecasts/quality", { mode, horizon }));
     const content = block(quality, () => forecastQualityPage({ data: (quality as { data: QualityDto }).data, mode, horizon }));
+    root.innerHTML = shell(content, updatedAt, sourceStatus, page);
+    return;
+  }
+
+  // UI-7.1.1: диагностика прогнозирования — два независимых endpoint (quality, errors).
+  // errors не фильтруется по horizon (API не поддерживает); режим обязателен.
+  if (page === "forecast-diagnostics") {
+    const { mode, horizon, invalid } = diagnosticsParams(route);
+    if (invalid) {
+      root.innerHTML = shell(forecastDiagnosticsInvalid(route.range, route.from), updatedAt, "NOT_AVAILABLE", page);
+      return;
+    }
+    root.innerHTML = shell(forecastDiagnosticsLoading(), updatedAt, sourceStatus, page);
+    const [quality, errors] = await Promise.all([
+      loadResult(api.get<QualityDto>("/api/v1/forecasts/quality", { mode, horizon })),
+      loadResult(api.get<ForecastErrorsDto>("/api/v1/forecasts/errors", { mode })),
+    ]);
+    // meta.generatedAt: время формирования ответа API (не дата последнего факта). Берём из quality,
+    // при его недоступности — из errors; в последнюю очередь — из overview.
+    const generatedAt =
+      quality.status === "ok" || quality.status === "not_available"
+        ? quality.meta.generatedAt
+        : errors.status === "ok" || errors.status === "not_available"
+          ? errors.meta.generatedAt
+          : updatedAt;
+    const content = forecastDiagnosticsPage({ mode, horizon, quality, errors, generatedAt });
     root.innerHTML = shell(content, updatedAt, sourceStatus, page);
     return;
   }

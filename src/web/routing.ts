@@ -13,6 +13,7 @@ export const PAGES = [
   { key: "quality", label: "Качество данных" },
   { key: "provenance", label: "Происхождение" },
   { key: "forecast-quality", label: "Прогнозы и качество" },
+  { key: "forecast-diagnostics", label: "Диагностика прогнозирования" },
 ] as const;
 
 export type PageKey = (typeof PAGES)[number]["key"];
@@ -45,7 +46,9 @@ export function parseHash(hash: string): Route {
   const raw = String(hash ?? "").replace(/^#/, "");
   const [pageRaw, rangeRaw, fromRaw, toRaw] = raw.split("/");
   const page = (PAGES.find((item) => item.key === pageRaw)?.key ?? DEFAULT_PAGE) as PageKey;
-  const isForecast = page === "forecast-quality";
+  const isForecast = page === "forecast-quality" || page === "forecast-diagnostics";
+  // D-001 регрессия: для non-forecast страниц параметры range/from — это даты, isForecast=false.
+  // Для forecast-diagnostics route.range трактуется как mode, route.from — как horizon.
   return { page, range: rangeRaw || "all", from: fromRaw || "", to: toRaw || "", isForecast };
 }
 
@@ -62,6 +65,30 @@ export function forecastParams(route: Pick<Route, "range" | "from">): ForecastPa
   const mode = route.range === "replay" ? "replay" : "shadow";
   const horizon = route.from === "3" ? 3 : 1;
   return { mode, horizon };
+}
+
+/**
+ * UI-7.1.1: разбор маршрута диагностики `#forecast-diagnostics/<mode>/<horizon>`.
+ *
+ * В отличие от `forecastParams` (безопасные значения по умолчанию), здесь различаем
+ * корректный режим/горизонт и некорректные параметры, чтобы показать явную ошибку вместо
+ * молчаливой подстановки. Пустые сегменты трактуются как дефолтные (shadow / 1).
+ */
+export interface DiagnosticsParams {
+  mode: "shadow" | "replay";
+  horizon: 1 | 3;
+  /** true, если хотя бы один сегмент был задан некорректно. */
+  invalid: boolean;
+}
+
+export function diagnosticsParams(route: Pick<Route, "range" | "from">): DiagnosticsParams {
+  const modeRaw = route.range;
+  const horizonRaw = route.from;
+  const modeValid = modeRaw === "" || modeRaw === "all" || modeRaw === "replay" || modeRaw === "shadow";
+  const horizonValid = horizonRaw === "" || horizonRaw === "1" || horizonRaw === "3";
+  const mode: DiagnosticsParams["mode"] = modeRaw === "replay" ? "replay" : "shadow";
+  const horizon: DiagnosticsParams["horizon"] = horizonRaw === "3" ? 3 : 1;
+  return { mode, horizon, invalid: !modeValid || !horizonValid };
 }
 
 /** Диапазоны истории с числом дней; `custom` вычисляется из from/to. */

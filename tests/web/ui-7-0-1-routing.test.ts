@@ -7,6 +7,7 @@ import { describe, expect, test } from "bun:test";
 
 import {
   DEFAULT_PAGE,
+  diagnosticsParams,
   forecastParams,
   isValidCalendarDate,
   PAGES,
@@ -51,6 +52,7 @@ describe("parseHash: все известные страницы", () => {
     ["#quality", "quality"],
     ["#provenance", "provenance"],
     ["#forecast-quality", "forecast-quality"],
+    ["#forecast-diagnostics", "forecast-diagnostics"],
   ];
   for (const [hash, expected] of cases) {
     test(`${hash} → page=${expected}`, () => {
@@ -58,8 +60,8 @@ describe("parseHash: все известные страницы", () => {
     });
   }
 
-  test("PAGES содержит ровно 5 страниц с ожидаемыми ключами", () => {
-    expect(PAGES.map((page) => page.key)).toEqual(["overview", "history", "quality", "provenance", "forecast-quality"]);
+  test("PAGES содержит ожидаемые ключи страниц (UI-7.1.1 добавил forecast-diagnostics)", () => {
+    expect(PAGES.map((page) => page.key)).toEqual(["overview", "history", "quality", "provenance", "forecast-quality", "forecast-diagnostics"]);
   });
 });
 
@@ -102,6 +104,58 @@ describe("D-003/D-001: forecast-quality", () => {
     const route = parseHash("#forecast-quality/shadow/1");
     // Подтверждаем, что без isForecast-разделения эти значения ломали rangeToQuery.
     expect(rangeToQuery(route.range, route.from, route.to, "2026-11-23").error).toBe("Некорректная дата начала");
+  });
+});
+
+describe("UI-7.1.1: диагностика прогнозирования (diagnosticsParams)", () => {
+  test("корректный маршрут #forecast-diagnostics/shadow/1", () => {
+    const route = parseHash("#forecast-diagnostics/shadow/1");
+    expect(route.page).toBe("forecast-diagnostics");
+    expect(route.isForecast).toBe(true);
+    expect(diagnosticsParams(route)).toEqual({ mode: "shadow", horizon: 1, invalid: false });
+  });
+
+  test("replay/h1 и replay/h3 — корректны", () => {
+    expect(diagnosticsParams(parseHash("#forecast-diagnostics/replay/1"))).toEqual({ mode: "replay", horizon: 1, invalid: false });
+    expect(diagnosticsParams(parseHash("#forecast-diagnostics/replay/3"))).toEqual({ mode: "replay", horizon: 3, invalid: false });
+  });
+
+  test("shadow/h3 — корректен", () => {
+    expect(diagnosticsParams(parseHash("#forecast-diagnostics/shadow/3"))).toEqual({ mode: "shadow", horizon: 3, invalid: false });
+  });
+
+  test("прямой переход без параметров → shadow/h1, invalid=false", () => {
+    expect(diagnosticsParams(parseHash("#forecast-diagnostics"))).toEqual({ mode: "shadow", horizon: 1, invalid: false });
+  });
+
+  test("некорректный режим → invalid=true, безопасные значения", () => {
+    const params = diagnosticsParams(parseHash("#forecast-diagnostics/evil/1"));
+    expect(params.invalid).toBe(true);
+    expect(params.mode).toBe("shadow");
+  });
+
+  test("некорректный горизонт → invalid=true", () => {
+    const params = diagnosticsParams(parseHash("#forecast-diagnostics/shadow/9"));
+    expect(params.invalid).toBe(true);
+    expect(params.horizon).toBe(1);
+  });
+
+  test("некорректны оба параметра → invalid=true", () => {
+    expect(diagnosticsParams(parseHash("#forecast-diagnostics/x/2")).invalid).toBe(true);
+  });
+
+  test("существующие маршруты не сломаны: forecast-quality по-прежнему isForecast=true", () => {
+    expect(parseHash("#forecast-quality/shadow/1").isForecast).toBe(true);
+    expect(parseHash("#history/30").isForecast).toBe(false);
+    expect(parseHash("#overview").isForecast).toBe(false);
+  });
+
+  test("UI-7.1.1: диагностика использует те же hash-сегменты, что forecast-quality (mode/horizon)", () => {
+    // range=mode, from=horizon; rangeToQuery не применяется (isForecast=true), значит date-валидация не ловится.
+    const route = parseHash("#forecast-diagnostics/replay/3");
+    expect(route.range).toBe("replay");
+    expect(route.from).toBe("3");
+    expect(route.isForecast).toBe(true);
   });
 });
 
