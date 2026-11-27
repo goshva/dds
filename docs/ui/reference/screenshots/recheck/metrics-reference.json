@@ -1,0 +1,2102 @@
+[
+  {
+    "kind": "reference",
+    "page": "overview",
+    "width": 1440,
+    "height": 1000,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\overview-reference-1440.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1440,
+    "innerHeight": 1000,
+    "scrollWidth": 1425,
+    "scrollHeight": 2255,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 1000
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1179,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1179,
+      "h": 2179
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 560,
+      "h": 184
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 284,
+      "y": 284,
+      "w": 260,
+      "h": 120
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 284,
+      "y": 1332,
+      "w": 1103,
+      "h": 145
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "history",
+    "width": 1440,
+    "height": 1000,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\history-reference-1440.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1440,
+    "innerHeight": 1000,
+    "scrollWidth": 1425,
+    "scrollHeight": 2170,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 1000
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1179,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1179,
+      "h": 2094
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 273,
+      "w": 1135,
+      "h": 411
+    },
+    "kpiCount": 6,
+    "firstKpi": {
+      "x": 284,
+      "y": 340,
+      "w": 548,
+      "h": 120
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 284,
+      "y": 1292,
+      "w": 1103,
+      "h": 221
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "quality",
+    "width": 1440,
+    "height": 1000,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\quality-reference-1440.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1440,
+    "innerHeight": 1000,
+    "scrollWidth": 1425,
+    "scrollHeight": 1618,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 1000
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1179,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1179,
+      "h": 1542
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 1135,
+      "h": 266
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 284,
+      "y": 284,
+      "w": 548,
+      "h": 74
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 284,
+      "y": 584,
+      "w": 1103,
+      "h": 108
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "provenance",
+    "width": 1440,
+    "height": 1000,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\provenance-reference-1440.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1440,
+    "innerHeight": 1000,
+    "scrollWidth": 1425,
+    "scrollHeight": 1323,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 1000
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1179,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1179,
+      "h": 1247
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 560,
+      "h": 156
+    },
+    "kpiCount": 2,
+    "firstKpi": {
+      "x": 284,
+      "y": 284,
+      "w": 260,
+      "h": 92
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-quality",
+    "width": 1440,
+    "height": 1000,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-quality-reference-1440.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1440,
+    "innerHeight": 1000,
+    "scrollWidth": 1425,
+    "scrollHeight": 2351,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 1000
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1179,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1179,
+      "h": 2275
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 1135,
+      "h": 104
+    },
+    "kpiCount": 16,
+    "firstKpi": {
+      "x": 284,
+      "y": 421,
+      "w": 548,
+      "h": 120
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-diagnostics",
+    "width": 1440,
+    "height": 1000,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-diagnostics-reference-1440.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1440,
+    "innerHeight": 1000,
+    "scrollWidth": 1425,
+    "scrollHeight": 2060,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 1000
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1179,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1179,
+      "h": 1984
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 1135,
+      "h": 289
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 284,
+      "y": 607,
+      "w": 548,
+      "h": 92
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 284,
+      "y": 924,
+      "w": 1103,
+      "h": 145
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "overview",
+    "width": 1280,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\overview-reference-1280.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1280,
+    "innerHeight": 900,
+    "scrollWidth": 1265,
+    "scrollHeight": 2174,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 900
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1019,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1019,
+      "h": 2098
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 480,
+      "h": 184
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 284,
+      "y": 284,
+      "w": 220,
+      "h": 120
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 284,
+      "y": 1275,
+      "w": 943,
+      "h": 145
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "history",
+    "width": 1280,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\history-reference-1280.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1280,
+    "innerHeight": 900,
+    "scrollWidth": 1265,
+    "scrollHeight": 2113,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 900
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1019,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1019,
+      "h": 2037
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 273,
+      "w": 975,
+      "h": 411
+    },
+    "kpiCount": 6,
+    "firstKpi": {
+      "x": 284,
+      "y": 340,
+      "w": 468,
+      "h": 120
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 284,
+      "y": 1234,
+      "w": 943,
+      "h": 221
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "quality",
+    "width": 1280,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\quality-reference-1280.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1280,
+    "innerHeight": 900,
+    "scrollWidth": 1265,
+    "scrollHeight": 1595,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 900
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1019,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1019,
+      "h": 1519
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 975,
+      "h": 266
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 284,
+      "y": 284,
+      "w": 468,
+      "h": 74
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 284,
+      "y": 584,
+      "w": 943,
+      "h": 108
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "provenance",
+    "width": 1280,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\provenance-reference-1280.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1280,
+    "innerHeight": 900,
+    "scrollWidth": 1265,
+    "scrollHeight": 1323,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 900
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1019,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1019,
+      "h": 1247
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 480,
+      "h": 156
+    },
+    "kpiCount": 2,
+    "firstKpi": {
+      "x": 284,
+      "y": 284,
+      "w": 220,
+      "h": 92
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-quality",
+    "width": 1280,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-quality-reference-1280.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1280,
+    "innerHeight": 900,
+    "scrollWidth": 1265,
+    "scrollHeight": 2351,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 900
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1019,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1019,
+      "h": 2275
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 975,
+      "h": 104
+    },
+    "kpiCount": 16,
+    "firstKpi": {
+      "x": 284,
+      "y": 421,
+      "w": 468,
+      "h": 120
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-diagnostics",
+    "width": 1280,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-diagnostics-reference-1280.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1280,
+    "innerHeight": 900,
+    "scrollWidth": 1265,
+    "scrollHeight": 2060,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 246,
+      "h": 900
+    },
+    "topbar": {
+      "x": 246,
+      "y": 0,
+      "w": 1019,
+      "h": 76
+    },
+    "content": {
+      "x": 246,
+      "y": 76,
+      "w": 1019,
+      "h": 1984
+    },
+    "firstCard": {
+      "x": 268,
+      "y": 235,
+      "w": 975,
+      "h": 289
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 284,
+      "y": 607,
+      "w": 468,
+      "h": 92
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 284,
+      "y": 924,
+      "w": 943,
+      "h": 145
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "overview",
+    "width": 1024,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\overview-reference-1024.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1024,
+    "innerHeight": 900,
+    "scrollWidth": 1009,
+    "scrollHeight": 2065,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 218,
+      "h": 900
+    },
+    "topbar": {
+      "x": 218,
+      "y": 0,
+      "w": 791,
+      "h": 76
+    },
+    "content": {
+      "x": 218,
+      "y": 76,
+      "w": 791,
+      "h": 1989
+    },
+    "firstCard": {
+      "x": 234,
+      "y": 235,
+      "w": 372,
+      "h": 184
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 250,
+      "y": 284,
+      "w": 166,
+      "h": 120
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 250,
+      "y": 1197,
+      "w": 727,
+      "h": 145
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "history",
+    "width": 1024,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\history-reference-1024.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1024,
+    "innerHeight": 900,
+    "scrollWidth": 1009,
+    "scrollHeight": 2095,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 218,
+      "h": 900
+    },
+    "topbar": {
+      "x": 218,
+      "y": 0,
+      "w": 791,
+      "h": 76
+    },
+    "content": {
+      "x": 218,
+      "y": 76,
+      "w": 791,
+      "h": 2019
+    },
+    "firstCard": {
+      "x": 234,
+      "y": 333,
+      "w": 759,
+      "h": 411
+    },
+    "kpiCount": 6,
+    "firstKpi": {
+      "x": 250,
+      "y": 400,
+      "w": 360,
+      "h": 120
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 250,
+      "y": 1216,
+      "w": 727,
+      "h": 221
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "quality",
+    "width": 1024,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\quality-reference-1024.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1024,
+    "innerHeight": 900,
+    "scrollWidth": 1009,
+    "scrollHeight": 1582,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 218,
+      "h": 900
+    },
+    "topbar": {
+      "x": 218,
+      "y": 0,
+      "w": 791,
+      "h": 76
+    },
+    "content": {
+      "x": 218,
+      "y": 76,
+      "w": 791,
+      "h": 1506
+    },
+    "firstCard": {
+      "x": 234,
+      "y": 235,
+      "w": 759,
+      "h": 266
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 250,
+      "y": 284,
+      "w": 360,
+      "h": 74
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 250,
+      "y": 584,
+      "w": 727,
+      "h": 108
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "provenance",
+    "width": 1024,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\provenance-reference-1024.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1024,
+    "innerHeight": 900,
+    "scrollWidth": 1009,
+    "scrollHeight": 1355,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 218,
+      "h": 900
+    },
+    "topbar": {
+      "x": 218,
+      "y": 0,
+      "w": 791,
+      "h": 76
+    },
+    "content": {
+      "x": 218,
+      "y": 76,
+      "w": 791,
+      "h": 1279
+    },
+    "firstCard": {
+      "x": 234,
+      "y": 235,
+      "w": 372,
+      "h": 188
+    },
+    "kpiCount": 2,
+    "firstKpi": {
+      "x": 250,
+      "y": 284,
+      "w": 166,
+      "h": 124
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-quality",
+    "width": 1024,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-quality-reference-1024.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1024,
+    "innerHeight": 900,
+    "scrollWidth": 1009,
+    "scrollHeight": 2351,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 218,
+      "h": 900
+    },
+    "topbar": {
+      "x": 218,
+      "y": 0,
+      "w": 791,
+      "h": 76
+    },
+    "content": {
+      "x": 218,
+      "y": 76,
+      "w": 791,
+      "h": 2275
+    },
+    "firstCard": {
+      "x": 234,
+      "y": 235,
+      "w": 759,
+      "h": 104
+    },
+    "kpiCount": 16,
+    "firstKpi": {
+      "x": 250,
+      "y": 421,
+      "w": 360,
+      "h": 120
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-diagnostics",
+    "width": 1024,
+    "height": 900,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-diagnostics-reference-1024.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 1024,
+    "innerHeight": 900,
+    "scrollWidth": 1009,
+    "scrollHeight": 2116,
+    "overflowX": false,
+    "sidebar": {
+      "x": 0,
+      "y": 0,
+      "w": 218,
+      "h": 900
+    },
+    "topbar": {
+      "x": 218,
+      "y": 0,
+      "w": 791,
+      "h": 76
+    },
+    "content": {
+      "x": 218,
+      "y": 76,
+      "w": 791,
+      "h": 2040
+    },
+    "firstCard": {
+      "x": 234,
+      "y": 235,
+      "w": 759,
+      "h": 289
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 250,
+      "y": 607,
+      "w": 360,
+      "h": 92
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 250,
+      "y": 924,
+      "w": 727,
+      "h": 202
+    },
+    "navLinks": 7,
+    "burgerVisible": false
+  },
+  {
+    "kind": "reference",
+    "page": "overview",
+    "width": 768,
+    "height": 1024,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\overview-reference-768.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 768,
+    "innerHeight": 1024,
+    "scrollWidth": 753,
+    "scrollHeight": 2042,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 1024
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 753,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 753,
+      "h": 1974
+    },
+    "firstCard": {
+      "x": 16,
+      "y": 227,
+      "w": 353,
+      "h": 188
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 32,
+      "y": 276,
+      "w": 156,
+      "h": 120
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 32,
+      "y": 1179,
+      "w": 689,
+      "h": 145
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "history",
+    "width": 768,
+    "height": 1024,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\history-reference-768.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 768,
+    "innerHeight": 1024,
+    "scrollWidth": 753,
+    "scrollHeight": 2073,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 1024
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 753,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 753,
+      "h": 2005
+    },
+    "firstCard": {
+      "x": 16,
+      "y": 325,
+      "w": 721,
+      "h": 411
+    },
+    "kpiCount": 6,
+    "firstKpi": {
+      "x": 32,
+      "y": 392,
+      "w": 341,
+      "h": 120
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 32,
+      "y": 1194,
+      "w": 689,
+      "h": 221
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "quality",
+    "width": 768,
+    "height": 1024,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\quality-reference-768.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 768,
+    "innerHeight": 1024,
+    "scrollWidth": 753,
+    "scrollHeight": 1568,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 1024
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 753,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 753,
+      "h": 1500
+    },
+    "firstCard": {
+      "x": 16,
+      "y": 227,
+      "w": 721,
+      "h": 266
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 32,
+      "y": 276,
+      "w": 341,
+      "h": 74
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 32,
+      "y": 576,
+      "w": 689,
+      "h": 108
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "provenance",
+    "width": 768,
+    "height": 1024,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\provenance-reference-768.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 768,
+    "innerHeight": 1024,
+    "scrollWidth": 753,
+    "scrollHeight": 1347,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 1024
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 753,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 753,
+      "h": 1279
+    },
+    "firstCard": {
+      "x": 16,
+      "y": 227,
+      "w": 353,
+      "h": 188
+    },
+    "kpiCount": 2,
+    "firstKpi": {
+      "x": 32,
+      "y": 276,
+      "w": 156,
+      "h": 124
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-quality",
+    "width": 768,
+    "height": 1024,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-quality-reference-768.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 768,
+    "innerHeight": 1024,
+    "scrollWidth": 753,
+    "scrollHeight": 2372,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 1024
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 753,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 753,
+      "h": 2304
+    },
+    "firstCard": {
+      "x": 16,
+      "y": 257,
+      "w": 721,
+      "h": 104
+    },
+    "kpiCount": 16,
+    "firstKpi": {
+      "x": 32,
+      "y": 443,
+      "w": 341,
+      "h": 120
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-diagnostics",
+    "width": 768,
+    "height": 1024,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-diagnostics-reference-768.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 768,
+    "innerHeight": 1024,
+    "scrollWidth": 753,
+    "scrollHeight": 2108,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 1024
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 753,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 753,
+      "h": 2040
+    },
+    "firstCard": {
+      "x": 16,
+      "y": 227,
+      "w": 721,
+      "h": 289
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 32,
+      "y": 599,
+      "w": 341,
+      "h": 92
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 32,
+      "y": 916,
+      "w": 689,
+      "h": 202
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "overview",
+    "width": 390,
+    "height": 844,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\overview-reference-390.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 2165,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 844
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 390,
+      "h": 2097
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 301,
+      "w": 370,
+      "h": 174
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 23,
+      "y": 349,
+      "w": 168,
+      "h": 114
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 23,
+      "y": 1344,
+      "w": 347,
+      "h": 145
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "history",
+    "width": 390,
+    "height": 844,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\history-reference-390.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 2084,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 844
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 390,
+      "h": 2016
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 393,
+      "w": 370,
+      "h": 405
+    },
+    "kpiCount": 6,
+    "firstKpi": {
+      "x": 23,
+      "y": 458,
+      "w": 168,
+      "h": 130
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 23,
+      "y": 1181,
+      "w": 371,
+      "h": 221
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "quality",
+    "width": 390,
+    "height": 844,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\quality-reference-390.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 1634,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 844
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 390,
+      "h": 1566
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 284,
+      "w": 370,
+      "h": 266
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 23,
+      "y": 331,
+      "w": 168,
+      "h": 68
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 23,
+      "y": 625,
+      "w": 344,
+      "h": 108
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "provenance",
+    "width": 390,
+    "height": 844,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\provenance-reference-390.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 399,
+    "innerHeight": 864,
+    "scrollWidth": 399,
+    "scrollHeight": 1623,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 864
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 390,
+      "h": 1555
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 284,
+      "w": 370,
+      "h": 146
+    },
+    "kpiCount": 2,
+    "firstKpi": {
+      "x": 23,
+      "y": 331,
+      "w": 168,
+      "h": 86
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-quality",
+    "width": 390,
+    "height": 844,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-quality-reference-390.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 2513,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 844
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 390,
+      "h": 2445
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 301,
+      "w": 370,
+      "h": 129
+    },
+    "kpiCount": 16,
+    "firstKpi": {
+      "x": 23,
+      "y": 523,
+      "w": 168,
+      "h": 146
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-diagnostics",
+    "width": 390,
+    "height": 844,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-diagnostics-reference-390.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 2365,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 844
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 390,
+      "h": 2297
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 301,
+      "w": 370,
+      "h": 350
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 23,
+      "y": 743,
+      "w": 168,
+      "h": 102
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 23,
+      "y": 1072,
+      "w": 629,
+      "h": 259
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "overview",
+    "width": 360,
+    "height": 800,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\overview-reference-360.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 360,
+    "innerHeight": 800,
+    "scrollWidth": 360,
+    "scrollHeight": 2194,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 800
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 360,
+      "h": 2126
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 301,
+      "w": 340,
+      "h": 174
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 23,
+      "y": 349,
+      "w": 153,
+      "h": 114
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 23,
+      "y": 1354,
+      "w": 347,
+      "h": 145
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "history",
+    "width": 360,
+    "height": 800,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\history-reference-360.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 360,
+    "innerHeight": 800,
+    "scrollWidth": 360,
+    "scrollHeight": 2108,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 800
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 360,
+      "h": 2040
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 393,
+      "w": 340,
+      "h": 423
+    },
+    "kpiCount": 6,
+    "firstKpi": {
+      "x": 23,
+      "y": 475,
+      "w": 153,
+      "h": 130
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 23,
+      "y": 1188,
+      "w": 371,
+      "h": 221
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "quality",
+    "width": 360,
+    "height": 800,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\quality-reference-360.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 360,
+    "innerHeight": 800,
+    "scrollWidth": 360,
+    "scrollHeight": 1665,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 800
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 360,
+      "h": 1597
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 284,
+      "w": 340,
+      "h": 266
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 23,
+      "y": 331,
+      "w": 153,
+      "h": 68
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 23,
+      "y": 625,
+      "w": 322,
+      "h": 108
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "provenance",
+    "width": 360,
+    "height": 800,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\provenance-reference-360.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 385,
+    "innerHeight": 854,
+    "scrollWidth": 385,
+    "scrollHeight": 1623,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 854
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 360,
+      "h": 1555
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 284,
+      "w": 340,
+      "h": 146
+    },
+    "kpiCount": 2,
+    "firstKpi": {
+      "x": 23,
+      "y": 331,
+      "w": 153,
+      "h": 86
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-quality",
+    "width": 360,
+    "height": 800,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-quality-reference-360.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 360,
+    "innerHeight": 800,
+    "scrollWidth": 360,
+    "scrollHeight": 2630,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 800
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 360,
+      "h": 2562
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 301,
+      "w": 340,
+      "h": 147
+    },
+    "kpiCount": 16,
+    "firstKpi": {
+      "x": 23,
+      "y": 540,
+      "w": 153,
+      "h": 146
+    },
+    "tableCount": 0,
+    "firstTable": null,
+    "navLinks": 7,
+    "burgerVisible": true
+  },
+  {
+    "kind": "reference",
+    "page": "forecast-diagnostics",
+    "width": 360,
+    "height": 800,
+    "file": "docs\\ui\\reference\\screenshots\\recheck\\forecast-diagnostics-reference-360.png",
+    "fontsStatus": "loaded",
+    "imagesComplete": true,
+    "loadingPresent": true,
+    "emptyPresent": true,
+    "errorPresent": true,
+    "hasCard": true,
+    "attempts": 71,
+    "apiStatus": null,
+    "innerWidth": 360,
+    "innerHeight": 800,
+    "scrollWidth": 360,
+    "scrollHeight": 2365,
+    "overflowX": false,
+    "sidebar": {
+      "x": -260,
+      "y": 0,
+      "w": 260,
+      "h": 800
+    },
+    "topbar": {
+      "x": 0,
+      "y": 0,
+      "w": 360,
+      "h": 68
+    },
+    "content": {
+      "x": 0,
+      "y": 68,
+      "w": 360,
+      "h": 2297
+    },
+    "firstCard": {
+      "x": 10,
+      "y": 301,
+      "w": 340,
+      "h": 350
+    },
+    "kpiCount": 4,
+    "firstKpi": {
+      "x": 23,
+      "y": 743,
+      "w": 153,
+      "h": 102
+    },
+    "tableCount": 1,
+    "firstTable": {
+      "x": 23,
+      "y": 1072,
+      "w": 629,
+      "h": 259
+    },
+    "navLinks": 7,
+    "burgerVisible": true
+  }
+]

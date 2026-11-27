@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DSS — эталон: История заказов</title>
+<link rel="stylesheet" href="../assets/reference.css" />
+</head>
+<body>
+<div class="ds-app">
+  <aside class="ds-sidebar" data-ds-sidebar>
+    <div class="ds-brand">
+      <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
+    </div>
+    <nav class="ds-nav">
+      <div class="ds-nav-section">Эталоны страниц</div>
+      <a href="../index.html">Индекс</a>
+      <a href="overview.html">Обзор</a>
+      <a href="history.html">История</a>
+      <a href="quality.html">Качество данных</a>
+      <a href="provenance.html">Происхождение</a>
+      <a href="forecast-quality.html">Прогнозы и качество</a>
+      <a href="forecast-diagnostics.html">Диагностика прогнозирования</a>
+    </nav>
+  </aside>
+  <div class="ds-scrim" data-ds-scrim></div>
+  <div class="ds-main">
+    <header class="ds-topbar">
+      <div class="ds-row">
+        <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
+        <div><div class="ds-card-title">DSS · история и аналитика</div></div>
+      </div>
+      <div class="ds-row ds-topbar-meta">
+        <span>Магазин 7745</span>
+        <span class="ds-badge ds-badge--ok">источник: OK</span>
+        <span>обновлено: 2026-11-27 16:00</span>
+      </div>
+    </header>
+    <main class="ds-content">
+      <div class="ds-row" style="align-items:flex-start">
+        <div>
+          <h1>История заказов</h1>
+          <p class="ds-sub">Историческая динамика доставленных заказов · Магазин 7745 · 01.01.2024 — 18.06.2026</p>
+        </div>
+        <span class="ds-spacer"></span>
+        <span class="ds-badge ds-badge--provisional">PROVISIONAL</span>
+        <span class="ds-badge ds-badge--pending">период неполный: нет 7 дн.</span>
+      </div>
+
+      <div class="ds-ref-banner">
+        <span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span>
+        <span class="ds-sub">Синтетические значения; не являются показателями магазина.</span>
+      </div>
+
+      <div class="ds-row" data-ds-history-filters>
+        <a class="ds-badge ds-badge--ok" href="history.html">Весь период</a>
+        <a class="ds-badge ds-badge--na" href="history.html">30 дней</a>
+        <a class="ds-badge ds-badge--na" href="history.html">90 дней</a>
+        <a class="ds-badge ds-badge--na" href="history.html">180 дней</a>
+        <a class="ds-badge ds-badge--na" href="history.html">365 дней</a>
+        <span class="ds-sub">произвольный диапазон:</span>
+        <input type="date" id="ds-from" value="2026-06-01" aria-label="Дата начала" />
+        <input type="date" id="ds-to" value="2026-06-30" aria-label="Дата окончания" />
+        <button class="ds-badge ds-badge--provisional" id="ds-apply" type="button">Применить</button>
+        <button class="ds-badge ds-badge--na" id="ds-reset" type="button">Сбросить</button>
+        <span class="ds-sub" id="ds-range-error" role="status"></span>
+      </div>
+
+      <section class="ds-card">
+        <div class="ds-card-head"><h2 class="ds-card-title">Показатели периода</h2></div>
+        <p class="ds-sub">рассчитаны только по доступным фактическим значениям</p>
+        <div class="ds-kpi-grid">
+          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Всего заказов</div><div class="ds-kpi-value">10 500</div><div class="ds-kpi-note">наблюдений: 7</div></div>
+          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Среднее в день</div><div class="ds-kpi-value">1 500</div><div class="ds-kpi-note">по доступным дням, не по календарю</div><div style="margin-top:6px"><span class="ds-badge ds-badge--pending">ожидает</span></div></div>
+          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Максимум</div><div class="ds-kpi-value">1 700</div></div>
+          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Минимум</div><div class="ds-kpi-value">1 200</div></div>
+          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Календарных дней</div><div class="ds-kpi-value">10</div><div class="ds-kpi-note">по запрошенному диапазону</div></div>
+          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Дней с данными</div><div class="ds-kpi-value">7</div><div class="ds-kpi-note">отсутствует: 3</div><div style="margin-top:6px"><span class="ds-badge ds-badge--pending">ожидает</span></div></div>
+        </div>
+      </section>
+
+      <section class="ds-card">
+        <div class="ds-card-head"><h2 class="ds-card-title">Динамика доставленных заказов</h2></div>
+        <p class="ds-sub">единица измерения — заказы в день; линия разрывается на отсутствующих наблюдениях</p>
+        <div class="ds-chart-block">
+          <div class="ds-chart-wrap">
+            <svg class="ds-chart" viewBox="0 0 720 260" role="img" aria-label="line chart">
+              <title>01.06.2026 — 10.06.2026</title>
+              <line class="ds-chart-grid" x1="42" y1="12" x2="708" y2="12"/><text class="ds-chart-axis" x="4" y="15">1 800</text>
+              <line class="ds-chart-grid" x1="42" y1="71" x2="708" y2="71"/><text class="ds-chart-axis" x="4" y="74">1 400</text>
+              <line class="ds-chart-grid" x1="42" y1="130" x2="708" y2="130"/><text class="ds-chart-axis" x="4" y="133">1 000</text>
+              <line class="ds-chart-grid" x1="42" y1="189" x2="708" y2="189"/><text class="ds-chart-axis" x="4" y="192">600</text>
+              <line class="ds-chart-grid" x1="42" y1="248" x2="708" y2="248"/><text class="ds-chart-axis" x="4" y="251">200</text>
+              <path class="ds-chart-line--actual" d="M42,120 L190,100 L340,140 M470,90 L620,110 L708,95"/>
+            </svg>
+          </div>
+        </div>
+        <div class="ds-chart-legend"><span><i class="ds-legend-dot"></i>факт</span><span>отсутствующие дни не соединяются линией и не заменяются нулём</span></div>
+      </section>
+
+      <section class="ds-card">
+        <div class="ds-card-head"><h2 class="ds-card-title">Таблица истории</h2></div>
+        <p class="ds-sub">показаны последние 5 из 7 дней периода</p>
+        <div class="ds-table-wrap">
+          <table class="ds-table">
+            <thead><tr><th>Дата</th><th class="is-num">Доставленные заказы</th><th>Статус данных</th></tr></thead>
+            <tbody>
+              <tr><td>10.06.2026</td><td class="is-num">1 600</td><td>fact</td></tr>
+              <tr><td>09.06.2026</td><td class="is-num">[Н/Д]</td><td>unknown</td></tr>
+              <tr><td>08.06.2026</td><td class="is-num">1 450</td><td>fact</td></tr>
+              <tr><td>07.06.2026</td><td class="is-num">0</td><td>fact</td></tr>
+              <tr><td>06.06.2026</td><td class="is-num">1 700</td><td>fact</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="ds-card">
+        <div class="ds-card-head"><h2 class="ds-card-title">Формулы</h2></div>
+        <div class="ds-sub">сумма, среднее, максимум и минимум считаются по доступным фактическим значениям диапазона; календарные дни — по запрошенному диапазону; отсутствующие значения отображаются как [Н/Д] и не превращаются в 0.</div>
+      </section>
+
+      <section class="ds-card">
+        <div class="ds-card-head"><h2 class="ds-card-title">Состояния страницы</h2></div>
+        <div class="ds-state" data-ds-loading><div class="ds-skeleton" style="width:90%"></div><div class="ds-skeleton" style="width:70%"></div><div class="ds-skeleton" style="width:50%"></div></div>
+        <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">За выбранный период данных нет</div><div class="ds-sub">Диапазон не содержит наблюдений. Измените период или сбросьте фильтр.</div></div>
+        <div class="ds-state ds-state--error" data-ds-error><div class="ds-state-icon">!</div><div class="ds-state-title">Некорректный диапазон</div><div class="ds-sub">Проверка выполняется до запроса к источнику.</div><div class="ds-badge ds-badge--conflict">INVALID_RANGE</div></div>
+      </section>
+    </main>
+  </div>
+</div>
+<script src="../assets/reference.js"></script>
+</body>
+</html>

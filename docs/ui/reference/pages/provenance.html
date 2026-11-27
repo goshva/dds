@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DSS — эталон: Происхождение данных</title>
+<link rel="stylesheet" href="../assets/reference.css" />
+</head>
+<body>
+<div class="ds-app">
+  <aside class="ds-sidebar" data-ds-sidebar>
+    <div class="ds-brand">
+      <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
+    </div>
+    <nav class="ds-nav">
+      <div class="ds-nav-section">Эталоны страниц</div>
+      <a href="../index.html">Индекс</a>
+      <a href="overview.html">Обзор</a>
+      <a href="history.html">История</a>
+      <a href="quality.html">Качество данных</a>
+      <a href="provenance.html">Происхождение</a>
+      <a href="forecast-quality.html">Прогнозы и качество</a>
+      <a href="forecast-diagnostics.html">Диагностика прогнозирования</a>
+    </nav>
+  </aside>
+  <div class="ds-scrim" data-ds-scrim></div>
+  <div class="ds-main">
+    <header class="ds-topbar">
+      <div class="ds-row">
+        <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
+        <div><div class="ds-card-title">DSS · история и аналитика</div></div>
+      </div>
+      <div class="ds-row ds-topbar-meta">
+        <span>Магазин 7745</span>
+        <span class="ds-badge ds-badge--ok">источник: OK</span>
+        <span>обновлено: 2026-11-27 16:00</span>
+      </div>
+    </header>
+    <main class="ds-content">
+      <div class="ds-row" style="align-items:flex-start">
+        <div>
+          <h1>Происхождение данных</h1>
+          <p class="ds-sub">Источник, версия, контрольные суммы и актуальность</p>
+        </div>
+        <span class="ds-spacer"></span>
+        <span class="ds-badge ds-badge--provisional">PROVISIONAL</span>
+      </div>
+
+      <div class="ds-ref-banner">
+        <span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span>
+        <span class="ds-sub">Синтетические значения; не являются показателями магазина.</span>
+      </div>
+
+      <div class="ds-grid ds-grid--cards">
+        <section class="ds-card">
+          <div class="ds-card-head"><h2 class="ds-card-title">Источник</h2></div>
+          <div class="ds-kpi-grid">
+            <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Набор</div><div class="ds-kpi-value">canonical CSV</div><div class="ds-kpi-note">только чтение</div></div>
+            <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Метрика</div><div class="ds-kpi-value">delivered_orders_daily</div><div class="ds-kpi-note">семантика PROVISIONAL</div></div>
+          </div>
+        </section>
+        <section class="ds-card">
+          <div class="ds-card-head"><h2 class="ds-card-title">Актуальность</h2></div>
+          <div class="ds-row">
+            <span class="ds-badge ds-badge--ok">актуальность: совпадает</span>
+            <span class="ds-badge ds-badge--ok">манифест: OK</span>
+          </div>
+          <p class="ds-sub ds-ref-note">Расхождение контрольных сумм отображается как предупреждение, а не как ошибка модели.</p>
+          <div class="ds-row">
+            <span class="ds-badge ds-badge--pending">актуальность: расходится (пример)</span>
+            <span class="ds-badge ds-badge--na">манифест: отсутствует (пример)</span>
+          </div>
+        </section>
+      </div>
+
+      <section class="ds-card">
+        <div class="ds-card-head"><h2 class="ds-card-title">Контрольные суммы и версия</h2></div>
+        <dl class="ds-drawer" data-ds-provenance>
+          <dt>источник</dt><dd>canonical CSV (только чтение)</dd>
+          <dt>checksum</dt><dd>файл REFERENCE-FILE-CHECKSUM-0001</dd>
+          <dt>версия</dt><dd>нормализованный REFERENCE-NORMALIZED-CHECKSUM-0001</dd>
+          <dt>примечание</dt><dd>checksum набора и версия входных данных не смешиваются</dd>
+        </dl>
+      </section>
+
+      <section class="ds-card">
+        <div class="ds-card-head"><h2 class="ds-card-title">Ограничения интерпретации</h2></div>
+        <ul class="ds-sub">
+          <li>Бизнес-семантика фактических данных не подтверждена: статус PROVISIONAL сохраняется.</li>
+          <li>Расхождение контрольных сумм не доказывает некорректность модели.</li>
+          <li>Отсутствующее значение показывается как [Н/Д] и не превращается в ноль.</li>
+          <li>Внутренние пути и служебные детали источника не выводятся.</li>
+        </ul>
+      </section>
+
+      <section class="ds-card">
+        <div class="ds-card-head"><h2 class="ds-card-title">Состояния страницы</h2></div>
+        <div class="ds-state" data-ds-loading><div class="ds-skeleton" style="width:70%"></div><div class="ds-skeleton" style="width:45%"></div></div>
+        <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Данные недоступны</div><div class="ds-sub">причина: NOT_AVAILABLE</div></div>
+        <div class="ds-state ds-state--error" data-ds-error><div class="ds-state-icon">!</div><div class="ds-state-title">Манифест повреждён</div><div class="ds-sub">Данные не выдаются за корректные.</div><div class="ds-badge ds-badge--conflict">CORRUPTED</div></div>
+      </section>
+    </main>
+  </div>
+</div>
+<script src="../assets/reference.js"></script>
+</body>
+</html>
