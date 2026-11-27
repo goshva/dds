@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-11-23T12:27:13.149Z",
-  "tracked_text_files": 520,
-  "files_with_hits": 104,
+  "generated_at": "2026-11-27T08:52:41.276Z",
+  "tracked_text_files": 855,
+  "files_with_hits": 123,
   "totals": {
-    "person_name_hits": 1018,
-    "phone_hits": 0,
+    "person_name_hits": 1083,
+    "phone_hits": 4,
     "email_hits": 0,
-    "secret_hits": 14,
-    "person_code_hits": 1093
+    "secret_hits": 12,
+    "person_code_hits": 873
   },
   "files": [
     {
@@ -198,6 +198,17 @@
       "in_origin_main": true
     },
     {
+      "file": "docs/ui/ui-7-0-browser-verification-report.md",
+      "person_name_hits": 21,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 19881,
+      "last_commit": "42bbd2c frontent visial not logic",
+      "in_origin_main": true
+    },
+    {
       "file": "analysis_package/metrics_catalog.csv",
       "person_name_hits": 18,
       "phone_hits": 0,
@@ -286,6 +297,17 @@
       "in_origin_main": true
     },
     {
+      "file": "src/forecasting/analytics/calendar/calendar-core.ts",
+      "person_name_hits": 9,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 13055,
+      "last_commit": "9daafc6 pre check",
+      "in_origin_main": true
+    },
+    {
       "file": "docs/phase-01-8/01_logical_model_overview.md",
       "person_name_hits": 8,
       "phone_hits": 0,
@@ -294,6 +316,17 @@
       "person_code_hits": 0,
       "bytes": 7399,
       "last_commit": "f1bfdb5  arch ok",
+      "in_origin_main": true
+    },
+    {
+      "file": "docs/ui/ui-7-0-1-defect-remediation-report.md",
+      "person_name_hits": 8,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 9464,
+      "last_commit": "42bbd2c frontent visial not logic",
       "in_origin_main": true
     },
     {
@@ -330,6 +363,17 @@
       "in_origin_main": true
     },
     {
+      "file": "tools/redact-pii.test.ts",
+      "person_name_hits": 1,
+      "phone_hits": 4,
+      "email_hits": 0,
+      "secret_hits": 6,
+      "person_code_hits": 25,
+      "bytes": 12123,
+      "last_commit": "9daafc6 pre check",
+      "in_origin_main": true
+    },
+    {
       "file": "reports/phase-01-1/phase_01_1_summary.md",
       "person_name_hits": 4,
       "phone_hits": 0,
@@ -352,6 +396,17 @@
       "in_origin_main": true
     },
     {
+      "file": "docs/forecasting/audit-report.md",
+      "person_name_hits": 3,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 23487,
+      "last_commit": "867546d need sml fix",
+      "in_origin_main": true
+    },
+    {
       "file": "src/phase1-8/run.ts",
       "person_name_hits": 3,
       "phone_hits": 0,
@@ -360,6 +415,28 @@
       "person_code_hits": 0,
       "bytes": 16946,
       "last_commit": "f1bfdb5  arch ok",
+      "in_origin_main": true
+    },
+    {
+      "file": "README.md",
+      "person_name_hits": 2,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 9844,
+      "last_commit": "a5ff5a2 ph1",
+      "in_origin_main": true
+    },
+    {
+      "file": "docs/forecasting/implementation-log.md",
+      "person_name_hits": 2,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 11031,
+      "last_commit": "867546d need sml fix",
       "in_origin_main": true
     },
     {
@@ -429,6 +506,17 @@
       "in_origin_main": true
     },
     {
+      "file": "src/forecasting/analytics/calendar/catalog.ts",
+      "person_name_hits": 2,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 15616,
+      "last_commit": "9daafc6 pre check",
+      "in_origin_main": true
+    },
+    {
       "file": "src/phase1-1-kpi-catalog.ts",
       "person_name_hits": 2,
       "phone_hits": 0,
@@ -440,25 +528,58 @@
       "in_origin_main": true
     },
     {
+      "file": "src/server/services/forecasting-read-models.ts",
+      "person_name_hits": 2,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 11990,
+      "last_commit": "42bbd2c frontent visial not logic",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/web/pages/forecast-quality.ts",
+      "person_name_hits": 2,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 13336,
+      "last_commit": "42bbd2c frontent visial not logic",
+      "in_origin_main": true
+    },
+    {
       "file": "tools/redact-pii.ts",
       "person_name_hits": 2,
       "phone_hits": 0,
       "email_hits": 0,
       "secret_hits": 1,
       "person_code_hits": 5,
-      "bytes": 13908,
-      "last_commit": "51d4162 pii: stop publishing raw reports, add publish gate and history purge tooling",
+      "bytes": 17134,
+      "last_commit": "9daafc6 pre check",
       "in_origin_main": true
     },
     {
-      "file": "README.md",
+      "file": "docs/forecasting/api-reconciliation-report.md",
       "person_name_hits": 1,
       "phone_hits": 0,
       "email_hits": 0,
       "secret_hits": 0,
       "person_code_hits": 0,
-      "bytes": 4338,
-      "last_commit": "a5ff5a2 ph1",
+      "bytes": 15102,
+      "last_commit": "867546d need sml fix",
+      "in_origin_main": true
+    },
+    {
+      "file": "docs/forecasting/shadow-mode-architecture.md",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 4834,
+      "last_commit": "ddf2b34 done code  start  harvest",
       "in_origin_main": true
     },
     {
@@ -748,6 +869,116 @@
       "in_origin_main": true
     },
     {
+      "file": "src/forecasting/analytics/semantics/metric-registry.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 21033,
+      "last_commit": "9daafc6 pre check",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/forecasting/baselines/naive-yesterday.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 1524,
+      "last_commit": "9daafc6 pre check",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/forecasting/baselines/rolling-7-day-mean.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 2331,
+      "last_commit": "9daafc6 pre check",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/forecasting/baselines/weekly-seasonal-naive.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 2524,
+      "last_commit": "9daafc6 pre check",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/forecasting/cli/shadow.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 5841,
+      "last_commit": "505f70a done   harvest start fontend",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/forecasting/shadow/index.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 782,
+      "last_commit": "ddf2b34 done code  start  harvest",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/forecasting/shadow/pipeline.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 6858,
+      "last_commit": "ddf2b34 done code  start  harvest",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/forecasting/shadow/runner.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 7445,
+      "last_commit": "ddf2b34 done code  start  harvest",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/forecasting/shadow/store.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 9104,
+      "last_commit": "ddf2b34 done code  start  harvest",
+      "in_origin_main": true
+    },
+    {
+      "file": "src/forecasting/storage/sqlite/migrations/sql/001_init.sql",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 9082,
+      "last_commit": "867546d need sml fix",
+      "in_origin_main": true
+    },
+    {
       "file": "src/phase1-1-dataset-detail-loader.ts",
       "person_name_hits": 1,
       "phone_hits": 0,
@@ -814,14 +1045,36 @@
       "in_origin_main": true
     },
     {
-      "file": "tools/redact-pii.test.ts",
+      "file": "tests/forecasting/calendar.test.ts",
       "person_name_hits": 1,
       "phone_hits": 0,
       "email_hits": 0,
-      "secret_hits": 8,
-      "person_code_hits": 21,
-      "bytes": 7819,
-      "last_commit": "51d4162 pii: stop publishing raw reports, add publish gate and history purge tooling",
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 9763,
+      "last_commit": "9daafc6 pre check",
+      "in_origin_main": true
+    },
+    {
+      "file": "tests/forecasting/shadow-mode.test.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 10465,
+      "last_commit": "ddf2b34 done code  start  harvest",
+      "in_origin_main": true
+    },
+    {
+      "file": "tests/web/forecast-quality.test.ts",
+      "person_name_hits": 1,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 0,
+      "bytes": 17694,
+      "last_commit": "42bbd2c frontent visial not logic",
       "in_origin_main": true
     },
     {
@@ -921,28 +1174,6 @@
       "person_code_hits": 1,
       "bytes": 11443,
       "last_commit": "c152bae one step more",
-      "in_origin_main": true
-    },
-    {
-      "file": "reports/code-review/pii-containment-status.md",
-      "person_name_hits": 0,
-      "phone_hits": 0,
-      "email_hits": 0,
-      "secret_hits": 0,
-      "person_code_hits": 1,
-      "bytes": 6966,
-      "last_commit": "fdd7b07 pii: history-wide verification (587 blobs, 0 personal names)",
-      "in_origin_main": true
-    },
-    {
-      "file": "reports/code-review/pii-tracked-inventory.json",
-      "person_name_hits": 0,
-      "phone_hits": 0,
-      "email_hits": 0,
-      "secret_hits": 0,
-      "person_code_hits": 78,
-      "bytes": 20801,
-      "last_commit": "c5b979a pii: post-purge verification report and refreshed inventory",
       "in_origin_main": true
     },
     {
@@ -1056,39 +1287,6 @@
       "in_origin_main": true
     },
     {
-      "file": "reports/public/code-review-redaction.json",
-      "person_name_hits": 0,
-      "phone_hits": 0,
-      "email_hits": 0,
-      "secret_hits": 0,
-      "person_code_hits": 6,
-      "bytes": 2152,
-      "last_commit": "51d4162 pii: stop publishing raw reports, add publish gate and history purge tooling",
-      "in_origin_main": true
-    },
-    {
-      "file": "reports/public/code-review/pii-tracked-inventory.json",
-      "person_name_hits": 0,
-      "phone_hits": 0,
-      "email_hits": 0,
-      "secret_hits": 0,
-      "person_code_hits": 130,
-      "bytes": 34525,
-      "last_commit": "51d4162 pii: stop publishing raw reports, add publish gate and history purge tooling",
-      "in_origin_main": true
-    },
-    {
-      "file": "reports/public/pii-redaction-report.json",
-      "person_name_hits": 0,
-      "phone_hits": 0,
-      "email_hits": 0,
-      "secret_hits": 0,
-      "person_code_hits": 10,
-      "bytes": 3697,
-      "last_commit": "5887369 for check",
-      "in_origin_main": true
-    },
-    {
       "file": "src/phase1-2/audit-datasets.ts",
       "person_name_hits": 0,
       "phone_hits": 0,
@@ -1151,7 +1349,18 @@
       "secret_hits": 4,
       "person_code_hits": 2,
       "bytes": 17706,
-      "last_commit": "5887369 for check",
+      "last_commit": "36924f1 pii: key-aware masking of personnel identifiers (person_code, id_courier, courier_id, employee_id) in JSON and CSV artifacts",
+      "in_origin_main": true
+    },
+    {
+      "file": "tools/pii-tracked-inventory.ts",
+      "person_name_hits": 0,
+      "phone_hits": 0,
+      "email_hits": 0,
+      "secret_hits": 0,
+      "person_code_hits": 1,
+      "bytes": 3800,
+      "last_commit": "36924f1 pii: key-aware masking of personnel identifiers (person_code, id_courier, courier_id, employee_id) in JSON and CSV artifacts",
       "in_origin_main": true
     }
   ]

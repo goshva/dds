@@ -22,9 +22,10 @@ import {
 } from "./components";
 import { api, ApiClientError, type ApiResult } from "./api/client";
 import { dataQualityPage } from "./pages/data-quality";
-import { historyEmpty, historyPage, RANGES, type CoverageDto, type HistoryDto } from "./pages/history";
+import { historyEmpty, historyPage, type CoverageDto, type HistoryDto } from "./pages/history";
 import { provenancePage, type OverviewForProvenance } from "./pages/provenance";
 import { forecastQualityPage, type QualityDto } from "./pages/forecast-quality";
+import { forecastParams, PAGES, parseHash, rangeToQuery, type PageKey } from "./routing";
 
 interface Overview extends OverviewForProvenance {
   shadow: { snapshots: number; pending: number; reconciled: number; fallbacks: number; invalids: number; candidate: string; baseline: string; horizons: number[]; available: boolean };
@@ -33,46 +34,6 @@ interface Overview extends OverviewForProvenance {
 interface ShadowForecasts { totals: { snapshots: number; pending: number; reconciled: number }; errorsByMode: { shadow: number; replay: number; unknown: number }; manifestStatus: string; items: Array<{ mode: string; modelId: string; horizon: number; originDate: string; targetDate: string; forecastValue: number | null; status: string }> }
 
 const root = document.getElementById("app")!;
-const PAGES = [
-  { key: "overview", label: "Обзор" },
-  { key: "history", label: "История" },
-  { key: "quality", label: "Качество данных" },
-  { key: "provenance", label: "Происхождение" },
-  { key: "forecast-quality", label: "Прогнозы и качество" },
-] as const;
-type PageKey = (typeof PAGES)[number]["key"];
-
-/**
- * UI-7.0.1 (D-001): разбор маршрута отделён от разбора диапазона дат.
- * Для страницы forecast-quality сегменты хеша — это mode/horizon, а не from/to.
- * Валидатор дат (rangeToQuery) получает параметры только для страниц с диапазоном.
- */
-interface Route {
-  page: PageKey;
-  /** Ключ диапазона истории ("all"/"30"/.../"custom"). Для forecast-quality — mode. */
-  range: string;
-  /** Начало диапазона (YYYY-MM-DD). Для forecast-quality — horizon ("1"/"3"). */
-  from: string;
-  /** Конец диапазона (YYYY-MM-DD). Для forecast-quality не используется. */
-  to: string;
-  /** true — параметры from/to интерпретируются как mode/horizon, валидация дат неприменима. */
-  isForecast: boolean;
-}
-
-function parseHash(): Route {
-  const raw = window.location.hash.replace(/^#/, "");
-  const [pageRaw, rangeRaw, fromRaw, toRaw] = raw.split("/");
-  const page = (PAGES.find((item) => item.key === pageRaw)?.key ?? "history") as PageKey;
-  const isForecast = page === "forecast-quality";
-  return { page, range: rangeRaw || "all", from: fromRaw || "", to: toRaw || "", isForecast };
-}
-
-/** Параметры прогнозной страницы: mode ∈ {shadow, replay}, horizon ∈ {1, 3}; иначе значения по умолчанию. */
-function forecastParams(route: Route): { mode: "shadow" | "replay"; horizon: 1 | 3 } {
-  const mode = route.range === "replay" ? "replay" : "shadow";
-  const horizon = route.from === "3" ? 3 : 1;
-  return { mode, horizon };
-}
 
 async function loadResult<T>(promise: Promise<ApiResult<T>>): Promise<ApiResult<T>> {
   try {
@@ -105,23 +66,9 @@ function block(result: ApiResult<unknown>, render: () => TrustedHtml): TrustedHt
   return render();
 }
 
-/** Диапазон запроса: вычисляется на клиенте из уже выбранного периода; сервер фильтрует по датам. */
-function rangeToQuery(range: string, from: string, to: string, lastDate: string | null): { from?: string; to?: string; error?: string } {
-  if (from || to) {
-    if (from && !/^\d{4}-\d{2}-\d{2}$/.test(from)) return { error: "Некорректная дата начала" };
-    if (to && !/^\d{4}-\d{2}-\d{2}$/.test(to)) return { error: "Некорректная дата окончания" };
-    if (from && to && from > to) return { error: "Дата начала позже даты окончания" };
-    return { from: from || undefined, to: to || undefined };
-  }
-  const days = RANGES.find((item) => item.key === range)?.days ?? null;
-  if (!days || !lastDate) return {};
-  const end = Date.parse(`${lastDate}T00:00:00Z`);
-  const start = new Date(end - (days - 1) * 86_400_000).toISOString().slice(0, 10);
-  return { from: start, to: lastDate };
-}
-
+/** Диапазон запроса вычисляется на клиенте из уже выбранного периода; сервер фильтрует по датам. */
 async function render(): Promise<void> {
-  const route = parseHash();
+  const route = parseHash(window.location.hash);
   const { page, range, from, to } = route;
   root.innerHTML = shell(loadingState({ rows: 6 }), null, "NOT_AVAILABLE", page);
 

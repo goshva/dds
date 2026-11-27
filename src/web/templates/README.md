@@ -62,7 +62,7 @@
 | Partial | Компонент |
 |---|---|
 | `empty-state.html` | `emptyState({ title, detail })` |
-| `loading-state.html` | `loadingState({ rows })` |
+| `loading-state.html` | `loadingState({ rows })` — partial принимает готовый `skeletons[]` (ширины считаются в компоненте) |
 | `error-state.html` | `errorState({ title, detail, code })` |
 
 ### `pages/` — композиционные блоки страниц (`pages/*.ts`)
@@ -75,7 +75,25 @@
 
 - В partials значения из API всегда обозначены как `{{esc}}` (экранируемые);
   слоты TrustedHtml — как `{{{trusted}}}`. Это отражает границу `escapeHtml` vs `trusted()` из `lib/format.ts`.
-- Частичные значения никогда не должны попадать в `{{{ }}}` без прохода через компонент.
+- Значения, которые в TypeScript проходят через `escapeHtml()`, обозначены одинарными `{{ }}`
+  (например, `kpi-card.html`: `{{note}}`, а не `{{{note}}}`).
+- Атрибут `href` всегда проходит через `safeHref()`; в partial это `{{{safeHref}}}` —
+  доверенная разметка, потому что `safeHref()` сам возвращает экранированную строку
+  (см. `shell/sidebar.html`, `shell/sidebar-nav.html`).
+- Атрибут `data-ds-unsafe-href="1"` проставляется по признаку **небезопасности ссылки**
+  (`{{#unsafe}}`), а не по признаку текущего пункта меню.
+- Прочие значения никогда не должны попадать в `{{{ }}}` без прохода через компонент.
+
+## История исправлений
+
+| Дата | Файл | Дефект | Исправление |
+|---|---|---|---|
+| 2026-11-25 | `cards/kpi-card.html` | P1: `{{{note}}}` при `escapeHtml()` в TS | → `{{note}}` |
+| 2026-11-25 | `shell/sidebar.html` | P1: `href` без `safeHref()` | → `{{{safeHref}}}` |
+| 2026-11-25 | `shell/sidebar-nav.html` | P1: `href` без `safeHref()`; `data-ds-unsafe-href` по `current` | → `{{{safeHref}}}`, `{{#unsafe}}` |
+| 2026-11-25 | `cards/kpi-grid.html` | P1: нарушена структура — `</div>` внутри `{{#items}}` | `{{#items}}{{{kpiCard}}}{{/items}}` внутри одного `<div>` |
+| 2026-11-25 | `states/loading-state.html` | P2: partial ожидал `skeletons[]`, компонент принимает `rows` | Контракт зафиксирован в таблице `states/` |
+
 
 ## Полнота
 

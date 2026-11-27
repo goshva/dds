@@ -34,13 +34,9 @@ export interface CoverageDto {
   fillRatio: number; fillRatioFormula: string;
 }
 
-export const RANGES: Array<{ key: string; label: string; days: number | null }> = [
-  { key: "all", label: "Весь период", days: null },
-  { key: "30", label: "30 дней", days: 30 },
-  { key: "90", label: "90 дней", days: 90 },
-  { key: "180", label: "180 дней", days: 180 },
-  { key: "365", label: "365 дней", days: 365 },
-];
+import { RANGES } from "../routing";
+
+export { RANGES } from "../routing";
 
 export function historyFilters(active: string, from: string, to: string): TrustedHtml {
   const buttons = RANGES.map((range) =>

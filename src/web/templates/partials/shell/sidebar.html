@@ -1,5 +1,5 @@
 <!-- sidebar.html -->
 <aside class="ds-sidebar" data-ds-sidebar>
   {{BRAND}}
-  <nav class="ds-nav">{{#sections}}<div class="ds-nav-section">{{title}}</div>{{#items}}<a href="{{{href}}}"{{#current}} aria-current="page"{{/current}}>{{label}}</a>{{/items}}</nav>
+  <nav class="ds-nav">{{#sections}}<div class="ds-nav-section">{{title}}</div>{{#items}}<a href="{{{safeHref}}}"{{#current}} aria-current="page"{{/current}}{{#unsafe}} data-ds-unsafe-href="1"{{/unsafe}}>{{label}}</a>{{/items}}{{/sections}}</nav>
 </aside>
