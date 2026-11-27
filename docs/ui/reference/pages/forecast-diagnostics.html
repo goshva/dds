@@ -9,113 +9,441 @@
 <body>
 <div class="ds-app">
   <aside class="ds-sidebar" data-ds-sidebar>
-    <div class="ds-brand">
-      <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
-    </div>
-    <nav class="ds-nav">
-      <div class="ds-nav-section">Эталоны страниц</div>
-      <a href="../index.html">Индекс</a>
-      <a href="overview.html">Обзор</a>
-      <a href="history.html">История</a>
-      <a href="quality.html">Качество данных</a>
-      <a href="provenance.html">Происхождение</a>
-      <a href="forecast-quality.html">Прогнозы и качество</a>
-      <a href="forecast-diagnostics.html">Диагностика прогнозирования</a>
-    </nav>
-  </aside>
-  <div class="ds-scrim" data-ds-scrim></div>
-  <div class="ds-main">
-    <header class="ds-topbar">
-      <div class="ds-row">
-        <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
-        <div><div class="ds-card-title">DSS · история и аналитика</div></div>
-      </div>
-      <div class="ds-row ds-topbar-meta">
-        <span>Магазин 7745</span>
-        <span class="ds-badge ds-badge--ok">источник: OK</span>
-        <span>обновлено: 2026-11-27 16:00</span>
-      </div>
-    </header>
-    <main class="ds-content">
-      <div class="ds-row" style="align-items:flex-start">
-        <div>
-          <h1>Диагностика прогнозирования</h1>
-          <p class="ds-sub">Режим: теневой · горизонт: h1 · два независимых представления: качество и диагностические записи</p>
-        </div>
-        <span class="ds-spacer"></span>
-        <span class="ds-badge ds-badge--provisional">PROVISIONAL</span>
-      </div>
-
-      <div class="ds-ref-banner">
-        <span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span>
-        <span class="ds-sub">Синтетические значения; не являются показателями магазина.</span>
-      </div>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Состояние режима и горизонта</h2></div>
-        <div class="ds-row">
-          <a class="ds-badge ds-badge--na" href="forecast-diagnostics.html">Историческая диагностика (Replay)</a>
-          <a class="ds-badge ds-badge--ok" href="forecast-diagnostics.html">Текущий теневой режим</a>
-          <span class="ds-sub">|</span>
-          <a class="ds-badge ds-badge--provisional" href="forecast-diagnostics.html">h1</a>
-          <a class="ds-badge ds-badge--na" href="forecast-diagnostics.html">h3</a>
-        </div>
-        <p class="ds-sub ds-ref-note">Некорректный режим или горизонт показывается явной ошибкой, а не молчаливой подстановкой.</p>
-        <div class="ds-state ds-state--error">
-          <div class="ds-state-icon">!</div>
-          <div class="ds-state-title">Некорректные параметры маршрута</div>
-          <div class="ds-sub">допустимы: режим — теневой или исторический; горизонт — h1 или h3</div>
-          <div class="ds-badge ds-badge--conflict">INVALID_ROUTE_PARAMS</div>
-        </div>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Качество прогноза</h2></div>
-        <p class="ds-sub">источник — отдельный endpoint качества; диагностика не выводится из него автоматически</p>
-        <div class="ds-kpi-grid">
-          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">MAE baseline</div><div class="ds-kpi-value">40</div><div class="ds-kpi-note">n = 1 · описательное значение</div></div>
-          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">MAE candidate</div><div class="ds-kpi-value">124</div><div class="ds-kpi-note">n = 1 · описательное значение</div></div>
-          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">pairedN</div><div class="ds-kpi-value">1</div><div class="ds-kpi-note">INSUFFICIENT</div><div style="margin-top:6px"><span class="ds-badge ds-badge--pending">ожидает</span></div></div>
-          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Ожидают факта</div><div class="ds-kpi-value">6</div></div>
-        </div>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Обнаруженные диагностические записи</h2></div>
-        <p class="ds-sub">персистентный журнал ошибок отсутствует: отсутствие файла не означает отсутствие ошибок</p>
-        <div class="ds-table-wrap">
-          <table class="ds-table">
-            <thead><tr><th>Источник</th><th>Тип</th><th>Идентификатор</th><th>Запись</th><th>Причина</th></tr></thead>
-            <tbody>
-              <tr><td>вычислено</td><td>UNKNOWN_HORIZON</td><td>REFERENCE-SNAPSHOT-0007</td><td>snapshot</td><td>горизонт вне поддерживаемых</td></tr>
-              <tr><td>вычислено</td><td>CONFLICT_PAIR_IDENTITY</td><td>REFERENCE-SNAPSHOT-0011</td><td>snapshot</td><td>baseline: несколько записей на одну пару</td></tr>
-              <tr><td>вычислено</td><td>UNKNOWN_RECONCILIATION</td><td>REFERENCE-SNAPSHOT-0014</td><td>reconciliation</td><td>невалидные обязательные поля</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="ds-sub ds-ref-note">Состояние «диагностических записей нет» показывается отдельно и не подменяет журнал ошибок.</p>
-        <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Достоверный источник диагностики недоступен</div><div class="ds-sub">причина: NO_DETECTED_DIAGNOSTICS</div></div>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Происхождение</h2></div>
-        <dl class="ds-drawer" data-ds-provenance>
-          <dt>источник</dt><dd>теневые JSONL · technicalFactCutoff REFERENCE-DATE</dd>
-          <dt>checksum</dt><dd>REFERENCE-SHADOW-CHECKSUM-0001</dd>
-          <dt>версия</dt><dd>манифест: OK · актуальность: совпадает</dd>
-          <dt>примечание</dt><dd>время формирования ответа не является датой последнего факта</dd>
-        </dl>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Состояния страницы</h2></div>
-        <div class="ds-state" data-ds-loading><div class="ds-skeleton" style="width:92%"></div><div class="ds-skeleton" style="width:64%"></div><div class="ds-skeleton" style="width:38%"></div></div>
-        <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Данные недоступны</div><div class="ds-sub">причина: NOT_AVAILABLE</div></div>
-        <div class="ds-state ds-state--error" data-ds-error><div class="ds-state-icon">!</div><div class="ds-state-title">Ошибка источника</div><div class="ds-sub">Частичные метрики не выдаются как полные.</div><div class="ds-badge ds-badge--conflict">DATA_SOURCE_CORRUPTED</div></div>
-      </section>
-    </main>
+  <div class="ds-brand">
+    <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
   </div>
+  <nav class="ds-nav"><div class="ds-nav-section">Эталоны страниц</div><a href="index.html">Индекс</a><a href="overview.html">Обзор</a><a href="history.html">История</a><a href="quality.html">Качество данных</a><a href="provenance.html">Происхождение</a><a href="forecast-quality.html">Прогнозы и качество</a><a href="forecast-diagnostics.html" aria-current="page">Диагностика прогнозирования</a></nav>
+</aside>
+  <div class="ds-scrim" data-ds-scrim></div>
+  <div class="ds-main"><header class="ds-topbar">
+  <div class="ds-row">
+    <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
+    <div><div class="ds-card-title">DSS · история и аналитика</div></div>
+  </div>
+  <div class="ds-row ds-topbar-meta">
+    <span>Магазин 7745</span>
+    <span class="ds-badge ds-badge--ok">источник: OK</span>
+    <span>обновлено: NOT_AVAILABLE</span>
+  </div>
+</header><main class="ds-content"><div class="ds-ref-banner"><span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span><span class="ds-sub">Значения синтетические: не являются показателями магазина и не используются приложением.</span></div>
+<div class="ds-row" style="align-items:flex-start">
+    <div><h1>Диагностика прогнозирования</h1><p class="ds-sub">режим: Текущий Shadow Mode · горизонт h1 · replay и shadow не смешиваются</p></div>
+    <span class="ds-spacer"></span><span class="ds-badge ds-badge--provisional">PROVISIONAL</span> <span class="ds-badge ds-badge--na">JOURNAL N/A</span>
+  </div>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Параметры</h2></div>
+  <p class="ds-sub">переключение режима и горизонта меняет запросы к API</p>
+  <div class="ds-row"><a class="ds-badge ds-badge--na" href="#forecast-diagnostics/replay/1">Историческая диагностика (Replay)</a> <a class="ds-badge ds-badge--ok" href="#forecast-diagnostics/shadow/1">Текущий Shadow Mode</a><span class="ds-sub">|</span><a class="ds-badge ds-badge--provisional" href="#forecast-diagnostics/shadow/1">h1</a> <a class="ds-badge ds-badge--na" href="#forecast-diagnostics/shadow/3">h3</a></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Состояние диагностики</h2></div>
+  <p class="ds-sub">время формирования ответа API не является временем последнего наблюдения данных</p>
+  <div class="ds-row" style="flex-wrap:wrap">
+  <span class="ds-badge ds-badge--provisional">SHADOW</span>
+  <span class="ds-badge ds-badge--provisional">h1</span>
+  <span class="ds-badge ds-badge--ok">quality: ok</span>
+  <span class="ds-badge ds-badge--ok">errors: ok</span>
+</div>
+<div class="ds-sub" style="margin-top:8px">Параметры: Текущий Shadow Mode · горизонт h1</div>
+<div class="ds-sub" style="margin-top:6px">Время формирования ответа API (meta.generatedAt): <b>2026-01-01T00:00:00.000Z</b></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Качество прогноза</h2></div>
+  <p class="ds-sub">только данные quality endpoint; frontend-метрики не пересчитываются</p>
+
+<div class="ds-kpi-grid"><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">pairedN</div>
+  <div class="ds-kpi-value">1</div>
+  <div class="ds-kpi-note">парная выборка (доступна для сравнения моделей)</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Ожидают факта (pending)</div>
+  <div class="ds-kpi-value">6</div>
+  <div class="ds-kpi-note">pending ≠ ошибка</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Исключено baseline</div>
+  <div class="ds-kpi-value">3</div>
+  <div class="ds-kpi-note">per-record причина недоступна в API</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Исключено candidate</div>
+  <div class="ds-kpi-value">3</div>
+  <div class="ds-kpi-note">per-record причина недоступна в API</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Конфликты</div>
+  <div class="ds-kpi-value">0</div>
+
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Неизвестные записи</div>
+  <div class="ds-kpi-value">0</div>
+
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Полнота выборки</div>
+  <div class="ds-kpi-value">PARTIAL</div>
+  <div class="ds-kpi-note">техническая полнота, не статистическая достаточность</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Интерпретируемость</div>
+  <div class="ds-kpi-value">INSUFFICIENT</div>
+  <div class="ds-kpi-note">недостаточно наблюдений</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div></div>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Метрики моделей</h2></div>
+  <p class="ds-sub">описательно; статус интерпретируемости выше</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Модель</th><th class="is-num">n</th><th class="is-num">MAE</th><th class="is-num">WAPE</th><th class="is-num">Bias</th><th>Полнота</th></tr></thead><tbody><tr><td>rolling_7_day_mean</td><td class="is-num">1</td><td class="is-num">40,43</td><td class="is-num">2,62</td><td class="is-num">40,43</td><td>COMPLETE</td></tr><tr><td>adaptive_baseline</td><td class="is-num">1</td><td class="is-num">124,12</td><td class="is-num">8,03</td><td class="is-num">124,12</td><td>COMPLETE</td></tr></tbody></table></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Предупреждения API</h2></div>
+
+  <ul class="ds-sub"><li>Есть прогнозы, ожидающие факта (pending). Это не ошибка.</li></ul>
+</section>
+
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Обнаруженные диагностические записи</h2><span class="ds-badge ds-badge--na">Journal: N/A</span></div>
+  <p class="ds-sub">Диагностические записи возвращаются для выбранного режима целиком. API не поддерживает фильтрацию этого списка по горизонту.</p>
+  <div class="ds-sub" style="margin-bottom:8px">total = 3 (items обрезаются по limit; лимит на стороне API).</div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>source</th><th>kind</th><th>snapshotId</th><th>recordType</th><th>reason</th></tr></thead><tbody><tr><td>detected</td><td>UNKNOWN_HORIZON</td><td>reference-snapshot-0007</td><td>snapshot</td><td>горизонт вне поддерживаемых</td></tr><tr><td>detected</td><td>CONFLICT_PAIR_IDENTITY</td><td>reference-snapshot-0011</td><td>snapshot</td><td>несколько записей на одну пару</td></tr><tr><td>detected</td><td>UNKNOWN_RECONCILIATION</td><td>reference-snapshot-0014</td><td>reconciliation</td><td>невалидные обязательные поля</td></tr></tbody></table></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Provenance и Shadow Mode</h2></div>
+  <p class="ds-sub">состояние источников; freshness само по себе не доказывает ошибочность прогноза</p>
+
+<div class="ds-row" style="margin-bottom:8px;flex-wrap:wrap"><span class="ds-badge ds-badge--ok">SINGLE_VERSION</span><span class="ds-sub">Единая версия dataset_checksum.</span></div>
+<dl class="ds-drawer" data-ds-provenance><dt>источник</dt><dd>shadow JSONL (read-only) + canonical CSV</dd><dt>checksum</dt><dd>dataset: reference-shadow-0000</dd><dt>версия</dt><dd>manifest: OK · freshness: MATCH</dd><dt>примечание</dt><dd>manifest dataset_checksum доступен через API, но не в клиентском DTO</dd></dl>
+<div class="ds-sub" style="margin-top:8px"><b>freshness:</b> Версия фактов совпадает с подтверждённой в manifest.</div>
+<div class="ds-row" style="margin-top:6px;flex-wrap:wrap"><b class="ds-sub">manifest:</b> <span class="ds-badge ds-badge--ok">OK</span></div>
+<div class="ds-row" style="margin-top:6px;flex-wrap:wrap"><span class="ds-badge ds-badge--ok">freshness: MATCH</span></div>
+<pre class="ds-sub" style="white-space:pre-wrap;word-break:break-all;margin-top:8px">shadow file checksums:
+forecasts: reference-shadow-0000</pre>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Ограничения диагностики</h2></div>
+
+  <ul class="ds-sub">
+  <li><b>Сохранённый журнал ошибок недоступен</b> (<code>errors.jsonl</code> отсутствует): persisted errors показываются как NOT_AVAILABLE, а не как «0 ошибок».</li>
+  <li><b>Per-record eligibility reasons не предоставляются:</b> API отдаёт только агрегаты (pendingN / excludedN), без причины по каждой записи.</li>
+  <li><b>Полная детализация конфликтов не предоставляется:</b> списки duplicate / orphan / snapshotsWithoutReconciliation / actualConflicts в API отсутствуют.</li>
+  <li><b>Ошибки API ≠ ошибки модели:</b> HTTP-ошибка или not_available источника не означает, что модель ошибочна.</li>
+  <li><b>pending ≠ failed:</b> прогнозы с будущей target date ожидают появления факта и не являются сбоями.</li>
+</ul>
+</section>
+
+<div class="ds-row" style="align-items:flex-start">
+    <div><h1>Диагностика прогнозирования</h1><p class="ds-sub">режим: Текущий Shadow Mode · горизонт h1 · replay и shadow не смешиваются</p></div>
+    <span class="ds-spacer"></span><span class="ds-badge ds-badge--provisional">PROVISIONAL</span> <span class="ds-badge ds-badge--na">JOURNAL N/A</span>
+  </div>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Параметры</h2></div>
+  <p class="ds-sub">переключение режима и горизонта меняет запросы к API</p>
+  <div class="ds-row"><a class="ds-badge ds-badge--na" href="#forecast-diagnostics/replay/1">Историческая диагностика (Replay)</a> <a class="ds-badge ds-badge--ok" href="#forecast-diagnostics/shadow/1">Текущий Shadow Mode</a><span class="ds-sub">|</span><a class="ds-badge ds-badge--provisional" href="#forecast-diagnostics/shadow/1">h1</a> <a class="ds-badge ds-badge--na" href="#forecast-diagnostics/shadow/3">h3</a></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Состояние диагностики</h2></div>
+  <p class="ds-sub">время формирования ответа API не является временем последнего наблюдения данных</p>
+  <div class="ds-row" style="flex-wrap:wrap">
+  <span class="ds-badge ds-badge--provisional">SHADOW</span>
+  <span class="ds-badge ds-badge--provisional">h1</span>
+  <span class="ds-badge ds-badge--na">quality: not_available</span>
+  <span class="ds-badge ds-badge--ok">errors: ok</span>
+</div>
+<div class="ds-sub" style="margin-top:8px">Параметры: Текущий Shadow Mode · горизонт h1</div>
+<div class="ds-sub" style="margin-top:6px">Время формирования ответа API (meta.generatedAt): <b>NOT_AVAILABLE</b></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Качество прогноза</h2></div>
+
+  <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Данные качества недоступны</div><div class="ds-sub">причина: NO_RECORDS_FOR_MODE_AND_HORIZON</div></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Обнаруженные диагностические записи</h2><span class="ds-badge ds-badge--na">Journal: N/A</span></div>
+  <p class="ds-sub">Диагностические записи возвращаются для выбранного режима целиком. API не поддерживает фильтрацию этого списка по горизонту.</p>
+  <div class="ds-sub" style="margin-bottom:8px">total = 3 (items обрезаются по limit; лимит на стороне API).</div><div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>source</th><th>kind</th><th>snapshotId</th><th>recordType</th><th>reason</th></tr></thead><tbody><tr><td>detected</td><td>UNKNOWN_HORIZON</td><td>reference-snapshot-0007</td><td>snapshot</td><td>горизонт вне поддерживаемых</td></tr><tr><td>detected</td><td>CONFLICT_PAIR_IDENTITY</td><td>reference-snapshot-0011</td><td>snapshot</td><td>несколько записей на одну пару</td></tr><tr><td>detected</td><td>UNKNOWN_RECONCILIATION</td><td>reference-snapshot-0014</td><td>reconciliation</td><td>невалидные обязательные поля</td></tr></tbody></table></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Provenance и Shadow Mode</h2></div>
+
+  <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Provenance недоступен</div><div class="ds-sub">quality endpoint не вернул данные; проверка версий/checksums невозможна.</div></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Ограничения диагностики</h2></div>
+
+  <ul class="ds-sub">
+  <li><b>Сохранённый журнал ошибок недоступен</b> (<code>errors.jsonl</code> отсутствует): persisted errors показываются как NOT_AVAILABLE, а не как «0 ошибок».</li>
+  <li><b>Per-record eligibility reasons не предоставляются:</b> API отдаёт только агрегаты (pendingN / excludedN), без причины по каждой записи.</li>
+  <li><b>Полная детализация конфликтов не предоставляется:</b> списки duplicate / orphan / snapshotsWithoutReconciliation / actualConflicts в API отсутствуют.</li>
+  <li><b>Ошибки API ≠ ошибки модели:</b> HTTP-ошибка или not_available источника не означает, что модель ошибочна.</li>
+  <li><b>pending ≠ failed:</b> прогнозы с будущей target date ожидают появления факта и не являются сбоями.</li>
+</ul>
+</section>
+
+<div class="ds-row" style="align-items:flex-start">
+    <div><h1>Диагностика прогнозирования</h1><p class="ds-sub">режим: Текущий Shadow Mode · горизонт h1 · replay и shadow не смешиваются</p></div>
+    <span class="ds-spacer"></span><span class="ds-badge ds-badge--provisional">PROVISIONAL</span> <span class="ds-badge ds-badge--na">JOURNAL N/A</span>
+  </div>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Параметры</h2></div>
+  <p class="ds-sub">переключение режима и горизонта меняет запросы к API</p>
+  <div class="ds-row"><a class="ds-badge ds-badge--na" href="#forecast-diagnostics/replay/1">Историческая диагностика (Replay)</a> <a class="ds-badge ds-badge--ok" href="#forecast-diagnostics/shadow/1">Текущий Shadow Mode</a><span class="ds-sub">|</span><a class="ds-badge ds-badge--provisional" href="#forecast-diagnostics/shadow/1">h1</a> <a class="ds-badge ds-badge--na" href="#forecast-diagnostics/shadow/3">h3</a></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Состояние диагностики</h2></div>
+  <p class="ds-sub">время формирования ответа API не является временем последнего наблюдения данных</p>
+  <div class="ds-row" style="flex-wrap:wrap">
+  <span class="ds-badge ds-badge--provisional">SHADOW</span>
+  <span class="ds-badge ds-badge--provisional">h1</span>
+  <span class="ds-badge ds-badge--ok">quality: ok</span>
+  <span class="ds-badge ds-badge--na">errors: not_available</span>
+</div>
+<div class="ds-sub" style="margin-top:8px">Параметры: Текущий Shadow Mode · горизонт h1</div>
+<div class="ds-sub" style="margin-top:6px">Время формирования ответа API (meta.generatedAt): <b>NOT_AVAILABLE</b></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Качество прогноза</h2></div>
+  <p class="ds-sub">только данные quality endpoint; frontend-метрики не пересчитываются</p>
+
+<div class="ds-kpi-grid"><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">pairedN</div>
+  <div class="ds-kpi-value">1</div>
+  <div class="ds-kpi-note">парная выборка (доступна для сравнения моделей)</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Ожидают факта (pending)</div>
+  <div class="ds-kpi-value">6</div>
+  <div class="ds-kpi-note">pending ≠ ошибка</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Исключено baseline</div>
+  <div class="ds-kpi-value">3</div>
+  <div class="ds-kpi-note">per-record причина недоступна в API</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Исключено candidate</div>
+  <div class="ds-kpi-value">3</div>
+  <div class="ds-kpi-note">per-record причина недоступна в API</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Конфликты</div>
+  <div class="ds-kpi-value">0</div>
+
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Неизвестные записи</div>
+  <div class="ds-kpi-value">0</div>
+
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Полнота выборки</div>
+  <div class="ds-kpi-value">PARTIAL</div>
+  <div class="ds-kpi-note">техническая полнота, не статистическая достаточность</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Интерпретируемость</div>
+  <div class="ds-kpi-value">INSUFFICIENT</div>
+  <div class="ds-kpi-note">недостаточно наблюдений</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div></div>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Метрики моделей</h2></div>
+  <p class="ds-sub">описательно; статус интерпретируемости выше</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Модель</th><th class="is-num">n</th><th class="is-num">MAE</th><th class="is-num">WAPE</th><th class="is-num">Bias</th><th>Полнота</th></tr></thead><tbody><tr><td>rolling_7_day_mean</td><td class="is-num">1</td><td class="is-num">40,43</td><td class="is-num">2,62</td><td class="is-num">40,43</td><td>COMPLETE</td></tr><tr><td>adaptive_baseline</td><td class="is-num">1</td><td class="is-num">124,12</td><td class="is-num">8,03</td><td class="is-num">124,12</td><td>COMPLETE</td></tr></tbody></table></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Предупреждения API</h2></div>
+
+  <ul class="ds-sub"><li>Есть прогнозы, ожидающие факта (pending). Это не ошибка.</li></ul>
+</section>
+
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Обнаруженные диагностические записи</h2></div>
+  <p class="ds-sub">Диагностические записи возвращаются для выбранного режима целиком. API не поддерживает фильтрацию этого списка по горизонту.</p>
+  <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Диагностических записей нет</div><div class="ds-sub">API вернул not_available · причина: NO_DETECTED_DIAGNOSTICS. Это не «ошибок нет».</div></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Provenance и Shadow Mode</h2></div>
+  <p class="ds-sub">состояние источников; freshness само по себе не доказывает ошибочность прогноза</p>
+
+<div class="ds-row" style="margin-bottom:8px;flex-wrap:wrap"><span class="ds-badge ds-badge--ok">SINGLE_VERSION</span><span class="ds-sub">Единая версия dataset_checksum.</span></div>
+<dl class="ds-drawer" data-ds-provenance><dt>источник</dt><dd>shadow JSONL (read-only) + canonical CSV</dd><dt>checksum</dt><dd>dataset: reference-shadow-0000</dd><dt>версия</dt><dd>manifest: OK · freshness: MATCH</dd><dt>примечание</dt><dd>manifest dataset_checksum доступен через API, но не в клиентском DTO</dd></dl>
+<div class="ds-sub" style="margin-top:8px"><b>freshness:</b> Версия фактов совпадает с подтверждённой в manifest.</div>
+<div class="ds-row" style="margin-top:6px;flex-wrap:wrap"><b class="ds-sub">manifest:</b> <span class="ds-badge ds-badge--ok">OK</span></div>
+<div class="ds-row" style="margin-top:6px;flex-wrap:wrap"><span class="ds-badge ds-badge--ok">freshness: MATCH</span></div>
+<pre class="ds-sub" style="white-space:pre-wrap;word-break:break-all;margin-top:8px">shadow file checksums:
+forecasts: reference-shadow-0000</pre>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Ограничения диагностики</h2></div>
+
+  <ul class="ds-sub">
+  <li><b>Сохранённый журнал ошибок недоступен</b> (<code>errors.jsonl</code> отсутствует): persisted errors показываются как NOT_AVAILABLE, а не как «0 ошибок».</li>
+  <li><b>Per-record eligibility reasons не предоставляются:</b> API отдаёт только агрегаты (pendingN / excludedN), без причины по каждой записи.</li>
+  <li><b>Полная детализация конфликтов не предоставляется:</b> списки duplicate / orphan / snapshotsWithoutReconciliation / actualConflicts в API отсутствуют.</li>
+  <li><b>Ошибки API ≠ ошибки модели:</b> HTTP-ошибка или not_available источника не означает, что модель ошибочна.</li>
+  <li><b>pending ≠ failed:</b> прогнозы с будущей target date ожидают появления факта и не являются сбоями.</li>
+</ul>
+</section>
+
+<div class="ds-row" style="align-items:flex-start">
+    <div><h1>Диагностика прогнозирования</h1><p class="ds-sub">режим: Историческая диагностика (Replay) · горизонт h3 · replay и shadow не смешиваются</p></div>
+    <span class="ds-spacer"></span><span class="ds-badge ds-badge--provisional">PROVISIONAL</span> <span class="ds-badge ds-badge--na">JOURNAL N/A</span>
+  </div>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Параметры</h2></div>
+  <p class="ds-sub">переключение режима и горизонта меняет запросы к API</p>
+  <div class="ds-row"><a class="ds-badge ds-badge--ok" href="#forecast-diagnostics/replay/3">Историческая диагностика (Replay)</a> <a class="ds-badge ds-badge--na" href="#forecast-diagnostics/shadow/3">Текущий Shadow Mode</a><span class="ds-sub">|</span><a class="ds-badge ds-badge--na" href="#forecast-diagnostics/replay/1">h1</a> <a class="ds-badge ds-badge--provisional" href="#forecast-diagnostics/replay/3">h3</a></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Состояние диагностики</h2></div>
+  <p class="ds-sub">время формирования ответа API не является временем последнего наблюдения данных</p>
+  <div class="ds-row" style="flex-wrap:wrap">
+  <span class="ds-badge ds-badge--provisional">REPLAY</span>
+  <span class="ds-badge ds-badge--provisional">h3</span>
+  <span class="ds-badge ds-badge--ok">quality: ok</span>
+  <span class="ds-badge ds-badge--ok">errors: ok</span>
+</div>
+<div class="ds-sub" style="margin-top:8px">Параметры: Историческая диагностика (Replay) · горизонт h3</div>
+<div class="ds-sub" style="margin-top:6px">Время формирования ответа API (meta.generatedAt): <b>NOT_AVAILABLE</b></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Качество прогноза</h2></div>
+  <p class="ds-sub">только данные quality endpoint; frontend-метрики не пересчитываются</p>
+
+<div class="ds-kpi-grid"><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">pairedN</div>
+  <div class="ds-kpi-value">1</div>
+  <div class="ds-kpi-note">парная выборка (доступна для сравнения моделей)</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Ожидают факта (pending)</div>
+  <div class="ds-kpi-value">6</div>
+  <div class="ds-kpi-note">pending ≠ ошибка</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Исключено baseline</div>
+  <div class="ds-kpi-value">3</div>
+  <div class="ds-kpi-note">per-record причина недоступна в API</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Исключено candidate</div>
+  <div class="ds-kpi-value">3</div>
+  <div class="ds-kpi-note">per-record причина недоступна в API</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Конфликты</div>
+  <div class="ds-kpi-value">0</div>
+
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Неизвестные записи</div>
+  <div class="ds-kpi-value">0</div>
+
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Полнота выборки</div>
+  <div class="ds-kpi-value">PARTIAL</div>
+  <div class="ds-kpi-note">техническая полнота, не статистическая достаточность</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Интерпретируемость</div>
+  <div class="ds-kpi-value">INSUFFICIENT</div>
+  <div class="ds-kpi-note">недостаточно наблюдений</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div></div>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Метрики моделей</h2></div>
+  <p class="ds-sub">описательно; статус интерпретируемости выше</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Модель</th><th class="is-num">n</th><th class="is-num">MAE</th><th class="is-num">WAPE</th><th class="is-num">Bias</th><th>Полнота</th></tr></thead><tbody><tr><td>rolling_7_day_mean</td><td class="is-num">1</td><td class="is-num">40,43</td><td class="is-num">2,62</td><td class="is-num">40,43</td><td>COMPLETE</td></tr><tr><td>adaptive_baseline</td><td class="is-num">1</td><td class="is-num">124,12</td><td class="is-num">8,03</td><td class="is-num">124,12</td><td>COMPLETE</td></tr></tbody></table></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Предупреждения API</h2></div>
+
+  <ul class="ds-sub"><li>Есть прогнозы, ожидающие факта (pending). Это не ошибка.</li></ul>
+</section>
+
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Обнаруженные диагностические записи</h2></div>
+  <p class="ds-sub">Диагностические записи возвращаются для выбранного режима целиком. API не поддерживает фильтрацию этого списка по горизонту.</p>
+  <div class="ds-row" style="margin-bottom:8px"><span class="ds-badge ds-badge--na">Journal: N/A</span></div><div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Успешный пустой набор</div><div class="ds-sub">API вернул успешный ответ без обнаруженных записей.</div></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Provenance и Shadow Mode</h2></div>
+  <p class="ds-sub">состояние источников; freshness само по себе не доказывает ошибочность прогноза</p>
+
+<div class="ds-row" style="margin-bottom:8px;flex-wrap:wrap"><span class="ds-badge ds-badge--ok">SINGLE_VERSION</span><span class="ds-sub">Единая версия dataset_checksum.</span></div>
+<dl class="ds-drawer" data-ds-provenance><dt>источник</dt><dd>shadow JSONL (read-only) + canonical CSV</dd><dt>checksum</dt><dd>dataset: reference-shadow-0000</dd><dt>версия</dt><dd>manifest: OK · freshness: MATCH</dd><dt>примечание</dt><dd>manifest dataset_checksum доступен через API, но не в клиентском DTO</dd></dl>
+<div class="ds-sub" style="margin-top:8px"><b>freshness:</b> Версия фактов совпадает с подтверждённой в manifest.</div>
+<div class="ds-row" style="margin-top:6px;flex-wrap:wrap"><b class="ds-sub">manifest:</b> <span class="ds-badge ds-badge--ok">OK</span></div>
+<div class="ds-row" style="margin-top:6px;flex-wrap:wrap"><span class="ds-badge ds-badge--ok">freshness: MATCH</span></div>
+<pre class="ds-sub" style="white-space:pre-wrap;word-break:break-all;margin-top:8px">shadow file checksums:
+forecasts: reference-shadow-0000</pre>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Ограничения диагностики</h2></div>
+
+  <ul class="ds-sub">
+  <li><b>Сохранённый журнал ошибок недоступен</b> (<code>errors.jsonl</code> отсутствует): persisted errors показываются как NOT_AVAILABLE, а не как «0 ошибок».</li>
+  <li><b>Per-record eligibility reasons не предоставляются:</b> API отдаёт только агрегаты (pendingN / excludedN), без причины по каждой записи.</li>
+  <li><b>Полная детализация конфликтов не предоставляется:</b> списки duplicate / orphan / snapshotsWithoutReconciliation / actualConflicts в API отсутствуют.</li>
+  <li><b>Ошибки API ≠ ошибки модели:</b> HTTP-ошибка или not_available источника не означает, что модель ошибочна.</li>
+  <li><b>pending ≠ failed:</b> прогнозы с будущей target date ожидают появления факта и не являются сбоями.</li>
+</ul>
+</section>
+
+<div class="ds-row" style="align-items:flex-start">
+    <div><h1>Диагностика прогнозирования</h1><p class="ds-sub">режим: Текущий Shadow Mode · горизонт h3 · replay и shadow не смешиваются</p></div>
+    <span class="ds-spacer"></span><span class="ds-badge ds-badge--provisional">PROVISIONAL</span> <span class="ds-badge ds-badge--na">JOURNAL N/A</span>
+  </div>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Параметры</h2></div>
+  <p class="ds-sub">переключение режима и горизонта меняет запросы к API</p>
+  <div class="ds-row"><a class="ds-badge ds-badge--na" href="#forecast-diagnostics/replay/3">Историческая диагностика (Replay)</a> <a class="ds-badge ds-badge--ok" href="#forecast-diagnostics/shadow/3">Текущий Shadow Mode</a><span class="ds-sub">|</span><a class="ds-badge ds-badge--na" href="#forecast-diagnostics/shadow/1">h1</a> <a class="ds-badge ds-badge--provisional" href="#forecast-diagnostics/shadow/3">h3</a></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Состояние диагностики</h2></div>
+  <p class="ds-sub">время формирования ответа API не является временем последнего наблюдения данных</p>
+  <div class="ds-row" style="flex-wrap:wrap">
+  <span class="ds-badge ds-badge--provisional">SHADOW</span>
+  <span class="ds-badge ds-badge--provisional">h3</span>
+  <span class="ds-badge ds-badge--na">quality: not_available</span>
+  <span class="ds-badge ds-badge--conflict">errors: error</span>
+</div>
+<div class="ds-sub" style="margin-top:8px">Параметры: Текущий Shadow Mode · горизонт h3</div>
+<div class="ds-sub" style="margin-top:6px">Время формирования ответа API (meta.generatedAt): <b>NOT_AVAILABLE</b></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Качество прогноза</h2></div>
+
+  <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Данные качества недоступны</div><div class="ds-sub">причина: NO_RECORDS_FOR_MODE_AND_HORIZON</div></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Обнаруженные диагностические записи</h2></div>
+  <p class="ds-sub">Диагностические записи возвращаются для выбранного режима целиком. API не поддерживает фильтрацию этого списка по горизонту.</p>
+  <div class="ds-state ds-state--error" data-ds-error><div class="ds-state-icon">!</div><div class="ds-state-title">Ошибка запроса диагностики</div><div class="ds-sub">Источник повреждён</div><div class="ds-badge ds-badge--conflict">DATA_SOURCE_CORRUPTED · referenc</div></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Provenance и Shadow Mode</h2></div>
+
+  <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Provenance недоступен</div><div class="ds-sub">quality endpoint не вернул данные; проверка версий/checksums невозможна.</div></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Ограничения диагностики</h2></div>
+
+  <ul class="ds-sub">
+  <li><b>Сохранённый журнал ошибок недоступен</b> (<code>errors.jsonl</code> отсутствует): persisted errors показываются как NOT_AVAILABLE, а не как «0 ошибок».</li>
+  <li><b>Per-record eligibility reasons не предоставляются:</b> API отдаёт только агрегаты (pendingN / excludedN), без причины по каждой записи.</li>
+  <li><b>Полная детализация конфликтов не предоставляется:</b> списки duplicate / orphan / snapshotsWithoutReconciliation / actualConflicts в API отсутствуют.</li>
+  <li><b>Ошибки API ≠ ошибки модели:</b> HTTP-ошибка или not_available источника не означает, что модель ошибочна.</li>
+  <li><b>pending ≠ failed:</b> прогнозы с будущей target date ожидают появления факта и не являются сбоями.</li>
+</ul>
+</section>
+</main></div>
 </div>
 <script src="../assets/reference.js"></script>
 </body>

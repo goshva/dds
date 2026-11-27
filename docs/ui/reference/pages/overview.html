@@ -9,146 +9,75 @@
 <body>
 <div class="ds-app">
   <aside class="ds-sidebar" data-ds-sidebar>
-    <div class="ds-brand">
-      <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
-    </div>
-    <nav class="ds-nav">
-      <div class="ds-nav-section">Эталоны страниц</div>
-      <a href="../index.html">Индекс</a>
-      <a href="overview.html">Обзор</a>
-      <a href="history.html">История</a>
-      <a href="quality.html">Качество данных</a>
-      <a href="provenance.html">Происхождение</a>
-      <a href="forecast-quality.html">Прогнозы и качество</a>
-      <a href="forecast-diagnostics.html">Диагностика прогнозирования</a>
-    </nav>
-  </aside>
-  <div class="ds-scrim" data-ds-scrim></div>
-  <div class="ds-main">
-    <header class="ds-topbar">
-      <div class="ds-row">
-        <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
-        <div><div class="ds-card-title">DSS · история и аналитика</div></div>
-      </div>
-      <div class="ds-row ds-topbar-meta">
-        <span>Магазин 7745</span>
-        <span class="ds-badge ds-badge--ok">источник: OK</span>
-        <span>обновлено: 2026-11-27 16:00</span>
-      </div>
-    </header>
-    <main class="ds-content">
-      <div class="ds-row" style="align-items:flex-start">
-        <div>
-          <h1>Обзор</h1>
-          <p class="ds-sub">магазин 7745 · Europe/Moscow · метрика delivered_orders_daily · slice REFERENCE</p>
-        </div>
-        <span class="ds-spacer"></span>
-        <span class="ds-badge ds-badge--provisional">PROVISIONAL</span>
-      </div>
-
-      <div class="ds-ref-banner">
-        <span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span>
-        <span class="ds-sub">Синтетические значения; не являются показателями магазина.</span>
-      </div>
-
-      <div class="ds-grid ds-grid--cards">
-        <section class="ds-card">
-          <div class="ds-card-head"><h2 class="ds-card-title">История</h2></div>
-          <div class="ds-kpi-grid">
-            <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Дней</div><div class="ds-kpi-value">900</div><div class="ds-kpi-note">01.01.2024 — 18.06.2026</div><div style="margin-top:6px"><span class="ds-badge ds-badge--pending">ожидает</span></div></div>
-            <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Последний факт</div><div class="ds-kpi-value">1 500</div><div class="ds-kpi-note">18.06.2026</div></div>
-          </div>
-        </section>
-        <section class="ds-card">
-          <div class="ds-card-head"><h2 class="ds-card-title">Теневой режим</h2></div>
-          <div class="ds-kpi-grid">
-            <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Снапшотов</div><div class="ds-kpi-value">40</div><div class="ds-kpi-note">историческая диагностика отдельно: 3 500</div></div>
-            <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Ожидают факта</div><div class="ds-kpi-value">6</div><div class="ds-kpi-note">сверено 34</div><div style="margin-top:6px"><span class="ds-badge ds-badge--pending">ожидает</span></div></div>
-          </div>
-        </section>
-      </div>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Актуальность источника</h2></div>
-        <div class="ds-row">
-          <span class="ds-badge ds-badge--ok">актуальность: совпадает</span>
-          <span class="ds-badge ds-badge--ok">манифест: OK</span>
-        </div>
-        <dl class="ds-drawer" data-ds-provenance>
-          <dt>источник</dt><dd>canonical CSV (только чтение)</dd>
-          <dt>checksum</dt><dd>файл REFERENCE0 · нормализованный REFERENCE1</dd>
-          <dt>версия</dt><dd>version REFERENCE</dd>
-          <dt>примечание</dt><dd>семантика PROVISIONAL</dd>
-        </dl>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">История фактов</h2></div>
-        <p class="ds-sub">линия разрывается на отсутствующих наблюдениях</p>
-        <div class="ds-chart-block">
-          <div class="ds-chart-wrap">
-            <svg class="ds-chart" viewBox="0 0 720 260" role="img" aria-label="line chart">
-              <title>01.01.2024 — 18.06.2026</title>
-              <line class="ds-chart-grid" x1="42" y1="12" x2="708" y2="12"/><text class="ds-chart-axis" x="4" y="15">2 000</text>
-              <line class="ds-chart-grid" x1="42" y1="71" x2="708" y2="71"/><text class="ds-chart-axis" x="4" y="74">1 500</text>
-              <line class="ds-chart-grid" x1="42" y1="130" x2="708" y2="130"/><text class="ds-chart-axis" x="4" y="133">1 000</text>
-              <line class="ds-chart-grid" x1="42" y1="189" x2="708" y2="189"/><text class="ds-chart-axis" x="4" y="192">500</text>
-              <line class="ds-chart-grid" x1="42" y1="248" x2="708" y2="248"/><text class="ds-chart-axis" x="4" y="251">0</text>
-              <path class="ds-chart-line--actual" d="M42,180 L180,150 L360,168 L520,120 L708,132 M560,90 L708,70"/>
-            </svg>
-          </div>
-        </div>
-        <div class="ds-chart-legend"><span><i class="ds-legend-dot"></i>факт</span><span>отсутствующие дни не соединяются линией и не заменяются нулём</span></div>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Теневой режим: наблюдения</h2></div>
-        <p class="ds-sub">только теневой режим, историческая диагностика не смешивается</p>
-        <div class="ds-table-wrap">
-          <table class="ds-table">
-            <thead><tr><th>Модель</th><th class="is-num">h</th><th>Целевая дата</th><th class="is-num">Прогноз</th></tr></thead>
-            <tbody>
-              <tr><td>rolling_7_day_mean</td><td class="is-num">1</td><td>17.06.2026</td><td class="is-num">1 480</td></tr>
-              <tr><td>adaptive_baseline</td><td class="is-num">1</td><td>17.06.2026</td><td class="is-num">1 505</td></tr>
-              <tr><td>rolling_7_day_mean</td><td class="is-num">3</td><td>19.06.2026</td><td class="is-num">[Н/Д]</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Полнота (последние 28 календарных дней)</h2></div>
-        <div class="ds-calendar" data-ds-calendar>
-          <div class="ds-calendar-day ds-calendar-day--full" title="01.06.2026 (full)"></div>
-          <div class="ds-calendar-day ds-calendar-day--full" title="02.06.2026 (full)"></div>
-          <div class="ds-calendar-day ds-calendar-day--missing" title="03.06.2026 (missing)"></div>
-          <div class="ds-calendar-day ds-calendar-day--unknown" title="04.06.2026 (unknown)"></div>
-          <div class="ds-calendar-day ds-calendar-day--partial" title="05.06.2026 (partial)"></div>
-        </div>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Состояния страницы</h2></div>
-        <p class="ds-sub">набор состояний из общего контракта: загрузка, пустота, недоступность, ошибка</p>
-        <div class="ds-state" data-ds-loading>
-          <div class="ds-skeleton" style="width:80%"></div>
-          <div class="ds-skeleton" style="width:60%"></div>
-        </div>
-        <div class="ds-state" data-ds-empty>
-          <div class="ds-state-icon">∅</div>
-          <div class="ds-state-title">Данные недоступны</div>
-          <div class="ds-sub">причина: NOT_AVAILABLE</div>
-        </div>
-        <div class="ds-state ds-state--error" data-ds-error>
-          <div class="ds-state-icon">!</div>
-          <div class="ds-state-title">Ошибка источника</div>
-          <div class="ds-sub">ответ без деталей; событие фиксируется идентификатором</div>
-          <div class="ds-badge ds-badge--conflict">DATA_SOURCE_UNAVAILABLE</div>
-        </div>
-      </section>
-    </main>
+  <div class="ds-brand">
+    <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
   </div>
+  <nav class="ds-nav"><div class="ds-nav-section">Эталоны страниц</div><a href="index.html">Индекс</a><a href="overview.html" aria-current="page">Обзор</a><a href="history.html">История</a><a href="quality.html">Качество данных</a><a href="provenance.html">Происхождение</a><a href="forecast-quality.html">Прогнозы и качество</a><a href="forecast-diagnostics.html">Диагностика прогнозирования</a></nav>
+</aside>
+  <div class="ds-scrim" data-ds-scrim></div>
+  <div class="ds-main"><header class="ds-topbar">
+  <div class="ds-row">
+    <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
+    <div><div class="ds-card-title">DSS · история и аналитика</div></div>
+  </div>
+  <div class="ds-row ds-topbar-meta">
+    <span>Магазин 7745</span>
+    <span class="ds-badge ds-badge--ok">источник: OK</span>
+    <span>обновлено: NOT_AVAILABLE</span>
+  </div>
+</header><main class="ds-content"><div class="ds-ref-banner"><span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span><span class="ds-sub">Значения синтетические: не являются показателями магазина и не используются приложением.</span></div><div class="ds-row" style="align-items:flex-start">
+    <div><h1>Обзор</h1><p class="ds-sub">магазин 7745 · Europe/Moscow · метрика delivered_orders_daily · семантика PROVISIONAL</p></div>
+    <span class="ds-spacer"></span><span class="ds-badge ds-badge--provisional">PROVISIONAL</span> <span class="ds-badge ds-badge--pending">ожидают факта: 6</span>
+  </div><div class="ds-grid ds-grid--cards"><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">История</h2></div>
+
+  <div class="ds-kpi-grid"><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Дней</div>
+  <div class="ds-kpi-value">900</div>
+  <div class="ds-kpi-note">01.01.2024 — 18.06.2026</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Последний факт</div>
+  <div class="ds-kpi-value">1 500</div>
+  <div class="ds-kpi-note">18.06.2026</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div></div>
+</section><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Теневой режим</h2></div>
+
+  <div class="ds-kpi-grid"><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Наблюдений</div>
+  <div class="ds-kpi-value">40</div>
+  <div class="ds-kpi-note">историческая диагностика отдельно: 3 500</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Ожидают факта</div>
+  <div class="ds-kpi-value">6</div>
+  <div class="ds-kpi-note">сверено 34</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div></div>
+</section></div><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Актуальность источника</h2><span class="ds-badge ds-badge--ok">актуальность: совпадает</span> <span class="ds-badge ds-badge--ok">манифест: OK</span></div>
+
+  <dl class="ds-drawer" data-ds-provenance><dt>источник</dt><dd>canonical CSV (только чтение)</dd><dt>checksum</dt><dd>reference-file-0000</dd><dt>версия</dt><dd>reference-normalized-0000</dd><dt>примечание</dt><dd>семантика PROVISIONAL</dd></dl>
+</section><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">История фактов</h2></div>
+  <p class="ds-sub">линия разрывается на отсутствующих наблюдениях</p>
+  <div class="ds-chart-block"><div class="ds-chart-wrap"><svg class="ds-chart" viewBox="0 0 720 260" role="img" aria-label="line chart"><title>2026-06-01 — 2026-06-08</title><line class="ds-chart-grid" x1="42" y1="12" x2="708" y2="12"/><text class="ds-chart-axis" x="4" y="15">1700</text><line class="ds-chart-grid" x1="42" y1="68" x2="708" y2="68"/><text class="ds-chart-axis" x="4" y="71">1275</text><line class="ds-chart-grid" x1="42" y1="124" x2="708" y2="124"/><text class="ds-chart-axis" x="4" y="127">850</text><line class="ds-chart-grid" x1="42" y1="180" x2="708" y2="180"/><text class="ds-chart-axis" x="4" y="183">425</text><line class="ds-chart-grid" x1="42" y1="236" x2="708" y2="236"/><text class="ds-chart-axis" x="4" y="239">0</text><path class="ds-chart-line--actual" d="M42.0,38.4 L137.1,41.0 M327.4,22.5 L422.6,12.0 L517.7,236.0 L612.9,44.9"/></svg></div></div><div class="ds-chart-legend"><span><i class="ds-legend-dot"></i>факт</span><span>отсутствующие дни не соединяются линией и не заменяются нулём</span></div>
+</section><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Теневой режим: наблюдения</h2></div>
+  <p class="ds-sub">только теневой режим; историческая диагностика не смешивается</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Модель</th><th class="is-num">h</th><th>Целевая дата</th><th class="is-num">Прогноз</th></tr></thead><tbody><tr><td>rolling_7_day_mean</td><td class="is-num">1</td><td>17.06.2026</td><td class="is-num">1 480</td></tr><tr><td>adaptive_baseline</td><td class="is-num">1</td><td>17.06.2026</td><td class="is-num">1 505</td></tr><tr><td>rolling_7_day_mean</td><td class="is-num">3</td><td>19.06.2026</td><td class="is-num">[Н/Д]</td></tr></tbody></table></div>
+</section><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Полнота (последние 28 календарных дней)</h2></div>
+
+  <div class="ds-calendar" data-ds-calendar><div class="ds-calendar-day ds-calendar-day--full" title="2026-06-01 (full)"></div><div class="ds-calendar-day ds-calendar-day--full" title="2026-06-02 (full)"></div><div class="ds-calendar-day ds-calendar-day--missing" title="2026-06-03 (missing)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-04 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--partial" title="2026-06-05 (partial)"></div><div class="ds-calendar-day ds-calendar-day--full" title="2026-06-06 (full)"></div></div>
+</section><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Состояния и семантика</h2></div>
+  <p class="ds-sub">загрузка, недоступность, ошибка; ожидание не является ошибкой</p>
+  <div class="ds-state" data-ds-loading><div class="ds-skeleton" style="width:70%"></div><div class="ds-skeleton" style="width:85%"></div><div class="ds-skeleton" style="width:65%"></div></div><div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Данные недоступны</div><div class="ds-sub">причина: NOT_AVAILABLE</div></div><div class="ds-state ds-state--error" data-ds-error><div class="ds-state-icon">!</div><div class="ds-state-title">Ошибка источника</div><div class="ds-sub">Частичные данные не выдаются как полные.</div><div class="ds-badge ds-badge--conflict">DATA_SOURCE_CORRUPTED</div></div><div class="ds-row ds-ref-note"><span class="ds-badge ds-badge--provisional">семантика PROVISIONAL</span><span class="ds-badge ds-badge--pending">ожидают факта: 6</span></div>
+</section></main></div>
 </div>
 <script src="../assets/reference.js"></script>
 </body>

@@ -9,75 +9,40 @@
 <body>
 <div class="ds-app">
   <aside class="ds-sidebar" data-ds-sidebar>
-    <div class="ds-brand">
-      <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div>
-        <span class="ds-brand-name">DSS</span>
-        <span class="ds-brand-sub">прогнозирование заказов</span>
-      </div>
-    </div>
-    <nav class="ds-nav">
-      <div class="ds-nav-section">Эталоны страниц</div>
-      <a href="index.html" aria-current="page">Индекс</a>
-      <a href="pages/overview.html">Обзор</a>
-      <a href="pages/history.html">История</a>
-      <a href="pages/quality.html">Качество данных</a>
-      <a href="pages/provenance.html">Происхождение</a>
-      <a href="pages/forecast-quality.html">Прогнозы и качество</a>
-      <a href="pages/forecast-diagnostics.html">Диагностика прогнозирования</a>
-    </nav>
-  </aside>
-  <div class="ds-scrim" data-ds-scrim></div>
-  <div class="ds-main">
-    <header class="ds-topbar">
-      <div class="ds-row">
-        <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
-        <div><div class="ds-card-title">DSS · эталоны интерфейса</div></div>
-      </div>
-      <div class="ds-row ds-topbar-meta">
-        <span>Магазин 7745</span>
-        <span class="ds-badge ds-badge--provisional">источник: REFERENCE</span>
-        <span>обновлено: —</span>
-      </div>
-    </header>
-    <main class="ds-content">
-      <div class="ds-row" style="align-items:flex-start">
-        <div>
-          <h1>Эталоны страниц DSS</h1>
-          <p class="ds-sub">Шесть страниц, подтверждённых production-маршрутизацией · синтетические данные</p>
-        </div>
-        <span class="ds-spacer"></span>
-        <span class="ds-badge ds-badge--provisional">PROVISIONAL</span>
-      </div>
-
-      <div class="ds-ref-banner">
-        <span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span>
-        <span class="ds-sub">Значения синтетические, не являются показателями магазина и не используются приложением.</span>
-      </div>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Страницы</h2></div>
-        <p class="ds-sub">Состав соответствует маршрутам production-приложения; шестая страница подтверждена кодом (диагностика прогнозирования).</p>
-        <ul class="ds-ref-index">
-          <li><a href="pages/overview.html"><b>Обзор</b><div class="ds-sub ds-ref-note">История, теневой режим, актуальность источника, график, полнота</div></a></li>
-          <li><a href="pages/history.html"><b>История заказов</b><div class="ds-sub ds-ref-note">Показатели периода, фильтры, график, таблица</div></a></li>
-          <li><a href="pages/quality.html"><b>Качество данных</b><div class="ds-sub ds-ref-note">Полнота, пропуски, календарь, ограничения</div></a></li>
-          <li><a href="pages/provenance.html"><b>Происхождение</b><div class="ds-sub ds-ref-note">Источник, версия, контрольные суммы, актуальность</div></a></li>
-          <li><a href="pages/forecast-quality.html"><b>Прогнозы и качество</b><div class="ds-sub ds-ref-note">Независимые метрики, парное сравнение, ограничения интерпретации</div></a></li>
-          <li><a href="pages/forecast-diagnostics.html"><b>Диагностика прогнозирования</b><div class="ds-sub ds-ref-note">Качество, диагностические записи, провенанс</div></a></li>
-        </ul>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Ограничения эталонов</h2></div>
-        <ul class="ds-sub">
-          <li>Нет подключения к API: состояния загрузки, пустоты, ошибки и недоступности показаны статически.</li>
-          <li>Интерактивность ограничена мобильным меню; фильтры и переключатели не выполняют переходов.</li>
-          <li>Расхождения с production фиксируются в отчёте визуального аудита, а не скрываются в эталоне.</li>
-        </ul>
-      </section>
-    </main>
+  <div class="ds-brand">
+    <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
   </div>
+  <nav class="ds-nav"><div class="ds-nav-section">Эталоны страниц</div><a href="index.html" aria-current="page">Индекс</a><a href="overview.html">Обзор</a><a href="history.html">История</a><a href="quality.html">Качество данных</a><a href="provenance.html">Происхождение</a><a href="forecast-quality.html">Прогнозы и качество</a><a href="forecast-diagnostics.html">Диагностика прогнозирования</a></nav>
+</aside>
+  <div class="ds-scrim" data-ds-scrim></div>
+  <div class="ds-main"><header class="ds-topbar">
+  <div class="ds-row">
+    <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
+    <div><div class="ds-card-title">DSS · эталоны интерфейса</div></div>
+  </div>
+  <div class="ds-row ds-topbar-meta">
+    <span>Магазин 7745</span>
+    <span class="ds-badge ds-badge--ok">источник: OK</span>
+    <span>обновлено: NOT_AVAILABLE</span>
+  </div>
+</header><main class="ds-content"><div class="ds-ref-banner"><span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span><span class="ds-sub">Демонстрационные значения; интерфейс приложения использует реальные данные.</span></div><div class="ds-row" style="align-items:flex-start">
+    <div><h1>Эталоны страниц DSS</h1><p class="ds-sub">Шесть страниц, сгенерированных из production-компонентов · синтетические данные</p></div>
+    <span class="ds-spacer"></span><span class="ds-badge ds-badge--provisional">PROVISIONAL</span> <span class="ds-badge ds-badge--pending">REFERENCE DATA — NOT PRODUCTION DATA</span>
+  </div><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Страницы</h2></div>
+  <p class="ds-sub">состав соответствует маршрутам production-приложения</p>
+  <ul class="ds-ref-index"><li><a href="pages/overview.html"><b>Обзор</b><div class="ds-sub ds-ref-note">История, теневой режим, актуальность источника, график и полнота</div></a></li><li><a href="pages/history.html"><b>История заказов</b><div class="ds-sub ds-ref-note">Показатели периода, фильтры, график и таблица наблюдений</div></a></li><li><a href="pages/quality.html"><b>Качество данных</b><div class="ds-sub ds-ref-note">Полнота ряда, пропуски, календарь и ограничения качества</div></a></li><li><a href="pages/provenance.html"><b>Происхождение данных</b><div class="ds-sub ds-ref-note">Источник, контрольные суммы, версия и актуальность</div></a></li><li><a href="pages/forecast-quality.html"><b>Прогнозы и качество</b><div class="ds-sub ds-ref-note">Независимые метрики, парное сравнение и ограничения интерпретации</div></a></li><li><a href="pages/forecast-diagnostics.html"><b>Диагностика прогнозирования</b><div class="ds-sub ds-ref-note">Качество, диагностические записи и провенанс</div></a></li></ul>
+</section><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Ограничения эталонов</h2></div>
+
+  <ul class="ds-sub">
+  <li>Разметка собрана production-компонентами <code>src/web/components</code> и функциями страниц.</li>
+  <li>Данные синтетические: REFERENCE DATA — NOT PRODUCTION DATA; не являются показателями магазина.</li>
+  <li>Нет подключения к API, сети, SQLite и JSONL; состояния показаны статически.</li>
+  <li>Команда генерации: <code>bun tools/reference/generate.ts</code>.</li>
+</ul>
+</section></main></div>
 </div>
 <script src="assets/reference.js"></script>
 </body>

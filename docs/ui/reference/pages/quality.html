@@ -9,104 +9,84 @@
 <body>
 <div class="ds-app">
   <aside class="ds-sidebar" data-ds-sidebar>
-    <div class="ds-brand">
-      <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
-    </div>
-    <nav class="ds-nav">
-      <div class="ds-nav-section">Эталоны страниц</div>
-      <a href="../index.html">Индекс</a>
-      <a href="overview.html">Обзор</a>
-      <a href="history.html">История</a>
-      <a href="quality.html">Качество данных</a>
-      <a href="provenance.html">Происхождение</a>
-      <a href="forecast-quality.html">Прогнозы и качество</a>
-      <a href="forecast-diagnostics.html">Диагностика прогнозирования</a>
-    </nav>
-  </aside>
-  <div class="ds-scrim" data-ds-scrim></div>
-  <div class="ds-main">
-    <header class="ds-topbar">
-      <div class="ds-row">
-        <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
-        <div><div class="ds-card-title">DSS · история и аналитика</div></div>
-      </div>
-      <div class="ds-row ds-topbar-meta">
-        <span>Магазин 7745</span>
-        <span class="ds-badge ds-badge--pending">источник: PARTIAL</span>
-        <span>обновлено: 2026-11-27 16:00</span>
-      </div>
-    </header>
-    <main class="ds-content">
-      <div class="ds-row" style="align-items:flex-start">
-        <div>
-          <h1>Качество данных</h1>
-          <p class="ds-sub">Полнота исторического ряда · 01.01.2024 — 18.06.2026</p>
-        </div>
-        <span class="ds-spacer"></span>
-        <span class="ds-badge ds-badge--pending">полнота: PARTIAL</span>
-      </div>
-
-      <div class="ds-ref-banner">
-        <span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span>
-        <span class="ds-sub">Синтетические значения; не являются показателями магазина.</span>
-      </div>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Полнота</h2></div>
-        <div class="ds-kpi-grid">
-          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Календарных дней</div><div class="ds-kpi-value">900</div></div>
-          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Дней с данными</div><div class="ds-kpi-value">893</div></div>
-          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Отсутствующих значений</div><div class="ds-kpi-value">7</div><div class="ds-kpi-note">пропусков: 2</div><div style="margin-top:6px"><span class="ds-badge ds-badge--pending">ожидает</span></div></div>
-          <div class="ds-kpi" data-ds-kpi><div class="ds-kpi-label">Доля заполненности</div><div class="ds-kpi-value">99.22 %</div><div class="ds-kpi-note">наблюдения / календарные дни</div></div>
-        </div>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Пропуски</h2></div>
-        <p class="ds-sub">максимальная длина интервала: 4</p>
-        <div class="ds-table-wrap">
-          <table class="ds-table">
-            <thead><tr><th>Начало пропуска</th><th>Конец пропуска</th><th class="is-num">Дней</th></tr></thead>
-            <tbody>
-              <tr><td>03.06.2026</td><td>04.06.2026</td><td class="is-num">2</td></tr>
-              <tr><td>12.04.2025</td><td>15.04.2025</td><td class="is-num">4</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Календарь (последние 28 дней)</h2></div>
-        <div class="ds-calendar" data-ds-calendar>
-          <div class="ds-calendar-day ds-calendar-day--full" title="01.06.2026 (full)"></div>
-          <div class="ds-calendar-day ds-calendar-day--full" title="02.06.2026 (full)"></div>
-          <div class="ds-calendar-day ds-calendar-day--missing" title="03.06.2026 (missing)"></div>
-          <div class="ds-calendar-day ds-calendar-day--missing" title="04.06.2026 (missing)"></div>
-          <div class="ds-calendar-day ds-calendar-day--unknown" title="05.06.2026 (unknown)"></div>
-          <div class="ds-calendar-day ds-calendar-day--partial" title="06.06.2026 (partial)"></div>
-        </div>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Ограничения качества</h2></div>
-        <ul class="ds-sub">
-          <li>Семантика целевой метрики — <b>PROVISIONAL</b>: правила перерасчётов и корректировок требуют подтверждения владельцем бизнес-процесса.</li>
-          <li>Финансовая интерпретация показателей не подтверждена.</li>
-          <li>Аномальные значения не удаляются из исторического ряда и сохраняются для последующего анализа.</li>
-          <li>Отсутствующие значения показываются как [Н/Д] и не заменяются нулём.</li>
-          <li>Список аномальных дат не отображается: однозначная связь с наблюдениями не подтверждена.</li>
-        </ul>
-      </section>
-
-      <section class="ds-card">
-        <div class="ds-card-head"><h2 class="ds-card-title">Состояния страницы</h2></div>
-        <div class="ds-state" data-ds-loading><div class="ds-skeleton" style="width:85%"></div><div class="ds-skeleton" style="width:55%"></div></div>
-        <div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Данные недоступны</div><div class="ds-sub">причина: NOT_AVAILABLE</div></div>
-        <div class="ds-state ds-state--error" data-ds-error><div class="ds-state-icon">!</div><div class="ds-state-title">Ошибка источника</div><div class="ds-sub">Повреждённый источник не показывается как корректный.</div><div class="ds-badge ds-badge--conflict">DATA_SOURCE_CORRUPTED</div></div>
-      </section>
-    </main>
+  <div class="ds-brand">
+    <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
   </div>
+  <nav class="ds-nav"><div class="ds-nav-section">Эталоны страниц</div><a href="index.html">Индекс</a><a href="overview.html">Обзор</a><a href="history.html">История</a><a href="quality.html" aria-current="page">Качество данных</a><a href="provenance.html">Происхождение</a><a href="forecast-quality.html">Прогнозы и качество</a><a href="forecast-diagnostics.html">Диагностика прогнозирования</a></nav>
+</aside>
+  <div class="ds-scrim" data-ds-scrim></div>
+  <div class="ds-main"><header class="ds-topbar">
+  <div class="ds-row">
+    <button class="ds-burger" type="button" data-ds-menu aria-label="Меню">☰</button>
+    <div><div class="ds-card-title">DSS · история и аналитика</div></div>
+  </div>
+  <div class="ds-row ds-topbar-meta">
+    <span>Магазин 7745</span>
+    <span class="ds-badge ds-badge--ok">источник: OK</span>
+    <span>обновлено: NOT_AVAILABLE</span>
+  </div>
+</header><main class="ds-content"><div class="ds-ref-banner"><span class="ds-badge ds-badge--conflict">REFERENCE DATA — NOT PRODUCTION DATA</span><span class="ds-sub">Значения синтетические: не являются показателями магазина и не используются приложением.</span></div>
+<div class="ds-row" style="align-items:flex-start">
+    <div><h1>Качество данных</h1><p class="ds-sub">Полнота исторического ряда · 01.06.2024 — 18.06.2026</p></div>
+    <span class="ds-spacer"></span><span class="ds-badge ds-badge--pending">полнота: PARTIAL</span>
+  </div>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Полнота</h2></div>
+
+  <div class="ds-kpi-grid"><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Календарных дней</div>
+  <div class="ds-kpi-value">907</div>
+
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Дней с данными</div>
+  <div class="ds-kpi-value">900</div>
+
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--ok">OK</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Отсутствующих значений</div>
+  <div class="ds-kpi-value">7</div>
+  <div class="ds-kpi-note">пропусков: 7</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div><div class="ds-kpi" data-ds-kpi>
+  <div class="ds-kpi-label">Доля заполненности</div>
+  <div class="ds-kpi-value">99.20 %</div>
+  <div class="ds-kpi-note">observationDays / calendarDays</div>
+  <div style="margin-top:6px"><span class="ds-badge ds-badge--pending">PENDING</span></div>
+</div></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Пропуски</h2></div>
+  <p class="ds-sub">максимальная длина интервала: 2</p>
+  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th>Начало пропуска</th><th>Конец пропуска</th><th class="is-num">Дней</th></tr></thead><tbody><tr><td>03.06.2026</td><td>04.06.2026</td><td class="is-num">2</td></tr><tr><td>07.06.2026</td><td>07.06.2026</td><td class="is-num">1</td></tr></tbody></table></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Календарь (последние 28 дней)</h2></div>
+
+  <div class="ds-calendar" data-ds-calendar><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-22 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-23 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-24 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-25 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-26 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-27 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-28 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-29 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-30 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-05-31 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--full" title="2026-06-01 (full)"></div><div class="ds-calendar-day ds-calendar-day--full" title="2026-06-02 (full)"></div><div class="ds-calendar-day ds-calendar-day--missing" title="2026-06-03 (missing)"></div><div class="ds-calendar-day ds-calendar-day--missing" title="2026-06-04 (missing)"></div><div class="ds-calendar-day ds-calendar-day--full" title="2026-06-05 (full)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-06 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--missing" title="2026-06-07 (missing)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-08 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-09 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-10 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-11 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-12 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-13 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-14 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-15 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-16 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-17 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-18 (unknown)"></div></div>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Ограничения качества</h2></div>
+
+  <ul class="ds-sub">
+  <li>Семантика целевой метрики — <b>PROVISIONAL</b>: правила перерасчётов и корректировок требуют подтверждения владельцем бизнес-процесса.</li>
+  <li>Финансовая интерпретация показателей не подтверждена.</li>
+  <li>Аномальные значения не удаляются из исторического ряда и сохраняются для последующего анализа.</li>
+  <li>Данные одного магазина не являются доказательством универсальной закономерности.</li>
+  <li>Плановые мероприятия не являются историческими факторами.</li>
+  <li>Список аномальных дат не отображается: однозначная связь с наблюдениями не подтверждена.</li>
+</ul>
+</section>
+<section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Статусы календаря</h2></div>
+  <p class="ds-sub">все четыре состояния: наблюдение, частичное, пропуск, неизвестное</p>
+  <div class="ds-calendar" data-ds-calendar><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-09 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-10 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-11 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-12 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-13 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-14 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-15 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-16 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-17 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-18 (unknown)"></div></div>
+</section><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Состояния и семантика</h2></div>
+  <p class="ds-sub">загрузка, недоступность, ошибка; ожидание не является ошибкой</p>
+  <div class="ds-state" data-ds-loading><div class="ds-skeleton" style="width:70%"></div><div class="ds-skeleton" style="width:85%"></div><div class="ds-skeleton" style="width:65%"></div></div><div class="ds-state" data-ds-empty><div class="ds-state-icon">∅</div><div class="ds-state-title">Данные недоступны</div><div class="ds-sub">причина: NOT_AVAILABLE</div></div><div class="ds-state ds-state--error" data-ds-error><div class="ds-state-icon">!</div><div class="ds-state-title">Ошибка источника</div><div class="ds-sub">Частичные данные не выдаются как полные.</div><div class="ds-badge ds-badge--conflict">DATA_SOURCE_CORRUPTED</div></div><div class="ds-row ds-ref-note"><span class="ds-badge ds-badge--provisional">семантика PROVISIONAL</span><span class="ds-badge ds-badge--pending">ожидают факта: 6</span></div>
+</section></main></div>
 </div>
 <script src="../assets/reference.js"></script>
 </body>
