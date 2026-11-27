@@ -100,3 +100,116 @@ items: snapshotId, modelId, horizon, targetDate, forecastValue|null,
 2. Список прогнозов (модель, версия, variant, origin/target, status, inputDataVersion, generatedAt) — отдельный блок по `/api/v1/forecasts`.
 3. Селектор моделей в FINAL-3 не реализуется (риск `INVALID_QUERY`); при необходимости — отдельным решением.
 4. Дата-диапазон на странице не вводится: сервер отдаёт последние N записей без фильтра по датам.
+
+---
+
+# FINAL-3.3.2.0 — повторный preflight перед реализацией страницы
+
+**Дата:** 2026-11-28 · **Режим:** только чтение (изменений кода нет)
+
+## 1. Baseline (FACT)
+
+| Проверка | Значение |
+|---|---|
+| HEAD | `ef1f3ff34c4b34a34d8b7b77395521b9891ce775` («pre final») |
+| origin/main | тот же коммит — совпадает |
+| Branch | `main` |
+| staged / unstaged / untracked | **0 / 0 / 0** — рабочее дерево полностью чистое |
+| Ожидаемый ранее baseline | `9a6f9fd…` — **перекрыт внешним коммитом** «pre final» |
+| Что вошло в коммит | 14 файлов: `src/web/routing.ts` (54+), `tests/web/forecast-routing.test.ts` (120), `tests/web/history.test.ts` (198), `tests/web/ui-7-0-1-routing.test.ts` (1), `src/web/main.ts`, `src/web/pages/history.ts`, `docs/ui/reference/pages/history.html` и 6 отчётов `docs/final-frontend/` |
+| `diff.txt` | отсутствует |
+| Артефакт в HEAD (FACT, не мой) | файл с именем `c --noEmit` добавлен в коммит `ef1f3ff` (след прежних shell-команд, аналог прежнего `-files --others --exclude-standard`) |
+| Git-операции этого этапа | не выполнялись |
+
+Прежние пользовательские изменения FINAL-2/2.1 более не видны как незакоммиченные: они вошли в коммит `ef1f3ff` (FACT).
+
+## 2. Готовность маршрутизации (FACT)
+
+`src/web/routing.ts` (195 строк) уже содержит маршрут Forecast:
+
+- `PAGES` включает `{ key: "forecast", label: "Прогноз" }` (позиция 5, после `provenance`);
+- `Route.segmentCount` — число сегментов hash;
+- `parseHash` помечает `isForecast` для страницы `forecast`;
+- `normalizeForecastParams` требует **ровно три сегмента** и допустимые `mode`/`horizon`, иначе `mode: null`, `horizon: null`, `valid: false`, `fallback: "#forecast/replay/1"`;
+- `forecastHref(mode, horizon)` возвращает один из четырёх канонических адресов.
+
+Тесты маршрута: `tests/web/forecast-routing.test.ts` (120 строк) — проходят.
+
+## 3. Точка входа и dispatch (FACT)
+
+- `src/web/main.ts` — **197 строк** (лимит 200); ветки страниц: `forecast-quality`, `forecast-diagnostics`, `history`, `quality`, `provenance`, иначе — **Overview** (строка 154: `} else {`) .
+- Следствие: до реализации `#forecast/...` временно рендерит Overview — известное промежуточное поведение.
+- `src/web/app-render.ts` — **отсутствует**, должен быть создан для выноса dispatch (согласовано ранее).
+- `src/web/pages/forecast.ts` — отсутствует.
+
+## 4. Повторная проверка API-контрактов (FACT)
+
+| Проверка | Результат |
+|---|---|
+| `GET /api/v1/forecasts` | присутствует (`routes.ts`), параметры `mode` (обяз.), `horizon` (обяз.), `model` (опц., allowlist), `limit` 1..1000 (по умолч. 200) |
+| `GET /api/v1/shadow/reconciliations` | присутствует, параметры `mode` (по умолч. `shadow`), `horizon` (опц. 1\|3), `limit` (по умолч. 60) |
+| `ForecastItemDto` | **12 полей**, без `actual`, ошибок, per-record checksum, target, p10/p90 |
+| `ReconciliationModel` | `snapshotId, modelId, horizon, targetDate, forecastValue\|null, actual, absoluteError, signedError` + `total`, `unknownSnapshots` |
+| Provenance | только у снапшотов (`datasetChecksums`, `datasetVersionWarning`, `manifestStatus`, `manifestDatasetChecksum`, `freshness`, `shadowFileChecksums`, `meta.checksum`); у сверок только `meta.source`/`meta.note` |
+
+Контракты не изменились относительно FINAL-3.1/3.2.
+
+## 5. Компоненты для повторного использования (FACT)
+
+Экспортируются: `appShell`, `pageHeader`, `sidebar`, `topbar`; `card`, `chartCard`, `kpiCard`, `kpiGrid`, `provenanceDrawer`, `statusBadge`; `dataTable`, `completenessCalendar`, `sparkline`; `emptyState`, `errorState`, `loadingState`; `barChart`, `lineChart`; `escapeHtml`, `formatDate`, `formatNumber`, `formatPercent`, `isSafeHref`, `safeHref`, `statusClass`, `statusLabel`, `trusted`. Новых компонентов не требуется; график в FINAL-3 не создаётся.
+
+## 6. Тестовый baseline (FACT)
+
+- `tests/web` — 10 файлов, прогон: **212 pass / 0 fail**;
+- `bunx tsc --noEmit` — 0 ошибок;
+- лимиты тестов: `forecast-routing.test.ts` 120 (≤120), `history.test.ts` 198 (≤200).
+
+## 7. Reference-генератор (FACT)
+
+- `tools/reference/fixtures/common.ts` (63 строки) содержит **собственный** `PAGES` из **6** записей (без `forecast`) и тип `PageKey`;
+- `render-page.ts` (58) — `BUILDERS: Record<PageKey, …>` (2 упоминания);
+- `generate.ts` (51) обходит `PAGES` (8 упоминаний) и пишет индекс + страницы;
+- навигация reference-страниц строится из всех `PAGES` → добавление Forecast изменит **все** сгенерированные файлы (индекс + 6 страниц + новая).
+
+Это заранее согласовано для FINAL-3.3.2.6 (расширение allowlist: `fixtures/common.ts`, `docs/ui/reference/index.html`, `docs/ui/reference/pages/forecast.html`, перегенерация шести страниц).
+
+## 8. План файлов и лимиты (2 00 строк)
+
+| Файл | Действие | Строк сейчас → план |
+|---|---|---|
+| `src/web/app-render.ts` | создать (dispatch + page helpers) | 0 → ≤200 |
+| `src/web/main.ts` | сократить до тонкой точки входа | 197 → ≤80 |
+| `src/web/pages/forecast.ts` | создать (страница) | 0 → ≤200 |
+| `src/web/pages/forecast-*.ts` | условно (только при реальном превышении) | 0 → ≤200 |
+| `tests/web/forecast.test.ts` | создать | 0 → ≤200 |
+| `tools/reference/fixtures/forecast.ts` | создать (FIXTURE, синтетика) | 0 → ≤90 |
+| `tools/reference/fixtures/common.ts` | +1 запись PAGES | 63 → ≤70 |
+| `tools/reference/render-page.ts` | +1 builder | 58 → ≤62 |
+| `tools/reference/generate.ts` | только при необходимости | 51 |
+| `docs/ui/reference/index.html`, `pages/forecast.html`, 6 существующих страниц | генерируются | — |
+| `docs/final-frontend/forecast-implementation.md` | отчёт FINAL-3.3.2 | — |
+
+`src/web/pages/forecast-diagnostics.ts` (348 строк) **не изменяется** — декомпозиция вне scope.
+
+## 9. Риски
+
+| Приоритет | Риск | Митигация |
+|---|---|---|
+| P1 | `main.ts` 197/200 → добавление ветки Forecast превысит лимит | вынос dispatch в `app-render.ts`; `main.ts` только точка входа |
+| P1 | Гонки запросов между двумя блоками | `selectionGeneration` + независимые `snapshotsRequestSeq`/`reconciliationsRequestSeq` (контракт FINAL-3.2.1) |
+| P1 | Reference-генератор меняет 8 файлов | согласованный allowlist FINAL-3.3.2.6, генерация только через `generate.ts` |
+| P2 | Промежуточный рендер Overview на `#forecast/...` | устраняется подключением страницы на этапе dispatch |
+| P2 | Артефактные файлы в репозитории (`c --noEmit`) | не трогать; зафиксировано как внешнее |
+| P3 | `forecast-quality`/`diagnostics` используют мягкие дефолты `forecastParams` | Forecast использует **строгий** `normalizeForecastParams`, поведение других страниц не меняется |
+
+## 10. Ограничения и NOT_VERIFIED
+
+- **NOT_VERIFIED:** фактическое содержимое ответов `/api/v1/forecasts` и `/shadow/reconciliations` на живых данных (не вызывались; будут проверены на этапах 3.3.2.5/3.3.2.8);
+- **NOT_VERIFIED:** браузерная отрисовка (этап 3.3.2.8);
+- ограничения контракта: нет `actual`/ошибок в снапшотах, нет per-record checksum, нет p10/p90, нет h7/h14, нет финансовых показателей, нет серверной пагинации и фильтра дат.
+
+## 11. Решение
+
+**`GO_WITH_LIMITATIONS`** — маршрутизация готова, контракты подтверждены, baseline зелёный (212 pass, tsc 0). Реализация возможна в согласованном scope при обязательном выносе dispatch в `src/web/app-render.ts` и соблюдении лимита 200 строк.
+
+**Остановка: реализация (3.3.2.1 Dispatch) не начата.**
