@@ -61,7 +61,7 @@ describe("parseHash: все известные страницы", () => {
   }
 
   test("PAGES содержит ожидаемые ключи страниц (UI-7.1.1 добавил forecast-diagnostics)", () => {
-    expect(PAGES.map((page) => page.key)).toEqual(["overview", "history", "quality", "provenance", "forecast-quality", "forecast-diagnostics"]);
+    expect(PAGES.map((page) => page.key)).toEqual(["overview", "history", "quality", "provenance", "forecast", "forecast-quality", "forecast-diagnostics"]);
   });
 });
 

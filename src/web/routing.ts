@@ -12,6 +12,7 @@ export const PAGES = [
   { key: "history", label: "История" },
   { key: "quality", label: "Качество данных" },
   { key: "provenance", label: "Происхождение" },
+  { key: "forecast", label: "Прогноз" },
   { key: "forecast-quality", label: "Прогнозы и качество" },
   { key: "forecast-diagnostics", label: "Диагностика прогнозирования" },
 ] as const;
@@ -39,17 +40,24 @@ export interface Route {
   to: string;
   /** true — параметры from/to интерпретируются как mode/horizon, валидация дат неприменима. */
   isForecast: boolean;
+  /**
+   * FINAL-3.3.1.1: число сегментов hash после удаления \`#\`. Позволяет строго отклонять лишние,
+   * пустые и завершающие сегменты там, где это требуется (маршрут Forecast), не меняя значения
+   * \`range\`/\`from\`/\`to\` для существующих страниц.
+   */
+  segmentCount: number;
 }
 
 /** Разбирает hash (с `#` или без) в Route. Неизвестная страница → DEFAULT_PAGE. */
 export function parseHash(hash: string): Route {
   const raw = String(hash ?? "").replace(/^#/, "");
-  const [pageRaw, rangeRaw, fromRaw, toRaw] = raw.split("/");
+  const parts = raw.split("/");
+  const [pageRaw, rangeRaw, fromRaw, toRaw] = parts;
   const page = (PAGES.find((item) => item.key === pageRaw)?.key ?? DEFAULT_PAGE) as PageKey;
-  const isForecast = page === "forecast-quality" || page === "forecast-diagnostics";
+  const isForecast = page === "forecast" || page === "forecast-quality" || page === "forecast-diagnostics";
   // D-001 регрессия: для non-forecast страниц параметры range/from — это даты, isForecast=false.
   // Для forecast-diagnostics route.range трактуется как mode, route.from — как horizon.
-  return { page, range: rangeRaw || "all", from: fromRaw || "", to: toRaw || "", isForecast };
+  return { page, range: rangeRaw || "all", from: fromRaw || "", to: toRaw || "", isForecast, segmentCount: parts.length };
 }
 
 export interface ForecastParams {
@@ -65,6 +73,46 @@ export function forecastParams(route: Pick<Route, "range" | "from">): ForecastPa
   const mode = route.range === "replay" ? "replay" : "shadow";
   const horizon = route.from === "3" ? 3 : 1;
   return { mode, horizon };
+}
+
+export type ForecastMode = "replay" | "shadow";
+export type ForecastHorizon = 1 | 3;
+
+export interface NormalizedForecastParams {
+  mode: ForecastMode | null;
+  horizon: ForecastHorizon | null;
+  /** true только для канонического маршрута `#forecast/<mode>/<horizon>` с допустимыми значениями. */
+  valid: boolean;
+  /** Канонический адрес для нормализации некорректного маршрута (используется вызывающей стороной). */
+  fallback: string;
+}
+
+const FORECAST_FALLBACK = "#forecast/replay/1";
+
+/**
+ * FINAL-3.3.1: строгий разбор `#forecast/<mode>/<horizon>`.
+ *
+ * Отличие от `forecastParams` и `diagnosticsParams`: неизвестные значения **не** подменяются
+ * значениями по умолчанию — `mode`/`horizon` остаются `null`, а `valid = false`. Канонический
+ * адрес для перезаписи URL возвращается отдельным полем `fallback`. Лишний четвёртый сегмент
+ * (например, `#forecast/replay/1/extra`) делает маршрут недействительным.
+ */
+export function normalizeForecastParams(route: Pick<Route, "page" | "range" | "from" | "to" | "segmentCount">): NormalizedForecastParams {
+  const modeRaw = route.range === "replay" || route.range === "shadow" ? route.range : null;
+  const horizonRaw = route.from === "1" ? 1 : route.from === "3" ? 3 : null;
+  // Ровно три сегмента: "forecast", mode, horizon. Лишние, пустые и завершающие сегменты недопустимы.
+  const valid = route.page === "forecast" && route.segmentCount === 3 && route.to === "" && modeRaw !== null && horizonRaw !== null;
+  // Некорректный маршрут не даёт типизированных mode/horizon: вызывающая сторона обязана
+  // нормализовать URL по `fallback`, а не использовать частично разобранные значения.
+  return { mode: valid ? modeRaw : null, horizon: valid ? horizonRaw : null, valid, fallback: FORECAST_FALLBACK };
+}
+
+/** Канонический hash для допустимой пары mode/horizon; при некорректных значениях — null. */
+export function forecastHref(mode: ForecastMode, horizon: ForecastHorizon): string | null {
+  const modeValid = mode === "replay" || mode === "shadow";
+  const horizonValid = horizon === 1 || horizon === 3;
+  if (!modeValid || !horizonValid) return null;
+  return `#forecast/${mode}/${horizon}`;
 }
 
 /**

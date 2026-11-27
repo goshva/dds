@@ -36,6 +36,10 @@ interface ShadowForecasts { totals: { snapshots: number; pending: number; reconc
 
 const root = document.getElementById("app")!;
 
+/** FINAL-2: индекс страницы таблицы истории (в памяти; hash-контракт не меняется). */
+let historyPageIndex = 0;
+let historyPageKey = "";
+
 async function loadResult<T>(promise: Promise<ApiResult<T>>): Promise<ApiResult<T>> {
   try {
     return await promise;
@@ -133,8 +137,10 @@ async function render(): Promise<void> {
     content = block(history, () => {
       const data = (history as { data: HistoryDto }).data;
       if (!data.returnedPoints) return historyEmpty();
-      const cov = coverage.status === "ok" ? (coverage as { data: CoverageDto }).data : ({ firstDate: data.from, lastDate: data.to, days: data.returnedPoints, gaps: 0, duplicateDates: 0, nullValues: 0, nullPolicy: "REJECTED_AS_CORRUPTED", completeness: "UNKNOWN", missingDates: [], gapIntervals: [], maxGapLength: 0, fillRatio: 0, fillRatioFormula: "observationDays / calendarDays" } as CoverageDto);
-      return historyPage({ history: data, coverage: cov, activeRange: range, from, to });
+      const cov = coverage.status === "ok" ? (coverage as { data: CoverageDto }).data : null;
+      const stateKey = `${range}|${from}|${to}`;
+      if (stateKey !== historyPageKey) { historyPageKey = stateKey; historyPageIndex = 0; }
+      return historyPage({ history: data, coverage: cov, activeRange: range, from, to, page: historyPageIndex });
     });
   } else if (page === "quality") {
     content = block(coverage, () => {
@@ -181,6 +187,8 @@ document.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
   if (target.id === "ds-apply") applyCustomRange();
   if (target.id === "ds-reset") window.location.hash = "#history/all";
+  if (target.id === "ds-page-prev") { historyPageIndex = Math.max(0, historyPageIndex - 1); void render(); }
+  if (target.id === "ds-page-next") { historyPageIndex += 1; void render(); }
 });
 document.querySelector("[data-ds-menu]")?.addEventListener("click", () => {
   document.querySelector("[data-ds-sidebar]")?.classList.toggle("is-open");
