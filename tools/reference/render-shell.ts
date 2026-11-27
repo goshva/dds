@@ -16,6 +16,10 @@ export interface DocumentInput {
 }
 
 export function renderDocument(input: DocumentInput): string {
+  // Индекс находится на уровень выше страниц: относительные ссылки навигации зависят от расположения документа.
+  const isIndex = input.navCurrent === null;
+  const pagePrefix = isIndex ? "pages/" : "";
+  const indexHref = isIndex ? "index.html" : "../index.html";
   const shell = appShell({
     sidebar: sidebar({
       brandName: "DSS",
@@ -24,8 +28,8 @@ export function renderDocument(input: DocumentInput): string {
         {
           title: "Эталоны страниц",
           items: [
-            { href: "index.html", label: "Индекс", current: input.navCurrent === null },
-            ...PAGES.map((page) => ({ href: page.file, label: page.navLabel, current: page.key === input.navCurrent })),
+            { href: indexHref, label: "Индекс", current: isIndex },
+            ...PAGES.map((page) => ({ href: `${pagePrefix}${page.file}`, label: page.navLabel, current: page.key === input.navCurrent })),
           ],
         },
       ],

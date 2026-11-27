@@ -1,8 +1,9 @@
 /**
- * TPL-4.1: проверки генератора эталонов (без записи файлов).
- * Проверяется содержимое, изоляция, семантика и детерминированность.
+ * TPL-4.1.1: проверки генератора эталонов (без записи файлов).
+ * Проверяются все семь артефактов: индекс и шесть страниц.
  */
 import { existsSync, readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
 
 import { describe, expect, test } from "bun:test";
 
@@ -13,12 +14,20 @@ import { renderDocument, renderIndexDocument } from "../../tools/reference/rende
 const CSS_PAGES = "../assets/reference.css";
 const JS_PAGES = "../assets/reference.js";
 
-function renderAll(): Array<{ file: string; html: string }> {
+interface Generated {
+  file: string;
+  html: string;
+}
+
+function renderAll(): Generated[] {
   const index = renderIndexDocument(indexPageContent(), "assets/reference.css", "assets/reference.js");
-  return [{ file: "index.html", html: index }, ...PAGES.map((page) => ({
-    file: `pages/${page.file}`,
-    html: renderDocument({ title: `DSS — эталон: ${page.title}`, cssHref: CSS_PAGES, jsHref: JS_PAGES, topbarTitle: page.topbarTitle, navCurrent: page.key, content: pageContent(page.key) }),
-  }))];
+  return [
+    { file: "index.html", html: index },
+    ...PAGES.map((page) => ({
+      file: `pages/${page.file}`,
+      html: renderDocument({ title: `DSS — эталон: ${page.title}`, cssHref: CSS_PAGES, jsHref: JS_PAGES, topbarTitle: page.topbarTitle, navCurrent: page.key, content: pageContent(page.key) }),
+    })),
+  ];
 }
 
 const GENERATOR_SOURCES = [
@@ -34,15 +43,44 @@ const GENERATOR_SOURCES = [
   "tools/reference/fixtures/forecast-diagnostics.ts",
 ];
 
-describe("TPL-4.1: состав страниц", () => {
-  test("шесть страниц и индекс создаются", () => {
+const sha256 = (value: string): string => new Bun.CryptoHasher("sha256").update(value).digest("hex");
+
+describe("TPL-4.1.1: все семь артефактов", () => {
+  test("индекс и шесть страниц присутствуют в сборке", () => {
     const documents = renderAll();
     expect(documents.length).toBe(7);
     expect(documents.map((item) => item.file)).toEqual(["index.html", ...PAGES.map((page) => `pages/${page.file}`)]);
     for (const item of documents) expect(item.html.length, item.file).toBeGreaterThan(1000);
   });
 
-  test("все ссылки индекса указывают на существующие файлы", () => {
+  test("каждый файл существует на диске и совпадает с результатом генерации", () => {
+    for (const item of renderAll()) {
+      const path = `docs/ui/reference/${item.file}`;
+      expect(existsSync(path), path).toBe(true);
+      const onDisk = readFileSync(path, "utf8");
+      expect(sha256(onDisk), `${item.file}: контрольная сумма`).toBe(sha256(item.html));
+      expect(onDisk, `${item.file}: содержимое`).toBe(item.html);
+    }
+  });
+
+  test("ни в одном файле нет незаменённых placeholder", () => {
+    for (const item of renderAll()) expect(/\{\{[^}]+\}\}/.test(item.html), item.file).toBe(false);
+  });
+
+  test("относительные ссылки каждого файла существуют на диске", () => {
+    for (const item of renderAll()) {
+      const localPath = `docs/ui/reference/${item.file}`;
+      for (const match of item.html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+        const target = match[1]!;
+        if (target.startsWith("#")) continue;
+        expect(/(https?:)?\/\//.test(target), `${item.file}: внешняя ссылка ${target}`).toBe(false);
+        const resolved = resolve(dirname(localPath), target.split("#")[0]!);
+        expect(existsSync(resolved), `${item.file} → ${target}`).toBe(true);
+      }
+    }
+  });
+
+  test("индекс содержит ссылки на все шесть страниц", () => {
     const index = renderAll()[0]!.html;
     for (const page of PAGES) {
       expect(index, page.file).toContain(`pages/${page.file}`);
@@ -51,20 +89,13 @@ describe("TPL-4.1: состав страниц", () => {
     expect(existsSync("docs/ui/reference/index.html")).toBe(true);
   });
 
-  test("production CSS подключается относительными путями и файлы существуют", () => {
-    const documents = renderAll();
-    for (const item of documents) expect(item.html, item.file).toContain("assets/reference.css");
-    expect(existsSync("docs/ui/reference/assets/reference.css")).toBe(true);
-    expect(existsSync("docs/ui/reference/assets/reference.js")).toBe(true);
+  test("production CSS подключается относительными путями", () => {
+    for (const item of renderAll()) expect(item.html, item.file).toContain("assets/reference.css");
     const css = readFileSync("docs/ui/reference/assets/reference.css", "utf8");
     for (const style of ["tokens.css", "layout.css", "components.css", "charts.css", "responsive.css"]) {
       expect(css, style).toContain(`../../../../src/web/styles/${style}`);
       expect(existsSync(`src/web/styles/${style}`), style).toBe(true);
     }
-  });
-
-  test("в готовом HTML нет незаменённых placeholder", () => {
-    for (const item of renderAll()) expect(/\{\{[^}]+\}\}/.test(item.html), item.file).toBe(false);
   });
 
   test("маркировка синтетических данных присутствует на каждой странице", () => {
@@ -89,16 +120,22 @@ describe("TPL-4.1: использование production-компонентов"
   });
 
   test("страницы вызывают production-функции страниц", () => {
-    const history = pageContent("history");
+    expect(pageContent("history")).toContain("История заказов");
+    expect(pageContent("quality")).toContain("Качество данных");
+    expect(pageContent("provenance")).toContain("Происхождение данных");
+    expect(pageContent("forecast-quality")).toContain("Прогнозы и качество моделей");
+    expect(pageContent("forecast-diagnostics")).toContain("Диагностика прогнозирования");
+  });
+
+  test("календарь качества: статус partial поддерживается компонентом и передаётся типизированно", () => {
     const quality = pageContent("quality");
-    const provenance = pageContent("provenance");
-    const forecastQuality = pageContent("forecast-quality");
-    const diagnostics = pageContent("forecast-diagnostics");
-    expect(history).toContain("История заказов");
-    expect(quality).toContain("Качество данных");
-    expect(provenance).toContain("Происхождение данных");
-    expect(forecastQuality).toContain("Прогнозы и качество моделей");
-    expect(diagnostics).toContain("Диагностика прогнозирования");
+    for (const status of ["full", "partial", "missing", "unknown"]) expect(quality, status).toContain(`ds-calendar-day--${status}`);
+    const fixture = readFileSync("tools/reference/fixtures/quality.ts", "utf8");
+    expect(fixture).toContain("CalendarDay[]");
+    expect(fixture).toContain("completenessCalendar");
+    // утверждение о том, что построитель формирует partial, не должно присутствовать
+    expect(fixture).not.toContain("все четыре состояния: наблюдение");
+    expect(fixture).toContain("статус partial построителем не формируется");
   });
 });
 
@@ -125,12 +162,11 @@ describe("TPL-4.1: изоляция и безопасность", () => {
     }
   });
 
-  test("доверенные слоты формируются компонентами, а не строками из данных", () => {
+  test("доверенные слоты формируются компонентами", () => {
     const diagnostics = readFileSync("tools/reference/fixtures/forecast-diagnostics.ts", "utf8");
     expect(diagnostics).not.toContain("innerHTML");
     expect(diagnostics).toContain("forecastDiagnosticsPage");
-    const values = pageContent("forecast-quality");
-    expect(values).not.toContain("<script");
+    expect(pageContent("forecast-quality")).not.toContain("<script");
   });
 });
 
@@ -160,18 +196,17 @@ describe("TPL-4.1: семантика данных", () => {
 });
 
 describe("TPL-4.1: детерминированность", () => {
-  test("два прогона сборки дают идентичный HTML", async () => {
-    const first = renderAll();
-    const second = renderAll();
-    const digest = (documents: Array<{ html: string }>) => documents.map((item) => new Bun.CryptoHasher("sha256").update(item.html).digest("hex"));
-    expect(digest(first)).toEqual(digest(second));
+  test("два прогона сборки дают идентичные SHA-256 всех семи файлов", () => {
+    const first = renderAll().map((item) => `${item.file}:${sha256(item.html)}`);
+    const second = renderAll().map((item) => `${item.file}:${sha256(item.html)}`);
+    expect(second).toEqual(first);
+    expect(first.length).toBe(7);
   });
 
-  test("файлы на диске совпадают с результатом сборки", () => {
+  test("контрольные суммы файлов на диске совпадают с повторной генерацией", () => {
     for (const item of renderAll()) {
-      if (item.file === "index.html") continue;
       const onDisk = readFileSync(`docs/ui/reference/${item.file}`, "utf8");
-      expect(new Bun.CryptoHasher("sha256").update(onDisk).digest("hex"), item.file).toBe(new Bun.CryptoHasher("sha256").update(item.html).digest("hex"));
+      expect(sha256(onDisk), item.file).toBe(sha256(item.html));
     }
   });
 });

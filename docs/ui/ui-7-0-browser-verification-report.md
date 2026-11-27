@@ -1,5 +1,10 @@
 # UI-7.0 — Browser Verification & Responsive Audit
 
+> **Архитектурная поправка TPL-4.5.** Каталог `src/web/templates/partials/` удалён в TPL-4.4.
+> Production HTML формируют `src/web/components/` и `src/web/pages/`; экранирование — `src/web/lib/format.ts`;
+> актуальная документация архитектуры — `src/web/templates/README.md`; эталоны страниц — `docs/ui/reference/`
+> (генератор `tools/reference/`). Исторические результаты ниже не изменялись.
+
 **Дата:** 2026-11-24 · **Статус:** ACCEPTED WITH LIMITATIONS  
 **HEAD:** `099f37b2588c2c1cb821faabf81d507f14f14818` · **Ветка:** `main`  
 **Продукционный билд:** `dist/web/` на порту `127.0.0.1:5199`  

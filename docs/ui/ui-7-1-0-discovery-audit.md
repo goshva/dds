@@ -1,5 +1,10 @@
 # UI-7.1.0 — Discovery Audit: Forecast Errors & Diagnostics
 
+> **Архитектурная поправка TPL-4.5.** Каталог `src/web/templates/partials/` удалён в TPL-4.4.
+> Production HTML формируют `src/web/components/` и `src/web/pages/`; экранирование — `src/web/lib/format.ts`;
+> актуальная документация архитектуры — `src/web/templates/README.md`; эталоны страниц — `docs/ui/reference/`
+> (генератор `tools/reference/`). Исторические результаты ниже не изменялись.
+
 **Проект:** DSS — DarkStore AI Forecast Engine
 **Дата аудита:** 27 ноября 2026
 **Тип:** Read-only audit (реализация не выполнялась, источники не изменялись)

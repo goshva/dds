@@ -13,7 +13,7 @@
     <svg class="ds-brand-mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 22l6-7 5 4 7-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <div><span class="ds-brand-name">DSS</span><span class="ds-brand-sub">прогнозирование заказов</span></div>
   </div>
-  <nav class="ds-nav"><div class="ds-nav-section">Эталоны страниц</div><a href="index.html">Индекс</a><a href="overview.html">Обзор</a><a href="history.html">История</a><a href="quality.html" aria-current="page">Качество данных</a><a href="provenance.html">Происхождение</a><a href="forecast-quality.html">Прогнозы и качество</a><a href="forecast-diagnostics.html">Диагностика прогнозирования</a></nav>
+  <nav class="ds-nav"><div class="ds-nav-section">Эталоны страниц</div><a href="../index.html">Индекс</a><a href="overview.html">Обзор</a><a href="history.html">История</a><a href="quality.html" aria-current="page">Качество данных</a><a href="provenance.html">Происхождение</a><a href="forecast-quality.html">Прогнозы и качество</a><a href="forecast-diagnostics.html">Диагностика прогнозирования</a></nav>
 </aside>
   <div class="ds-scrim" data-ds-scrim></div>
   <div class="ds-main"><header class="ds-topbar">
@@ -79,9 +79,13 @@
 </ul>
 </section>
 <section class="ds-card">
-  <div class="ds-card-head"><h2 class="ds-card-title">Статусы календаря</h2></div>
-  <p class="ds-sub">все четыре состояния: наблюдение, частичное, пропуск, неизвестное</p>
+  <div class="ds-card-head"><h2 class="ds-card-title">Календарь построителя</h2></div>
+  <p class="ds-sub">buildCalendar(): доступны статусы full, missing и unknown; статус partial построителем не формируется</p>
   <div class="ds-calendar" data-ds-calendar><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-09 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-10 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-11 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-12 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-13 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-14 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-15 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-16 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-17 (unknown)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-18 (unknown)"></div></div>
+</section><section class="ds-card">
+  <div class="ds-card-head"><h2 class="ds-card-title">Статусы, поддерживаемые компонентом</h2></div>
+  <p class="ds-sub">completenessCalendar(): full, partial, missing, unknown — данные переданы типизированным массивом CalendarDay</p>
+  <div class="ds-calendar" data-ds-calendar><div class="ds-calendar-day ds-calendar-day--full" title="2026-06-01 (full)"></div><div class="ds-calendar-day ds-calendar-day--partial" title="2026-06-02 (partial)"></div><div class="ds-calendar-day ds-calendar-day--missing" title="2026-06-03 (missing)"></div><div class="ds-calendar-day ds-calendar-day--unknown" title="2026-06-04 (unknown)"></div></div>
 </section><section class="ds-card">
   <div class="ds-card-head"><h2 class="ds-card-title">Состояния и семантика</h2></div>
   <p class="ds-sub">загрузка, недоступность, ошибка; ожидание не является ошибкой</p>

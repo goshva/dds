@@ -1,5 +1,10 @@
 # Отчёт: UI-7.0.1 — Browser Audit Defect Remediation
 
+> **Архитектурная поправка TPL-4.5.** Каталог `src/web/templates/partials/` удалён в TPL-4.4.
+> Production HTML формируют `src/web/components/` и `src/web/pages/`; экранирование — `src/web/lib/format.ts`;
+> актуальная документация архитектуры — `src/web/templates/README.md`; эталоны страниц — `docs/ui/reference/`
+> (генератор `tools/reference/`). Исторические результаты ниже не изменялись.
+
 **Дата:** 25 ноября 2026
 **Статус:** ✅ ЗАВЕРШЕНО
 

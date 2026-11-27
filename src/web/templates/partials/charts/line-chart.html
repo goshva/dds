@@ -1,8 +1,0 @@
-<!-- line-chart.html -->
-<div class="ds-chart-wrap">
-  <svg class="ds-chart" viewBox="0 0 {{width}} {{height}}" role="img" aria-label="line chart">
-    <title>{{firstDate}} — {{lastDate}}</title>
-    {{#grid}}<line class="ds-chart-grid" x1="{{x1}}" y1="{{y1}}" x2="{{x2}}" y2="{{y2}}"/><text class="ds-chart-axis" x="4" y="{{labelY}}">{{label}}</text>{{/grid}}
-    {{#series}}<path class="{{cssClass}}" d="{{path}}"/>{{/series}}
-  </svg>
-</div>

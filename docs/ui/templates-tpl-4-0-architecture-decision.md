@@ -1,5 +1,10 @@
 # TPL-4.0 — архитектурное решение по источнику разметки
 
+> **Архитектурная поправка TPL-4.5.** Каталог `src/web/templates/partials/` удалён в TPL-4.4.
+> Production HTML формируют `src/web/components/` и `src/web/pages/`; экранирование — `src/web/lib/format.ts`;
+> актуальная документация архитектуры — `src/web/templates/README.md`; эталоны страниц — `docs/ui/reference/`
+> (генератор `tools/reference/`). Исторические результаты ниже не изменялись.
+
 **Дата:** 2026-11-27 · **HEAD:** `c6efe8479a2dc8b4a4823be6abc9aa0889ffe867` · **Режим:** только чтение, реализация не выполнялась
 
 Основание: `docs/ui/templates-tpl-4-0-runtime-audit.md`.

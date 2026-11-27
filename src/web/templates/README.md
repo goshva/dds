@@ -1,125 +1,52 @@
-# Templates — атомарные HTML-partials (Фаза 2)
+# HTML-разметка DSS UI: архитектура и источники
 
-> **Единый источник правил:** [`docs/ui/templates-contract.md`](../../../docs/ui/templates-contract.md).
-> При расхождении README и документа контрактов приоритет имеет документ контрактов.
+**Обновлено:** TPL-4.4 · **Статус:** каталог legacy partials удалён
 
-## Нормализация TPL-1
+## Источник HTML-разметки
 
-- имена плейсхолдеров — только camelCase; имена в верхнем регистре запрещены;
-- доверенные слоты закрыты перечнем (раздел 4 контракта) и используются только с тройными скобками;
-- вычисления внутри шаблонов запрещены; производные значения готовит компонент;
-- hash-ссылки допускаются только по allowlist маршрутов и перечислимым сегментам;
-- `charts/sparkline.html` остаётся в каталоге `charts/`.
+Единственный источник HTML приложения — TypeScript:
 
+- `src/web/components/` — атомарные компоненты (`shell.ts`, `cards.ts`, `charts.ts`, `data.ts`, `states.ts`);
+- `src/web/pages/` и `src/web/main.ts` — композиция страниц, маршрутизация и состояния;
+- `src/web/lib/format.ts` — экранирование (`escapeHtml`), доверенная разметка (`trusted`, `TrustedHtml`) и безопасные ссылки (`safeHref`, `isSafeHref`).
 
-Каталог `templates/partials/` содержит **эталонные HTML-partials** для каждого компонента DSS UI.
-Каждый partial — это разметка одного атомарного компонента из `src/web/components/*.ts`,
-перенесённая 1:1 с заменой интерполяции на Mustache-подобные плейсхолдеры.
+Все динамические значения проходят `escapeHtml`; в доверенные слоты (`sidebar`, `topbar`, `content`, `brand`, `safeHref`, `right`, `body`, `chart`, `legend`, `kpiCard`, `statusBadge`) попадает только разметка, созданная компонентами.
 
-## Назначение
+## Эталонные страницы
 
-- Служит **визуальной спецификацией** разметки компонентов (референс для ручной проверки и документации).
-- Не исполняется рантаймом: рендеринг в проде выполняет TypeScript-код в `src/web/components/`.
-- При изменении разметки компонента соответствующий partial обновляется синхронно.
+Актуальная визуальная документация разметки: `docs/ui/reference/` — HTML-эталоны шести страниц, собираемые напрямую из production-компонентов:
 
-## Синтаксис плейсхолдеров
+```bash
+bun tools/reference/generate.ts
+```
 
-| Запись | Смысл | Пример источника в TS |
-|---|---|---|
-| `{{name}}` | экранированное значение | `${escapeHtml(props.name)}` |
-| `{{{name}}}` | доверенная вложенная разметка (TrustedHtml) | `${props.body}` |
-| `{{#cond}}…{{/cond}}` | блок, если значение истинно | `${props.note ? \`…\` : ""}` |
-| `{{^cond}}…{{/cond}}` | блок, если значение ложно | тернарный else |
-| `{{#list}}…{{/list}}` | повтор по элементам массива | `.map(...).join("")` |
+Генератор детерминирован, использует типизированные синтетические фикстуры, не обращается к API, SQLite и JSONL, и помечает данные как `REFERENCE DATA — NOT PRODUCTION DATA`.
 
-> СоответствиеMustache выбрано как нейтральный, не исполняемый формат —
-> он не требует сборки и читается без контекста проекта.
+## Удалённый каталог
 
-## Структура и соответствие компонентам
+Каталог `src/web/templates/partials/` (22 HTML-файла) **удалён** в рамках TPL-4.4.
 
-### `shell/` — каркас приложения (`components/shell.ts`)
-| Partial | Компонент / props |
-|---|---|
-| `app-shell.html` | `appShell({ sidebar, topbar, content, menuOpen })` |
-| `sidebar.html` | `sidebar({ brandName, brandSub, sections })` (контейнер) |
-| `sidebar-brand.html` | блок `.ds-brand` внутри sidebar |
-| `sidebar-nav.html` | блок `<nav class="ds-nav">` внутри sidebar |
-| `topbar.html` | `topbar({ title, shopNo, lastUpdated, sourceStatus })` |
-| `page-header.html` | `pageHeader({ title, subtitle, right })` |
+Причины:
 
-### `cards/` — карточки и статусы (`components/cards.ts`)
-| Partial | Компонент / props |
-|---|---|
-| `card.html` | `card({ title, subtitle, right, body })` |
-| `chart-card.html` | `chartCard({ title, hint, legend, chart })` |
-| `kpi-card.html` | `kpiCard({ label, value, note, status })` |
-| `kpi-grid.html` | `kpiGrid(items[])` |
-| `status-badge.html` | `statusBadge({ status, text })` |
-| `provenance-drawer.html` | `provenanceDrawer({ source, checksum, version, note })` |
+- ни один файл не использовался production runtime (проверено дважды: TPL-4.2 STAGE B и TPL-4.4);
+- ни один файл не участвовал в сборке: в `dist/web` попадал только `index.html`;
+- содержимое дублировало разметку TypeScript-компонентов и расходилось с их фактическим контрактом (`data-table`, `loading-state`, `kpi-card`, графики, `history-filters`);
+- поддержка синхронизации вручную противоречила принципу единственного источника разметки;
+- explicit-генерация partials без дублирования HTML признана нецелесообразной (TPL-4.2 STAGE B: `NO_GENERATOR_RECOMMENDED`).
 
-### `charts/` — SVG-графики (`components/charts.ts`)
-| Partial | Компонент |
-|---|---|
-| `line-chart.html` | `lineChart(series[], width, height)` |
-| `bar-chart.html` | `barChart(values[], width, height)` |
-| `sparkline.html` | `sparkline(values[], width, height)` |
+Исторические документы аудита (`docs/ui/templates-inventory.md`, `docs/ui/templates-contract.md`, отчёты `docs/ui/templates-tpl-*`) сохранены как след проверок и **не описывают действующий механизм**.
 
-### `data/` — табличные данные (`components/data.ts`)
-| Partial | Компонент |
-|---|---|
-| `data-table.html` | `dataTable({ columns, rows, emptyText, caption })` |
-| `completeness-calendar.html` | `completenessCalendar(days[])` |
+## Правила для разработчиков
 
-### `states/` — состояния загрузки (`components/states.ts`)
-| Partial | Компонент |
-|---|---|
-| `empty-state.html` | `emptyState({ title, detail })` |
-| `loading-state.html` | `loadingState({ rows })` — partial принимает готовый `skeletons[]` (ширины считаются в компоненте) |
-| `error-state.html` | `errorState({ title, detail, code })` |
+- Разметку компонентов меняйте только в `src/web/components/` и `src/web/pages/`.
+- Не воссоздавайте каталог partials и не поддерживайте параллельную копию разметки.
+- Не вводите шаблонный движок, реестр шаблонов или runtime-renderer: приложение формирует HTML напрямую в TypeScript.
+- После изменения разметки обновляйте эталоны командой `bun tools/reference/generate.ts` и проверяйте разницу в `docs/ui/reference/`.
+- Безопасность: любые новые значения из API проходят `escapeHtml`; новые доверенные слоты не добавляются без отдельного теста безопасности.
 
-### `pages/` — композиционные блоки страниц (`pages/*.ts`)
-| Partial | Компонент / источник |
-|---|---|
-| `history-filters.html` | `historyFilters(active, from, to)` — `pages/history.ts` |
-| `forecast-mode-switcher.html` | mode/horizon переключатель — `pages/forecast-quality.ts` |
+## Проверки
 
-## Инварианты безопасности
-
-- В partials значения из API всегда обозначены как `{{esc}}` (экранируемые);
-  слоты TrustedHtml — как `{{{trusted}}}`. Это отражает границу `escapeHtml` vs `trusted()` из `lib/format.ts`.
-- Значения, которые в TypeScript проходят через `escapeHtml()`, обозначены одинарными `{{ }}`
-  (например, `kpi-card.html`: `{{note}}`, а не `{{{note}}}`).
-- Атрибут `href` всегда проходит через `safeHref()`; в partial это `{{{safeHref}}}` —
-  доверенная разметка, потому что `safeHref()` сам возвращает экранированную строку
-  (см. `shell/sidebar.html`, `shell/sidebar-nav.html`).
-- Атрибут `data-ds-unsafe-href="1"` проставляется по признаку **небезопасности ссылки**
-  (`{{#unsafe}}`), а не по признаку текущего пункта меню.
-- Прочие значения никогда не должны попадать в `{{{ }}}` без прохода через компонент.
-
-## История исправлений
-
-| Дата | Файл | Дефект | Исправление |
-|---|---|---|---|
-| 2026-11-25 | `cards/kpi-card.html` | P1: `{{{note}}}` при `escapeHtml()` в TS | → `{{note}}` |
-| 2026-11-25 | `shell/sidebar.html` | P1: `href` без `safeHref()` | → `{{{safeHref}}}` |
-| 2026-11-25 | `shell/sidebar-nav.html` | P1: `href` без `safeHref()`; `data-ds-unsafe-href` по `current` | → `{{{safeHref}}}`, `{{#unsafe}}` |
-| 2026-11-25 | `cards/kpi-grid.html` | P1: нарушена структура — `</div>` внутри `{{#items}}` | `{{#items}}{{{kpiCard}}}{{/items}}` внутри одного `<div>` |
-| 2026-11-25 | `states/loading-state.html` | P2: partial ожидал `skeletons[]`, компонент принимает `rows` | Контракт зафиксирован в таблице `states/` |
-
-
-## Полнота
-
-22 partials покрывают все публичные компоненты из `components/index.ts`
-плюс два композиционных блока страниц. Композитные страницы
-(`historyPage`, `forecastQualityPage`, `dataQualityPage`, `provenancePage`) собираются
-из этих partials и не имеют отдельного файла-partial.
-
-## Уточнения TPL-1.1
-
-- hash-ссылки: маршруты `#history/` и `#forecast-quality/`; позиции и допустимые значения — раздел 15 контракта;
-- динамический сегмент допускается только как `{{key}}`, `{{mode}}` или `{{horizon}}` в своей позиции;
-- таблица: `columns[]` + `rows[]` + `cells[]` + `columnCount` + `emptyText`; значения и форматирование готовит компонент `dataTable()`;
-- состояние загрузки: публичный API — `loadingState({ rows })`, внутреннее представление partial — подготовленный массив `skeletons[]`;
-- графики: геометрия вычисляется в `lineChart()` / `barChart()` / `sparkline()`, partial получает готовые атрибуты;
-- доверенные слоты: закрытый перечень в разделе 4 контракта, совпадает с тестами и partials;
-- ограничения автоматических проверок — раздел 16 контракта.
+- `bun test tests/web` — компоненты, генератор эталонов, инварианты безопасности и архитектуры;
+- `bun test tests/server` — API и источники;
+- `bunx tsc --noEmit` — строгая типизация;
+- `bun run ui:build` — сборка интерфейса.

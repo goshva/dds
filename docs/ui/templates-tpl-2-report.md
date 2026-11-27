@@ -1,5 +1,10 @@
 # Отчёт TPL-2 — HTML reference pages
 
+> **Архитектурная поправка TPL-4.5.** Каталог `src/web/templates/partials/` удалён в TPL-4.4.
+> Production HTML формируют `src/web/components/` и `src/web/pages/`; экранирование — `src/web/lib/format.ts`;
+> актуальная документация архитектуры — `src/web/templates/README.md`; эталоны страниц — `docs/ui/reference/`
+> (генератор `tools/reference/`). Исторические результаты ниже не изменялись.
+
 **Дата:** 2026-11-27 · **HEAD:** `6e84af17cc1586f425777efb79b62e1086f36f2a` · **Ветка:** `main`
 **Вердикт:** `ACCEPTED WITH LIMITATIONS` (ограничения — разделы 10, 12, 13)
 

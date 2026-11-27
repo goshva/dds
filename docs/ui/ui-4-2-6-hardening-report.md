@@ -1,5 +1,10 @@
 # UI-4.2.6 — безопасное представление метрик: отчёт
 
+> **Архитектурная поправка TPL-4.5.** Каталог `src/web/templates/partials/` удалён в TPL-4.4.
+> Production HTML формируют `src/web/components/` и `src/web/pages/`; экранирование — `src/web/lib/format.ts`;
+> актуальная документация архитектуры — `src/web/templates/README.md`; эталоны страниц — `docs/ui/reference/`
+> (генератор `tools/reference/`). Исторические результаты ниже не изменялись.
+
 **Дата:** 2026-11-24 · **HEAD:** `099f37b2588c2c1cb821faabf81d507f14f14818` · **Ветка:** `main` · **Staged:** 0
 **Статус:** `COMPLETE WITH LIMITATIONS` (браузерная проверка и происхождение части HTML — `NOT_VERIFIED`)
 

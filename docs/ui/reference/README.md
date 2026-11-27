@@ -1,5 +1,10 @@
 # Reference-эталоны DSS UI (TPL-2)
 
+> **Архитектурная поправка TPL-4.5.** Каталог `src/web/templates/partials/` удалён в TPL-4.4.
+> Production HTML формируют `src/web/components/` и `src/web/pages/`; экранирование — `src/web/lib/format.ts`;
+> актуальная документация архитектуры — `src/web/templates/README.md`; эталоны страниц — `docs/ui/reference/`
+> (генератор `tools/reference/`). Исторические результаты ниже не изменялись.
+
 **Назначение.** Независимый комплект HTML-эталонов шести страниц DSS UI для проверки структуры, композиции, размеров, отступов, визуальной иерархии и адаптивности.
 
 **Статус:** reference artifact. Не является production UI, не подключается к API, не выполняет расчётов и не влияет на приложение.
@@ -20,7 +25,7 @@
 
 ## Правила
 
-- разметка построена на утверждённых partials из `src/web/templates/partials/` (TPL-1/TPL-1.1);
+- разметка собирается из production-компонентов и функций страниц (`src/web/components/`, `src/web/pages/`) через генератор `tools/reference/`;
 - дизайн-система не дублируется: `assets/reference.css` подключает `src/web/styles/*`;
 - данные синтетические и помечены баннером `REFERENCE DATA — NOT PRODUCTION DATA`;
 - семантика сохранена: `PROVISIONAL`, `[Н/Д]` для отсутствующих значений, предупреждения не превращаются в ошибки;
