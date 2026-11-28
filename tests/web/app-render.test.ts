@@ -95,14 +95,40 @@ describe("FINAL-3.3.2.1: dispatch Forecast (placeholder)", () => {
   });
 });
 
-describe("FINAL-3.3.2.1-HARDENING: независимость Forecast от API (FIX-2)", () => {
-  test("placeholder отображается без единого запроса", async () => {
+describe("FINAL-3.3.2.2: маршрут Forecast загружает два независимых источника", () => {
+  test("валидные маршруты запрашивают /forecasts и /reconciliations с mode и horizon", async () => {
+    const originalFetch = globalThis.fetch;
+    const urls: string[] = [];
+    try {
+      globalThis.fetch = ((input: RequestInfo | URL) => {
+        urls.push(String(input));
+        return Promise.resolve({ ok: true, status: 200, json: async () => ({ status: "not_available", data: null, meta: { generatedAt: "2026-06-02T00:00:00.000Z", source: "shadow_jsonl", readOnly: true, reason: "NONE" } }) } as Response);
+      }) as unknown as typeof fetch;
+      const root = { innerHTML: "" } as unknown as HTMLElement;
+      for (const [hash, mode, horizon] of [["#forecast/replay/1", "replay", "1"], ["#forecast/replay/3", "replay", "3"], ["#forecast/shadow/1", "shadow", "1"], ["#forecast/shadow/3", "shadow", "3"]] as const) {
+        urls.length = 0;
+        await renderApp(root, hash);
+        expect(urls.filter((url) => url.includes("/api/v1/forecasts")), hash).toHaveLength(1);
+        expect(urls.filter((url) => url.includes("/api/v1/shadow/reconciliations")), hash).toHaveLength(1);
+        const forecasts = urls.find((url) => url.includes("/api/v1/forecasts")) ?? "";
+        expect(forecasts, hash).toContain(`mode=${mode}`);
+        expect(forecasts, hash).toContain(`horizon=${horizon}`);
+        expect(root.innerHTML, hash).toContain("Снапшоты прогнозов");
+        expect(root.innerHTML, hash).toContain("Сверка с фактом");
+        expect(root.innerHTML, hash).not.toContain("NOT_IMPLEMENTED");
+      }
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  test("некорректные маршруты показывают placeholder и не делают запросов", async () => {
     const originalFetch = globalThis.fetch;
     let calls = 0;
     try {
       globalThis.fetch = (() => { calls++; return Promise.reject(new Error("network must not be used")); }) as unknown as typeof fetch;
       const root = { innerHTML: "" } as unknown as HTMLElement;
-      for (const hash of ["#forecast/replay/1", "#forecast/replay/3", "#forecast/shadow/1", "#forecast/shadow/3"]) {
+      for (const hash of ["#forecast/replay", "#forecast/unknown/1", "#forecast/replay/2", "#forecast/replay/1/extra", "#forecast//1"]) {
         await renderApp(root, hash);
         expect(calls, hash).toBe(0);
         expect(root.innerHTML, hash).toContain("Страница прогнозирования ещё не реализована");
@@ -113,7 +139,6 @@ describe("FINAL-3.3.2.1-HARDENING: независимость Forecast от API 
     }
   });
 });
-
 describe("FINAL-3.3.2.1-HARDENING: делегирование кликов (FIX-3)", () => {
   test("действия распознаются по id, посторонние — нет", () => {
     expect(clickActionFor("ds-apply")).toBe("apply-range");

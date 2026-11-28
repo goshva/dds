@@ -1,11 +1,7 @@
-/**
- * FINAL-3.3.2.1: выбор и рендеринг страниц (dispatch).
- *
- * Только выбор renderer и композиция оболочки: без forecasting-расчётов, без чтения SQLite/JSONL,
- * без управления URL и историей. Маршрутизация — `routing.ts`, разметка страниц — `pages/*`.
- */
+/** FINAL-3.3.2.1/UI-2.3: dispatch: выбор страницы, композиция оболочки, кэш страницы истории. */
 import { appShell, card, errorState, loadingState, pageHeader, sidebar, statusBadge, topbar, trusted, type TrustedHtml } from "./components";
 import { api } from "./api/client";
+import type { ApiResult } from "./api/client";
 import { block, loadResult } from "./app-result";
 import { resolveClickAction, type ClickAction } from "./app-events";
 import { dataQualityPage } from "./pages/data-quality";
@@ -14,17 +10,12 @@ import { overviewPage, type OverviewView } from "./pages/overview";
 import { provenancePage, type OverviewForProvenance } from "./pages/provenance";
 import { forecastQualityPage, type QualityDto } from "./pages/forecast-quality";
 import { forecastDiagnosticsInvalid, forecastDiagnosticsLoading, forecastDiagnosticsPage, type ForecastErrorsDto } from "./pages/forecast-diagnostics";
+import { forecastPage, loadForecastPage } from "./pages/forecast";
+import { forecastNotImplemented } from "./pages/forecast-placeholder";
+export { forecastNotImplemented };
 import {
-  diagnosticsParams,
-  forecastParams,
-  normalizeForecastParams,
-  PAGES,
-  parseHash,
-  rangeToQuery,
-  type ForecastHorizon,
-  type ForecastMode,
-  type PageKey,
-  type Route,
+  diagnosticsParams, forecastParams, normalizeForecastParams, PAGES, parseHash, rangeToQuery,
+  type ForecastHorizon, type ForecastMode, type PageKey, type Route,
 } from "./routing";
 
 interface Overview extends OverviewView {
@@ -48,19 +39,7 @@ export function resolvePage(route: Route): PageDecision {
 }
 
 /**
- * Безопасный placeholder до реализации страницы. Это не empty state «данных нет»: прогнозы не
- * запрашивались, поэтому отсутствие прогнозов здесь не утверждается.
  */
-export function forecastNotImplemented(input: { valid: boolean; mode: ForecastMode | null; horizon: ForecastHorizon | null; canonical: string }): TrustedHtml {
-  const params = input.valid ? `${input.mode} · h${input.horizon}` : "параметры маршрута некорректны";
-  return trusted(`
-${pageHeader({ title: "Прогнозирование", subtitle: "Исторические прогнозы и результаты теневого наблюдения", right: statusBadge({ status: "NOT_AVAILABLE", text: "NOT_IMPLEMENTED" }) })}
-${card({
-    title: "Страница прогнозирования ещё не реализована",
-    subtitle: `режим и горизонт: ${params}`,
-    body: trusted(`<div class="ds-sub">Раздел находится в разработке. Данные прогнозов не запрашивались, поэтому отсутствие прогнозов здесь не утверждается. Канонический адрес раздела: ${input.canonical}</div>`),
-  })}`);
-}
 
 function shell(content: TrustedHtml, updatedAt: string | null, sourceStatus: "OK" | "PARTIAL" | "NOT_AVAILABLE", page: PageKey): TrustedHtml {
   return appShell({
@@ -74,15 +53,18 @@ function shell(content: TrustedHtml, updatedAt: string | null, sourceStatus: "OK
   });
 }
 
-/** FINAL-2: индекс страницы таблицы истории (в памяти; hash-контракт не меняется). */
+/** FINAL-2/UI-2.3: состояние таблицы истории в памяти (hash-контракт не меняется). */
 let historyPageIndex = 0;
 let historyPageKey = "";
+let appRoot: HTMLElement | null = null;
+let historyCache: { history: HistoryDto; coverage: CoverageDto | null; range: string; from: string; to: string; sourceStatus: "OK" | "PARTIAL" | "NOT_AVAILABLE" } | null = null;
 
 /** FIX-1: поколение рендера. Устаревший вызов не имеет права изменять DOM. */
 let renderRequestSeq = 0;
 
 /** Выбор и рендеринг страницы. Hash передаётся вызывающей стороной: URL здесь не изменяется. */
-export async function renderApp(root: HTMLElement, hash: string): Promise<void> {
+export async function renderApp(root: HTMLElement, hash: string, get: typeof api.get = api.get): Promise<void> {
+  appRoot = root;
   const generation = ++renderRequestSeq;
   const commit = (content: TrustedHtml): void => {
     if (generation === renderRequestSeq) root.innerHTML = content;
@@ -92,21 +74,36 @@ export async function renderApp(root: HTMLElement, hash: string): Promise<void> 
   const { page, range, from, to } = route;
   const decision = resolvePage(route);
 
-  // FIX-2: placeholder Forecast не зависит от API и Overview; никаких запросов не выполняется.
+  // Forecast: валидный маршрут грузит два источника; вход #forecast уходит на канонический адрес.
   if (decision.kind === "forecast") {
-    commit(shell(forecastNotImplemented(decision), null, "NOT_AVAILABLE", page));
+    const { mode: forecastMode, horizon: forecastHorizon } = decision;
+    if (!decision.valid || forecastMode === null || forecastHorizon === null) {
+      if (route.segmentCount === 1) {
+        window.location.replace("#forecast/replay/1");
+        commit(shell(forecastPage({ mode: "replay", horizon: 1, snapshots: null, reconciliations: null, generatedAt: null }), null, "NOT_AVAILABLE", page));
+        return;
+      }
+      commit(shell(forecastNotImplemented(decision), null, "NOT_AVAILABLE", page));
+      return;
+    }
+    commit(shell(forecastPage({ mode: forecastMode, horizon: forecastHorizon, snapshots: null, reconciliations: null, generatedAt: null }), null, "NOT_AVAILABLE", page));
+    await loadForecastPage({
+      mode: forecastMode,
+      horizon: forecastHorizon,
+      commit: (content) => commit(shell(content, null, "NOT_AVAILABLE", page)),
+    });
     return;
   }
 
   commit(shell(loadingState({ rows: 6 }), null, "NOT_AVAILABLE", page));
 
-  const overview = await loadResult(api.get<Overview>("/api/v1/overview"));
+  const overview = await loadResult(get<Overview>("/api/v1/overview"));
   const updatedAt = overview.status === "ok" ? overview.meta.generatedAt : null;
   const sourceStatus = overview.status === "ok" ? "OK" : overview.status === "not_available" ? "NOT_AVAILABLE" : "PARTIAL";
 
   if (page === "forecast-quality") {
     const { mode, horizon } = forecastParams(route);
-    const quality = await loadResult(api.get<QualityDto>("/api/v1/forecasts/quality", { mode, horizon }));
+    const quality = await loadResult(get<QualityDto>("/api/v1/forecasts/quality", { mode, horizon }));
     commit(shell(block(quality, () => forecastQualityPage({ data: (quality as { data: QualityDto }).data, mode, horizon })), updatedAt, sourceStatus, page));
     return;
   }
@@ -119,8 +116,8 @@ export async function renderApp(root: HTMLElement, hash: string): Promise<void> 
     }
     commit(shell(forecastDiagnosticsLoading(), updatedAt, sourceStatus, page));
     const [quality, errors] = await Promise.all([
-      loadResult(api.get<QualityDto>("/api/v1/forecasts/quality", { mode, horizon })),
-      loadResult(api.get<ForecastErrorsDto>("/api/v1/forecasts/errors", { mode })),
+      loadResult(get<QualityDto>("/api/v1/forecasts/quality", { mode, horizon })),
+      loadResult(get<ForecastErrorsDto>("/api/v1/forecasts/errors", { mode })),
     ]);
     const generatedAt =
       quality.status === "ok" || quality.status === "not_available"
@@ -139,13 +136,16 @@ export async function renderApp(root: HTMLElement, hash: string): Promise<void> 
     return;
   }
 
-  const [history, coverage, fullHistory, forecasts] = await Promise.all([
-    loadResult(api.get<HistoryDto>("/api/v1/history", { limit: 1000, from: query.from, to: query.to })),
-    loadResult(api.get<CoverageDto>("/api/v1/history/coverage")),
-    loadResult(api.get<HistoryDto>("/api/v1/history", { limit: 1000 })),
-    loadResult(api.get<ShadowForecasts>("/api/v1/shadow/forecasts", { limit: 20 })),
+  // B1: shadow-запрос только для Overview. B3: при range === "all" полный ряд совпадает с history.
+  const [history, coverage, fullHistoryResult, shadowResult] = await Promise.all([
+    loadResult(get<HistoryDto>("/api/v1/history", { limit: 1000, from: query.from, to: query.to })),
+    loadResult(get<CoverageDto>("/api/v1/history/coverage")),
+    range === "all" ? Promise.resolve(null) : loadResult(get<HistoryDto>("/api/v1/history", { limit: 1000 })),
+    page === "overview" ? loadResult(get<ShadowForecasts>("/api/v1/shadow/forecasts", { limit: 20 })) : Promise.resolve(null),
   ]);
+  const fullHistory = fullHistoryResult ?? history;
 
+  const shadowForOverview: ApiResult<ShadowForecasts> = shadowResult ?? { status: "not_available", data: null, meta: { generatedAt: "", source: "shadow_jsonl", readOnly: true, reason: "SHADOW_NOT_LOADED" } };
   let content: TrustedHtml;
   if (page === "history") {
     content = block(history, () => {
@@ -154,6 +154,7 @@ export async function renderApp(root: HTMLElement, hash: string): Promise<void> 
       const cov = coverage.status === "ok" ? (coverage as { data: CoverageDto }).data : null;
       const stateKey = `${range}|${from}|${to}`;
       if (stateKey !== historyPageKey) { historyPageKey = stateKey; historyPageIndex = 0; }
+      historyCache = { history: data, coverage: cov, range, from, to, sourceStatus };
       return historyPage({ history: data, coverage: cov, activeRange: range, from, to, page: historyPageIndex });
     });
   } else if (page === "quality") {
@@ -165,11 +166,10 @@ export async function renderApp(root: HTMLElement, hash: string): Promise<void> 
   } else if (page === "provenance") {
     content = block(overview, () => provenancePage((overview as { data: Overview }).data));
   } else {
-    content = block(overview, () => overviewPage((overview as { data: Overview }).data, history, forecasts));
+    content = block(overview, () => overviewPage((overview as { data: Overview }).data, history, shadowForOverview));
   }
   commit(shell(content, updatedAt, sourceStatus, page));
 }
-
 
 /** Клики страницы: диапазон истории и пагинация. Возвращает true, если клик обработан. */
 export function handleAppClick(target: EventTarget | null, rerender: () => void): boolean {
@@ -183,8 +183,18 @@ export function handleAppClick(target: EventTarget | null, rerender: () => void)
     return true;
   }
   if (action === "reset-range") { window.location.hash = "#history/all"; return true; }
-  if (action === "page-prev") { historyPageIndex = Math.max(0, historyPageIndex - 1); rerender(); return true; }
+  if (action === "page-prev") { historyPageIndex = Math.max(0, historyPageIndex - 1); rerenderHistoryFromCache(rerender); return true; }
   historyPageIndex += 1;
-  rerender();
+  rerenderHistoryFromCache(rerender);
   return true;
+}
+
+/** B2: перерисовка таблицы истории из уже загруженного набора — без повторных GET-запросов. */
+export function rerenderHistoryFromCache(fallback: () => void): void {
+  if (!historyCache || !appRoot) { fallback(); return; }
+  const { history, coverage, range, from, to, sourceStatus: cachedStatus } = historyCache;
+  // B4: статус берётся из кэша: error не превращается в NOT_AVAILABLE, пустой ответ не маскируется.
+  if (!history.returnedPoints) { appRoot.innerHTML = shell(historyEmpty(), null, cachedStatus, "history"); return; }
+  const content = historyPage({ history, coverage, activeRange: range, from, to, page: historyPageIndex });
+  appRoot.innerHTML = shell(content, null, cachedStatus, "history");
 }
