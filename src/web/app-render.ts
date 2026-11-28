@@ -62,8 +62,11 @@ let historyCache: { history: HistoryDto; coverage: CoverageDto | null; range: st
 /** FIX-1: поколение рендера. Устаревший вызов не имеет права изменять DOM. */
 let renderRequestSeq = 0;
 
+/** UI-2.3-FIX: api.get без привязки к экземпляру теряет this и падает на this.timeoutMs. */
+const apiGet = api.get.bind(api);
+
 /** Выбор и рендеринг страницы. Hash передаётся вызывающей стороной: URL здесь не изменяется. */
-export async function renderApp(root: HTMLElement, hash: string, get: typeof api.get = api.get): Promise<void> {
+export async function renderApp(root: HTMLElement, hash: string, get: typeof api.get = apiGet): Promise<void> {
   appRoot = root;
   const generation = ++renderRequestSeq;
   const commit = (content: TrustedHtml): void => {
